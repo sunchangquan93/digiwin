@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <dbname value="digiwin.db" />
+    <version value="1" />
+    <list>
+       <!--写入对应实体类的完整包名及类名-->
+        <mapping class="digiwin.smartdepot.litepal.Test"></mapping>
+        <mapping class="digiwin.smartdepot.login.bean.AccoutBean"></mapping>
+    </list>
+</litepal>

@@ -1,0 +1,22 @@
+<resources>
+    <string name="package_name">digiwin.smartdepot</string>
+    <string name="app_name">dgwlibrary</string>
+    <string name="label_exit_activity_sure">是否确定退出当前界面?</string>
+    <string name="label_sure">确定</string>
+    <string name="label_cancel">取消</string>
+    <string name="message_net_wifi">正在使用无线网络</string>
+    <string name="message_net_local">正在使用本地流量</string>
+    <string name="message_net_none">没有可用的网络 请检查网络设置</string>
+    <string name="scan_text">将二维码放入框内, 即可自动扫描</string>
+    <string name="label_loader">正在处理中...</string>
+    <string name="yes">确定</string>
+    <string name="exit">退出</string>
+    <string name="user_exit">确定要退出吗</string>
+    <string name="label_delete_date_sure">是否删除本次未提交数据?</string>
+    <string name="start_date">开始日期</string>
+    <string name="end_date">结束日期</string>
+    <string name="voicer_male">男声</string>
+    <string name="voicer_female">女声</string>
+    <string name="voicer_not">不提醒</string>
+    <string name="is_sure_commit">是否确定提交?</string>
+</resources>

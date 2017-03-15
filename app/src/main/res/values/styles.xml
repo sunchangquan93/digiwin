@@ -1,0 +1,88 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowAnimationStyle">@style/activityAnimation</item>
+    </style>
+
+    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowAnimationStyle">@style/splashActivityAnimation</item>
+    </style>
+    <style name="ToolBar" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="actionMenuTextColor">@color/white</item>
+    </style>
+    <style name="ClubToolbar" parent="Widget.AppCompat.Toolbar">
+        <item name="contentInsetStart">@dimen/layout_0dp</item><!-- 设置该属性解决空白部分-->
+    </style>
+    <style name="SettingLinearLayout">
+        <item name="android:paddingRight">@dimen/layout_10dp</item>
+        <item name="android:paddingTop">@dimen/layout_10dp</item>
+        <item name="android:paddingBottom">@dimen/layout_10dp</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+    <!--扫描条目使用 -->
+    <style name="itemstyle">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingTop">@dimen/layout_7dp</item>
+        <item name="android:paddingBottom">@dimen/layout_7dp</item>
+        <item name="android:paddingLeft">@dimen/layout_7dp</item>
+        <item name="android:paddingRight">@dimen/layout_7dp</item>
+    </style>
+    <!--列表中线条样式-->
+    <style name="ry_line_style">
+        <item name="android:layout_height">@dimen/layout_0.5dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/gray_f0</item>
+    </style>
+    <!--扫描条目线条使用 -->
+    <style name="fg_line_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/layout_0.5dp</item>
+        <item name="android:layout_marginLeft">@dimen/layout_5dp</item>
+        <item name="android:layout_marginRight">@dimen/layout_5dp</item>
+        <item name="android:background">@color/gray_f0</item>
+    </style>
+    <style name="ry_style">
+        <item name="android:layout_marginRight">@dimen/layout_10dp</item>
+        <item name="android:layout_marginLeft">@dimen/layout_10dp</item>
+        <item name="android:layout_marginBottom">@dimen/layout_10dp</item>
+        <item name="android:paddingLeft">@dimen/layout_10dp</item>
+        <item name="android:paddingRight">@dimen/layout_10dp</item>
+        <item name="android:background">@drawable/green_scandetail_bg</item>
+    </style>
+    <style name="uncom_itemstyle">
+        <item name="android:paddingTop">@dimen/layout_10dp</item>
+        <item name="android:paddingBottom">@dimen/layout_10dp</item>
+        <item name="android:paddingLeft">@dimen/layout_7dp</item>
+        <item name="android:paddingRight">@dimen/layout_7dp</item>
+    </style>
+
+    <!-- 依成品发料 -->
+    <style name="act_line_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/layout_0.5dp</item>
+        <item name="android:layout_marginLeft">@dimen/layout_5dp</item>
+        <item name="android:layout_marginRight">@dimen/layout_5dp</item>
+        <item name="android:background">@color/green98</item>
+    </style>
+
+    <!--FIFO中线条样式-->
+    <style name="fifo_line_style">
+        <item name="android:layout_height">@dimen/layout_0.5dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/green7d</item>
+    </style>
+
+    <!-- 采购收货checkbox-->
+    <style name="checkbox_selector" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/cb_selector</item>
+    </style>
+
+</resources>

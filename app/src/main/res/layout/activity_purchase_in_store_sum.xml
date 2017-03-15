@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/activity_distribute"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+android:background="@color/white"
+tools:context="digiwin.smartdepot.module.activity.produce.distribute.DistributeActivity">
+<include  layout="@layout/activity_title_toolbar_bar"></include>
+
+<ScrollView
+    android:id="@+id/scrollview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="visible"
+    android:layout_below="@+id/toolbar_title"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentStart="true">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_post_order"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/layout_10dp"
+            android:layout_marginRight="@dimen/layout_10dp"
+            android:layout_marginBottom="@dimen/layout_10dp"
+            android:orientation="vertical"
+            android:focusable="true"
+            android:layout_marginTop="@dimen/layout_10dp"
+            android:background="@drawable/accordingmaterialtop_sharp"
+            android:padding="@dimen/layout_5dp">
+
+            <LinearLayout
+                style="@style/itemstyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/back47"
+                    android:textSize="@dimen/textSize_14sp"
+                    android:text="@string/post_material_order"
+                    />
+                <TextView
+                    android:id="@+id/tv_head_post_order"
+                    android:layout_width="@dimen/layout_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/layout_5dp"
+                    android:layout_weight="3"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSize_14sp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/back47"
+                    android:textSize="@dimen/textSize_14sp"
+                    android:layout_marginLeft="@dimen/layout_5dp"
+                    android:text="@string/data"
+                    />
+                <TextView
+                    android:id="@+id/tv_head_plan_date"
+                    android:layout_width="@dimen/layout_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/layout_5dp"
+                    android:layout_weight="2"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSize_14sp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/itemstyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/back47"
+                    android:textSize="@dimen/textSize_14sp"
+                    android:text="@string/provider_code"
+                    />
+                <TextView
+                    android:id="@+id/tv_head_provider"
+                    android:layout_width="@dimen/layout_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/layout_5dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSize_14sp"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <include layout="@layout/ry_common"/>
+    </LinearLayout>
+
+</ScrollView>
+    <include layout="@layout/inclu_commit" />
+</RelativeLayout>

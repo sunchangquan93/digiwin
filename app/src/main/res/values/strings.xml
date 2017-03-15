@@ -1,0 +1,235 @@
+﻿<resources>
+    <string name="app_name">智能物流</string>
+    <string name="setting">设置</string>
+    <string name="operation">运营中心</string>
+    <string name="system_setting">系统设置</string>
+    <string name="remember_password">记住密码</string>
+    <string name="login_rightNow">立即登入</string>
+    <string name="little_text">鼎捷软件技术支持</string>
+    <string name="little_voice_text">语音技术由科大讯飞提供</string>
+    <string name="formal">正式区</string>
+    <string name="test">测试区</string>
+    <string name="language">语言别</string>
+    <string name="server_address">服务器地址</string>
+    <string name="easy_chinese">简体中文</string>
+    <string name="traditional_chinese">繁体中文</string>
+    <string name="english">English</string>
+    <string name="yes">确定</string>
+    <string name="exit">退出</string>
+    <string name="operating_center">营运中心</string>
+    <string name="voicer">发音人</string>
+    <string name="voicer_male">男声</string>
+    <string name="voicer_female">女声</string>
+    <string name="voicer_not">不提醒</string>
+    <string name="page_setting">分页设置</string>
+    <string name="vibrate">震动提醒</string>
+    <string name="open">开</string>
+    <string name="close">关</string>
+    <string name="manuspript">手写设置</string>
+    <string name="bluetooth">蓝牙</string>
+    <string name="versions">版本信息</string>
+    <string name="user_info">账号管理</string>
+    <string name="choose_device">选择蓝牙</string>
+    <string name="connect_device_now">正在连接设备</string>
+    <string name="connect_device_failed">连接失败</string>
+    <string name="connect_device_ok">连接成功</string>
+    <string name="data_null">返回集合为空</string>
+    <string name="user_exit">确定要退出吗</string>
+    <string name="app_exit"> 再按一次退出程序</string>
+
+    <string name="username_not_null">用户名不能为空</string>
+    <string name="password_not_null">密码不能为空</string>
+    <string name="plant_not_null">营用中心不能为空</string>
+    <string name="network_error">网络已断开,请检查网络设置</string>
+    <string name="network_wifi_success">wifi网络连接成功</string>
+    <string name="network_mobile_success">移动网络连接成功</string>
+
+
+    <string name="download">确认下载</string>
+    <string name="download_ok">下载完成</string>
+
+    <string name="versions_show">版本更新内容:</string>
+    <string name="version_new">new</string>
+
+    <string name="input_beyond">输入越界!!!</string>
+    <string name="digiwin_soft">鼎捷软件</string>
+
+    <string name="title_getgoods_check">收货检验</string>
+    <string name="title_wo_bill">工单领料</string>
+    <string name="title_receipt_patch">杂项发料</string>
+    <string name="label_storage">仓库</string>
+    <string name="ScanCode">条形扫码</string>
+    <string name="SumData">数据汇总</string>
+
+    <string name="finishedstorage">生产完工入库</string>
+    <string name="finishedstorage_un_com">未完事项</string>
+    <string name="barcode_no">物料条码</string>
+    <string name="material_returning_number">退料单号</string>
+    <string name="card_number">流转卡号</string>
+    <string name="gongDan_no">工单单号</string>
+    <string name="locator">库位</string>
+    <string name="item_no">料号</string>
+    <string name="item_name">品名</string>
+    <string name="apply_date">申请日</string>
+    <string name="apply_number">申请量</string>
+    <string name="apply_branch">申请部门</string>
+    <string name="reason_no">理由码</string>
+    <string name="num">数量</string>
+    <string name="input_num">请手动输入数量</string>
+    <string name="save">保存</string>
+    <string name="commit">提交</string>
+    <string name="check_network_error">网络已断开,请检查网络设置</string>
+    <string name="plan_numb">计划量</string>
+    <string name="scaned_numb">已扫描量</string>
+
+    <string name="transfers_to_review">调拨复核</string>
+    <string name="transfers_list">调拨单</string>
+    <string name="transfers_list_no">调拨单号</string>
+    <string name="applicant">申请人</string>
+    <string name="in_warehouse">拨入仓</string>
+    <string name="out_warehouse">拨出仓</string>
+    <string name="data">日期</string>
+    <string name="person">人员</string>
+
+    <string name="nodate">无数据</string>
+    <string name="unknow_error">程序出现异常</string>
+    <string name="barcode">条码</string>
+    <string name="delete">删除</string>
+    <string name="scan_barcode">请扫描物料条码</string>
+    <string name="scan_work_order">请扫描工单单号</string>
+    <string name="scan_card_number">请扫描流转卡号</string>
+    <string name="scan_material">请扫描退料单号</string>
+    <string name="scan_locator">请扫描库位</string>
+    <string name="scan_storage">请扫描仓库</string>
+    <string name="delete_choose">请至少选中一个进行删除</string>
+    <string name="order_number">工单号</string>
+    <string name="again_commit">再次提交</string>
+    <string name="commit_failed">抛转失败</string>
+    <string name="un_com">未抛转</string>
+
+    <string name="distribute">生产配货</string>
+    <string name="plan_date">计划日</string>
+    <string name="class_group">班组</string>
+    <string name="model">规格</string>
+    <string name="locator_num">库存</string>
+    <string name="locator_num_">库存量</string>
+    <string name="left_material_num">欠料</string>
+    <string name="left_material_num_">欠料量</string>
+    <string name="scanned">已扫</string>
+    <string name="wait_recheck">待复核</string>
+    <string name="act_send_num">实发量</string>
+    <string name="need_num">需求量</string>
+    <string name="need_class_group">需求班组</string>
+    <string name="need_departmenyt">需求部门</string>
+
+    <string name="toerror">跳转错误</string>
+
+    <string name="mataerial_returning">生产退料</string>
+    <string name="direct_storage">直接入库</string>
+
+    <string name="according_material">依成品发料</string>
+    <string name="under_feed">欠料量</string>
+    <string name="stock_balance">库存量</string>
+    <string name="actual_yield">实发量</string>
+    <string name="according_material_scan">依成品发料扫描</string>
+    <string name="rdna_num">建议量</string>
+    <string name="fifo_scan_error">您所扫入的物料条码不存在于先进先出管理中</string>
+    <string name="save_success">保存成功</string>
+    <string name="please_scan_item_no">请扫描料号</string>
+
+
+    <string name="department">部门</string>
+
+    <string name="barcode_not_in_fifo">该条码不在FIFO建议中</string>
+    <string name="locator_not_in_fifo">该库位不在FIFO建议中</string>
+
+    <string name="item_seq">项次</string>
+    <string name="unit">单位</string>
+
+    <string name="req_number">申请</string>
+    <string name="distribute_number">备货</string>
+    <string name="accept_number">接收</string>
+
+    <string name="receipt_date">备货日期</string>
+    <string name="apply_depart">申请部门</string>
+    <string name="apply_person">申请人</string>
+    <string name="transfers_to_reviewlist">调拨复核清单</string>
+
+    <string name="filter_condition">筛选条件</string>
+
+
+    <string name="post_material_order">单号</string>
+    <string name="stock_apply_list">备货申请列表</string>
+    <string name="post_material">领料过账</string>
+
+    <string name="userinfo">人员信息</string>
+    <string name="repeatseting">轮播时间</string>
+    <string name="delivery_date">收货日期</string>
+    <string name="waitnumber">待入数量</string>
+    <string name="statu">状态</string>
+    <string name="supplier">供应商</string>
+    <string name="waithour">等待小时</string>
+    <string name="delivery_uncheck_board">收货待检货看板</string>
+    <string name="tcts_board">检货完成待入库看板</string>
+
+    <string name="inlocator">拨入库位</string>
+    <string name="outlocator">拨出库位</string>
+    <string name="nocome_allot">无来源调拨</string>
+    <string name="allotin">拨入</string>
+    <string name="allotout">拨出</string>
+    <string name="scan_inlocator">请扫描拨入库位</string>
+    <string name="scan_outlocator">请扫描拨出库位</string>
+    <string name="scandetail">扫描明细</string>
+
+
+    <string name="purchase_in_store">采购入库</string>
+    <string name="provider_code">供应商代码</string>
+    <string name="purchase_order">收货单号</string>
+    <string name="in_storage_number">入库量</string>
+    <string name="match_number">匹配量</string>
+    <string name="material_follow_order">原料跟踪单号</string>
+
+    <string name="title_material_receipt">采购收货</string>
+    <string name="delivery_note">送货单</string>
+    <string name="delivery_note_no">送货单号</string>
+    <string name="delivery_quantity">送货量</string>
+    <string name="actual_yield_num">实收量</string>
+    <string name="delivery_date_">送货日期</string>
+    <string name="please_delivery_note">请扫描送货单</string>
+    <string name="please_delivery_note_num">请确认所有实收数量</string>
+
+    <string name="title_work_order">依工单发料</string>
+    <string name="please_scan_job_number">请扫描工单号</string>
+    <string name="work_order_scan">依工单发料扫描</string>
+    <string name="purchasemanger">采购管理</string>
+    <string name="producemanager">生产管理</string>
+    <string name="storagemanager">库存管理</string>
+    <string name="salesmanager">销售管理</string>
+    <string name="dailyworkmanager">报工管理</string>
+    <string name="boardmanager">看板管理</string>
+    <string name="chooseallot">请选择拨入作业或拨出作业</string>
+    <string name="allotin_work">拨入作业</string>
+    <string name="allotout_work">拨出作业</string>
+    <string name="roam_num">流转卡号</string>
+    <string name="machine_num">机器编号</string>
+    <string name="work_num">报工数量</string>
+    <string name="scrap_num">报废数量</string>
+    <string name="beyond_move">超出转移</string>
+    <string name="orderdailywork">报工</string>
+    <string name="people_relation">员工关联</string>
+
+    <string name="general_number">出通单号</string>
+    <string name="saleoutlet">销售出库</string>
+
+
+    <string name="in_store_order">入库单号</string>
+    <string name="put_in_store">入库上架</string>
+    <string name="item_lot_no">批次</string>
+
+
+    <string name="title_completing_store">完工入库</string>
+    <string name="work_order_code">工单条码</string>
+    <string name="storage_capacity">可入库量</string>
+    <string name="storage_capacity_large">输入数量不可大于可入库量</string>
+
+</resources>
