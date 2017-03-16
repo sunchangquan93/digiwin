@@ -21,6 +21,7 @@ public class ScanBarcodeBackBean {
 //    available_in_qty    STRING  #可入库量
 //    scan_sumqty       STRING  #扫描汇总量
 //    barcode_no        STRING  #返回的物料条码
+//    fifo_check        STRING  #先进先出管控否
 
 
     /**
@@ -56,6 +57,18 @@ public class ScanBarcodeBackBean {
      * 规格
      */
     private String item_spec;
+    /**
+     * 先进先出管控否
+     */
+    private String fifo_check;
+
+    public String getFifo_check() {
+        return fifo_check;
+    }
+
+    public void setFifo_check(String fifo_check) {
+        this.fifo_check = fifo_check;
+    }
 
     public String getItem_name() {
         return item_name;

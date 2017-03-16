@@ -1,4 +1,4 @@
-package digiwin.smartdepot.module.activity.sale.saleoutlet;
+package digiwin.smartdepot.module.activity.purchase.purchaseinstore;
 
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
@@ -16,16 +16,14 @@ import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseFirstModuldeActivity;
 import digiwin.smartdepot.core.modulecommon.ModuleViewPagerAdapter;
-import digiwin.smartdepot.module.fragment.sale.saleoutlet.SaleOutletScanFg;
-import digiwin.smartdepot.module.fragment.sale.saleoutlet.SaleOutletSumFg;
+import digiwin.smartdepot.module.fragment.purchase.purchaseinstore.PurchaseInStoreScanFg;
+import digiwin.smartdepot.module.fragment.purchase.purchaseinstore.PurchaseInStoreSumFg;
 
 /**
- * @author xiemeng
- * @des 销售出库
- * @date 2017/3/13
+ * @author 唐孟宇
+ * @des 采购入库 扫描/汇总页面
  */
-public class SaleOutletActivity extends BaseFirstModuldeActivity {
-
+public class PurchaseInStoreSecondActivity extends BaseFirstModuldeActivity {
     /**
      * 标题
      */
@@ -51,18 +49,17 @@ public class SaleOutletActivity extends BaseFirstModuldeActivity {
     /**
      * 扫码
      */
-    SaleOutletScanFg scanFg;
+    PurchaseInStoreScanFg scanFg;
     /**
      * 汇总提交
      */
-    SaleOutletSumFg sumFg;
+    PurchaseInStoreSumFg sumFg;
 
     ModuleViewPagerAdapter adapter;
     /**
      * 跳转明细使用
      */
     public final int DETAILCODE = 1234;
-
 
     @Override
     protected Toolbar toolbar() {
@@ -71,19 +68,19 @@ public class SaleOutletActivity extends BaseFirstModuldeActivity {
 
     @Override
     public String moduleCode() {
-        module = ModuleCode.SALEOUTLET;
+        module = ModuleCode.PURCHASEINSTORE;
         return module;
     }
 
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        mName.setText(R.string.saleoutlet);
+        mName.setText(R.string.purchase_in_store);
     }
 
     @Override
     protected int bindLayoutId() {
-        return R.layout.activity_saleoutlet;
+        return R.layout.activity_finished_storage;
     }
 
     @Override
@@ -91,14 +88,13 @@ public class SaleOutletActivity extends BaseFirstModuldeActivity {
         initFragment();
     }
 
-
     /**
      * 初始化Fragment
      */
     private void initFragment() {
 
-        scanFg = new SaleOutletScanFg();
-        sumFg = new SaleOutletSumFg();
+        scanFg = new PurchaseInStoreScanFg();
+        sumFg = new PurchaseInStoreSumFg();
         fragments = new ArrayList<>();
         fragments.add(scanFg);
         fragments.add(sumFg);
@@ -129,7 +125,7 @@ public class SaleOutletActivity extends BaseFirstModuldeActivity {
             @Override
             public void onPageSelected(int position) {
                 if (position == 1) {
-                 //   sumFg.upDateList();
+                    sumFg.upDateList();
                 }
             }
 
@@ -145,7 +141,7 @@ public class SaleOutletActivity extends BaseFirstModuldeActivity {
         super.onActivityResult(requestCode, resultCode, data);
         try {
             if (requestCode == DETAILCODE) {
-              //  sumFg.upDateList();
+                sumFg.upDateList();
             }
         } catch (Exception e) {
             LogUtils.e(TAG, "onActivityResult-->" + e);
@@ -155,7 +151,6 @@ public class SaleOutletActivity extends BaseFirstModuldeActivity {
 
     @Override
     public ExitMode exitOrDel() {
-        return ExitMode.EXITISD;
+        return ExitMode.EXITD;
     }
-
 }

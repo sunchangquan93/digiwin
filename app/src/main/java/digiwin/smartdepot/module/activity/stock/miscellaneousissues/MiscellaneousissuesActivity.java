@@ -1,31 +1,41 @@
-package digiwin.smartdepot.module.activity.sale.saleoutlet;
+package digiwin.smartdepot.module.activity.stock.miscellaneousissues;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
+import digiwin.library.utils.ActivityManagerUtils;
 import digiwin.library.utils.LogUtils;
 import digiwin.smartdepot.R;
+import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseFirstModuldeActivity;
 import digiwin.smartdepot.core.modulecommon.ModuleViewPagerAdapter;
-import digiwin.smartdepot.module.fragment.sale.saleoutlet.SaleOutletScanFg;
-import digiwin.smartdepot.module.fragment.sale.saleoutlet.SaleOutletSumFg;
+import digiwin.smartdepot.module.activity.common.NoComeUnComActivity;
+import digiwin.smartdepot.module.bean.common.UnCompleteBean;
+import digiwin.smartdepot.module.fragment.purchase.purchaseinstore.PurchaseInStoreScanFg;
+import digiwin.smartdepot.module.fragment.purchase.purchaseinstore.PurchaseInStoreSumFg;
+import digiwin.smartdepot.module.fragment.stock.miscellaneous.MiscellaneousIssueScanFg;
+import digiwin.smartdepot.module.fragment.stock.miscellaneous.MiscellaneousIssueSumFg;
+import digiwin.smartdepot.module.logic.common.CommonLogic;
 
 /**
- * @author xiemeng
- * @des 销售出库
- * @date 2017/3/13
+ * @author 唐孟宇
+ * @des 杂项发料
  */
-public class SaleOutletActivity extends BaseFirstModuldeActivity {
-
+public class MiscellaneousissuesActivity extends BaseFirstModuldeActivity {
     /**
      * 标题
      */
@@ -43,6 +53,12 @@ public class SaleOutletActivity extends BaseFirstModuldeActivity {
     public ViewPager mZXVp;
 
     /**
+     * 未完事项
+     */
+    @BindView(R.id.un_com)
+    ImageView iv_un_com;
+
+    /**
      * Fragment设置
      */
     private List<Fragment> fragments;
@@ -51,18 +67,17 @@ public class SaleOutletActivity extends BaseFirstModuldeActivity {
     /**
      * 扫码
      */
-    SaleOutletScanFg scanFg;
+    MiscellaneousIssueScanFg scanFg;
     /**
      * 汇总提交
      */
-    SaleOutletSumFg sumFg;
+    MiscellaneousIssueSumFg sumFg;
 
     ModuleViewPagerAdapter adapter;
     /**
      * 跳转明细使用
      */
     public final int DETAILCODE = 1234;
-
 
     @Override
     protected Toolbar toolbar() {
@@ -71,19 +86,32 @@ public class SaleOutletActivity extends BaseFirstModuldeActivity {
 
     @Override
     public String moduleCode() {
-        module = ModuleCode.SALEOUTLET;
+        module = ModuleCode.MISCELLANEOUSISSUES;
         return module;
+    }
+
+    /**
+     * 未完事项
+     */
+    @OnClick(R.id.un_com)
+    void unComaffair(){
+        Bundle bundle = new Bundle();
+        bundle.putString(AddressContants.MODULEID_INTENT, mTimestamp.toString());
+        bundle.putString(NoComeUnComActivity.MODULECODE, module);
+        ActivityManagerUtils.startActivityForBundleData(activity, NoComeUnComActivity.class, bundle);
     }
 
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        mName.setText(R.string.saleoutlet);
+        mName.setText(R.string.miscellaneous_issues);
+
+        iv_un_com.setVisibility(View.VISIBLE);
     }
 
     @Override
     protected int bindLayoutId() {
-        return R.layout.activity_saleoutlet;
+        return R.layout.activity_finished_storage;
     }
 
     @Override
@@ -91,14 +119,13 @@ public class SaleOutletActivity extends BaseFirstModuldeActivity {
         initFragment();
     }
 
-
     /**
      * 初始化Fragment
      */
     private void initFragment() {
 
-        scanFg = new SaleOutletScanFg();
-        sumFg = new SaleOutletSumFg();
+        scanFg = new MiscellaneousIssueScanFg();
+        sumFg = new MiscellaneousIssueSumFg();
         fragments = new ArrayList<>();
         fragments.add(scanFg);
         fragments.add(sumFg);
@@ -129,7 +156,7 @@ public class SaleOutletActivity extends BaseFirstModuldeActivity {
             @Override
             public void onPageSelected(int position) {
                 if (position == 1) {
-                 //   sumFg.upDateList();
+                    sumFg.upDateList();
                 }
             }
 
@@ -145,7 +172,7 @@ public class SaleOutletActivity extends BaseFirstModuldeActivity {
         super.onActivityResult(requestCode, resultCode, data);
         try {
             if (requestCode == DETAILCODE) {
-              //  sumFg.upDateList();
+                sumFg.upDateList();
             }
         } catch (Exception e) {
             LogUtils.e(TAG, "onActivityResult-->" + e);
@@ -155,7 +182,6 @@ public class SaleOutletActivity extends BaseFirstModuldeActivity {
 
     @Override
     public ExitMode exitOrDel() {
-        return ExitMode.EXITISD;
+        return ExitMode.EXITD;
     }
-
 }

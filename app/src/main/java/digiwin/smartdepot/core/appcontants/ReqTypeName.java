@@ -142,6 +142,14 @@ public interface ReqTypeName {
      * 完工入库提交
      */
     static final String COMPLETINGSTORECOMMIT = "app.stock.in.no.submit";
+    /**
+     * 扫描理由码
+     */
+    static final String SCANREASONCODE = "app.reason.code.no.get";
+    /**
+     * 扫描申请部门
+     */
+    static final String SCANDEPARTMENT = "app.department.no.get";
 
     /**
      * 工单报工请求

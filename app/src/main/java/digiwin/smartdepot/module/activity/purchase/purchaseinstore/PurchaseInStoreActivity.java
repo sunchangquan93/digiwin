@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,7 +23,6 @@ import butterknife.OnFocusChange;
 import digiwin.library.datepicker.DatePickerUtils;
 import digiwin.library.utils.ActivityManagerUtils;
 import digiwin.library.utils.LogUtils;
-import digiwin.library.utils.ObjectAndMapUtils;
 import digiwin.library.utils.StringUtils;
 import digiwin.pulltorefreshlibrary.recyclerview.FullyLinearLayoutManager;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
@@ -34,12 +32,9 @@ import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseTitleActivity;
 import digiwin.smartdepot.core.modulecommon.ModuleUtils;
 import digiwin.smartdepot.login.bean.AccoutBean;
-import digiwin.smartdepot.login.loginlogic.LoginLogic;
 import digiwin.smartdepot.module.adapter.purchase.PurchaseInStorageAdapter;
-import digiwin.smartdepot.module.bean.common.ClickItemPutBean;
 import digiwin.smartdepot.module.bean.common.FilterBean;
 import digiwin.smartdepot.module.bean.common.FilterResultOrderBean;
-import digiwin.smartdepot.module.bean.common.ListSumBean;
 import digiwin.smartdepot.module.logic.common.CommonLogic;
 
 import static digiwin.smartdepot.login.loginlogic.LoginLogic.getUserInfo;
@@ -260,30 +255,34 @@ public class PurchaseInStoreActivity extends BaseTitleActivity {
             @Override
             public void onItemClick(View itemView, int position) {
                 final FilterResultOrderBean orderData = sumShowBeanList.get(position);
-                ClickItemPutBean clickItemPutData = new ClickItemPutBean();
-                clickItemPutData.setDoc_no(orderData.getDoc_no());
-                AccoutBean accoutBean = LoginLogic.getUserInfo();
-                if (null != accoutBean) {
-                    clickItemPutData.setWarehouse_in_no(accoutBean.getWare());
-                }
-                clickItemPutData.setReceipt_date(orderData.getCreate_date());
-                showLoadingDialog();
-                commonLogic.getOrderSumData(clickItemPutData, new CommonLogic.GetOrderSumListener() {
-                    @Override
-                    public void onSuccess(List<ListSumBean> list) {
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable("list", (Serializable) list);
+                Bundle bundle = new Bundle();
+                        bundle.putSerializable("orderData", orderData);
                         bundle.putString(AddressContants.MODULEID_INTENT, pactivity.mTimestamp.toString());
+                        ActivityManagerUtils.startActivityBundleForResult(pactivity, PurchaseInStoreSecondActivity.class, bundle, SUMCODE);
+//                ClickItemPutBean clickItemPutData = new ClickItemPutBean();
+//                clickItemPutData.setDoc_no(orderData.getDoc_no());
+//                AccoutBean accoutBean = LoginLogic.getUserInfo();
+//                if (null != accoutBean) {
+//                    clickItemPutData.setWarehouse_in_no(accoutBean.getWare());
+//                }
+//                clickItemPutData.setReceipt_date(orderData.getCreate_date());
+//                showLoadingDialog();
+//                commonLogic.getOrderSumData(clickItemPutData, new CommonLogic.GetOrderSumListener() {
+//                    @Override
+//                    public void onSuccess(List<ListSumBean> list) {
+//                        Bundle bundle = new Bundle();
+//                        bundle.putSerializable("list", (Serializable) list);
+//                        bundle.putString(AddressContants.MODULEID_INTENT, pactivity.mTimestamp.toString());
+////                        dismissLoadingDialog();
+//                        ActivityManagerUtils.startActivityBundleForResult(pactivity, PurchaseInStorageSumActivity.class, bundle, SUMCODE);
+//                    }
+//
+//                    @Override
+//                    public void onFailed(String error) {
 //                        dismissLoadingDialog();
-                        ActivityManagerUtils.startActivityBundleForResult(pactivity, PurchaseInStorageSumActivity.class, bundle, SUMCODE);
-                    }
-
-                    @Override
-                    public void onFailed(String error) {
-                        dismissLoadingDialog();
-                        showFailedDialog(error);
-                    }
-                });
+//                        showFailedDialog(error);
+//                    }
+//                });
             }
         });
     }

@@ -118,7 +118,7 @@ public class LoginLogic {
                 @Override
                 public void onResponse(String string) {
                     ParseXmlResp xmlResp = ParseXmlResp.fromXml(ReqTypeName.GETAC, string);
-                    String error = "";
+                    String error = mContext.getString(R.string.login_error);
                     if (null != xmlResp) {
                         if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
                             List<AccoutBean> accoutBeen = xmlResp.getParameterDatas(AccoutBean.class);

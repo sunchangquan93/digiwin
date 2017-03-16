@@ -4,12 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/white_ff">
 
-    <include  layout="@layout/activity_title_toolbar_bar"></include>
-
-
     <ScrollView
-        android:layout_marginTop="@dimen/layout_10dp"
-        android:layout_below="@+id/toolbar_title"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

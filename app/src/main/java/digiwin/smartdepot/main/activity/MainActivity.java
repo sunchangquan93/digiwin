@@ -126,22 +126,23 @@ public class MainActivity extends BaseTitleActivity {
         mName.setEnabled(false);
         mName.setText(R.string.app_name);
 
+//        iv_un_com.setVisibility(View.VISIBLE);
+//        iv_un_com.setImageResource(R.drawable.search);
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
-    }
-    //    /**
-//     * 语音识别测试
-//     */
+    /**
+     * 语音识别测试
+     */
+
 //    @OnClick(R.id.un_com)
 //    void voiceTest(){
-//        String voicer = (String)SharedPreferencesUtils.get(activity, SharePreKey.VOICER_SELECTED,"voicer");
-//        String text = VoiceUtils.getInstance(activity,voicer).voiceToText();
-//        Log.d(TAG,"testResult:"+text);
-//        //TODO
+//        String voicer = (String)SharedPreferencesUtils.get(this, SharePreKey.VOICER_SELECTED,"voicer");
+//        Log.d(TAG,"voicer:"+voicer);
+//       VoiceUtils.getInstance(this,voicer).voiceToText();
+//        String command = (String) SharedPreferencesUtils.get(this,SharePreKey.VOICECOMMAND,"voicecommand");
+//        Log.d(TAG,"resulttext"+command);
+//        TODO
 //        List<ModuleBean> list = MainLogic.ModuleList;
 //        if(null != list && list.size()>0){
 //            for (int i = 0;i<list.size();i++){

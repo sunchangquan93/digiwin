@@ -22,7 +22,9 @@ import digiwin.smartdepot.module.bean.common.FilterResultOrderBean;
 import digiwin.smartdepot.module.bean.common.ListSumBean;
 import digiwin.smartdepot.module.bean.common.SaveBean;
 import digiwin.smartdepot.module.bean.common.ScanBarcodeBackBean;
+import digiwin.smartdepot.module.bean.common.ScanDepartmentBackBean;
 import digiwin.smartdepot.module.bean.common.ScanLocatorBackBean;
+import digiwin.smartdepot.module.bean.common.ScanReasonCodeBackBean;
 import digiwin.smartdepot.module.bean.common.SumShowBean;
 import digiwin.smartdepot.module.bean.common.UnCompleteBean;
 import digiwin.smartdepot.module.bean.produce.FiFoBean;
@@ -676,4 +678,97 @@ public class CommonLogic {
         },null);
     }
 
+    /**
+     * 扫描理由码
+     */
+    public interface ScanReasonCodeListener {
+        public void onSuccess(ScanReasonCodeBackBean reasonCodeBackBean);
+
+        public void onFailed(String error);
+    }
+
+    /**
+     * 扫描理由码
+     */
+    public void scanReasonCode(final Map<String, String> map, final ScanReasonCodeListener listener) {
+        ThreadPoolManager.getInstance().executeTask(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String xml = CreateParaXmlReqIm.getInstance(map, mModule, ReqTypeName.SCANREASONCODE, mTimestamp).toXml();
+                    OkhttpRequest.getInstance(mContext).post(xml, new IRequestCallbackImp() {
+                        @Override
+                        public void onResponse(String string) {
+                            ParseXmlResp xmlResp = ParseXmlResp.fromXml(ReqTypeName.SCANREASONCODE, string);
+                            String error = mContext.getString(R.string.unknow_error);
+                            if (null != xmlResp) {
+                                if (ReqTypeName.SUCCCESSCODE .equals( xmlResp.getCode())) {
+                                    List<ScanReasonCodeBackBean> locatorBackBeen = xmlResp.getParameterDatas(ScanReasonCodeBackBean.class);
+                                    if (locatorBackBeen.size() > 0) {
+                                        listener.onSuccess(locatorBackBeen.get(0));
+                                        return;
+                                    } else {
+                                        error = mContext.getString(R.string.data_null);
+                                    }
+                                } else {
+                                    error = xmlResp.getDescription();
+                                }
+                            }
+                            listener.onFailed(error);
+                        }
+                    });
+                } catch (Exception e) {
+                    listener.onFailed(mContext.getString(R.string.unknow_error));
+                    LogUtils.e(TAG, "scanLocator--->" + e);
+                }
+            }
+        }, null);
+    }
+
+    /**
+     * 扫描部门
+     */
+    public interface ScanDepartmentListener {
+        public void onSuccess(ScanDepartmentBackBean scanDepartmentBackBeann);
+
+        public void onFailed(String error);
+    }
+
+    /**
+     * 扫描部门
+     */
+    public void scanDepartmentCode(final Map<String, String> map, final ScanDepartmentListener listener) {
+        ThreadPoolManager.getInstance().executeTask(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String xml = CreateParaXmlReqIm.getInstance(map, mModule, ReqTypeName.SCANDEPARTMENT, mTimestamp).toXml();
+                    OkhttpRequest.getInstance(mContext).post(xml, new IRequestCallbackImp() {
+                        @Override
+                        public void onResponse(String string) {
+                            ParseXmlResp xmlResp = ParseXmlResp.fromXml(ReqTypeName.SCANDEPARTMENT, string);
+                            String error = mContext.getString(R.string.unknow_error);
+                            if (null != xmlResp) {
+                                if (ReqTypeName.SUCCCESSCODE .equals( xmlResp.getCode())) {
+                                    List<ScanDepartmentBackBean> locatorBackBeen = xmlResp.getParameterDatas(ScanDepartmentBackBean.class);
+                                    if (locatorBackBeen.size() > 0) {
+                                        listener.onSuccess(locatorBackBeen.get(0));
+                                        return;
+                                    } else {
+                                        error = mContext.getString(R.string.data_null);
+                                    }
+                                } else {
+                                    error = xmlResp.getDescription();
+                                }
+                            }
+                            listener.onFailed(error);
+                        }
+                    });
+                } catch (Exception e) {
+                    listener.onFailed(mContext.getString(R.string.unknow_error));
+                    LogUtils.e(TAG, "scanLocator--->" + e);
+                }
+            }
+        }, null);
+    }
 }

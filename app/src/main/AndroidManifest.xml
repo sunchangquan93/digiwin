@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="digiwin.smartdepot">
 
@@ -244,9 +244,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".module.activity.purchase.purchaseinstore.PurchaseInStorageScanActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
-        <activity android:name=".module.activity.purchase.purchaseinstore.PurchaseInStorageSumActivity"
+        <activity android:name=".module.activity.purchase.purchaseinstore.PurchaseInStoreSecondActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
 
         <!-- 入库上架 待办事项 -->
@@ -267,6 +265,14 @@
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
             <intent-filter>
                 <action android:name="android.intent.action.digiwin.SaleOutletActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".module.activity.stock.miscellaneousissues.MiscellaneousissuesActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
+            <intent-filter>
+                <action android:name="android.intent.action.digiwin.MiscellaneousissuesActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

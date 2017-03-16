@@ -520,6 +520,7 @@ public class DistributeScanActivity extends BaseTitleActivity {
         tv_locator_num.setText(StringUtils.deleteZero(sumshoubean.getStock_qty()));
         tv_left_material_num.setText(StringUtils.deleteZero(sumshoubean.getShortage_qty()));
         tv_scanned_num.setText(StringUtils.deleteZero(sumshoubean.getScan_sumqty()));
+        saveBean.setUnit_no(sumshoubean.getUnit_no());
         //欠料量
         float num1 = StringUtils.string2Float(sumshoubean.getShortage_qty());
         //库存量

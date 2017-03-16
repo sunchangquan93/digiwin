@@ -1,7 +1,6 @@
 package digiwin.smartdepot.module.adapter.purchase;
 
 import android.content.Context;
-import android.view.View;
 
 import java.util.List;
 
@@ -9,7 +8,6 @@ import digiwin.library.utils.StringUtils;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.BaseRecyclerAdapter;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.RecyclerViewHolder;
 import digiwin.smartdepot.R;
-import digiwin.smartdepot.module.activity.purchase.purchaseinstore.PurchaseInStorageSumActivity;
 import digiwin.smartdepot.module.bean.common.ListSumBean;
 
 /**
@@ -33,14 +31,6 @@ public class PurchaseInStorageSumAdapter extends BaseRecyclerAdapter<ListSumBean
     protected void bindData(RecyclerViewHolder holder, int position, final ListSumBean item) {
         float numb1 = StringUtils.string2Float(item.getReceipt_qty());
         float numb2 = StringUtils.string2Float(item.getScan_sumqty());
-        holder.setClickListener(R.id.iv_detail_look, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 跳转到明细界面
-                PurchaseInStorageSumActivity ac= (PurchaseInStorageSumActivity)mContext;
-                ac.getDetail(item);
-    }
-});
         holder.setText(R.id.tv_item_no, item.getItem_no());
         holder.setText(R.id.tv_item_name,item.getItem_name());
         holder.setText(R.id.tv_item_model,item.getItem_spec());

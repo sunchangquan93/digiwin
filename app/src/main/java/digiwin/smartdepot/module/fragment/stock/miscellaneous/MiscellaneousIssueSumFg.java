@@ -1,4 +1,4 @@
-package digiwin.smartdepot.module.fragment.produce.postmaterial;
+package digiwin.smartdepot.module.fragment.stock.miscellaneous;
 
 
 import android.os.Bundle;
@@ -26,8 +26,10 @@ import digiwin.smartdepot.core.base.BaseFragment;
 import digiwin.smartdepot.login.bean.AccoutBean;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
 import digiwin.smartdepot.module.activity.common.CommonDetailActivity;
-import digiwin.smartdepot.module.activity.produce.postmaterial.PostMaterialSecondActivity;
-import digiwin.smartdepot.module.adapter.produce.PostMaterialSumAdapter;
+import digiwin.smartdepot.module.activity.purchase.purchaseinstore.PurchaseInStoreSecondActivity;
+import digiwin.smartdepot.module.activity.stock.miscellaneousissues.MiscellaneousissuesActivity;
+import digiwin.smartdepot.module.adapter.purchase.PurchaseInStorageSumAdapter;
+import digiwin.smartdepot.module.adapter.stock.MiscellaneousSumAdapter;
 import digiwin.smartdepot.module.bean.common.ClickItemPutBean;
 import digiwin.smartdepot.module.bean.common.DetailShowBean;
 import digiwin.smartdepot.module.bean.common.FilterResultOrderBean;
@@ -38,28 +40,11 @@ import digiwin.smartdepot.module.logic.common.CommonLogic;
 
 /**
  * @author 唐孟宇
- * @des 领料过账 数据汇总界面
- * @date 2017/2/23
+ * @des 杂项发料 数据汇总界面
  */
-public class PostMaterialSumFg extends BaseFragment {
+public class MiscellaneousIssueSumFg extends BaseFragment {
     @BindView(R.id.ry_list)
     RecyclerView ryList;
-
-    /**
-     * 单号
-     */
-    @BindView(R.id.tv_head_post_order)
-    TextView tv_head_post_order;
-    /**
-     * 部门
-     */
-    @BindView(R.id.tv_head_department)
-    TextView tv_head_department;
-    /**
-     * 日期
-     */
-    @BindView(R.id.tv_head_date)
-    TextView tv_head_date;
 
     @OnClick(R.id.commit)
     void commit() {
@@ -75,33 +60,28 @@ public class PostMaterialSumFg extends BaseFragment {
         });
     }
 
-    PostMaterialSecondActivity pactivity;
+    MiscellaneousissuesActivity pactivity;
 
     CommonLogic commonLogic;
 
     private boolean upDateFlag;
 
-    PostMaterialSumAdapter adapter;
+    MiscellaneousSumAdapter adapter;
 
     List<ListSumBean> sumShowBeanList;
 
-    /**
-     * 从汇总界面带入的单头数据
-     */
-    FilterResultOrderBean orderData;
     @Override
     protected int bindLayoutId() {
-        return R.layout.fg_putinstore_sum;
+        return R.layout.fg_miscellaneous_sum;
     }
 
     @Override
     protected void doBusiness() {
-        pactivity = (PostMaterialSecondActivity) activity;
+        pactivity = (MiscellaneousissuesActivity) activity;
         commonLogic = CommonLogic.getInstance(pactivity, pactivity.module, pactivity.mTimestamp.toString());
         FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(activity);
         ryList.setLayoutManager(linearLayoutManager);
         upDateFlag = false;
-        orderData = (FilterResultOrderBean) pactivity.getIntent().getExtras().getSerializable("orderData");
     }
 
     /**
@@ -109,67 +89,39 @@ public class PostMaterialSumFg extends BaseFragment {
      */
     public void upDateList() {
         try {
-            ClickItemPutBean clickItemPutBean = new ClickItemPutBean();
-            clickItemPutBean.setDoc_no(orderData.getDoc_no());
+            ClickItemPutBean clickItemPutData = new ClickItemPutBean();
             AccoutBean accoutBean = LoginLogic.getUserInfo();
             if(null != accoutBean){
-                clickItemPutBean.setWarehouse_out_no(accoutBean.getWare());
+                clickItemPutData.setWarehouse_in_no(accoutBean.getWare());
             }
             showLoadingDialog();
-            commonLogic.getOrderSumData(clickItemPutBean, new CommonLogic.GetOrderSumListener() {
+            commonLogic.getOrderSumData(clickItemPutData, new CommonLogic.GetOrderSumListener() {
                 @Override
                 public void onSuccess(List<ListSumBean> list) {
                     dismissLoadingDialog();
-                    tv_head_post_order.setText(orderData.getDoc_no());
-                    tv_head_date.setText(orderData.getCreate_date());
-                    tv_head_department.setText(orderData.getDepartment_name());
                     sumShowBeanList = list;
-                    adapter = new PostMaterialSumAdapter(activity, sumShowBeanList);
-                    ryList.setAdapter(adapter);
-                    upDateFlag = true;
-                    toDetail();
+                    if(list.size()>0){
+                        adapter = new MiscellaneousSumAdapter(pactivity, sumShowBeanList);
+                        ryList.setAdapter(adapter);
+                        upDateFlag = true;
+                        toDetail();
+                    }
                 }
 
                 @Override
                 public void onFailed(String error) {
-                    dismissLoadingDialog();
+                   dismissLoadingDialog();
                     upDateFlag = false;
                     try {
                         showFailedDialog(error);
                         sumShowBeanList = new ArrayList<ListSumBean>();
-                        adapter = new PostMaterialSumAdapter(pactivity, sumShowBeanList);
+                        adapter = new MiscellaneousSumAdapter(pactivity, sumShowBeanList);
                         ryList.setAdapter(adapter);
                     } catch (Exception e) {
                         LogUtils.e(TAG, "upDateList--getSum--onFailed" + e);
                     }
                 }
             });
-//            HashMap<String,String> map = new HashMap<>();
-//            commonLogic.getSum(map, new CommonLogic.GetSumListener() {
-//                @Override
-//                public void onSuccess(List<SumShowBean> list) {
-//                    dismissLoadingDialog();
-//                    sumShowBeanList = list;
-//                    adapter = new PostMaterialSumAdapter(activity, sumShowBeanList);
-//                    ryList.setAdapter(adapter);
-//                    upDateFlag = true;
-//                    toDetail();
-//                }
-//
-//                @Override
-//                public void onFailed(String error) {
-//                    dismissLoadingDialog();
-//                    upDateFlag = false;
-//                    try {
-//                        showFailedDialog(error);
-//                        sumShowBeanList = new ArrayList<SumShowBean>();
-//                        adapter = new PostMaterialSumAdapter(pactivity, sumShowBeanList);
-//                        ryList.setAdapter(adapter);
-//                    } catch (Exception e) {
-//                        LogUtils.e(TAG, "upDateList--getSum--onFailed" + e);
-//                    }
-//                }
-//            });
         } catch (Exception e) {
             LogUtils.e(TAG, "upDateList--getSum--Exception" + e);
         }
@@ -200,8 +152,8 @@ public class PostMaterialSumFg extends BaseFragment {
         showLoadingDialog();
         map.put("item_no", orderSumData.getItem_no());
         final SumShowBean sumShowBean = new SumShowBean();
-        sumShowBean.setItem_no(orderSumData.getItem_no());
         sumShowBean.setItem_name(orderSumData.getItem_name());
+        sumShowBean.setItem_no(orderSumData.getItem_no());
         commonLogic.getDetail(map, new CommonLogic.GetDetailListener() {
             @Override
             public void onSuccess(List<DetailShowBean> detailShowBeen) {
@@ -210,8 +162,8 @@ public class PostMaterialSumFg extends BaseFragment {
                 bundle.putString(CommonDetailActivity.MODULECODE, pactivity.module);
                 bundle.putSerializable(CommonDetailActivity.ONESUM, sumShowBean);
                 bundle.putSerializable(CommonDetailActivity.DETAIL, (Serializable) detailShowBeen);
-                dismissLoadingDialog();
                 ActivityManagerUtils.startActivityBundleForResult(activity, CommonDetailActivity.class, bundle, pactivity.DETAILCODE);
+                dismissLoadingDialog();
             }
 
             @Override

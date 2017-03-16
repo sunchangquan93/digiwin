@@ -46,19 +46,17 @@ public class FilterResultOrderBean implements Serializable {
 
     public String department_name = null;
 
-    public String getEmployee_no() {
-        return employee_no;
+    public String getEmployee_name() {
+        return employee_name;
     }
 
-    public void setEmployee_no(String employee_no) {
-        this.employee_no = employee_no;
+    public void setEmployee_name(String employee_name) {
+        this.employee_name = employee_name;
     }
 
     /**
-     * 部门
+     * 人员
      */
-
-
-    public String employee_no = null;
+    public String employee_name = null;
 
 }

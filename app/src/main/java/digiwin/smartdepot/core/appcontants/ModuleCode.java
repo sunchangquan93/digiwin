@@ -86,6 +86,10 @@ public interface ModuleCode {
      * 销售出库
      */
     public final String SALEOUTLET="D001";
+    /**
+     * 杂项发料
+     */
+    public final String MISCELLANEOUSISSUES="C009";
 
     /**
      * 工序报工

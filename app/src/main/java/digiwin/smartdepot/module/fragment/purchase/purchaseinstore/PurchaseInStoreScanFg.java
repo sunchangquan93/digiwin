@@ -1,17 +1,18 @@
-package digiwin.smartdepot.module.fragment.produce.putinstore;
+package digiwin.smartdepot.module.fragment.purchase.purchaseinstore;
 
 import android.os.Handler;
 import android.os.Message;
 import android.text.method.TextKeyListener;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.BindViews;
@@ -20,15 +21,15 @@ import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
 import digiwin.library.dialog.OnDialogClickListener;
-import digiwin.library.utils.ObjectAndMapUtils;
 import digiwin.library.utils.StringUtils;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.base.BaseFragment;
 import digiwin.smartdepot.core.modulecommon.ModuleUtils;
 import digiwin.smartdepot.module.activity.produce.putinstore.PutInStoreSecondActivity;
-import digiwin.smartdepot.module.bean.common.FilterBean;
+import digiwin.smartdepot.module.activity.purchase.purchaseinstore.PurchaseInStoreSecondActivity;
 import digiwin.smartdepot.module.bean.common.FilterResultOrderBean;
+import digiwin.smartdepot.module.bean.common.ListSumBean;
 import digiwin.smartdepot.module.bean.common.SaveBean;
 import digiwin.smartdepot.module.bean.common.ScanBarcodeBackBean;
 import digiwin.smartdepot.module.bean.common.ScanLocatorBackBean;
@@ -37,92 +38,151 @@ import digiwin.smartdepot.module.logic.common.CommonLogic;
 
 /**
  * @author 唐孟宇
- * @des 入库上架 扫码页面
+ * @des 采购入库 扫码页面
  */
-public class PutInStoreScanFg extends BaseFragment {
+public class PurchaseInStoreScanFg extends BaseFragment {
 
+    /**
+     * 条码
+     */
     @BindView(R.id.tv_barcode)
     TextView tvBarcode;
+
+    /**
+     * 条码
+     */
     @BindView(R.id.et_scan_barocde)
-    EditText etScanBarocde;
-    @BindView(R.id.ll_scan_barcode)
-    LinearLayout llScanBarcode;
+    EditText et_scan_barocde;
+
+    /**
+     * 库位
+     */
     @BindView(R.id.tv_locator)
-    TextView tvLocator;
+    TextView tv_locator;
+    /**
+     * 库位
+     */
     @BindView(R.id.et_scan_locator)
-    EditText etScanLocator;
+    EditText et_scan_locator;
+    /**
+     * 锁定库位
+     */
+    @BindView(R.id.cb_locatorlock)
+    CheckBox cb_locatorlock;
+    /**
+     * 数量
+     */
+    @BindView(R.id.et_input_num)
+    EditText et_input_num;
+
+    /**
+     * 保存按钮
+     */
+    @BindView( R.id.save)
+    Button save;
+
+    @BindView(R.id.ll_scan_barcode)
+    LinearLayout ll_scan_barcode;
     @BindView(R.id.ll_scan_locator)
-    LinearLayout llScanLocator;
+    LinearLayout ll_scan_locator;
     @BindView(R.id.tv_number)
     TextView tvNumber;
-    @BindView(R.id.et_input_num)
-    EditText etInputNum;
     @BindView(R.id.ll_input_num)
     LinearLayout llInputNum;
-    @BindView(R.id.ll_zx_input)
-    LinearLayout llZxInput;
-    @BindView(R.id.tv_detail_show)
-    TextView tvDetailShow;
-    @BindView(R.id.includedetail)
-    View includeDetail;
 
     @BindViews({R.id.et_scan_barocde, R.id.et_scan_locator, R.id.et_input_num})
     List<EditText> editTexts;
-    @BindViews({R.id.ll_scan_barcode,R.id.ll_scan_locator, R.id.ll_input_num})
+    @BindViews({R.id.ll_scan_barcode, R.id.ll_scan_locator, R.id.ll_input_num})
     List<View> views;
     @BindViews({R.id.tv_barcode, R.id.tv_locator, R.id.tv_number})
     List<TextView> textViews;
-    @BindView(R.id.cb_locatorlock2)
-    CheckBox cb_locatorlock2;
 
-    @OnCheckedChanged(R.id.cb_locatorlock2)
-    void isLock2(boolean checked) {
+    /**
+     * 公共区域展示
+     */
+    @BindView(R.id.tv_detail_show)
+    TextView tvDetailShow;
+
+    @BindView(R.id.includedetail)
+    RelativeLayout includeDetail;
+    /**
+     * 条码展示
+     */
+    String barcodeShow;
+    /**
+     * 库位展示
+     */
+    String locatorShow;
+    /**
+     * 条码扫描
+     */
+    boolean barcodeFlag;
+    /**
+     * 库位扫描
+     */
+    boolean locatorFlag;
+
+    SaveBean saveBean;
+
+    /**
+     * 物料条码
+     */
+    final int BARCODEWHAT = 1001;
+    /**
+     * 库位
+     */
+    final int LOCATORWHAT = 1002;
+
+    CommonLogic commonLogic;
+
+    @OnCheckedChanged(R.id.cb_locatorlock)
+    void isLock(boolean checked) {
         if (checked) {
-            etScanLocator.setKeyListener(null);
+            et_scan_locator.setKeyListener(null);
         } else {
-            etScanLocator.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
+            et_scan_locator.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
         }
     }
 
     @OnFocusChange(R.id.et_scan_barocde)
     void barcodeFocusChanage() {
-        ModuleUtils.viewChange(llScanBarcode, views);
-        ModuleUtils.etChange(activity, etScanBarocde, editTexts);
+        ModuleUtils.viewChange(ll_scan_barcode, views);
+        ModuleUtils.etChange(activity, et_scan_barocde, editTexts);
         ModuleUtils.tvChange(activity, tvBarcode, textViews);
     }
 
     @OnFocusChange(R.id.et_scan_locator)
     void locatorFocusChanage() {
-        ModuleUtils.viewChange(llScanLocator, views);
-        ModuleUtils.etChange(activity, etScanLocator, editTexts);
-        ModuleUtils.tvChange(activity, tvLocator, textViews);
+        ModuleUtils.viewChange(ll_scan_locator, views);
+        ModuleUtils.etChange(activity, et_scan_locator, editTexts);
+        ModuleUtils.tvChange(activity, tv_locator, textViews);
     }
 
     @OnFocusChange(R.id.et_input_num)
     void numFocusChanage() {
         ModuleUtils.viewChange(llInputNum, views);
-        ModuleUtils.etChange(activity, etInputNum, editTexts);
+        ModuleUtils.etChange(activity, et_input_num, editTexts);
         ModuleUtils.tvChange(activity, tvNumber, textViews);
     }
 
     @OnTextChanged(value = R.id.et_scan_barocde, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void barcodeChange(CharSequence s) {
-        if (!StringUtils.isBlank(s.toString())) {
+        if (!StringUtils.isBlank(s.toString().trim())) {
             mHandler.removeMessages(BARCODEWHAT);
-            mHandler.sendMessageDelayed(mHandler.obtainMessage(BARCODEWHAT, s.toString()), AddressContants.DELAYTIME);
+            mHandler.sendMessageDelayed(mHandler.obtainMessage(BARCODEWHAT, s.toString().trim()), AddressContants.DELAYTIME);
         }
     }
 
     @OnTextChanged(value = R.id.et_scan_locator, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void locatorChange(CharSequence s) {
-        if (!StringUtils.isBlank(s.toString())) {
+        if (!StringUtils.isBlank(s.toString().trim())) {
             mHandler.removeMessages(LOCATORWHAT);
-            mHandler.sendMessageDelayed(mHandler.obtainMessage(LOCATORWHAT, s.toString()), AddressContants.DELAYTIME);
+            mHandler.sendMessageDelayed(mHandler.obtainMessage(LOCATORWHAT, s.toString().trim()), AddressContants.DELAYTIME);
         }
     }
 
     @OnClick(R.id.save)
-    void save() {
+    void Save() {
         if (!barcodeFlag) {
             showFailedDialog(R.string.scan_barcode);
             return;
@@ -131,11 +191,11 @@ public class PutInStoreScanFg extends BaseFragment {
             showFailedDialog(R.string.scan_locator);
             return;
         }
-        if (StringUtils.isBlank(etInputNum.getText().toString())) {
+        if (StringUtils.isBlank(et_input_num.getText().toString())) {
             showFailedDialog(R.string.input_num);
             return;
         }
-        saveBean.setQty(etInputNum.getText().toString());
+        saveBean.setQty(et_input_num.getText().toString());
         float qty = StringUtils.string2Float(saveBean.getQty());
         float scansum_qty = StringUtils.string2Float(saveBean.getScan_sumqty());
         float avaliable_in_qty = StringUtils.string2Float(saveBean.getAvailable_in_qty());
@@ -160,38 +220,10 @@ public class PutInStoreScanFg extends BaseFragment {
 
     }
 
-    /**
-     * 物料条码
-     */
-    final int BARCODEWHAT = 1001;
-    /**
-     * 库位
-     */
-    final int LOCATORWHAT = 1002;
-
-    PutInStoreSecondActivity pactivity;
-
-    CommonLogic commonLogic;
-    /**
-     * 条码展示
-     */
-    String barcodeShow;
-    /**
-     * 库位展示
-     */
-    String locatorShow;
-    /**
-     * 条码扫描
-     */
-    boolean barcodeFlag;
-    /**
-     * 库位扫描
-     */
-    boolean locatorFlag;
-
-    SaveBean saveBean;
+    PurchaseInStoreSecondActivity pactivity;
 
     FilterResultOrderBean orderBean = new FilterResultOrderBean();
+
     private Handler mHandler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
@@ -203,30 +235,36 @@ public class PutInStoreScanFg extends BaseFragment {
                         @Override
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
                             barcodeShow = barcodeBackBean.getShow();
-                            etInputNum.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
+                            if(!StringUtils.isBlank(barcodeBackBean.getBarcode_qty())){
+                                et_input_num.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
+                            }
                             barcodeFlag = true;
                             show();
-                            saveBean.setAvailable_in_qty(barcodeBackBean.getAvailable_in_qty());
+                            saveBean.setQty(barcodeBackBean.getBarcode_qty());
                             saveBean.setBarcode_no(barcodeBackBean.getBarcode_no());
                             saveBean.setItem_no(barcodeBackBean.getItem_no());
                             saveBean.setUnit_no(barcodeBackBean.getUnit_no());
                             saveBean.setLot_no(barcodeBackBean.getLot_no());
                             saveBean.setScan_sumqty(barcodeBackBean.getScan_sumqty());
-                            etInputNum.requestFocus();
+                            if (cb_locatorlock.isChecked()){
+                                et_input_num.requestFocus();
+                            }else {
+                                et_scan_locator.requestFocus();
+                            }
                         }
 
                         @Override
-                public void onFailed(String error) {
-                    barcodeFlag = false;
-                    showFailedDialog(error, new OnDialogClickListener() {
-                        @Override
-                        public void onCallback() {
-                            etScanBarocde.setText("");
+                        public void onFailed(String error) {
+                            barcodeFlag = false;
+                            showFailedDialog(error, new OnDialogClickListener() {
+                                @Override
+                                public void onCallback() {
+                                    et_scan_barocde.setText("");
+                                }
+                            });
                         }
                     });
-                }
-            });
-            break;
+                    break;
                 case LOCATORWHAT:
                     HashMap<String, String> locatorMap = new HashMap<>();
                     locatorMap.put(AddressContants.STORAGE_SPACES_BARCODE, String.valueOf(msg.obj));
@@ -238,7 +276,7 @@ public class PutInStoreScanFg extends BaseFragment {
                             show();
                             saveBean.setStorage_spaces_in_no(locatorBackBean.getStorage_spaces_no());
                             saveBean.setWarehouse_in_no(locatorBackBean.getWarehouse_no());
-                            etScanBarocde.requestFocus();
+                            et_input_num.requestFocus();
                         }
 
                         @Override
@@ -246,14 +284,13 @@ public class PutInStoreScanFg extends BaseFragment {
                             showFailedDialog(error, new OnDialogClickListener() {
                                 @Override
                                 public void onCallback() {
-                                    etScanLocator.setText("");
+                                    et_scan_locator.setText("");
                                 }
                             });
                             locatorFlag = false;
                         }
                     });
                     break;
-
             }
             return false;
         }
@@ -261,12 +298,12 @@ public class PutInStoreScanFg extends BaseFragment {
 
     @Override
     protected int bindLayoutId() {
-        return R.layout.fg_putinstore_scan;
+        return R.layout.activity_purchase_in_storage_scan;
     }
 
     @Override
     protected void doBusiness() {
-        pactivity = (PutInStoreSecondActivity) activity;
+        pactivity = (PurchaseInStoreSecondActivity) activity;
         commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
         initData();
     }
@@ -286,16 +323,17 @@ public class PutInStoreScanFg extends BaseFragment {
      * 保存完成之后的操作
      */
     private void clear() {
-        etInputNum.setText("");
-        if (!cb_locatorlock2.isChecked()){
-            locatorFlag=false;
-            etScanLocator.setText("");
-            locatorShow="";
+        et_scan_barocde.setText("");
+        et_input_num.setText("");
+        if (cb_locatorlock.isChecked()){
+            barcodeFlag = false;
+        }else {
+            locatorFlag = false;
+            locatorShow = "";
+            et_scan_locator.setText("");
+            et_scan_barocde.requestFocus();
         }
-        barcodeFlag=false;
-        etScanBarocde.setText("");
-        barcodeShow="";
-        etScanLocator.requestFocus();
+        barcodeShow = "";
         show();
     }
 
@@ -303,6 +341,8 @@ public class PutInStoreScanFg extends BaseFragment {
      * 初始化一些变量
      */
     private void initData() {
+        et_scan_barocde.setText("");
+        et_scan_locator.setText("");
         barcodeShow = "";
         locatorShow = "";
         barcodeFlag = false;
@@ -310,5 +350,6 @@ public class PutInStoreScanFg extends BaseFragment {
         saveBean = new SaveBean();
         orderBean = (FilterResultOrderBean) pactivity.getIntent().getExtras().getSerializable("orderData");
         saveBean.setDoc_no(orderBean.getDoc_no());
-    }
-}
+        et_scan_barocde.requestFocus();
+        }
+        }
