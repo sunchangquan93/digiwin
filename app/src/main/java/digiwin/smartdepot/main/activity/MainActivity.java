@@ -1,5 +1,6 @@
 package digiwin.smartdepot.main.activity;
 
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -23,6 +24,7 @@ import digiwin.library.constant.SharePreKey;
 import digiwin.library.utils.ActivityManagerUtils;
 import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.SharedPreferencesUtils;
+import digiwin.library.utils.ThreadPoolManager;
 import digiwin.library.utils.ToastUtils;
 import digiwin.library.voiceutils.VoiceUtils;
 import digiwin.smartdepot.R;
@@ -126,7 +128,12 @@ public class MainActivity extends BaseTitleActivity {
 
     }
 
-//    /**
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
+    //    /**
 //     * 语音识别测试
 //     */
 //    @OnClick(R.id.un_com)
@@ -150,6 +157,7 @@ public class MainActivity extends BaseTitleActivity {
     protected Toolbar toolbar() {
         return toolbar;
     }
+
 
     @Override
     protected void doBusiness() {
@@ -184,7 +192,7 @@ public class MainActivity extends BaseTitleActivity {
         dailyworkItems = new ArrayList<>();
         boardItems=new ArrayList<>();
         //初始化各个模块数据
-        mainLogic.initModule(this,powerItems, purchaseItems, produceItems, storageItems, salesItems, dailyworkItems,boardItems);
+        mainLogic.initModule(activity,powerItems, purchaseItems, produceItems, storageItems, salesItems, dailyworkItems,boardItems);
         showTitle();
     }
 

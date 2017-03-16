@@ -87,4 +87,9 @@ public interface ModuleCode {
      */
     public final String SALEOUTLET="D001";
 
+    /**
+     * 工序报工
+     */
+    public final String PROCESSREPORTING = "E005";
+
 }

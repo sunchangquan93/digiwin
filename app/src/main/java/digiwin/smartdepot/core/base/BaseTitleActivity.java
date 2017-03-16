@@ -1,18 +1,18 @@
 package digiwin.smartdepot.core.base;
 
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import digiwin.library.popupwindow.CustomPopWindow;
 import digiwin.library.utils.ActivityManagerUtils;
-import digiwin.library.utils.StringUtils;
+import digiwin.library.utils.ViewUtils;
+import digiwin.library.zxing.MipcaActivityCapture;
+import digiwin.library.zxing.camera.GetBarCodeListener;
 import digiwin.smartdepot.R;
-import digiwin.smartdepot.login.bean.AccoutBean;
-import digiwin.smartdepot.login.loginlogic.LoginLogic;
 import digiwin.smartdepot.main.activity.SettingActivity;
 
 /**
@@ -32,7 +32,25 @@ public abstract class BaseTitleActivity extends BaseActivity {
     public TextView tvOperation;
     @BindView(R.id.iv_back)
     public ImageView mBack;
-    private CustomPopWindow popWindow;
+    /**
+     * 扫码框
+     */
+    @BindView(R.id.iv_scan)
+    public ImageView ivScan;
+    @OnClick(R.id.iv_scan)
+    public void cameraScan(){
+        MipcaActivityCapture.startCameraActivity(activity, new GetBarCodeListener() {
+            @Override
+            public void onSuccess(String msg) {
+                View focusView = ViewUtils.getFocusView(activity);
+                if (focusView instanceof EditText){
+                   EditText et= (EditText) focusView;
+                    et.setText(msg);
+                    et.setSelection(msg.length());
+                }
+            }
+        });
+    }
 
 
 
@@ -56,7 +74,7 @@ public abstract class BaseTitleActivity extends BaseActivity {
         toolbar().setBackgroundResource(R.color.Base_color);
         setSupportActionBar(toolbar());
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
+        ivScan.setVisibility(View.VISIBLE);
     }
 
     /**

@@ -11,11 +11,11 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 
 import java.util.Hashtable;
-
 /**
- * Created by xiemeng on 2017/1/24.
+ * @des    生成二维码
+ * @author  xiemeng
+ * @date    2017/3/15
  */
-
 public class CreateQR {
     private   int QR_WIDTH = 200, QR_HEIGHT = 200;
     //要转换的地址或字符串,可以是中文

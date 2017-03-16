@@ -91,7 +91,7 @@ public interface ReqTypeName {
      */
     static final String  GETFIFO = "app.item.fifo.get";
     /**
-     * 领料过账 获取FIFO数据
+     *  获取FIFO数据
      */
     static final String  POSTMATERIALFIFO = "app.doc.no.fifo.get";
 
@@ -143,4 +143,13 @@ public interface ReqTypeName {
      */
     static final String COMPLETINGSTORECOMMIT = "app.stock.in.no.submit";
 
+    /**
+     * 工单报工请求
+     */
+    static final String PROCESSREPORT = "app.process.name.get";
+
+    /**
+     * 报工人请求
+     */
+    static final String GETWORKPERSON = "app.employee.name.get";
 }

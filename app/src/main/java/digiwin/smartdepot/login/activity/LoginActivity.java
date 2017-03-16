@@ -3,6 +3,7 @@ package digiwin.smartdepot.login.activity;
 
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -205,18 +206,17 @@ public class LoginActivity extends BaseActivity {
                     //传入权限
                     Bundle bundle=new Bundle();
                     bundle.putString("access",accoutBean.getAccess());
-
                     accoutBean.setPassword(et_login_lock.getText().toString());
-                    JPushManager.login(TelephonyUtils.getDeviceId(activity),TelephonyUtils.getDeviceId(activity));
                     if (cb_remeber_password.isChecked()) {
                         accoutBean.setIsRemeberPassWord("Y");
                     } else {
-                    accoutBean.setIsRemeberPassWord("N");}
+                        accoutBean.setIsRemeberPassWord("N");}
                     Connector.getDatabase();
                     DataSupport.deleteAll(AccoutBean.class);
                     accoutBean.save();
-                    dismissLoadingDialog();
                     ActivityManagerUtils.startActivityForBundleDataFinish(activity,MainActivity.class,bundle);
+                    JPushManager.login(TelephonyUtils.getDeviceId(activity),TelephonyUtils.getDeviceId(activity));
+//                    dismissLoadingDialog();
                 }
             }
 
@@ -231,6 +231,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        dismissLoadingDialog();
         isFinished = true;
     }
 

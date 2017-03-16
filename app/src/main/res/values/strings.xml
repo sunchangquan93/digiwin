@@ -232,4 +232,15 @@
     <string name="storage_capacity">可入库量</string>
     <string name="storage_capacity_large">输入数量不可大于可入库量</string>
 
+    <string name="title_pallet_report">工序报工</string>
+    <string name="job_num">作业号</string>
+    <string name="the_workers">报工人</string>
+    <string name="good_amount">良品量</string>
+    <string name="not_good_amount">不良品量</string>
+    <string name="work_time">工时(分)</string>
+    <string name="job_name">作业名</string>
+    <string name="day_has_passed">本日已转</string>
+    <string name="person_name">人员名</string>
+    <string name="input_time">请手动输入工时</string>
+    <string name="scan_sale">请先扫描出通单号</string>
 </resources>

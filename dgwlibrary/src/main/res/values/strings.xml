@@ -19,4 +19,5 @@
     <string name="voicer_female">女声</string>
     <string name="voicer_not">不提醒</string>
     <string name="is_sure_commit">是否确定提交?</string>
+    <string name="barcodescan">二维码扫描</string>
 </resources>

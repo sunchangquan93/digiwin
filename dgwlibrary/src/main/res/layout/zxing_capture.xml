@@ -13,7 +13,7 @@
             android:layout_height="fill_parent"
             android:layout_gravity="center" />
 
-        <com.app.zxing.view.ViewfinderView
+        <digiwin.library.zxing.view.ViewfinderView
             android:id="@+id/viewfinder_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -24,6 +24,15 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             layout="@layout/zxing_title" />
+        <CheckBox
+            android:id="@+id/cb_flashlight"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/flashlight"
+            android:layout_marginBottom="@dimen/layout_30dp"
+           />
     </RelativeLayout>
 
 </FrameLayout>

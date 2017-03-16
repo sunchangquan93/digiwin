@@ -116,7 +116,7 @@ public class MainLogic {
 
        // ModuleBean workorder = new ModuleBean(R.string.title_work_order,R.mipmap.work_order,ModuleCode.WORKORDERCODE,"android.intent.action.digiwin.WorkOrderActivity");
 
-        ModuleBean materialReturning= new ModuleBean(R.string.mataerial_returning, R.mipmap.return_of_material, ModuleCode.MATERIALRETURNING,"android.intent.action.digiwin.MaterialReturningActivity");
+        ModuleBean materialReturning= new ModuleBean(R.string.mataerial_returning, R.mipmap.return_of_material, ModuleCode.MATERIALRETURNING,"android.intent.action.digiwin.GDCompletingStoreActivity");
 
         ModuleBean driectStorage= new ModuleBean(R.string.direct_storage, R.mipmap.direct_storage, ModuleCode.DIRECTSTORAGE,"android.intent.action.digiwin.DirectStorageActivity");
 
@@ -156,7 +156,10 @@ public class MainLogic {
         ModuleBean dailyworkBean1 = new ModuleBean(R.string.title_receipt_patch, R.drawable.receiptout, "C001", "com.digiwin.erpfc.biz.intent.ReceiptPatchActivity");
         ModuleBean rcttboardactivity = new ModuleBean(R.string.delivery_uncheck_board, R.drawable.receiptout, ModuleCode.RCCTBOARD, "android.intent.action.digiwin.RcttBoardActivity");
         ModuleBean tctsboardactivity = new ModuleBean(R.string.tcts_board, R.drawable.receiptout, ModuleCode.RCCTBOARD, "android.intent.action.digiwin.TctsBoardActivity");
+        ModuleBean palletreport = new ModuleBean(R.string.title_pallet_report, R.mipmap.pallet_report, ModuleCode.PROCESSREPORTING, "android.intent.action.digiwin.ProcessReportingActivity");
         dailyworkItems.add(dailyworkBean1);
+        dailyworkItems.add(palletreport);
+
         boardItems.add(rcttboardactivity);
         boardItems.add(tctsboardactivity);
         // TODO: 2017/3/14 暂时屏蔽测试用
@@ -236,88 +239,42 @@ public class MainLogic {
      */
     public void showTitle(List<TotalMode> totalModes,List<String> titles) {
         try {
-            for (int i = 0; i < powerItems.size(); i++) {
-                boolean flag = false;
-                for (int j = 0; j < purchaseItems.size(); j++) {
-                    if (powerItems.get(i).equals(purchaseItems.get(j).getId())) {
-                        TotalMode totalMode = new TotalMode(activity.getString(R.string.purchasemanger), purchaseItems);
-                        totalModes.add(totalMode);
-                        flag = true;
-                        break;
-                    }
-                }
-                if (flag) {
-                    break;
-                }
+            //添加采购管理
+            if(purchaseItems.size()>0 && purchaseItems!=null){
+                TotalMode totalMode = new TotalMode(activity.getString(R.string.purchasemanger), purchaseItems);
+                totalModes.add(totalMode);
             }
-            for (int i = 0; i < powerItems.size(); i++) {
-                boolean flag = false;
-                for (int j = 0; j < produceItems.size(); j++) {
-                    if (powerItems.get(i).equals(produceItems.get(j).getId())) {
-                        totalModes.add(new TotalMode(activity.getString(R.string.producemanager), produceItems));
-                        flag = true;
-                        break;
-                    }
-                }
-                if (flag) {
-                    break;
-                }
+            //添加生产管理
+            if(produceItems.size()>0 && produceItems!=null){
+                TotalMode totalMode = new TotalMode(activity.getString(R.string.producemanager), produceItems);
+                totalModes.add(totalMode);
             }
-            for (int i = 0; i < powerItems.size(); i++) {
-                boolean flag = false;
-                for (int j = 0; j < storageItems.size(); j++) {
-                    if (powerItems.get(i).equals(storageItems.get(j).getId())) {
-                        totalModes.add(new TotalMode(activity.getString(R.string.storagemanager), storageItems));
-                        flag = true;
-                        break;
-                    }
-                }
-                if (flag) {
-                    break;
-                }
+            //添加库存管理
+            if(storageItems.size()>0 && storageItems!=null){
+                TotalMode totalMode = new TotalMode(activity.getString(R.string.storagemanager), storageItems);
+                totalModes.add(totalMode);
             }
-            for (int i = 0; i < powerItems.size(); i++) {
-                boolean flag = false;
-                for (int j = 0; j < salesItems.size(); j++) {
-                    if (powerItems.get(i).equals(salesItems.get(j).getId())) {
-                        totalModes.add(new TotalMode(activity.getString(R.string.salesmanager), salesItems));
-                        flag = true;
-                        break;
-                    }
-                }
-                if (flag) {
-                    break;
-                }
+
+            //销售管理
+            if(salesItems.size()>0 && salesItems!=null){
+                TotalMode totalMode = new TotalMode(activity.getString(R.string.salesmanager), salesItems);
+                totalModes.add(totalMode);
             }
-            for (int i = 0; i < powerItems.size(); i++) {
-                boolean flag = false;
-                for (int j = 0; j < dailyworkItems.size(); j++) {
-                    if (powerItems.get(i).equals(dailyworkItems.get(j).getId())) {
-                        totalModes.add(new TotalMode(activity.getString(R.string.dailyworkmanager), dailyworkItems));
-                        flag = true;
-                        break;
-                    }
-                }
-                if (flag) {
-                    break;
-                }
+            //报工管理
+            if(dailyworkItems.size()>0 && dailyworkItems!=null){
+                TotalMode totalMode = new TotalMode(activity.getString(R.string.dailyworkmanager), dailyworkItems);
+                totalModes.add(totalMode);
             }
-            for (int i = 0; i < powerItems.size(); i++) {
-                boolean flag = false;
-                for (int j = 0; j < boardItems.size(); j++) {
-                    if (powerItems.get(i).equals(boardItems.get(j).getId())) {
-                        totalModes.add(new TotalMode(activity.getString(R.string.boardmanager), boardItems));
-                        flag = true;
-                        break;
-                    }
-                }
-                if (flag) {
-                    break;
-                }
+            //看板管理
+            if(boardItems.size()>0 && boardItems!=null){
+                TotalMode totalMode = new TotalMode(activity.getString(R.string.boardmanager), boardItems);
+                totalModes.add(totalMode);
             }
+
             for (TotalMode mode : totalModes) {
                 titles.add(mode.name);
             }
+
         } catch (Exception e) {
             Log.e(TAG, "MainActivity--showTitle-----error");
         }

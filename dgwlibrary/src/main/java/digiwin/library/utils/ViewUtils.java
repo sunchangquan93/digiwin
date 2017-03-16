@@ -5,9 +5,12 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.WindowManager;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by ChangquanSun
@@ -48,8 +51,7 @@ public class ViewUtils {
      * @param spVal
      * @return
      */
-    public static int sp2px(Context context, float spVal)
-    {
+    public static int sp2px(Context context, float spVal) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,
                 spVal, context.getResources().getDisplayMetrics());
     }
@@ -61,17 +63,15 @@ public class ViewUtils {
      * @param pxVal
      * @return
      */
-    public static float px2sp(Context context, float pxVal)
-    {
+    public static float px2sp(Context context, float pxVal) {
         return (pxVal / context.getResources().getDisplayMetrics().scaledDensity);
     }
 
     /**
      * 获取屏幕宽度
-     *
      */
     public static int getScreenWidth(Context context) {
-        WindowManager manager = ((Activity)context).getWindowManager();
+        WindowManager manager = ((Activity) context).getWindowManager();
         DisplayMetrics outMetrics = new DisplayMetrics();
         manager.getDefaultDisplay().getMetrics(outMetrics);
         return outMetrics.widthPixels;
@@ -96,19 +96,16 @@ public class ViewUtils {
      * @param context
      * @return
      */
-    public static int getStatusHeight(Context context)
-    {
+    public static int getStatusHeight(Context context) {
 
         int statusHeight = -1;
-        try
-        {
+        try {
             Class<?> clazz = Class.forName("com.android.internal.R$dimen");
             Object object = clazz.newInstance();
             int height = Integer.parseInt(clazz.getField("status_bar_height")
                     .get(object).toString());
             statusHeight = context.getResources().getDimensionPixelSize(height);
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return statusHeight;
@@ -120,8 +117,7 @@ public class ViewUtils {
      * @param activity
      * @return
      */
-    public static Bitmap snapShotWithStatusBar(Activity activity)
-    {
+    public static Bitmap snapShotWithStatusBar(Activity activity) {
         View view = activity.getWindow().getDecorView();
         view.setDrawingCacheEnabled(true);
         view.buildDrawingCache();
@@ -141,8 +137,7 @@ public class ViewUtils {
      * @param activity
      * @return
      */
-    public static Bitmap snapShotWithoutStatusBar(Activity activity)
-    {
+    public static Bitmap snapShotWithoutStatusBar(Activity activity) {
         View view = activity.getWindow().getDecorView();
         view.setDrawingCacheEnabled(true);
         view.buildDrawingCache();
@@ -158,5 +153,14 @@ public class ViewUtils {
                 - statusBarHeight);
         view.destroyDrawingCache();
         return bp;
+    }
+
+    /**
+     * 获取当前焦点所在
+     */
+    public static View getFocusView(Activity activity) {
+        View rootview = activity.getWindow().getDecorView();
+        View focusView = rootview.findFocus();
+        return  focusView;
     }
 }

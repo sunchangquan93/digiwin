@@ -16,8 +16,6 @@
 
 package digiwin.library.zxing.camera;
 
-import java.io.IOException;
-
 import android.content.Context;
 import android.graphics.PixelFormat;
 import android.graphics.Point;
@@ -27,6 +25,8 @@ import android.os.Build;
 import android.os.Handler;
 import android.util.Log;
 import android.view.SurfaceHolder;
+
+import java.io.IOException;
 
 /**
  * This object wraps the Camera service object and expects to be the only one talking to it. The
@@ -324,4 +324,19 @@ public final class CameraManager {
 		return context;
 	}
 
+	public void openFlash(){
+      if (null!=camera) {
+        Camera.Parameters mParameters = camera.getParameters();
+        mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+        camera.setParameters(mParameters);
+      }
+    }
+
+    public void closeFlash(){
+      if (null!=camera) {
+        Camera.Parameters mParameters = camera.getParameters();
+        mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+        camera.setParameters(mParameters);
+      }
+    }
 }

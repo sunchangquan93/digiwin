@@ -119,28 +119,33 @@ public class MaterialReceiptActivity extends BaseFirstModuldeActivity implements
 
     @OnClick(R.id.commit)
     void commit(){
-        final List<ListSumBean> checkedList = adapter.getCheckData();
-        if(checkedList.size() > 0){
-            showCommitSureDialog(new OnDialogTwoListener() {
-                @Override
-                public void onCallback1() {
-                    showLoadingDialog();
-                    if(StringUtils.isBlank(et_delivery_note.getText().toString())){
-                        dismissLoadingDialog();
-                        showFailedDialog(getResources().getString(R.string.please_delivery_note));
-                        return;
+        final List<ListSumBean> checkedList;
+        try {
+            checkedList = adapter.getCheckData();
+            if(checkedList.size() > 0){
+                showCommitSureDialog(new OnDialogTwoListener() {
+                    @Override
+                    public void onCallback1() {
+                        showLoadingDialog();
+                        if(StringUtils.isBlank(et_delivery_note.getText().toString())){
+                            dismissLoadingDialog();
+                            showFailedDialog(getResources().getString(R.string.please_delivery_note));
+                            return;
+                        }
+                        commitData(checkedList);
                     }
-                    commitData(checkedList);
-                }
-                @Override
-                public void onCallback2() {
+                    @Override
+                    public void onCallback2() {
 
-                }
-            });
-        }else{
-            showFailedDialog(getResources().getString(R.string.please_delivery_note_num));
+                    }
+                });
+            }else{
+                showFailedDialog(getResources().getString(R.string.please_delivery_note_num));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            showFailedDialog(getResources().getString(R.string.please_delivery_note));
         }
-
     }
 
     @OnTextChanged(value = R.id.et_delivery_note, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)

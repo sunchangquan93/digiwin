@@ -10,8 +10,10 @@ import android.widget.EditText;
 
 import digiwin.library.R;
 
-/***
- *扫描二维码
+/**
+ * @des      扫码二维码
+ * @author  xiemeng
+ * @date    2017/3/15
  */
 public class CaptureScanActivity extends Activity {
 	private final static int SCANNIN_GREQUEST_CODE = 1;
