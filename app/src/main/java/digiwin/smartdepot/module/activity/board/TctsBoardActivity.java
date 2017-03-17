@@ -15,13 +15,12 @@ import java.util.TimerTask;
 import butterknife.BindView;
 import digiwin.library.constant.SharePreKey;
 import digiwin.library.utils.SharedPreferencesUtils;
+import digiwin.library.utils.StringUtils;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseTitleActivity;
-import digiwin.smartdepot.module.adapter.board.RcctBoardAdapter;
 import digiwin.smartdepot.module.adapter.board.TctsBoardAdapter;
-import digiwin.smartdepot.module.bean.board.RcctboardBean;
 import digiwin.smartdepot.module.bean.board.TctsBoardBean;
 import digiwin.smartdepot.module.logic.board.TctsboardLogic;
 
@@ -95,7 +94,11 @@ public class TctsBoardActivity extends BaseTitleActivity {
         map.put("pagenow", String.valueOf(pagenow));
         tctsboardLogic.getTctsBoard(map, new TctsboardLogic.GetTctsBoardListener() {
             @Override
-            public void onSuccess(List<TctsBoardBean> list) {
+            public void onSuccess(List<TctsBoardBean> list,String msg) {
+                if (!StringUtils.isBlank(msg))
+                {
+                    voice(msg);
+                }
                 if (list.size() == 0)
                 {
                     timer.cancel();

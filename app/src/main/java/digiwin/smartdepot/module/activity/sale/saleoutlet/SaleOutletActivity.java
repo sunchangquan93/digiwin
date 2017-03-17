@@ -129,7 +129,7 @@ public class SaleOutletActivity extends BaseFirstModuldeActivity {
             @Override
             public void onPageSelected(int position) {
                 if (position == 1) {
-                 //   sumFg.upDateList();
+                    sumFg.upDateList();
                 }
             }
 
@@ -145,7 +145,7 @@ public class SaleOutletActivity extends BaseFirstModuldeActivity {
         super.onActivityResult(requestCode, resultCode, data);
         try {
             if (requestCode == DETAILCODE) {
-              //  sumFg.upDateList();
+                sumFg.upDateList();
             }
         } catch (Exception e) {
             LogUtils.e(TAG, "onActivityResult-->" + e);

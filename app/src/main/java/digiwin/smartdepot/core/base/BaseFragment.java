@@ -34,13 +34,11 @@ public abstract class BaseFragment extends BaseAppFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        EventBus.getDefault().register(this);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-//        EventBus.getDefault().unregister(this);
         if (unBind != null) unBind.unbind();
         if (null != mFragmentView) {
             ((ViewGroup) mFragmentView.getParent()).removeView(mFragmentView);

@@ -15,6 +15,7 @@ import java.util.TimerTask;
 import butterknife.BindView;
 import digiwin.library.constant.SharePreKey;
 import digiwin.library.utils.SharedPreferencesUtils;
+import digiwin.library.utils.StringUtils;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
@@ -98,7 +99,11 @@ public class RcttBoardActivity extends BaseTitleActivity {
         map.put("pagenow", String.valueOf(pagenow));
         rcctboardLogic.getRcctBoard(map, new RcctboardLogic.GetRcctBoardListener() {
             @Override
-            public void onSuccess(List<RcctboardBean> list) {
+            public void onSuccess(List<RcctboardBean> list,String msg) {
+                if (!StringUtils.isBlank(msg))
+                {
+                    voice(msg);
+                }
                 if (list.size() == 0)
                 {
                     timer.cancel();

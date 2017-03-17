@@ -2,6 +2,7 @@ package digiwin.smartdepot.module.fragment.produce.putinstore;
 
 
 import android.os.Bundle;
+import android.os.Message;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
@@ -212,6 +213,9 @@ public class PutInStoreSumFg extends BaseFragment {
                         pactivity.mZXVp.setCurrentItem(0);
                         pactivity.createNewModuleId(pactivity.module);
                         commonLogic = CommonLogic.getInstance(activity,pactivity.module,pactivity.mTimestamp.toString());
+                        Message msgs = new Message();
+                        msgs.what = pactivity.CLEAR;
+                        pactivity.handler.sendMessage(msgs);
                     }
                 });
             }

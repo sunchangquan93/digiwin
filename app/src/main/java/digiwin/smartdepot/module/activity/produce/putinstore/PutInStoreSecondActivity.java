@@ -2,11 +2,14 @@ package digiwin.smartdepot.module.activity.produce.putinstore;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -71,6 +74,10 @@ public class PutInStoreSecondActivity extends BaseFirstModuldeActivity {
      */
     public final int DETAILCODE = 1234;
 
+    /**
+     * 清空扫描界面信息
+     */
+    public final int CLEAR = 1005;
     @Override
     protected Toolbar toolbar() {
         return toolbarTitle;
@@ -81,6 +88,17 @@ public class PutInStoreSecondActivity extends BaseFirstModuldeActivity {
         module = ModuleCode.PUTINSTORE;
         return module;
     }
+
+    public Handler handler =  new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if(msg.what == CLEAR){
+                Log.d(TAG,"clear");
+                scanFg.initData();
+            }
+        }
+    };
 
     @Override
     protected void initNavigationTitle() {

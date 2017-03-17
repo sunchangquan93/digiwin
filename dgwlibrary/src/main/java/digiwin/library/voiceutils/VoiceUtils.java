@@ -67,7 +67,7 @@ public class VoiceUtils {
         public void onInit(int code) {
             LogUtils.d(TAG, "InitListener init() code = " + code);
             if (code != ErrorCode.SUCCESS) {
-                showTip("初始化失败,错误码：" + code);
+                //showTip("初始化失败,错误码：" + code);
             } else {
                 // 初始化成功，之后可以调用startSpeaking方法
                 // 注：有的开发者在onCreate方法中创建完合成对象之后马上就调用startSpeaking进行合成，

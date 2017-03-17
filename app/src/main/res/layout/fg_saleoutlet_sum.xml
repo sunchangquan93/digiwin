@@ -32,7 +32,6 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/layout_10dp"
                 android:layout_weight="1"
-                android:gravity="center"
                 android:textColor="@color/white"
                 android:textSize="@dimen/textSize_14sp"
                 />
@@ -50,15 +49,14 @@
                 android:gravity="center_vertical"
                 android:textColor="@color/back47"
                 android:textSize="@dimen/textSize_14sp"
-                android:text="@string/supplier"
+                android:text="@string/custom"
                 />
             <TextView
-                android:id="@+id/tv_supplier"
+                android:id="@+id/tv_custom"
                 android:layout_width="@dimen/layout_0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/layout_10dp"
                 android:layout_weight="1"
-                android:gravity="center"
                 android:textColor="@color/white"
                 android:textSize="@dimen/textSize_14sp"
                 />

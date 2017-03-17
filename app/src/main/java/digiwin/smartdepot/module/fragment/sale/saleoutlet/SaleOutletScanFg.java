@@ -1,30 +1,30 @@
 package digiwin.smartdepot.module.fragment.sale.saleoutlet;
 
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.method.TextKeyListener;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.greenrobot.eventbus.EventBus;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.BindViews;
-import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
-import cn.jpush.im.android.eventbus.EventBus;
 import digiwin.library.dialog.OnDialogClickListener;
+import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.StringUtils;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.BaseRecyclerAdapter;
 import digiwin.smartdepot.R;
@@ -33,14 +33,15 @@ import digiwin.smartdepot.core.base.BaseFragment;
 import digiwin.smartdepot.core.modulecommon.ModuleUtils;
 import digiwin.smartdepot.login.bean.AccoutBean;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
-import digiwin.smartdepot.module.activity.produce.finishstorage.FinishedStorageActivity;
 import digiwin.smartdepot.module.activity.sale.saleoutlet.SaleOutletActivity;
-import digiwin.smartdepot.module.adapter.produce.PostmaterialFiFoAdapter;
+import digiwin.smartdepot.module.adapter.sale.SaleOutletFiFoAdapter;
+import digiwin.smartdepot.module.bean.common.ClickItemPutBean;
 import digiwin.smartdepot.module.bean.common.SaveBean;
 import digiwin.smartdepot.module.bean.common.ScanBarcodeBackBean;
 import digiwin.smartdepot.module.bean.common.ScanLocatorBackBean;
 import digiwin.smartdepot.module.bean.produce.PostMaterialFIFOBean;
 import digiwin.smartdepot.module.logic.common.CommonLogic;
+
 
 /**
  * @author xiemeng
@@ -49,11 +50,11 @@ import digiwin.smartdepot.module.logic.common.CommonLogic;
  */
 public class SaleOutletScanFg extends BaseFragment {
 
-    @BindViews({R.id.et_scan_sale,R.id.et_scan_locator,R.id.et_scan_barocde,  R.id.et_input_num})
+    @BindViews({R.id.et_scan_sale, R.id.et_scan_locator, R.id.et_scan_barocde, R.id.et_input_num})
     List<EditText> editTexts;
-    @BindViews({R.id.ll_scan_sale,R.id.ll_scan_barcode, R.id.ll_scan_locator, R.id.ll_input_num})
+    @BindViews({R.id.ll_scan_sale, R.id.ll_scan_barcode, R.id.ll_scan_locator, R.id.ll_input_num})
     List<View> views;
-    @BindViews({R.id.tv_sale,R.id.tv_barcode, R.id.tv_locator, R.id.tv_number})
+    @BindViews({R.id.tv_sale, R.id.tv_barcode, R.id.tv_locator, R.id.tv_number})
     List<TextView> textViews;
 
     @BindView(R.id.tv_sale)
@@ -103,12 +104,14 @@ public class SaleOutletScanFg extends BaseFragment {
         ModuleUtils.etChange(activity, etSacnSale, editTexts);
         ModuleUtils.tvChange(activity, tvSale, textViews);
     }
+
     @OnFocusChange(R.id.et_scan_locator)
     void locatorFocusChanage() {
         ModuleUtils.viewChange(llScanLocator, views);
         ModuleUtils.etChange(activity, etScanLocator, editTexts);
         ModuleUtils.tvChange(activity, tvLocator, textViews);
     }
+
     @OnFocusChange(R.id.et_scan_barocde)
     void barcodeFocusChanage() {
         ModuleUtils.viewChange(llScanBarcode, views);
@@ -134,6 +137,15 @@ public class SaleOutletScanFg extends BaseFragment {
     @OnTextChanged(value = R.id.et_scan_barocde, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void barcodeChange(CharSequence s) {
         if (!StringUtils.isBlank(s.toString())) {
+            if (!saleFlag) {
+                showFailedDialog(R.string.scan_sale, new OnDialogClickListener() {
+                    @Override
+                    public void onCallback() {
+                        etScanBarocde.setText("");
+                    }
+                });
+                return;
+            }
             mHandler.removeMessages(BARCODEWHAT);
             mHandler.sendMessageDelayed(mHandler.obtainMessage(BARCODEWHAT, s.toString()), AddressContants.DELAYTIME);
         }
@@ -142,6 +154,15 @@ public class SaleOutletScanFg extends BaseFragment {
     @OnTextChanged(value = R.id.et_scan_locator, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void locatorChange(CharSequence s) {
         if (!StringUtils.isBlank(s.toString())) {
+            if (!saleFlag) {
+                showFailedDialog(R.string.scan_sale, new OnDialogClickListener() {
+                    @Override
+                    public void onCallback() {
+                        etScanLocator.setText("");
+                    }
+                });
+                return;
+            }
             mHandler.removeMessages(LOCATORWHAT);
             mHandler.sendMessageDelayed(mHandler.obtainMessage(LOCATORWHAT, s.toString()), AddressContants.DELAYTIME);
         }
@@ -153,20 +174,40 @@ public class SaleOutletScanFg extends BaseFragment {
             showFailedDialog(R.string.scan_sale);
             return;
         }
-        if (!barcodeFlag) {
-            showFailedDialog(R.string.scan_barcode);
-            return;
-        }
         if (!locatorFlag) {
             showFailedDialog(R.string.scan_locator);
+            return;
+        }
+        if (!barcodeFlag) {
+            showFailedDialog(R.string.scan_barcode);
             return;
         }
         if (StringUtils.isBlank(etInputNum.getText().toString())) {
             showFailedDialog(R.string.input_num);
             return;
         }
-        showLoadingDialog();
+        boolean isSave=true;
         saveBean.setQty(etInputNum.getText().toString());
+        if (AddressContants.FIFOY.equals(saveBean.getFifo_check())) {
+            isSave=false;
+            for (PostMaterialFIFOBean bean : fiFoList) {
+                if (saveBean.getBarcode_no().equals(bean.getBarcode_no())
+                 &&saveBean.getStorage_spaces_out_no().equals(bean.getStorage_spaces_no())){
+                    if (StringUtils.string2Float(saveBean.getQty())>StringUtils.string2Float(bean.getRecommended_qty()))
+                    {
+                        showFailedDialog(R.string.input_num_toobig);
+                        return;
+                    }
+                    isSave=true;
+                    break;
+                }
+            }
+        }
+        if (!isSave){
+            showFailedDialog(R.string.fifo_scan_error);
+            return;
+        }
+        showLoadingDialog();
         commonLogic.scanSave(saveBean, new CommonLogic.SaveListener() {
             @Override
             public void onSuccess(String msg) {
@@ -182,6 +223,7 @@ public class SaleOutletScanFg extends BaseFragment {
         });
 
     }
+
     /**
      * 出通单号
      */
@@ -217,35 +259,42 @@ public class SaleOutletScanFg extends BaseFragment {
 
     private BaseRecyclerAdapter adapter;
 
+    String ware = "";
+
     private Handler mHandler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
                 case SALEWHAT:
-                    HashMap<String,String> map = new HashMap<String,String>();
-                    map.put("issuing_no",String.valueOf(msg.obj));
-                    AccoutBean accoutBean = LoginLogic.getUserInfo();
-                    String ware = "";
-                    if(null != accoutBean){
-                        ware = accoutBean.getWare();
-                    }
-                    map.put("warehouse_no",ware);
-                    showLoadingDialog();
+                    HashMap<String, String> map = new HashMap<String, String>();
+                    map.put("issuing_no", String.valueOf(msg.obj));
+                    map.put(AddressContants.WAREHOUSE_NO, ware);
                     commonLogic.postMaterialFIFO(map, new CommonLogic.PostMaterialFIFOListener() {
                         @Override
                         public void onSuccess(List<PostMaterialFIFOBean> fiFoBeanList) {
-                            dismissLoadingDialog();
                             fiFoList.clear();
                             fiFoList = fiFoBeanList;
-                            adapter = new PostmaterialFiFoAdapter(pactivity,fiFoList);
+                            adapter = new SaleOutletFiFoAdapter(pactivity, fiFoList);
                             ryList.setAdapter(adapter);
-                            saleFlag=true;
-                            EventBus.getDefault().post(etSacnSale.getText().toString());
+                            saleFlag = true;
+                            ClickItemPutBean itemPutBean = new ClickItemPutBean();
+                            itemPutBean.setNotice_no(etSacnSale.getText().toString());
+                            itemPutBean.setWarehouse_no(ware);
+                            EventBus.getDefault().post(itemPutBean);
+                            if (!cbLocatorlock.isChecked()) {
+                                etScanLocator.requestFocus();
+                            } else {
+                                etScanBarocde.requestFocus();
+                            }
                         }
+
                         @Override
                         public void onFailed(String error) {
-                            dismissLoadingDialog();
-                            saleFlag=false;
+                            saleFlag = false;
+                            fiFoList.clear();
+                            adapter = new SaleOutletFiFoAdapter(pactivity, fiFoList);
+                            ryList.setAdapter(adapter);
+                            saleFlag = true;
                             showFailedDialog(error, new OnDialogClickListener() {
                                 @Override
                                 public void onCallback() {
@@ -257,6 +306,8 @@ public class SaleOutletScanFg extends BaseFragment {
                     break;
                 case BARCODEWHAT:
                     HashMap<String, String> barcodeMap = new HashMap<>();
+                    barcodeMap.put(AddressContants.DOC_NO, etSacnSale.getText().toString());
+                    barcodeMap.put(AddressContants.WAREHOUSE_NO, ware);
                     barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
                     commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                         @Override
@@ -268,6 +319,8 @@ public class SaleOutletScanFg extends BaseFragment {
                             saveBean.setItem_no(barcodeBackBean.getItem_no());
                             saveBean.setUnit_no(barcodeBackBean.getUnit_no());
                             saveBean.setLot_no(barcodeBackBean.getLot_no());
+                            saveBean.setDoc_no(etSacnSale.getText().toString());
+                            saveBean.setFifo_check(barcodeBackBean.getFifo_check());
                             etInputNum.requestFocus();
                         }
 
@@ -325,21 +378,20 @@ public class SaleOutletScanFg extends BaseFragment {
     }
 
 
-
-
-
     /**
      * 保存完成之后的操作
      */
     private void clear() {
         etInputNum.setText("");
-        if (!cbLocatorlock.isChecked()) {
-            locatorFlag = false;
-            etScanLocator.setText("");
-        }
         barcodeFlag = false;
         etScanBarocde.setText("");
         etScanBarocde.requestFocus();
+        if (!cbLocatorlock.isChecked()) {
+            locatorFlag = false;
+            etScanLocator.setText("");
+            etScanLocator.requestFocus();
+        }
+        mHandler.sendMessage(mHandler.obtainMessage(SALEWHAT, etSacnSale.getText().toString()));
     }
 
 
@@ -347,11 +399,20 @@ public class SaleOutletScanFg extends BaseFragment {
      * 初始化一些变量
      */
     private void initData() {
-        saleFlag=false;
+        saleFlag = false;
         barcodeFlag = false;
         locatorFlag = false;
         saveBean = new SaveBean();
+        fiFoList = new ArrayList<>();
+        ware = "";
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(pactivity);
+        ryList.setLayoutManager(linearLayoutManager);
+        AccoutBean accoutBean = LoginLogic.getUserInfo();
+        if (null != accoutBean) {
+            ware = accoutBean.getWare();
+        }
     }
+
 
 }
 

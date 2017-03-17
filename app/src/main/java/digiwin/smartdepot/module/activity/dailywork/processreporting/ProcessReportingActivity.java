@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,8 @@ import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
 import digiwin.library.dialog.OnDialogClickListener;
+import digiwin.library.dialog.OnDialogTwoListener;
+import digiwin.library.utils.ObjectAndMapUtils;
 import digiwin.library.utils.StringUtils;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
@@ -26,6 +29,7 @@ import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseFirstModuldeActivity;
 import digiwin.smartdepot.core.modulecommon.ModuleUtils;
 import digiwin.smartdepot.module.bean.dailywork.ProcessReportingBean;
+import digiwin.smartdepot.module.bean.dailywork.ProcessReportingCommitBean;
 import digiwin.smartdepot.module.bean.dailywork.WorkerPerson;
 import digiwin.smartdepot.module.logic.dailywok.ProcessReportingLogic;
 
@@ -225,7 +229,61 @@ public class ProcessReportingActivity extends BaseFirstModuldeActivity{
 
     @OnClick(R.id.commit)
     void commit(){
+        showLoadingDialog();
 
+        showCommitSureDialog(new OnDialogTwoListener() {
+            @Override
+            public void onCallback1() {
+                if(StringUtils.isBlank(et_gongDan_no.getText().toString())){
+                    showFailedDialog(R.string.scan_work_order);
+                    return;
+                }
+                if(StringUtils.isBlank(et_job_num.getText().toString())){
+                    showFailedDialog(R.string.job_num_scan);
+                    return;
+                }
+                if(StringUtils.isBlank(et_the_workers.getText().toString())){
+                    showFailedDialog(R.string.the_workers_scan);
+                    return;
+                }
+
+                List<ProcessReportingCommitBean> list = new ArrayList<ProcessReportingCommitBean>();
+                ProcessReportingCommitBean bean = new ProcessReportingCommitBean();
+                bean.setWo_no(et_gongDan_no.getText().toString());
+                bean.setProcess_no(et_job_num.getText().toString());
+                bean.setEmplyee_no(et_the_workers.getText().toString());
+                bean.setUndefect_qty(et_good_amount.getText().toString());
+                bean.setDefect_qty(et_not_good_amount.getText().toString());
+                bean.setReport_hours(et_work_time.getText().toString());
+                bean.setItem_no(tv_item_no.getText().toString());
+                list.add(bean);
+                List<Map<String, String>> listMap = ObjectAndMapUtils.getListMap(list);
+                manager.commitList(listMap, new ProcessReportingLogic.CommitListListener() {
+                    @Override
+                    public void onSuccess(String msg) {
+                        dismissLoadingDialog();
+                        showCommitSuccessDialog(msg, new OnDialogClickListener() {
+                            @Override
+                            public void onCallback() {
+                                clear();
+                                createNewModuleId(module);
+                                manager = ProcessReportingLogic.getInstance(activity,activity.module,activity.mTimestamp.toString());
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onFailed(String error) {
+                        showFailedDialog(error);
+                    }
+                });
+            }
+
+            @Override
+            public void onCallback2() {
+
+            }
+        });
     }
 
     public Handler mHandler = new Handler(new Handler.Callback() {

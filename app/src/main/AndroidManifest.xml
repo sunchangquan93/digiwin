@@ -269,10 +269,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".module.activity.stock.miscellaneousissues.MiscellaneousissuesActivity"
+            android:name=".module.activity.stock.miscellaneousissues.MiscellaneousissuesOutActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
             <intent-filter>
-                <action android:name="android.intent.action.digiwin.MiscellaneousissuesActivity" />
+                <action android:name="android.intent.action.digiwin.MiscellaneousissuesOutActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".module.activity.stock.miscellaneousissues.MiscellaneousissuesInActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
+            <intent-filter>
+                <action android:name="android.intent.action.digiwin.MiscellaneousissuesInActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -286,6 +294,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <!-- 依成品发料 新FIFO -->
+        <activity
+            android:name=".module.activity.produce.accordingmaterial.AccordingMaterialScanNewActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
 
         <!-- Required SDK 核心功能极光推送需要 -->
         <!-- 可配置android:process参数将PushService放在其他进程中 -->

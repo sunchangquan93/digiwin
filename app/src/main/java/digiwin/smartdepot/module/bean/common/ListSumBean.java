@@ -198,6 +198,7 @@ public class ListSumBean implements Serializable {
      * 申请数量
      */
     private String req_qty;
+
     /**
      * 备货数量
      */
@@ -379,7 +380,21 @@ public class ListSumBean implements Serializable {
      * 储位
      */
     private String storage_spaces_no;
+    /**
+     * 通知单号
+     */
+    private String  notice_no;
 
+    /**
+     * 客户编码
+     */
+    private String  customer_no;
+    /**
+     * 客户名称
+     */
+    private String customer_name;
+
+    private  String match_qty;
 
     public String getStorage_spaces_no() {
         return storage_spaces_no;
@@ -411,5 +426,37 @@ public class ListSumBean implements Serializable {
 
     public void setCheck(String check) {
         this.check = check;
+    }
+
+    public String getNotice_no() {
+        return notice_no;
+    }
+
+    public void setNotice_no(String notice_no) {
+        this.notice_no = notice_no;
+    }
+
+    public String getCustomer_no() {
+        return customer_no;
+    }
+
+    public void setCustomer_no(String customer_no) {
+        this.customer_no = customer_no;
+    }
+
+    public String getCustomer_name() {
+        return customer_name;
+    }
+
+    public void setCustomer_name(String customer_name) {
+        this.customer_name = customer_name;
+    }
+
+    public String getMatch_qty() {
+        return match_qty;
+    }
+
+    public void setMatch_qty(String match_qty) {
+        this.match_qty = match_qty;
     }
 }

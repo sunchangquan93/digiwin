@@ -85,11 +85,15 @@ public interface ModuleCode {
     /**
      * 销售出库
      */
-    public final String SALEOUTLET="D001";
+    public final String SALEOUTLET="B021";
     /**
      * 杂项发料
      */
-    public final String MISCELLANEOUSISSUES="C009";
+    public final String MISCELLANEOUSISSUESOUT="C009";
+    /**
+     * 杂项收料
+     */
+    public final String MISCELLANEOUSISSUESIN="C008";
 
     /**
      * 工序报工

@@ -116,4 +116,8 @@ public class AddressContants {
      * 送货单号
      */
     public static final String DOC_NO = "doc_no";
+    /**
+     * fifoY
+     */
+    public static final  String FIFOY="Y";
 }

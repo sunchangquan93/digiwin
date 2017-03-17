@@ -205,7 +205,7 @@ public class SettingActivity extends BaseTitleActivity {
             public void VoicerChooseCallBack(String voicerType) {
                 tv_voicerSetting.setText(voicerType);
                 SharedPreferencesUtils.put(activity, VOICER_SELECTED, voicerType);
-                voiceOrVibrate(voicerType);
+                voice(voicerType);
             }
         });
     }

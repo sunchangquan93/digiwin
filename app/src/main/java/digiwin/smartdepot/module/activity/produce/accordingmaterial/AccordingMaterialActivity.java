@@ -227,7 +227,9 @@ public class AccordingMaterialActivity extends BaseFirstModuldeActivity {
                         ListSumBean data = list.get(position);
                         bundle.putSerializable("sumdata", data);
                         bundle.putString("modilecode",mTimestamp.toString());
-                        ActivityManagerUtils.startActivityBundleForResult(activity,AccordingMaterialScanActivity.class,bundle,SCANCODE);
+//                        ActivityManagerUtils.startActivityBundleForResult(activity,AccordingMaterialScanActivity.class,bundle,SCANCODE);
+                        //调用新的FIFO
+                        ActivityManagerUtils.startActivityBundleForResult(activity,AccordingMaterialScanNewActivity.class,bundle,SCANCODE);
                     }
                 });
             }

@@ -131,7 +131,8 @@ public abstract class BaseAppActivity extends AppCompatActivity {
      */
     protected void showCommitFailDialog(Object content) {
         AlertDialogUtils.showCommitFailDialog(context, content);
-        voiceOrVibrate(content);
+        voice(content);
+        vibrate();
     }
 
     /**
@@ -139,6 +140,8 @@ public abstract class BaseAppActivity extends AppCompatActivity {
      */
     protected void showCommitFailDialog(Object content, OnDialogClickListener listener) {
         AlertDialogUtils.showCommitFailDialogAndCall(context, content, listener);
+        voice(content);
+        vibrate();
     }
 
     /**
@@ -146,7 +149,8 @@ public abstract class BaseAppActivity extends AppCompatActivity {
      */
     protected void showFailedDialog(Object content) {
         AlertDialogUtils.showFailedDialog(context, content);
-        voiceOrVibrate(content);
+        voice(content);
+        vibrate();
     }
 
     /**
@@ -154,7 +158,8 @@ public abstract class BaseAppActivity extends AppCompatActivity {
      */
     protected void showFailedDialog(Object content, OnDialogClickListener listener) {
         AlertDialogUtils.showFailedDialog(context, content, listener);
-        voiceOrVibrate(content);
+        voice(content);
+        vibrate();
     }
 
     /**
@@ -206,15 +211,19 @@ public abstract class BaseAppActivity extends AppCompatActivity {
     }
 
     /**
-     * 语音和震动
-     *
-     * @param text 提示内容
+     * 震动
      */
-    public void voiceOrVibrate(Object text) {
+    public void vibrate() {
         String VIBRATE = (String) SharedPreferencesUtils.get(activity, VIBRATE_SETTING, VIBRATEMETION);
         if (VIBRATE.equals(VIBRATEMETION)) {//是否震动提醒
             VibratorUtil.Vibrate(activity, VibratorUtil.VIBRATETIME);
         }
+    }
+
+    /**
+     * 语音
+     */
+    public void voice(Object text){
         String voicer = "";
         String chooseVoiceType = (String) SharedPreferencesUtils.get(activity, SharePreKey.VOICER_SELECTED, activity.getString(R.string.voicer_not));
         if (chooseVoiceType.equals(activity.getString(R.string.voicer_male))) {
@@ -234,7 +243,6 @@ public abstract class BaseAppActivity extends AppCompatActivity {
         } else {
             voicer = SystemConstant.NOMETION;
         }
-
     }
 
 

@@ -11,7 +11,7 @@ public class ClickItemPutBean {
     /**
      * 单号
      */
-    private String doc_no = null;
+    private String doc_no ;
 
     public String getDoc_no() {
         return doc_no;
@@ -71,9 +71,9 @@ public class ClickItemPutBean {
         this.receipt_no = receipt_no;
     }
 
-    private String warehouse_no = null;
+    private String warehouse_no ;
 
-    private String item_no = null;
+    private String item_no ;
 
     /**
      * 工单编号
@@ -108,6 +108,10 @@ public class ClickItemPutBean {
      * 数量
      */
     private String qty;
+    /**
+     * 出通单号
+     */
+    private String notice_no;
 
     public String getQty() {
         return qty;
@@ -115,5 +119,13 @@ public class ClickItemPutBean {
 
     public void setQty(String qty) {
         this.qty = qty;
+    }
+
+    public String getNotice_no() {
+        return notice_no;
+    }
+
+    public void setNotice_no(String notice_no) {
+        this.notice_no = notice_no;
     }
 }

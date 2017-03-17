@@ -236,13 +236,16 @@
     <string name="scan_sumqty_larger_than_need_qty">已扫描量大于需求量，请检查</string>
     <string name="can_instorage_number">可入数量</string>
 
-    <string name="miscellaneous_issues">杂项发料</string>
+    <string name="miscellaneous_issues_out">杂项发料</string>
+    <string name="miscellaneous_issues_in">杂项收料</string>
     <string name="scan_reason_code">请扫描理由码</string>
     <string name="scan_apply_branch">请扫描申请部门</string>
     <string name="send_material_num">发料量</string>
+    <string name="accept_material_num">收料量</string>
 
     <string name="title_pallet_report">工序报工</string>
     <string name="job_num">作业号</string>
+    <string name="job_num_scan">请扫描作业号</string>
     <string name="the_workers">报工人</string>
     <string name="good_amount">良品量</string>
     <string name="not_good_amount">不良品量</string>
@@ -252,6 +255,14 @@
     <string name="person_name">人员名</string>
     <string name="login_error">登录失败</string>
     <string name="input_time">请手动输入工时</string>
+    <string name="the_workers_scan">请扫描报工人</string>
+
+
     <string name="scan_sale">请先扫描出通单号</string>
->>>>>>> .r598
+
+    <string name="barcode_sp">物料</string>
+    <string name="custom">客户</string>
+
+    <string name="batch_date">批次日</string>
+    <string name="input_num_toobig">输入数量过大</string>
 </resources>

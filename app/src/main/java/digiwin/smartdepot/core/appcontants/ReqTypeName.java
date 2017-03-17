@@ -160,4 +160,14 @@ public interface ReqTypeName {
      * 报工人请求
      */
     static final String GETWORKPERSON = "app.employee.name.get";
+
+    /**
+     * 获取FIFO数据
+     */
+    static final String  GETACCORDINGFIFO = "app.item.fifo.new.get";
+
+    /**
+     * 工序报工提交
+     */
+    static final String  PROCESSREPORTCOMMIT = "app.process.submit";
 }

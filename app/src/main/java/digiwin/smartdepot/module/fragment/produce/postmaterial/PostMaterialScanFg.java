@@ -461,11 +461,12 @@ public class PostMaterialScanFg extends BaseFragment {
     /**
      * 初始化一些变量
      */
-    private void initData() {
+    public void initData() {
         et_scan_barocde.setText("");
         et_scan_locator.setText("");
         tv_product_name.setText("");
         et_scan_barocde.requestFocus();
+        cb_locatorlock.setChecked(false);
         barcodeShow = "";
         locatorShow = "";
         barcodeFlag = false;

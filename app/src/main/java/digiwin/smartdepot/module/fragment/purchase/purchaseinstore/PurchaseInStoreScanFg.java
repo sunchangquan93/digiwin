@@ -26,6 +26,8 @@ import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.base.BaseFragment;
 import digiwin.smartdepot.core.modulecommon.ModuleUtils;
+import digiwin.smartdepot.login.bean.AccoutBean;
+import digiwin.smartdepot.login.loginlogic.LoginLogic;
 import digiwin.smartdepot.module.activity.produce.putinstore.PutInStoreSecondActivity;
 import digiwin.smartdepot.module.activity.purchase.purchaseinstore.PurchaseInStoreSecondActivity;
 import digiwin.smartdepot.module.bean.common.FilterResultOrderBean;
@@ -198,10 +200,12 @@ public class PurchaseInStoreScanFg extends BaseFragment {
         saveBean.setQty(et_input_num.getText().toString());
         float qty = StringUtils.string2Float(saveBean.getQty());
         float scansum_qty = StringUtils.string2Float(saveBean.getScan_sumqty());
-        float avaliable_in_qty = StringUtils.string2Float(saveBean.getAvailable_in_qty());
-        if(qty + scansum_qty > avaliable_in_qty){
-            showFailedDialog(pactivity.getResources().getString(R.string.scan_sumqty_larger_than_need_qty));
-            return;
+        if(!StringUtils.isBlank(saveBean.getAvailable_in_qty())){
+            float avaliable_in_qty = StringUtils.string2Float(saveBean.getAvailable_in_qty());
+            if(qty + scansum_qty > avaliable_in_qty){
+                showFailedDialog(pactivity.getResources().getString(R.string.scan_sumqty_larger_than_need_qty));
+                return;
+            }
         }
         showLoadingDialog();
         commonLogic.scanSave(saveBean, new CommonLogic.SaveListener() {
@@ -231,6 +235,11 @@ public class PurchaseInStoreScanFg extends BaseFragment {
                 case BARCODEWHAT:
                     HashMap<String, String> barcodeMap = new HashMap<>();
                     barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
+                    AccoutBean accoutBean = LoginLogic.getUserInfo();
+                    if(null != accoutBean){
+                        barcodeMap.put("warehouse_no",accoutBean.getWare());
+                    }
+                    barcodeMap.put("doc_no",saveBean.getDoc_no());
                     commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                         @Override
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
@@ -307,6 +316,7 @@ public class PurchaseInStoreScanFg extends BaseFragment {
         commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
         initData();
     }
+
     /**
      * 公共区域展示
      */
@@ -340,13 +350,15 @@ public class PurchaseInStoreScanFg extends BaseFragment {
     /**
      * 初始化一些变量
      */
-    private void initData() {
+    public void initData() {
         et_scan_barocde.setText("");
         et_scan_locator.setText("");
         barcodeShow = "";
         locatorShow = "";
+        show();
         barcodeFlag = false;
         locatorFlag = false;
+        cb_locatorlock.setChecked(false);
         saveBean = new SaveBean();
         orderBean = (FilterResultOrderBean) pactivity.getIntent().getExtras().getSerializable("orderData");
         saveBean.setDoc_no(orderBean.getDoc_no());

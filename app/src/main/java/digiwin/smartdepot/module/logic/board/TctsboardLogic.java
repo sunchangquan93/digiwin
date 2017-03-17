@@ -51,7 +51,7 @@ public class TctsboardLogic {
      * 获取看板资料
      */
     public interface GetTctsBoardListener {
-        public void onSuccess(List<TctsBoardBean> list);
+        public void onSuccess(List<TctsBoardBean> list,String msg);
 
         public void onFailed(String error);
     }
@@ -69,8 +69,9 @@ public class TctsboardLogic {
                     String error = mContext.getString(R.string.unknow_error);
                     if (null != xmlResp) {
                         if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
+                            String fieldString = xmlResp.getFieldString();
                             List<TctsBoardBean> boardBeen = xmlResp.getMasterDatas(TctsBoardBean.class);
-                            listener.onSuccess(boardBeen);
+                            listener.onSuccess(boardBeen,fieldString);
                             return;
                         } else {
                             error = xmlResp.getDescription();

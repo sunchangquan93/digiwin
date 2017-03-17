@@ -113,6 +113,19 @@ public class ScanBarcodeBackBean {
      */
     private  String available_in_qty;
 
+    /**
+     * 批次日期
+     */
+    private String lot_date;
+
+    public String getLot_date() {
+        return lot_date;
+    }
+
+    public void setLot_date(String lot_date) {
+        this.lot_date = lot_date;
+    }
+
     public String getScan_sumqty() {
         return scan_sumqty;
     }

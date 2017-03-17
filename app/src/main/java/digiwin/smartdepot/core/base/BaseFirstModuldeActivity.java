@@ -7,6 +7,7 @@ import digiwin.library.dialog.OnDialogTwoListener;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.module.logic.common.CommonLogic;
 
+import static digiwin.smartdepot.core.base.BaseFirstModuldeActivity.ExitMode.EXITD;
 import static digiwin.smartdepot.core.base.BaseFirstModuldeActivity.ExitMode.EXITISD;
 
 /**
@@ -56,13 +57,13 @@ public abstract class BaseFirstModuldeActivity extends  BaseTitleActivity{
     }
 
     /**
-     * 删除或者退出
+     * 删除且退出或者直接退出
      */
     private void delete() {
         showExitActivityDialog(new OnDialogTwoListener() {
             @Override
             public void onCallback1() {
-                isShowExitDialogAndDelete(EXITISD);
+                isShowExitDialogAndDelete(EXITD);
             }
             @Override
             public void onCallback2() {

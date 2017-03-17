@@ -15,7 +15,6 @@ import digiwin.smartdepot.core.net.OkhttpRequest;
 import digiwin.smartdepot.core.xml.CreateParaXmlReqIm;
 import digiwin.smartdepot.module.bean.dailywork.ProcessReportingBean;
 import digiwin.smartdepot.module.bean.dailywork.WorkerPerson;
-import digiwin.smartdepot.module.logic.common.CommonLogic;
 
 /**
  * @author 赵浩然
@@ -146,45 +145,47 @@ public class ProcessReportingLogic {
         }, null);
     }
 
+
     /**
-     * 提交
+     * 扫描入库单 提交监听
      */
-    public interface CommitListener {
+    public interface CommitListListener {
         public void onSuccess(String msg);
 
         public void onFailed(String error);
     }
 
     /**
-     * 提交
+     * 需要先使用ObjectAndMapUtils.getListMap(checkedList);转换LIST
+     * recordset 提交请求
      */
-    public void commit(final Map<String, String> map, final CommonLogic.CommitListener listener) {
+    public void commitList(final List<Map<String, String>> listMap, final CommitListListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
                 try {
-                    final String xml = CreateParaXmlReqIm.getInstance(map, mModule, ReqTypeName.COMMIT, mTimestamp).toXml();
+                    String xml = CreateParaXmlReqIm.getInstance(listMap, mModule, ReqTypeName.PROCESSREPORTCOMMIT, mTimestamp).toXml();
                     OkhttpRequest.getInstance(mContext).post(xml, new IRequestCallbackImp() {
                         @Override
                         public void onResponse(String string) {
-                            ParseXmlResp xmlResp = ParseXmlResp.fromXml(ReqTypeName.COMMIT, string);
-                            String error= mContext.getString(R.string.unknow_error);
-                            if (null!=xmlResp){
-                                if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())){
+                            ParseXmlResp xmlResp = ParseXmlResp.fromXml(ReqTypeName.PROCESSREPORTCOMMIT, string);
+                            String error = mContext.getString(R.string.unknow_error);
+                            if (null != xmlResp) {
+                                if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
                                     listener.onSuccess(xmlResp.getFieldString());
                                     return;
-                                }else {
-                                    error=xmlResp.getDescription();
+                                } else {
+                                    error = xmlResp.getDescription();
                                 }
                             }
                             listener.onFailed(error);
                         }
                     });
-                }catch (Exception e){
+                } catch (Exception e) {
                     listener.onFailed(mContext.getString(R.string.unknow_error));
-                    LogUtils.e(TAG, "getSum--->" + e);
+                    LogUtils.e(TAG, "scanBarcode--->" + e);
                 }
             }
-        },null);
+        }, null);
     }
 }

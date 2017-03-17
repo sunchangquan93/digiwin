@@ -2,6 +2,7 @@ package digiwin.smartdepot.module.fragment.purchase.purchaseinstore;
 
 
 import android.os.Bundle;
+import android.os.Message;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
@@ -221,6 +222,9 @@ public class PurchaseInStoreSumFg extends BaseFragment {
                         tv_head_plan_date.setText("");
                         tv_head_post_order.setText("");
                         tv_head_provider.setText("");
+                        Message msgs = new Message();
+                        msgs.what = pactivity.CLEAR;
+                        pactivity.handler.sendMessage(msgs);
                     }
                 });
             }

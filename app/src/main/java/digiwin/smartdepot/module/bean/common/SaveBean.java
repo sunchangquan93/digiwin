@@ -88,6 +88,23 @@ public class SaveBean {
      * 理由码
      */
     private String reason_code_no;
+    /**
+     * 是否检查fifo
+     */
+    private  String fifo_check;
+
+    /**
+     * 批次日期
+     */
+    private String lot_date;
+
+    public String getLot_date() {
+        return lot_date;
+    }
+
+    public void setLot_date(String lot_date) {
+        this.lot_date = lot_date;
+    }
 
 
     public String getWorkgroup_no() {
@@ -225,4 +242,13 @@ public class SaveBean {
     public void setReason_code_no(String reason_code_no) {
         this.reason_code_no = reason_code_no;
     }
+
+    public String getFifo_check() {
+        return fifo_check;
+    }
+
+    public void setFifo_check(String fifo_check) {
+        this.fifo_check = fifo_check;
+    }
+
 }

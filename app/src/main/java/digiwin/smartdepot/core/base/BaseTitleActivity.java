@@ -74,7 +74,7 @@ public abstract class BaseTitleActivity extends BaseActivity {
         toolbar().setBackgroundResource(R.color.Base_color);
         setSupportActionBar(toolbar());
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        ivScan.setVisibility(View.VISIBLE);
+            ivScan.setVisibility(View.VISIBLE);
     }
 
     /**

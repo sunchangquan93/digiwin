@@ -29,7 +29,6 @@ tools:context="digiwin.smartdepot.module.activity.produce.distribute.DistributeA
             android:layout_marginBottom="@dimen/layout_10dp"
             android:orientation="vertical"
             android:focusable="true"
-            android:layout_marginTop="@dimen/layout_10dp"
             android:background="@drawable/accordingmaterialtop_sharp"
             android:padding="@dimen/layout_5dp">
 

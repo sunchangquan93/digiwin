@@ -15,6 +15,9 @@ import digiwin.library.utils.ToastUtils;
 import digiwin.library.voiceutils.VibratorUtil;
 import digiwin.library.voiceutils.VoiceUtils;
 
+import static digiwin.library.constant.SharePreKey.VIBRATE_SETTING;
+import static digiwin.library.constant.SystemConstant.VIBRATEMETION;
+
 public abstract class BaseAppFragment extends Fragment {
     protected Context context;
     protected Activity activity;
@@ -93,7 +96,8 @@ public abstract class BaseAppFragment extends Fragment {
      */
     protected void showCommitFailDialog(Object content) {
         AlertDialogUtils.showCommitFailDialog(context, content);
-        voiceOrVibrate(content);
+        voice(content);
+        vibrate();
     }
 
     /**
@@ -101,7 +105,8 @@ public abstract class BaseAppFragment extends Fragment {
      */
     protected void showCommitFailDialog(Object content, OnDialogClickListener listener) {
         AlertDialogUtils.showCommitFailDialogAndCall(context, content, listener);
-        voiceOrVibrate(content);
+        voice(content);
+        vibrate();
     }
 
     /**
@@ -109,7 +114,8 @@ public abstract class BaseAppFragment extends Fragment {
      */
     protected void showFailedDialog(Object content) {
         AlertDialogUtils.showFailedDialog(context, content);
-        voiceOrVibrate(content);
+        voice(content);
+        vibrate();
     }
 
     /**
@@ -117,7 +123,8 @@ public abstract class BaseAppFragment extends Fragment {
      */
     protected void showFailedDialog(Object content, OnDialogClickListener listener) {
         AlertDialogUtils.showFailedDialog(context, content, listener);
-        voiceOrVibrate(content);
+        voice(content);
+        vibrate();
     }
 
     /**
@@ -136,13 +143,19 @@ public abstract class BaseAppFragment extends Fragment {
 
 
     /**
-     * @param text 提示内容
+     * 震动
      */
-    public void voiceOrVibrate(Object text) {
-        String VIBRATE = (String) SharedPreferencesUtils.get(activity, SharePreKey.VIBRATE_SETTING, SystemConstant.VIBRATEMETION);
-        if (VIBRATE.equals(SystemConstant.VIBRATEMETION)) {//是否震动提醒
-            VibratorUtil.Vibrate(activity, 1000);
+    public void vibrate() {
+        String VIBRATE = (String) SharedPreferencesUtils.get(activity, VIBRATE_SETTING, VIBRATEMETION);
+        if (VIBRATE.equals(VIBRATEMETION)) {//是否震动提醒
+            VibratorUtil.Vibrate(activity, VibratorUtil.VIBRATETIME);
         }
+    }
+
+    /**
+     * 语音
+     */
+    public void voice(Object text){
         String voicer = "";
         String chooseVoiceType = (String) SharedPreferencesUtils.get(activity, SharePreKey.VOICER_SELECTED, activity.getString(R.string.voicer_not));
         if (chooseVoiceType.equals(activity.getString(R.string.voicer_male))) {
@@ -162,8 +175,6 @@ public abstract class BaseAppFragment extends Fragment {
         } else {
             voicer = SystemConstant.NOMETION;
         }
-
-
     }
 
 }

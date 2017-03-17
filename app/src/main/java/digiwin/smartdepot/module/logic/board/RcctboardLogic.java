@@ -52,7 +52,7 @@ public class RcctboardLogic {
      * 获取看板资料
      */
     public interface GetRcctBoardListener {
-        public void onSuccess(List<RcctboardBean> list);
+        public void onSuccess(List<RcctboardBean> list,String msg);
 
         public void onFailed(String error);
     }
@@ -70,8 +70,9 @@ public class RcctboardLogic {
                     String error = mContext.getString(R.string.unknow_error);
                     if (null != xmlResp) {
                         if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
+                            String fieldString = xmlResp.getFieldString();
                             List<RcctboardBean> rcctboardBeen = xmlResp.getMasterDatas(RcctboardBean.class);
-                            listener.onSuccess(rcctboardBeen);
+                            listener.onSuccess(rcctboardBeen,fieldString);
                             return;
                         } else {
                             error = xmlResp.getDescription();

@@ -149,9 +149,11 @@ public class MainLogic {
         //初始化库存管理
         ModuleBean storeallotactivity = new ModuleBean(R.string.nocome_allot, R.mipmap.nocome_alllot, ModuleCode.NOCOMESTOREALLOT, "android.intent.action.digiwin.StoreAllotActivity");
         storageItems.add(storeallotactivity);
-        //初始化库存管理
-        ModuleBean miscellaneousactivity = new ModuleBean(R.string.miscellaneous_issues, R.mipmap.receiptout, ModuleCode.MISCELLANEOUSISSUES, "android.intent.action.digiwin.MiscellaneousissuesActivity");
-        storageItems.add(miscellaneousactivity);
+        ModuleBean miscellaneousoutactivity = new ModuleBean(R.string.miscellaneous_issues_out, R.mipmap.receiptout, ModuleCode.MISCELLANEOUSISSUESOUT, "android.intent.action.digiwin.MiscellaneousissuesOutActivity");
+        storageItems.add(miscellaneousoutactivity);
+        ModuleBean miscellaneousainctivity = new ModuleBean(R.string.miscellaneous_issues_in, R.mipmap.shouliao, ModuleCode.MISCELLANEOUSISSUESIN, "android.intent.action.digiwin.MiscellaneousissuesInActivity");
+        storageItems.add(miscellaneousainctivity);
+
         //初始化销售管理
         ModuleBean saleoutletactivity = new ModuleBean(R.string.saleoutlet, R.mipmap.saleoutlet, ModuleCode.SALEOUTLET, "android.intent.action.digiwin.SaleOutletActivity");
         salesItems.add(saleoutletactivity);
