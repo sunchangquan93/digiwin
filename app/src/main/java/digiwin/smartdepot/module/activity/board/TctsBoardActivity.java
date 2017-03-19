@@ -16,10 +16,12 @@ import butterknife.BindView;
 import digiwin.library.constant.SharePreKey;
 import digiwin.library.utils.SharedPreferencesUtils;
 import digiwin.library.utils.StringUtils;
+import digiwin.library.voiceutils.VoiceUtils;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseTitleActivity;
+import digiwin.smartdepot.core.coreutil.GetVoicer;
 import digiwin.smartdepot.module.adapter.board.TctsBoardAdapter;
 import digiwin.smartdepot.module.bean.board.TctsBoardBean;
 import digiwin.smartdepot.module.logic.board.TctsboardLogic;
@@ -95,9 +97,15 @@ public class TctsBoardActivity extends BaseTitleActivity {
         tctsboardLogic.getTctsBoard(map, new TctsboardLogic.GetTctsBoardListener() {
             @Override
             public void onSuccess(List<TctsBoardBean> list,String msg) {
-                if (!StringUtils.isBlank(msg))
-                {
-                    voice(msg);
+                String voiceType = GetVoicer.getVoice(context);
+                if (!StringUtils.isBlank(msg) && !StringUtils.isBlank(voiceType)) {
+                    SpeakDailog.showChooseAllotDailog(context,voiceType);
+                    VoiceUtils.getInstance(context, voiceType).speakText(msg, new VoiceUtils.VoiceComListener() {
+                        @Override
+                        public void isCom(boolean flag) {
+                            SpeakDailog.dismissDialog();
+                        }
+                    });
                 }
                 if (list.size() == 0)
                 {

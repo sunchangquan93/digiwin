@@ -391,6 +391,14 @@ public class SaleOutletScanFg extends BaseFragment {
             etScanLocator.setText("");
             etScanLocator.requestFocus();
         }
+        updateFifo();
+    }
+
+    /**
+     * 更新fifo列表
+     */
+    public void updateFifo(){
+        if (saleFlag)
         mHandler.sendMessage(mHandler.obtainMessage(SALEWHAT, etSacnSale.getText().toString()));
     }
 

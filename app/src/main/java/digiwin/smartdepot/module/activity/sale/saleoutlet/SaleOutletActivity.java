@@ -128,7 +128,10 @@ public class SaleOutletActivity extends BaseFirstModuldeActivity {
 
             @Override
             public void onPageSelected(int position) {
-                if (position == 1) {
+                if (position==0){
+                    scanFg.updateFifo();
+                }
+                else if (position == 1) {
                     sumFg.upDateList();
                 }
             }
@@ -155,7 +158,7 @@ public class SaleOutletActivity extends BaseFirstModuldeActivity {
 
     @Override
     public ExitMode exitOrDel() {
-        return ExitMode.EXITISD;
+        return ExitMode.EXITD;
     }
 
 }

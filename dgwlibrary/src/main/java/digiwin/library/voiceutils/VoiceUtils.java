@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.iflytek.cloud.ErrorCode;
 import com.iflytek.cloud.InitListener;
@@ -24,7 +23,11 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
+import digiwin.library.R;
+import digiwin.library.constant.SharePreKey;
+import digiwin.library.constant.SystemConstant;
 import digiwin.library.utils.LogUtils;
+import digiwin.library.utils.SharedPreferencesUtils;
 import digiwin.library.utils.ToastUtils;
 
 /**
@@ -33,10 +36,21 @@ import digiwin.library.utils.ToastUtils;
  */
 
 public class VoiceUtils {
+    /**
+     * 检测声音完毕接口
+     */
+    public interface VoiceComListener{
+        public void isCom(boolean flag);
+    }
+
     private static VoiceUtils instances;
     private static String TAG = "VoiceUtils";
     private Context mContext;
     public ApkInstaller mInstaller;
+    /**
+     * 监听
+     */
+    private VoiceComListener mListnener;
 
     private static String mVoicer;
 
@@ -107,6 +121,8 @@ public class VoiceUtils {
 
         @Override
         public void onCompleted(SpeechError error) {
+            if (null!=mListnener){
+            mListnener.isCom(true);}
             if (error == null) {
                 LogUtils.d(TAG, "播放完成");
             } else if (error != null) {
@@ -236,6 +252,25 @@ public class VoiceUtils {
                 mInstaller.install();
             } else {
                 //showTip("语音合成失败,错误码: " + code);
+            }
+
+        }
+    }
+
+    /**
+     * 读出文本内容
+     *
+     * @param text
+     */
+    public void speakText(String text,VoiceComListener listener) {
+        // 设置参数
+        mListnener=listener;
+        setParam();
+        int code = mTts.startSpeaking(text, mTtsListener);
+        if (code != ErrorCode.SUCCESS) {
+            if (code == ErrorCode.ERROR_COMPONENT_NOT_INSTALLED) {
+                mInstaller.install();
+            } else {
             }
 
         }

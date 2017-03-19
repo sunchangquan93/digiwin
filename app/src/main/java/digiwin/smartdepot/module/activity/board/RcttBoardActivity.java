@@ -3,6 +3,7 @@ package digiwin.smartdepot.module.activity.board;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
@@ -16,13 +17,17 @@ import butterknife.BindView;
 import digiwin.library.constant.SharePreKey;
 import digiwin.library.utils.SharedPreferencesUtils;
 import digiwin.library.utils.StringUtils;
+import digiwin.library.voiceutils.VoiceUtils;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseTitleActivity;
+import digiwin.smartdepot.core.coreutil.GetVoicer;
 import digiwin.smartdepot.module.adapter.board.RcctBoardAdapter;
 import digiwin.smartdepot.module.bean.board.RcctboardBean;
 import digiwin.smartdepot.module.logic.board.RcctboardLogic;
+
+import static android.R.id.list;
 
 /**
  * @author xiemeng
@@ -51,7 +56,7 @@ public class RcttBoardActivity extends BaseTitleActivity {
     /**
      * 间隔时间
      */
-    private  long TIME ;
+    private long TIME;
 
     @Override
     protected Toolbar toolbar() {
@@ -62,6 +67,7 @@ public class RcttBoardActivity extends BaseTitleActivity {
     protected void initNavigationTitle() {
         super.initNavigationTitle();
         mName.setText(R.string.delivery_uncheck_board);
+        ivScan.setVisibility(View.GONE);
     }
 
     @Override
@@ -75,57 +81,58 @@ public class RcttBoardActivity extends BaseTitleActivity {
         rcctboardLogic = RcctboardLogic.getInstance(context, module, mTimestamp.toString());
         pagenow = 1;
         String tiems_second = (String) SharedPreferencesUtils.get(context, SharePreKey.REPEATTIME, AddressContants.REPEATTIME);
-        TIME= Long.valueOf(tiems_second)*1000;
+        TIME = Long.valueOf(tiems_second) * 1000;
         pagesize = (String) SharedPreferencesUtils.get(context, SharePreKey.PAGE_SETTING, AddressContants.PAGE_NUM);
         timer = new Timer();
         timer.schedule(new MyTask(), 0, TIME);
         ryboard.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
 
     @Override
     public String moduleCode() {
-        module= ModuleCode.RCCTBOARD;
+        module = ModuleCode.RCCTBOARD;
         return module;
     }
 
     private void getDatas() {
         HashMap<String, String> map = new HashMap<String, String>();
-        map.put("pagesize",pagesize);
+        map.put("pagesize", pagesize);
         map.put("pagenow", String.valueOf(pagenow));
         rcctboardLogic.getRcctBoard(map, new RcctboardLogic.GetRcctBoardListener() {
             @Override
-            public void onSuccess(List<RcctboardBean> list,String msg) {
-                if (!StringUtils.isBlank(msg))
-                {
-                    voice(msg);
+            public void onSuccess(List<RcctboardBean> list, String msg) {
+                String voiceType = GetVoicer.getVoice(context);
+                if (!StringUtils.isBlank(msg) && !StringUtils.isBlank(voiceType)) {
+                    SpeakDailog.showChooseAllotDailog(context,voiceType);
+                    VoiceUtils.getInstance(context, voiceType).speakText(msg, new VoiceUtils.VoiceComListener() {
+                        @Override
+                        public void isCom(boolean flag) {
+                            SpeakDailog.dismissDialog();
+                        }
+                    });
                 }
-                if (list.size() == 0)
-                {
+                if (list.size() == 0) {
                     timer.cancel();
                     pagenow = 1;
                     timer = new Timer();
                     timer.schedule(new MyTask(), 0, TIME);
-                }
-                else
-                {
-                    animotion();
-                    RcctBoardAdapter adapter = new RcctBoardAdapter(context, list);
-                    ryboard.setAdapter(adapter);
-                    if (list.size() >= Integer.valueOf(pagesize))
-                    {
-                        pagenow++;
-                    }
-                    else
-                    {
-                        pagenow = 1;
+                } else {
+                    try {
+                        animotion();
+                        RcctBoardAdapter adapter = new RcctBoardAdapter(context, list);
+                        ryboard.setAdapter(adapter);
+                        if (list.size() >= Integer.valueOf(pagesize)) {
+                            pagenow++;
+                        } else {
+                            pagenow = 1;
+                        }
+                    }catch (Exception e){
+
                     }
                 }
             }
+
             @Override
             public void onFailed(String error) {
 
@@ -136,14 +143,15 @@ public class RcttBoardActivity extends BaseTitleActivity {
     /**
      * 动画效果
      */
-    private void animotion()
-    {
-        Animation animation = (Animation) AnimationUtils.loadAnimation(this, R.anim.board_item);
-        LayoutAnimationController lac = new LayoutAnimationController(animation);
-        lac.setDelay(0.4f); // 设置动画间隔时间
-        lac.setOrder(LayoutAnimationController.ORDER_NORMAL); // 设置列表的显示顺序
-        ryboard.setLayoutAnimation(lac);
+    private void animotion() {
+
+            Animation animation = (Animation) AnimationUtils.loadAnimation(this, R.anim.board_item);
+            LayoutAnimationController lac = new LayoutAnimationController(animation);
+            lac.setDelay(0.4f); // 设置动画间隔时间
+            lac.setOrder(LayoutAnimationController.ORDER_NORMAL); // 设置列表的显示顺序
+            ryboard.setLayoutAnimation(lac);
     }
+
     /**
      * 定时任务发送请求
      */
@@ -153,12 +161,12 @@ public class RcttBoardActivity extends BaseTitleActivity {
         }
 
     }
-
     @Override
-    protected void onStop() {
-        super.onStop();
-        timer.cancel();
+    protected void onResume() {
+        super.onResume();
+
     }
+
 
     @Override
     public void onBackPressed() {
