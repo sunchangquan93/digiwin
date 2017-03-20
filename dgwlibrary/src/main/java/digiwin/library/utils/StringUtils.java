@@ -317,4 +317,13 @@ public class StringUtils
         return str;
     }
 
+
+    /**
+     * 取出其中小的数量
+     * @return
+     */
+    public static String getMinQty(String numb1,String numb2){
+        return  StringUtils.string2Float(numb1)<StringUtils.string2Float(numb2)?numb1:numb2;
+    }
+
 }

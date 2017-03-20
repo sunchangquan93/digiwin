@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
+import android.hardware.Camera;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
+import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
@@ -115,7 +117,6 @@ public class MipcaActivityCapture extends Activity implements Callback {
         }
         decodeFormats = null;
         characterSet = null;
-
         playBeep = true;
         AudioManager audioService = (AudioManager) getSystemService(AUDIO_SERVICE);
         if (audioService.getRingerMode() != AudioManager.RINGER_MODE_NORMAL) {
@@ -181,6 +182,7 @@ public class MipcaActivityCapture extends Activity implements Callback {
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width,
                                int height) {
+        cameraManager.setCameraDisplayOrientation(this,0);
 
     }
 
@@ -266,5 +268,7 @@ public class MipcaActivityCapture extends Activity implements Callback {
             activity.startActivity(intent);
         }
     }
+
+
 
 }
