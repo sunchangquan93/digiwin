@@ -223,4 +223,8 @@
     <color name="colorAccent">#FF4081</color>
     <color name="graybb">#bbbbbb</color>
     <color name="tranblack">#b1000000</color>
+    <color name="yellow_text">#ffbf00</color>
+    <color name="hint_color">#9b9b9b</color>
+    <color name="head_text">#02544b</color>
+    <color name="check_detail_form_head_text">#797979</color>
 </resources>

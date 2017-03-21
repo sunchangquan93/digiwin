@@ -60,6 +60,7 @@
     <dimen name="layout_18dp">18dp</dimen>
     <dimen name="layout_23dp">23dp</dimen>
     <dimen name="layout_25dp">25dp</dimen>
+    <dimen name="layout_24dp">24dp</dimen>
     <dimen name="layout_28dp">28dp</dimen>
     <dimen name="layout_30dp">30dp</dimen>
     <dimen name="layout_40dp">40dp</dimen>
