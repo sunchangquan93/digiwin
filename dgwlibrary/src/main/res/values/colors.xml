@@ -227,4 +227,9 @@
     <color name="hint_color">#9b9b9b</color>
     <color name="head_text">#02544b</color>
     <color name="check_detail_form_head_text">#797979</color>
+
+    <color name="cdcdcd">#cdcdcd</color>
+
+    <color name="check_detail_form_text">#5d5d5d</color>
+
 </resources>

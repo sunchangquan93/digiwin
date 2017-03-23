@@ -15,7 +15,7 @@ public class StringUtils
 {
     /**
      * 计算字符串的中文长度
-     * 
+     *
      * @param s
      * @return
      */
@@ -32,7 +32,7 @@ public class StringUtils
         }
         return num;
     }
-    
+
     public static String objToString(Object obj)
     {
         if (obj != null && !String.valueOf(obj).equals("") && !String.valueOf(obj).equals("null"))
@@ -44,10 +44,10 @@ public class StringUtils
             return "";
         }
     }
-    
+
     /**
      * 转换字符串，如果字符串是NULL,或者“null”，或者"",统一返回""
-     * 
+     *
      * @param str
      *            需要转换的字符串
      * @return String 统一返回空字符串
@@ -63,10 +63,10 @@ public class StringUtils
             return "0";
         }
     }
-    
+
     /**
      * 检查字符串是否是空白：<code>null</code>、空字符串<code>""</code>或只有空白字符。
-     * 
+     *
      * <pre>
      * StringUtil.isBlank(null)      = true
      * StringUtil.isBlank("")        = true
@@ -74,21 +74,21 @@ public class StringUtils
      * StringUtil.isBlank("bob")     = false
      * StringUtil.isBlank("  bob  ") = false
      * </pre>
-     * 
+     *
      * @param str
      *            要检查的字符串
-     * 
+     *
      * @return 如果为空白, 则返回<code>true</code>
      */
     public static boolean isBlank(String str)
     {
         int length;
-        
+
         if ((str == null) || ((length = str.length()) == 0) || str.equals("null"))
         {
             return true;
         }
-        
+
         for (int i = 0; i < length; i++)
         {
             if (!Character.isWhitespace(str.charAt(i)))
@@ -96,13 +96,13 @@ public class StringUtils
                 return false;
             }
         }
-        
+
         return true;
     }
-    
+
     /**
      * 判断字符串是否为空
-     * 
+     *
      * @param string
      *            设置字符串
      * @return boolean 返回是否为空
@@ -111,10 +111,10 @@ public class StringUtils
     {
         return string == null || string.length() == 0;
     }
-    
+
     /**
      * 格式化数字返回整数型
-     * 
+     *
      * @param number
      * @return int
      */
@@ -129,7 +129,7 @@ public class StringUtils
         {
             err.printStackTrace();
         }
-        
+
         return intNumber;
     }
     /**
@@ -142,7 +142,7 @@ public class StringUtils
         view.setFocusableInTouchMode(false); // 触摸时也得不到焦点
         view.setFocusableInTouchMode(false);// 虚拟键盘隐藏
     }
-    
+
     /**
      * 判断字符串是否是整数
      */
@@ -158,10 +158,10 @@ public class StringUtils
             return false;
         }
     }
-    
+
     /**
      * double 相加
-     * 
+     *
      * @param d1
      * @param d2
      * @return
@@ -172,10 +172,10 @@ public class StringUtils
         BigDecimal bd2 = new BigDecimal(Double.toString(d2));
         return bd1.add(bd2).doubleValue();
     }
-    
+
     /**
      * double 相减
-     * 
+     *
      * @param d1
      * @param d2
      * @return
@@ -186,10 +186,10 @@ public class StringUtils
         BigDecimal bd2 = new BigDecimal(Double.toString(d2));
         return bd1.subtract(bd2).doubleValue();
     }
-    
+
     /**
      * double 乘法
-     * 
+     *
      * @param d1
      * @param d2
      * @return
@@ -200,10 +200,10 @@ public class StringUtils
         BigDecimal bd2 = new BigDecimal(Double.toString(d2));
         return bd1.multiply(bd2).doubleValue();
     }
-    
+
     /**
      * double 除法
-     * 
+     *
      * @param d1
      * @param d2
      * @param scale 四舍五入 小数点位数
@@ -213,15 +213,15 @@ public class StringUtils
     {
         // 当然在此之前，你要判断分母是否为0，
         // 为0你可以根据实际需求做相应的处理
-        
+
         BigDecimal bd1 = new BigDecimal(Double.toString(d1));
         BigDecimal bd2 = new BigDecimal(Double.toString(d2));
         return bd1.divide(bd2, scale, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
-    
+
     /**
      * 转换STRING成FLOAT
-     * 
+     *
      * @return
      */
     public static float string2Float(String string)
@@ -240,10 +240,10 @@ public class StringUtils
         }
         return a;
     }
-    
+
     /**
      * string 相加
-     * 
+     *
      * @param str1
      * @param str2
      * @return
@@ -254,10 +254,10 @@ public class StringUtils
         BigDecimal bd2 = new BigDecimal(str2);
         return bd1.add(bd2).floatValue();
     }
-    
+
     /**
      * string 相减
-     * 
+     *
      * @param d1
      * @param d2
      * @return
@@ -268,7 +268,7 @@ public class StringUtils
         BigDecimal bd2 = new BigDecimal(d2);
         return bd1.subtract(bd2).floatValue();
     }
-    
+
 
     /**
      * 根据，拆分
