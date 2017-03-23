@@ -93,4 +93,9 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.
         view.setOnClickListener(listener);
         return this;
     }
+
+    public void setVisibility(int viewId,int visible){
+        View view = findViewById(viewId);
+        view.setVisibility(visible);
+    }
 }

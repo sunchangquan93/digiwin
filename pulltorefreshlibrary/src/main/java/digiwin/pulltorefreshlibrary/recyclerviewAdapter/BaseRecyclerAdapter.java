@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,6 +18,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
     protected final Context mContext;
     protected LayoutInflater mInflater;
     private OnItemClickListener mClickListener;
+    private AdapterView.OnItemSelectedListener mSelectedListener;
 
     public BaseRecyclerAdapter(Context ctx, List<T> list) {
         mItems = (list != null) ? list : new ArrayList<T>();
@@ -62,6 +64,9 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
 
     final public void setOnItemClickListener(OnItemClickListener listener) {
         mClickListener = listener;
+    }
+    final public void setOnItemSelectedListener(AdapterView.OnItemSelectedListener listener) {
+        mSelectedListener = listener;
     }
     /**
      * 重写该方法，根据viewType设置item的layout
