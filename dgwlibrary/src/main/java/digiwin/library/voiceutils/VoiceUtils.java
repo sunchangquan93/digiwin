@@ -142,6 +142,19 @@ public class VoiceUtils {
     };
 
     /**
+     * 获取识别的语音字符串
+     */
+    public interface GetVoiceTextListener{
+        /**
+         * 获取别的语音字符串
+         * @return
+         */
+        String getVoiceText(String str);
+    }
+
+    private GetVoiceTextListener mTextListener;
+
+    /**
      * 解析出的语音字符串
      */
     private static StringBuffer resultbuffer;
@@ -176,6 +189,9 @@ public class VoiceUtils {
                 resultbuffer.append(mIatResults.get(key));
             }
             ToastUtils.showToastByString(mContext,"录音结果："+resultbuffer.toString());
+            if(mTextListener != null){
+                mTextListener.getVoiceText(resultbuffer.toString());
+            }
         }
 
         @Override
@@ -276,14 +292,15 @@ public class VoiceUtils {
         }
     }
 
+
     /**
-     * 语音识别，将识别的内容以字符串形式返回
+     * 语音识别，将识别的内容以字符串形式在接口中返回
      *
      * @return
      */
-    public String voiceToText() {
-        String result = "";
+    public void voiceToText(GetVoiceTextListener listener) {
         try{
+            mTextListener = listener;
             //1. 创建RecognizerDialog对象
             RecognizerDialog mDialog = new RecognizerDialog(mContext, mTtsInitListener);
             //2. 设置accent、 language等参数
@@ -297,14 +314,9 @@ public class VoiceUtils {
             mDialog.setListener(new MyRecognizerDialogListener());
             //4. 显示dialog，接收语音输入
             mDialog.show();
-            if(null != resultbuffer && resultbuffer.length()>0){
-               result =  resultbuffer.toString();
-            }
-            Log.d(TAG,"result:"+result);
         }catch(Exception e){
             e.printStackTrace();
         }
-        return result;
     }
 
     // 听写监听器
