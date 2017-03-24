@@ -68,6 +68,37 @@ public class MainActivity extends BaseTitleActivity {
 
     @BindView(R.id.tv_title_operation)
     TextView tv_title_operation;
+
+    String command ="";
+    /**
+     * 语音按钮
+     */
+    @OnClick(R.id.voice_guide)
+    void voiceTest(){
+        String voicer = (String)SharedPreferencesUtils.get(this, SharePreKey.VOICER_SELECTED,"voicer");
+        VoiceUtils.getInstance(this,voicer).voiceToText(new VoiceUtils.GetVoiceTextListener() {
+            @Override
+            public String getVoiceText(String str) {
+                Log.d(TAG,"resulttext"+str);
+                command = str;
+                List<ModuleBean> list = MainLogic.ModuleList;
+                Log.d(TAG,"list.size()"+list.size());
+                if(list.size()>0){
+                    for (int i = 0;i<list.size();i++){
+                        if(command.contains(getResources().getString(list.get(i).getNameRes()))){
+                            //
+                            Log.d(TAG,"command"+command);
+                            Log.d(TAG,"list.get(i).getNameRes()"+list.get(i).getNameRes());
+                            voice("正在为您打开"+getResources().getString(list.get(i).getNameRes()));
+                            ActivityManagerUtils.startActivity(MainActivity.this,list.get(i).getIntent());
+                        }
+                    }
+                }
+                return str;
+            }
+        });
+
+    }
     /**
      * 用户权限
      */
@@ -126,33 +157,8 @@ public class MainActivity extends BaseTitleActivity {
         mName.setEnabled(false);
         mName.setText(R.string.app_name);
 
-//        iv_un_com.setVisibility(View.VISIBLE);
-//        iv_un_com.setImageResource(R.drawable.search);
     }
 
-
-    /**
-     * 语音识别测试
-     */
-
-//    @OnClick(R.id.un_com)
-//    void voiceTest(){
-//        String voicer = (String)SharedPreferencesUtils.get(this, SharePreKey.VOICER_SELECTED,"voicer");
-//        Log.d(TAG,"voicer:"+voicer);
-//       VoiceUtils.getInstance(this,voicer).voiceToText();
-//        String command = (String) SharedPreferencesUtils.get(this,SharePreKey.VOICECOMMAND,"voicecommand");
-//        Log.d(TAG,"resulttext"+command);
-//        TODO
-//        List<ModuleBean> list = MainLogic.ModuleList;
-//        if(null != list && list.size()>0){
-//            for (int i = 0;i<list.size();i++){
-//                if(text.contains(String.valueOf(list.get(i).getNameRes()))){
-//                    //
-//                    ActivityManagerUtils.startActivity(activity,list.get(i).getIntent());
-//                }
-//            }
-//        }
-//    }
 
      @Override
     protected Toolbar toolbar() {

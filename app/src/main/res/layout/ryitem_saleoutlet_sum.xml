@@ -89,7 +89,7 @@
         <TextView
             android:layout_width="@dimen/layout_50dp"
             android:layout_height="wrap_content"
-            android:text="@string/apply_number"
+            android:text="@string/locator_num_"
             android:textSize="@dimen/textSize_14sp" />
 
         <TextView

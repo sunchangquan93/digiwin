@@ -13,6 +13,71 @@ public class ClickItemPutBean {
      */
     private String doc_no ;
 
+    /**
+     * 发出仓
+     */
+    private String warehouse_out_no ;
+    /**
+     * 拨入仓
+     */
+    private String warehouse_in_no ;
+    /**
+     * 日期
+     */
+    private String receipt_date ;
+    /**
+     * 调拨单号
+     */
+    private String receipt_no;
+    /**
+     * 仓库
+     */
+    private String warehouse_no ;
+    /**
+     * 料号
+     */
+    private String item_no ;
+
+    /**
+     * 工单编号
+     */
+    private String wo_no;
+
+    /**
+     * 数量
+     */
+    private String qty;
+    /**
+     * 出通单号
+     */
+    private String notice_no;
+    /**
+     * 物料条码
+     */
+    private String barcode_no;
+
+    /**
+     * 品名
+     */
+    private String item_name;
+
+    /**
+     * 库位
+     */
+    private String storage_space;
+    /**
+     * 标记（1：物料库存；2：物料条码库存）
+     */
+    private  String flag;
+
+    public String getStorage_space() {
+        return storage_space;
+    }
+
+    public void setStorage_space(String storage_space) {
+        this.storage_space = storage_space;
+    }
+
     public String getDoc_no() {
         return doc_no;
     }
@@ -44,25 +109,6 @@ public class ClickItemPutBean {
     public void setReceipt_date(String receipt_date) {
         this.receipt_date = receipt_date;
     }
-
-    /**
-     * 发出仓
-     */
-    private String warehouse_out_no ;
-    /**
-     * 拨入仓
-     */
-    private String warehouse_in_no ;
-    /**
-     * 日期
-     */
-    private String receipt_date ;
-    /**
-     * 调拨单号
-     */
-    private String receipt_no;
-
-
     public String getReceipt_no() {
         return receipt_no;
     }
@@ -70,15 +116,6 @@ public class ClickItemPutBean {
     public void setReceipt_no(String receipt_no) {
         this.receipt_no = receipt_no;
     }
-
-    private String warehouse_no ;
-
-    private String item_no ;
-
-    /**
-     * 工单编号
-     */
-    private String wo_no;
 
     public String getWo_no() {
         return wo_no;
@@ -104,14 +141,6 @@ public class ClickItemPutBean {
         this.item_no = item_no;
     }
 
-    /**
-     * 数量
-     */
-    private String qty;
-    /**
-     * 出通单号
-     */
-    private String notice_no;
 
     public String getQty() {
         return qty;
@@ -127,5 +156,29 @@ public class ClickItemPutBean {
 
     public void setNotice_no(String notice_no) {
         this.notice_no = notice_no;
+    }
+
+    public String getBarcode_no() {
+        return barcode_no;
+    }
+
+    public void setBarcode_no(String barcode_no) {
+        this.barcode_no = barcode_no;
+    }
+
+    public String getItem_name() {
+        return item_name;
+    }
+
+    public void setItem_name(String item_name) {
+        this.item_name = item_name;
+    }
+
+    public String getFlag() {
+        return flag;
+    }
+
+    public void setFlag(String flag) {
+        this.flag = flag;
     }
 }

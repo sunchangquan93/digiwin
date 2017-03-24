@@ -113,8 +113,25 @@ public class ListSumBean implements Serializable {
         this.fifo_check = fifo_check;
     }
 
+    public String getStock_unit_no() {
+        return stock_unit_no;
+    }
+
+    public void setStock_unit_no(String stock_unit_no) {
+        this.stock_unit_no = stock_unit_no;
+    }
+
+    public String getWarehouse_storage() {
+        return warehouse_storage;
+    }
+
+    public void setWarehouse_storage(String warehouse_storage) {
+        this.warehouse_storage = warehouse_storage;
+    }
+
     public String getItem_no() {
         return item_no;
+
     }
 
     public void setItem_no(String item_no) {
@@ -207,6 +224,18 @@ public class ListSumBean implements Serializable {
      * 接收数量
      */
     private String accept_qty;
+    /**
+     * 库存单位
+     */
+    private String stock_unit_no;
+    /**
+     * 仓库库位
+     */
+    private String warehouse_storage;
+    /**
+     * 物料条码
+     */
+    private String barcode_no;
 
     public String getWarehouse_out_no() {
         return warehouse_out_no;
@@ -458,5 +487,13 @@ public class ListSumBean implements Serializable {
 
     public void setMatch_qty(String match_qty) {
         this.match_qty = match_qty;
+    }
+
+    public String getBarcode_no() {
+        return barcode_no;
+    }
+
+    public void setBarcode_no(String barcode_no) {
+        this.barcode_no = barcode_no;
     }
 }

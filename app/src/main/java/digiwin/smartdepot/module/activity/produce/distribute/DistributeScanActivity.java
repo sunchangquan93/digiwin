@@ -25,7 +25,6 @@ import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
 import digiwin.library.dialog.OnDialogClickListener;
-import digiwin.library.utils.ObjectAndMapUtils;
 import digiwin.library.utils.StringUtils;
 import digiwin.pulltorefreshlibrary.recyclerview.FullyLinearLayoutManager;
 import digiwin.smartdepot.R;

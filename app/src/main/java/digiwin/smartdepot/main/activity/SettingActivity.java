@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -26,6 +27,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import digiwin.library.constant.SharePreKey;
+import digiwin.library.constant.SystemConstant;
 import digiwin.library.dialog.CustomDialog;
 import digiwin.library.dialog.OnDialogClickgetTextListener;
 import digiwin.library.utils.ActivityManagerUtils;
@@ -35,6 +37,7 @@ import digiwin.library.utils.SharedPreferencesUtils;
 import digiwin.library.utils.StringUtils;
 import digiwin.library.utils.TelephonyUtils;
 import digiwin.library.voiceutils.VibratorUtil;
+import digiwin.library.voiceutils.VoiceUtils;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
@@ -56,6 +59,7 @@ import digiwin.smartdepot.main.voicer.VoicerChooseDialog;
 import static digiwin.library.constant.SharePreKey.VOICER_SELECTED;
 import static digiwin.library.constant.SystemConstant.VIBRATEMETION;
 import static digiwin.library.constant.SystemConstant.VIBRATEMETIONNOT;
+import static digiwin.smartdepot.R.id.rl_versionsSetting;
 import static digiwin.smartdepot.main.bluetooth.BlueToothDialog.REQUEST_ENABLE_BT;
 
 
@@ -63,6 +67,28 @@ import static digiwin.smartdepot.main.bluetooth.BlueToothDialog.REQUEST_ENABLE_B
  * @Author 毛衡
  */
 public class SettingActivity extends BaseTitleActivity {
+    @BindView(R.id.ll_userinforseting)
+    LinearLayout llUserinforseting;
+    @BindView(R.id.ll_operatingCenterSetting)
+    LinearLayout llOperatingCenterSetting;
+    @BindView(R.id.ll_storageSetting)
+    LinearLayout llStorageSetting;
+    @BindView(R.id.ll_pageSetting)
+    LinearLayout llPageSetting;
+    @BindView(R.id.ll_repeatSetting)
+    LinearLayout llRepeatSetting;
+    @BindView(R.id.ll_voicerSetting)
+    LinearLayout llVoicerSetting;
+    @BindView(R.id.ll_vibrateSetting)
+    LinearLayout llVibrateSetting;
+    @BindView(R.id.ll_manuscriptSetting)
+    LinearLayout llManuscriptSetting;
+    @BindView(R.id.ll_blueToothSetting)
+    LinearLayout llBlueToothSetting;
+    @BindView(rl_versionsSetting)
+    RelativeLayout rlVersionsSetting;
+    @BindView(R.id.activity_setting)
+    LinearLayout activitySetting;
     /**
      * 版本信息
      */
@@ -122,8 +148,6 @@ public class SettingActivity extends BaseTitleActivity {
     /**
      * 版本信息
      */
-    @BindView(R.id.rl_versionsSetting)
-    RelativeLayout rl_versionsSetting;
     @BindView(R.id.tv_versionsSetting)
     TextView tv_versionsSetting;
 
@@ -132,6 +156,11 @@ public class SettingActivity extends BaseTitleActivity {
      */
     @BindView(R.id.tv_versions_new)
     TextView tv_versions_new;
+    /**
+     * 轮播时间
+     */
+    @BindView(R.id.tv_repeat_time)
+    TextView tvRepeaTime;
 
     private LoginLogic loginlogic;
     /**
@@ -161,6 +190,7 @@ public class SettingActivity extends BaseTitleActivity {
      */
     @OnClick(R.id.ll_operatingCenterSetting)
     void showOperatingCenter() {
+        llOperatingCenterSetting.setEnabled(false);
         AccoutBean accoutBean = LoginLogic.getUserInfo();
         if (null == accoutBean) {
             return;
@@ -171,14 +201,16 @@ public class SettingActivity extends BaseTitleActivity {
         loginlogic.getPlant(map, new LoginLogic.GetPlantListener() {
             @Override
             public void onSuccess(List<String> plants) {
+                llOperatingCenterSetting.setEnabled(true);
                 dismissLoadingDialog();
                 OperatingCenterDialog.showOperatingCenterDialog(activity, tv_operatingCenterSetting.getText().toString(), plants);
             }
 
             @Override
             public void onFailed(String msg) {
+                llOperatingCenterSetting.setEnabled(true);
                 dismissLoadingDialog();
-                showToast(msg);
+                showFailedDialog(msg);
             }
         });
     }
@@ -188,6 +220,7 @@ public class SettingActivity extends BaseTitleActivity {
      */
     @OnClick(R.id.ll_storageSetting)
     void showStorage() {
+        llStorageSetting.setEnabled(false);
         AccoutBean accoutBean = LoginLogic.getUserInfo();
         if (null == accoutBean) {
             return;
@@ -200,6 +233,7 @@ public class SettingActivity extends BaseTitleActivity {
      */
     @OnClick(R.id.ll_voicerSetting)
     void VoicerSetting() {
+        llVoicerSetting.setEnabled(false);
         VoicerChooseDialog.showVoicerChooseDialog(activity, tv_voicerSetting.getText().toString(), voicersList);
         VoicerChooseDialog.setCallBack(new VoicerChooseDialog.VoicerChooseCallBack() {
             public void VoicerChooseCallBack(String voicerType) {
@@ -208,6 +242,7 @@ public class SettingActivity extends BaseTitleActivity {
                 voice(voicerType);
             }
         });
+        llVoicerSetting.setEnabled(true);
     }
 
     /**
@@ -215,6 +250,7 @@ public class SettingActivity extends BaseTitleActivity {
      */
     @OnClick(R.id.ll_pageSetting)
     void showPageSetting() {
+        llPageSetting.setEnabled(false);
         AlertDialogUtils.showNumDialog(activity, 1, 100, tv_pageSetting.getText().toString(), new OnDialogClickgetTextListener() {
             @Override
             public void onCallback(CustomDialog dialog, String text) {
@@ -222,26 +258,25 @@ public class SettingActivity extends BaseTitleActivity {
                 SharedPreferencesUtils.put(context, SharePreKey.PAGE_SETTING, text);
             }
         });
+        llPageSetting.setEnabled(true);
         // PageSettingDialog.showPageSettingDialog(activity);
     }
 
     /**
      * 点击展示版本信息
      */
-    @OnClick(R.id.rl_versionsSetting)
+    @OnClick(rl_versionsSetting)
     public void versionsSetting() {
+        rlVersionsSetting.setEnabled(false);
         VersionsSettingDialog dialog = new VersionsSettingDialog();
         dialog.showVersionDialog(activity, versionBean);
+        rlVersionsSetting.setEnabled(true);
     }
 
-    /**
-     * 轮播时间
-     */
-    @BindView(R.id.tv_repeat_time)
-    TextView tvRepeaTime;
 
     @OnClick(R.id.ll_repeatSetting)
     void chooseRepeat() {
+        llRepeatSetting.setEnabled(false);
         AlertDialogUtils.showNumDialog(activity, 1, 200, tvRepeaTime.getText().toString(), new OnDialogClickgetTextListener() {
             @Override
             public void onCallback(CustomDialog dialog, String text) {
@@ -249,6 +284,7 @@ public class SettingActivity extends BaseTitleActivity {
                 SharedPreferencesUtils.put(context, SharePreKey.REPEATTIME, text);
             }
         });
+        llRepeatSetting.setEnabled(true);
     }
 
     @Override
@@ -399,6 +435,7 @@ public class SettingActivity extends BaseTitleActivity {
         GetStorageLogic.getInstance(context, module, mTimestamp.toString()).getStorage(map, new GetStorageLogic.GetStorageListener() {
             @Override
             public void onSuccess(List<String> wares) {
+                llStorageSetting.setEnabled(true);
                 dismissLoadingDialog();
                 if (wares.size() > 0) {
                     if (flag) {
@@ -420,8 +457,9 @@ public class SettingActivity extends BaseTitleActivity {
 
             @Override
             public void onFailed(String msg) {
+                llStorageSetting.setEnabled(true);
                 dismissLoadingDialog();
-                showToast(msg);
+                showFailedDialog(msg);
             }
         });
     }
@@ -511,9 +549,9 @@ public class SettingActivity extends BaseTitleActivity {
                     float vernum = StringUtils.string2Float(bean.getVernum());
                     if (vernum > TelephonyUtils.getMAppVersion(context)) {
                         tv_versions_new.setVisibility(View.VISIBLE);
-                        rl_versionsSetting.setEnabled(true);
+                        rlVersionsSetting.setEnabled(true);
                     } else {
-                        rl_versionsSetting.setEnabled(false);
+                        rlVersionsSetting.setEnabled(false);
                     }
                 } catch (Exception e) {
                     LogUtils.e(TAG, "UpdateVer异常");

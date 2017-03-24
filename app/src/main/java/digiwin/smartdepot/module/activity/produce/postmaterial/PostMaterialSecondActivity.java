@@ -52,11 +52,11 @@ public class PostMaterialSecondActivity extends BaseFirstModuldeActivity {
     /**
      * 扫码
      */
-    PostMaterialScanFg scanFg;
+    public PostMaterialScanFg scanFg;
     /**
      * 汇总提交
      */
-    PostMaterialSumFg sumFg;
+    public PostMaterialSumFg sumFg;
 
     ModuleViewPagerAdapter adapter;
     /**
@@ -78,17 +78,6 @@ public class PostMaterialSecondActivity extends BaseFirstModuldeActivity {
         module = ModuleCode.POSTMATERIAL;
         return module;
     }
-
-    public Handler handler =  new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            if(msg.what == CLEAR){
-                Log.d(TAG,"clear");
-                scanFg.initData();
-            }
-        }
-    };
 
     @Override
     protected void initNavigationTitle() {
@@ -169,6 +158,6 @@ public class PostMaterialSecondActivity extends BaseFirstModuldeActivity {
 
     @Override
     public ExitMode exitOrDel() {
-        return ExitMode.EXITD;
+        return ExitMode.EXITISD;
     }
 }

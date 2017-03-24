@@ -210,8 +210,6 @@ public class MaterialReturningScanFg extends BaseFragment {
     @Override
     protected void doBusiness() {
         pactivity = (MaterialReturningActivity) activity;
-        headerBean=new MaterialReturningHeaderBean();
-        commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
         initData();
     }
 
@@ -356,14 +354,19 @@ public class MaterialReturningScanFg extends BaseFragment {
     /**
      * 初始化一些变量
      */
-    private void initData() {
+    public  void initData() {
         barcodeShow = "";
         locatorShow = "";
         materialShow="";
         materialFlag=false;
         barcodeFlag = false;
         locatorFlag = false;
+        cbLocatorlock.setChecked(false);
+        etScanLocator.setText("");
+        etScanBarocde.requestFocus();
         saveBean = new SaveBean();
+        headerBean=new MaterialReturningHeaderBean();
+        commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
     }
 
 

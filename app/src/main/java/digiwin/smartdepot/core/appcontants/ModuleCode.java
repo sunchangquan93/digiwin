@@ -9,7 +9,7 @@ public interface ModuleCode {
     /**
      * 非具体模块统一使用编号
      */
-    public final String OTHER="";
+    public final String OTHER="OTHER";
     /**
      * 生产退料
      */
@@ -99,5 +99,36 @@ public interface ModuleCode {
      * 工序报工
      */
     public final String PROCESSREPORTING = "E005";
+    /**
+     * 采购收货扫描
+     */
+    public final String PURCHASEGOODSSCAN = "A003";
+    /**
+     * 收货检验
+     */
+    public final String PURCHASECHECK = "A004";
+
+    /**
+     *装箱打印
+     */
+    public final String ENCHASEPRINT="B027";
+    /**
+     * 库存查询
+     */
+    public final String STOREQUERY="C004";
+    /**
+     * 条码移库
+     */
+    public final String MOVESTORE="C011";
+
+    /**
+     * 依工单退料
+     */
+    public final String WORKORDERRETURN="B022";
+
+    /**
+     * 标签补打
+     */
+    public final String PRINTLABEL="C011";
 
 }

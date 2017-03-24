@@ -9,11 +9,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.iflytek.cloud.thirdparty.I;
-
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.BindViews;
@@ -23,7 +20,6 @@ import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
 import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.dialog.OnDialogTwoListener;
-import digiwin.library.utils.ObjectAndMapUtils;
 import digiwin.library.utils.StringUtils;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
@@ -361,7 +357,6 @@ public class StoreAllotScanFg extends BaseFragment {
     @Override
     protected void doBusiness() {
         pactivity = (StoreAllotActivity) activity;
-        commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
         initData();
         ChooseAllotDailog.showChooseAllotDailog(activity, new OnDialogTwoListener() {
             @Override
@@ -427,7 +422,7 @@ public class StoreAllotScanFg extends BaseFragment {
     /**
      * 初始化一些变量
      */
-    private void initData() {
+    public void initData() {
         INOROUT=IN;
         barcodeShow = "";
         inlocatorShow = "";
@@ -436,5 +431,12 @@ public class StoreAllotScanFg extends BaseFragment {
         inlocatorFlag = false;
         outlocatorFlag = false;
         saveBean = new SaveBean();
+        cbOutLocatorlock.setChecked(false);
+        cbInLocatorlock.setChecked(false);
+        etScanInLocator.setText("");
+        etScanOutLocator.setText("");
+        etScanBarocde.requestFocus();
+        includeDetail.setVisibility(View.GONE);
+        commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
     }
 }

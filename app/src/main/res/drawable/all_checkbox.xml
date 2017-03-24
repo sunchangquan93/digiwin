@@ -3,6 +3,5 @@
 
         <item android:drawable="@drawable/green_cb_true" android:state_checked="true"/>
         <item android:drawable="@drawable/green_cb_false" android:state_checked="false"/>
-        <item android:drawable="@drawable/green_cb_false" android:state_checked="false"/>
 
 </selector>

@@ -146,12 +146,12 @@ public class PurchaseInStoreSumFg extends BaseFragment {
                         adapter = new PurchaseInStorageSumAdapter(pactivity, sumShowBeanList);
                         ryList.setAdapter(adapter);
                     } catch (Exception e) {
-                        LogUtils.e(TAG, "upDateList--getSum--onFailed" + e);
+                        LogUtils.e(TAG, "updateList--getSum--onFailed" + e);
                     }
                 }
             });
         } catch (Exception e) {
-            LogUtils.e(TAG, "upDateList--getSum--Exception" + e);
+            LogUtils.e(TAG, "updateList--getSum--Exception" + e);
         }
     }
 
@@ -218,13 +218,10 @@ public class PurchaseInStoreSumFg extends BaseFragment {
                     public void onCallback() {
                         pactivity.mZXVp.setCurrentItem(0);
                         pactivity.createNewModuleId(pactivity.module);
-                        commonLogic = CommonLogic.getInstance(activity,pactivity.module,pactivity.mTimestamp.toString());
                         tv_head_plan_date.setText("");
                         tv_head_post_order.setText("");
                         tv_head_provider.setText("");
-                        Message msgs = new Message();
-                        msgs.what = pactivity.CLEAR;
-                        pactivity.handler.sendMessage(msgs);
+                        pactivity.scanFg.initData();
                     }
                 });
             }

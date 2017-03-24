@@ -9,9 +9,10 @@ import digiwin.library.voiceutils.VoiceUtils;
 import digiwin.smartdepot.R;
 
 /**
- * Created by xiemeng on 2017/3/17.
+ * @des     获取当前声音类型
+ * @author  xiemeng
+ * @date    2017/3/24
  */
-
 public class GetVoicer {
 
     public static  String getVoice(Context context){

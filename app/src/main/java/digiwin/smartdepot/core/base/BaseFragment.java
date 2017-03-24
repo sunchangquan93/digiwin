@@ -6,9 +6,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import digiwin.library.base.BaseAppFragment;
+import digiwin.smartdepot.module.bean.common.ClickItemPutBean;
+import digiwin.smartdepot.module.logic.common.CommonLogic;
+
+import static u.aly.d.c.b.a;
+
 /**
  * Created by ChangquanSun
  * 2017/1/9
@@ -18,6 +27,7 @@ public abstract class BaseFragment extends BaseAppFragment {
     protected String TAG;
     protected View mFragmentView;
     private Unbinder unBind;
+
 
     @Nullable
     @Override

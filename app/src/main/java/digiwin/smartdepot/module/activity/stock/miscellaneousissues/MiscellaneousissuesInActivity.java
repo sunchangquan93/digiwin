@@ -66,7 +66,7 @@ public class MiscellaneousissuesInActivity extends BaseFirstModuldeActivity {
     /**
      * 扫码
      */
-    MiscellaneousIssueInScanFg scanFg;
+  public   MiscellaneousIssueInScanFg scanFg;
     /**
      * 汇总提交
      */
@@ -92,17 +92,6 @@ public class MiscellaneousissuesInActivity extends BaseFirstModuldeActivity {
         module = ModuleCode.MISCELLANEOUSISSUESIN;
         return module;
     }
-
-    public Handler handler =  new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            if(msg.what == CLEAR){
-                Log.d(TAG,"clear");
-                scanFg.initData();
-            }
-        }
-    };
 
     /**
      * 未完事项
@@ -193,9 +182,8 @@ public class MiscellaneousissuesInActivity extends BaseFirstModuldeActivity {
         }
     }
 
-
     @Override
     public ExitMode exitOrDel() {
-        return ExitMode.EXITD;
+        return ExitMode.EXITISD;
     }
 }

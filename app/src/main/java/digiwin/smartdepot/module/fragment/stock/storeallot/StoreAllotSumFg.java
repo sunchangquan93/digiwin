@@ -18,6 +18,7 @@ import digiwin.library.dialog.OnDialogTwoListener;
 import digiwin.library.utils.ActivityManagerUtils;
 import digiwin.library.utils.LogUtils;
 import digiwin.pulltorefreshlibrary.recyclerview.FullyLinearLayoutManager;
+import digiwin.pulltorefreshlibrary.recyclerviewAdapter.BaseRecyclerAdapter;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
@@ -57,22 +58,21 @@ public class StoreAllotSumFg extends BaseFragment {
 
     private boolean upDateFlag;
 
-    StoreAllotSumAdapter adapter;
+    BaseRecyclerAdapter adapter;
 
     List<SumShowBean> sumShowBeanList;
 
     @Override
     protected int bindLayoutId() {
-        return R.layout.fg_storageallot_sum;
+        return R.layout.fg_storeallot_sum;
     }
 
     @Override
     protected void doBusiness() {
         pactivity = (StoreAllotActivity) activity;
-        commonLogic = CommonLogic.getInstance(activity, pactivity.module, pactivity.mTimestamp.toString());
         FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(activity);
         ryList.setLayoutManager(linearLayoutManager);
-        upDateFlag = false;
+        initData();
     }
 
     /**
@@ -103,12 +103,12 @@ public class StoreAllotSumFg extends BaseFragment {
                         adapter = new StoreAllotSumAdapter(activity, sumShowBeanList);
                         ryList.setAdapter(adapter);
                     } catch (Exception e) {
-                        LogUtils.e(TAG, "upDateList--getSum--onFailed" + e);
+                        LogUtils.e(TAG, "updateList--getSum--onFailed" + e);
                     }
                 }
             });
         } catch (Exception e) {
-            LogUtils.e(TAG, "upDateList--getSum--Exception" + e);
+            LogUtils.e(TAG, "updateList--getSum--Exception" + e);
         }
     }
 
@@ -135,7 +135,7 @@ public class StoreAllotSumFg extends BaseFragment {
     private void getDetail(final SumShowBean sumShowBean) {
         Map<String, String> map = new HashMap<>();
         showLoadingDialog();
-        map.put("item_no", sumShowBean.getItem_no());
+        map.put(AddressContants.ITEM_NO, sumShowBean.getItem_no());
         commonLogic.getDetail(map, new CommonLogic.GetDetailListener() {
             @Override
             public void onSuccess(List<DetailShowBean> detailShowBeen) {
@@ -172,6 +172,8 @@ public class StoreAllotSumFg extends BaseFragment {
                     public void onCallback() {
                         pactivity.mZXVp.setCurrentItem(0);
                         pactivity.createNewModuleId(pactivity.module);
+                        pactivity.scanFg.initData();
+                        initData();
                     }
                 });
             }
@@ -185,5 +187,9 @@ public class StoreAllotSumFg extends BaseFragment {
 
     }
 
+    public void initData(){
+        commonLogic = CommonLogic.getInstance(activity, pactivity.module, pactivity.mTimestamp.toString());
+        upDateFlag = false;
+    }
 
 }

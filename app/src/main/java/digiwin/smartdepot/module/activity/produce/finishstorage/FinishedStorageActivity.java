@@ -68,7 +68,7 @@ public class FinishedStorageActivity extends BaseFirstModuldeActivity {
     /**
      * 扫码
      */
-    FinishedStorageScanFg scanFg;
+   public  FinishedStorageScanFg scanFg;
     /**
      * 汇总提交
      */

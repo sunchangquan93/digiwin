@@ -181,8 +181,14 @@ public class FilterBean {
      *  品名
      */
     private String item_name;
-
+    /**
+     * 客户编号
+     */
     private String customer_no;
+    /**
+     * 下阶料号
+     */
+    private String low_order_item_no;
 
     public String getCustomer_no() {
         return customer_no;
@@ -190,5 +196,13 @@ public class FilterBean {
 
     public void setCustomer_no(String customer_no) {
         this.customer_no = customer_no;
+    }
+
+    public String getLow_order_item_no() {
+        return low_order_item_no;
+    }
+
+    public void setLow_order_item_no(String low_order_item_no) {
+        this.low_order_item_no = low_order_item_no;
     }
 }

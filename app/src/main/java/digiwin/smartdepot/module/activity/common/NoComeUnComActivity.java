@@ -17,6 +17,7 @@ import com.yanzhenjie.recyclerview.swipe.SwipeMenuItem;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,6 +48,7 @@ public class NoComeUnComActivity extends BaseTitleActivity {
     SwipeMenuRecyclerView mSwipeMenuRecyclerView;
 
     private BaseSwipeMenuAdapter<UnCompleteBean> adapter;
+
     @BindView(R.id.toolbar_title)
     Toolbar toolbar;
 
@@ -86,6 +88,7 @@ public class NoComeUnComActivity extends BaseTitleActivity {
     @Override
     protected void doBusiness() {
         logic = CommonLogic.getInstance(activity, module, mTimestamp.toString());
+        uncomList=new ArrayList<>();
     }
 
     @Override
@@ -122,6 +125,8 @@ public class NoComeUnComActivity extends BaseTitleActivity {
                     showFailedDialog(error, new OnDialogClickListener() {
                         @Override
                         public void onCallback() {
+                            uncomList = new ArrayList<UnCompleteBean>();
+                            showList();
                             activity.finish();
                         }
                     });
@@ -137,38 +142,38 @@ public class NoComeUnComActivity extends BaseTitleActivity {
      * 显示数据
      */
     private void showList() {
-        mSwipeMenuRecyclerView.setVisibility(View.VISIBLE);
-        adapter = new BaseSwipeMenuAdapter<UnCompleteBean>(this, uncomList) {
-            @Override
-            protected int getItemLayout(int viewType) {
-                return R.layout.ryitem_nocome_no_finish;
-            }
-
-            @Override
-            protected void bindData(RecyclerViewHolder holder, int position, UnCompleteBean item) {
-                holder.setText(R.id.tv_name, item.getEmployee_no());
-                holder.setText(R.id.tv_date, item.getTransaction_date() + " " + item.getTransaction_time());
-                if (AddressContants.N.equals(item.getTransfer_status())) {
-                    holder.setText(R.id.tv_state, context.getString(R.string.un_com));
-                    holder.setTextColor(R.id.tv_state, context.getResources().getColor(R.color.red));
-                } else {
-                    holder.setText(R.id.tv_state, context.getString(R.string.commit_failed));
-                    holder.setTextColor(R.id.tv_state, context.getResources().getColor(R.color.Base_color));
+            mSwipeMenuRecyclerView.setVisibility(View.VISIBLE);
+            adapter = new BaseSwipeMenuAdapter<UnCompleteBean>(this, uncomList) {
+                @Override
+                protected int getItemLayout(int viewType) {
+                    return R.layout.ryitem_nocome_no_finish;
                 }
 
-            }
-        };
-        mSwipeMenuRecyclerView.setLayoutManager(new LinearLayoutManager(this));// 布局管理器。
-        mSwipeMenuRecyclerView.setHasFixedSize(true);// 如果Item够简单，高度是确定的，打开FixSize将提高性能。
-        mSwipeMenuRecyclerView.setItemAnimator(new DefaultItemAnimator());// 设置Item默认动画，加也行，不加也行。
-        // 为SwipeRecyclerView的Item创建菜单就两句话，不错就是这么简单：
-        // 设置菜单Item点击监听。
-        mSwipeMenuRecyclerView.setSwipeMenuItemClickListener(menuItemClickListener);
-        // 设置菜单创建器。
-        mSwipeMenuRecyclerView.setSwipeMenuCreator(swipeMenuCreator);
-        mSwipeMenuRecyclerView.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL_LIST));
-        mSwipeMenuRecyclerView.setAdapter(adapter);
-        onitemClick();
+                @Override
+                protected void bindData(RecyclerViewHolder holder, int position, UnCompleteBean item) {
+                    holder.setText(R.id.tv_name, item.getEmployee_no());
+                    holder.setText(R.id.tv_date, item.getTransaction_date() + " " + item.getTransaction_time());
+                    if (AddressContants.N.equals(item.getTransfer_status())) {
+                        holder.setText(R.id.tv_state, context.getString(R.string.un_com));
+                        holder.setTextColor(R.id.tv_state, context.getResources().getColor(R.color.red));
+                    } else {
+                        holder.setText(R.id.tv_state, context.getString(R.string.commit_failed));
+                        holder.setTextColor(R.id.tv_state, context.getResources().getColor(R.color.Base_color));
+                    }
+
+                }
+            };
+            mSwipeMenuRecyclerView.setLayoutManager(new LinearLayoutManager(this));// 布局管理器。
+            mSwipeMenuRecyclerView.setHasFixedSize(true);// 如果Item够简单，高度是确定的，打开FixSize将提高性能。
+            mSwipeMenuRecyclerView.setItemAnimator(new DefaultItemAnimator());// 设置Item默认动画，加也行，不加也行。
+            // 为SwipeRecyclerView的Item创建菜单就两句话，不错就是这么简单：
+            // 设置菜单Item点击监听。
+            mSwipeMenuRecyclerView.setSwipeMenuItemClickListener(menuItemClickListener);
+            // 设置菜单创建器。
+            mSwipeMenuRecyclerView.setSwipeMenuCreator(swipeMenuCreator);
+            mSwipeMenuRecyclerView.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL_LIST));
+            mSwipeMenuRecyclerView.setAdapter(adapter);
+            onitemClick();
     }
 
     /**
@@ -231,7 +236,7 @@ public class NoComeUnComActivity extends BaseTitleActivity {
                     public void onSuccess(List<UnCompleteBean> list) {
                         dismissLoadingDialog();
                         uncomList=list;
-                        showList();
+                            showList();
                     }
 
                     @Override
@@ -248,20 +253,21 @@ public class NoComeUnComActivity extends BaseTitleActivity {
      * 菜单创建器。在Item要创建菜单的时候调用。
      */
     private SwipeMenuCreator swipeMenuCreator = new SwipeMenuCreator() {
-        @Override
-        public void onCreateMenu(SwipeMenu swipeLeftMenu, SwipeMenu swipeRightMenu, int viewType) {
-            int width = getResources().getDimensionPixelSize(R.dimen.item_width);
-            // MATCH_PARENT 自适应高度，保持和内容一样高；也可以指定菜单具体高度，也可以用WRAP_CONTENT。
-               int height = ViewGroup.LayoutParams.MATCH_PARENT;
+                @Override
+                public void onCreateMenu(SwipeMenu swipeLeftMenu, SwipeMenu swipeRightMenu, int viewType) {
+                    int width = getResources().getDimensionPixelSize(R.dimen.item_width);
+                    // MATCH_PARENT 自适应高度，保持和内容一样高；也可以指定菜单具体高度，也可以用WRAP_CONTENT。
+                    int height = ViewGroup.LayoutParams.MATCH_PARENT;
 //            int height = getResources().getDimensionPixelSize(R.dimen.item_height);
 
-            SwipeMenuItem deleteItem = new SwipeMenuItem(activity)
-                    .setBackgroundDrawable(R.drawable.swipe_delete)
-                    .setText(R.string.delete)// 文字，还可以设置文字颜色，大小等
-                    .setTextColor(Color.WHITE)
-                    .setWidth(width)
-                    .setHeight(height);
-            swipeRightMenu.addMenuItem(deleteItem);// 添加一个按钮到右侧侧菜单。
-        }
-    };
+                    SwipeMenuItem deleteItem = new SwipeMenuItem(activity)
+                            .setBackgroundDrawable(R.drawable.swipe_delete)
+                            .setText(R.string.delete)// 文字，还可以设置文字颜色，大小等
+                            .setTextColor(Color.WHITE)
+                            .setWidth(width)
+                            .setHeight(height);
+                    swipeRightMenu.addMenuItem(deleteItem);// 添加一个按钮到右侧侧菜单。
+                }
+            };
+
 }

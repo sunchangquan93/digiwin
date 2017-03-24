@@ -70,6 +70,7 @@ public class PutInStoreSumFg extends BaseFragment {
             public void onCallback1() {
                 sureCommit();
             }
+
             @Override
             public void onCallback2() {
 
@@ -88,6 +89,7 @@ public class PutInStoreSumFg extends BaseFragment {
     List<ListSumBean> sumShowBeanList;
 
     FilterResultOrderBean orderData;
+
     @Override
     protected int bindLayoutId() {
         return R.layout.fg_putinstore_sum;
@@ -96,15 +98,8 @@ public class PutInStoreSumFg extends BaseFragment {
     @Override
     protected void doBusiness() {
         pactivity = (PutInStoreSecondActivity) activity;
-        commonLogic = CommonLogic.getInstance(activity, pactivity.module, pactivity.mTimestamp.toString());
         FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(activity);
         ryList.setLayoutManager(linearLayoutManager);
-        upDateFlag = false;
-        Bundle bundle = getActivity().getIntent().getExtras();
-        orderData = (FilterResultOrderBean) bundle.getSerializable("orderData");
-        tv_head_date.setText(orderData.getCreate_date());
-        tv_head_post_order.setText(orderData.getDoc_no());
-        tv_head_department.setText(orderData.getDepartment_name());
     }
 
     /**
@@ -115,7 +110,7 @@ public class PutInStoreSumFg extends BaseFragment {
             ClickItemPutBean clickItemPutData = new ClickItemPutBean();
             clickItemPutData.setDoc_no(orderData.getDoc_no());
             AccoutBean accoutBean = LoginLogic.getUserInfo();
-            if(null != accoutBean){
+            if (null != accoutBean) {
                 clickItemPutData.setWarehouse_in_no(accoutBean.getWare());
             }
             showLoadingDialog();
@@ -132,7 +127,7 @@ public class PutInStoreSumFg extends BaseFragment {
 
                 @Override
                 public void onFailed(String error) {
-                   dismissLoadingDialog();
+                    dismissLoadingDialog();
                     upDateFlag = false;
                     try {
                         showFailedDialog(error);
@@ -140,12 +135,12 @@ public class PutInStoreSumFg extends BaseFragment {
                         adapter = new PutInStoreSumAdapter(activity, sumShowBeanList);
                         ryList.setAdapter(adapter);
                     } catch (Exception e) {
-                        LogUtils.e(TAG, "upDateList--getSum--onFailed" + e);
+                        LogUtils.e(TAG, "updateList--getSum--onFailed" + e);
                     }
                 }
             });
         } catch (Exception e) {
-            LogUtils.e(TAG, "upDateList--getSum--Exception" + e);
+            LogUtils.e(TAG, "updateList--getSum--Exception" + e);
         }
     }
 
@@ -196,7 +191,7 @@ public class PutInStoreSumFg extends BaseFragment {
         });
     }
 
-    private void sureCommit(){
+    private void sureCommit() {
         if (!upDateFlag) {
             showFailedDialog(R.string.nodate);
             return;
@@ -212,10 +207,8 @@ public class PutInStoreSumFg extends BaseFragment {
                     public void onCallback() {
                         pactivity.mZXVp.setCurrentItem(0);
                         pactivity.createNewModuleId(pactivity.module);
-                        commonLogic = CommonLogic.getInstance(activity,pactivity.module,pactivity.mTimestamp.toString());
-                        Message msgs = new Message();
-                        msgs.what = pactivity.CLEAR;
-                        pactivity.handler.sendMessage(msgs);
+                        initData();
+                        pactivity.scanFg.initData();
                     }
                 });
             }
@@ -226,8 +219,15 @@ public class PutInStoreSumFg extends BaseFragment {
                 showCommitFailDialog(error);
             }
         });
-
     }
 
-
+    private void initData() {
+        upDateFlag = false;
+        commonLogic = CommonLogic.getInstance(activity, pactivity.module, pactivity.mTimestamp.toString());
+        Bundle bundle = getActivity().getIntent().getExtras();
+        orderData = (FilterResultOrderBean) bundle.getSerializable("orderData");
+        tv_head_date.setText(orderData.getCreate_date());
+        tv_head_post_order.setText(orderData.getDoc_no());
+        tv_head_department.setText(orderData.getDepartment_name());
+    }
 }

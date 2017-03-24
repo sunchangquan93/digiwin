@@ -20,7 +20,7 @@ import digiwin.library.voiceutils.VoiceUtils;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
-import digiwin.smartdepot.core.base.BaseTitleActivity;
+import digiwin.smartdepot.core.base.BaseTitleHActivity;
 import digiwin.smartdepot.core.coreutil.GetVoicer;
 import digiwin.smartdepot.module.adapter.board.TctsBoardAdapter;
 import digiwin.smartdepot.module.bean.board.TctsBoardBean;
@@ -31,10 +31,10 @@ import digiwin.smartdepot.module.logic.board.TctsboardLogic;
  * @des 检验完成待入库看板
  * @date 2017/3/8
  */
-public class TctsBoardActivity extends BaseTitleActivity {
-    @BindView(R.id.toolbar_title)
+public class TctsBoardActivity extends BaseTitleHActivity {
+   @BindView(R.id.toolbar_title)
     Toolbar toolbarTitle;
-    @BindView(R.id.ryboard)
+   // @BindView(R.id.ryboard)
     RecyclerView ryboard;
     /**
      * 定时器
@@ -73,6 +73,7 @@ public class TctsBoardActivity extends BaseTitleActivity {
 
     @Override
     protected void doBusiness() {
+        ryboard= (RecyclerView) findViewById(R.id.ryboard);
         tctsboardLogic = TctsboardLogic.getInstance(context, module, mTimestamp.toString());
         pagenow = 1;
         String tiems_second = (String) SharedPreferencesUtils.get(context, SharePreKey.REPEATTIME, AddressContants.REPEATTIME);
@@ -141,11 +142,15 @@ public class TctsBoardActivity extends BaseTitleActivity {
      */
     private void animotion()
     {
-        Animation animation = (Animation) AnimationUtils.loadAnimation(this, R.anim.board_item);
-        LayoutAnimationController lac = new LayoutAnimationController(animation);
-        lac.setDelay(0.4f); // 设置动画间隔时间
-        lac.setOrder(LayoutAnimationController.ORDER_NORMAL); // 设置列表的显示顺序
-        ryboard.setLayoutAnimation(lac);
+        try {
+            Animation animation = (Animation) AnimationUtils.loadAnimation(this, R.anim.board_item);
+            LayoutAnimationController lac = new LayoutAnimationController(animation);
+            lac.setDelay(0.4f); // 设置动画间隔时间
+            lac.setOrder(LayoutAnimationController.ORDER_NORMAL); // 设置列表的显示顺序
+            ryboard.setLayoutAnimation(lac);
+        }catch (Exception e){
+
+        }
     }
     /**
      * 定时任务发送请求
@@ -158,10 +163,11 @@ public class TctsBoardActivity extends BaseTitleActivity {
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onPause() {
+        super.onPause();
         timer.cancel();
     }
+
 
     @Override
     public void onBackPressed() {

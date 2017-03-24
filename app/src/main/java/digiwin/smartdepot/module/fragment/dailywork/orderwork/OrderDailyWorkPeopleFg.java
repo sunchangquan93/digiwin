@@ -105,13 +105,13 @@ public class OrderDailyWorkPeopleFg extends BaseFragment {
                         adapter = new FinishedStorageSumAdapter(activity, sumShowBeanList);
                         ryList.setAdapter(adapter);
                     } catch (Exception e) {
-                        LogUtils.e(TAG, "upDateList--getSum--onFailed" + e);
+                        LogUtils.e(TAG, "updateList--getSum--onFailed" + e);
                     }
                     dismissLoadingDialog();
                 }
             });
         } catch (Exception e) {
-            LogUtils.e(TAG, "upDateList--getSum--Exception" + e);
+            LogUtils.e(TAG, "updateList--getSum--Exception" + e);
         }
     }
 

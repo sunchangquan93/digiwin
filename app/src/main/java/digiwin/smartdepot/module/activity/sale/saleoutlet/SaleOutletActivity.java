@@ -7,6 +7,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 
+import com.iflytek.cloud.thirdparty.B;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,13 +53,15 @@ public class SaleOutletActivity extends BaseFirstModuldeActivity {
     /**
      * 扫码
      */
-    SaleOutletScanFg scanFg;
+    public SaleOutletScanFg scanFg;
     /**
      * 汇总提交
      */
-    SaleOutletSumFg sumFg;
+    public SaleOutletSumFg sumFg;
 
     ModuleViewPagerAdapter adapter;
+
+    public static final String filterBean="filterBean";
     /**
      * 跳转明细使用
      */
@@ -126,10 +130,10 @@ public class SaleOutletActivity extends BaseFirstModuldeActivity {
 
             }
 
-            @Override
+         @Override
             public void onPageSelected(int position) {
                 if (position==0){
-                    scanFg.updateFifo();
+                    scanFg.getFIFo();
                 }
                 else if (position == 1) {
                     sumFg.upDateList();

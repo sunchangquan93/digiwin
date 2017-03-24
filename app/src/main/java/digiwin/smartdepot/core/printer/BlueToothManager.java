@@ -12,13 +12,18 @@ import java.util.UUID;
 
 import digiwin.library.utils.AlertDialogUtils;
 import digiwin.library.utils.LogUtils;
+import digiwin.library.utils.StringUtils;
 import digiwin.library.utils.ThreadPoolManager;
 import digiwin.smartdepot.R;
+import digiwin.smartdepot.module.bean.stock.PrintBarcodeBean;
+
+import static digiwin.smartdepot.R.string.num;
+
 
 /**
- * @des      蓝牙设置
- * @author  xiemeng
- * @date    2017/1/17
+ * @author xiemeng
+ * @des 蓝牙设置
+ * @date 2017/1/17
  */
 
 public class BlueToothManager {
@@ -40,7 +45,7 @@ public class BlueToothManager {
 
     private UUID dvcUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
-    private String mDeviceName="";
+    private String mDeviceName = "";
 
     private static Handler handler;
 
@@ -51,7 +56,7 @@ public class BlueToothManager {
     public static BlueToothManager getManager(Context context) {
         if (null == manager) {
             manager = new BlueToothManager(context);
-            handler=new Handler(Looper.getMainLooper());
+            handler = new Handler(Looper.getMainLooper());
         }
         return manager;
     }
@@ -59,19 +64,20 @@ public class BlueToothManager {
     /**
      * 连接设备
      */
-    public interface ConnectListener{
+    public interface ConnectListener {
         public void onSuccess();
+
         public void onFailed(int msg);
     }
 
     /**
      * 连接设备
+     *
      * @param address    蓝牙地址
      * @param deviceName 蓝牙名称
      */
     public void connect(String address, final String deviceName, final ConnectListener listener) {
-      try
-        {
+        try {
             mBTAdapter = BluetoothAdapter.getDefaultAdapter();
             if (null == mBTAdapter) {
                 listener.onFailed(R.string.connect_device_failed);
@@ -88,9 +94,9 @@ public class BlueToothManager {
                 public void run() {
                     try {
                         mBTSocket.connect();
-                         mPrintSend = new PrintSend(mBTSocket);
+                        mPrintSend = new PrintSend(mBTSocket);
                         if (null != mPrintSend) {
-                            mDeviceName=deviceName;
+                            mDeviceName = deviceName;
                             handler.post(new Runnable() {
                                 @Override
                                 public void run() {
@@ -99,41 +105,35 @@ public class BlueToothManager {
                             });
                             return;
                         }
-                    }
-                    catch (IOException e) {
+                    } catch (IOException e) {
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
                                 listener.onFailed(R.string.connect_device_failed);
                             }
                         });
-                        LogUtils.e(TAG,"connect异常---IOException---");
+                        LogUtils.e(TAG, "connect异常---IOException---");
                     }
                 }
             }, null);
-        }
-       catch (Exception e)
-       {
+        } catch (Exception e) {
             listener.onFailed(R.string.connect_device_failed);
-            LogUtils.e(TAG,"connect异常");
+            LogUtils.e(TAG, "connect异常");
         }
     }
 
     /**
      * 确认蓝牙是否开启并连接成功
      */
-    public boolean isOpen()
-    {
+    public boolean isOpen() {
         boolean flag = true;
         //没有开启
-        if (null == mBTDevice)
-        {
+        if (null == mBTDevice) {
             flag = false;
             return flag;
         }
         //没有连接
-        if (null == mPrintSend)
-        {
+        if (null == mPrintSend) {
             flag = false;
             return flag;
         }
@@ -142,9 +142,10 @@ public class BlueToothManager {
 
     /**
      * 获取连接设备名称
+     *
      * @return
      */
-    public String getDeviceName(){
+    public String getDeviceName() {
         return mDeviceName;
     }
 
@@ -159,37 +160,83 @@ public class BlueToothManager {
         } catch (Exception e) {
             LogUtils.i(TAG, " close()异常");
         }
-
     }
 
 
     /**
      * 打印出通单
+     *
      * @see [类、类#方法、类#成员]
      */
-    public  boolean printOutNumber(String out_number,String num2)
-    {
+    public boolean printBarocde(String box) {
         boolean flag = false;
-        if (null == mBTDevice)
-        {
-            AlertDialogUtils.showFailedDialog(mContext,"请连接蓝牙设备");
+        if (null == mBTDevice) {
+            AlertDialogUtils.showFailedDialog(mContext, "请连接蓝牙设备");
             flag = false;
             return flag;
         }
 
-        if (null == mPrintSend)
-        {
-            AlertDialogUtils.showFailedDialog(mContext,"蓝牙设备连接式失败");
+        if (null == mPrintSend) {
+            AlertDialogUtils.showFailedDialog(mContext, "蓝牙设备连接式失败");
             flag = false;
             return flag;
         }
-        String encoding2="A"+
-                "H040V300P2L0101K9B中文ABCD1234"+
-                "%0H0040V0100BG02120>G" + "123"+ "\n"+
-                "Q1"+
-                "Z";
+        String encoding2 = "A\n" + "PS\n"
+                + "%0H0040V0040L0202P02C9B箱号:" + box + "\n"
+               // + "%0H0040V0080L0101P02C9B" + num + "\n"
+               // + "%0H0080V01402D30,M,05,1,0DN" + num.length() + "," + num
+                + "Q1\n" + "Z\n";
         mPrintSend.sendBtMessage(encoding2);
         return flag;
     }
+    /**
+     * 打印条码
+     *
+     * @see [类、类#方法、类#成员]
+     */
+    public boolean printMaterialCode(PrintBarcodeBean printBarcodeBean,int sumnum) {
+        boolean flag = false;
+        if (null == mBTDevice) {
+            AlertDialogUtils.showFailedDialog(mContext, "请连接蓝牙设备");
+            flag = false;
+            return flag;
+        }
 
+        if (null == mPrintSend) {
+            AlertDialogUtils.showFailedDialog(mContext, "蓝牙设备连接式失败");
+            flag = false;
+            return flag;
+        }
+        int num = Integer.valueOf(printBarcodeBean.getQty());
+        String encoding2 = "A\n" + "PS\n"
+                + "%0H0040V0020L0101P02C9B" + printBarcodeBean.getItem_name() + "\n"
+                + "%0H0040V0045L0101P02C9B" + printBarcodeBean.getItem_spec() + "\n"
+                + "%0H0040V0452D30,M,05,1,0DN"+printBarcodeBean.getBarcode().length()+","+printBarcodeBean.getBarcode()
+                + "%0H0040V0195L0101P02C9B" + printBarcodeBean.getBarcode() + "\n"
+                 +"%0H0040V0225L0101P02C9B" +mContext.getResources().getString(R.string.num)+"   "+printBarcodeBean.getQty()
+//                + "  "+ unit+"\n"
+                + "Q1\n" + "Z\n";
+        if(num != 0){
+            if(sumnum%num == 0){
+                for (int i = 0; i < StringUtils.string2Float(printBarcodeBean.getPrint_num()); i++) {
+                    mPrintSend.sendBtMessage(encoding2);
+                }
+            }else{
+                for (int i = 0; i < StringUtils.string2Float(printBarcodeBean.getPrint_num())-1; i++) {
+                    mPrintSend.sendBtMessage(encoding2);
+                }
+                num = sumnum%num;
+                encoding2 = "A\n" + "PS\n"
+                        + "%0H0040V0020L0101P02C9B" + printBarcodeBean.getItem_name() + "\n"
+                        + "%0H0040V0045L0101P02C9B" + printBarcodeBean.getItem_spec() + "\n"
+                        + "%0H0040V0452D30,M,05,1,0DN"+printBarcodeBean.getBarcode().length()+","+printBarcodeBean.getBarcode()
+                        + "%0H0040V0195L0101P02C9B" + printBarcodeBean.getBarcode() + "\n"
+                        +"%0H0040V0225L0101P02C9B" +mContext.getResources().getString(R.string.num)+"   "+num
+//                + "  "+ unit+"\n"
+                        + "Q1\n" + "Z\n";
+                mPrintSend.sendBtMessage(encoding2);
+            }
+        }
+        return flag;
+    }
 }

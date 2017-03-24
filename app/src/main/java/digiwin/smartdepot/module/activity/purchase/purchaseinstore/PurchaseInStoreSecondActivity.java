@@ -52,11 +52,11 @@ public class PurchaseInStoreSecondActivity extends BaseFirstModuldeActivity {
     /**
      * 扫码
      */
-    PurchaseInStoreScanFg scanFg;
+    public PurchaseInStoreScanFg scanFg;
     /**
      * 汇总提交
      */
-    PurchaseInStoreSumFg sumFg;
+    public PurchaseInStoreSumFg sumFg;
 
     ModuleViewPagerAdapter adapter;
     /**
@@ -78,17 +78,6 @@ public class PurchaseInStoreSecondActivity extends BaseFirstModuldeActivity {
         module = ModuleCode.PURCHASEINSTORE;
         return module;
     }
-
-    public Handler handler =  new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            if(msg.what == CLEAR){
-                Log.d(TAG,"clear");
-                scanFg.initData();
-            }
-        }
-    };
 
     @Override
     protected void initNavigationTitle() {

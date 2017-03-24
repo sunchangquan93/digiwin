@@ -170,4 +170,32 @@ public interface ReqTypeName {
      * 工序报工提交
      */
     static final String  PROCESSREPORTCOMMIT = "app.process.submit";
+    /**
+     * 获取采购收货待检验事项
+     */
+    static final String  GETMATERIALTOCHECK = "app.get.material.tocheck";
+    /**
+     * 获取IQC质量记录
+     */
+    static final String  GETIQCLIST = "app.inspection.item.list";
+    /**
+     * 根据首字母获取不良原因
+     */
+    static final String  GETQCREASON = "app.get.qcereason";
+    /**
+     * 根据料号获取不良原因Top5
+     */
+    static final String  GETQCREASONTOP5 = "app.get.qcereason.top5";
+    /**
+     * 检验单数据提交
+     */
+    static final String  UPDATEIQCSTATUS = "app.upd.iqc.status";
+    /**
+     * 更新收货单
+     */
+    static final String  UPDRVBCHECKSTATUS = "app.update.rvb.check.status";
+    /**
+     * 获取图纸
+     */
+    static final String  GETDRAWING = "app.get.drawing";
 }

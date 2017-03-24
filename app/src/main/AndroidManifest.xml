@@ -162,14 +162,15 @@
         </activity>
 
         <activity android:name=".module.activity.board.RcttBoardActivity"
-            android:configChanges="keyboardHidden|screenSize">
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.digiwin.RcttBoardActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity android:name=".module.activity.board.TctsBoardActivity"
-            android:configChanges="keyboardHidden|screenSize">
+            android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.digiwin.TctsBoardActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -261,13 +262,17 @@
             android:name=".module.activity.produce.putinstore.PutInStoreSecondActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
-            android:name=".module.activity.sale.saleoutlet.SaleOutletActivity"
+            android:name=".module.activity.sale.saleoutlet.SaleOutletListActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
             <intent-filter>
-                <action android:name="android.intent.action.digiwin.SaleOutletActivity" />
+                <action android:name="android.intent.action.digiwin.SaleOutletListActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".module.activity.sale.saleoutlet.SaleOutletActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+
         <activity
             android:name=".module.activity.stock.miscellaneousissues.MiscellaneousissuesOutActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
@@ -299,6 +304,86 @@
         <activity
             android:name=".module.activity.produce.accordingmaterial.AccordingMaterialScanNewActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+
+        <!-- 采购收货扫描-->
+        <activity
+            android:name=".module.activity.purchase.purchasegoodsscan.PurchaseGoodsScanActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
+            <intent-filter>
+                <action android:name="android.intent.action.digiwin.PurchaseGoodsScanActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".module.activity.purchase.purchasegoodsscan.PurchaseGoodsScanSecondActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
+        </activity>
+        <!-- 收货检验-->
+        <activity
+            android:name=".module.activity.purchase.purchasecheck.PurchaseCheckActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
+            android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.digiwin.PurchaseCheckActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+        android:name=".module.activity.produce.enchaseprint.EnchasePrintActivity"
+        android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+        <intent-filter>
+            <action android:name="android.intent.action.digiwin.EnchasePrintActivity" />
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+    </activity>
+        <activity
+            android:name=".module.activity.stock.storequery.StoreQueryActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.digiwin.StoreQueryActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".module.activity.purchase.purchasecheck.BadReasonActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
+            android:screenOrientation="landscape"/>
+        <activity
+            android:name=".module.activity.stock.movestore.MoveStoreActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.digiwin.MoveStoreActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".module.activity.purchase.purchasecheck.CheckShowImageActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
+            android:screenOrientation="landscape"/>
+
+        <activity
+            android:name=".module.activity.produce.workorderreturn.WorkOrderReturnListActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
+            <intent-filter>
+                <action android:name="android.intent.action.digiwin.WorkOrderReturnListActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".module.activity.produce.workorderreturn.WorkOrderReturnActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+
+        <activity
+            android:name=".module.activity.stock.PrintLabelActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
+            android:screenOrientation="landscape">
+        <intent-filter>
+            <action android:name="android.intent.action.digiwin.PrintLabelActivity" />
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+        </activity>
 
         <!-- Required SDK 核心功能极光推送需要 -->
         <!-- 可配置android:process参数将PushService放在其他进程中 -->

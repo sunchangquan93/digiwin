@@ -49,7 +49,7 @@ public class    MaterialReturningActivity extends BaseFirstModuldeActivity {
     /**
      * 扫码
      */
-    MaterialReturningScanFg scanFg;
+   public MaterialReturningScanFg scanFg;
     /**
      * 汇总提交
      */

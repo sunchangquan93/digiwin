@@ -62,11 +62,11 @@ public class PutInStoreSecondActivity extends BaseFirstModuldeActivity {
     /**
      * 扫码
      */
-    PutInStoreScanFg scanFg;
+    public PutInStoreScanFg scanFg;
     /**
      * 汇总提交
      */
-    PutInStoreSumFg sumFg;
+    public PutInStoreSumFg sumFg;
 
     ModuleViewPagerAdapter adapter;
     /**
@@ -96,6 +96,7 @@ public class PutInStoreSecondActivity extends BaseFirstModuldeActivity {
             if(msg.what == CLEAR){
                 Log.d(TAG,"clear");
                 scanFg.initData();
+                activity.finish();
             }
         }
     };

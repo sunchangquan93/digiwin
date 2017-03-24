@@ -65,7 +65,7 @@ public class MiscellaneousissuesOutActivity extends BaseFirstModuldeActivity {
     /**
      * 扫码
      */
-    MiscellaneousIssueScanFg scanFg;
+  public   MiscellaneousIssueScanFg scanFg;
     /**
      * 汇总提交
      */
@@ -76,9 +76,8 @@ public class MiscellaneousissuesOutActivity extends BaseFirstModuldeActivity {
      * 跳转明细使用
      */
     public final int DETAILCODE = 1234;
-
     /**
-     * 清空扫描界面信息
+     * 跳转明细使用
      */
     public final int CLEAR = 1005;
 
@@ -93,16 +92,6 @@ public class MiscellaneousissuesOutActivity extends BaseFirstModuldeActivity {
         return module;
     }
 
-    public Handler handler =  new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            if(msg.what == CLEAR){
-                Log.d(TAG,"clear");
-                scanFg.initData();
-            }
-        }
-    };
 
     /**
      * 未完事项
@@ -193,9 +182,8 @@ public class MiscellaneousissuesOutActivity extends BaseFirstModuldeActivity {
         }
     }
 
-
     @Override
     public ExitMode exitOrDel() {
-        return ExitMode.EXITD;
+        return ExitMode.EXITISD;
     }
 }

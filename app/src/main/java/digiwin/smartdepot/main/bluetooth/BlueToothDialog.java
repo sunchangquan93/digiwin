@@ -103,7 +103,6 @@ public class BlueToothDialog {
                                 holder.imageView.setImageDrawable(mActivity.getResources().getDrawable(R.mipmap.bluetoothchose));
                                 deviceListener.isConnected(true);
                                 dialogUtils.dismissDialog();
-                                blueToothManager.printOutNumber("123","123");
                             } catch (Exception e) {
                                 dialogUtils.dismissDialog();
                                 connectFailed(holder, R.string.connect_device_failed);

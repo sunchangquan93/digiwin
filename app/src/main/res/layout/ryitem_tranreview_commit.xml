@@ -2,49 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/item_ll"
     style="@style/ry_style"
-    android:descendantFocusability="beforeDescendants"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:descendantFocusability="beforeDescendants"
     android:orientation="vertical">
-
-    <LinearLayout
-        style="@style/itemstyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="@dimen/layout_45dp"
-            android:layout_height="wrap_content"
-            android:text="@string/item_no"
-            android:textSize="@dimen/textSize_14sp" />
-
-        <TextView
-            android:id="@+id/tv_item_no"
-            android:layout_width="@dimen/layout_0dp"
-            android:layout_weight="1"
-            android:textColor="@color/Base_color"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/textSize_14sp" />
-        <TextView
-            android:id="@+id/tv_item_seq"
-            android:layout_width="wrap_content"
-            android:textColor="@color/Base_color"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/layout_15dp"
-            android:textSize="@dimen/textSize_14sp" />
-        <TextView
-            android:id="@+id/tv_unit"
-            android:layout_width="wrap_content"
-            android:textColor="@color/Base_color"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/textSize_14sp" />
-    </LinearLayout>
-
-    <View
-        android:id="@+id/line_1"
-        style="@style/ry_line_style"
-        android:layout_width="wrap_content" />
 
     <LinearLayout
         style="@style/itemstyle"
@@ -66,9 +27,8 @@
             android:textColor="@color/Base_color"
             android:textSize="@dimen/textSize_14sp" />
     </LinearLayout>
-    <View
-        android:id="@+id/line_2"
-        style="@style/ry_line_style" />
+
+    <View style="@style/ry_line_style" />
 
     <LinearLayout
         style="@style/itemstyle"
@@ -84,15 +44,51 @@
 
         <TextView
             android:id="@+id/tv_itemspec"
-            android:textColor="@color/Base_color"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/Base_color"
             android:textSize="@dimen/textSize_14sp" />
     </LinearLayout>
 
-    <View
-        android:id="@+id/line_3"
-        style="@style/ry_line_style" />
+    <View style="@style/ry_line_style" />
+
+    <LinearLayout
+        style="@style/itemstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/layout_45dp"
+            android:layout_height="wrap_content"
+            android:text="@string/item_no"
+            android:textSize="@dimen/textSize_14sp" />
+
+        <TextView
+            android:id="@+id/tv_item_no"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/Base_color"
+            android:textSize="@dimen/textSize_14sp" />
+
+        <TextView
+            android:id="@+id/tv_item_seq"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/layout_15dp"
+            android:textColor="@color/Base_color"
+            android:textSize="@dimen/textSize_14sp" />
+
+        <TextView
+            android:id="@+id/tv_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/Base_color"
+            android:textSize="@dimen/textSize_14sp" />
+    </LinearLayout>
+
+    <View style="@style/ry_line_style" />
 
     <LinearLayout
         style="@style/itemstyle"
@@ -109,21 +105,23 @@
         <TextView
             android:id="@+id/req_qty"
             android:layout_width="@dimen/layout_0dp"
-            android:textColor="@color/Base_color"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/Base_color"
             android:textSize="@dimen/textSize_14sp" />
+
         <TextView
             android:layout_width="@dimen/layout_45dp"
             android:layout_height="wrap_content"
             android:text="@string/distribute_number"
             android:textSize="@dimen/textSize_14sp" />
+
         <TextView
             android:id="@+id/tv_distribute_qty"
             android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textColor="@color/Base_color"
-            android:layout_height="wrap_content"
             android:textSize="@dimen/textSize_14sp" />
 
         <TextView
@@ -131,17 +129,18 @@
             android:layout_height="wrap_content"
             android:text="@string/accept_number"
             android:textSize="@dimen/textSize_14sp" />
+
         <EditText
+            android:id="@+id/et_accept_qty"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:background="@null"
-            android:singleLine="true"
+            android:inputType="numberDecimal"
             android:selectAllOnFocus="true"
+            android:singleLine="true"
             android:textColor="@color/outside_yellow"
             android:textCursorDrawable="@drawable/et_cursor_yellow"
-            android:id="@+id/et_accept_qty"
-            android:inputType="numberDecimal"
-            android:layout_width="@dimen/layout_0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
             android:textSize="@dimen/textSize_14sp" />
     </LinearLayout>
 </LinearLayout>

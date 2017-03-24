@@ -23,6 +23,7 @@ import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.dialog.OnDialogTwoListener;
 import digiwin.library.utils.ActivityManagerUtils;
 import digiwin.library.utils.LogUtils;
+import digiwin.library.utils.StringUtils;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.BaseRecyclerAdapter;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
 import digiwin.smartdepot.R;
@@ -177,6 +178,7 @@ public class SaleOutletSumFg extends BaseFragment {
         final SumShowBean sumShowBean = new SumShowBean();
         sumShowBean.setItem_no(orderSumData.getItem_no());
         sumShowBean.setItem_name(orderSumData.getItem_name());
+        sumShowBean.setAvailable_in_qty(StringUtils.getMinQty(orderSumData.getStock_qty(),orderSumData.getReq_qty()));
         commonLogic.getDetail(map, new CommonLogic.GetDetailListener() {
             @Override
             public void onSuccess(List<DetailShowBean> detailShowBeen) {
@@ -211,8 +213,10 @@ public class SaleOutletSumFg extends BaseFragment {
                 showCommitSuccessDialog(msg, new OnDialogClickListener() {
                     @Override
                     public void onCallback() {
-                        pactivity.mZXVp.setCurrentItem(0);
-                        pactivity.createNewModuleId(pactivity.module);
+                        tvCustom.setText("");
+                        tvHeadPostOrder.setText("");
+                        pactivity.scanFg.initData();
+                        pactivity.finish();
                     }
                 });
             }
@@ -225,5 +229,6 @@ public class SaleOutletSumFg extends BaseFragment {
         });
 
     }
+
 
 }

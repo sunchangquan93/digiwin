@@ -18,6 +18,7 @@ import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseTitleActivity;
 import digiwin.smartdepot.module.adapter.produce.FinishedStorageSumAdapter;
+import digiwin.smartdepot.module.adapter.produce.WorkOrderReturnSumAdapter;
 import digiwin.smartdepot.module.adapter.stock.storeallot.StoreAllotSumAdapter;
 import digiwin.smartdepot.module.bean.common.SumShowBean;
 import digiwin.smartdepot.module.logic.common.CommonLogic;
@@ -101,26 +102,30 @@ public class CommonTwoCommitActivity extends BaseTitleActivity {
 
     @Override
     protected void doBusiness() {
-        FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(activity);
-        ryList.setLayoutManager(linearLayoutManager);
-        Bundle bundle = getIntent().getExtras();
-        sumShowBeanList = (List<SumShowBean>) bundle.getSerializable(COMMITLIST);
-        BaseRecyclerAdapter adapter=null;
-        switch (module){
-            //TODO:每个无来源模块列表可能不一样
-            case ModuleCode.FINISHEDSTORAGE:
-                adapter= new FinishedStorageSumAdapter(activity, sumShowBeanList);
-                break;
-            case ModuleCode.NOCOMESTOREALLOT:
-                adapter = new StoreAllotSumAdapter(context, sumShowBeanList);
-                break;
-            default:
-                break;
+        try {
+            FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(activity);
+            ryList.setLayoutManager(linearLayoutManager);
+            Bundle bundle = getIntent().getExtras();
+            sumShowBeanList = (List<SumShowBean>) bundle.getSerializable(COMMITLIST);
+            BaseRecyclerAdapter adapter = null;
+            switch (module) {
+                //TODO:每个无来源模块列表可能不一样
+                case ModuleCode.FINISHEDSTORAGE:
+                    adapter = new FinishedStorageSumAdapter(activity, sumShowBeanList);
+                    break;
+                case ModuleCode.NOCOMESTOREALLOT:
+                    adapter = new StoreAllotSumAdapter(context, sumShowBeanList);
+                    break;
+                default:
+                    break;
+            }
+            if (null != adapter) {
+                ryList.setAdapter(adapter);
+            }
+            logic = CommonLogic.getInstance(activity, module, mTimestamp.toString());
+        }catch (Exception e){
+            LogUtils.e(TAG,"doBusiness()" +e);
         }
-        if (null!=adapter) {
-            ryList.setAdapter(adapter);
-        }
-        logic = CommonLogic.getInstance(activity, module, mTimestamp.toString());
     }
 
 }

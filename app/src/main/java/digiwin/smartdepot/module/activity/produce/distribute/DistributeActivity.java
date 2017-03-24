@@ -479,13 +479,13 @@ public class DistributeActivity extends BaseFirstModuldeActivity {
                         adapter = new DistributeSumAdapter(distributeActivity, sumShowBeanList);
                         ryList.setAdapter(adapter);
                     } catch (Exception e) {
-                        LogUtils.e(TAG, "upDateList--getSum--onFailed" + e);
+                        LogUtils.e(TAG, "updateList--getSum--onFailed" + e);
                     }
                 }
             });
 
         } catch (Exception e) {
-            LogUtils.e(TAG, "upDateList--getSum--Exception" + e);
+            LogUtils.e(TAG, "updateList--getSum--Exception" + e);
         }
     }
     /**

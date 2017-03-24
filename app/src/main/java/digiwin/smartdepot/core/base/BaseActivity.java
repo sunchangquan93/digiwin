@@ -11,6 +11,7 @@ import butterknife.Unbinder;
 import digiwin.library.base.BaseAppActivity;
 import digiwin.library.utils.ActivityManagerUtils;
 import digiwin.library.utils.LogUtils;
+import digiwin.library.utils.SharedPreferencesUtils;
 import digiwin.library.utils.StringUtils;
 import digiwin.library.utils.TelephonyUtils;
 import digiwin.smartdepot.core.appcontants.AddressContants;
@@ -116,10 +117,10 @@ public abstract class BaseActivity extends BaseAppActivity {
             } else {
                 createNewModuleId(s);
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             LogUtils.e(TAG, "createModuleId()---Exception");
         }
-
     }
 
     /**
@@ -130,7 +131,7 @@ public abstract class BaseActivity extends BaseAppActivity {
         mTimestamp.append(TelephonyUtils.getDeviceId(this))
                 .append(module)
                 .append(TelephonyUtils.getTime());
-        Log.d("createNewModuleId=====:",mTimestamp.toString());
+        LogUtils.i("createNewModuleId=====:",mTimestamp.toString());
     }
 
 

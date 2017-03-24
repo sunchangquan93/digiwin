@@ -156,4 +156,16 @@ public class LoginLogic {
         }
         return  null;
     }
+    /**
+     *获取仓库
+     */
+    public static String getWare(){
+        String ware="";
+        Connector.getDatabase();
+        List<AccoutBean> accoutBeen = DataSupport.findAll(AccoutBean.class);
+        if (accoutBeen.size()>0){
+            ware = accoutBeen.get(0).getWare();
+        }
+        return  ware;
+    }
 }

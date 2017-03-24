@@ -57,6 +57,14 @@
         <item name="android:paddingRight">@dimen/layout_10dp</item>
         <item name="android:background">@drawable/green_scandetail_bg</item>
     </style>
+    <style name="ry_style1">
+        <item name="android:layout_marginRight">@dimen/layout_10dp</item>
+        <item name="android:layout_marginLeft">@dimen/layout_10dp</item>
+        <item name="android:layout_marginBottom">@dimen/layout_10dp</item>
+        <item name="android:paddingLeft">@dimen/layout_10dp</item>
+        <item name="android:paddingRight">@dimen/layout_10dp</item>
+        <item name="android:background">@drawable/item_detail_bg</item>
+    </style>
     <style name="uncom_itemstyle">
         <item name="android:paddingTop">@dimen/layout_10dp</item>
         <item name="android:paddingBottom">@dimen/layout_10dp</item>
@@ -83,6 +91,12 @@
     <!-- 采购收货checkbox-->
     <style name="checkbox_selector" parent="@android:style/Widget.CompoundButton.CheckBox">
         <item name="android:button">@drawable/cb_selector</item>
+    </style>
+    <!--竖线条样式-->
+    <style name="ry_ve_line_style">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">@dimen/layout_0.5dp</item>
+        <item name="android:background">@color/gray_f0</item>
     </style>
 
 </resources>

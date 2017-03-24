@@ -259,30 +259,6 @@ public class PurchaseInStoreActivity extends BaseTitleActivity {
                         bundle.putSerializable("orderData", orderData);
                         bundle.putString(AddressContants.MODULEID_INTENT, pactivity.mTimestamp.toString());
                         ActivityManagerUtils.startActivityBundleForResult(pactivity, PurchaseInStoreSecondActivity.class, bundle, SUMCODE);
-//                ClickItemPutBean clickItemPutData = new ClickItemPutBean();
-//                clickItemPutData.setDoc_no(orderData.getDoc_no());
-//                AccoutBean accoutBean = LoginLogic.getUserInfo();
-//                if (null != accoutBean) {
-//                    clickItemPutData.setWarehouse_in_no(accoutBean.getWare());
-//                }
-//                clickItemPutData.setReceipt_date(orderData.getCreate_date());
-//                showLoadingDialog();
-//                commonLogic.getOrderSumData(clickItemPutData, new CommonLogic.GetOrderSumListener() {
-//                    @Override
-//                    public void onSuccess(List<ListSumBean> list) {
-//                        Bundle bundle = new Bundle();
-//                        bundle.putSerializable("list", (Serializable) list);
-//                        bundle.putString(AddressContants.MODULEID_INTENT, pactivity.mTimestamp.toString());
-////                        dismissLoadingDialog();
-//                        ActivityManagerUtils.startActivityBundleForResult(pactivity, PurchaseInStorageSumActivity.class, bundle, SUMCODE);
-//                    }
-//
-//                    @Override
-//                    public void onFailed(String error) {
-//                        dismissLoadingDialog();
-//                        showFailedDialog(error);
-//                    }
-//                });
             }
         });
     }
@@ -356,13 +332,13 @@ public class PurchaseInStoreActivity extends BaseTitleActivity {
                         adapter = new PurchaseInStorageAdapter(pactivity, sumShowBeanList);
                         ryList.setAdapter(adapter);
                     } catch (Exception e) {
-                        LogUtils.e(TAG, "upDateList--getSum--onFailed" + e);
+                        LogUtils.e(TAG, "updateList--getSum--onFailed" + e);
                     }
                 }
             });
 
         } catch (Exception e) {
-            LogUtils.e(TAG, "upDateList--getSum--Exception" + e);
+            LogUtils.e(TAG, "updateList--getSum--Exception" + e);
         }
     }
 

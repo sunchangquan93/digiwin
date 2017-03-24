@@ -277,7 +277,6 @@ public class PutInStoreScanFg extends BaseFragment {
     protected void doBusiness() {
         putInStoreScanFg = this;
         pactivity = (PutInStoreSecondActivity) activity;
-        commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
         initData();
     }
     private static PutInStoreScanFg putInStoreScanFg;
@@ -332,5 +331,7 @@ public class PutInStoreScanFg extends BaseFragment {
         saveBean = new SaveBean();
         orderBean = (FilterResultOrderBean) pactivity.getIntent().getExtras().getSerializable("orderData");
         saveBean.setDoc_no(orderBean.getDoc_no());
+        commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
+
     }
 }

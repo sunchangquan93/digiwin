@@ -72,11 +72,12 @@ public class MiscellaneousIssueSumFg extends BaseFragment {
     @Override
     protected void doBusiness() {
         pactivity = (MiscellaneousissuesOutActivity) activity;
-        commonLogic = CommonLogic.getInstance(pactivity, pactivity.module, pactivity.mTimestamp.toString());
         FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(activity);
         ryList.setLayoutManager(linearLayoutManager);
-        upDateFlag = false;
+        initData();
+
     }
+
 
     /**
      * 汇总展示
@@ -108,7 +109,7 @@ public class MiscellaneousIssueSumFg extends BaseFragment {
                         adapter = new MiscellaneousOutSumAdapter(pactivity, sumShowBeanList);
                         ryList.setAdapter(adapter);
                     } catch (Exception e) {
-                        LogUtils.e(TAG, "upDateList--getSum--onFailed" + e);
+                        LogUtils.e(TAG, "updateList--getSum--onFailed" + e);
                     }
                 }
             });
@@ -135,12 +136,12 @@ public class MiscellaneousIssueSumFg extends BaseFragment {
 //                        adapter = new MiscellaneousOutSumAdapter(pactivity, sumShowBeanList);
 //                        ryList.setAdapter(adapter);
 //                    } catch (Exception e) {
-//                        LogUtils.e(TAG, "upDateList--getSum--onFailed" + e);
+//                        LogUtils.e(TAG, "updateList--getSum--onFailed" + e);
 //                    }
 //                }
 //            });
         } catch (Exception e) {
-            LogUtils.e(TAG, "upDateList--getSum--Exception" + e);
+            LogUtils.e(TAG, "updateList--getSum--Exception" + e);
         }
     }
 
@@ -208,10 +209,8 @@ public class MiscellaneousIssueSumFg extends BaseFragment {
                     public void onCallback() {
                         pactivity.mZXVp.setCurrentItem(0);
                         pactivity.createNewModuleId(pactivity.module);
-                        commonLogic = CommonLogic.getInstance(activity,pactivity.module,pactivity.mTimestamp.toString());
-                        Message msgs = new Message();
-                        msgs.what = pactivity.CLEAR;
-                        pactivity.handler.sendMessage(msgs);
+                        pactivity.scanFg.initData();
+                        initData();
                     }
                 });
             }
@@ -224,6 +223,9 @@ public class MiscellaneousIssueSumFg extends BaseFragment {
         });
 
     }
-
+    private void initData() {
+        commonLogic = CommonLogic.getInstance(pactivity, pactivity.module, pactivity.mTimestamp.toString());
+        upDateFlag = false;
+    }
 
 }

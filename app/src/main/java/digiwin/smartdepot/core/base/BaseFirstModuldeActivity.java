@@ -32,7 +32,6 @@ public abstract class BaseFirstModuldeActivity extends  BaseTitleActivity{
      * 是否退出
      */
     private void isShowExitDialogAndDelete(ExitMode flag){
-        showLoadingDialog();
         Map<String, String> map = new HashMap<>();
         map.put(AddressContants.FLAG, flag.name);
         CommonLogic commonLogic = CommonLogic.getInstance(activity, moduleCode(), mTimestamp.toString());

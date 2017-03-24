@@ -128,6 +128,8 @@ public class LoginActivity extends BaseActivity {
         isFinished = false;
         transparentStatusBar();
         logic = LoginLogic.getInstance(activity, module, mTimestamp.toString());
+        et_login_user.setText("tiptop");
+        et_login_lock.setText("tiptop");
         getUserInfo();
         updatePlant();
         getVersion();

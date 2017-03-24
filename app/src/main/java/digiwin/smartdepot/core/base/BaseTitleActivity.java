@@ -1,5 +1,7 @@
 package digiwin.smartdepot.core.base;
 
+import android.content.pm.ActivityInfo;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
@@ -52,7 +54,12 @@ public abstract class BaseTitleActivity extends BaseActivity {
         });
     }
 
-
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // 竖屏
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    }
 
     @OnClick(R.id.iv_back)
     public void goBack() {

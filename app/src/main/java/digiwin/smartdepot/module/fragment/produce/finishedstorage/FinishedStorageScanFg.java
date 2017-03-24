@@ -263,7 +263,6 @@ public class FinishedStorageScanFg extends BaseFragment {
     @Override
     protected void doBusiness()      {
         pactivity = (FinishedStorageActivity) activity;
-        commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
         initData();
     }
 
@@ -301,12 +300,16 @@ public class FinishedStorageScanFg extends BaseFragment {
     /**
      * 初始化一些变量
      */
-    private void initData() {
+    public  void initData() {
         barcodeShow = "";
         locatorShow = "";
         barcodeFlag = false;
         locatorFlag = false;
         saveBean = new SaveBean();
+        cbLocatorlock.setChecked(false);
+        etScanLocator.setText("");
+        etScanBarocde.requestFocus();
+        commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
     }
 
 

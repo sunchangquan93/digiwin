@@ -69,7 +69,7 @@ public class StoreAllotActivity extends BaseFirstModuldeActivity {
     /**
      * 扫码
      */
-    StoreAllotScanFg scanFg;
+   public StoreAllotScanFg scanFg;
     /**
      * 汇总提交
      */

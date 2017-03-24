@@ -313,7 +313,6 @@ public class PurchaseInStoreScanFg extends BaseFragment {
     @Override
     protected void doBusiness() {
         pactivity = (PurchaseInStoreSecondActivity) activity;
-        commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
         initData();
     }
 
@@ -322,10 +321,6 @@ public class PurchaseInStoreScanFg extends BaseFragment {
      */
     private void show() {
         tvDetailShow.setText(StringUtils.lineChange(barcodeShow + "\\n" + locatorShow));
-//        if (!StringUtils.isBlank(tvDetailShow.getText().toString())){
-//        includeDetail.setVisibility(View.VISIBLE);}else {
-//        includeDetail.setVisibility(View.GONE);
-//        }
         includeDetail.setVisibility(View.VISIBLE);
     }
 
@@ -360,6 +355,7 @@ public class PurchaseInStoreScanFg extends BaseFragment {
         locatorFlag = false;
         cb_locatorlock.setChecked(false);
         saveBean = new SaveBean();
+        commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
         orderBean = (FilterResultOrderBean) pactivity.getIntent().getExtras().getSerializable("orderData");
         saveBean.setDoc_no(orderBean.getDoc_no());
         et_scan_barocde.requestFocus();

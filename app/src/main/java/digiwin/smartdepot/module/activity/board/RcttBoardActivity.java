@@ -21,23 +21,21 @@ import digiwin.library.voiceutils.VoiceUtils;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
-import digiwin.smartdepot.core.base.BaseTitleActivity;
+import digiwin.smartdepot.core.base.BaseTitleHActivity;
 import digiwin.smartdepot.core.coreutil.GetVoicer;
 import digiwin.smartdepot.module.adapter.board.RcctBoardAdapter;
 import digiwin.smartdepot.module.bean.board.RcctboardBean;
 import digiwin.smartdepot.module.logic.board.RcctboardLogic;
-
-import static android.R.id.list;
 
 /**
  * @author xiemeng
  * @des 收货完成待检验看板
  * @date 2017/3/8
  */
-public class RcttBoardActivity extends BaseTitleActivity {
-    @BindView(R.id.toolbar_title)
-    Toolbar toolbarTitle;
-    @BindView(R.id.ryboard)
+public class RcttBoardActivity extends BaseTitleHActivity {
+  @BindView(R.id.toolbar_title)
+   Toolbar toolbarTitle;
+   //   @BindView(R.id.ryboard)
     RecyclerView ryboard;
     /**
      * 定时器
@@ -78,6 +76,7 @@ public class RcttBoardActivity extends BaseTitleActivity {
 
     @Override
     protected void doBusiness() {
+         ryboard= (RecyclerView) findViewById(R.id.ryboard);
         rcctboardLogic = RcctboardLogic.getInstance(context, module, mTimestamp.toString());
         pagenow = 1;
         String tiems_second = (String) SharedPreferencesUtils.get(context, SharePreKey.REPEATTIME, AddressContants.REPEATTIME);
@@ -165,6 +164,11 @@ public class RcttBoardActivity extends BaseTitleActivity {
     protected void onResume() {
         super.onResume();
 
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        timer.cancel();
     }
 
 

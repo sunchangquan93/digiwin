@@ -98,11 +98,9 @@ public class PostMaterialSumFg extends BaseFragment {
     @Override
     protected void doBusiness() {
         pactivity = (PostMaterialSecondActivity) activity;
-        commonLogic = CommonLogic.getInstance(pactivity, pactivity.module, pactivity.mTimestamp.toString());
         FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(activity);
         ryList.setLayoutManager(linearLayoutManager);
-        upDateFlag = false;
-        orderData = (FilterResultOrderBean) pactivity.getIntent().getExtras().getSerializable("orderData");
+        initData();
     }
 
     /**
@@ -141,7 +139,7 @@ public class PostMaterialSumFg extends BaseFragment {
                         adapter = new PostMaterialSumAdapter(pactivity, sumShowBeanList);
                         ryList.setAdapter(adapter);
                     } catch (Exception e) {
-                        LogUtils.e(TAG, "upDateList--getSum--onFailed" + e);
+                        LogUtils.e(TAG, "updateList--getSum--onFailed" + e);
                     }
                 }
             });
@@ -167,12 +165,12 @@ public class PostMaterialSumFg extends BaseFragment {
 //                        adapter = new PostMaterialSumAdapter(pactivity, sumShowBeanList);
 //                        ryList.setAdapter(adapter);
 //                    } catch (Exception e) {
-//                        LogUtils.e(TAG, "upDateList--getSum--onFailed" + e);
+//                        LogUtils.e(TAG, "updateList--getSum--onFailed" + e);
 //                    }
 //                }
 //            });
         } catch (Exception e) {
-            LogUtils.e(TAG, "upDateList--getSum--Exception" + e);
+            LogUtils.e(TAG, "updateList--getSum--Exception" + e);
         }
     }
 
@@ -239,10 +237,8 @@ public class PostMaterialSumFg extends BaseFragment {
                     public void onCallback() {
                         pactivity.mZXVp.setCurrentItem(0);
                         pactivity.createNewModuleId(pactivity.module);
-                        commonLogic = CommonLogic.getInstance(activity,pactivity.module,pactivity.mTimestamp.toString());
-                        Message msgs = new Message();
-                        msgs.what = pactivity.CLEAR;
-                        pactivity.handler.sendMessage(msgs);
+                        pactivity.scanFg.initData();
+                        initData();
                     }
                 });
             }
@@ -255,6 +251,10 @@ public class PostMaterialSumFg extends BaseFragment {
         });
 
     }
-
+public void initData(){
+    commonLogic = CommonLogic.getInstance(pactivity, pactivity.module, pactivity.mTimestamp.toString());
+    upDateFlag = false;
+    orderData = (FilterResultOrderBean) pactivity.getIntent().getExtras().getSerializable("orderData");
+}
 
 }

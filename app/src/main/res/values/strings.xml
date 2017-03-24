@@ -265,4 +265,78 @@
 
     <string name="batch_date">批次日</string>
     <string name="input_num_toobig">输入数量过大</string>
+    <string name="custom_no">客户编号</string>
+    <string name="send_goods_order">发货单号</string>
+    <string name="receipt_address">收货地址</string>
+    <string name="purchase_goods_scan">采购收货扫描</string>
+    <string name="send_goods_num">发货量</string>
+
+    <string name="purchase_check">收货检验</string>
+    <string name="please_scan_send_order_or_barcode">请扫描发货单号/物料条码</string>
+    <string name="get_material_time">收料时间</string>
+    <string name="to_get_material_minute">距收料（分钟）</string>
+    <string name="picture_no">图号</string>
+    <string name="send_check_num">送验量</string>
+    <string name="ok_num">合格量</string>
+    <string name="check_state">判定状态</string>
+    <string name="check_item">检验项目</string>
+    <string name="aql">AQL</string>
+    <string name="select_check_num">抽验量</string>
+    <string name="ac">AC</string>
+
+    <string name="showpic">查看图纸</string>
+    <string name="enchaseprint">装箱打印</string>
+    <string name="autoprint">自动打印</string>
+    <string name="print_count">打印次数</string>
+    <string name="box_code">箱码</string>
+    <string name="barcode_type">条码类型</string>
+    <string name="barcode_code">条码编号</string>
+    <string name="weight">重量(Kg)</string>
+    <string name="title_set_bluttooth">蓝牙未连接，是否前去设置?</string>
+    <string name="store_query">库存查询</string>
+    <string name="store_query_barcode">条码库存</string>
+    <string name="store_query_item_no">料件库存</string>
+    <string name="item_name_unit_no">品名/单位</string>
+    <string name="store_locator">仓库/库位</string>
+
+
+    <string name="re">RE</string>
+    <string name="project_check">项目判定</string>
+    <string name="defect_num">缺点数</string>
+    <string name="goods_return">退货</string>
+    <string name="bad_reason_maintenance">不良原因维护</string>
+    <string name="first_letter_search">首字母查询</string>
+    <string name="please_select_one_data">请选择一笔不良数据</string>
+    <string name="this_reason_existed">该笔不良原因已经存在于面板</string>
+    <string name="movestore">条码移库</string>
+    <string name="move_instore">移入库位</string>
+    <string name="move_outstore">移出库位</string>
+    <string name="allot_num">调拨量</string>
+    <string name="scan_in_movelocator">请先扫描移入库位</string>
+    <string name="scan_out_movelocator">请先扫描移出库位</string>
+    <string name="please_input_bad_num">请录入不良数量</string>
+    <string name="please_save_bad_reason_first">请先保存不良原因</string>
+    <string name="check_image">查看图纸</string>
+    <string name="no_pic">没有图纸</string>
+    <string name="please_check_bad_reason">请维护不良原因</string>
+
+    <string name="end_product">成品料号</string>
+    <string name="lower_item_no">下阶料号</string>
+    <string name="depart_supplier">部门/厂商</string>
+    <string name="work_order_return">依工单退料</string>
+    <string name="end_productname">成品品名</string>
+    <string name="can_return_num">可退量</string>
+    <string name="actual_return_num">实退量</string>
+
+
+    <string name="print_label">标签补打</string>
+    <string name="resource_barcode">来源条码</string>
+    <string name="sum_num">总数量</string>
+    <string name="single_page_num">单包数量</string>
+    <string name="num_of_print_pieces">打印张数</string>
+    <string name="please_scan_barcode_first">请先扫描物料条码</string>
+
+
+
+
 </resources>

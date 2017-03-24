@@ -8,13 +8,24 @@ import java.util.Map;
 import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.ObjectAndMapUtils;
 import digiwin.library.utils.StringUtils;
+import digiwin.library.utils.TelephonyUtils;
 import digiwin.library.utils.ThreadPoolManager;
 import digiwin.library.xml.ParseXmlResp;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.ReqTypeName;
+
+import digiwin.smartdepot.core.base.BaseActivity;
+import digiwin.smartdepot.core.base.BaseFragment;
+
+
+import digiwin.smartdepot.core.base.BaseApplication;
+
 import digiwin.smartdepot.core.net.IRequestCallbackImp;
 import digiwin.smartdepot.core.net.OkhttpRequest;
 import digiwin.smartdepot.core.xml.CreateParaXmlReqIm;
+import digiwin.smartdepot.core.xml.CreatePurchaseCheckReq;
+import digiwin.smartdepot.login.bean.AccoutBean;
+import digiwin.smartdepot.login.loginlogic.LoginLogic;
 import digiwin.smartdepot.module.bean.common.ClickItemPutBean;
 import digiwin.smartdepot.module.bean.common.DetailShowBean;
 import digiwin.smartdepot.module.bean.common.FifoAccordingBean;
@@ -30,6 +41,10 @@ import digiwin.smartdepot.module.bean.common.SumShowBean;
 import digiwin.smartdepot.module.bean.common.UnCompleteBean;
 import digiwin.smartdepot.module.bean.produce.FiFoBean;
 import digiwin.smartdepot.module.bean.produce.PostMaterialFIFOBean;
+import digiwin.smartdepot.module.bean.purchase.BadReasonBean;
+import digiwin.smartdepot.module.bean.purchase.PurchaseCheckBean;
+import digiwin.smartdepot.module.bean.purchase.PurchaseCheckDetailBean;
+import digiwin.smartdepot.module.bean.purchase.ImageUrl;
 
 /**
  * Created by xiemeng on 2017/2/23.
@@ -52,9 +67,9 @@ public class CommonLogic {
     private static CommonLogic logic;
 
     private CommonLogic(Context context, String module, String timestamp) {
+        mTimestamp = timestamp;
         mContext = context;
         mModule = module;
-        mTimestamp = timestamp;
 
     }
 

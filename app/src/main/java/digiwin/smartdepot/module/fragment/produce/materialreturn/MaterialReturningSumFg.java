@@ -88,16 +88,16 @@ public class MaterialReturningSumFg extends BaseFragment {
     @Override
     protected void doBusiness() {
         pactivity = (MaterialReturningActivity) activity;
-        commonLogic = CommonLogic.getInstance(activity, pactivity.module, pactivity.mTimestamp.toString());
         FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(activity);
         ryList.setLayoutManager(linearLayoutManager);
-        upDateFlag = false;
+        initData();
     }
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
     }
+
 
     /**
      * 订阅成功
@@ -136,12 +136,12 @@ public class MaterialReturningSumFg extends BaseFragment {
                         adapter = new MaterialReturningSumAdapter(activity, sumShowBeanList);
                         ryList.setAdapter(adapter);
                     } catch (Exception e) {
-                        LogUtils.e(TAG, "upDateList--getSum--onFailed" + e);
+                        LogUtils.e(TAG, "updateList--getSum--onFailed" + e);
                     }
                 }
             });
         } catch (Exception e) {
-            LogUtils.e(TAG, "upDateList--getSum--Exception" + e);
+            LogUtils.e(TAG, "updateList--getSum--Exception" + e);
         }
     }
 
@@ -206,6 +206,8 @@ public class MaterialReturningSumFg extends BaseFragment {
                     public void onCallback() {
                         pactivity.mZXVp.setCurrentItem(0);
                         pactivity.createNewModuleId(pactivity.module);
+                        pactivity.scanFg.initData();
+                        initData();
                     }
                 });
             }
@@ -232,6 +234,11 @@ public class MaterialReturningSumFg extends BaseFragment {
 
             }
         });
+    }
+
+    public void initData(){
+        commonLogic = CommonLogic.getInstance(activity, pactivity.module, pactivity.mTimestamp.toString());
+        upDateFlag = false;
     }
 
     @Override

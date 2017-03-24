@@ -51,7 +51,7 @@ public class PurchaseInStoreDetailAdapter extends BaseRecyclerAdapter<DetailShow
 
     @Override
     protected int getItemLayout(int viewType) {
-        return R.layout.ryitem_purchase_in_store_detail;
+        return R.layout.ryitem_purchase_goods_detail;
     }
 
     @Override

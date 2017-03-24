@@ -120,4 +120,12 @@ public class AddressContants {
      * fifoY
      */
     public static final  String FIFOY="Y";
+    /**
+     * 物料条码标记1
+     */
+    public static  final String ONE="1";
+    /**
+     * 物料条码标记2
+     */
+    public static  final String TWO="2";
 }

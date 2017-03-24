@@ -46,7 +46,7 @@ public class ChooseAllotDailog {
                                 listener.onCallback2();
                             }
                         }).cancelTouchout(false).backCancelTouchout(true)
-                        .widthpx((int) (ViewUtils.getScreenWidth(context) * 0.6))
+                        .widthpx((int) (ViewUtils.getScreenWidth(context) * 0.8))
                         .heightpx(ViewGroup.LayoutParams.WRAP_CONTENT);
                 dialog=builder.build();
                 dialog.show();

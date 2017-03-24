@@ -19,6 +19,14 @@ public class FilterResultOrderBean implements Serializable {
         return create_date;
     }
 
+    public String getDelivery_address() {
+        return delivery_address;
+    }
+
+    public void setDelivery_address(String delivery_address) {
+        this.delivery_address = delivery_address;
+    }
+
     public void setCreate_date(String create_date) {
         this.create_date = create_date;
     }
@@ -44,7 +52,7 @@ public class FilterResultOrderBean implements Serializable {
      * 部门
      */
 
-    public String department_name = null;
+    private String department_name ;
 
     public String getEmployee_name() {
         return employee_name;
@@ -57,6 +65,44 @@ public class FilterResultOrderBean implements Serializable {
     /**
      * 人员
      */
-    public String employee_name = null;
+    private String employee_name ;
+    /**
+     * 供应商名称
+     */
+    private String supplier_name ;
+    /**
+     * 送货地址
+     */
+    private String delivery_address;
+    /**
+     * 料号
+     */
+    private String item_no;
+    /**
+     * 品名
+     */
+    private String item_name;
 
+    public String getSupplier_name() {
+        return supplier_name;
+    }
+
+    public void setSupplier_name(String supplier_name) {
+        this.supplier_name = supplier_name;
+    }
+
+    public String getItem_no() {
+        return item_no;
+    }
+    public void setItem_no(String item_no) {
+        this.item_no = item_no;
+    }
+
+    public String getItem_name() {
+        return item_name;
+    }
+
+    public void setItem_name(String item_name) {
+        this.item_name = item_name;
+    }
 }

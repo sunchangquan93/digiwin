@@ -8,7 +8,6 @@ import digiwin.pulltorefreshlibrary.recyclerviewAdapter.BaseRecyclerAdapter;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.RecyclerViewHolder;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.module.bean.common.ListSumBean;
-import digiwin.smartdepot.module.bean.common.SumShowBean;
 /**
  * @des      销售出库汇总列表
  * @author  xiemeng
