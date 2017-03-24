@@ -220,6 +220,26 @@ public class StringUtils
     }
 
     /**
+     * 两个整数相除
+     * @param a
+     * @param b
+     * @return
+     */
+    public static int div(int a,int b){
+        int num = 0;
+            try{
+                if(a%b == 0){
+                    num = a/b;
+                }else{
+                    num = a/b + 1;
+                }
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        return num;
+    }
+
+    /**
      * 转换STRING成FLOAT
      *
      * @return

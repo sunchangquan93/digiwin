@@ -1,6 +1,9 @@
 package digiwin.library.voiceutils;
 
 import android.content.Context;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -24,6 +27,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 import digiwin.library.R;
+import digiwin.library.base.BaseAppActivity;
 import digiwin.library.constant.SharePreKey;
 import digiwin.library.constant.SystemConstant;
 import digiwin.library.utils.LogUtils;
@@ -173,24 +177,24 @@ public class VoiceUtils {
             String text = JsonParser.parseIatResult(result);//解析过后的
             System.out.println(" 解析后的 :" + text);
 
-            String sn = null;
-            // 读取json结果中的 sn字段
-            try {
-                JSONObject resultJson = new JSONObject(results.getResultString());
-                sn = resultJson.optString("sn");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            mIatResults.put(sn, text);//每得到一句，添加到
-
-            resultbuffer = new StringBuffer();
-            for (String key : mIatResults.keySet()) {
-                resultbuffer.append(mIatResults.get(key));
-            }
-            ToastUtils.showToastByString(mContext,"录音结果："+resultbuffer.toString());
+//            String sn = null;
+//            // 读取json结果中的 sn字段
+//            try {
+//                JSONObject resultJson = new JSONObject(results.getResultString());
+//                sn = resultJson.optString("sn");
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//
+//            mIatResults.put(sn, text);//每得到一句，添加到
+//
+//            resultbuffer = new StringBuffer();
+//            for (String key : mIatResults.keySet()) {
+//                resultbuffer.append(mIatResults.get(key));
+//            }
+//            startAlarm(mContext);
             if(mTextListener != null){
-                mTextListener.getVoiceText(resultbuffer.toString());
+                mTextListener.getVoiceText(text);
             }
         }
 
@@ -381,5 +385,13 @@ public class VoiceUtils {
             e.printStackTrace();
         }
         return result;
+    }
+
+    //提示音
+    private static void startAlarm(Context context) {
+        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        if (notification == null) return;
+        Ringtone r = RingtoneManager.getRingtone(context, notification);
+        r.play();
     }
 }
