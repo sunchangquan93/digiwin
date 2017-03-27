@@ -109,6 +109,11 @@ public interface ModuleCode {
     public final String PURCHASECHECK = "A004";
 
     /**
+     * 捡料出货
+     */
+    public final String PICKUPSHIPMENT = "D003";
+
+    /**
      *装箱打印
      */
     public final String ENCHASEPRINT="B027";

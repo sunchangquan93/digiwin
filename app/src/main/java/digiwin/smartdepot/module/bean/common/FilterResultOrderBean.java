@@ -36,7 +36,7 @@ public class FilterResultOrderBean implements Serializable {
      */
     private String doc_no;
     /**
-     * 日期
+     * 日期 出货日期
      */
     private String create_date;
 
@@ -91,13 +91,22 @@ public class FilterResultOrderBean implements Serializable {
         this.supplier_name = supplier_name;
     }
 
+    public String getCustomer_name() {
+        return customer_name;
+    }
     public String getItem_no() {
         return item_no;
     }
     public void setItem_no(String item_no) {
         this.item_no = item_no;
     }
-
+    public void setCustomer_name(String customer_no) {
+        this.customer_name = customer_name;
+    }
+    /**
+     * 客户
+     */
+    public String customer_name = null;
     public String getItem_name() {
         return item_name;
     }

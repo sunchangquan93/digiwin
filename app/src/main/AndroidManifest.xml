@@ -329,6 +329,29 @@
             </intent-filter>
         </activity>
 
+        <!-- 捡料出货清单-->
+
+        <activity
+            android:name=".module.activity.sale.pickupshipment.PickUpShipmentListActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
+            android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.digiwin.PickUpShipmentListActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!-- 捡料出货-->
+        <activity
+            android:name=".module.activity.sale.pickupshipment.PickUpShipmentActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
+            android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.digiwin.PickUpShipmentActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity
         android:name=".module.activity.produce.enchaseprint.EnchasePrintActivity"
         android:windowSoftInputMode="stateAlwaysHidden|adjustPan">

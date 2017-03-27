@@ -308,6 +308,17 @@
     <string name="first_letter_search">首字母查询</string>
     <string name="please_select_one_data">请选择一笔不良数据</string>
     <string name="this_reason_existed">该笔不良原因已经存在于面板</string>
+
+    <string name="title_pickupshipment_list">捡料出货清单</string>
+    <string name="material_warehouse">发料仓</string>
+    <string name="shipping_order">出货单号</string>
+    <string name="salesman">业务员</string>
+    <string name="operating_department">业务部门</string>
+    <string name="shipping_date">出货日期</string>
+    <string name="title_pickupshipment">捡料出货</string>
+    <string name="barcode_scan">条码扫描</string>
+    <string name="apply_date_">申请日期</string>
+
     <string name="movestore">条码移库</string>
     <string name="move_instore">移入库位</string>
     <string name="move_outstore">移出库位</string>
@@ -335,8 +346,6 @@
     <string name="single_page_num">单包数量</string>
     <string name="num_of_print_pieces">打印张数</string>
     <string name="please_scan_barcode_first">请先扫描物料条码</string>
-
-
 
 
 </resources>

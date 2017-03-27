@@ -184,6 +184,9 @@ public class FilterBean {
     /**
      * 客户编号
      */
+    /**
+     * 客户
+     */
     private String customer_no;
     /**
      * 下阶料号

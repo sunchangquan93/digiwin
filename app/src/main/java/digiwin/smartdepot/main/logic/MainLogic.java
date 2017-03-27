@@ -178,7 +178,11 @@ public class MainLogic {
         storageItems.add(movestoreactivity);
         //初始化销售管理
         ModuleBean saleoutletactivity = new ModuleBean(R.string.saleoutlet, R.mipmap.saleoutlet, ModuleCode.SALEOUTLET, "android.intent.action.digiwin.SaleOutletListActivity");
+        //捡料出货
+        ModuleBean pickupshipment = new ModuleBean(R.string.title_pickupshipment_list, R.mipmap.pickup_shipment, ModuleCode.PICKUPSHIPMENT, "android.intent.action.digiwin.PickUpShipmentListActivity");
         salesItems.add(saleoutletactivity);
+        salesItems.add(pickupshipment);
+
         //初始化报工管理
         ModuleBean rcttboardactivity = new ModuleBean(R.string.delivery_uncheck_board, R.drawable.receiptout, ModuleCode.RCCTBOARD, "android.intent.action.digiwin.RcttBoardActivity");
         ModuleBean tctsboardactivity = new ModuleBean(R.string.tcts_board, R.drawable.receiptout, ModuleCode.RCCTBOARD, "android.intent.action.digiwin.TctsBoardActivity");

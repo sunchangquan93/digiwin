@@ -23,7 +23,7 @@ public class WiFiPrintManager {
     /**
      * 超时时间
      */
-    public int Net_ReceiveTimeout = 1500;
+    public int Net_ReceiveTimeout = 150000;
     /**
      * 是否开启
      */
@@ -100,7 +100,8 @@ public class WiFiPrintManager {
                     "%0H0040V0100BG02120>G" + "123"+ "\n"+
                     "Q1"+
                     "Z";
-            printSend.sendMessage(encoding2);
+            String encoding3="1231";
+            printSend.sendMessage(encoding3);
             close();
         } catch (Exception e) {
 

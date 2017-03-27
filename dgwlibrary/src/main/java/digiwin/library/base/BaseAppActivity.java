@@ -43,6 +43,7 @@ public abstract class BaseAppActivity extends AppCompatActivity {
         context = this;
         activity = this;
 
+        TAG = getClass().getSimpleName();
         if (bindLayoutId() != 0) {
             setContentView(bindLayoutId());
             ActivityManagerUtils.addActivity(this);
@@ -52,7 +53,6 @@ public abstract class BaseAppActivity extends AppCompatActivity {
         } else {
             throw new IllegalStateException("layoutid is null!");
         }
-        TAG = getClass().getSimpleName();
 
     }
 

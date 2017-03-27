@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_ll"
+    style="@style/ry_style"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        style="@style/itemstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_shipping_order_string"
+            android:layout_width="@dimen/layout_70dp"
+            android:layout_height="wrap_content"
+            android:text="@string/shipping_order"
+            android:textSize="@dimen/textSize_14sp" />
+
+        <TextView
+            android:id="@+id/tv_shipping_order"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/Base_color"
+            android:textSize="@dimen/textSize_14sp" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/line_1"
+        style="@style/ry_line_style" />
+
+    <LinearLayout
+        style="@style/itemstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_shipping_date_string"
+            android:layout_width="@dimen/layout_70dp"
+            android:layout_height="wrap_content"
+            android:text="@string/shipping_date"
+            android:textSize="@dimen/textSize_14sp" />
+
+        <TextView
+            android:id="@+id/tv_shipping_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/Base_color"
+            android:textSize="@dimen/textSize_14sp" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/line_2"
+        style="@style/ry_line_style" />
+
+    <LinearLayout
+        style="@style/itemstyle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_custom_string"
+            android:layout_width="@dimen/layout_70dp"
+            android:layout_height="wrap_content"
+            android:text="@string/custom"
+            android:textSize="@dimen/textSize_14sp" />
+
+        <TextView
+            android:id="@+id/tv_custom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/Base_color"
+            android:textSize="@dimen/textSize_14sp" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/line_3"
+        style="@style/ry_line_style" />
+
+    <LinearLayout
+        style="@style/itemstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_apply_branch_string"
+                android:layout_width="@dimen/layout_70dp"
+                android:layout_height="wrap_content"
+                android:text="@string/apply_branch"
+                android:textSize="@dimen/textSize_14sp" />
+
+            <TextView
+                android:id="@+id/tv_apply_branch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/Base_color"
+                android:textSize="@dimen/textSize_14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_applicant_string"
+                android:layout_width="@dimen/layout_70dp"
+                android:layout_height="wrap_content"
+                android:text="@string/applicant"
+                android:textSize="@dimen/textSize_14sp" />
+
+            <TextView
+                android:id="@+id/tv_applicant"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/Base_color"
+                android:textSize="@dimen/textSize_14sp" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
