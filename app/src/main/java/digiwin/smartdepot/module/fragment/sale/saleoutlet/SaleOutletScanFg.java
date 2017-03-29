@@ -236,7 +236,7 @@ public class SaleOutletScanFg extends BaseFragment {
      */
     boolean locatorFlag;
     /**
-     * 出通单号
+     * fiFoList
      */
     boolean saleFlag;
 

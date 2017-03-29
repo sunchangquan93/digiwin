@@ -109,7 +109,7 @@ public class WorkOrderReturnSumFg extends BaseFragment {
             public void onSuccess(List<ListSumBean> list) {
                 dismissLoadingDialog();
                 sumBeanList = list;
-                adapter = new SaleOutletSumAdapter(context, sumBeanList);
+                adapter = new WorkOrderReturnSumAdapter(context, sumBeanList);
                 ryList.setAdapter(adapter);
                 if (null != list && list.size() > 0) {
                     upDateFlag = true;
@@ -216,6 +216,8 @@ public class WorkOrderReturnSumFg extends BaseFragment {
             tvDepartSupplier.setText(orderHeadBean.getDepartment_name());
             tvEndProduct.setText(orderHeadBean.getItem_no());
             tvEndProductname.setText(orderHeadBean.getItem_name());
+            mPutBean=new ClickItemPutBean();
+            mPutBean.setDoc_no(orderHeadBean.getDoc_no());
         }catch (Exception e){
             LogUtils.e(TAG,"initData()"+ e);
         }

@@ -296,7 +296,6 @@ public class FinishedStorageScanFg extends BaseFragment {
         show();
     }
 
-
     /**
      * 初始化一些变量
      */

@@ -208,4 +208,28 @@ public class FilterBean {
     public void setLow_order_item_no(String low_order_item_no) {
         this.low_order_item_no = low_order_item_no;
     }
+    /**
+     * 批号
+     */
+    private String lot_no;
+
+    public String getLot_no() {
+        return lot_no;
+    }
+
+    public void setLot_no(String lot_no) {
+        this.lot_no = lot_no;
+    }
+    /**
+     * 库位
+     */
+    private String warehouse_storage;
+
+    public String getWarehouse_storage() {
+        return warehouse_storage;
+    }
+
+    public void setWarehouse_storage(String warehouse_storage) {
+        this.warehouse_storage = warehouse_storage;
+    }
 }

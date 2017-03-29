@@ -112,7 +112,7 @@ public class CreatePurchaseCheckReq {
      * @param appmodule 模组名s
      * @param timestamp 设备号+模组名+时间
      */
-    public CreatePurchaseCheckReq(String userName, String plant, List<Map<String, String>> maps, List<BadReasonBean> badReasonBeen,String deviceId, String appmodule, String reqType, String timestamp) {
+    public CreatePurchaseCheckReq(String userName, String plant, List<Map<String, String>> maps, Map<String,List<BadReasonBean>> badReasonBeanMap,String deviceId, String appmodule, String reqType, String timestamp) {
         try {
             // 遍历Map的方法
             init(userName, plant, deviceId, appmodule,reqType, timestamp);
@@ -130,20 +130,30 @@ public class CreatePurchaseCheckReq {
                 }
                 Detail detail = new Detail();
                 detail.name = "Detail";
-                if (null != badReasonBeen) {
-                    for (int j = 0; j < badReasonBeen.size(); j++) {
-                        Record record = new Record();
-                        Field field1 = new Field("defect_reason", badReasonBeen.get(j).getDefect_reason());
-                        Field field2 = new Field("defect_reason_name", badReasonBeen.get(j).getDefect_reason_name());
-                        Field field3 = new Field("defect_reason_qty", badReasonBeen.get(j).getDefect_qty());
-                        record.Field.add(field1);
-                        record.Field.add(field2);
-                        record.Field.add(field3);
-                        detail.Record.add(record);
+                if (null != badReasonBeanMap) {
+                    List<BadReasonBean> list = new ArrayList<>();
+                    Set<Entry<String, List<BadReasonBean>>> sets1 = badReasonBeanMap.entrySet();
+                    for (Entry<String, String> entry : sets) {
+                        Object key = entry.getKey();
+                        Object val = entry.getValue();
+                        if (null == val) {
+                            val = new ArrayList<>();
+                        }
+                        list = (List<BadReasonBean>) val;
+                        for (int j = 0; j < list.size(); j++) {
+                            Record record = new Record();
+                            Field field1 = new Field("defect_reason", list.get(j).getDefect_reason());
+                            Field field2 = new Field("defect_reason_name", list.get(j).getDefect_reason_name());
+                            Field field3 = new Field("defect_reason_qty", list.get(j).getDefect_qty());
+                            record.Field.add(field1);
+                            record.Field.add(field2);
+                            record.Field.add(field3);
+                            detail.Record.add(record);
+                        }
                     }
+                    recordset1.B_Detail.add(detail);
+                    B_Body.Tip.TipRequest.Request.RequestContent.B_Document.RecordSet.add(recordset1);
                 }
-                recordset1.B_Detail.add(detail);
-                B_Body.Tip.TipRequest.Request.RequestContent.B_Document.RecordSet.add(recordset1);
             }
         } catch (Exception e) {
             LogUtils.e("CreateParaXmlReq", "RecordSet中报文--组织报文异常");

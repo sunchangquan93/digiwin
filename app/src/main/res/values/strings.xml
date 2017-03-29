@@ -63,7 +63,7 @@
     <string name="LetteringDetail">刻字明细</string>
 
     <string name="finishedstorage">生产完工入库</string>
-    <string name="finishedstorage_un_com">未完事项</string>
+    <string name="un_complete">未完事项</string>
     <string name="barcode_no">物料条码</string>
     <string name="material_returning_number">退料单号</string>
     <string name="card_number">流转卡号</string>
@@ -71,6 +71,7 @@
     <string name="locator">库位</string>
     <string name="item_no">料号</string>
     <string name="item_name">品名</string>
+    <string name="batch_no">批号</string>
     <string name="apply_date">申请日</string>
     <string name="apply_number">申请量</string>
     <string name="apply_branch">申请部门</string>
@@ -126,7 +127,7 @@
 
     <string name="toerror">跳转错误</string>
 
-    <string name="mataerial_returning">生产退料</string>
+    <string name="mataerial_returning">退料过账</string>
     <string name="direct_storage">直接入库</string>
 
     <string name="according_material">依成品发料</string>
@@ -269,6 +270,7 @@
     <string name="send_goods_order">发货单号</string>
     <string name="receipt_address">收货地址</string>
     <string name="purchase_goods_scan">采购收货扫描</string>
+    <string name="title_purchase_goods_scan">采购收货（全扫码）</string>
     <string name="send_goods_num">发货量</string>
 
     <string name="purchase_check">收货检验</string>
@@ -347,5 +349,27 @@
     <string name="num_of_print_pieces">打印张数</string>
     <string name="please_scan_barcode_first">请先扫描物料条码</string>
 
+    <string name="title_worksupplement_list">补料清单</string>
+    <string name="title_worksupplement">依工单补料</string>
+    <string name="returning_item_no">退料料号</string>
+    <string name="returned_material_department">退料部门</string>
+    <string name="returned_person">退料人员</string>
+    <string name="available_quantity">可发量</string>
+    <string name="material_return">退料量</string>
+    <string name="material_return_big">最大可发量</string>
+    <string name="feeding_amount">补料量</string>
+    <string name="ware_error">扫描仓库与所选仓库不一致</string>
+    <string name="store_trans_lock">库存交易锁定</string>
+    <string name="lock_store">锁定仓库</string>
+    <string name="baocode_store">仓储条码</string>
+    <string name="lock_reason">锁定原因</string>
+    <string name="store_failed_be_empty">仓库不能为空!</string>
+    <string name="lock_failed_other_empty">锁定信息不全!请扫描其他相关信息</string>
+
+    <string name="store_trans_unlock">库存交易解锁</string>
+    <string name="store_trans_unlock_detail">库存交易解锁明细</string>
+    <string name="store_lock_no">锁定单号</string>
+    <string name="store_lock_people">锁定人</string>
+    <string name="store_lock_date">锁定日期</string>
 
 </resources>

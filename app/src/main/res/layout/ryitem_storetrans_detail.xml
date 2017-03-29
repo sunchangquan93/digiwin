@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_ll"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginTop="@dimen/layout_10dp"
+    android:layout_marginLeft="@dimen/layout_10dp"
+    android:layout_marginRight="@dimen/layout_10dp"
+    android:background="@drawable/zx_scandetail_bg"
+    android:paddingLeft="@dimen/layout_10dp"
+    android:paddingRight="@dimen/layout_10dp">
+
+    <LinearLayout
+        style="@style/itemstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/layout_50dp"
+            android:textColor="@color/black_32"
+            android:layout_height="wrap_content"
+            android:text="@string/item_name"
+            android:textSize="@dimen/textSize_14sp" />
+
+        <TextView
+            android:id="@+id/tv_item_name"
+            android:layout_width="@dimen/layout_0dp"
+            android:singleLine="true"
+            android:textColor="@color/Base_color"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="@dimen/textSize_14sp" />
+    </LinearLayout>
+
+    <View style="@style/ry_line_style" />
+    <LinearLayout
+        style="@style/itemstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:textColor="@color/black_32"
+            android:layout_width="@dimen/layout_50dp"
+            android:layout_height="wrap_content"
+            android:text="@string/model"
+            android:textSize="@dimen/textSize_14sp" />
+
+        <TextView
+            android:id="@+id/tv_model"
+            android:layout_width="@dimen/layout_0dp"
+            android:textColor="@color/Base_color"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="@dimen/textSize_14sp" />
+    </LinearLayout>
+    <View style="@style/ry_line_style" />
+    <LinearLayout
+        style="@style/itemstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/layout_50dp"
+            android:textColor="@color/black_32"
+            android:layout_height="wrap_content"
+            android:text="@string/item_no"
+            android:textSize="@dimen/textSize_14sp" />
+
+        <TextView
+            android:id="@+id/tv_item_no"
+            android:layout_width="@dimen/layout_0dp"
+            android:textColor="@color/Base_color"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="@dimen/textSize_14sp" />
+    </LinearLayout>
+    <View style="@style/ry_line_style" />
+    <LinearLayout
+        style="@style/itemstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/layout_50dp"
+            android:textColor="@color/black_32"
+            android:layout_height="wrap_content"
+            android:text="@string/item_lot_no"
+            android:textSize="@dimen/textSize_14sp" />
+
+        <TextView
+            android:id="@+id/tv_lot_no"
+            android:layout_width="@dimen/layout_0dp"
+            android:textColor="@color/Base_color"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="@dimen/textSize_14sp" />
+    </LinearLayout>
+    <View style="@style/ry_line_style" />
+    <LinearLayout
+        style="@style/itemstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/layout_50dp"
+            android:textColor="@color/black_32"
+            android:layout_height="wrap_content"
+            android:text="@string/label_storage"
+            android:textSize="@dimen/textSize_14sp" />
+
+        <TextView
+            android:id="@+id/tv_storage"
+            android:layout_width="@dimen/layout_0dp"
+            android:textColor="@color/Base_color"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="@dimen/textSize_14sp" />
+        <TextView
+            android:layout_width="@dimen/layout_50dp"
+            android:textColor="@color/black_32"
+            android:layout_height="wrap_content"
+            android:text="@string/locator"
+            android:textSize="@dimen/textSize_14sp" />
+
+        <TextView
+            android:id="@+id/tv_locator"
+            android:layout_width="@dimen/layout_0dp"
+            android:textColor="@color/Base_color"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="@dimen/textSize_14sp" />
+    </LinearLayout>
+
+</LinearLayout>

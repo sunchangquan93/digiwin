@@ -21,10 +21,12 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -187,15 +189,23 @@ public class PurchaseCheckActivity extends BaseActivity {
     void commit(){
         if(null != purchaseCheckBean){
             if(purchaseCheckBean.getQc_state().equals("Y")){
-//                if(badReasonList == null){
-//                    showToast(R.string.please_save_bad_reason_first);
-//                    return;
-//                }
                final List<Map<String,String>> maps = new ArrayList<>();
                 for (int i = 0; i < purchaseCheckBeanList.size(); i++) {
                     Map<String, String> map = new HashMap<>();
-                    if (null != purchaseCheckDetailList && clickPosition >=0) {
-                        map.putAll(ObjectAndMapUtils.getValueMap(purchaseCheckDetailList.get(clickPosition)));
+                    if (allDataMap.size()>0) {
+                        List<PurchaseCheckDetailBean> list = new ArrayList<>();
+                            Set<Map.Entry<Integer, List<PurchaseCheckDetailBean>>> sets = allDataMap.entrySet();
+                            for (Map.Entry<Integer, List<PurchaseCheckDetailBean>> entry : sets) {
+                                Object key = entry.getKey();
+                                Object val = entry.getValue();
+                                if (null == val) {
+                                    val = new ArrayList<>();
+                                }
+                                list = (List<PurchaseCheckDetailBean>) val;
+                                for (int j = 0; j < list.size(); j++) {
+                                    map.putAll(ObjectAndMapUtils.getValueMap(list.get(positionMap.get(j))));
+                                }
+                            }
                     }
                     map.putAll(ObjectAndMapUtils.getValueMap(purchaseCheckBean));
                     maps.add(map);
@@ -204,7 +214,7 @@ public class PurchaseCheckActivity extends BaseActivity {
                         @Override
                         public void onCallback1() {
                             showLoadingDialog();
-                            logic.updateQcData(maps, badReasonList, new PurcahseCheckLogic.UpdateQCDataListener() {
+                            logic.updateQcData(maps, badReasonMap, new PurcahseCheckLogic.UpdateQCDataListener() {
                                 @Override
                                 public void onSuccess(String msg) {
                                     dismissLoadingDialog();
@@ -267,8 +277,11 @@ public class PurchaseCheckActivity extends BaseActivity {
         purchaseCheckDetailBean = new PurchaseCheckDetailBean();
         adapter1 = new PurchaseCheckAdapter(pactivity,purchaseCheckBeanList);
         detailAdapter = new PurchaseCheckDetailAdapter(pactivity,purchaseCheckDetailList);
-        clickPosition = -1;
+        selectPosition = -1;
         seq = "";
+        allDataMap.clear();
+        positionMap.clear();
+        badReasonMap.clear();
         badReasonList = null;
         isShow = false;
         defect_num = 0;
@@ -292,6 +305,10 @@ public class PurchaseCheckActivity extends BaseActivity {
 
     List<PurchaseCheckBean> purchaseCheckBeanList;
     List<PurchaseCheckDetailBean> purchaseCheckDetailList;
+
+    Map<Integer,List<PurchaseCheckDetailBean>> allDataMap = new HashMap<>();
+
+    Map<String,List<BadReasonBean>> badReasonMap = new HashMap<>();
 
     List<BadReasonBean> badReasonList;
     @Override
@@ -327,6 +344,7 @@ public class PurchaseCheckActivity extends BaseActivity {
         if(badReasonBeanList.size()>0){
             badReasonList = new ArrayList<>();
             badReasonList.addAll(badReasonBeanList);
+            badReasonMap.put(positionMap.get(selectPosition)+""+selectPosition,badReasonList);
             for (int i = 0; i < badReasonBeanList.size(); i++) {
                 defect_num += StringUtils.string2Float(badReasonBeanList.get(i).getDefect_qty());
             }
@@ -380,7 +398,7 @@ public class PurchaseCheckActivity extends BaseActivity {
                             purchaseCheckBeanList = purchaseCheckBean;
                             adapter1 = new PurchaseCheckAdapter(pactivity,purchaseCheckBean);
                             rc_list.setAdapter(adapter1);
-                            onItemClick();
+                            clickItem();
                         }
 
                         @Override
@@ -400,19 +418,51 @@ public class PurchaseCheckActivity extends BaseActivity {
      */
     String seq = "";
 
-    int clickPosition = -1;
+    /**
+     * 物料信息点击位置
+     */
+    int selectPosition = -1;
+
+    Map<Integer,Integer> positionMap = new HashMap<>();
 
     PurchaseCheckBean purchaseCheckBean;
     PurchaseCheckDetailBean purchaseCheckDetailBean;
-    public void onItemClick(){
+    public void clickItem(){
         adapter1.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View itemView, int position) {
+                selectPosition = position;
+                positionMap.put(selectPosition,-1);
                 purchaseCheckBean = purchaseCheckBeanList.get(position);
                 if(!isShow){
                     if(!StringUtils.isBlank(seq)){
                         if(seq.equals(purchaseCheckBean.getSeq()+purchaseCheckBean.getReceipt_no())){
-                            showDetailData(purchaseCheckDetailList);
+                            detailAdapter = new PurchaseCheckDetailAdapter(pactivity,allDataMap.get(selectPosition));
+                            isShow = true;
+                            adapter1.notifyDataSetChanged();
+
+                            detailAdapter.setOnItemClickListener(new OnItemClickListener() {
+                                @Override
+                                public void onItemClick(View itemView, int position) {
+                                    /**
+                                     * 不良原因明细点击位置
+                                     */
+                                    int clickPosition = -1;
+                                    if (position != clickPosition)
+                                    {
+                                        clickPosition = position;
+                                        positionMap.put(selectPosition,clickPosition);
+                                        purchaseCheckDetailBean = purchaseCheckDetailList.get(position);
+                                    }
+                                    else
+                                    {
+                                        clickPosition = -1;
+                                        positionMap.put(selectPosition,clickPosition);
+                                        purchaseCheckDetailBean = null;
+                                    }
+                                    detailAdapter.notifyDataSetChanged();
+                                }
+                            });
                             return;
                         }
                     }
@@ -430,33 +480,34 @@ public class PurchaseCheckActivity extends BaseActivity {
                         public void onSuccess(List<PurchaseCheckDetailBean> detailList) {
                             dismissLoadingDialog();
                             purchaseCheckDetailList = new ArrayList<PurchaseCheckDetailBean>();
-                            purchaseCheckDetailList = detailList;
+                            purchaseCheckDetailList.addAll(detailList);
                             for (int i = 0; i < purchaseCheckDetailList.size(); i++) {
                                 purchaseCheckDetailList.get(i).setHead_seq(map.get("seq"));
                                 purchaseCheckDetailList.get(i).setItem_no(purchaseCheckBean.getItem_no());
                             }
                             detailAdapter = new PurchaseCheckDetailAdapter(pactivity,purchaseCheckDetailList);
-                            final RecyclerView rc_detail_list = (RecyclerView) findViewById(R.id.rc_list_detail);
-                            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(pactivity);
-                            rc_detail_list.setLayoutManager(linearLayoutManager);
-                            rc_detail_list.setAdapter(detailAdapter);
+                            allDataMap.put(selectPosition,purchaseCheckDetailList);
+                            isShow = true;
+                            adapter1.notifyDataSetChanged();
                             detailAdapter.setOnItemClickListener(new OnItemClickListener() {
                                 @Override
                                 public void onItemClick(View itemView, int position) {
+                                    int clickPosition = -1;
                                     if (position != clickPosition)
                                     {
                                         clickPosition = position;
+                                        positionMap.put(selectPosition,clickPosition);
                                         purchaseCheckDetailBean = purchaseCheckDetailList.get(position);
                                     }
                                     else
                                     {
                                         clickPosition = -1;
+                                        positionMap.put(selectPosition,clickPosition);
                                         purchaseCheckDetailBean = null;
                                     }
                                      detailAdapter.notifyDataSetChanged();
                                 }
                             });
-                            showDetailData(purchaseCheckDetailList);
                         }
 
                         @Override
@@ -467,29 +518,10 @@ public class PurchaseCheckActivity extends BaseActivity {
                     });
                 }else{
                     isShow = false;
-                    try{
-                        LinearLayout ll_form_detail = (LinearLayout) findViewById(R.id.ll_form_detail);
-                        ll_form_detail.setVisibility(View.GONE);
-                    }catch(Exception e){
-                        e.printStackTrace();
-                    }
+                    adapter1.notifyDataSetChanged();
                 }
             }
 
-            private void showDetailData(final List<PurchaseCheckDetailBean> purchaseCheckDetailList) {
-                RecyclerViewHolder holder = adapter1.getHolder();
-                Log.d(TAG,"holder:"+holder);
-                if(null != holder){
-                    isShow = true;
-                    try{
-                        LinearLayout ll_form_detail = (LinearLayout) findViewById(R.id.ll_form_detail);
-                        ll_form_detail.setVisibility(View.VISIBLE);
-                       
-                    }catch(Exception e){
-                        e.printStackTrace();
-                    }
-                }
-            }
         });
     }
 
@@ -512,6 +544,7 @@ public class PurchaseCheckActivity extends BaseActivity {
             //合格量栏位：如果返回的QC单检验否=N，则该栏位可以输入，
             // 如果不是，则该栏位不能输入；该栏位需大于等于0；
             // 如果合格量=0，则判定状态图标为P，否则为N
+            holder.setText(R.id.et_ok_num,item.getOk_qty());
             final EditText et_ok_num = holder.getEditText(R.id.et_ok_num);
             if(!StringUtils.isBlank(item.getOk_qty())){
                 et_ok_num.setText(item.getOk_qty());
@@ -550,6 +583,18 @@ public class PurchaseCheckActivity extends BaseActivity {
             holder.setText(R.id.tv_model,item.getItem_spec());
             holder.setText(R.id.tv_picture_no,item.getDrawing_no());
             holder.setText(R.id.tv_send_check_num,item.getQty());
+
+                if (isShow) {
+                    if(selectPosition == position) {
+                        holder.setVisibility(R.id.ll_form_detail, View.VISIBLE);
+                        RecyclerView rc_detail_list = holder.findViewById(R.id.rc_list_detail);
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(pactivity);
+                        rc_detail_list.setLayoutManager(linearLayoutManager);
+                        rc_detail_list.setAdapter(detailAdapter);
+                    }
+                } else {
+                    holder.setVisibility(R.id.ll_form_detail, View.GONE);
+                }
         }
 
         public RecyclerViewHolder getHolder(){
@@ -559,7 +604,6 @@ public class PurchaseCheckActivity extends BaseActivity {
                 return null;
             }
         }
-
     }
 
     /**
@@ -581,6 +625,7 @@ public class PurchaseCheckActivity extends BaseActivity {
         @Override
         protected void bindData(final RecyclerViewHolder holder, int position, final PurchaseCheckDetailBean item) {
             viewHolder = holder;
+            holder.setText(R.id.et_defect_num,item.getDefect_qty());
             holder.setText(R.id.tv_project_check,item.getItem_deter());
             holder.setText(R.id.tv_item_seq, item.getSeq());
             holder.setText(R.id.tv_check_item,item.getInspection_item());
@@ -621,6 +666,7 @@ public class PurchaseCheckActivity extends BaseActivity {
                         }else{
                             holder.setText(R.id.tv_project_check,item.getItem_deter());
                         }
+                        allDataMap.put(selectPosition,purchaseCheckDetailList);
                     }
                 }
             });
@@ -631,7 +677,7 @@ public class PurchaseCheckActivity extends BaseActivity {
                 holder.setText(R.id.tv_project_check,getResources().getString(R.string.goods_return));
             }
 
-            if (position == clickPosition){
+            if (position == positionMap.get(selectPosition)){
                 holder.setBackground(R.id.item_ll,R.color.green7d);
             }else{
                 holder.setBackground(R.id.item_ll,R.color.gray_da);

@@ -30,6 +30,7 @@ import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseActivity;
 import digiwin.smartdepot.core.jpush.JPushManager;
+import digiwin.smartdepot.core.json.JsonReqForJava;
 import digiwin.smartdepot.login.activity.operating_center_pw.OperatingCenterDialog;
 import digiwin.smartdepot.login.activity.setting_dialog.SettingDialog;
 import digiwin.smartdepot.login.bean.AccoutBean;

@@ -1,9 +1,4 @@
 package digiwin.smartdepot.module.activity.produce.workorderreturn;
-
-/**
- * Created by xiemeng on 2017/3/24.
- */
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -26,6 +21,7 @@ import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseFirstModuldeActivity;
 import digiwin.smartdepot.core.modulecommon.ModuleViewPagerAdapter;
+import digiwin.smartdepot.module.activity.common.HaveSourceUnComActivity;
 import digiwin.smartdepot.module.activity.common.NoComeUnComActivity;
 import digiwin.smartdepot.module.fragment.produce.workorderreturn.WorkOrderReturnScanFg;
 import digiwin.smartdepot.module.fragment.produce.workorderreturn.WorkOrderReturnSumFg;
@@ -78,8 +74,6 @@ public class WorkOrderReturnActivity extends BaseFirstModuldeActivity {
      * 跳转明细使用
      */
     public final int DETAILCODE = 1234;
-
-
     @Override
     protected Toolbar toolbar() {
         return toolbarTitle;

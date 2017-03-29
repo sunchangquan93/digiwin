@@ -31,7 +31,7 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.
         return itemView;
     }
 
-    private <T extends View> T findViewById(int viewId) {
+    public <T extends View> T findViewById(int viewId) {
         View view = mViews.get(viewId);
         if (view == null) {
             view = itemView.findViewById(viewId);

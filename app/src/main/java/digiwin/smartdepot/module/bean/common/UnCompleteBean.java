@@ -30,6 +30,11 @@ public class UnCompleteBean implements Serializable{
      */
     private String transfer_status;
 
+    /**
+     *来源单号
+     */
+    private String doc_no;
+
     public String getTransaction_date() {
         return transaction_date;
     }
@@ -68,5 +73,13 @@ public class UnCompleteBean implements Serializable{
 
     public void setTransfer_status(String transfer_status) {
         this.transfer_status = transfer_status;
+    }
+
+    public String getDoc_no() {
+        return doc_no;
+    }
+
+    public void setDoc_no(String doc_no) {
+        this.doc_no = doc_no;
     }
 }

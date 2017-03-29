@@ -92,13 +92,13 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
     /**
      * 库存量
      */
-    @BindView(R.id.tv_stock_balance)
+    @BindView(R.id.tv_material_return_big)
     TextView tv_stock_balance;
 
     /**
      * 欠料量
      */
-    @BindView(R.id.tv_under_feed)
+    @BindView(R.id.tv_material_return)
     TextView tv_under_feed;
 
 /*    *//**
@@ -442,7 +442,7 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
         saveBean = new SaveBean();
 
         if(type.equals(codetype)){
-            etScanBarocde.setText(data.getLow_order_iitem_no());
+            etScanBarocde.setText(data.getLow_order_item_no());
         }
 
         if(data.getFifo_check().equals("Y")){
@@ -468,7 +468,7 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
             float num = StringUtils.sub(tv_stock_balance.getText().toString(),data.getScan_sumqty());
             map.put("qty",String.valueOf(num));
         }
-        map.put("item_no",data.getLow_order_iitem_no());
+        map.put("item_no",data.getLow_order_item_no());
         map.put("lot_no","");
         map.put("warehouse_no", LoginLogic.getUserInfo().getWare());
 

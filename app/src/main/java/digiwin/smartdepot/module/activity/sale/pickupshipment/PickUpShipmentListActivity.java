@@ -73,16 +73,6 @@ public class PickUpShipmentListActivity extends BaseTitleActivity{
             R.id.et_salesman,R.id.et_operating_department})
     List<EditText> editTexts;
 
-/*    *//**
-     * 发料仓
-     *//*
-    @BindView(R.id.ll_material_warehouse)
-    LinearLayout ll_material_warehouse;
-    @BindView(R.id.tv_material_warehouse)
-    TextView tv_material_warehouse;
-    @BindView(R.id.et_material_warehouse)
-    EditText et_material_warehouse;*/
-
     /**
      * 出货单号
      */
@@ -249,7 +239,17 @@ public class PickUpShipmentListActivity extends BaseTitleActivity{
                     dataList = list;
                     adapter = new PickUpShipmentListAdapter(activity,list);
                     ryList.setAdapter(adapter);
-                    onItemClick(list);
+
+                    adapter.setOnItemClickListener(new OnItemClickListener() {
+                        @Override
+                        public void onItemClick(View itemView, int position) {
+                            Bundle bundle = new Bundle();
+                            FilterResultOrderBean data = list.get(position);
+                            bundle.putSerializable("data",data);
+                            bundle.putString(AddressContants.MODULEID_INTENT,activity.mTimestamp.toString());
+                            ActivityManagerUtils.startActivityBundleForResult(activity,PickUpShipmentActivity.class,bundle,SCANCODE);
+                        }
+                    });
                 }else{
                     showFailedDialog(getResources().getString(R.string.nodate));
                 }
@@ -295,19 +295,6 @@ public class PickUpShipmentListActivity extends BaseTitleActivity{
         iv_title_setting.setImageResource(R.drawable.search);
     }
 
-    public void onItemClick(final List<FilterResultOrderBean> list){
-        adapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(View itemView, int position) {
-                Bundle bundle = new Bundle();
-                FilterResultOrderBean data = list.get(position);
-                bundle.putSerializable("data",data);
-                bundle.putString(AddressContants.MODULEID_INTENT,activity.mTimestamp.toString());
-                ActivityManagerUtils.startActivityBundleForResult(activity,PickUpShipmentActivity.class,bundle,SCANCODE);
-            }
-        });
-    }
-
     /**
      * 弹出筛选对话框
      */
@@ -317,9 +304,9 @@ public class PickUpShipmentListActivity extends BaseTitleActivity{
             if(null != dataList && dataList.size()>0){
                 ll_search_dialog.setVisibility(View.GONE);
                 scrollview.setVisibility(View.VISIBLE);
-                adapter = new PickUpShipmentListAdapter(activity,dataList);
-                ryList.setAdapter(adapter);
-                onItemClick(dataList);
+//                adapter = new PickUpShipmentListAdapter(activity,dataList);
+//                ryList.setAdapter(adapter);
+//                onItemClick(dataList);
             }
         }else{
             ll_search_dialog.setVisibility(View.VISIBLE);

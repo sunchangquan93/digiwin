@@ -3,6 +3,7 @@ package digiwin.smartdepot.module.fragment.produce.putinstore;
 import android.os.Handler;
 import android.os.Message;
 import android.text.method.TextKeyListener;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -11,7 +12,6 @@ import android.widget.TextView;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.BindViews;
@@ -20,7 +20,6 @@ import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
 import digiwin.library.dialog.OnDialogClickListener;
-import digiwin.library.utils.ObjectAndMapUtils;
 import digiwin.library.utils.StringUtils;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
@@ -29,7 +28,6 @@ import digiwin.smartdepot.core.modulecommon.ModuleUtils;
 import digiwin.smartdepot.login.bean.AccoutBean;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
 import digiwin.smartdepot.module.activity.produce.putinstore.PutInStoreSecondActivity;
-import digiwin.smartdepot.module.bean.common.FilterBean;
 import digiwin.smartdepot.module.bean.common.FilterResultOrderBean;
 import digiwin.smartdepot.module.bean.common.SaveBean;
 import digiwin.smartdepot.module.bean.common.ScanBarcodeBackBean;
@@ -87,12 +85,12 @@ public class PutInStoreScanFg extends BaseFragment {
     }
 
     @OnFocusChange(R.id.et_scan_barocde)
+
     void barcodeFocusChanage() {
         ModuleUtils.viewChange(llScanBarcode, views);
         ModuleUtils.etChange(activity, etScanBarocde, editTexts);
         ModuleUtils.tvChange(activity, tvBarcode, textViews);
     }
-
     @OnFocusChange(R.id.et_scan_locator)
     void locatorFocusChanage() {
         ModuleUtils.viewChange(llScanLocator, views);
@@ -278,6 +276,7 @@ public class PutInStoreScanFg extends BaseFragment {
         putInStoreScanFg = this;
         pactivity = (PutInStoreSecondActivity) activity;
         initData();
+        Log.d(TAG,"pactivity"+pactivity);
     }
     private static PutInStoreScanFg putInStoreScanFg;
     public static PutInStoreScanFg getInstance(){

@@ -36,34 +36,10 @@ public class ListSumBean implements Serializable {
      */
     private String scan_sumqty;
 
-    public String getSupplier_name() {
-        return supplier_name;
-    }
-
-    public void setSupplier_name(String supplier_name) {
-        this.supplier_name = supplier_name;
-    }
-
     /**
      * 供应商
      */
     private String supplier_name;
-
-    public String getReceipt_date() {
-        return receipt_date;
-    }
-
-    public void setReceipt_date(String receipt_date) {
-        this.receipt_date = receipt_date;
-    }
-
-    public String getReceipt_no() {
-        return receipt_no;
-    }
-
-    public void setReceipt_no(String receipt_no) {
-        this.receipt_no = receipt_no;
-    }
 
     /**
      * 收货日期
@@ -76,14 +52,6 @@ public class ListSumBean implements Serializable {
      */
     private String receipt_no;
 
-    public String getReceipt_qty() {
-        return receipt_qty;
-    }
-
-    public void setReceipt_qty(String receipt_qty) {
-        this.receipt_qty = receipt_qty;
-    }
-
     /**
      * 收货量
      */
@@ -93,99 +61,9 @@ public class ListSumBean implements Serializable {
      */
     private String item_barcode_type;
     /**
-     *  先进先出管控否
+     * 先进先出管控否
      */
     private String fifo_check;
-
-    public String getItem_barcode_type() {
-        return item_barcode_type;
-    }
-
-    public void setItem_barcode_type(String item_barcode_type) {
-        this.item_barcode_type = item_barcode_type;
-    }
-
-    public String getFifo_check() {
-        return fifo_check;
-    }
-
-    public void setFifo_check(String fifo_check) {
-        this.fifo_check = fifo_check;
-    }
-
-    public String getStock_unit_no() {
-        return stock_unit_no;
-    }
-
-    public void setStock_unit_no(String stock_unit_no) {
-        this.stock_unit_no = stock_unit_no;
-    }
-
-    public String getWarehouse_storage() {
-        return warehouse_storage;
-    }
-
-    public void setWarehouse_storage(String warehouse_storage) {
-        this.warehouse_storage = warehouse_storage;
-    }
-
-    public String getItem_no() {
-        return item_no;
-
-    }
-
-    public void setItem_no(String item_no) {
-        this.item_no = item_no;
-    }
-
-    public String getItem_name() {
-        return item_name;
-    }
-
-    public void setItem_name(String item_name) {
-        this.item_name = item_name;
-    }
-
-    public String getItem_spec() {
-        return item_spec;
-    }
-
-    public void setItem_spec(String item_spec) {
-        this.item_spec = item_spec;
-    }
-
-    public String getUnit_no() {
-        return unit_no;
-    }
-
-    public void setUnit_no(String unit_no) {
-        this.unit_no = unit_no;
-    }
-
-    public String getShortage_qty() {
-        return shortage_qty;
-    }
-
-    public void setShortage_qty(String shortage_qty) {
-        this.shortage_qty = shortage_qty;
-    }
-
-    public String getStock_qty() {
-        return stock_qty;
-    }
-
-    public void setStock_qty(String stock_qty) {
-        this.stock_qty = stock_qty;
-    }
-
-    public String getScan_sumqty() {
-        return scan_sumqty;
-    }
-
-    public void setScan_sumqty(String scan_sumqty) {
-        this.scan_sumqty = scan_sumqty;
-    }
-
 
     /**
      * 发料仓
@@ -236,6 +114,195 @@ public class ListSumBean implements Serializable {
      * 物料条码
      */
     private String barcode_no;
+
+    /**
+     * 下阶料
+     */
+    private String low_order_item_no;
+
+    /**
+     * 下阶料品名
+     */
+
+    private String low_order_item_name;
+
+    /**
+     * 下阶料规格
+     */
+    private String low_order_item_spec;
+
+    /**
+     * 可入库量
+     */
+    private String available_in_qty;
+
+    /**
+     * 匹配量
+     */
+    private String qty;
+
+    /**
+     * 仓库
+     */
+    private String warehouse_no;
+    /**
+     * 到货单号
+     */
+    private String doc_no;
+
+    /**
+     * 到货日期
+     */
+    private String create_date;
+
+    /**
+     * 是否确认数量 1为未确认 2为确认
+     */
+    private String check;
+
+    /**
+     * 储位
+     */
+    private String storage_spaces_no;
+    /**
+     * 通知单号
+     */
+    private String notice_no;
+
+    /**
+     * 客户编码
+     */
+    private String customer_no;
+    /**
+     * 客户名称
+     */
+    private String customer_name;
+
+    private String match_qty;
+
+
+
+
+    public String getSupplier_name() {
+        return supplier_name;
+    }
+
+    public void setSupplier_name(String supplier_name) {
+        this.supplier_name = supplier_name;
+    }
+
+    public String getReceipt_date() {
+        return receipt_date;
+    }
+
+    public void setReceipt_date(String receipt_date) {
+        this.receipt_date = receipt_date;
+    }
+
+    public String getReceipt_no() {
+        return receipt_no;
+    }
+
+    public void setReceipt_no(String receipt_no) {
+        this.receipt_no = receipt_no;
+    }
+
+    public String getReceipt_qty() {
+        return receipt_qty;
+    }
+
+    public void setReceipt_qty(String receipt_qty) {
+        this.receipt_qty = receipt_qty;
+    }
+
+    public String getItem_barcode_type() {
+        return item_barcode_type;
+    }
+
+    public void setItem_barcode_type(String item_barcode_type) {
+        this.item_barcode_type = item_barcode_type;
+    }
+
+    public String getFifo_check() {
+        return fifo_check;
+    }
+
+    public void setFifo_check(String fifo_check) {
+        this.fifo_check = fifo_check;
+    }
+
+    public String getStock_unit_no() {
+        return stock_unit_no;
+    }
+
+    public void setStock_unit_no(String stock_unit_no) {
+        this.stock_unit_no = stock_unit_no;
+    }
+
+    public String getWarehouse_storage() {
+        return warehouse_storage;
+    }
+
+    public void setWarehouse_storage(String warehouse_storage) {
+        this.warehouse_storage = warehouse_storage;
+    }
+
+    public String getItem_no() {
+        return item_no;
+    }
+
+    public void setItem_no(String item_no) {
+        this.item_no = item_no;
+    }
+
+    public String getItem_name() {
+        return item_name;
+    }
+
+    public void setItem_name(String item_name) {
+        this.item_name = item_name;
+    }
+
+    public String getItem_spec() {
+        return item_spec;
+    }
+
+    public void setItem_spec(String item_spec) {
+        this.item_spec = item_spec;
+    }
+
+    public String getUnit_no() {
+        return unit_no;
+    }
+
+    public void setUnit_no(String unit_no) {
+        this.unit_no = unit_no;
+    }
+
+    public String getShortage_qty() {
+        return shortage_qty;
+    }
+
+    public void setShortage_qty(String shortage_qty) {
+        this.shortage_qty = shortage_qty;
+    }
+
+    public String getStock_qty() {
+        return stock_qty;
+    }
+
+    public void setStock_qty(String stock_qty) {
+        this.stock_qty = stock_qty;
+    }
+
+    public String getScan_sumqty() {
+        return scan_sumqty;
+    }
+
+
+    public void setScan_sumqty(String scan_sumqty) {
+        this.scan_sumqty = scan_sumqty;
+    }
 
     public String getWarehouse_out_no() {
         return warehouse_out_no;
@@ -309,28 +376,12 @@ public class ListSumBean implements Serializable {
         this.accept_qty = accept_qty;
     }
 
-    /**
-     * 下阶料
-     */
-    private String low_order_iitem_no;
-
-    /**
-     * 下阶料品名
-     */
-
-    private String low_order_item_name;
-
-    /**
-     * 下阶料规格
-     */
-    private String low_order_item_spec;
-
-    public String getLow_order_iitem_no() {
-        return low_order_iitem_no;
+    public String getLow_order_item_no() {
+        return low_order_item_no;
     }
 
-    public void setLow_order_iitem_no(String low_order_iitem_no) {
-        this.low_order_iitem_no = low_order_iitem_no;
+    public void setLow_order_item_no(String low_order_item_no) {
+        this.low_order_item_no = low_order_item_no;
     }
 
     public String getLow_order_item_name() {
@@ -349,21 +400,6 @@ public class ListSumBean implements Serializable {
         this.low_order_item_spec = low_order_item_spec;
     }
 
-    /**
-     * 可入库量
-     */
-    private String available_in_qty;
-
-    /**
-     * 匹配量
-     */
-    private String qty;
-
-    /**
-
-     * 仓库
-     */
-    private String warehouse_no;
 
     public String getAvailable_in_qty() {
         return available_in_qty;
@@ -388,42 +424,6 @@ public class ListSumBean implements Serializable {
     public void setWarehouse_no(String warehouse_no) {
         this.warehouse_no = warehouse_no;
     }
-
-
-    /**
-     * 到货单号
-     */
-    private String doc_no;
-
-    /**
-     * 到货日期
-     */
-    private String create_date;
-
-    /**
-     * 是否确认数量 1为未确认 2为确认
-     */
-    private String check;
-
-    /**
-     * 储位
-     */
-    private String storage_spaces_no;
-    /**
-     * 通知单号
-     */
-    private String  notice_no;
-
-    /**
-     * 客户编码
-     */
-    private String  customer_no;
-    /**
-     * 客户名称
-     */
-    private String customer_name;
-
-    private  String match_qty;
 
     public String getStorage_spaces_no() {
         return storage_spaces_no;
@@ -495,5 +495,44 @@ public class ListSumBean implements Serializable {
 
     public void setBarcode_no(String barcode_no) {
         this.barcode_no = barcode_no;
+    }
+
+    /**
+     * #退料量
+     */
+    private String return_qty;
+
+    /**
+     * #（最大）可发量
+     */
+    private String issue_qty;
+
+    public String getReturn_qty() {
+        return return_qty;
+    }
+
+    public void setReturn_qty(String return_qty) {
+        this.return_qty = return_qty;
+    }
+
+    public String getIssue_qty() {
+        return issue_qty;
+    }
+
+    public void setIssue_qty(String issue_qty) {
+        this.issue_qty = issue_qty;
+    }
+
+    /**
+     * 批号
+     */
+    public String item_lot_no;
+
+    public String getItem_lot_no() {
+        return item_lot_no;
+    }
+
+    public void setItem_lot_no(String item_lot_no) {
+        this.item_lot_no = item_lot_no;
     }
 }

@@ -107,8 +107,6 @@
         </LinearLayout>
     </LinearLayout>
 
-    <include layout="@layout/inclu_commit" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -116,4 +114,5 @@
         android:layout_marginTop="@dimen/layout_10dp">
         <include layout="@layout/ry_common" />
     </LinearLayout>
+    <include layout="@layout/inclu_commit" />
 </RelativeLayout>

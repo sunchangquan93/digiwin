@@ -25,11 +25,12 @@ import digiwin.library.utils.LogUtils;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.BaseRecyclerAdapter;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
 import digiwin.smartdepot.R;
+import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseTitleActivity;
 import digiwin.smartdepot.core.modulecommon.ModuleUtils;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
-import digiwin.smartdepot.module.activity.produce.workorder.WorkOrderActivity;
+import digiwin.smartdepot.module.activity.common.HaveSourceUnComActivity;
 import digiwin.smartdepot.module.adapter.produce.WorkOrderReturnListAdapter;
 import digiwin.smartdepot.module.bean.common.FilterBean;
 import digiwin.smartdepot.module.bean.common.FilterResultOrderBean;
@@ -167,6 +168,15 @@ public class WorkOrderReturnListActivity extends BaseTitleActivity {
     void search_sure() {
         onUpdate();
     }
+    @BindView(R.id.un_com)
+    ImageView unCom;
+    @OnClick(R.id.un_com)
+    void toUnCom() {
+        Bundle bundle = new Bundle();
+        bundle.putString(AddressContants.MODULEID_INTENT, mTimestamp.toString());
+        bundle.putString(HaveSourceUnComActivity.MODULECODE, module);
+        ActivityManagerUtils.startActivityForBundleData(activity, HaveSourceUnComActivity.class, bundle);
+    }
 
 
     /**
@@ -206,6 +216,7 @@ public class WorkOrderReturnListActivity extends BaseTitleActivity {
         search.setVisibility(View.VISIBLE);
         search.setImageResource(R.drawable.search);
         isSearching = true;
+        unCom.setVisibility(View.VISIBLE);
     }
 
     @Override

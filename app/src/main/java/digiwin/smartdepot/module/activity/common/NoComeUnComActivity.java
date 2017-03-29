@@ -2,7 +2,6 @@ package digiwin.smartdepot.module.activity.common;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
@@ -77,7 +76,7 @@ public class NoComeUnComActivity extends BaseTitleActivity {
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        mName.setText(R.string.finishedstorage_un_com);
+        mName.setText(R.string.un_complete);
     }
 
     @Override

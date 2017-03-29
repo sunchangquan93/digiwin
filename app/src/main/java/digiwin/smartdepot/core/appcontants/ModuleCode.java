@@ -136,4 +136,16 @@ public interface ModuleCode {
      */
     public final String PRINTLABEL="C011";
 
+    /**
+     * 库存交易锁定
+     */
+    public final String STORETRANSLOCK="C012";
+    /**
+     * 库存交易解锁
+     */
+    public final String STORETRANSUNLOCK="C015";
+    /**
+     * 依工单补料
+     */
+    public final String WORKSUPPLEMENT="B023";
 }

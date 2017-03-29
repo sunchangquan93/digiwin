@@ -103,11 +103,9 @@ public class PickUpShipmentSumFg extends BaseFragment {
 
     public void upDateList() {
         try {
-            pactivity = (PickUpShipmentActivity) activity;
             ClickItemPutBean putBean = new ClickItemPutBean();
             putBean.setDoc_no(localData.getDoc_no());
             putBean.setWarehouse_no(LoginLogic.getUserInfo().getWare());
-
             Log.d("====",pactivity.mTimestamp.toString());
 
             commonLogic = CommonLogic.getInstance(pactivity, pactivity.module, pactivity.mTimestamp.toString());
@@ -184,24 +182,33 @@ public class PickUpShipmentSumFg extends BaseFragment {
             showFailedDialog(R.string.nodate);
             return;
         }
-        showLoadingDialog();
-        HashMap<String, String> map = new HashMap<>();
-        commonLogic.commit(map, new CommonLogic.CommitListener() {
+        showCommitSureDialog(new OnDialogTwoListener() {
             @Override
-            public void onSuccess(String msg) {
-                dismissLoadingDialog();
-                showCommitSuccessDialog(msg, new OnDialogClickListener() {
+            public void onCallback1() {
+                showLoadingDialog();
+                HashMap<String, String> map = new HashMap<>();
+                commonLogic.commit(map, new CommonLogic.CommitListener() {
                     @Override
-                    public void onCallback() {
-                       activity.finish();
+                    public void onSuccess(String msg) {
+                        dismissLoadingDialog();
+                        showCommitSuccessDialog(msg, new OnDialogClickListener() {
+                            @Override
+                            public void onCallback() {
+                                activity.finish();
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onFailed(String error) {
+                        dismissLoadingDialog();
+                        showCommitFailDialog(error);
                     }
                 });
             }
-
             @Override
-            public void onFailed(String error) {
-                dismissLoadingDialog();
-                showCommitFailDialog(error);
+            public void onCallback2() {
+
             }
         });
     }
@@ -215,4 +222,5 @@ public class PickUpShipmentSumFg extends BaseFragment {
     public void onDestroy() {
         super.onDestroy();
     }
+
 }

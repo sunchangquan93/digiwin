@@ -117,7 +117,6 @@ public class PrintLabelActivity extends BaseTitleActivity {
 
     final int BARCODEWHAT = 1234;
 
-
     @OnTextChanged(value = R.id.et_resource_barcode, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void barcodeChange(CharSequence s) {
         if (!StringUtils.isBlank(s.toString().trim())) {

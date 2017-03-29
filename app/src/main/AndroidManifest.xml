@@ -154,7 +154,9 @@
 
         <!-- 采购收获 快速 -->
         <activity
-            android:name=".module.activity.purchase.materialreceipt.MaterialReceiptActivity">
+            android:name=".module.activity.purchase.materialreceipt.MaterialReceiptActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.digiwin.MaterialReceiptActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -203,16 +205,7 @@
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
         </activity>
 
-        <!-- 依工单发料  -->
-        <activity
-            android:name=".module.activity.dailywork.orderwork.OrderDailyWorkActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
-            <intent-filter>
-                <action android:name="android.intent.action.digiwin.OrderDailyWorkActivity" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
 
         <!-- 完工入库 -->
         <activity
@@ -344,22 +337,17 @@
         <!-- 捡料出货-->
         <activity
             android:name=".module.activity.sale.pickupshipment.PickUpShipmentActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
-            android:screenOrientation="landscape">
-            <intent-filter>
-                <action android:name="android.intent.action.digiwin.PickUpShipmentActivity" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
 
         <activity
         android:name=".module.activity.produce.enchaseprint.EnchasePrintActivity"
         android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
-        <intent-filter>
-            <action android:name="android.intent.action.digiwin.EnchasePrintActivity" />
-            <category android:name="android.intent.category.DEFAULT" />
-        </intent-filter>
-    </activity>
+            <intent-filter>
+                <action android:name="android.intent.action.digiwin.EnchasePrintActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".module.activity.stock.storequery.StoreQueryActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
@@ -402,10 +390,62 @@
             android:name=".module.activity.stock.PrintLabelActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
             android:screenOrientation="landscape">
-        <intent-filter>
-            <action android:name="android.intent.action.digiwin.PrintLabelActivity" />
-            <category android:name="android.intent.category.DEFAULT" />
-        </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.digiwin.PrintLabelActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".module.activity.common.HaveSourceUnComActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+        <activity
+            android:name=".module.activity.produce.workorderreturn.WorkOrderReturnCommitActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+
+        <!-- 依工单补料-补料清单-->
+        <activity
+            android:name=".module.activity.produce.worksupplement.WorkSupplementListActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
+            android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.digiwin.WorkSupplementListActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!-- 依工单补料-->
+        <activity
+            android:name=".module.activity.produce.worksupplement.WorkSupplementActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+        <!-- 库存交易锁定 -->
+        <activity
+            android:name=".module.activity.stock.storetranscation.StoreTransLockActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
+            android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.digiwin.StoreTransLockActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- 库存交易解锁 -->
+        <activity
+            android:name=".module.activity.stock.storetranscation.StoreTransUnlockActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
+            android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.digiwin.StoreTransUnlockActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- 库存交易解锁明细 -->
+        <activity
+            android:name=".module.activity.stock.storetranscation.StoreTransUnLockDetailActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
+            android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.digiwin.StoreTransUnLockDetailActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
 
         <!-- Required SDK 核心功能极光推送需要 -->

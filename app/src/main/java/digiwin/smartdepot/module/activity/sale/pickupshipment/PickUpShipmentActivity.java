@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -28,8 +29,8 @@ import digiwin.smartdepot.module.fragment.sale.pickupshipment.PickUpShipmentSumF
 
 /**
  * @author 赵浩然
- * @module 捡料出货
- * @date 2017/3/22
+ * @module 减料出货
+ * @date 2017/3/24
  */
 
 public class PickUpShipmentActivity extends BaseTitleActivity{
@@ -84,6 +85,11 @@ public class PickUpShipmentActivity extends BaseTitleActivity{
 
 
     @Override
+    protected int bindLayoutId() {
+        return R.layout.activity_pickupshipment;
+    }
+
+    @Override
     protected void doBusiness() {
         initFragment();
     }
@@ -92,7 +98,6 @@ public class PickUpShipmentActivity extends BaseTitleActivity{
      * 初始化Fragment
      */
     private void initFragment() {
-
         scanFg = new PickUpShipmentScanFg();
         sumFg = new PickUpShipmentSumFg();
         fragments = new ArrayList<>();
@@ -149,11 +154,6 @@ public class PickUpShipmentActivity extends BaseTitleActivity{
     }
 
     @Override
-    protected int bindLayoutId() {
-        return R.layout.activity_pickupshipment;
-    }
-
-    @Override
     protected Toolbar toolbar() {
         return toolbar;
     }
@@ -161,6 +161,7 @@ public class PickUpShipmentActivity extends BaseTitleActivity{
     @Override
     public String moduleCode() {
         module = ModuleCode.PICKUPSHIPMENT;
+        Log.d("moduleCode=====",module);
         return module;
     }
 

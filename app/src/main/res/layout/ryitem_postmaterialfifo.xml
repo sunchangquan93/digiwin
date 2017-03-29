@@ -86,7 +86,7 @@
                 android:textSize="@dimen/textSize_12sp" />
 
             <TextView
-                android:id="@+id/tv_actual_yield"
+                android:id="@+id/tv_feeding_amount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/textSize_12sp" />

@@ -32,6 +32,6 @@ public class SaleOutletFiFoAdapter extends BaseRecyclerAdapter<PostMaterialFIFOB
         holder.setText(R.id.tv_lot_no,item.getLot_no());
         holder.setText(R.id.tv_barcode,item.getBarcode_no());
         holder.setText(R.id.tv_rdna_num, item.getRecommended_qty());
-        holder.setText(R.id.tv_actual_yield, item.getScan_sumqty());
+        holder.setText(R.id.tv_feeding_amount, item.getScan_sumqty());
     }
 }

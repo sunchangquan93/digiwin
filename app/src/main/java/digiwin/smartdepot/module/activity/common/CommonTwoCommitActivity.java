@@ -11,6 +11,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.OnClick;
 import digiwin.library.dialog.OnDialogClickListener;
+import digiwin.library.dialog.OnDialogTwoListener;
 import digiwin.library.utils.LogUtils;
 import digiwin.pulltorefreshlibrary.recyclerview.FullyLinearLayoutManager;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.BaseRecyclerAdapter;
@@ -18,7 +19,6 @@ import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseTitleActivity;
 import digiwin.smartdepot.module.adapter.produce.FinishedStorageSumAdapter;
-import digiwin.smartdepot.module.adapter.produce.WorkOrderReturnSumAdapter;
 import digiwin.smartdepot.module.adapter.stock.storeallot.StoreAllotSumAdapter;
 import digiwin.smartdepot.module.bean.common.SumShowBean;
 import digiwin.smartdepot.module.logic.common.CommonLogic;
@@ -38,35 +38,16 @@ public class CommonTwoCommitActivity extends BaseTitleActivity {
 
     @OnClick(R.id.commit)
     void commit() {
-        try {
-            if (null == sumShowBeanList || sumShowBeanList.size() == 0) {
-                showFailedDialog(R.string.nodate);
-                return;
+        showCommitSureDialog(new OnDialogTwoListener() {
+            @Override
+            public void onCallback1() {
+                sureCommit();
             }
-            showLoadingDialog();
-            Map<String, String> map = new HashMap<>();
-            logic.commit(map, new CommonLogic.CommitListener() {
-                @Override
-                public void onSuccess(String msg) {
-                    dismissLoadingDialog();
-                    showCommitSuccessDialog(msg, new OnDialogClickListener() {
-                        @Override
-                        public void onCallback() {
-                            activity.finish();
-                        }
-                    });
-                }
+            @Override
+            public void onCallback2() {
 
-                @Override
-                public void onFailed(String error) {
-                    dismissLoadingDialog();
-                    showCommitFailDialog(error);
-                }
-            });
-
-        } catch (Exception e) {
-            LogUtils.e(TAG, "commit-->" + e);
-        }
+            }
+        });
     }
 
     /**
@@ -91,7 +72,7 @@ public class CommonTwoCommitActivity extends BaseTitleActivity {
 
     @Override
     protected int bindLayoutId() {
-        return R.layout.activity_finishedstorage_sum;
+        return R.layout.activity_twocommit_sum;
     }
 
     @Override
@@ -125,6 +106,38 @@ public class CommonTwoCommitActivity extends BaseTitleActivity {
             logic = CommonLogic.getInstance(activity, module, mTimestamp.toString());
         }catch (Exception e){
             LogUtils.e(TAG,"doBusiness()" +e);
+        }
+    }
+
+    private void sureCommit(){
+        try {
+            if (null == sumShowBeanList || sumShowBeanList.size() == 0) {
+                showFailedDialog(R.string.nodate);
+                return;
+            }
+            showLoadingDialog();
+            Map<String, String> map = new HashMap<>();
+            logic.commit(map, new CommonLogic.CommitListener() {
+                @Override
+                public void onSuccess(String msg) {
+                    dismissLoadingDialog();
+                    showCommitSuccessDialog(msg, new OnDialogClickListener() {
+                        @Override
+                        public void onCallback() {
+                            activity.finish();
+                        }
+                    });
+                }
+
+                @Override
+                public void onFailed(String error) {
+                    dismissLoadingDialog();
+                    showCommitFailDialog(error);
+                }
+            });
+
+        } catch (Exception e) {
+            LogUtils.e(TAG, "commit-->" + e);
         }
     }
 

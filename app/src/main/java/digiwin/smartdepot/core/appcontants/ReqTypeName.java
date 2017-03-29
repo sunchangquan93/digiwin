@@ -198,4 +198,8 @@ public interface ReqTypeName {
      * 获取图纸
      */
     static final String  GETDRAWING = "app.get.drawing";
+    /**
+     * (库存交易锁定)获取料号信息
+     */
+    static final String  GETITEMDETAIL = "app.item.check";
 }

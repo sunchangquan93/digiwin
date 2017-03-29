@@ -28,7 +28,7 @@ import digiwin.pulltorefreshlibrary.recyclerview.FullyLinearLayoutManager;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
-import digiwin.smartdepot.core.base.BaseFirstModuldeActivity;
+import digiwin.smartdepot.core.base.BaseTitleActivity;
 import digiwin.smartdepot.core.modulecommon.ModuleUtils;
 import digiwin.smartdepot.module.adapter.purchase.MaterialReceiptAdapter;
 import digiwin.smartdepot.module.bean.common.ClickItemPutBean;
@@ -44,7 +44,7 @@ import static android.R.attr.keyHeight;
  * @date 2017/3/8
  */
 
-public class MaterialReceiptActivity extends BaseFirstModuldeActivity implements View.OnLayoutChangeListener{
+public class MaterialReceiptActivity extends BaseTitleActivity implements View.OnLayoutChangeListener{
 
     private MaterialReceiptActivity activity;
 
@@ -274,10 +274,5 @@ public class MaterialReceiptActivity extends BaseFirstModuldeActivity implements
                 showFailedDialog(error);
             }
         });
-    }
-
-    @Override
-    public ExitMode exitOrDel() {
-        return ExitMode.EXITD;
     }
 }

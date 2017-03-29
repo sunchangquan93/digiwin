@@ -26,7 +26,7 @@ import digiwin.library.utils.StringUtils;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
-import digiwin.smartdepot.core.base.BaseFirstModuldeActivity;
+import digiwin.smartdepot.core.base.BaseTitleActivity;
 import digiwin.smartdepot.core.modulecommon.ModuleUtils;
 import digiwin.smartdepot.module.bean.dailywork.ProcessReportingBean;
 import digiwin.smartdepot.module.bean.dailywork.ProcessReportingCommitBean;
@@ -39,7 +39,7 @@ import digiwin.smartdepot.module.logic.dailywok.ProcessReportingLogic;
  * @date 2017/3/15
  */
 
-public class ProcessReportingActivity extends BaseFirstModuldeActivity{
+public class ProcessReportingActivity extends BaseTitleActivity{
 
     private ProcessReportingActivity activity;
 
@@ -416,12 +416,6 @@ public class ProcessReportingActivity extends BaseFirstModuldeActivity{
     }
 
     @Override
-    public ExitMode exitOrDel() {
-        return ExitMode.EXITD;
-    }
-
-    @Override
-
     protected Toolbar toolbar() {
         return toolbar;
     }

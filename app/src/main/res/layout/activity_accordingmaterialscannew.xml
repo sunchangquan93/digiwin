@@ -98,7 +98,7 @@
                             android:textSize="@dimen/textSize_12sp" />
 
                         <TextView
-                            android:id="@+id/tv_stock_balance"
+                            android:id="@+id/tv_material_return_big"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
@@ -120,7 +120,7 @@
                             android:textSize="@dimen/textSize_12sp" />
 
                         <TextView
-                            android:id="@+id/tv_under_feed"
+                            android:id="@+id/tv_material_return"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
@@ -140,7 +140,7 @@
                             android:textSize="@dimen/textSize_12sp" />
 
                         <TextView
-                            android:id="@+id/tv_actual_yield"
+                            android:id="@+id/tv_feeding_amount"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"

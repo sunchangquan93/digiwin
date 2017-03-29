@@ -32,6 +32,6 @@ public class PickUpShipmentFIFoAdapter extends BaseRecyclerAdapter<PostMaterialF
         holder.setText(R.id.tv_locator,item.getStorage_spaces_no());
         holder.setText(R.id.tv_barcode, item.getBarcode_no());
         holder.setText(R.id.tv_rdna_num, item.getRecommended_qty());
-        holder.setText(R.id.tv_actual_yield, item.getScan_sumqty());
+        holder.setText(R.id.tv_feeding_amount, item.getScan_sumqty());
     }
 }

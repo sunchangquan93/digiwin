@@ -114,4 +114,30 @@ public class FilterResultOrderBean implements Serializable {
     public void setItem_name(String item_name) {
         this.item_name = item_name;
     }
+    /**
+     * 锁定原因
+     */
+    private String lock_reason = null;
+
+    public String getLock_reason() {
+        return lock_reason;
+    }
+
+    public void setLock_reason(String lock_reason) {
+        this.lock_reason = lock_reason;
+    }
+
+
+    /**
+     * 退料单号
+     */
+    private String return_no;
+
+    public String getReturn_no() {
+        return return_no;
+    }
+
+    public void setReturn_no(String return_no) {
+        this.return_no = return_no;
+    }
 }

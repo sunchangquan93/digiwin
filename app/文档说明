@@ -1,4 +1,15 @@
-<<<<<<< .mine
+复制项目注意事项：
+	修改app的build中applicationId为自己项目的名称
+	修改清单文件和MainLogic中的隐式跳转名，原格式android.intent.action.digiwin.xxxActivity
+	替换为android.intent.action.客户简称.xxxActivity统一查找替换即可
+	清单文件中TODO地方统一修改为客户简称
+	修改project名称
+	1.关闭Android Studio 
+	2.修改project所在路径的文件夹名字为[NewName]，执行2后3，4，5可以忽略
+	3.打开Android Stuido，import新的[NewName]路径工程(很重要,重新import工程，Android Studio会自动修改部分相关的project名字引用)
+	4.修改根目录下的.iml文件名为[NewName].iml，及该文件中的external.linked.project.id=[NewName]
+	5.修改.idea/modules.xml里面的
+	<module fileurl="file://$PROJECT_DIR$/[NewName].iml" filepath="$PROJECT_DIR$/[NewName].iml" />
 
 1.okhttp网络请求示例:
           HashMap<String, String> loginMap = new HashMap<String, String>();

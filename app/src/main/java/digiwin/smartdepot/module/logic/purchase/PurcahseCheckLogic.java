@@ -2,6 +2,7 @@ package digiwin.smartdepot.module.logic.purchase;
 
 import android.content.Context;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -269,7 +270,7 @@ public class PurcahseCheckLogic {
     /**
      * 检验单数据提交
      */
-    public void updateQcData(final List<Map<String, String>> maps, final List<BadReasonBean> badReasonBeanList,final UpdateQCDataListener listener) {
+    public void updateQcData(final List<Map<String, String>> maps, final Map<String,List<BadReasonBean>> badReasonBeanMap, final UpdateQCDataListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
@@ -282,7 +283,7 @@ public class PurcahseCheckLogic {
                         plant = accoutBean.getPlant();
                     }
                     String deviceId= TelephonyUtils.getDeviceId(BaseApplication.getInstance());
-                    String xml = new CreatePurchaseCheckReq(userName,plant,maps,badReasonBeanList,deviceId,mModule, ReqTypeName.UPDATEIQCSTATUS, mTimestamp).toXml();
+                    String xml = new CreatePurchaseCheckReq(userName,plant,maps,badReasonBeanMap,deviceId,mModule, ReqTypeName.UPDATEIQCSTATUS, mTimestamp).toXml();
                     OkhttpRequest.getInstance(mContext).post(xml, new IRequestCallbackImp() {
                         @Override
                         public void onResponse(String string) {

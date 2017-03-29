@@ -8,7 +8,6 @@ import digiwin.pulltorefreshlibrary.recyclerviewAdapter.BaseRecyclerAdapter;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.RecyclerViewHolder;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.module.bean.common.FifoAccordingBean;
-import digiwin.smartdepot.module.bean.produce.FiFoBean;
 
 /**
  * @author 赵浩然
@@ -33,6 +32,6 @@ public class AccordingMaterialFiFo_Adapter extends BaseRecyclerAdapter<FifoAccor
         holder.setText(R.id.tv_batch_date,item.getLot_date());
         holder.setText(R.id.tv_item_no,item.getItem_no());
         holder.setText(R.id.tv_rdna_num, item.getRecommended_qty());
-        holder.setText(R.id.tv_actual_yield, item.getScan_sumqty());
+        holder.setText(R.id.tv_feeding_amount, item.getScan_sumqty());
     }
 }

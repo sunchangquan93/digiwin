@@ -93,19 +93,19 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
     /**
      * 库存量
      */
-    @BindView(R.id.tv_stock_balance)
+    @BindView(R.id.tv_material_return_big)
     TextView tv_stock_balance;
 
     /**
      * 欠料量
      */
-    @BindView(R.id.tv_under_feed)
+    @BindView(R.id.tv_material_return)
     TextView tv_under_feed;
 
     /**
      * 已扫
      */
-    @BindView(R.id.tv_actual_yield)
+    @BindView(R.id.tv_feeding_amount)
     TextView tv_actual_yield;
 
     @BindView(R.id.ry_list)
@@ -421,7 +421,7 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
         type = data.getItem_barcode_type();
 
         if(type.equals(codetype)){
-            etScanBarocde.setText(data.getLow_order_iitem_no());
+            etScanBarocde.setText(data.getLow_order_item_no());
         }
 
         if(data.getFifo_check().equals("Y")){
@@ -435,7 +435,7 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
         mRc_list.setLayoutManager(fullyLinearLayoutManager);
 
         HashMap<String,String> map = new HashMap<String,String>();
-        map.put("item_no",data.getLow_order_iitem_no());
+        map.put("item_no",data.getLow_order_item_no());
         map.put("lot_no","");
         map.put("warehouse_no", LoginLogic.getUserInfo().getWare());
 
