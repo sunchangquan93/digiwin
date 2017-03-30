@@ -23,22 +23,24 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static digiwin.library.net.OkHttpRequestManager.TYPE_XML;
+
 /**
  * Created by ChangQuan.Sun on 2016/12/23
  */
 
-public class OkHttpRequestManager implements IRequestManager {
+public class OkHttpJsonRequestManager implements IRequestManager {
     public static final int DOWNLOAD_SUCCESS_FILE = 1;
     public static final int DOWNLOAD_FAIL = 2;
     public static final int DOWNLOAD_PROGRESS = 3;
     public static final MediaType TYPE_JSON = MediaType.parse("application/json; charset=utf-8");
 //  public static final MediaType TYPE_XML = MediaType.parse("application/xml; charset=utf-8");
-   public static final MediaType TYPE_XML = MediaType.parse("text/xml; charset=utf-8");
+ //  public static final MediaType TYPE_XML = MediaType.parse("text/xml; charset=utf-8");
     private OkHttpClient okHttpClient;
     private Handler handler;
     private static Context context;
 
-    public OkHttpRequestManager(Context context) {
+    public OkHttpJsonRequestManager(Context context) {
         //持久化cookie
         ClearableCookieJar cookieJar1 = new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(context));
         okHttpClient = new OkHttpClient.Builder()
@@ -52,13 +54,13 @@ public class OkHttpRequestManager implements IRequestManager {
         handler = new Handler(Looper.getMainLooper());
     }
 
-    public static OkHttpRequestManager getInstance(Context context) {
-        OkHttpRequestManager.context = context;
+    public static OkHttpJsonRequestManager getInstance(Context context) {
+        OkHttpJsonRequestManager.context = context;
         return SingletonHolder.INSTANCE;
     }
 
     private static class SingletonHolder {
-        private static final OkHttpRequestManager INSTANCE = new OkHttpRequestManager(context);
+        private static final OkHttpJsonRequestManager INSTANCE = new OkHttpJsonRequestManager(context);
     }
 
     @Override
@@ -73,7 +75,7 @@ public class OkHttpRequestManager implements IRequestManager {
 
     @Override
     public void post(String url, String requestBodyXml, IRequestCallBack requestCallBack) {
-        RequestBody body = RequestBody.create(TYPE_XML, requestBodyXml);
+        RequestBody body = RequestBody.create(TYPE_JSON, requestBodyXml);
         Request request = new Request.Builder()
                 .addHeader("SOAPAction", "\"\"")
                 .url(url)
