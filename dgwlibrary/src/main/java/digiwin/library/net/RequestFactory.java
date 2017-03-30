@@ -10,4 +10,8 @@ public class RequestFactory {
     public static IRequestManager getRequestManager(Context context){
         return OkHttpRequestManager.getInstance(context);
     }
+
+    public static IRequestManager getRequestJsonManager(Context context){
+        return OkHttpRequestJsonManager.getInstance(context);
+    }
 }

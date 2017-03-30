@@ -23,13 +23,11 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import static digiwin.library.net.OkHttpRequestManager.TYPE_XML;
-
 /**
  * Created by ChangQuan.Sun on 2016/12/23
  */
 
-public class OkHttpJsonRequestManager implements IRequestManager {
+public class OkHttpRequestJsonManager implements IRequestManager {
     public static final int DOWNLOAD_SUCCESS_FILE = 1;
     public static final int DOWNLOAD_FAIL = 2;
     public static final int DOWNLOAD_PROGRESS = 3;
@@ -40,7 +38,7 @@ public class OkHttpJsonRequestManager implements IRequestManager {
     private Handler handler;
     private static Context context;
 
-    public OkHttpJsonRequestManager(Context context) {
+    public OkHttpRequestJsonManager(Context context) {
         //持久化cookie
         ClearableCookieJar cookieJar1 = new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(context));
         okHttpClient = new OkHttpClient.Builder()
@@ -54,13 +52,13 @@ public class OkHttpJsonRequestManager implements IRequestManager {
         handler = new Handler(Looper.getMainLooper());
     }
 
-    public static OkHttpJsonRequestManager getInstance(Context context) {
-        OkHttpJsonRequestManager.context = context;
+    public static OkHttpRequestJsonManager getInstance(Context context) {
+        OkHttpRequestJsonManager.context = context;
         return SingletonHolder.INSTANCE;
     }
 
     private static class SingletonHolder {
-        private static final OkHttpJsonRequestManager INSTANCE = new OkHttpJsonRequestManager(context);
+        private static final OkHttpRequestJsonManager INSTANCE = new OkHttpRequestJsonManager(context);
     }
 
     @Override
