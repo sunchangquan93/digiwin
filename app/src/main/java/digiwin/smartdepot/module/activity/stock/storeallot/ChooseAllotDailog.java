@@ -29,7 +29,7 @@ public class ChooseAllotDailog {
                     dialog = null;
                 }
                 CustomDialog.Builder builder = new CustomDialog.Builder(context)
-                        .view(R.layout.dialognocome_chooseallot)
+                        .view(R.layout.dialog_nocome_chooseallot)
                         .style(R.style.CustomDialog)
                         .addViewOnclick(R.id.tv_allotin, new View.OnClickListener() {
                             @Override

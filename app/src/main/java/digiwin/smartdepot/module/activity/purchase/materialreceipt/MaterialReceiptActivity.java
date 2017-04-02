@@ -160,7 +160,6 @@ public class MaterialReceiptActivity extends BaseTitleActivity implements View.O
         @Override
         public boolean handleMessage(Message msg) {
             if(msg.what == DELIVERY_NOTE_NO){
-
                 ClickItemPutBean putBean = new ClickItemPutBean();
                 putBean.setDoc_no(String.valueOf(msg.obj));
                 commonLogic.getOrderSumData(putBean, new CommonLogic.GetOrderSumListener() {

@@ -273,6 +273,9 @@ public class SaleOutletListActivity extends BaseTitleActivity {
      * 更新
      */
     private void onUpdate() {
+        list.clear();
+        adapter = new SaleOutletListAdapter(activity, list);
+        ryList.setAdapter(adapter);
         showLoadingDialog();
         FilterBean filterBean = new FilterBean();
         AccoutBean userInfo = LoginLogic.getUserInfo();

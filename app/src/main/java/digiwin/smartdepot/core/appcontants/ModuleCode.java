@@ -83,9 +83,9 @@ public interface ModuleCode {
      */
     public final String COMPLETINGSTORE = "B006";
     /**
-     * 销售出库
+     * 通知出货
      */
-    public final String SALEOUTLET="B021";
+    public final String SALEOUTLET="D001";
     /**
      * 杂项发料
      */
@@ -134,7 +134,7 @@ public interface ModuleCode {
     /**
      * 标签补打
      */
-    public final String PRINTLABEL="C011";
+    public final String PRINTLABEL="C001";
 
     /**
      * 库存交易锁定
@@ -148,4 +148,39 @@ public interface ModuleCode {
      * 依工单补料
      */
     public final String WORKSUPPLEMENT="B023";
+    /**
+     * 仓库退料
+     */
+    public final String STORERETURNMATERIAL="A008";
+    /**
+     * 销售退货
+     */
+    public final String SALERETURN="D004";
+
+    /**
+     * 生产超领
+     */
+    public final String PRODUCTIONLEADER = "B011";
+
+    /**
+     * 快速入库
+     */
+    public final String QUICKSTORAGE = "A007";
+
+    /**
+     * 扫入扫描
+     */
+    public final String SCANINSCAN = "E001";
+    /**
+     * 开工扫描
+     */
+    public final String STARTWORKSCAN = "E002";
+    /**
+     * 完工扫描
+     */
+    public final String FINISHWORKSCAN = "E003";
+    /**
+     * 扫出扫描
+     */
+    public final String SCANOUTSCAN = "E004";
 }

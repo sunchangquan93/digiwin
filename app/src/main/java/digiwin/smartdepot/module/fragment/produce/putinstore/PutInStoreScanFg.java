@@ -29,6 +29,7 @@ import digiwin.smartdepot.login.bean.AccoutBean;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
 import digiwin.smartdepot.module.activity.produce.putinstore.PutInStoreSecondActivity;
 import digiwin.smartdepot.module.bean.common.FilterResultOrderBean;
+import digiwin.smartdepot.module.bean.common.SaveBackBean;
 import digiwin.smartdepot.module.bean.common.SaveBean;
 import digiwin.smartdepot.module.bean.common.ScanBarcodeBackBean;
 import digiwin.smartdepot.module.bean.common.ScanLocatorBackBean;
@@ -74,6 +75,12 @@ public class PutInStoreScanFg extends BaseFragment {
     List<TextView> textViews;
     @BindView(R.id.cb_locatorlock2)
     CheckBox cb_locatorlock2;
+
+    /**
+     * 已扫描量
+     */
+    @BindView(R.id.tv_scan_hasScan)
+    TextView tvScanHasScan;
 
     @OnCheckedChanged(R.id.cb_locatorlock2)
     void isLock2(boolean checked) {
@@ -136,21 +143,22 @@ public class PutInStoreScanFg extends BaseFragment {
             return;
         }
         saveBean.setQty(etInputNum.getText().toString());
-        float qty = StringUtils.string2Float(saveBean.getQty());
-        float scansum_qty = StringUtils.string2Float(saveBean.getScan_sumqty());
-        if(!StringUtils.isBlank(saveBean.getAvailable_in_qty())){
-            float avaliable_in_qty = StringUtils.string2Float(saveBean.getAvailable_in_qty());
-            if(qty + scansum_qty > avaliable_in_qty){
-                showFailedDialog(pactivity.getResources().getString(R.string.scan_sumqty_larger_than_need_qty));
-                return;
-            }
-        }
+//        float qty = StringUtils.string2Float(saveBean.getQty());
+//        float scansum_qty = StringUtils.string2Float(saveBean.getScan_sumqty());
+//        if(!StringUtils.isBlank(saveBean.getAvailable_in_qty())){
+//            float avaliable_in_qty = StringUtils.string2Float(saveBean.getAvailable_in_qty());
+//            if(qty + scansum_qty > avaliable_in_qty){
+//                showFailedDialog(pactivity.getResources().getString(R.string.scan_sumqty_larger_than_need_qty));
+//                return;
+//            }
+//        }
         showLoadingDialog();
         commonLogic.scanSave(saveBean, new CommonLogic.SaveListener() {
             @Override
-            public void onSuccess(String msg) {
+            public void onSuccess(SaveBackBean saveBackBean) {
                 dismissLoadingDialog();
                 clear();
+                tvScanHasScan.setText(saveBackBean.getScan_sumqty());
             }
 
             @Override
@@ -211,6 +219,7 @@ public class PutInStoreScanFg extends BaseFragment {
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
                             barcodeShow = barcodeBackBean.getShow();
                             etInputNum.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
+                            tvScanHasScan.setText(barcodeBackBean.getScan_sumqty());
                             barcodeFlag = true;
                             show();
                             saveBean.setAvailable_in_qty(barcodeBackBean.getAvailable_in_qty());
@@ -276,7 +285,6 @@ public class PutInStoreScanFg extends BaseFragment {
         putInStoreScanFg = this;
         pactivity = (PutInStoreSecondActivity) activity;
         initData();
-        Log.d(TAG,"pactivity"+pactivity);
     }
     private static PutInStoreScanFg putInStoreScanFg;
     public static PutInStoreScanFg getInstance(){
@@ -291,11 +299,10 @@ public class PutInStoreScanFg extends BaseFragment {
      */
     private void show() {
         tvDetailShow.setText(StringUtils.lineChange(barcodeShow + "\\n" + locatorShow));
-//        if (!StringUtils.isBlank(tvDetailShow.getText().toString())){
-//        includeDetail.setVisibility(View.VISIBLE);}else {
-//        includeDetail.setVisibility(View.GONE);
-//        }
-        includeDetail.setVisibility(View.VISIBLE);
+        if (!StringUtils.isBlank(tvDetailShow.getText().toString())){
+            includeDetail.setVisibility(View.VISIBLE);}else {
+            includeDetail.setVisibility(View.GONE);
+        }
     }
 
     /**
@@ -303,15 +310,15 @@ public class PutInStoreScanFg extends BaseFragment {
      */
     private void clear() {
         etInputNum.setText("");
+        barcodeFlag=false;
+        etScanBarocde.setText("");
+        barcodeShow="";
         if (!cb_locatorlock2.isChecked()){
             locatorFlag=false;
             etScanLocator.setText("");
             locatorShow="";
+            etScanLocator.requestFocus();
         }
-        barcodeFlag=false;
-        etScanBarocde.setText("");
-        barcodeShow="";
-        etScanLocator.requestFocus();
         show();
     }
 

@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -38,6 +37,7 @@ import digiwin.smartdepot.module.activity.sale.saleoutlet.SaleOutletActivity;
 import digiwin.smartdepot.module.adapter.sale.SaleOutletFiFoAdapter;
 import digiwin.smartdepot.module.bean.common.ClickItemPutBean;
 import digiwin.smartdepot.module.bean.common.FilterResultOrderBean;
+import digiwin.smartdepot.module.bean.common.SaveBackBean;
 import digiwin.smartdepot.module.bean.common.SaveBean;
 import digiwin.smartdepot.module.bean.common.ScanBarcodeBackBean;
 import digiwin.smartdepot.module.bean.common.ScanLocatorBackBean;
@@ -197,7 +197,7 @@ public class SaleOutletScanFg extends BaseFragment {
         showLoadingDialog();
         commonLogic.scanSave(saveBean, new CommonLogic.SaveListener() {
             @Override
-            public void onSuccess(String msg) {
+            public void onSuccess(SaveBackBean saveBackBean) {
                 dismissLoadingDialog();
                 clear();
             }
@@ -301,8 +301,8 @@ public class SaleOutletScanFg extends BaseFragment {
                             etInputNum.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
                             barcodeFlag = true;
                             saveBean.setAvailable_in_qty(barcodeBackBean.getAvailable_in_qty());
-                            saveBean.setBarcode_no(barcodeBackBean.getBarcode_no());
                             saveBean.setItem_no(barcodeBackBean.getItem_no());
+                            saveBean.setBarcode_no(barcodeBackBean.getBarcode_no());
                             saveBean.setUnit_no(barcodeBackBean.getUnit_no());
                             saveBean.setLot_no(barcodeBackBean.getLot_no());
                             saveBean.setDoc_no(notice_no);

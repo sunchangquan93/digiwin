@@ -23,6 +23,7 @@ import digiwin.smartdepot.module.bean.common.FifoAccordingBean;
 import digiwin.smartdepot.module.bean.common.FilterBean;
 import digiwin.smartdepot.module.bean.common.FilterResultOrderBean;
 import digiwin.smartdepot.module.bean.common.ListSumBean;
+import digiwin.smartdepot.module.bean.common.SaveBackBean;
 import digiwin.smartdepot.module.bean.common.SaveBean;
 import digiwin.smartdepot.module.bean.common.ScanBarcodeBackBean;
 import digiwin.smartdepot.module.bean.common.ScanEmployeeBackBean;
@@ -170,7 +171,7 @@ public class CommonLogic {
      * 保存
      */
     public interface SaveListener {
-        public void onSuccess(String msg);
+        public void onSuccess(SaveBackBean saveBackBean);
 
         public void onFailed(String error);
     }
@@ -192,8 +193,10 @@ public class CommonLogic {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != xmlResp) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
-                                    String fieldString = xmlResp.getFieldString();
-                                    listener.onSuccess(fieldString);
+                                    List<SaveBackBean> savebackBeanList = xmlResp.getMasterDatas(SaveBackBean.class);
+                                    SaveBackBean saveBackBean = savebackBeanList.get(0);
+                                    saveBackBean.setScan_sumqty(StringUtils.deleteZero(saveBackBean.getScan_sumqty()));
+                                    listener.onSuccess(saveBackBean);
                                     return;
                                 } else {
                                     error = xmlResp.getDescription();

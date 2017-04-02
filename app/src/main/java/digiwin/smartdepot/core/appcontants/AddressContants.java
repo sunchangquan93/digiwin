@@ -19,7 +19,7 @@ public class AddressContants {
     /**
      *  默认测试区地址
      */
-    public static String TEST_ADDRESS = "http://180.167.0.43:8009/web/ws/r/aws_ttsrv2_topprod?wsdl";
+    public static String TEST_ADDRESS = "http://172.16.100.24/web/ws/r/aws_ttsrv2?wsdl";
     /**
      * 测试区地址标记
      */
@@ -27,7 +27,7 @@ public class AddressContants {
     /**
      *  默认正式区地址
      */
-    public static String FORMAL_ADDRESS = "http://180.167.0.43:8009/web/ws/r/aws_ttsrv2_topprod?wsdl";
+    public static String FORMAL_ADDRESS = "http://172.16.100.24/web/ws/r/aws_ttsrv2?wsdl";
     /**
      * 正式区地址标记
      */
@@ -116,6 +116,14 @@ public class AddressContants {
      * 送货单号
      */
     public static final String DOC_NO = "doc_no";
+    /**
+     * 时间
+     */
+    public static final String DATE = "date";
+    /**
+     * 供应商
+     */
+    public static final String SUPPLIER = "supplier";
     /**
      * fifoY
      */

@@ -5,6 +5,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.widget.TextView;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import digiwin.library.dialog.OnDialogClickListener;
@@ -65,10 +67,13 @@ public class UserInfoActivity extends BaseTitleActivity {
             @Override
             public void onCallback() {
                 ActivityManagerUtils.startActivity(activity, LoginActivity.class);
-                activity.finish();
-                Activity mainActivity = ActivityManagerUtils.getActivity("MainActivity");
-                if (null != mainActivity){
-                    mainActivity.finish();
+                List<Activity> activityLists = ActivityManagerUtils.getActivityLists();
+                for (Activity mActivity:activityLists){
+                    if(!mActivity.getClass().getSimpleName().equals("LoginActivity")){
+                        if(mActivity!=null &&!mActivity.isFinishing()){
+                            mActivity.finish();
+                        }
+                    }
                 }
             }
         });

@@ -9,7 +9,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 
@@ -29,6 +28,7 @@ import digiwin.smartdepot.core.modulecommon.ModuleUtils;
 import digiwin.smartdepot.module.activity.produce.workorderreturn.WorkOrderReturnActivity;
 import digiwin.smartdepot.module.activity.produce.workorderreturn.WorkOrderReturnListActivity;
 import digiwin.smartdepot.module.bean.common.FilterResultOrderBean;
+import digiwin.smartdepot.module.bean.common.SaveBackBean;
 import digiwin.smartdepot.module.bean.common.SaveBean;
 import digiwin.smartdepot.module.bean.common.ScanBarcodeBackBean;
 import digiwin.smartdepot.module.bean.common.ScanLocatorBackBean;
@@ -74,6 +74,8 @@ public class WorkOrderReturnScanFg extends BaseFragment {
     List<TextView> textViews;
     @BindView(R.id.cb_locatorlock)
     CheckBox cbLocatorlock;
+    @BindView(R.id.tv_scan_hasScan)
+    TextView tvScanHasScan;
 
     @OnCheckedChanged(R.id.cb_locatorlock)
     void isLock(boolean checked) {
@@ -139,7 +141,8 @@ public class WorkOrderReturnScanFg extends BaseFragment {
         saveBean.setQty(etInputNum.getText().toString());
         commonLogic.scanSave(saveBean, new CommonLogic.SaveListener() {
             @Override
-            public void onSuccess(String msg) {
+            public void onSuccess(SaveBackBean saveBackBean) {
+                tvScanHasScan.setText(saveBackBean.getScan_sumqty());
                 dismissLoadingDialog();
                 clear();
             }
@@ -200,6 +203,7 @@ public class WorkOrderReturnScanFg extends BaseFragment {
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
                             barcodeShow = barcodeBackBean.getShow();
                             etInputNum.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
+                            tvScanHasScan.setText(barcodeBackBean.getScan_sumqty());
                             barcodeFlag = true;
                             show();
                             saveBean.setAvailable_in_qty(barcodeBackBean.getAvailable_in_qty());
@@ -288,15 +292,16 @@ public class WorkOrderReturnScanFg extends BaseFragment {
      */
     private void clear() {
         etInputNum.setText("");
-        if (!cbLocatorlock.isChecked()) {
-            locatorFlag = false;
-            etScanLocator.setText("");
-            locatorShow = "";
-        }
         barcodeFlag = false;
         etScanBarocde.setText("");
         barcodeShow = "";
         etScanBarocde.requestFocus();
+        if (!cbLocatorlock.isChecked()) {
+            locatorFlag = false;
+            etScanLocator.setText("");
+            locatorShow = "";
+            etScanLocator.requestFocus();
+        }
         show();
     }
 

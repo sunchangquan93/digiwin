@@ -92,13 +92,17 @@ public class MainLogic {
 
         //初始化采购管理
 
-        ModuleBean purchaseInStore= new ModuleBean(R.string.purchase_in_store, R.mipmap.lingliaoguozahng, ModuleCode.PURCHASEINSTORE,"android.intent.action.digiwin.PurchaseGoodsScanActivity");
+        ModuleBean purchaseInStore= new ModuleBean(R.string.purchase_in_store, R.mipmap.lingliaoguozahng, ModuleCode.PURCHASEINSTORE,"android.intent.action.digiwin.PurchaseInStoreActivity");
 
         ModuleBean materialreceipt = new ModuleBean(R.string.title_material_receipt, R.mipmap.material_receipt, ModuleCode.MATERIALRECEIPTCODE, "android.intent.action.digiwin.MaterialReceiptActivity");
 
         ModuleBean purchaseGoodsScan = new ModuleBean(R.string.title_purchase_goods_scan, R.mipmap.material_receipt, ModuleCode.PURCHASEGOODSSCAN, "android.intent.action.digiwin.PurchaseGoodsScanActivity");
 
         ModuleBean purchaseCheck = new ModuleBean(R.string.purchase_check, R.mipmap.material_receipt, ModuleCode.PURCHASECHECK, "android.intent.action.digiwin.PurchaseCheckActivity");
+
+        ModuleBean storeReturnMaterial = new ModuleBean(R.string.store_return_material, R.mipmap.warehouse_return, ModuleCode.STORERETURNMATERIAL, "android.intent.action.digiwin.StoreReturnMaterialActivity");
+
+        ModuleBean quickstorage = new ModuleBean(R.string.title_quickstorage, R.mipmap.quickly_storage, ModuleCode.QUICKSTORAGE, "android.intent.action.digiwin.QuickStorageListActivity");
 
         purchaseItems.add(materialreceipt);
 
@@ -107,6 +111,10 @@ public class MainLogic {
         purchaseItems.add(purchaseGoodsScan);
 
         purchaseItems.add(purchaseCheck);
+
+        purchaseItems.add(storeReturnMaterial);
+
+        purchaseItems.add(quickstorage);
 
         //初始化生产管理
         ModuleBean finishedStorageActivity= new ModuleBean(R.string.finishedstorage, R.mipmap.wangongruku, ModuleCode.FINISHEDSTORAGE,"android.intent.action.digiwin.FinishedStorageActivity");
@@ -123,7 +131,7 @@ public class MainLogic {
 
        // ModuleBean workorder = new ModuleBean(R.string.title_work_order,R.mipmap.work_order,ModuleCode.WORKORDERCODE,"android.intent.action.digiwin.WorkOrderActivity");
 
-        ModuleBean materialReturning= new ModuleBean(R.string.mataerial_returning, R.mipmap.return_of_material, ModuleCode.MATERIALRETURNING,"android.intent.action.digiwin.GDCompletingStoreActivity");
+        ModuleBean materialReturning= new ModuleBean(R.string.mataerial_returning, R.mipmap.return_of_material, ModuleCode.MATERIALRETURNING,"android.intent.action.digiwin.MaterialReturnListActivity");
 
         ModuleBean driectStorage= new ModuleBean(R.string.direct_storage, R.mipmap.direct_storage, ModuleCode.DIRECTSTORAGE,"android.intent.action.digiwin.DirectStorageActivity");
 
@@ -137,6 +145,8 @@ public class MainLogic {
         ModuleBean workorderreturnlistactivity = new ModuleBean(R.string.work_order_return,R.mipmap.work_order_return,ModuleCode.WORKORDERRETURN,  "android.intent.action.digiwin.WorkOrderReturnListActivity");
 
         ModuleBean worksupplementlist = new ModuleBean(R.string.title_worksupplement,R.mipmap.ordermaterial,ModuleCode.WORKSUPPLEMENT,  "android.intent.action.digiwin.WorkSupplementListActivity");
+
+        ModuleBean productionleaderlist = new ModuleBean(R.string.title_production_leader,R.mipmap.production_receive,ModuleCode.PRODUCTIONLEADER,  "android.intent.action.digiwin.ProductionLeaderListActivity");
 
         produceItems.add(finishedStorageActivity);
 
@@ -164,7 +174,9 @@ public class MainLogic {
 
         produceItems.add(workorderreturnlistactivity);
 
-        produceItems.add(worksupplementlist);
+//        produceItems.add(worksupplementlist);
+
+        produceItems.add(productionleaderlist);
 
         //初始化库存管理
         ModuleBean storeallotactivity = new ModuleBean(R.string.nocome_allot, R.mipmap.nocome_alllot, ModuleCode.NOCOMESTOREALLOT, "android.intent.action.digiwin.StoreAllotActivity");
@@ -178,27 +190,42 @@ public class MainLogic {
         ModuleBean printLabelActivity = new ModuleBean(R.string.print_label, R.mipmap.bar_code, ModuleCode.PRINTLABEL, "android.intent.action.digiwin.PrintLabelActivity");
         storageItems.add(printLabelActivity);
 
-        ModuleBean movestoreactivity = new ModuleBean(R.string.movestore, R.mipmap.movestore, ModuleCode.STOREQUERY, "android.intent.action.digiwin.MoveStoreActivity");
+        ModuleBean movestoreactivity = new ModuleBean(R.string.movestore, R.mipmap.movestore, ModuleCode.MOVESTORE, "android.intent.action.digiwin.MoveStoreActivity");
         storageItems.add(movestoreactivity);
         ModuleBean storetranslockactivity = new ModuleBean(R.string.store_trans_lock, R.mipmap.inventory_lock, ModuleCode.STORETRANSLOCK, "android.intent.action.digiwin.StoreTransLockActivity");
         storageItems.add(storetranslockactivity);
-        ModuleBean storetransunlockactivity = new ModuleBean(R.string.store_trans_unlock, R.mipmap.work_order_return, ModuleCode.STORETRANSLOCK, "android.intent.action.digiwin.StoreTransUnlockActivity");
+        ModuleBean storetransunlockactivity = new ModuleBean(R.string.store_trans_unlock, R.mipmap.inventory_deblocking, ModuleCode.STORETRANSUNLOCK, "android.intent.action.digiwin.StoreTransUnlockActivity");
         storageItems.add(storetransunlockactivity);
         //初始化销售管理
         ModuleBean saleoutletactivity = new ModuleBean(R.string.saleoutlet, R.mipmap.saleoutlet, ModuleCode.SALEOUTLET, "android.intent.action.digiwin.SaleOutletListActivity");
         //捡料出货
         ModuleBean pickupshipment = new ModuleBean(R.string.title_pickupshipment, R.mipmap.pickup_shipment, ModuleCode.PICKUPSHIPMENT, "android.intent.action.digiwin.PickUpShipmentListActivity");
+        ModuleBean saleReturnActivity = new ModuleBean(R.string.title_sale_return, R.mipmap.ntsale_return, ModuleCode.SALERETURN, "android.intent.action.digiwin.SaleReturnActivity");
         salesItems.add(saleoutletactivity);
         salesItems.add(pickupshipment);
+        salesItems.add(saleReturnActivity);
 
         //初始化报工管理
         ModuleBean rcttboardactivity = new ModuleBean(R.string.delivery_uncheck_board, R.drawable.receiptout, ModuleCode.RCCTBOARD, "android.intent.action.digiwin.RcttBoardActivity");
         ModuleBean tctsboardactivity = new ModuleBean(R.string.tcts_board, R.drawable.receiptout, ModuleCode.RCCTBOARD, "android.intent.action.digiwin.TctsBoardActivity");
         ModuleBean palletreport = new ModuleBean(R.string.title_pallet_report, R.mipmap.pallet_report, ModuleCode.PROCESSREPORTING, "android.intent.action.digiwin.ProcessReportingActivity");
         dailyworkItems.add(palletreport);
+        //扫入扫描
+        ModuleBean entrance = new ModuleBean(R.string.scanin_scan, R.mipmap.entrance, ModuleCode.SCANINSCAN, "android.intent.action.digiwin.EntranceActivity");
+        dailyworkItems.add(entrance);
+        //开工扫描
+        ModuleBean startwork = new ModuleBean(R.string.start_scan, R.mipmap.start_working, ModuleCode.STARTWORKSCAN, "android.intent.action.digiwin.StartWorkActivity");
+        dailyworkItems.add(startwork);
+        //完工扫描
+        ModuleBean finishwork = new ModuleBean(R.string.finish_scan, R.mipmap.compete_working, ModuleCode.FINISHWORKSCAN, "android.intent.action.digiwin.FinishWorkActivity");
+        dailyworkItems.add(finishwork);
+        //扫出扫描
+        ModuleBean stockremoval = new ModuleBean(R.string.scanout_scan, R.mipmap.stock_removal, ModuleCode.SCANOUTSCAN, "android.intent.action.digiwin.StockRemovalActivity");
+        dailyworkItems.add(stockremoval);
 
-        boardItems.add(rcttboardactivity);
-        boardItems.add(tctsboardactivity);
+
+//        boardItems.add(rcttboardactivity);
+//        boardItems.add(tctsboardactivity);
         // TODO: 2017/3/14 暂时屏蔽测试用
 
         ModuleList.addAll(purchaseItems);

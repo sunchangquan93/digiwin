@@ -4,14 +4,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.LayoutRes;
-import android.util.Log;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import digiwin.library.base.BaseAppActivity;
 import digiwin.library.utils.ActivityManagerUtils;
 import digiwin.library.utils.LogUtils;
-import digiwin.library.utils.SharedPreferencesUtils;
 import digiwin.library.utils.StringUtils;
 import digiwin.library.utils.TelephonyUtils;
 import digiwin.smartdepot.core.appcontants.AddressContants;

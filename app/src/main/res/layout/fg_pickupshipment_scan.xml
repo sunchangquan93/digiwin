@@ -27,33 +27,7 @@
                 android:background="@drawable/allscanedit_bg"
                 android:orientation="vertical"
                 android:padding="@dimen/layout_5dp">
-                <LinearLayout
-                    android:id="@+id/ll_barcode"
-                    style="@style/itemstyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
 
-                    <TextView
-                        android:id="@+id/tv_barcode_string"
-                        android:layout_width="@dimen/layout_70dp"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:text="@string/barcode"
-                        android:textColor="@color/black_32"
-                        android:textSize="@dimen/textSize_14sp" />
-
-                    <EditText
-                        android:id="@+id/et_barcode"
-                        android:layout_width="@dimen/layout_0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/layout_10dp"
-                        android:layout_weight="1"
-                        android:background="@null"
-                        android:textColor="@color/black_32"
-                        android:textCursorDrawable="@drawable/et_cursor_yellow"
-                        android:textSize="@dimen/textSize_14sp" />
-                </LinearLayout>
-                <View style="@style/fg_line_style" />
                 <LinearLayout
                     android:id="@+id/ll_scan_locator"
                     style="@style/itemstyle"
@@ -62,7 +36,7 @@
 
                     <TextView
                         android:id="@+id/tv_locator"
-                        android:layout_width="@dimen/layout_70dp"
+                        android:layout_width="@dimen/layout_50dp"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/locator"
@@ -76,6 +50,7 @@
                         android:layout_marginLeft="@dimen/layout_10dp"
                         android:layout_weight="1"
                         android:background="@null"
+                        android:singleLine="true"
                         android:textColor="@color/black_32"
                         android:textCursorDrawable="@drawable/et_cursor_yellow"
                         android:textSize="@dimen/textSize_14sp" />
@@ -90,6 +65,35 @@
                 <View style="@style/fg_line_style" />
 
                 <LinearLayout
+                    android:id="@+id/ll_barcode"
+                    style="@style/itemstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/tv_barcode_string"
+                        android:layout_width="@dimen/layout_50dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/barcode"
+                        android:textColor="@color/black_32"
+                        android:textSize="@dimen/textSize_14sp" />
+
+                    <EditText
+                        android:id="@+id/et_barcode"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_10dp"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:singleLine="true"
+                        android:textColor="@color/black_32"
+                        android:textCursorDrawable="@drawable/et_cursor_yellow"
+                        android:textSize="@dimen/textSize_14sp" />
+                </LinearLayout>
+
+                <View style="@style/fg_line_style" />
+                <LinearLayout
                     android:id="@+id/ll_input_num"
                     style="@style/itemstyle"
                     android:layout_width="match_parent"
@@ -97,7 +101,7 @@
 
                     <TextView
                         android:id="@+id/tv_number"
-                        android:layout_width="@dimen/layout_70dp"
+                        android:layout_width="@dimen/layout_50dp"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/num"
@@ -112,6 +116,7 @@
                         android:layout_weight="1"
                         android:background="@null"
                         android:hint="@string/input_num"
+                        android:singleLine="true"
                         android:inputType="numberDecimal"
                         android:textColor="@color/black_32"
                         android:textCursorDrawable="@drawable/et_cursor_yellow"
@@ -119,7 +124,7 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
+          <!--  <LinearLayout
                 android:layout_marginTop="@dimen/layout_10dp"
                 style="@style/ry_style"
                 android:layout_width="match_parent"
@@ -228,8 +233,8 @@
 
                     </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
-            <include layout="@layout/ry_fifo_common" />
+            </LinearLayout>-->
+            <include layout="@layout/ryitem_fifo_common" />
         </LinearLayout>
     </ScrollView>
     <include layout="@layout/inclu_save" />

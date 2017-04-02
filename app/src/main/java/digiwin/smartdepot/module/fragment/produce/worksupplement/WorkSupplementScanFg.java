@@ -31,14 +31,13 @@ import digiwin.smartdepot.login.loginlogic.LoginLogic;
 import digiwin.smartdepot.module.activity.produce.worksupplement.WorkSupplementActivity;
 import digiwin.smartdepot.module.adapter.purchase.WorkSupplementFIFoAdapter;
 import digiwin.smartdepot.module.bean.common.FilterResultOrderBean;
+import digiwin.smartdepot.module.bean.common.SaveBackBean;
 import digiwin.smartdepot.module.bean.common.SaveBean;
 import digiwin.smartdepot.module.bean.common.ScanBarcodeBackBean;
 import digiwin.smartdepot.module.bean.common.ScanLocatorBackBean;
 import digiwin.smartdepot.module.bean.produce.PostMaterialFIFOBean;
 import digiwin.smartdepot.module.logic.common.CommonLogic;
 
-import static digiwin.smartdepot.R.id.et_barcode;
-import static digiwin.smartdepot.R.id.et_input_num;
 
 
 /**
@@ -90,7 +89,7 @@ public class WorkSupplementScanFg extends BaseFragment {
      */
     @BindView(R.id.tv_barcode_string)
     TextView tvBarcode;
-    @BindView(et_barcode)
+    @BindView(R.id.et_barcode)
     EditText etScanBarocde;
     @BindView(R.id.ll_barcode)
     LinearLayout llScanBarcode;
@@ -113,7 +112,7 @@ public class WorkSupplementScanFg extends BaseFragment {
     @BindView(R.id.ll_input_num)
     LinearLayout llInputNum;
 
-    @BindViews({R.id.et_barcode, R.id.et_scan_locator, et_input_num})
+    @BindViews({R.id.et_barcode, R.id.et_scan_locator, R.id.et_input_num})
     List<EditText> editTexts;
     @BindViews({R.id.ll_barcode, R.id.ll_scan_locator, R.id.ll_input_num})
     List<View> views;
@@ -235,7 +234,7 @@ public class WorkSupplementScanFg extends BaseFragment {
         showLoadingDialog();
         commonLogic.scanSave(saveBean, new CommonLogic.SaveListener() {
             @Override
-            public void onSuccess(String msg) {
+            public void onSuccess(SaveBackBean saveBackBean) {
                 dismissLoadingDialog();
                 clear();
                 adapter = new WorkSupplementFIFoAdapter(activity,fiFoList);
@@ -257,10 +256,16 @@ public class WorkSupplementScanFg extends BaseFragment {
 //        tv_item_format.setText("");
         etInputNum.setText("");
         etScanBarocde.setText("");
-        etScanLocator.setText("");
+        barcodeFlag=false;
 //        tv_available_quantity.setText("");
 //        tv_scaned_numb.setText("");
         etScanBarocde.requestFocus();
+        if (!cbLocatorlock.isChecked())
+        {
+            locatorFlag=false;
+            etScanLocator.requestFocus();
+            etScanLocator.setText("");
+        }
     }
 
     private Handler mHandler = new Handler(new Handler.Callback() {
@@ -271,6 +276,7 @@ public class WorkSupplementScanFg extends BaseFragment {
                 HashMap<String, String> barcodeMap = new HashMap<>();
                 barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
                 barcodeMap.put(AddressContants.DOC_NO, localData.getDoc_no());
+                barcodeMap.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
                 commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                     @Override
                     public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
@@ -396,5 +402,6 @@ public class WorkSupplementScanFg extends BaseFragment {
 
         mHandler.sendMessageDelayed(mHandler.obtainMessage(FIFOWHAT, data.getDoc_no()), AddressContants.DELAYTIME);
     }
+
 }
 

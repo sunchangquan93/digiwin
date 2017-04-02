@@ -27,6 +27,7 @@ import digiwin.smartdepot.core.base.BaseFragment;
 import digiwin.smartdepot.core.modulecommon.ModuleUtils;
 import digiwin.smartdepot.module.activity.stock.storeallot.ChooseAllotDailog;
 import digiwin.smartdepot.module.activity.stock.storeallot.StoreAllotActivity;
+import digiwin.smartdepot.module.bean.common.SaveBackBean;
 import digiwin.smartdepot.module.bean.common.SaveBean;
 import digiwin.smartdepot.module.bean.common.ScanBarcodeBackBean;
 import digiwin.smartdepot.module.bean.common.ScanLocatorBackBean;
@@ -72,6 +73,12 @@ public class StoreAllotScanFg extends BaseFragment {
     TextView tvDetailShow;
     @BindView(R.id.includedetail)
     View includeDetail;
+
+    /**
+     * 已扫描量
+     */
+    @BindView(R.id.tv_scaned_num)
+    TextView tv_scaned_num;
 
     @BindViews({R.id.et_scan_barocde, R.id.et_scan_inlocator, R.id.et_scan_outlocator, R.id.et_input_num})
     List<EditText> editTexts;
@@ -177,8 +184,9 @@ public class StoreAllotScanFg extends BaseFragment {
         saveBean.setQty(etInputNum.getText().toString());
         commonLogic.scanSave(saveBean, new CommonLogic.SaveListener() {
             @Override
-            public void onSuccess(String msg) {
+            public void onSuccess(SaveBackBean saveBackBean) {
                 dismissLoadingDialog();
+                saveBean.setScan_sumqty(saveBackBean.getScan_sumqty());
                 clear();
             }
 
@@ -322,6 +330,7 @@ public class StoreAllotScanFg extends BaseFragment {
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
                             barcodeShow = barcodeBackBean.getShow();
                             etInputNum.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
+                            tv_scaned_num.setText(barcodeBackBean.getScan_sumqty());
                             barcodeFlag = true;
                             show();
                             saveBean.setAvailable_in_qty(barcodeBackBean.getAvailable_in_qty());
@@ -398,6 +407,7 @@ public class StoreAllotScanFg extends BaseFragment {
      * 保存完成之后的操作
      */
     private void clear() {
+        tv_scaned_num.setText(saveBean.getScan_sumqty());
         etInputNum.setText("");
         barcodeFlag = false;
         barcodeShow = "";
@@ -424,6 +434,7 @@ public class StoreAllotScanFg extends BaseFragment {
      */
     public void initData() {
         INOROUT=IN;
+        tv_scaned_num.setText("");
         barcodeShow = "";
         inlocatorShow = "";
         outlocatorShow = "";
@@ -435,7 +446,6 @@ public class StoreAllotScanFg extends BaseFragment {
         cbInLocatorlock.setChecked(false);
         etScanInLocator.setText("");
         etScanOutLocator.setText("");
-        etScanBarocde.requestFocus();
         includeDetail.setVisibility(View.GONE);
         commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
     }

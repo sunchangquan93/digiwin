@@ -5,6 +5,7 @@ import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.method.TextKeyListener;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -31,6 +32,7 @@ import digiwin.smartdepot.login.loginlogic.LoginLogic;
 import digiwin.smartdepot.module.activity.sale.pickupshipment.PickUpShipmentActivity;
 import digiwin.smartdepot.module.adapter.sale.pickupshipment.PickUpShipmentFIFoAdapter;
 import digiwin.smartdepot.module.bean.common.FilterResultOrderBean;
+import digiwin.smartdepot.module.bean.common.SaveBackBean;
 import digiwin.smartdepot.module.bean.common.SaveBean;
 import digiwin.smartdepot.module.bean.common.ScanBarcodeBackBean;
 import digiwin.smartdepot.module.bean.common.ScanLocatorBackBean;
@@ -122,17 +124,17 @@ public class PickUpShipmentScanFg extends BaseFragment {
     @BindView(R.id.cb_locatorlock)
     CheckBox cbLocatorlock;
 
-    @BindView(R.id.tv_storage)
-    TextView tv_storage;
-
-    @BindView(R.id.tv_locator_tv)
-    TextView tv_locator_tv;
-
-    @BindView(R.id.tv_item_name)
-    TextView tv_item_name;
-
-    @BindView(R.id.tv_item_format)
-    TextView tv_item_format;
+//    @BindView(R.id.tv_storage)
+//    TextView tv_storage;
+//
+//    @BindView(R.id.tv_locator_tv)
+//    TextView tv_locator_tv;
+//
+//    @BindView(R.id.tv_item_name)
+//    TextView tv_item_name;
+//
+//    @BindView(R.id.tv_item_format)
+//    TextView tv_item_format;
 
     @OnCheckedChanged(R.id.cb_locatorlock)
     void isLock(boolean checked) {
@@ -226,7 +228,7 @@ public class PickUpShipmentScanFg extends BaseFragment {
         showLoadingDialog();
         commonLogic.scanSave(saveBean, new CommonLogic.SaveListener() {
             @Override
-            public void onSuccess(String msg) {
+            public void onSuccess(SaveBackBean saveBackBean) {
                 dismissLoadingDialog();
                 clear();
                 adapter = new PickUpShipmentFIFoAdapter(activity,fiFoList);
@@ -244,14 +246,21 @@ public class PickUpShipmentScanFg extends BaseFragment {
     }
 
     public void clear(){
-        tv_item_name.setText("");
-        tv_item_format.setText("");
-        tv_storage.setText("");
-        tv_locator_tv.setText("");
+//        tv_item_name.setText("");
+//        tv_item_format.setText("");
+//        tv_storage.setText("");
+//        tv_locator_tv.setText("");
         etInputNum.setText("");
         etScanBarocde.setText("");
-        etScanLocator.setText("");
-        etScanBarocde.requestFocus();
+        barcodeFlag = false;
+        if(cbLocatorlock.isChecked()){
+            etScanBarocde.requestFocus();
+        }else{
+            etScanLocator.setText("");
+            locatorFlag = false;
+            etScanLocator.requestFocus();
+        }
+
     }
 
     private Handler mHandler = new Handler(new Handler.Callback() {
@@ -262,14 +271,15 @@ public class PickUpShipmentScanFg extends BaseFragment {
                 HashMap<String, String> barcodeMap = new HashMap<>();
                 barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
                 barcodeMap.put(AddressContants.DOC_NO, localData.getDoc_no());
+                barcodeMap.put(AddressContants.WAREHOUSE_NO,LoginLogic.getWare());
                 commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                     @Override
                     public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
                         dismissLoadingDialog();
                         etInputNum.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
                         barcodeFlag = true;
-                        tv_item_name.setText(barcodeBackBean.getItem_name());
-                        tv_item_format.setText(barcodeBackBean.getItem_spec());
+//                        tv_item_name.setText(barcodeBackBean.getItem_name());
+//                        tv_item_format.setText(barcodeBackBean.getItem_spec());
 
                         saveBean.setAvailable_in_qty(barcodeBackBean.getAvailable_in_qty());
                         saveBean.setBarcode_no(barcodeBackBean.getBarcode_no());
@@ -278,7 +288,7 @@ public class PickUpShipmentScanFg extends BaseFragment {
                         saveBean.setLot_no(barcodeBackBean.getLot_no());
                         saveBean.setDoc_no(localData.getDoc_no());
                         saveBean.setFifo_check(barcodeBackBean.getFifo_check());
-                        etScanLocator.requestFocus();
+                        etInputNum.requestFocus();
                     }
 
                     @Override
@@ -301,12 +311,12 @@ public class PickUpShipmentScanFg extends BaseFragment {
                     @Override
                     public void onSuccess(ScanLocatorBackBean locatorBackBean) {
                         dismissLoadingDialog();
-                        tv_storage.setText(locatorBackBean.getWarehouse_no());
-                        tv_locator_tv.setText(locatorBackBean.getStorage_spaces_no());
+//                        tv_storage.setText(locatorBackBean.getWarehouse_no());
+//                        tv_locator_tv.setText(locatorBackBean.getStorage_spaces_no());
                         locatorFlag = true;
                         saveBean.setStorage_spaces_out_no(locatorBackBean.getStorage_spaces_no());
                         saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
-                        etInputNum.requestFocus();
+                        etScanBarocde.requestFocus();
                     }
 
                     @Override
@@ -324,7 +334,6 @@ public class PickUpShipmentScanFg extends BaseFragment {
                 break;
 
             case FIFOWHAT:
-
                 showLoadingDialog();
                 Map<String,String> map = new HashMap<String,String>();
                 map.put("issuing_no",String.valueOf(msg.obj));
@@ -363,10 +372,44 @@ public class PickUpShipmentScanFg extends BaseFragment {
     @Override
     protected void doBusiness() {
         pactivity = (PickUpShipmentActivity) activity;
+        Log.d(TAG,"pactivity:"+pactivity);
         commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(pactivity);
         mRy_list.setLayoutManager(linearLayoutManager);
         initData();
+        getFifoeeee();
+    }
+
+    public void getFifoeeee(){
+        FilterResultOrderBean data = (FilterResultOrderBean) getActivity().getIntent().getSerializableExtra("data");
+        Map<String,String> map = new HashMap<String,String>();
+        map.put("issuing_no",data.getDoc_no());
+        map.put("warehouse_no", LoginLogic.getUserInfo().getWare());
+//        showLoadingDialog();
+        Log.d("getFifo=====:","========");
+        commonLogic.postMaterialFIFO(map, new CommonLogic.PostMaterialFIFOListener() {
+            @Override
+            public void onSuccess(List<PostMaterialFIFOBean> fiFoBeanList) {
+                dismissLoadingDialog();
+                if(fiFoBeanList.size() > 0 && null != mRy_list){
+                    adapter = new PickUpShipmentFIFoAdapter(context,fiFoBeanList);
+                    mRy_list.setAdapter(adapter);
+                }else{
+                    showFailedDialog(R.string.nodate);
+                }
+            }
+
+            @Override
+            public void onFailed(String error) {
+                dismissLoadingDialog();
+                showFailedDialog(error, new OnDialogClickListener() {
+                    @Override
+                    public void onCallback() {
+
+                    }
+                });
+            }
+        });
     }
 
     /**
@@ -383,8 +426,8 @@ public class PickUpShipmentScanFg extends BaseFragment {
         FilterResultOrderBean data = (FilterResultOrderBean) getActivity().getIntent().getSerializableExtra("data");
         localData = new FilterResultOrderBean();
         localData = data;
-
         mHandler.sendMessageDelayed(mHandler.obtainMessage(FIFOWHAT, data.getDoc_no()), AddressContants.DELAYTIME);
+
     }
 }
 

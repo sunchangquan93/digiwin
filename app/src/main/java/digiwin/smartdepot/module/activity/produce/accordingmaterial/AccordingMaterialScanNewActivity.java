@@ -34,6 +34,7 @@ import digiwin.smartdepot.login.loginlogic.LoginLogic;
 import digiwin.smartdepot.module.adapter.produce.AccordingMaterialFiFo_Adapter;
 import digiwin.smartdepot.module.bean.common.FifoAccordingBean;
 import digiwin.smartdepot.module.bean.common.ListSumBean;
+import digiwin.smartdepot.module.bean.common.SaveBackBean;
 import digiwin.smartdepot.module.bean.common.SaveBean;
 import digiwin.smartdepot.module.bean.common.ScanBarcodeBackBean;
 import digiwin.smartdepot.module.bean.common.ScanLocatorBackBean;
@@ -215,7 +216,7 @@ public class AccordingMaterialScanNewActivity extends BaseTitleActivity {
         }
         commonLogic.scanSave(saveBean, new CommonLogic.SaveListener() {
             @Override
-            public void onSuccess(String msg) {
+            public void onSuccess(SaveBackBean saveBackBean) {
                 dismissLoadingDialog();
                 showToast(getResources().getString(R.string.save_success));
                 float scan_sum = sum(etInputNum.getText().toString(),tv_actual_yield.getText().toString());
@@ -311,6 +312,7 @@ public class AccordingMaterialScanNewActivity extends BaseTitleActivity {
             case BARCODEWHAT:
                 HashMap<String, String> barcodeMap = new HashMap<>();
                 barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
+                barcodeMap.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
                 commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                     @Override
                     public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
@@ -366,7 +368,11 @@ public class AccordingMaterialScanNewActivity extends BaseTitleActivity {
                         locatorFlag = true;
                         saveBean.setStorage_spaces_out_no(locatorBackBean.getStorage_spaces_no());
                         saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
-                        etInputNum.requestFocus();
+                        if(type.equals(codetype)){
+                            etInputNum.requestFocus();
+                        }else{
+                            etScanBarocde.requestFocus();
+                        }
                     }
 
                     @Override
@@ -476,15 +482,19 @@ public class AccordingMaterialScanNewActivity extends BaseTitleActivity {
     }
 
     public void clearData(String type){
-        if(type.equals(codetype)){
+        if(!cbLocatorlock.isChecked()){
             etScanLocator.setText("");
+            locatorFlag = false;
+            etScanBarocde.requestFocus();
+        }
+        if(type.equals(codetype)){
             etInputNum.setText("");
-            etScanLocator.requestFocus();
+            etInputNum.requestFocus();
         }else{
             etScanBarocde.setText("");
-            etScanLocator.setText("");
-            etInputNum.setText("");
+            barcodeFlag = false;
             etScanBarocde.requestFocus();
+            etInputNum.setText("");
         }
     }
 
@@ -520,11 +530,6 @@ public class AccordingMaterialScanNewActivity extends BaseTitleActivity {
         saveBean.setUnit_no(barcodeBackBean.getUnit_no());
         saveBean.setLot_no(barcodeBackBean.getLot_no());
         saveBean.setLot_date(barcodeBackBean.getLot_date());
-
-        if (cbLocatorlock.isChecked()){
-            etInputNum.requestFocus();
-        }else {
-            etScanLocator.requestFocus();
-        }
+        etInputNum.requestFocus();
     }
 }

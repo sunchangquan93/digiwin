@@ -122,6 +122,34 @@
                         android:textCursorDrawable="@drawable/et_cursor_yellow"
                         android:textSize="@dimen/textSize_14sp" />
                 </LinearLayout>
+                <View style="@style/fg_line_style" />
+
+                <LinearLayout
+                    android:id="@+id/ll_hasScan"
+                    style="@style/itemstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_hasScan"
+                        android:layout_width="@dimen/layout_70dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/scaned_numb"
+                        android:textColor="@color/black_32"
+                        android:textSize="@dimen/textSize_14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_scan_hasScan"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_10dp"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        android:textColor="@color/black_32"
+                        android:textSize="@dimen/textSize_14sp" />
+
+                </LinearLayout>
             </LinearLayout>
 
             <include  android:id="@+id/includedetail"  android:visibility="gone" layout="@layout/show_playdetail_layout"></include>

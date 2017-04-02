@@ -40,7 +40,7 @@ public class BlueToothChooseAdapter extends RecyclerView.Adapter<BlueToothChoose
     }
     @Override
     public mViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.recycleview_bluetooth, null);
+        View view = inflater.inflate(R.layout.ryitem_bluetooth, null);
         return new mViewHolder(view);
     }
 

@@ -320,7 +320,7 @@ android:background="@color/white" tools:context="digiwin.smartdepot.module.activ
             </LinearLayout>
         </LinearLayout>
 
-        <include layout="@layout/ry_common"/>
+        <include layout="@layout/ryitem_common"/>
     </LinearLayout>
 
 </ScrollView>

@@ -28,10 +28,9 @@ import digiwin.smartdepot.core.base.BaseFragment;
 import digiwin.smartdepot.core.modulecommon.ModuleUtils;
 import digiwin.smartdepot.login.bean.AccoutBean;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
-import digiwin.smartdepot.module.activity.produce.putinstore.PutInStoreSecondActivity;
 import digiwin.smartdepot.module.activity.purchase.purchaseinstore.PurchaseInStoreSecondActivity;
 import digiwin.smartdepot.module.bean.common.FilterResultOrderBean;
-import digiwin.smartdepot.module.bean.common.ListSumBean;
+import digiwin.smartdepot.module.bean.common.SaveBackBean;
 import digiwin.smartdepot.module.bean.common.SaveBean;
 import digiwin.smartdepot.module.bean.common.ScanBarcodeBackBean;
 import digiwin.smartdepot.module.bean.common.ScanLocatorBackBean;
@@ -98,6 +97,12 @@ public class PurchaseInStoreScanFg extends BaseFragment {
     List<View> views;
     @BindViews({R.id.tv_barcode, R.id.tv_locator, R.id.tv_number})
     List<TextView> textViews;
+
+    /**
+     * 已扫描量
+     */
+    @BindView(R.id.tv_scaned_num)
+    TextView tv_scaned_num;
 
     /**
      * 公共区域展示
@@ -200,18 +205,19 @@ public class PurchaseInStoreScanFg extends BaseFragment {
         saveBean.setQty(et_input_num.getText().toString());
         float qty = StringUtils.string2Float(saveBean.getQty());
         float scansum_qty = StringUtils.string2Float(saveBean.getScan_sumqty());
-        if(!StringUtils.isBlank(saveBean.getAvailable_in_qty())){
-            float avaliable_in_qty = StringUtils.string2Float(saveBean.getAvailable_in_qty());
-            if(qty + scansum_qty > avaliable_in_qty){
-                showFailedDialog(pactivity.getResources().getString(R.string.scan_sumqty_larger_than_need_qty));
-                return;
-            }
-        }
+//        if(!StringUtils.isBlank(saveBean.getAvailable_in_qty())){
+//            float avaliable_in_qty = StringUtils.string2Float(saveBean.getAvailable_in_qty());
+//            if(qty + scansum_qty > avaliable_in_qty){
+//                showFailedDialog(pactivity.getResources().getString(R.string.scan_sumqty_larger_than_need_qty));
+//                return;
+//            }
+//        }
         showLoadingDialog();
         commonLogic.scanSave(saveBean, new CommonLogic.SaveListener() {
             @Override
-            public void onSuccess(String msg) {
+            public void onSuccess(SaveBackBean saveBackBean) {
                 dismissLoadingDialog();
+                saveBean.setScan_sumqty(saveBackBean.getScan_sumqty());
                 clear();
             }
 
@@ -247,6 +253,7 @@ public class PurchaseInStoreScanFg extends BaseFragment {
                             if(!StringUtils.isBlank(barcodeBackBean.getBarcode_qty())){
                                 et_input_num.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
                             }
+                            tv_scaned_num.setText(barcodeBackBean.getScan_sumqty());
                             barcodeFlag = true;
                             show();
                             saveBean.setQty(barcodeBackBean.getBarcode_qty());
@@ -255,11 +262,8 @@ public class PurchaseInStoreScanFg extends BaseFragment {
                             saveBean.setUnit_no(barcodeBackBean.getUnit_no());
                             saveBean.setLot_no(barcodeBackBean.getLot_no());
                             saveBean.setScan_sumqty(barcodeBackBean.getScan_sumqty());
-                            if (cb_locatorlock.isChecked()){
-                                et_input_num.requestFocus();
-                            }else {
-                                et_scan_locator.requestFocus();
-                            }
+                            saveBean.setAvailable_in_qty(barcodeBackBean.getAvailable_in_qty());
+                            et_input_num.requestFocus();
                         }
 
                         @Override
@@ -285,7 +289,7 @@ public class PurchaseInStoreScanFg extends BaseFragment {
                             show();
                             saveBean.setStorage_spaces_in_no(locatorBackBean.getStorage_spaces_no());
                             saveBean.setWarehouse_in_no(locatorBackBean.getWarehouse_no());
-                            et_input_num.requestFocus();
+                            et_scan_barocde.requestFocus();
                         }
 
                         @Override
@@ -328,15 +332,17 @@ public class PurchaseInStoreScanFg extends BaseFragment {
      * 保存完成之后的操作
      */
     private void clear() {
+        tv_scaned_num.setText(saveBean.getScan_sumqty());
         et_scan_barocde.setText("");
         et_input_num.setText("");
+        barcodeFlag = false;
         if (cb_locatorlock.isChecked()){
-            barcodeFlag = false;
+            et_scan_barocde.requestFocus();
         }else {
             locatorFlag = false;
             locatorShow = "";
             et_scan_locator.setText("");
-            et_scan_barocde.requestFocus();
+            et_scan_locator.requestFocus();
         }
         barcodeShow = "";
         show();
@@ -346,6 +352,7 @@ public class PurchaseInStoreScanFg extends BaseFragment {
      * 初始化一些变量
      */
     public void initData() {
+        tv_scaned_num.setText("");
         et_scan_barocde.setText("");
         et_scan_locator.setText("");
         barcodeShow = "";
@@ -358,6 +365,6 @@ public class PurchaseInStoreScanFg extends BaseFragment {
         commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
         orderBean = (FilterResultOrderBean) pactivity.getIntent().getExtras().getSerializable("orderData");
         saveBean.setDoc_no(orderBean.getDoc_no());
-        et_scan_barocde.requestFocus();
+        et_scan_locator.requestFocus();
         }
         }

@@ -290,11 +290,11 @@ public class StoreTransUnlockActivity extends BaseTitleActivity{
     /**
      * 开始日期
      */
-    String startDate;
+    private String startDate;
     /**
      * 结束日期
      */
-    String endDate;
+    private String endDate;
 
     @OnClick(R.id.lock_date)
     void getDate() {

@@ -128,7 +128,7 @@ tools:context="digiwin.smartdepot.module.activity.produce.distribute.DistributeA
 
         </LinearLayout>
 
-        <include layout="@layout/ry_common"/>
+        <include layout="@layout/ryitem_common"/>
     </LinearLayout>
 
 </ScrollView>

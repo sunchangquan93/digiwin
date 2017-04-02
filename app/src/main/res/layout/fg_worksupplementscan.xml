@@ -55,7 +55,9 @@
                         android:textCursorDrawable="@drawable/et_cursor_yellow"
                         android:textSize="@dimen/textSize_14sp" />
                 </LinearLayout>
+
                 <View style="@style/fg_line_style" />
+
                 <LinearLayout
                     android:id="@+id/ll_scan_locator"
                     style="@style/itemstyle"
@@ -233,7 +235,7 @@
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>-->
-            <include layout="@layout/ry_fifo_common" />
+            <include layout="@layout/ryitem_fifo_common" />
         </LinearLayout>
     </ScrollView>
     <include layout="@layout/inclu_save" />

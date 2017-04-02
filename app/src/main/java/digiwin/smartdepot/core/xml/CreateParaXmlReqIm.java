@@ -11,6 +11,7 @@ import digiwin.library.xml.CreateParaXmlReq;
 import digiwin.smartdepot.core.base.BaseApplication;
 import digiwin.smartdepot.login.bean.AccoutBean;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
+import digiwin.smartdepot.module.bean.purchase.BadReasonBean;
 
 /**
  * @des 进一步使用xml

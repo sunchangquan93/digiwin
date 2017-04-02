@@ -21,7 +21,7 @@ tools:context="digiwin.smartdepot.module.activity.produce.distribute.DistributeA
         android:orientation="vertical">
 
 
-        <include layout="@layout/ry_common"/>
+        <include layout="@layout/ryitem_common"/>
     </LinearLayout>
 
 </ScrollView>

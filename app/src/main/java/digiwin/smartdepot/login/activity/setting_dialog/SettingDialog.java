@@ -1,7 +1,6 @@
 package digiwin.smartdepot.login.activity.setting_dialog;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.util.DisplayMetrics;
@@ -13,9 +12,11 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import java.util.List;
 import java.util.Locale;
 
 import digiwin.library.constant.SharePreKey;
+import digiwin.library.utils.ActivityManagerUtils;
 import digiwin.library.utils.DialogUtils;
 import digiwin.library.utils.SharedPreferencesUtils;
 import digiwin.smartdepot.R;
@@ -33,7 +34,7 @@ public class SettingDialog {
     static RadioButton preRb;
     public static void showSettingDialog(final Activity context){
         //绑定布局
-        final View dialogView = LayoutInflater.from(context).inflate(R.layout.login_settingdialog_layout,null);
+        final View dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_login_setting_layout,null);
         //Dialog
         final DialogUtils mDialog = new DialogUtils(context,dialogView);
         //第一行正式区
@@ -238,7 +239,27 @@ public class SettingDialog {
                 }else {
 
                 }
-                context.startActivity(new Intent().setClass(context,LoginActivity.class));
+                ActivityManagerUtils.startActivity(context, LoginActivity.class);
+                List<Activity> activityLists = ActivityManagerUtils.getActivityLists();
+                for (Activity mActivity:activityLists){
+                    if(!mActivity.getClass().getSimpleName().equals("LoginActivity")){
+                        if(mActivity!=null &&!mActivity.isFinishing()){
+                            mActivity.finish();
+                        }
+                    }
+                }
+//                Activity mainActivity = ActivityManagerUtils.getActivity("MainActivity");
+//                if(mainActivity!=null){
+//                    mainActivity.finish();
+//                }
+//                Activity settingActivity = ActivityManagerUtils.getActivity("SettingActivity");
+//                if(settingActivity!=null){
+//                    settingActivity.finish();
+//                }
+//                Activity userInfoActivity = ActivityManagerUtils.getActivity("UserInfoActivity");
+//                if(userInfoActivity!=null){
+//                    userInfoActivity.finish();
+//                }
                 context.finish();
             }
         });

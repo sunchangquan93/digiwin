@@ -10,8 +10,11 @@ import java.util.List;
 
 import butterknife.BindView;
 import digiwin.library.utils.ActivityManagerUtils;
+import digiwin.library.utils.StringUtils;
 import digiwin.smartdepot.R;
+import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseFragment;
+import digiwin.smartdepot.login.loginlogic.LoginLogic;
 import digiwin.smartdepot.main.CustomRecyclerAdapter;
 import digiwin.smartdepot.main.bean.ModuleBean;
 
@@ -60,7 +63,13 @@ public class DetailFragment extends BaseFragment {
             @Override
             public void onClick(View view, int position) {
                 try {
-                    ActivityManagerUtils.startActivity(activity,beanLists.get(position).getIntent());
+                    String ware = LoginLogic.getWare();
+                    if(!StringUtils.isBlank(ware) ||
+                            beanLists.get(position).getId().equals(ModuleCode.PROCESSREPORTING)){
+                        ActivityManagerUtils.startActivity(activity,beanLists.get(position).getIntent());
+                    }else{
+                        showFailedDialog(R.string.system_warehouse_null);
+                    }
                 }catch (Exception e){
                     showFailedDialog(R.string.toerror);
                 }

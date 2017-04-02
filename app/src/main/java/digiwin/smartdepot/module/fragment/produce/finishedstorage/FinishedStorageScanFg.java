@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.BindViews;
@@ -20,18 +19,17 @@ import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
 import digiwin.library.dialog.OnDialogClickListener;
-import digiwin.library.utils.ObjectAndMapUtils;
 import digiwin.library.utils.StringUtils;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.base.BaseFragment;
+import digiwin.smartdepot.core.modulecommon.ModuleUtils;
 import digiwin.smartdepot.module.activity.produce.finishstorage.FinishedStorageActivity;
+import digiwin.smartdepot.module.bean.common.SaveBackBean;
 import digiwin.smartdepot.module.bean.common.SaveBean;
 import digiwin.smartdepot.module.bean.common.ScanBarcodeBackBean;
 import digiwin.smartdepot.module.bean.common.ScanLocatorBackBean;
 import digiwin.smartdepot.module.logic.common.CommonLogic;
-import digiwin.smartdepot.module.logic.produce.FinishedStorageLogic;
-import digiwin.smartdepot.core.modulecommon.ModuleUtils;
 
 
 /**
@@ -65,6 +63,9 @@ public class FinishedStorageScanFg extends BaseFragment {
     TextView tvDetailShow;
     @BindView(R.id.includedetail)
     View includeDetail;
+
+    @BindView(R.id.tv_scan_hasScan)
+    TextView tvScanHasScan;
 
     @BindViews({R.id.et_scan_barocde, R.id.et_scan_locator, R.id.et_input_num})
     List<EditText> editTexts;
@@ -139,7 +140,8 @@ public class FinishedStorageScanFg extends BaseFragment {
         saveBean.setQty(etInputNum.getText().toString());
         commonLogic.scanSave(saveBean, new CommonLogic.SaveListener() {
             @Override
-            public void onSuccess(String msg) {
+            public void onSuccess(SaveBackBean saveBackBean) {
+                tvScanHasScan.setText(saveBackBean.getScan_sumqty());
                 dismissLoadingDialog();
                 clear();
             }
@@ -197,6 +199,7 @@ public class FinishedStorageScanFg extends BaseFragment {
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
                             barcodeShow = barcodeBackBean.getShow();
                             etInputNum.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
+                            tvScanHasScan.setText(barcodeBackBean.getScan_sumqty());
                             barcodeFlag = true;
                             show();
                             saveBean.setAvailable_in_qty(barcodeBackBean.getAvailable_in_qty());
@@ -204,12 +207,7 @@ public class FinishedStorageScanFg extends BaseFragment {
                             saveBean.setItem_no(barcodeBackBean.getItem_no());
                             saveBean.setUnit_no(barcodeBackBean.getUnit_no());
                             saveBean.setLot_no(barcodeBackBean.getLot_no());
-
-                            if (cbLocatorlock.isChecked()){
-                                etInputNum.requestFocus();
-                            }else {
-                                etScanLocator.requestFocus();
-                            }
+                            etInputNum.requestFocus();
                         }
 
                         @Override
@@ -235,7 +233,7 @@ public class FinishedStorageScanFg extends BaseFragment {
                             show();
                             saveBean.setStorage_spaces_in_no(locatorBackBean.getStorage_spaces_no());
                             saveBean.setWarehouse_in_no(locatorBackBean.getWarehouse_no());
-                            etInputNum.requestFocus();
+                            etScanBarocde.requestFocus();
                         }
 
                         @Override
@@ -284,15 +282,16 @@ public class FinishedStorageScanFg extends BaseFragment {
      */
     private void clear() {
         etInputNum.setText("");
-        if (!cbLocatorlock.isChecked()){
-            locatorFlag=false;
-            etScanLocator.setText("");
-            locatorShow="";
-        }
         barcodeFlag=false;
         etScanBarocde.setText("");
         barcodeShow="";
         etScanBarocde.requestFocus();
+        if (!cbLocatorlock.isChecked()){
+            locatorFlag=false;
+            etScanLocator.setText("");
+            locatorShow="";
+            etScanLocator.requestFocus();
+        }
         show();
     }
 

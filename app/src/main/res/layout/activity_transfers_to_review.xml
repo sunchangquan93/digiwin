@@ -237,7 +237,7 @@
     </LinearLayout>
 
 
-    <include layout="@layout/ry_common" android:visibility="gone"/>
+    <include layout="@layout/ryitem_common" android:visibility="gone"/>
 
 
 </LinearLayout>

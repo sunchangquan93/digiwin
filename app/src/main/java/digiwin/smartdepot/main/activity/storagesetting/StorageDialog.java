@@ -38,7 +38,7 @@ public class StorageDialog {
      * @Author 毛衡
      */
     public static void showStorageDialog(final Activity context, final String storage, final List<String> list){
-        View view = LayoutInflater.from(context).inflate(R.layout.login_operatingcenter_layout, null);
+        View view = LayoutInflater.from(context).inflate(R.layout.dialog_login_operatingcenter_layout, null);
         final DialogUtils mDialog = new DialogUtils(context,view);
         final RecyclerView rv_operatingCenter = (RecyclerView) view.findViewById(R.id.rv_operatingCenter);
         if (!StringUtils.isBlank(storage)) {

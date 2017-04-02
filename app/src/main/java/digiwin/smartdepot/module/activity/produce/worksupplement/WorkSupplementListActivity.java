@@ -32,6 +32,7 @@ import digiwin.smartdepot.core.modulecommon.ModuleUtils;
 import digiwin.smartdepot.login.bean.AccoutBean;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
 import digiwin.smartdepot.module.adapter.produce.WorkSupplementListAdapter;
+import digiwin.smartdepot.module.adapter.stock.QuickStorageListAdapter;
 import digiwin.smartdepot.module.bean.common.FilterBean;
 import digiwin.smartdepot.module.bean.common.FilterResultOrderBean;
 import digiwin.smartdepot.module.logic.common.CommonLogic;
@@ -242,6 +243,9 @@ public class WorkSupplementListActivity extends BaseFirstModuldeActivity{
             public void onFailed(String error) {
                 dismissLoadingDialog();
                 showFailedDialog(error);
+                ArrayList dataList = new ArrayList<FilterResultOrderBean>();
+                adapter = new WorkSupplementListAdapter(activity,dataList);
+                ry_list.setAdapter(adapter);
             }
         });
     }

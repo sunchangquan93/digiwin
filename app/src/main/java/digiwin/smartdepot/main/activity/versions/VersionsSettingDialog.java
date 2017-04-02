@@ -47,7 +47,7 @@ public class VersionsSettingDialog {
          */
         final TextView versions_num_tv;
 
-        View view = LayoutInflater.from(context).inflate(R.layout.layout_versions_setting, null);
+        View view = LayoutInflater.from(context).inflate(R.layout.dialog_versions_setting, null);
         final DialogUtils dialogUtils = new DialogUtils(context,view);
         //点击外部和任何地方都不可消失
 //        dialogUtils.setCanceledOnTouchOutside();

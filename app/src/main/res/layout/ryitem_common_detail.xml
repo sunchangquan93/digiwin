@@ -48,7 +48,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="@dimen/layout_50dp"
+                android:layout_width="@dimen/layout_40dp"
                 android:layout_height="wrap_content"
                 android:text="@string/locator"
                 android:textSize="@dimen/textSize_14sp" />
@@ -71,9 +71,9 @@
             <TextView
                 android:id="@+id/tv_number"
                 android:layout_width="@dimen/layout_0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:textColor="@color/outside_yellow"
-                android:layout_weight="1"
+                android:layout_weight="1.5"
                 android:textSize="@dimen/textSize_14sp" />
 
         </LinearLayout>

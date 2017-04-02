@@ -199,8 +199,8 @@ public class CommonDetailActivity extends BaseTitleActivity {
                 deleteUpdateBean.setBarcode_qty(detail.getBarcode_qty());
                 deleteUpdateBean.setAvailable_in_qty(sumBean.getAvailable_in_qty());
                 list.add(deleteUpdateBean);
-                deleteAndUpdate(list, null);
             }
+            deleteAndUpdate(list, null);
         } catch (Exception e) {
             LogUtils.e(TAG, "toDelete---" + e);
         }
@@ -212,7 +212,7 @@ public class CommonDetailActivity extends BaseTitleActivity {
      *
      * @param list
      */
-    private void deleteAndUpdate(List<DeleteUpdateBean> list, CustomDialog ediTdialog) {
+    private void deleteAndUpdate(List<DeleteUpdateBean> list, CustomDialog editdialog) {
         showLoadingDialog();
         commonLogic.upDateAndDelete(ObjectAndMapUtils.getListMap(list), new CommonLogic.UpdateAndDeleteListener() {
             @Override

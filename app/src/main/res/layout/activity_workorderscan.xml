@@ -280,7 +280,7 @@
                         android:textSize="@dimen/textSize_14sp" />
                 </LinearLayout>
             </LinearLayout>
-            <include  layout="@layout/ry_fifo_common" />
+            <include  layout="@layout/ryitem_fifo_common" />
         </LinearLayout>
     </ScrollView>
     <include layout="@layout/inclu_save"></include>

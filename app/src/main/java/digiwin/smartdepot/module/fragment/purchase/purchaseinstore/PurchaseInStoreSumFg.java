@@ -182,6 +182,7 @@ public class PurchaseInStoreSumFg extends BaseFragment {
         final SumShowBean sumShowBean = new SumShowBean();
         sumShowBean.setItem_name(orderSumData.getItem_name());
         sumShowBean.setItem_no(orderSumData.getItem_no());
+        sumShowBean.setAvailable_in_qty(orderSumData.getReq_qty());
         commonLogic.getDetail(map, new CommonLogic.GetDetailListener() {
             @Override
             public void onSuccess(List<DetailShowBean> detailShowBeen) {

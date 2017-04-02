@@ -5,7 +5,6 @@ import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.method.TextKeyListener;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -35,6 +34,7 @@ import digiwin.smartdepot.module.activity.produce.postmaterial.PostMaterialSecon
 import digiwin.smartdepot.module.adapter.produce.PostmaterialFiFoAdapter;
 import digiwin.smartdepot.module.bean.common.FilterResultOrderBean;
 import digiwin.smartdepot.module.bean.common.ListSumBean;
+import digiwin.smartdepot.module.bean.common.SaveBackBean;
 import digiwin.smartdepot.module.bean.common.SaveBean;
 import digiwin.smartdepot.module.bean.common.ScanBarcodeBackBean;
 import digiwin.smartdepot.module.bean.common.ScanLocatorBackBean;
@@ -262,11 +262,8 @@ public class PostMaterialScanFg extends BaseFragment {
                             saveBean.setLot_no(barcodeBackBean.getLot_no());
                             saveBean.setScan_sumqty(barcodeBackBean.getScan_sumqty());
                             saveBean.setAvailable_in_qty(barcodeBackBean.getAvailable_in_qty());
-                            if (cb_locatorlock.isChecked()){
-                                et_input_num.requestFocus();
-                            }else {
-                                et_scan_locator.requestFocus();
-                            }
+                            et_input_num.requestFocus();
+
                         }
 
                         @Override
@@ -292,7 +289,7 @@ public class PostMaterialScanFg extends BaseFragment {
 //                            show();
                             saveBean.setStorage_spaces_out_no(locatorBackBean.getStorage_spaces_no());
                             saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
-                            et_input_num.requestFocus();
+                            et_scan_barocde.requestFocus();
                         }
 
                         @Override
@@ -382,7 +379,7 @@ public class PostMaterialScanFg extends BaseFragment {
         showLoadingDialog();
         commonLogic.scanSave(saveBean, new CommonLogic.SaveListener() {
             @Override
-            public void onSuccess(String msg) {
+            public void onSuccess(SaveBackBean saveBackBean) {
                 dismissLoadingDialog();
                 clear();
             }
@@ -398,7 +395,7 @@ public class PostMaterialScanFg extends BaseFragment {
 
     @Override
     protected int bindLayoutId() {
-        return R.layout.activity_post_material_scan;
+        return R.layout.fg_post_material_scan;
     }
 
     @Override
@@ -447,16 +444,17 @@ public class PostMaterialScanFg extends BaseFragment {
 //                et_scan_locator.requestFocus();
 //            }
 //        }
-        if (cb_locatorlock.isChecked()){
-                barcodeFlag = false;
-            }else {
-                et_scan_locator.setText("");
-            }
         et_scan_barocde.setText("");
         et_scan_barocde.requestFocus();
         et_input_num.setText("");
         tv_product_name.setText("");
         fifo_check = false;
+        if (!cb_locatorlock.isChecked()){
+            locatorFlag = false;
+            et_scan_locator.setText("");
+            et_scan_locator.requestFocus();
+            locatorShow="";
+        }
     }
 
     /**

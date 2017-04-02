@@ -152,7 +152,7 @@
 
             </LinearLayout>
 
-            <include layout="@layout/ry_fifo_common" />
+            <include layout="@layout/ryitem_fifo_common" />
         </LinearLayout>
     </ScrollView>
 

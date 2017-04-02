@@ -106,7 +106,7 @@ public class FilterResultOrderBean implements Serializable {
     /**
      * 客户
      */
-    public String customer_name = null;
+    private String customer_name;
     public String getItem_name() {
         return item_name;
     }
@@ -117,7 +117,7 @@ public class FilterResultOrderBean implements Serializable {
     /**
      * 锁定原因
      */
-    private String lock_reason = null;
+    private String lock_reason ;
 
     public String getLock_reason() {
         return lock_reason;

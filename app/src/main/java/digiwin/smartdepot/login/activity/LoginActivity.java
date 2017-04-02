@@ -26,17 +26,20 @@ import digiwin.library.utils.AlertDialogUtils;
 import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.StringUtils;
 import digiwin.library.utils.TelephonyUtils;
+import digiwin.library.voiceutils.VoiceUtils;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseActivity;
 import digiwin.smartdepot.core.jpush.JPushManager;
 import digiwin.smartdepot.core.json.JsonReqForJava;
+import digiwin.smartdepot.core.printer.WiFiPrintManager;
 import digiwin.smartdepot.login.activity.operating_center_pw.OperatingCenterDialog;
 import digiwin.smartdepot.login.activity.setting_dialog.SettingDialog;
 import digiwin.smartdepot.login.bean.AccoutBean;
 import digiwin.smartdepot.login.bean.AppVersionBean;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
 import digiwin.smartdepot.main.activity.MainActivity;
+import digiwin.smartdepot.main.bean.StorageBean;
 
 /**
  * 登录界面
@@ -124,6 +127,13 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void doBusiness() {
+        final    WiFiPrintManager wiFiPrintManager=   WiFiPrintManager.getManager();
+        wiFiPrintManager.openWiFi("", 0, new WiFiPrintManager.OpenWiFiPrintListener() {
+            @Override
+            public void isOpen(boolean isOpen) {
+                wiFiPrintManager.printText("123");
+            }
+        });
         mPlants = new ArrayList<>();
         et_login_user.setOnFocusChangeListener(focusChangeListener);
         isFinished = false;
@@ -214,9 +224,22 @@ public class LoginActivity extends BaseActivity {
                         accoutBean.setIsRemeberPassWord("Y");
                     } else {
                         accoutBean.setIsRemeberPassWord("N");}
+                    List<String> split = StringUtils.split(accoutBean.getWare());
+                    ArrayList<StorageBean> storageList = new ArrayList<>();
+                    for (int i=0;i<split.size();i++){
+                        StorageBean storageBean = new StorageBean();
+                        storageBean.setWare(split.get(i));
+                        storageList.add(storageBean);
+                    }
+                    if (storageList.size()>0){
+                        accoutBean.setWare(storageList.get(0).getWare());
+                    }
                     Connector.getDatabase();
+                    DataSupport.deleteAll(StorageBean.class);
                     DataSupport.deleteAll(AccoutBean.class);
+                    DataSupport.saveAll(storageList);
                     accoutBean.save();
+                    //上传用户词表
                     ActivityManagerUtils.startActivityForBundleDataFinish(activity,MainActivity.class,bundle);
                     JPushManager.login(TelephonyUtils.getDeviceId(activity),TelephonyUtils.getDeviceId(activity));
 //                    dismissLoadingDialog();

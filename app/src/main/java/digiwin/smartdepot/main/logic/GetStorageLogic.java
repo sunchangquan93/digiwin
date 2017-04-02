@@ -2,6 +2,9 @@ package digiwin.smartdepot.main.logic;
 
 import android.content.Context;
 
+import org.litepal.crud.DataSupport;
+import org.litepal.tablemanager.Connector;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +17,7 @@ import digiwin.smartdepot.core.appcontants.ReqTypeName;
 import digiwin.smartdepot.core.net.IRequestCallbackImp;
 import digiwin.smartdepot.core.net.OkhttpRequest;
 import digiwin.smartdepot.core.xml.CreateParaXmlReqIm;
+import digiwin.smartdepot.login.bean.AccoutBean;
 import digiwin.smartdepot.main.bean.StorageBean;
 
 /**
@@ -81,6 +85,15 @@ public class GetStorageLogic {
                                 String storages = storageBeen.get(0).getWare();
                                 if (!StringUtils.isBlank(storages)){
                                     split = StringUtils.split(storages);
+                                    List<StorageBean> storagesaveBeen=new ArrayList<StorageBean>();
+                                    for (int i=0;i<split.size();i++){
+                                        StorageBean bean = new StorageBean();
+                                        bean.setWare(split.get(i));
+                                        storagesaveBeen.add(bean);
+                                    }
+                                    Connector.getDatabase();
+                                    DataSupport.deleteAll(StorageBean.class);
+                                    DataSupport.saveAll(storagesaveBeen);
                                 }
                             }
                             listener.onSuccess(split);
@@ -96,5 +109,28 @@ public class GetStorageLogic {
             LogUtils.e(TAG, "getNewVersion异常");
             listener.onFailed(mContext.getString(R.string.unknow_error));
         }
+    }
+
+    /**
+     *获取所有仓库
+     */
+    public static List<StorageBean> getWare(){
+        Connector.getDatabase();
+        List<StorageBean> storageBeen = DataSupport.findAll(StorageBean.class);
+        return  storageBeen;
+    }
+
+    /**
+     *获取仓库编号
+     */
+    public static List<String> getWareString(){
+        Connector.getDatabase();
+        List<String> list = new ArrayList<>();
+        List<StorageBean> storageBeen = DataSupport.findAll(StorageBean.class);
+        if (null!=storageBeen)
+        for (int i=0;i<storageBeen.size();i++){
+            list.add(storageBeen.get(i).getWare());
+        }
+        return  list;
     }
 }

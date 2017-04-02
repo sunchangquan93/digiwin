@@ -185,7 +185,7 @@ android:background="@color/white" tools:context="digiwin.smartdepot.module.activ
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <include layout="@layout/ry_common"/>
+        <include layout="@layout/ryitem_common"/>
     </LinearLayout>
 
 </ScrollView>

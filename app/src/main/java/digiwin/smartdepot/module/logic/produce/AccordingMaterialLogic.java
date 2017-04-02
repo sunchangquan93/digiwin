@@ -172,7 +172,7 @@ public class AccordingMaterialLogic {
     /**
      * 保存
      */
-    public void scanSave(final Map<String, String> map, final CommonLogic.SaveListener listener) {
+    public void scanSave(final Map<String, String> map, final SaveListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {

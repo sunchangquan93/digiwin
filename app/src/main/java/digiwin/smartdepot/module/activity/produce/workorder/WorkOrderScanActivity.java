@@ -33,6 +33,7 @@ import digiwin.smartdepot.core.modulecommon.ModuleUtils;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
 import digiwin.smartdepot.module.adapter.produce.AccordingMaterialFiFoAdapter;
 import digiwin.smartdepot.module.bean.common.ListSumBean;
+import digiwin.smartdepot.module.bean.common.SaveBackBean;
 import digiwin.smartdepot.module.bean.common.SaveBean;
 import digiwin.smartdepot.module.bean.common.ScanBarcodeBackBean;
 import digiwin.smartdepot.module.bean.common.ScanLocatorBackBean;
@@ -228,7 +229,7 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
         }
         commonLogic.scanSave(saveBean, new CommonLogic.SaveListener() {
             @Override
-            public void onSuccess(String msg) {
+            public void onSuccess(SaveBackBean saveBackBean) {
                 dismissLoadingDialog();
                 showToast(getResources().getString(R.string.save_success));
               /*  float scan_sum = sum(etInputNum.getText().toString(),tv_actual_yield.getText().toString());
@@ -323,6 +324,8 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
             case BARCODEWHAT:
                 HashMap<String, String> barcodeMap = new HashMap<>();
                 barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
+                barcodeMap.put(AddressContants.DOC_NO, tv_gongDan_no.getText().toString().trim());
+                barcodeMap.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
                 commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                     @Override
                     public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {

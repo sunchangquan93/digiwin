@@ -34,11 +34,6 @@ public class ScanBarcodeBackBean {
      * 实际条码
      */
     private String barcode_no;
-
-    /**
-     *  扫描汇总数量
-     */
-    private String scan_sumqty;
     /**
      *  条码数量
      */
@@ -63,6 +58,32 @@ public class ScanBarcodeBackBean {
      * 先进先出管控否
      */
     private String fifo_check;
+
+    /**
+     * 物料条码类型
+     */
+    private String item_barcode_type;
+
+    /**
+     * 单位
+     */
+    private String unit_no ;
+    /**
+     * 批次号
+     */
+    private String lot_no ;
+
+    /**
+     * 可入库量--生产完工入库扫码条码使用
+     */
+    private  String available_in_qty;
+
+    /**
+     * 批次日期
+     */
+    private String lot_date;
+
+    private String scan_sumqty;
 
     public String getFifo_check() {
         return fifo_check;
@@ -95,30 +116,6 @@ public class ScanBarcodeBackBean {
     public void setItem_barcode_type(String item_barcode_type) {
         this.item_barcode_type = item_barcode_type;
     }
-
-    /**
-     * 物料条码类型
-     */
-    private String item_barcode_type;
-
-    /**
-     * 单位
-     */
-    private String unit_no ;
-    /**
-     * 批次号
-     */
-    private String lot_no ;
-
-    /**
-     * 可入库量--生产完工入库扫码条码使用
-     */
-    private  String available_in_qty;
-
-    /**
-     * 批次日期
-     */
-    private String lot_date;
 
     public String getLot_date() {
         return lot_date;

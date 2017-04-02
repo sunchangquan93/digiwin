@@ -23,23 +23,23 @@ public class WiFiPrintManager {
     /**
      * 超时时间
      */
-    public int Net_ReceiveTimeout = 150000;
+    private int Net_ReceiveTimeout = 1000;
     /**
      * 是否开启
      */
     public boolean isOpen = false;
-    public Socket socket;
+    private Socket socket;
 
-    public PrintSend printSend;
+    private PrintSend printSend;
 
     private static Handler handler;
 
 
     public static WiFiPrintManager getManager() {
-        if (null == manager) {
+       // if (null == manager) {
             manager = new WiFiPrintManager();
             handler=new Handler(Looper.getMainLooper());
-        }
+      //  }
         return manager;
     }
 
@@ -56,8 +56,9 @@ public class WiFiPrintManager {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
+                LogUtils.e(TAG, "openWiFi--");
                 try {
-                    SocketAddress ipe = new InetSocketAddress("192.168.31.244", 9100);
+                    SocketAddress ipe = new InetSocketAddress("172.20.10.10", 9100);
                     socket = new Socket();
                     socket.connect(ipe);
                     socket.setSoTimeout(Net_ReceiveTimeout);
@@ -67,6 +68,11 @@ public class WiFiPrintManager {
                     isOpen = false;
                     LogUtils.e(TAG, "IOException--连接不成功");
                 }
+                catch (Exception e) {
+                    isOpen = false;
+                    LogUtils.e(TAG, "Exception--连接不成功"+e);
+                }
+                LogUtils.e(TAG, "isOpen--isOpen："+isOpen);
                 handler.post(new Runnable() {
                     @Override
                     public void run() {

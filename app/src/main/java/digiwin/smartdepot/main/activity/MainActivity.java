@@ -1,6 +1,5 @@
 package digiwin.smartdepot.main.activity;
 
-import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -15,6 +14,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.litepal.crud.DataSupport;
+import org.litepal.tablemanager.Connector;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +26,6 @@ import digiwin.library.constant.SharePreKey;
 import digiwin.library.utils.ActivityManagerUtils;
 import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.SharedPreferencesUtils;
-import digiwin.library.utils.ThreadPoolManager;
 import digiwin.library.utils.ToastUtils;
 import digiwin.library.voiceutils.VoiceUtils;
 import digiwin.smartdepot.R;
@@ -32,6 +33,7 @@ import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseApplication;
 import digiwin.smartdepot.core.base.BaseTitleActivity;
 import digiwin.smartdepot.main.bean.ModuleBean;
+import digiwin.smartdepot.main.bean.StorageBean;
 import digiwin.smartdepot.main.bean.TotalMode;
 import digiwin.smartdepot.main.fragment.DetailFragment;
 import digiwin.smartdepot.main.logic.MainLogic;
@@ -76,19 +78,19 @@ public class MainActivity extends BaseTitleActivity {
     @OnClick(R.id.voice_guide)
     void voiceTest(){
         String voicer = (String)SharedPreferencesUtils.get(this, SharePreKey.VOICER_SELECTED,"voicer");
-        VoiceUtils.getInstance(this,voicer).voiceToText(new VoiceUtils.GetVoiceTextListener() {
+        final List<ModuleBean> list = MainLogic.ModuleList;
+        VoiceUtils voiceUtils = VoiceUtils.getInstance(this,voicer);
+        voiceUtils.voiceToText(new VoiceUtils.GetVoiceTextListener() {
             @Override
             public String getVoiceText(String str) {
                 Log.d(TAG,"resulttext"+str);
                 command = str;
-                List<ModuleBean> list = MainLogic.ModuleList;
                 Log.d(TAG,"list.size()"+list.size());
                 if(list.size()>0){
                     for (int i = 0;i<list.size();i++){
                         if(command.contains(getResources().getString(list.get(i).getNameRes()))){
                             //
                             Log.d(TAG,"command"+command);
-                            Log.d(TAG,"list.get(i).getNameRes()"+list.get(i).getNameRes());
                             voice("正在为您打开"+getResources().getString(list.get(i).getNameRes()));
                             ActivityManagerUtils.startActivity(MainActivity.this,list.get(i).getIntent());
                         }
@@ -217,6 +219,11 @@ public class MainActivity extends BaseTitleActivity {
     protected void onResume() {
         super.onResume();
        // MainLogic.setTitle(tvPersonName, tv_title_operation);
+        Connector.getDatabase();
+        List<StorageBean> all = DataSupport.findAll(StorageBean.class);
+        for (int i=0;i<all.size();i++) {
+            LogUtils.e(TAG, "StorageBean--" + all.get(i).getWare());
+        }
     }
     /**
      * 用户信息界面跳转

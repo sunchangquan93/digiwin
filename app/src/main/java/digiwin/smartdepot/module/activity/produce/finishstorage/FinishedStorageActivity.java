@@ -21,11 +21,10 @@ import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseFirstModuldeActivity;
+import digiwin.smartdepot.core.modulecommon.ModuleViewPagerAdapter;
 import digiwin.smartdepot.module.activity.common.NoComeUnComActivity;
 import digiwin.smartdepot.module.fragment.produce.finishedstorage.FinishedStorageScanFg;
 import digiwin.smartdepot.module.fragment.produce.finishedstorage.FinishedStorageSumFg;
-import digiwin.smartdepot.module.logic.common.CommonLogic;
-import digiwin.smartdepot.core.modulecommon.ModuleViewPagerAdapter;
 
 /**
  * @author xiemeng

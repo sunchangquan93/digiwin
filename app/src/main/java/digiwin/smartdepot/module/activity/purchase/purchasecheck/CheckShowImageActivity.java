@@ -49,7 +49,7 @@ public class CheckShowImageActivity extends BaseTitleHActivity{
 
 	@Override
 	protected int bindLayoutId() {
-		return R.layout.check_showimage_activity;
+		return R.layout.activity_check_showimage;
 	}
 
 	@Override

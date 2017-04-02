@@ -87,19 +87,6 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="@dimen/layout_50dp"
-            android:layout_height="wrap_content"
-            android:text="@string/locator_num_"
-            android:textSize="@dimen/textSize_14sp" />
-
-        <TextView
-            android:id="@+id/tv_store_number"
-            android:layout_width="@dimen/layout_0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="@dimen/textSize_14sp" />
-
-        <TextView
             android:id="@+id/tv_wait_recheck_numb_string"
             android:layout_width="@dimen/layout_50dp"
             android:layout_height="wrap_content"
@@ -109,6 +96,8 @@
         <TextView
             android:id="@+id/tv_in_apply_number"
             android:layout_width="@dimen/layout_0dp"
+            android:layout_marginRight="@dimen/layout_10dp"
+            android:layout_marginLeft="@dimen/layout_10dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="@dimen/textSize_14sp" />
@@ -123,8 +112,34 @@
         <TextView
             android:id="@+id/tv_match_number"
             android:layout_width="@dimen/layout_0dp"
+            android:layout_marginRight="@dimen/layout_10dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="@dimen/textSize_14sp" />
+    </LinearLayout>
+
+    <View style="@style/ry_line_style" />
+
+    <LinearLayout
+        style="@style/itemstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/layout_50dp"
+            android:layout_height="wrap_content"
+            android:text="@string/locator_num_"
+            android:textSize="@dimen/textSize_14sp" />
+
+        <TextView
+            android:id="@+id/tv_store_number"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginRight="@dimen/layout_10dp"
+            android:layout_marginLeft="@dimen/layout_10dp"
+            android:textSize="@dimen/textSize_14sp" />
+
     </LinearLayout>
 </LinearLayout>

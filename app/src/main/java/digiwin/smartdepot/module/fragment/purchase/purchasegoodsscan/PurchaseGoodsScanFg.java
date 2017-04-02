@@ -2,10 +2,8 @@ package digiwin.smartdepot.module.fragment.purchase.purchasegoodsscan;
 
 import android.os.Handler;
 import android.os.Message;
-import android.text.method.TextKeyListener;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -16,7 +14,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.BindViews;
-import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
@@ -29,11 +26,10 @@ import digiwin.smartdepot.core.modulecommon.ModuleUtils;
 import digiwin.smartdepot.login.bean.AccoutBean;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
 import digiwin.smartdepot.module.activity.purchase.purchasegoodsscan.PurchaseGoodsScanSecondActivity;
-import digiwin.smartdepot.module.activity.purchase.purchaseinstore.PurchaseInStoreSecondActivity;
 import digiwin.smartdepot.module.bean.common.FilterResultOrderBean;
+import digiwin.smartdepot.module.bean.common.SaveBackBean;
 import digiwin.smartdepot.module.bean.common.SaveBean;
 import digiwin.smartdepot.module.bean.common.ScanBarcodeBackBean;
-import digiwin.smartdepot.module.bean.common.ScanLocatorBackBean;
 import digiwin.smartdepot.module.logic.common.CommonLogic;
 
 
@@ -89,6 +85,13 @@ public class PurchaseGoodsScanFg extends BaseFragment {
 
     @BindView(R.id.includedetail)
     RelativeLayout includeDetail;
+
+    /**
+     * 已扫描量
+     */
+    @BindView(R.id.tv_scaned_num)
+    TextView tv_scaned_num;
+
     /**
      * 条码展示
      */
@@ -142,18 +145,19 @@ public class PurchaseGoodsScanFg extends BaseFragment {
         saveBean.setQty(et_input_num.getText().toString());
         float qty = StringUtils.string2Float(saveBean.getQty());
         float scansum_qty = StringUtils.string2Float(saveBean.getScan_sumqty());
-        if(!StringUtils.isBlank(saveBean.getAvailable_in_qty())){
-            float avaliable_in_qty = StringUtils.string2Float(saveBean.getAvailable_in_qty());
-            if(qty + scansum_qty > avaliable_in_qty){
-                showFailedDialog(pactivity.getResources().getString(R.string.scan_sumqty_larger_than_need_qty));
-                return;
-            }
-        }
+//        if(!StringUtils.isBlank(saveBean.getAvailable_in_qty())){
+//            float avaliable_in_qty = StringUtils.string2Float(saveBean.getAvailable_in_qty());
+//            if(qty + scansum_qty > avaliable_in_qty){
+//                showFailedDialog(pactivity.getResources().getString(R.string.scan_sumqty_larger_than_need_qty));
+//                return;
+//            }
+//        }
         showLoadingDialog();
         commonLogic.scanSave(saveBean, new CommonLogic.SaveListener() {
             @Override
-            public void onSuccess(String msg) {
+            public void onSuccess(SaveBackBean saveBackBean) {
                 dismissLoadingDialog();
+                saveBean.setScan_sumqty(saveBackBean.getScan_sumqty());
                 clear();
             }
 
@@ -189,6 +193,7 @@ public class PurchaseGoodsScanFg extends BaseFragment {
                             if(!StringUtils.isBlank(barcodeBackBean.getBarcode_qty())){
                                 et_input_num.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
                             }
+                            tv_scaned_num.setText(barcodeBackBean.getScan_sumqty());
                             barcodeFlag = true;
                             show();
                             saveBean.setQty(barcodeBackBean.getBarcode_qty());
@@ -197,6 +202,7 @@ public class PurchaseGoodsScanFg extends BaseFragment {
                             saveBean.setUnit_no(barcodeBackBean.getUnit_no());
                             saveBean.setLot_no(barcodeBackBean.getLot_no());
                             saveBean.setScan_sumqty(barcodeBackBean.getScan_sumqty());
+                            saveBean.setAvailable_in_qty(barcodeBackBean.getAvailable_in_qty());
                             et_input_num.requestFocus();
                         }
 
@@ -240,6 +246,7 @@ public class PurchaseGoodsScanFg extends BaseFragment {
      * 保存完成之后的操作
      */
     private void clear() {
+        tv_scaned_num.setText(saveBean.getScan_sumqty());
         et_scan_barocde.setText("");
         et_scan_barocde.requestFocus();
         et_input_num.setText("");
@@ -250,6 +257,7 @@ public class PurchaseGoodsScanFg extends BaseFragment {
      * 初始化一些变量
      */
     public void initData() {
+        tv_scaned_num.setText("");
         et_scan_barocde.setText("");
         barcodeShow = "";
         show();
