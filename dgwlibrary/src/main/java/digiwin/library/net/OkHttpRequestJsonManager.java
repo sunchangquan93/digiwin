@@ -17,6 +17,7 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.FormBody;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -71,17 +72,33 @@ public class OkHttpRequestJsonManager implements IRequestManager {
         addCallBack(context,requestCallBack, request);
     }
 
+
     @Override
-    public void post(String url, String requestBodyXml, IRequestCallBack requestCallBack) {
-        RequestBody body = RequestBody.create(TYPE_JSON, requestBodyXml);
+    public void post(String url, String requestBody ,IRequestCallBack requestCallBack) {
+        RequestBody formBody = new FormBody.Builder()
+                .add("token", "Hello")
+                .add("params", requestBody)
+                .build();
         Request request = new Request.Builder()
                 .addHeader("SOAPAction", "\"\"")
                 .url(url)
-                .post(body)
+                .post(formBody)
                 .build();
         addCallBack(context,requestCallBack, request);
     }
-
+    @Override
+    public void post(String url, String token, String requestBody, IRequestCallBack requestCallBack) {
+        RequestBody formBody = new FormBody.Builder()
+                .add("token", "Hello")
+                .add("params", requestBody)
+                .build();
+        Request request = new Request.Builder()
+                .addHeader("SOAPAction", "\"\"")
+                .url(url)
+                .post(formBody)
+                .build();
+        addCallBack(context,requestCallBack, request);
+    }
     @Override
     public void downLoadFile(String url, String filePath, String apkName, IDownLoadCallBack callBack) {
         Request request = new Request.Builder()
@@ -91,7 +108,8 @@ public class OkHttpRequestJsonManager implements IRequestManager {
         downLoad(context,request, filePath, apkName, callBack);
     }
 
-    private void addCallBack(final Context context,final IRequestCallBack requestCallback, final Request request) {
+
+    private void addCallBack(final Context context, final IRequestCallBack requestCallback, final Request request) {
         try {
             okHttpClient.newCall(request).enqueue(new Callback() {
                 @Override

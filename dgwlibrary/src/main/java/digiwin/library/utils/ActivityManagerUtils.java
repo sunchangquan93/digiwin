@@ -15,7 +15,11 @@ import java.util.List;
  */
 
 public class ActivityManagerUtils {
+
     private static List<Activity> activityLists=new ArrayList<>();
+    public static List<Activity> getActivityLists() {
+        return activityLists;
+    }
 
     public static void addActivity(Activity activity){
         if (activity!=null)
@@ -31,6 +35,17 @@ public class ActivityManagerUtils {
         for (Activity activity:activityLists){
             if(activity!=null &&!activity.isFinishing())
             activity.finish();
+        }
+        System.exit(0);
+    }
+
+    public static void finishOtherActivity(String activityName){
+        for (Activity activity:activityLists){
+            if(activity!=null &&!activity.isFinishing()){
+                if(!activity.getClass().getSimpleName().equals(activityName)){
+                    activity.finish();
+                }
+            }
         }
         System.exit(0);
     }

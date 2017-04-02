@@ -7,12 +7,18 @@ package digiwin.library.net;
 
 public interface IRequestManager {
 
-    void get(String url,IRequestCallBack requestCallBack);
+    void get(String url, IRequestCallBack requestCallBack);
 
-    void post(String url,String requestBodyXml,IRequestCallBack requestCallBack);
+    void post(String url, String requestBody, IRequestCallBack requestCallBack);
+
+    /**
+     * 需要token
+     */
+    void post(String url, String token, String requestBody, IRequestCallBack requestCallBack);
     /**
      * 文件下载
      */
-    void downLoadFile(String url,String filepath,String apkName,IDownLoadCallBack callBack);
+    void downLoadFile(String url, String filepath, String apkName, IDownLoadCallBack callBack);
+
 
 }

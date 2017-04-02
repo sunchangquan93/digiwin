@@ -10,6 +10,7 @@ import android.util.Log;
 
 import com.iflytek.cloud.ErrorCode;
 import com.iflytek.cloud.InitListener;
+import com.iflytek.cloud.LexiconListener;
 import com.iflytek.cloud.RecognizerListener;
 import com.iflytek.cloud.RecognizerResult;
 import com.iflytek.cloud.SpeechConstant;
@@ -74,6 +75,7 @@ public class VoiceUtils {
 
     private VoiceUtils(Context context) {
         this.mContext = context;
+        //上传用户词表
         mInstaller = new ApkInstaller(mContext);
     }
 
@@ -394,4 +396,35 @@ public class VoiceUtils {
         Ringtone r = RingtoneManager.getRingtone(context, notification);
         r.play();
     }
+
+    /**
+     * 上传用户词表
+     */
+    public void submitUserWords(){
+        SpeechRecognizer mIat = SpeechRecognizer.createRecognizer( mContext, null);
+    // 上传用户词表，userwords 为用户词表文件。
+        String contents = mContext.getResources().getString(R.string.user_words);
+        Log.d(TAG,"contents:"+contents);
+        mIat.setParameter(SpeechConstant.TEXT_ENCODING, "utf-8");
+        // 指定引擎类型
+         mIat.setParameter(SpeechConstant.ENGINE_TYPE, SpeechConstant.TYPE_CLOUD);
+        int ret = mIat.updateLexicon("userword", contents, lexiconListener);
+        if(ret != ErrorCode.SUCCESS){  Log.d(TAG,"上传用户词表失败：" + ret); }
+
+    }
+    // 上传用户词表监听器。
+    private LexiconListener lexiconListener = new LexiconListener()
+    {
+        @Override
+        public void onLexiconUpdated(String lexiconId, SpeechError error)
+        {
+            if(error != null)
+            {
+                Log.d(TAG,error.toString());
+            }else
+            {
+                Log.d(TAG,"上传成功！");
+            }
+        }
+    };
 }

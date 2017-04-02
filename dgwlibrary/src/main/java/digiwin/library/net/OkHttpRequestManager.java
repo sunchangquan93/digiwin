@@ -81,7 +81,10 @@ public class OkHttpRequestManager implements IRequestManager {
                 .build();
         addCallBack(context,requestCallBack, request);
     }
+    @Override
+    public void post(String url, String token, String requestBody, IRequestCallBack requestCallBack) {
 
+    }
     @Override
     public void downLoadFile(String url, String filePath, String apkName, IDownLoadCallBack callBack) {
         Request request = new Request.Builder()
@@ -91,7 +94,9 @@ public class OkHttpRequestManager implements IRequestManager {
         downLoad(context,request, filePath, apkName, callBack);
     }
 
-    private void addCallBack(final Context context,final IRequestCallBack requestCallback, final Request request) {
+
+
+    private void addCallBack(final Context context, final IRequestCallBack requestCallback, final Request request) {
         try {
             okHttpClient.newCall(request).enqueue(new Callback() {
                 @Override
