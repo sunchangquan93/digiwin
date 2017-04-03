@@ -79,7 +79,6 @@
                     <TextView
                         android:layout_width="@dimen/layout_60dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/layout_10dp"
                         android:text="@string/department"
                         android:textSize="@dimen/textSize_14sp" />
 

@@ -182,6 +182,7 @@ public class StoreReturnMaterialActivity extends BaseTitleActivity {
     }
 
     private void searchData() {
+        updateUI();
         showLoadingDialog();
         FilterBean bean = new FilterBean();
         bean.setWarehouse_out_no(LoginLogic.getWare());
@@ -313,6 +314,7 @@ public class StoreReturnMaterialActivity extends BaseTitleActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == TOCOMMIT){
+            list.clear();
             searchData();
         }
     }

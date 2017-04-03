@@ -286,15 +286,15 @@ public class TransfersToReviewActivity extends BaseTitleActivity {
      */
     private  void  onUpdate(){
         showLoadingDialog();
+        list.clear();
+        adapter = new TransfersReviewSumAdapter(activity, list);
+        ryList.setAdapter(adapter);
         FilterBean filterBean = new FilterBean();
         filterBean.setDoc_no(et_transfers_list.getText().toString().trim());
         filterBean.setDepartment_no(et_department.getText().toString().trim());
         filterBean.setEmployee_no(et_applicant.getText().toString().trim());
         filterBean.setWarehouse_in_no(et_in_warehouse.getText().toString().trim());
-        AccoutBean userInfo = LoginLogic.getUserInfo();
-        if (null!=userInfo) {
-            filterBean.setWarehouse_out_no(userInfo.getWare());
-        }
+        filterBean.setWarehouse_out_no(LoginLogic.getWare());
         filterBean.setDate_begin(startDate);
         filterBean.setDate_end(endDate);
         filterBean.setBarcode_no(et_item_no.getText().toString().trim());

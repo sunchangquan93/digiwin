@@ -130,6 +130,9 @@ public class ReturnMaterialActivity extends BaseTitleActivity {
 
             @Override
             public void onPageSelected(int position) {
+                if(position == 0){
+                    scanFg.updateView();
+                }
                 if (position == 1) {
                     sumFg.upDateList();
                 }

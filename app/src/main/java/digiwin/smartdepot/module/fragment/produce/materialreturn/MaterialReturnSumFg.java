@@ -29,6 +29,7 @@ import digiwin.smartdepot.login.loginlogic.LoginLogic;
 import digiwin.smartdepot.module.activity.common.CommonDetailActivity;
 import digiwin.smartdepot.module.activity.produce.materialreturn.MaterialReturnActivity;
 import digiwin.smartdepot.module.adapter.produce.MaterialReturnSumAdapter;
+import digiwin.smartdepot.module.adapter.produce.WorkOrderReturnSumAdapter;
 import digiwin.smartdepot.module.adapter.sale.SaleOutletSumAdapter;
 import digiwin.smartdepot.module.bean.common.ClickItemPutBean;
 import digiwin.smartdepot.module.bean.common.DetailShowBean;
@@ -95,40 +96,48 @@ public class MaterialReturnSumFg extends BaseFragment {
     }
 
     public void upDateList() {
-        Bundle bundle = activity.getIntent().getExtras();
-        FilterResultOrderBean filterBean = (FilterResultOrderBean) bundle.getSerializable(MaterialReturnActivity.filterBean);
-        ClickItemPutBean itemPutBean = new ClickItemPutBean();
-        itemPutBean.setDoc_no(filterBean.getDoc_no());
-        itemPutBean.setWarehouse_in_no(LoginLogic.getWare());
-        showLoadingDialog();
-        commonLogic.getOrderSumData(itemPutBean, new CommonLogic.GetOrderSumListener() {
-            @Override
-            public void onSuccess(List<ListSumBean> list) {
-                dismissLoadingDialog();
-                sumBeanList = list;
-                adapter = new MaterialReturnSumAdapter(context, sumBeanList);
-                ryList.setAdapter(adapter);
-                if (null != list && list.size() > 0) {
-                    upDateFlag = true;
-                    toDetail();
-                    tvMaterialReturnNumber.setText(list.get(0).getDoc_no());
-                    tvItemDate.setText(list.get(0).getCreate_date());
-                    tvDepart.setText(list.get(0).getDepartment_name());
-                    tvApplicant.setText(list.get(0).getEmployee_name());
+        try {
+            sumBeanList.clear();
+            adapter = new MaterialReturnSumAdapter(context, sumBeanList);
+            ryList.setAdapter(adapter);
+            Bundle bundle = activity.getIntent().getExtras();
+            FilterResultOrderBean filterBean = (FilterResultOrderBean) bundle.getSerializable(MaterialReturnActivity.filterBean);
+            ClickItemPutBean itemPutBean = new ClickItemPutBean();
+            itemPutBean.setDoc_no(filterBean.getDoc_no());
+            itemPutBean.setWarehouse_in_no(LoginLogic.getWare());
+            showLoadingDialog();
+            commonLogic.getOrderSumData(itemPutBean, new CommonLogic.GetOrderSumListener() {
+                @Override
+                public void onSuccess(List<ListSumBean> list) {
+                    dismissLoadingDialog();
+                    sumBeanList = list;
+                    adapter = new MaterialReturnSumAdapter(context, sumBeanList);
+                    ryList.setAdapter(adapter);
+                    if (null != list && list.size() > 0) {
+                        upDateFlag = true;
+                        toDetail();
+                        tvMaterialReturnNumber.setText(list.get(0).getDoc_no());
+                        tvItemDate.setText(list.get(0).getCreate_date());
+                        tvDepart.setText(list.get(0).getDepartment_name());
+                        tvApplicant.setText(list.get(0).getEmployee_name());
 
+                    }
                 }
-            }
 
-            @Override
-            public void onFailed(String error) {
-                dismissLoadingDialog();
-                upDateFlag = false;
-                sumBeanList.clear();
-                adapter = new MaterialReturnSumAdapter(context, sumBeanList);
-                ryList.setAdapter(adapter);
-                showFailedDialog(error);
-            }
-        });
+                @Override
+                public void onFailed(String error) {
+                    dismissLoadingDialog();
+                    upDateFlag = false;
+                    sumBeanList.clear();
+                    adapter = new MaterialReturnSumAdapter(context, sumBeanList);
+                    ryList.setAdapter(adapter);
+                    showFailedDialog(error);
+                }
+            });
+        }catch (Exception e){
+            LogUtils.e(TAG,"updatelist"+e);
+        }
+
 
     }
 

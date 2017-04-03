@@ -46,6 +46,15 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:textSize="@dimen/textSize_14sp" />
+    </LinearLayout>
+    <View
+        style="@style/ry_line_style" />
+
+    <LinearLayout
+        style="@style/itemstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
         <TextView
             android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"

@@ -1,32 +1,22 @@
 package digiwin.smartdepot.module.activity.produce.workorderreturn;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.OnClick;
-import digiwin.library.utils.ActivityManagerUtils;
 import digiwin.library.utils.LogUtils;
 import digiwin.smartdepot.R;
-import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseFirstModuldeActivity;
 import digiwin.smartdepot.core.modulecommon.ModuleViewPagerAdapter;
-import digiwin.smartdepot.module.activity.common.HaveSourceUnComActivity;
-import digiwin.smartdepot.module.activity.common.NoComeUnComActivity;
 import digiwin.smartdepot.module.fragment.produce.workorderreturn.WorkOrderReturnScanFg;
 import digiwin.smartdepot.module.fragment.produce.workorderreturn.WorkOrderReturnSumFg;
-import digiwin.smartdepot.module.fragment.sale.saleoutlet.SaleOutletScanFg;
-import digiwin.smartdepot.module.fragment.sale.saleoutlet.SaleOutletSumFg;
 
 /**
  * @des      依工单退料
@@ -139,7 +129,7 @@ public class WorkOrderReturnActivity extends BaseFirstModuldeActivity {
             @Override
             public void onPageSelected(int position) {
                  if (position == 1) {
-                    sumFg.upDateList();
+                    sumFg.updatelist();
                 }
             }
 
@@ -155,7 +145,7 @@ public class WorkOrderReturnActivity extends BaseFirstModuldeActivity {
         super.onActivityResult(requestCode, resultCode, data);
         try {
             if (requestCode == DETAILCODE) {
-                sumFg.upDateList();
+                sumFg.updatelist();
             }
         } catch (Exception e) {
             LogUtils.e(TAG, "onActivityResult-->" + e);

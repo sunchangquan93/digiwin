@@ -234,30 +234,37 @@ public class MaterialReturnListActivity extends BaseTitleActivity {
      * 更新
      */
     private void onUpdate() {
-        showLoadingDialog();
-        FilterBean filterBean = new FilterBean();
-        AccoutBean userInfo = LoginLogic.getUserInfo();
+        try {
+            showLoadingDialog();
+            list.clear();
+            adapter = new MaterialReturnListAdapter(activity, list);
+            ryList.setAdapter(adapter);
+            FilterBean filterBean = new FilterBean();
+            AccoutBean userInfo = LoginLogic.getUserInfo();
+            filterBean.setDoc_no(etMateialreturnNumber.getText().toString());
+            filterBean.setWarehouse_in_no(LoginLogic.getWare());
+            filterBean.setDepartment_no(etDepartment.getText().toString());
+            filterBean.setEmployee_no(etPerson.getText().toString());
+            filterBean.setDate_begin(startDate);
+            filterBean.setDate_end(endDate);
+            logic.getOrderData(filterBean, new CommonLogic.GetOrderListener() {
+                @Override
+                public void onSuccess(List<FilterResultOrderBean> masterDatas) {
+                    list = masterDatas;
+                    showData();
+                    dismissLoadingDialog();
+                }
 
-        filterBean.setDoc_no(etMateialreturnNumber.getText().toString());
-        filterBean.setWarehouse_in_no(LoginLogic.getWare());
-        filterBean.setDepartment_no(etDepartment.getText().toString());
-        filterBean.setEmployee_no(etPerson.getText().toString());
-        filterBean.setDate_begin(startDate);
-        filterBean.setDate_end(endDate);
-        logic.getOrderData(filterBean, new CommonLogic.GetOrderListener() {
-            @Override
-            public void onSuccess(List<FilterResultOrderBean> masterDatas) {
-                list = masterDatas;
-                showData();
-                dismissLoadingDialog();
-            }
+                @Override
+                public void onFailed(String error) {
+                    dismissLoadingDialog();
+                    showFailedDialog(error);
+                }
+            });
+        }catch (Exception e){
+            LogUtils.e(TAG,"onUpdate"+e);
+        }
 
-            @Override
-            public void onFailed(String error) {
-                dismissLoadingDialog();
-                showFailedDialog(error);
-            }
-        });
     }
 
     /**

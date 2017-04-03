@@ -25,7 +25,6 @@ import digiwin.smartdepot.core.base.BaseTitleActivity;
 import digiwin.smartdepot.core.modulecommon.ModuleUtils;
 import digiwin.smartdepot.core.printer.BlueToothManager;
 import digiwin.smartdepot.main.logic.ToSettingLogic;
-import digiwin.smartdepot.module.bean.common.SaveBean;
 import digiwin.smartdepot.module.bean.common.ScanBarcodeBackBean;
 import digiwin.smartdepot.module.bean.stock.PrintBarcodeBean;
 import digiwin.smartdepot.module.logic.common.CommonLogic;
@@ -133,7 +132,7 @@ public class PrintLabelActivity extends BaseTitleActivity {
                     int sum_num = (int)StringUtils.string2Float(et_sum_num.getText().toString());
                     int single_num = (int)StringUtils.string2Float(et_single_package_num.getText().toString());
                     if(single_num != 0){
-                        int num = StringUtils.div(sum_num,single_num);
+                        int num = (int) StringUtils.div(sum_num,single_num,0);
                         tv_num_of_print_pieces.setText(String.valueOf(num));
                         printBarcodeBean.setQty(String.valueOf(single_num));
                         printBarcodeBean.setPrint_num(String.valueOf(num));

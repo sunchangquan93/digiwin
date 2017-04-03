@@ -125,12 +125,12 @@ public class WorkOrderReturnScanFg extends BaseFragment {
 
     @OnClick(R.id.save)
     void save() {
-        if (!barcodeFlag) {
-            showFailedDialog(R.string.scan_barcode);
-            return;
-        }
         if (!locatorFlag) {
             showFailedDialog(R.string.scan_locator);
+            return;
+        }
+        if (!barcodeFlag) {
+            showFailedDialog(R.string.scan_barcode);
             return;
         }
         if (StringUtils.isBlank(etInputNum.getText().toString())) {
@@ -211,12 +211,7 @@ public class WorkOrderReturnScanFg extends BaseFragment {
                             saveBean.setItem_no(barcodeBackBean.getItem_no());
                             saveBean.setUnit_no(barcodeBackBean.getUnit_no());
                             saveBean.setLot_no(barcodeBackBean.getLot_no());
-
-                            if (cbLocatorlock.isChecked()) {
-                                etInputNum.requestFocus();
-                            } else {
-                                etScanLocator.requestFocus();
-                            }
+                            etInputNum.requestFocus();
                         }
 
                         @Override
@@ -242,7 +237,7 @@ public class WorkOrderReturnScanFg extends BaseFragment {
                             show();
                             saveBean.setStorage_spaces_in_no(locatorBackBean.getStorage_spaces_no());
                             saveBean.setWarehouse_in_no(locatorBackBean.getWarehouse_no());
-                            etInputNum.requestFocus();
+                            etScanBarocde.requestFocus();
                         }
 
                         @Override
@@ -264,7 +259,7 @@ public class WorkOrderReturnScanFg extends BaseFragment {
 
     @Override
     protected int bindLayoutId() {
-        return R.layout.fg_finishedstorage_scan;
+        return R.layout.fg_workorderreturn_scan;
     }
 
     @Override
@@ -317,7 +312,8 @@ public class WorkOrderReturnScanFg extends BaseFragment {
         saveBean = new SaveBean();
         cbLocatorlock.setChecked(false);
         etScanLocator.setText("");
-        etScanBarocde.requestFocus();
+        etScanLocator.setText("");
+        etScanLocator.requestFocus();
         commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
         try{
             FilterResultOrderBean headBean = (FilterResultOrderBean) activity.getIntent().getSerializableExtra(WorkOrderReturnListActivity.filterBean);

@@ -278,10 +278,7 @@ public class SaleOutletListActivity extends BaseTitleActivity {
         ryList.setAdapter(adapter);
         showLoadingDialog();
         FilterBean filterBean = new FilterBean();
-        AccoutBean userInfo = LoginLogic.getUserInfo();
-        if (null != userInfo) {
-            filterBean.setWarehouse_out_no(userInfo.getWare());
-        }
+        filterBean.setWarehouse_out_no(LoginLogic.getWare());
         filterBean.setDoc_no(etGeneralNumber.getText().toString());
         filterBean.setCustomer_no(etCustomNo.getText().toString());
         filterBean.setDepartment_no(etDepartment.getText().toString());

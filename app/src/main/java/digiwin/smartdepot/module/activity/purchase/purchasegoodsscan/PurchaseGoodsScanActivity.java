@@ -41,7 +41,7 @@ import digiwin.smartdepot.module.logic.common.CommonLogic;
 import static digiwin.smartdepot.login.loginlogic.LoginLogic.getUserInfo;
 
 /**
- * 采购入库 汇总界面
+ * 快速收货 汇总界面
  *
  * @author 唐孟宇
  */
@@ -339,7 +339,7 @@ public class PurchaseGoodsScanActivity extends BaseTitleActivity {
                         ll_search_dialog.setVisibility(View.GONE);
                         scrollview.setVisibility(View.VISIBLE);
                         iv_title_setting.setVisibility(View.VISIBLE);
-
+                        sumShowBeanList = new ArrayList<FilterResultOrderBean>();
                         sumShowBeanList = list;
                         adapter = new PurchaseGoodsScanAdapter(pactivity, sumShowBeanList);
                         ryList.setAdapter(adapter);

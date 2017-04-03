@@ -12,7 +12,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="@dimen/layout_70dp"
+            android:layout_width="@dimen/layout_50dp"
             android:layout_height="wrap_content"
             android:text="@string/item_name"
             android:textSize="@dimen/textSize_14sp" />
@@ -41,7 +41,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="@dimen/layout_70dp"
+            android:layout_width="@dimen/layout_50dp"
             android:layout_height="wrap_content"
             android:text="@string/model"
             android:textSize="@dimen/textSize_14sp" />
@@ -63,7 +63,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="@dimen/layout_70dp"
+            android:layout_width="@dimen/layout_50dp"
             android:layout_height="wrap_content"
             android:text="@string/item_no"
             android:textSize="@dimen/textSize_14sp" />
@@ -85,7 +85,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="@dimen/layout_70dp"
+            android:layout_width="@dimen/layout_50dp"
             android:layout_height="wrap_content"
             android:text="@string/apply_number"
             android:textSize="@dimen/textSize_14sp" />
@@ -98,7 +98,7 @@
             android:textSize="@dimen/textSize_14sp" />
 
         <TextView
-            android:layout_width="@dimen/layout_70dp"
+            android:layout_width="@dimen/layout_50dp"
             android:layout_height="wrap_content"
             android:text="@string/scaned_numb"
             android:textSize="@dimen/textSize_14sp" />

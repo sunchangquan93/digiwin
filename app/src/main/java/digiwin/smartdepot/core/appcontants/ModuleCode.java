@@ -145,6 +145,15 @@ public interface ModuleCode {
      */
     public final String STORETRANSUNLOCK="C015";
     /**
+     * 产品装箱
+     */
+    public final String PRODUCTBINNING="C016";
+    /**
+     * 产品出箱
+     */
+    public final String PRODUCTOUTBOX="C017";
+
+    /**
      * 依工单补料
      */
     public final String WORKSUPPLEMENT="B023";
@@ -156,6 +165,11 @@ public interface ModuleCode {
      * 销售退货
      */
     public final String SALERETURN="D004";
+
+    /**
+     * 扫码出货
+     */
+    public final String SCANOUTSTORE="D005";
 
     /**
      * 生产超领

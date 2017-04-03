@@ -70,6 +70,7 @@ public class FinishedStorageSumFg extends BaseFragment {
 
     @Override
     protected void doBusiness() {
+        sumShowBeanList=new ArrayList<>();
         pactivity = (FinishedStorageActivity) activity;
         FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(activity);
         ryList.setLayoutManager(linearLayoutManager);
@@ -83,7 +84,10 @@ public class FinishedStorageSumFg extends BaseFragment {
     public void upDateList() {
         try {
             Map<String, String> map = new HashMap<>();
-           showLoadingDialog();
+            sumShowBeanList.clear();
+            adapter = new FinishedStorageSumAdapter(activity, sumShowBeanList);
+            ryList.setAdapter(adapter);
+            showLoadingDialog();
             commonLogic.getSum(map, new CommonLogic.GetSumListener() {
                     @Override
                     public void onSuccess(List<SumShowBean> list) {
@@ -99,14 +103,7 @@ public class FinishedStorageSumFg extends BaseFragment {
                 public void onFailed(String error) {
                     upDateFlag = false;
                     dismissLoadingDialog();
-                    try {
-                        showFailedDialog(error);
-                        sumShowBeanList = new ArrayList<SumShowBean>();
-                        adapter = new FinishedStorageSumAdapter(activity, sumShowBeanList);
-                        ryList.setAdapter(adapter);
-                    } catch (Exception e) {
-                        LogUtils.e(TAG, "updateList--getSum--onFailed" + e);
-                    }
+                    showFailedDialog(error);
                 }
             });
         } catch (Exception e) {
@@ -172,7 +169,7 @@ public class FinishedStorageSumFg extends BaseFragment {
                 showCommitSuccessDialog(msg, new OnDialogClickListener() {
                     @Override
                     public void onCallback() {
-                        pactivity.mZXVp.setCurrentItem(0);
+                        pactivity.moduleVp.setCurrentItem(0);
                         pactivity.createNewModuleId(pactivity.module);
                         pactivity.scanFg.initData();
                         initData();

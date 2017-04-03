@@ -313,7 +313,7 @@ public class MaterialReturnScanFg extends BaseFragment {
         locatorFlag = false;
         cbLocatorlock.setChecked(false);
         etScanLocator.setText("");
-        etScanBarocde.requestFocus();
+        etScanLocator.requestFocus();
         saveBean = new SaveBean();
         Bundle bundle = activity.getIntent().getExtras();
         FilterResultOrderBean filterBean = (FilterResultOrderBean) bundle.getSerializable(MaterialReturnActivity.filterBean);

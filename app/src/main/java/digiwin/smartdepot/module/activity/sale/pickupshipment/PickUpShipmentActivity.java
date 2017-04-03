@@ -21,7 +21,7 @@ import digiwin.library.utils.LogUtils;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
-import digiwin.smartdepot.core.base.BaseTitleActivity;
+import digiwin.smartdepot.core.base.BaseFirstModuldeActivity;
 import digiwin.smartdepot.core.modulecommon.ModuleViewPagerAdapter;
 import digiwin.smartdepot.module.activity.common.NoComeUnComActivity;
 import digiwin.smartdepot.module.fragment.sale.pickupshipment.PickUpShipmentScanFg;
@@ -33,7 +33,7 @@ import digiwin.smartdepot.module.fragment.sale.pickupshipment.PickUpShipmentSumF
  * @date 2017/3/24
  */
 
-public class PickUpShipmentActivity extends BaseTitleActivity{
+public class PickUpShipmentActivity extends BaseFirstModuldeActivity{
 
     public PickUpShipmentActivity pactivity;
 
@@ -129,6 +129,11 @@ public class PickUpShipmentActivity extends BaseTitleActivity{
 
             @Override
             public void onPageSelected(int position) {
+
+                if(position == 0){
+                    scanFg.upDateList();
+                }
+
                 if (position == 1) {
                     sumFg.upDateList();
                 }
@@ -171,5 +176,10 @@ public class PickUpShipmentActivity extends BaseTitleActivity{
         pactivity = (PickUpShipmentActivity) activity;
         mName.setText(getResources().getString(R.string.title_pickupshipment));
         unCom.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public ExitMode exitOrDel() {
+        return ExitMode.EXITD;
     }
 }

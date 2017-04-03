@@ -65,16 +65,7 @@ public class PickUpShipmentSumFg extends BaseFragment {
 
     @OnClick(R.id.commit)
     void commit() {
-        showCommitSureDialog(new OnDialogTwoListener() {
-            @Override
-            public void onCallback1() {
-                sureCommit();
-            }
-            @Override
-            public void onCallback2() {
-
-            }
-        });
+        sureCommit();
     }
 
     FilterResultOrderBean localData = new FilterResultOrderBean();

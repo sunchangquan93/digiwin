@@ -373,6 +373,8 @@ public class PostMaterialActivity extends BaseTitleActivity {
                     try {
                         showFailedDialog(error);
                         //TODO setAdapter
+                        dataList = new ArrayList<FilterResultOrderBean>();
+                        adapter = new FilterResultOrderAdapter(pactivity,dataList);
                     } catch (Exception e) {
                         LogUtils.e(TAG, "updateList--getSum--onFailed" + e);
                     }

@@ -46,7 +46,7 @@ public class FinishedStorageActivity extends BaseFirstModuldeActivity {
      * ViewPager
      */
     @BindView(R.id.module_vp)
-    public ViewPager mZXVp;
+    public ViewPager moduleVp;
     @BindView(R.id.un_com)
     ImageView unCom;
 
@@ -124,11 +124,11 @@ public class FinishedStorageActivity extends BaseFirstModuldeActivity {
         titles.add(getResources().getString(R.string.SumData));
         fragmentManager = getSupportFragmentManager();
         adapter = new ModuleViewPagerAdapter(fragmentManager, fragments, titles);
-        mZXVp.setAdapter(adapter);
+        moduleVp.setAdapter(adapter);
         tlTab.addTab(tlTab.newTab().setText(titles.get(0)));
         tlTab.addTab(tlTab.newTab().setText(titles.get(1)));
         //Tablayout和ViewPager关联起来
-        tlTab.setupWithViewPager(mZXVp);
+        tlTab.setupWithViewPager(moduleVp);
         tlTab.setTabsFromPagerAdapter(adapter);
         select();
     }
@@ -137,7 +137,7 @@ public class FinishedStorageActivity extends BaseFirstModuldeActivity {
      * 滑动
      */
     private void select() {
-        mZXVp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        moduleVp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 

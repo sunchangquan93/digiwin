@@ -343,7 +343,7 @@ public class SaleReturnActivity extends BaseTitleActivity {
                         ll_search_dialog.setVisibility(View.GONE);
                         scrollview.setVisibility(View.VISIBLE);
                         iv_title_setting.setVisibility(View.VISIBLE);
-
+                        sumShowBeanList = new ArrayList<FilterResultOrderBean>();
                         sumShowBeanList = list;
                         adapter = new SaleReturnAdapter(pactivity, sumShowBeanList);
                         ryList.setAdapter(adapter);

@@ -306,9 +306,8 @@ public class FinishedStorageScanFg extends BaseFragment {
         saveBean = new SaveBean();
         cbLocatorlock.setChecked(false);
         etScanLocator.setText("");
-        etScanBarocde.requestFocus();
+        etScanLocator.requestFocus();
         commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
     }
-
 
 }

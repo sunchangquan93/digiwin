@@ -19,6 +19,8 @@ import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseTitleActivity;
 import digiwin.smartdepot.module.adapter.produce.FinishedStorageSumAdapter;
+import digiwin.smartdepot.module.adapter.stock.MiscellaneousInSumAdapter;
+import digiwin.smartdepot.module.adapter.stock.MiscellaneousOutSumAdapter;
 import digiwin.smartdepot.module.adapter.stock.storeallot.StoreAllotSumAdapter;
 import digiwin.smartdepot.module.bean.common.SumShowBean;
 import digiwin.smartdepot.module.logic.common.CommonLogic;
@@ -96,6 +98,12 @@ public class CommonTwoCommitActivity extends BaseTitleActivity {
                     break;
                 case ModuleCode.NOCOMESTOREALLOT:
                     adapter = new StoreAllotSumAdapter(context, sumShowBeanList);
+                    break;
+                case ModuleCode.MISCELLANEOUSISSUESIN:
+                    adapter = new MiscellaneousInSumAdapter(context, sumShowBeanList);
+                    break;
+                case ModuleCode.MISCELLANEOUSISSUESOUT:
+                    adapter = new MiscellaneousOutSumAdapter(context, sumShowBeanList);
                     break;
                 default:
                     break;

@@ -51,51 +51,47 @@
                 <LinearLayout
                     style="@style/itemstyle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv_apply_date_string"
+                        android:layout_width="@dimen/layout_70dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/back47"
+                        android:text="@string/apply_date_"
+                        android:paddingRight="@dimen/layout_5dp"
+                        android:textSize="@dimen/textSize_14sp" />
 
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_weight="1"
-                        android:layout_width="@dimen/layout_0dp"
-                        android:layout_height="match_parent">
-                        <TextView
-                            android:id="@+id/tv_apply_date_string"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/apply_date_"
-                            android:paddingRight="@dimen/layout_5dp"
-                            android:textSize="@dimen/textSize_12sp" />
+                    <TextView
+                        android:id="@+id/tv_apply_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:layout_marginLeft="@dimen/layout_10dp"
+                        android:textSize="@dimen/textSize_14sp" />
+                </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/tv_apply_date"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/textSize_12sp" />
+                <View style="@style/act_line_style"></View>
 
-                    </LinearLayout>
+                <LinearLayout
+                    style="@style/itemstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv_custom_string"
+                        android:layout_width="@dimen/layout_70dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/custom"
+                        android:paddingRight="@dimen/layout_5dp"
+                        android:textColor="@color/back47"
+                        android:textSize="@dimen/textSize_14sp" />
 
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_weight="1"
-                        android:layout_width="@dimen/layout_0dp"
-                        android:layout_height="match_parent">
-                        <TextView
-                            android:id="@+id/tv_custom_string"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/custom"
-                            android:paddingRight="@dimen/layout_5dp"
-                            android:textSize="@dimen/textSize_12sp" />
-
-                        <TextView
-                            android:id="@+id/tv_custom"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/textSize_12sp" />
-                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/tv_custom"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:layout_marginLeft="@dimen/layout_10dp"
+                        android:textSize="@dimen/textSize_14sp" />
                 </LinearLayout>
             </LinearLayout>
         <include  layout="@layout/ryitem_common" />

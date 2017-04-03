@@ -450,7 +450,7 @@ public class DistributeActivity extends BaseFirstModuldeActivity {
                     scrollview.setVisibility(View.VISIBLE);
                     commt.setVisibility(View.VISIBLE);
                     iv_title_setting.setVisibility(View.VISIBLE);
-
+                    sumShowBeanList = new ArrayList<DistributeSumShowBean>();
                     sumShowBeanList = list;
                     //单头信息
                     if(headDataList.size() >0){

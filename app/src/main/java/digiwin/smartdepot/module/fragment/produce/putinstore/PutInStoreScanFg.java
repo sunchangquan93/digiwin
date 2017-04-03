@@ -318,6 +318,8 @@ public class PutInStoreScanFg extends BaseFragment {
             etScanLocator.setText("");
             locatorShow="";
             etScanLocator.requestFocus();
+        }else{
+            etScanBarocde.requestFocus();
         }
         show();
     }

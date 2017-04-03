@@ -322,15 +322,6 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
             return;
         }
         saveBean.setQty(et_input_num.getText().toString());
-//        float qty = StringUtils.string2Float(saveBean.getQty());
-//        float scansum_qty = StringUtils.string2Float(saveBean.getScan_sumqty());
-//        if(!StringUtils.isBlank(saveBean.getAvailable_in_qty())){
-//            float avaliable_in_qty = StringUtils.string2Float(saveBean.getAvailable_in_qty());
-//            if(qty + scansum_qty > avaliable_in_qty){
-//                showFailedDialog(pactivity.getResources().getString(R.string.scan_sumqty_larger_than_need_qty));
-//                return;
-//            }
-//        }
         showLoadingDialog();
         commonLogic.scanSave(saveBean, new CommonLogic.SaveListener() {
             @Override
@@ -504,11 +495,12 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
      */
     private void show() {
         tvDetailShow.setText(StringUtils.lineChange(reasonCodeShow + "\\n" +departmentShow + "\\n" +barcodeShow + "\\n" + locatorShow));
-//        if (!StringUtils.isBlank(tvDetailShow.getText().toString())){
-//        includeDetail.setVisibility(View.VISIBLE);}else {
-//        includeDetail.setVisibility(View.GONE);
-//        }
+        if (!StringUtils.isBlank(tvDetailShow.getText().toString())){
         includeDetail.setVisibility(View.VISIBLE);
+        }
+        else {
+        includeDetail.setVisibility(View.GONE);
+        }
     }
 
     /**

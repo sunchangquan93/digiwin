@@ -23,6 +23,7 @@
     <string name="voicer_not">不提醒</string>
     <string name="page_setting">分页设置</string>
     <string name="vibrate">震动提醒</string>
+    <string name="zero">0</string>
     <string name="open">开</string>
     <string name="close">关</string>
     <string name="manuspript">手写设置</string>
@@ -65,6 +66,7 @@
     <string name="finishedstorage">依成品入库</string>
     <string name="un_complete">未完事项</string>
     <string name="barcode_no">条码</string>
+    <string name="box_number">箱内数量</string>
     <string name="material_returning_number">退料单号</string>
     <string name="card_number">流转卡号</string>
     <string name="gongDan_no">工单单号</string>
@@ -323,6 +325,7 @@
     <string name="apply_date_">申请日期</string>
 
     <string name="movestore">条码移库</string>
+    <string name="pack_boxnumber">包装箱号</string>
     <string name="move_instore">移入库位</string>
     <string name="move_outstore">移出库位</string>
     <string name="allot_num">调拨量</string>
@@ -333,7 +336,6 @@
     <string name="check_image">查看图纸</string>
     <string name="no_pic">没有图纸</string>
     <string name="please_check_bad_reason">请维护不良原因</string>
-
     <string name="end_product">成品料号</string>
     <string name="lower_item_no">下阶料号</string>
     <string name="depart_supplier">部门/厂商</string>
@@ -341,7 +343,6 @@
     <string name="end_productname">成品品名</string>
     <string name="can_return_num">可退量</string>
     <string name="actual_return_num">实退量</string>
-
 
     <string name="print_label">标签补打</string>
     <string name="resource_barcode">来源条码</string>
@@ -380,6 +381,9 @@
     <string name="store_lock_date">锁定日期</string>
 
     <string name="title_sale_return">销售退货</string>
+    <string name="product_binning">产品装箱</string>
+    <string name="product_outbox">产品出箱</string>
+    <string name="product_number">产品条码</string>
     <string name="return_order_no">退货单号</string>
     <string name="customer_no">客户编码</string>
 
@@ -407,6 +411,10 @@
     <string name="start_scan">开工扫描</string>
     <string name="finish_scan">完工扫描</string>
     <string name="scanout_scan">扫出扫描</string>
+    <string name="sales_dealers">出货量</string>
+
+    <string name="scan_out_store">扫码出货</string>
+    <string name="scan_out_store_list">扫码出货清单</string>
 
 
 </resources>

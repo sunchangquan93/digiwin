@@ -102,7 +102,7 @@
                 android:id="@+id/tv_under_feed_string"
                 android:layout_width="@dimen/layout_70dp"
                 android:layout_height="wrap_content"
-                android:text="@string/under_feed"
+                android:text="@string/sales_dealers"
                 android:textSize="@dimen/textSize_12sp" />
 
             <TextView

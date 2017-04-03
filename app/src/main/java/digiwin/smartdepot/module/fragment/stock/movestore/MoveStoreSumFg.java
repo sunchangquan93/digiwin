@@ -158,6 +158,9 @@ public class MoveStoreSumFg extends BaseFragment {
      */
     public void updateList() {
         try {
+            sumShowBeanList.clear();
+            adapter = new MoveStoreAdapter(activity, sumShowBeanList);
+            ryList.setAdapter(adapter);
             Map<String, String> map = new HashMap<>();
             showLoadingDialog();
             commonLogic.getSum(map, new CommonLogic.GetSumListener() {
@@ -274,6 +277,7 @@ public class MoveStoreSumFg extends BaseFragment {
     }
 
     private void initData(){
+        sumShowBeanList=new ArrayList<>();
         commonLogic = CommonLogic.getInstance(activity, pactivity.module, pactivity.mTimestamp.toString());
         locatorFlag=false;
         upDateFlag = false;

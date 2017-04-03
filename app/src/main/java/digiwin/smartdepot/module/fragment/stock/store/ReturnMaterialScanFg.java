@@ -309,6 +309,16 @@ public class ReturnMaterialScanFg extends BaseFragment {
         show();
     }
     /**
+     * updateView
+     */
+    public void updateView(){
+        if(cbInlocatorlock.isChecked()){
+            etScanBarocde.requestFocus();
+        }else{
+            etScanLocator.requestFocus();
+        }
+    }
+    /**
      * 初始化一些变量
      */
     public  void initData() {

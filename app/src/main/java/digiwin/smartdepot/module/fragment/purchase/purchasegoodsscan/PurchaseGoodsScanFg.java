@@ -143,15 +143,6 @@ public class PurchaseGoodsScanFg extends BaseFragment {
             return;
         }
         saveBean.setQty(et_input_num.getText().toString());
-        float qty = StringUtils.string2Float(saveBean.getQty());
-        float scansum_qty = StringUtils.string2Float(saveBean.getScan_sumqty());
-//        if(!StringUtils.isBlank(saveBean.getAvailable_in_qty())){
-//            float avaliable_in_qty = StringUtils.string2Float(saveBean.getAvailable_in_qty());
-//            if(qty + scansum_qty > avaliable_in_qty){
-//                showFailedDialog(pactivity.getResources().getString(R.string.scan_sumqty_larger_than_need_qty));
-//                return;
-//            }
-//        }
         showLoadingDialog();
         commonLogic.scanSave(saveBean, new CommonLogic.SaveListener() {
             @Override
@@ -239,7 +230,11 @@ public class PurchaseGoodsScanFg extends BaseFragment {
      */
     private void show() {
         tvDetailShow.setText(StringUtils.lineChange(barcodeShow));
-        includeDetail.setVisibility(View.VISIBLE);
+        if(StringUtils.isBlank(tvDetailShow.getText().toString().trim())){
+            includeDetail.setVisibility(View.GONE);
+        }else{
+            includeDetail.setVisibility(View.VISIBLE);
+        }
     }
 
     /**
@@ -250,6 +245,7 @@ public class PurchaseGoodsScanFg extends BaseFragment {
         et_scan_barocde.setText("");
         et_scan_barocde.requestFocus();
         et_input_num.setText("");
+        barcodeShow = "";
         show();
     }
 

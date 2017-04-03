@@ -42,7 +42,6 @@ import digiwin.smartdepot.module.logic.common.CommonLogic;
 import static digiwin.smartdepot.R.id.et_barcode;
 import static digiwin.smartdepot.R.id.et_input_num;
 
-
 /**
  * @author 赵浩然
  * @des 捡料出货扫描页
@@ -182,7 +181,6 @@ public class PickUpShipmentScanFg extends BaseFragment {
         }
     }
 
-
     @OnClick(R.id.save)
     void save() {
         if (!barcodeFlag) {
@@ -212,8 +210,6 @@ public class PickUpShipmentScanFg extends BaseFragment {
                             showFailedDialog(R.string.input_num_toobig);
                             return;
                         }
-                        Float sum = StringUtils.sum(bean.getScan_sumqty(),etInputNum.getText().toString().trim());
-                        bean.setScan_sumqty(StringUtils.deleteZero(String.valueOf(sum)));
                         isSave=true;
                         break;
                     }
@@ -231,9 +227,9 @@ public class PickUpShipmentScanFg extends BaseFragment {
             public void onSuccess(SaveBackBean saveBackBean) {
                 dismissLoadingDialog();
                 clear();
-                adapter = new PickUpShipmentFIFoAdapter(activity,fiFoList);
-                mRy_list.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
+                if("Y".equals(saveBean.getFifo_check())){
+                    upDateList();
+                }
             }
 
             @Override
@@ -342,9 +338,11 @@ public class PickUpShipmentScanFg extends BaseFragment {
                     @Override
                     public void onSuccess(List<PostMaterialFIFOBean> fiFoBeanList) {
                         dismissLoadingDialog();
-                        fiFoList = fiFoBeanList;
-                        adapter = new PickUpShipmentFIFoAdapter(context,fiFoBeanList);
-                        mRy_list.setAdapter(adapter);
+                        if(null != fiFoBeanList && fiFoBeanList.size() > 0){
+                            fiFoList = fiFoBeanList;
+                            adapter = new PickUpShipmentFIFoAdapter(context,fiFoBeanList);
+                            mRy_list.setAdapter(adapter);
+                        }
                     }
 
                     @Override
@@ -376,40 +374,13 @@ public class PickUpShipmentScanFg extends BaseFragment {
         commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(pactivity);
         mRy_list.setLayoutManager(linearLayoutManager);
-        initData();
-        getFifoeeee();
-    }
 
-    public void getFifoeeee(){
         FilterResultOrderBean data = (FilterResultOrderBean) getActivity().getIntent().getSerializableExtra("data");
-        Map<String,String> map = new HashMap<String,String>();
-        map.put("issuing_no",data.getDoc_no());
-        map.put("warehouse_no", LoginLogic.getUserInfo().getWare());
-//        showLoadingDialog();
-        Log.d("getFifo=====:","========");
-        commonLogic.postMaterialFIFO(map, new CommonLogic.PostMaterialFIFOListener() {
-            @Override
-            public void onSuccess(List<PostMaterialFIFOBean> fiFoBeanList) {
-                dismissLoadingDialog();
-                if(fiFoBeanList.size() > 0 && null != mRy_list){
-                    adapter = new PickUpShipmentFIFoAdapter(context,fiFoBeanList);
-                    mRy_list.setAdapter(adapter);
-                }else{
-                    showFailedDialog(R.string.nodate);
-                }
-            }
+        localData = new FilterResultOrderBean();
+        localData = data;
+        initData();
 
-            @Override
-            public void onFailed(String error) {
-                dismissLoadingDialog();
-                showFailedDialog(error, new OnDialogClickListener() {
-                    @Override
-                    public void onCallback() {
-
-                    }
-                });
-            }
-        });
+        upDateList();
     }
 
     /**
@@ -417,17 +388,15 @@ public class PickUpShipmentScanFg extends BaseFragment {
      */
     private void initData() {
         etScanBarocde.setText("");
-        etScanBarocde.requestFocus();
         etScanLocator.setText("");
+        etScanLocator.requestFocus();
         barcodeFlag = false;
         locatorFlag = false;
         saveBean = new SaveBean();
+    }
 
-        FilterResultOrderBean data = (FilterResultOrderBean) getActivity().getIntent().getSerializableExtra("data");
-        localData = new FilterResultOrderBean();
-        localData = data;
-        mHandler.sendMessageDelayed(mHandler.obtainMessage(FIFOWHAT, data.getDoc_no()), AddressContants.DELAYTIME);
-
+    public void upDateList() {
+        mHandler.sendMessageDelayed(mHandler.obtainMessage(FIFOWHAT, localData.getDoc_no()), AddressContants.DELAYTIME);
     }
 }
 

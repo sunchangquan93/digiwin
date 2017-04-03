@@ -20,7 +20,6 @@ import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.dialog.OnDialogTwoListener;
 import digiwin.library.utils.ActivityManagerUtils;
 import digiwin.library.utils.LogUtils;
-import digiwin.library.utils.StringUtils;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
@@ -100,13 +99,13 @@ public class ReturnMaterialSumFg extends BaseFragment {
             showFailedDialog(R.string.nodate);
             return;
         }
+        showLoadingDialog();
         Map<String,String> map = new HashMap<>();
         commonLogic.commit(map, new CommonLogic.CommitListener() {
             @Override
             public void onSuccess(String msg) {
                 dismissLoadingDialog();
-                showCommitSuccessDialog(msg);
-                showCommitSuccessDialog(rmActivity, new OnDialogClickListener() {
+                showCommitSuccessDialog(msg, new OnDialogClickListener() {
                     @Override
                     public void onCallback() {
                         rmActivity.finish();
@@ -157,6 +156,9 @@ public class ReturnMaterialSumFg extends BaseFragment {
      */
     public void upDateList() {
         try {
+            list.clear();
+            adapter = new StoreReturnMaterialSumAdapter(rmActivity,list);
+            ryList.setAdapter(adapter);
             showLoadingDialog();
             commonLogic.getOrderSumData(mPutBean, new CommonLogic.GetOrderSumListener() {
                 @Override
@@ -211,7 +213,7 @@ public class ReturnMaterialSumFg extends BaseFragment {
         final SumShowBean sumShowBean = new SumShowBean();
         sumShowBean.setItem_no(orderSumData.getItem_no());
         sumShowBean.setItem_name(orderSumData.getItem_name());
-        sumShowBean.setAvailable_in_qty(StringUtils.getMinQty(orderSumData.getStock_qty(), orderSumData.getReq_qty()));
+        sumShowBean.setAvailable_in_qty(orderSumData.getReceipt_qty());
         commonLogic.getDetail(map, new CommonLogic.GetDetailListener() {
             @Override
             public void onSuccess(List<DetailShowBean> detailShowBeen) {

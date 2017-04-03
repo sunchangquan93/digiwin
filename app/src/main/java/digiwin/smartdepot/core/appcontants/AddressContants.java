@@ -125,6 +125,10 @@ public class AddressContants {
      */
     public static final String SUPPLIER = "supplier";
     /**
+     * 客户
+     */
+    public static final String CUSTOM = "custom";
+    /**
      * fifoY
      */
     public static final  String FIFOY="Y";
@@ -136,4 +140,8 @@ public class AddressContants {
      * 物料条码标记2
      */
     public static  final String TWO="2";
+    /**
+     *包装箱号
+     */
+    public static  final String PACKAGENO="package_no";
 }

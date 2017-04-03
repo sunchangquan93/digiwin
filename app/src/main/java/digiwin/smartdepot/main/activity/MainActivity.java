@@ -182,14 +182,6 @@ public class MainActivity extends BaseTitleActivity {
 //        powerItems = StringUtils.split(access);
         //模拟测试
         powerItems = new ArrayList<>();
-        powerItems.add("A001");
-        powerItems.add("B001");
-        powerItems.add("B012");
-        powerItems.add("C001");
-        powerItems.add("C010");
-        powerItems.add("D001");
-        powerItems.add("E001");
-        powerItems.add("F001");
 
         totalModes = new ArrayList<TotalMode>();
 

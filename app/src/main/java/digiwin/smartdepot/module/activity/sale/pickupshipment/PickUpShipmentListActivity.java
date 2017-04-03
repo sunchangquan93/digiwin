@@ -232,7 +232,7 @@ public class PickUpShipmentListActivity extends BaseTitleActivity{
             @Override
             public void onSuccess(final List<FilterResultOrderBean> list) {
                 dismissLoadingDialog();
-                if(list.size() > 0){
+                if(null != list && list.size() > 0){
                     ll_search_dialog.setVisibility(View.GONE);
                     scrollview.setVisibility(View.VISIBLE);
                     dataList = new ArrayList<FilterResultOrderBean>();
@@ -250,8 +250,6 @@ public class PickUpShipmentListActivity extends BaseTitleActivity{
                             ActivityManagerUtils.startActivityBundleForResult(activity,PickUpShipmentActivity.class,bundle,SCANCODE);
                         }
                     });
-                }else{
-                    showFailedDialog(getResources().getString(R.string.nodate));
                 }
             }
 
@@ -259,6 +257,9 @@ public class PickUpShipmentListActivity extends BaseTitleActivity{
             public void onFailed(String error) {
                 dismissLoadingDialog();
                 showFailedDialog(error);
+                dataList = new ArrayList<FilterResultOrderBean>();
+                adapter = new PickUpShipmentListAdapter(activity,dataList);
+                ryList.setAdapter(adapter);
             }
         });
     }

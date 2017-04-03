@@ -457,22 +457,24 @@ public class DistributeScanActivity extends BaseTitleActivity {
      * 保存完成之后的操作
      */
     private void clear() {
-        //保存成功已扫描改变数量
-        float num = StringUtils.string2Float(saveBean.getScan_sumqty());
-        num += StringUtils.string2Float(et_input_num.getText().toString());
-        tv_scanned_num.setText(StringUtils.deleteZero(String.valueOf(num)));
-        saveBean.setScan_sumqty(tv_scanned_num.getText().toString());
-        //更新FIFO建议 实发量
-        if(null != fiFoList && fiFoList.size()>0){
-            for (int i = 0;i<fiFoList.size();i++){
-                //扫描的条码和库位与FIFO中的条码/库位一致
-                if(saveBean.getBarcode_no().equals(fiFoList.get(i).getBarcode_no())
-                        && saveBean.getStorage_spaces_out_no().equals(fiFoList.get(i).getStorage_spaces_no())){
-                    fiFoList.get(i).setScan_sumqty(saveBean.getScan_sumqty());
-                }
-            }
-            adapter.notifyDataSetChanged();
-        }
+//        //保存成功已扫描改变数量
+//        float num = StringUtils.string2Float(saveBean.getScan_sumqty());
+//        num += StringUtils.string2Float(et_input_num.getText().toString());
+//        tv_scanned_num.setText(StringUtils.deleteZero(String.valueOf(num)));
+//        saveBean.setScan_sumqty(tv_scanned_num.getText().toString());
+//        //更新FIFO建议 实发量
+//        if(null != fiFoList && fiFoList.size()>0){
+//            for (int i = 0;i<fiFoList.size();i++){
+//                //扫描的条码和库位与FIFO中的条码/库位一致
+//                if(saveBean.getBarcode_no().equals(fiFoList.get(i).getBarcode_no())
+//                        && saveBean.getStorage_spaces_out_no().equals(fiFoList.get(i).getStorage_spaces_no())){
+//                    fiFoList.get(i).setScan_sumqty(saveBean.getScan_sumqty());
+//                }
+//            }
+//            adapter.notifyDataSetChanged();
+//        }
+        //保存成功，重新获取FIFO
+        getFIFO(sumshoubean);
         //如果条码类型为1，不清空扫码框
         if(!sumshoubean.getItem_barcode_type().equals("1")){
             et_scan_barocde.setText("");
@@ -530,7 +532,6 @@ public class DistributeScanActivity extends BaseTitleActivity {
         }else{
             saveBean.setAvailable_in_qty(sumshoubean.getStock_qty());
         }
-
         //单头信息
         saveBean.setWarehouse_out_no(headData.getWareout());
         saveBean.setWarehouse_in_no(headData.getWarein());

@@ -33,6 +33,7 @@ import digiwin.smartdepot.module.bean.common.SumShowBean;
 import digiwin.smartdepot.module.bean.common.UnCompleteBean;
 import digiwin.smartdepot.module.bean.produce.FiFoBean;
 import digiwin.smartdepot.module.bean.produce.PostMaterialFIFOBean;
+import digiwin.smartdepot.module.bean.stock.ProductBinningBean;
 
 /**
  * Created by xiemeng on 2017/2/23.
@@ -878,4 +879,89 @@ public class CommonLogic {
             }
         }, null);
     }
+    /**
+     * 扫描包装箱号
+     */
+    public interface ScanPackBoxNumberListener {
+        public void onSuccess(List<ProductBinningBean> productBinningBeans);
+
+        public void onFailed(String error);
+    }
+
+    /**
+     * 扫描包装箱号
+     */
+    public void scanPackBoxNumber(final Map<String, String> map, final ScanPackBoxNumberListener listener) {
+        ThreadPoolManager.getInstance().executeTask(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String xml = CreateParaXmlReqIm.getInstance(map, mModule, ReqTypeName.GETPACKBOXNUMBER, mTimestamp).toXml();
+                    OkhttpRequest.getInstance(mContext).post(xml, new IRequestCallbackImp() {
+                        @Override
+                        public void onResponse(String string) {
+                            ParseXmlResp xmlResp = ParseXmlResp.fromXml(ReqTypeName.GETPACKBOXNUMBER, string);
+                            String error = mContext.getString(R.string.unknow_error);
+                            if (null != xmlResp) {
+                                if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
+                                    List<ProductBinningBean> beens = xmlResp.getMasterDatas(ProductBinningBean.class);
+                                    if (beens.size() > 0) {
+                                        listener.onSuccess(beens);
+                                        return;
+                                    } else {
+                                        error = mContext.getString(R.string.data_null);
+                                    }
+                                } else {
+                                    error = xmlResp.getDescription();
+                                }
+                            }
+                            listener.onFailed(error);
+                        }
+                    });
+                } catch (Exception e) {
+                    listener.onFailed(mContext.getString(R.string.unknow_error));
+                    LogUtils.e(TAG, "scanLocator--->" + e);
+                }
+            }
+        }, null);
+    }
+
+    /**
+     * 产品装箱修改和删除（出箱）
+     */
+    public interface InsertAndDeleteListener {
+        public void onSuccess(String show);
+
+        public void onFailed(String error);
+    }
+
+    /**
+     * 产品装箱修改和删除（出箱）
+     */
+    public void insertAndDelete(final List<Map<String, String>> list, final InsertAndDeleteListener listener) {
+        ThreadPoolManager.getInstance().executeTask(new Runnable() {
+            @Override
+            public void run() {
+                String xml = CreateParaXmlReqIm.getInstance(list, mModule, ReqTypeName.INSERTDELETE, mTimestamp).toXml();
+                OkhttpRequest.getInstance(mContext).post(xml, new IRequestCallbackImp() {
+                    @Override
+                    public void onResponse(String string) {
+                        ParseXmlResp xmlResp = ParseXmlResp.fromXml(ReqTypeName.INSERTDELETE, string);
+                        String error = mContext.getString(R.string.unknow_error);
+                        if (null != xmlResp) {
+                            if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
+                                String show = xmlResp.getFieldString();
+                                listener.onSuccess(show);
+                                return;
+                            } else {
+                                error = xmlResp.getDescription();
+                            }
+                        }
+                        listener.onFailed(error);
+                    }
+                });
+            }
+        }, null);
+    }
+
 }

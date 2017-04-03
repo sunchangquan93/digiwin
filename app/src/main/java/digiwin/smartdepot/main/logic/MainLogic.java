@@ -14,7 +14,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.ViewUtils;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
@@ -189,21 +188,27 @@ public class MainLogic {
         storageItems.add(storeQueryActivity);
         ModuleBean printLabelActivity = new ModuleBean(R.string.print_label, R.mipmap.bar_code, ModuleCode.PRINTLABEL, "android.intent.action.digiwin.PrintLabelActivity");
         storageItems.add(printLabelActivity);
-
         ModuleBean movestoreactivity = new ModuleBean(R.string.movestore, R.mipmap.movestore, ModuleCode.MOVESTORE, "android.intent.action.digiwin.MoveStoreActivity");
         storageItems.add(movestoreactivity);
         ModuleBean storetranslockactivity = new ModuleBean(R.string.store_trans_lock, R.mipmap.inventory_lock, ModuleCode.STORETRANSLOCK, "android.intent.action.digiwin.StoreTransLockActivity");
         storageItems.add(storetranslockactivity);
         ModuleBean storetransunlockactivity = new ModuleBean(R.string.store_trans_unlock, R.mipmap.inventory_deblocking, ModuleCode.STORETRANSUNLOCK, "android.intent.action.digiwin.StoreTransUnlockActivity");
         storageItems.add(storetransunlockactivity);
+        ModuleBean productbinning = new ModuleBean(R.string.product_binning, R.drawable.encasement, ModuleCode.PRODUCTBINNING, "android.intent.action.digiwin.ProductBinningActivity");
+        storageItems.add(productbinning);
+        ModuleBean productoutbox = new ModuleBean(R.string.product_outbox, R.mipmap.outbox, ModuleCode.PRODUCTBINNING, "android.intent.action.digiwin.ProductOutBoxActivity");
+        storageItems.add(productoutbox);
+
         //初始化销售管理
         ModuleBean saleoutletactivity = new ModuleBean(R.string.saleoutlet, R.mipmap.saleoutlet, ModuleCode.SALEOUTLET, "android.intent.action.digiwin.SaleOutletListActivity");
         //捡料出货
         ModuleBean pickupshipment = new ModuleBean(R.string.title_pickupshipment, R.mipmap.pickup_shipment, ModuleCode.PICKUPSHIPMENT, "android.intent.action.digiwin.PickUpShipmentListActivity");
         ModuleBean saleReturnActivity = new ModuleBean(R.string.title_sale_return, R.mipmap.ntsale_return, ModuleCode.SALERETURN, "android.intent.action.digiwin.SaleReturnActivity");
+        ModuleBean scanOutStoreActivity = new ModuleBean(R.string.scan_out_store, R.mipmap.scan_shipment, ModuleCode.SCANOUTSTORE, "android.intent.action.digiwin.ScanOutStoreListActivity");
         salesItems.add(saleoutletactivity);
         salesItems.add(pickupshipment);
         salesItems.add(saleReturnActivity);
+        salesItems.add(scanOutStoreActivity);
 
         //初始化报工管理
         ModuleBean rcttboardactivity = new ModuleBean(R.string.delivery_uncheck_board, R.drawable.receiptout, ModuleCode.RCCTBOARD, "android.intent.action.digiwin.RcttBoardActivity");
@@ -369,7 +374,7 @@ public class MainLogic {
     private View setTabStyle(Context context, int i, TabLayout tablayout, List<String> titles) {
         titleValue = ViewUtils.Dp2Px(context, 75);
         screenWidth = ViewUtils.getScreenWidth(context);
-        LogUtils.e("sunchangquan", "titleValue==" + titleValue + ",screenWidth--" + screenWidth);
+//        LogUtils.e("sunchangquan", "titleValue==" + titleValue + ",screenWidth--" + screenWidth);
         View view = LayoutInflater.from(context).inflate(R.layout.tablayout_item, tablayout, false);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(titleValue, ViewGroup.LayoutParams.WRAP_CONTENT);
         view.setLayoutParams(params);

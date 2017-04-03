@@ -35,7 +35,7 @@ import digiwin.smartdepot.module.logic.board.RcctboardLogic;
 public class RcttBoardActivity extends BaseTitleHActivity {
   @BindView(R.id.toolbar_title)
    Toolbar toolbarTitle;
-   //   @BindView(R.id.ryboard)
+   // @BindView(R.id.ryboard)
     RecyclerView ryboard;
     /**
      * 定时器

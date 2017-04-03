@@ -18,7 +18,6 @@ import digiwin.library.netstate.NetChangeObserver;
 import digiwin.library.netstate.NetStateReceiver;
 import digiwin.library.netstate.NetworkUtils;
 import digiwin.library.utils.AlertDialogUtils;
-import digiwin.library.voiceutils.VoiceUtils;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.jpush.NotificationClickEventReceiver;
 

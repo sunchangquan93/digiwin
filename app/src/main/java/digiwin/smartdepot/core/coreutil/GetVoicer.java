@@ -5,7 +5,6 @@ import android.content.Context;
 import digiwin.library.constant.SharePreKey;
 import digiwin.library.constant.SystemConstant;
 import digiwin.library.utils.SharedPreferencesUtils;
-import digiwin.library.voiceutils.VoiceUtils;
 import digiwin.smartdepot.R;
 
 /**

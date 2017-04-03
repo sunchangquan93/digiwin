@@ -10,7 +10,9 @@ import digiwin.smartdepot.R;
 import digiwin.smartdepot.module.bean.common.FilterResultOrderBean;
 
 /**
- * Created by Administrator on 2017/3/30 0030.
+ * @author maoheng
+ * @des 仓库退料清单
+ * @date 2017/3/30
  */
 
 public class StoreReturnMaterialListAdapter extends BaseRecyclerAdapter<FilterResultOrderBean>{

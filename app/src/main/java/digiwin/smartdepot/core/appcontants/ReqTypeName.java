@@ -55,6 +55,10 @@ public interface ReqTypeName {
      * 修改删除
      */
     static final String UPDATEDELETE = "app.scandetail.upd";
+    /**
+     * 修改删除(产品装箱)
+     */
+    static final String INSERTDELETE = "app.upd.package.detail";
 
     /**
      * 退出调用
@@ -202,4 +206,8 @@ public interface ReqTypeName {
      * (库存交易锁定)获取料号信息
      */
     static final String  GETITEMDETAIL = "app.item.check";
+    /**
+     * 包装箱号
+     */
+    static final String  GETPACKBOXNUMBER = "app.get.package.info";
 }

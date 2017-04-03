@@ -80,6 +80,9 @@ public class StoreAllotSumFg extends BaseFragment {
      */
     public void upDateList() {
         try {
+            sumShowBeanList.clear();
+            adapter = new StoreAllotSumAdapter(activity, sumShowBeanList);
+            ryList.setAdapter(adapter);
             Map<String, String> map = new HashMap<>();
             showLoadingDialog();
             commonLogic.getSum(map, new CommonLogic.GetSumListener() {
@@ -188,6 +191,7 @@ public class StoreAllotSumFg extends BaseFragment {
     }
 
     public void initData(){
+        sumShowBeanList=new ArrayList<>();
         commonLogic = CommonLogic.getInstance(activity, pactivity.module, pactivity.mTimestamp.toString());
         upDateFlag = false;
     }

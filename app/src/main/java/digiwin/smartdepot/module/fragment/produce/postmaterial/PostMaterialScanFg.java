@@ -333,6 +333,8 @@ public class PostMaterialScanFg extends BaseFragment {
             public void onFailed(String error) {
                 dismissLoadingDialog();
                 showFailedDialog(error);
+                fiFoList = new ArrayList<PostMaterialFIFOBean>();
+                adapter = new PostmaterialFiFoAdapter(pactivity,fiFoList);
             }
         });
     }
@@ -367,13 +369,6 @@ public class PostMaterialScanFg extends BaseFragment {
                     et_scan_locator.setText("");
                     return;
                 }
-//                float qty = StringUtils.string2Float(saveBean.getQty());
-//                float scansum_qty = StringUtils.string2Float(saveBean.getScan_sumqty());
-//                float avaliable_in_qty = StringUtils.string2Float(saveBean.getAvailable_in_qty());
-//                if(qty + scansum_qty > avaliable_in_qty){
-//                    showFailedDialog(pactivity.getResources().getString(R.string.scan_sumqty_larger_than_need_qty));
-//                    return;
-//                }
             }
         }
         showLoadingDialog();
@@ -411,39 +406,8 @@ public class PostMaterialScanFg extends BaseFragment {
      * 保存完成之后的操作
      */
     private void clear() {
-        //保存成功已扫描改变数量
-        float num = StringUtils.string2Float(saveBean.getScan_sumqty());
-        num += StringUtils.string2Float(et_input_num.getText().toString());
-        saveBean.setScan_sumqty(StringUtils.deleteZero(String.valueOf(num)));
-        //更新FIFO建议 实发量
-        if(null != fiFoList && fiFoList.size()>0){
-            for (int i = 0;i<fiFoList.size();i++){
-                //扫描的条码与FIFO中的条码一致
-                if(saveBean.getBarcode_no().equals(fiFoList.get(i).getBarcode_no())
-                        && saveBean.getStorage_spaces_out_no().equals(fiFoList.get(i).getStorage_spaces_no())){
-                    fiFoList.get(i).setScan_sumqty(StringUtils.deleteZero(String.valueOf(num)));
-                }
-            }
-            adapter.notifyDataSetChanged();
-        }
-//        //如果条码类型为1，不清空扫码框
-//        if(!sumshoubean.getItem_barcode_type().equals("1")){
-//            et_scan_barocde.setText("");
-//            et_scan_barocde.requestFocus();
-//            if (cb_locatorlock.isChecked()){
-//                barcodeFlag = false;
-//            }else {
-//                et_scan_locator.setText("");
-//            }
-//        }else{
-//            if (cb_locatorlock.isChecked()){
-//                barcodeFlag = false;
-//                et_input_num.requestFocus();
-//            }else {
-//                et_scan_locator.setText("");
-//                et_scan_locator.requestFocus();
-//            }
-//        }
+        //保存成功，重新获取FIFO
+        getFIFO(sumshoubean);
         et_scan_barocde.setText("");
         et_scan_barocde.requestFocus();
         et_input_num.setText("");
@@ -474,21 +438,6 @@ public class PostMaterialScanFg extends BaseFragment {
         saveBean = new SaveBean();
         orderData = (FilterResultOrderBean) pactivity.getIntent().getExtras().getSerializable("orderData");
         saveBean.setDoc_no(orderData.getDoc_no());
-//        //需求量
-//        float num1 = StringUtils.string2Float(sumshoubean.getShortage_qty());
-//        //库存量
-//        float num2 = StringUtils.string2Float(sumshoubean.getStock_qty());
-//        if(num1<=num2){
-//            saveBean.setAvailable_in_qty(sumshoubean.getShortage_qty());
-//        }else{
-//            saveBean.setAvailable_in_qty(sumshoubean.getStock_qty());
-//        }
-//        //物料条码类型为1
-//        if(sumshoubean.getItem_barcode_type().equals("1")){
-//            et_scan_barocde.setText(sumshoubean.getItem_no());
-//        }else{
-//            et_scan_barocde.requestFocus();
-//        }
         //获取FIFO
         getFIFO(sumshoubean);
     }

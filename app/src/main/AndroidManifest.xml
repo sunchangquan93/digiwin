@@ -328,8 +328,7 @@
         <!-- 收货检验-->
         <activity
             android:name=".module.activity.purchase.purchasecheck.PurchaseCheckActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
-            android:screenOrientation="landscape">
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.digiwin.PurchaseCheckActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -372,8 +371,7 @@
 
         <activity
             android:name=".module.activity.purchase.purchasecheck.BadReasonActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
-            android:screenOrientation="landscape"/>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
             android:name=".module.activity.stock.movestore.MoveStoreActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
@@ -384,8 +382,7 @@
         </activity>
         <activity
             android:name=".module.activity.purchase.purchasecheck.CheckShowImageActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
-            android:screenOrientation="landscape"/>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
 
         <activity
             android:name=".module.activity.produce.workorderreturn.WorkOrderReturnListActivity"
@@ -401,8 +398,7 @@
 
         <activity
             android:name=".module.activity.stock.PrintLabelActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
-            android:screenOrientation="landscape">
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.digiwin.PrintLabelActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -421,6 +417,24 @@
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.digiwin.WorkSupplementListActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- 产品装箱-->
+        <activity
+            android:name=".module.activity.stock.productbinning.ProductBinningActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.digiwin.ProductBinningActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- 产品出箱-->
+        <activity
+            android:name=".module.activity.stock.productoutbox.ProductOutBoxActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.digiwin.ProductOutBoxActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -499,7 +513,7 @@
 
         <!-- 扫入扫描 -->
         <activity
-            android:name=".module.activity.dailywork.dailyworkscan.EntranceActivity"
+            android:name=".module.activity.dailywork.dailworkscan.EntranceActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.digiwin.EntranceActivity" />
@@ -507,31 +521,22 @@
             </intent-filter>
         </activity>
         <!-- 开工扫描 -->
-        <activity
-            android:name=".module.activity.dailywork.dailyworkscan.StartWorkActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.digiwin.StartWorkActivity" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
         <!-- 完工扫描 -->
+        <!-- 扫出扫描 -->
+
+        <!-- 扫码出货列表 -->
         <activity
-            android:name=".module.activity.dailywork.dailyworkscan.FinishWorkActivity"
+            android:name=".module.activity.sale.scanout.ScanOutStoreListActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
-                <action android:name="android.intent.action.digiwin.FinishWorkActivity" />
+                <action android:name="android.intent.action.digiwin.ScanOutStoreListActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <!-- 扫出扫描 -->
+        <!-- 扫码出货 -->
         <activity
-            android:name=".module.activity.dailywork.dailyworkscan.StockRemovalActivity"
+            android:name=".module.activity.sale.scanout.ScanOutStoreActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.digiwin.StockRemovalActivity" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
         </activity>
 
         <!-- Required SDK 核心功能极光推送需要 -->

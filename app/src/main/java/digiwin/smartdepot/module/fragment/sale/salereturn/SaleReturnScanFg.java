@@ -328,7 +328,10 @@ public class SaleReturnScanFg extends BaseFragment {
      */
     private void show() {
         tvDetailShow.setText(StringUtils.lineChange(barcodeShow + "\\n" + locatorShow));
-        includeDetail.setVisibility(View.VISIBLE);
+        if (!StringUtils.isBlank(tvDetailShow.getText().toString())){
+            includeDetail.setVisibility(View.VISIBLE);}else {
+            includeDetail.setVisibility(View.GONE);
+        }
     }
 
     /**

@@ -102,32 +102,38 @@ public class WorkOrderReturnSumFg extends BaseFragment {
     /**
      * 获取数据
      */
-    public void upDateList() {
-        showLoadingDialog();
-        commonLogic.getOrderSumData(mPutBean, new CommonLogic.GetOrderSumListener() {
-            @Override
-            public void onSuccess(List<ListSumBean> list) {
-                dismissLoadingDialog();
-                sumBeanList = list;
-                adapter = new WorkOrderReturnSumAdapter(context, sumBeanList);
-                ryList.setAdapter(adapter);
-                if (null != list && list.size() > 0) {
-                    upDateFlag = true;
-                    toDetail();
+    public void updatelist() {
+        try{
+            showLoadingDialog();
+            sumBeanList.clear();
+            adapter = new WorkOrderReturnSumAdapter(context, sumBeanList);
+            ryList.setAdapter(adapter);
+            commonLogic.getOrderSumData(mPutBean, new CommonLogic.GetOrderSumListener() {
+                @Override
+                public void onSuccess(List<ListSumBean> list) {
+                    dismissLoadingDialog();
+                    sumBeanList = list;
+                    adapter = new WorkOrderReturnSumAdapter(context, sumBeanList);
+                    ryList.setAdapter(adapter);
+                    if (null != list && list.size() > 0) {
+                        upDateFlag = true;
+                        toDetail();
+                    }
                 }
-            }
 
-            @Override
-            public void onFailed(String error) {
-                dismissLoadingDialog();
-                upDateFlag = false;
-                sumBeanList.clear();
-                adapter = new WorkOrderReturnSumAdapter(context, sumBeanList);
-                ryList.setAdapter(adapter);
-                showFailedDialog(error);
-            }
-        });
-
+                @Override
+                public void onFailed(String error) {
+                    dismissLoadingDialog();
+                    upDateFlag = false;
+                    sumBeanList.clear();
+                    adapter = new WorkOrderReturnSumAdapter(context, sumBeanList);
+                    ryList.setAdapter(adapter);
+                    showFailedDialog(error);
+                }
+            });
+        }catch (Exception e){
+            LogUtils.e(TAG,"updatelist"+e);
+        }
     }
 
     /**

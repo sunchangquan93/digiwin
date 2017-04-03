@@ -208,11 +208,7 @@ public class MoveStoreScanFg extends BaseFragment {
                             saveBean.setUnit_no(barcodeBackBean.getUnit_no());
                             saveBean.setLot_no(barcodeBackBean.getLot_no());
                             saveBean.setFifo_check(barcodeBackBean.getFifo_check());
-                            if (cbInlocatorlock.isChecked()) {
-                                etInputNum.requestFocus();
-                            } else {
-                                etScanMoveOutlocator.requestFocus();
-                            }
+                            etInputNum.requestFocus();
                             barcodeShow = barcodeBackBean.getShow();
                             show();
                         }
@@ -279,14 +275,15 @@ public class MoveStoreScanFg extends BaseFragment {
         tv_scaned_num.setText(saveBean.getScan_sumqty());
         etInputNum.setText("");
         barcodeFlag = false;
-        if (!cbInlocatorlock.isChecked()) {
-            locatorFlag = false;
-            etScanMoveOutlocator.setText("");
-            locatorShow = "";
-        }
         barcodeShow = "";
         etScanBarocde.setText("");
         etScanBarocde.requestFocus();
+        if (!cbInlocatorlock.isChecked()) {
+            locatorFlag = false;
+            etScanMoveOutlocator.setText("");
+            etScanMoveOutlocator.requestFocus();
+            locatorShow = "";
+        }
         show();
     }
 
@@ -294,7 +291,7 @@ public class MoveStoreScanFg extends BaseFragment {
      * 公共区域展示
      */
     private void show() {
-        tvDetailShow.setText(StringUtils.lineChange(barcodeShow + "\\n" + locatorShow));
+        tvDetailShow.setText(StringUtils.lineChange(locatorShow + "\\n" + barcodeShow));
         if (!StringUtils.isBlank(tvDetailShow.getText().toString())) {
             includeDetail.setVisibility(View.VISIBLE);
         } else {
@@ -313,9 +310,10 @@ public class MoveStoreScanFg extends BaseFragment {
         barcodeShow = "";
         locatorShow = "";
         cbInlocatorlock.setChecked(false);
-        etScanBarocde.requestFocus();
-        etScanMoveOutlocator.setText("");
+        etScanMoveOutlocator.requestFocus();
+        etScanBarocde.setText("");
         tvDetailShow.setText("");
+        etScanMoveOutlocator.setText("");
         includeDetail.setVisibility(View.GONE);
         commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
     }
