@@ -28,4 +28,16 @@
         <attr name="load_more_complete_to_default_scrolling_duration" format="integer" />
         <attr name="default_to_loading_more_scrolling_duration" format="integer" />
     </declare-styleable>
+
+    <attr name="scrollMode" >
+        <enum name="normalScroll" value="0"/>
+        <enum name="followScroll" value="1"/>
+    </attr>
+
+    <declare-styleable name="TvRecyclerView">
+        <attr name="scrollMode"/>
+        <attr name="focusDrawable" format="reference" />
+        <attr name="isAutoProcessFocus" format="boolean" />
+        <attr name="focusScale" format="float" />
+    </declare-styleable>
 </resources>
