@@ -19,15 +19,15 @@ public class AddressContants {
     /**
      *  默认测试区地址
      */
-    public static String TEST_ADDRESS = "http://172.16.100.24/web/ws/r/aws_ttsrv2?wsdl";
+    public static String TEST_ADDRESS = "http://180.167.0.43:8089/web/ws/r/aws_ttsrv2?wsdl";
     /**
      * 测试区地址标记
      */
     public static String TEST_FLAG = "2";
     /**
-     *  默认正式区地址
+     *  默认正式区地址http://172.16.100.24/web/ws/r/aws_ttsrv2?wsdl
      */
-    public static String FORMAL_ADDRESS = "http://172.16.100.24/web/ws/r/aws_ttsrv2?wsdl";
+    public static String FORMAL_ADDRESS = "http://180.167.0.43:8089/web/ws/r/aws_ttsrv2?wsdl";
     /**
      * 正式区地址标记
      */
@@ -54,6 +54,10 @@ public class AddressContants {
      * 物料条码扫描传输xml的field值
      */
     public static final  String BARCODE_NO="barcode_no";
+    /**
+     * 装箱单号
+     */
+    public static final  String PACKAGE_NO="package_no";
     /**
      * 库位扫描传输xml的field值
      */
@@ -97,6 +101,10 @@ public class AddressContants {
      * 物料编号
      */
     public static final String ITEM_NO = "item_no";
+    /**
+     * 出货单
+     */
+    public static final String RECEIPT_NO = "receipt_no";
 
     /**
      * 仓库代码
@@ -144,4 +152,8 @@ public class AddressContants {
      *包装箱号
      */
     public static  final String PACKAGENO="package_no";
+    /**
+     *出货单号
+     */
+    public static  final String RECEIPTNO="receipt_no";
 }

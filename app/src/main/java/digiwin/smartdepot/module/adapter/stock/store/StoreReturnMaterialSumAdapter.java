@@ -32,6 +32,7 @@ public class StoreReturnMaterialSumAdapter extends BaseRecyclerAdapter<ListSumBe
         holder.setText(R.id.tv_item_name, item.getItem_name());
         holder.setText(R.id.tv_item_spec,item.getItem_spec());
         holder.setText(R.id.tv_item_no,item.getItem_no());
+        holder.setText(R.id.tv_unit,item.getUnit_no());
         holder.setText(R.id.tv_apply_numb, StringUtils.deleteZero(String.valueOf(numb1)));
         holder.setText(R.id.tv_scaned_numb, StringUtils.deleteZero(String.valueOf(numb2)));
         if (numb2 == 0) {
@@ -39,6 +40,7 @@ public class StoreReturnMaterialSumAdapter extends BaseRecyclerAdapter<ListSumBe
             holder.setTextColor(R.id.tv_item_name, mContext.getResources().getColor(R.color.red));
             holder.setTextColor(R.id.tv_item_spec, mContext.getResources().getColor(R.color.red));
             holder.setTextColor(R.id.tv_item_no, mContext.getResources().getColor(R.color.red));
+            holder.setTextColor(R.id.tv_unit, mContext.getResources().getColor(R.color.red));
             holder.setTextColor(R.id.tv_apply_numb, mContext.getResources().getColor(R.color.red));
             holder.setTextColor(R.id.tv_scaned_numb, mContext.getResources().getColor(R.color.red));
         } else if (numb1 > numb2) {
@@ -46,6 +48,7 @@ public class StoreReturnMaterialSumAdapter extends BaseRecyclerAdapter<ListSumBe
             holder.setTextColor(R.id.tv_item_name,mContext.getResources().getColor( R.color.outside_yellow));
             holder.setTextColor(R.id.tv_item_spec,mContext.getResources().getColor( R.color.outside_yellow));
             holder.setTextColor(R.id.tv_item_no,mContext.getResources().getColor( R.color.outside_yellow));
+            holder.setTextColor(R.id.tv_unit,mContext.getResources().getColor( R.color.outside_yellow));
             holder.setTextColor(R.id.tv_apply_numb, mContext.getResources().getColor(R.color.outside_yellow));
             holder.setTextColor(R.id.tv_scaned_numb, mContext.getResources().getColor(R.color.outside_yellow));
         } else if (numb1 ==numb2) {
@@ -53,6 +56,7 @@ public class StoreReturnMaterialSumAdapter extends BaseRecyclerAdapter<ListSumBe
             holder.setTextColor(R.id.tv_item_name, mContext.getResources().getColor(R.color.Base_color));
             holder.setTextColor(R.id.tv_item_spec, mContext.getResources().getColor(R.color.Base_color));
             holder.setTextColor(R.id.tv_item_no, mContext.getResources().getColor(R.color.Base_color));
+            holder.setTextColor(R.id.tv_unit, mContext.getResources().getColor(R.color.Base_color));
             holder.setTextColor(R.id.tv_apply_numb,mContext.getResources().getColor( R.color.Base_color));
             holder.setTextColor(R.id.tv_scaned_numb,mContext.getResources().getColor( R.color.Base_color));
         }

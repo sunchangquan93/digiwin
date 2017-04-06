@@ -285,7 +285,6 @@ public class PutInStoreActivity extends BaseTitleActivity {
                 final FilterResultOrderBean orderData = dataList.get(position);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("orderData",orderData);
-                bundle.putString(AddressContants.MODULEID_INTENT, pactivity.mTimestamp.toString());
                 ActivityManagerUtils.startActivityBundleForResult(pactivity,PutInStoreSecondActivity.class,bundle,SUMCODE);
             }
         });
@@ -372,6 +371,8 @@ public class PutInStoreActivity extends BaseTitleActivity {
         super.onActivityResult(requestCode, resultCode, data);
         try{
             if(requestCode == SUMCODE){
+                adapter = new PutInStoreFilterResultAdapter(pactivity,new ArrayList<FilterResultOrderBean>());
+                ryList.setAdapter(adapter);
                 upDateList();
             }
         }catch (Exception e){

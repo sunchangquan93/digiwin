@@ -15,7 +15,7 @@ import digiwin.library.base.BaseAppFragment;
  * 2017/1/9
  */
 
-public abstract class BaseFragment extends BaseAppFragment {
+public abstract class   BaseFragment extends BaseAppFragment {
     protected String TAG;
     protected View mFragmentView;
     private Unbinder unBind;

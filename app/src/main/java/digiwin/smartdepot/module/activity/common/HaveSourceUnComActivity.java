@@ -33,7 +33,9 @@ import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseTitleActivity;
+import digiwin.smartdepot.login.loginlogic.LoginLogic;
 import digiwin.smartdepot.module.activity.produce.workorderreturn.WorkOrderReturnCommitActivity;
+import digiwin.smartdepot.module.activity.sale.pickupshipment.PickUpShipmentCommitActivity;
 import digiwin.smartdepot.module.bean.common.ClickItemPutBean;
 import digiwin.smartdepot.module.bean.common.ListSumBean;
 import digiwin.smartdepot.module.bean.common.UnCompleteBean;
@@ -190,6 +192,7 @@ public class HaveSourceUnComActivity extends BaseTitleActivity {
                 showLoadingDialog();
                 ClickItemPutBean clickItemPutBean = new ClickItemPutBean();
                 clickItemPutBean.setDoc_no(uncomList.get(position).getDoc_no());
+                clickItemPutBean.setWarehouse_no(LoginLogic.getWare());
                 logic = CommonLogic.getInstance(activity, module, mTimestamp.toString());
                 logic.getOrderSumData(clickItemPutBean, new CommonLogic.GetOrderSumListener() {
                     @Override
@@ -218,6 +221,11 @@ public class HaveSourceUnComActivity extends BaseTitleActivity {
             case ModuleCode.WORKORDERRETURN:
                 bundle.putSerializable(WorkOrderReturnCommitActivity.COMMITLIST, list);
                 ActivityManagerUtils.startActivityForBundleData(activity, WorkOrderReturnCommitActivity.class, bundle);
+                break;
+
+            case ModuleCode.PICKUPSHIPMENT:
+                bundle.putSerializable(PickUpShipmentCommitActivity.COMMITLIST, list);
+                ActivityManagerUtils.startActivityForBundleData(activity, PickUpShipmentCommitActivity.class, bundle);
                 break;
         }
         dismissLoadingDialog();

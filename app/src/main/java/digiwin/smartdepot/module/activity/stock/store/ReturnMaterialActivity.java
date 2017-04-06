@@ -14,7 +14,7 @@ import butterknife.BindView;
 import digiwin.library.utils.LogUtils;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
-import digiwin.smartdepot.core.base.BaseTitleActivity;
+import digiwin.smartdepot.core.base.BaseFirstModuldeActivity;
 import digiwin.smartdepot.core.modulecommon.ModuleViewPagerAdapter;
 import digiwin.smartdepot.module.fragment.stock.store.ReturnMaterialScanFg;
 import digiwin.smartdepot.module.fragment.stock.store.ReturnMaterialSumFg;
@@ -25,7 +25,7 @@ import digiwin.smartdepot.module.fragment.stock.store.ReturnMaterialSumFg;
  * @date 2017/3/30
  */
 
-public class ReturnMaterialActivity extends BaseTitleActivity {
+public class ReturnMaterialActivity extends BaseFirstModuldeActivity {
 
     ReturnMaterialActivity pactivity;
 
@@ -156,5 +156,10 @@ public class ReturnMaterialActivity extends BaseTitleActivity {
             LogUtils.e(TAG, "onActivityResult-->" + e);
         }
 
+    }
+
+    @Override
+    public ExitMode exitOrDel() {
+        return ExitMode.EXITD;
     }
 }

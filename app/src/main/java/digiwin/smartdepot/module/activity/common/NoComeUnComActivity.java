@@ -235,7 +235,7 @@ public class NoComeUnComActivity extends BaseTitleActivity {
                     public void onSuccess(List<UnCompleteBean> list) {
                         dismissLoadingDialog();
                         uncomList=list;
-                            showList();
+                        showList();
                     }
 
                     @Override

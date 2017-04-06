@@ -1,5 +1,6 @@
 package digiwin.smartdepot.module.activity.stock.quickstorage;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -24,13 +25,11 @@ import digiwin.library.utils.StringUtils;
 import digiwin.pulltorefreshlibrary.recyclerview.FullyLinearLayoutManager;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
 import digiwin.smartdepot.R;
-import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseTitleActivity;
 import digiwin.smartdepot.core.modulecommon.ModuleUtils;
 import digiwin.smartdepot.login.bean.AccoutBean;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
-import digiwin.smartdepot.module.adapter.produce.ProductionLeaderListAdapter;
 import digiwin.smartdepot.module.adapter.stock.QuickStorageListAdapter;
 import digiwin.smartdepot.module.bean.common.FilterBean;
 import digiwin.smartdepot.module.bean.common.FilterResultOrderBean;
@@ -206,7 +205,6 @@ public class QuickStorageListActivity extends BaseTitleActivity{
                             Bundle bundle = new Bundle();
                             FilterResultOrderBean data = list.get(position);
                             bundle.putSerializable("data",data);
-                            bundle.putString(AddressContants.MODULEID_INTENT,activity.mTimestamp.toString());
                             ActivityManagerUtils.startActivityBundleForResult(activity,QuickStorageActivity.class,bundle,SCANCODE);
                         }
                     });
@@ -250,6 +248,18 @@ public class QuickStorageListActivity extends BaseTitleActivity{
         }else{
             ll_search_dialog.setVisibility(View.VISIBLE);
             scrollview.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        try{
+            if(requestCode == SCANCODE){
+                search();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 

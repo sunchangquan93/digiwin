@@ -98,8 +98,13 @@ public class PutInStoreSumFg extends BaseFragment {
     @Override
     protected void doBusiness() {
         pactivity = (PutInStoreSecondActivity) activity;
+        orderData = (FilterResultOrderBean) getActivity().getIntent().getExtras().getSerializable("orderData");
+        commonLogic = CommonLogic.getInstance(pactivity,pactivity.module,pactivity.mTimestamp.toString());
         FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(activity);
         ryList.setLayoutManager(linearLayoutManager);
+        tv_head_post_order.setText(orderData.getDoc_no());
+        tv_head_date.setText(orderData.getCreate_date());
+        tv_head_department.setText(orderData.getDepartment_name());
     }
 
     /**
@@ -224,11 +229,8 @@ public class PutInStoreSumFg extends BaseFragment {
 
     private void initData() {
         upDateFlag = false;
-        commonLogic = CommonLogic.getInstance(activity, pactivity.module, pactivity.mTimestamp.toString());
-        Bundle bundle = getActivity().getIntent().getExtras();
-        orderData = (FilterResultOrderBean) bundle.getSerializable("orderData");
-        tv_head_date.setText(orderData.getCreate_date());
-        tv_head_post_order.setText(orderData.getDoc_no());
-        tv_head_department.setText(orderData.getDepartment_name());
+        tv_head_date.setText("");
+        tv_head_post_order.setText("");
+        tv_head_department.setText("");
     }
 }

@@ -17,6 +17,5 @@
         android:textSize="@dimen/textSize_14sp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_horizontal"
         android:lineSpacingExtra="@dimen/layout_8dp" />
 </RelativeLayout>

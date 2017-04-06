@@ -13,30 +13,6 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tv_item_no_string"
-            android:layout_width="@dimen/layout_70dp"
-            android:layout_height="wrap_content"
-            android:text="@string/item_no"
-            android:textSize="@dimen/textSize_14sp" />
-
-        <TextView
-            android:id="@+id/tv_item_no"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/textSize_14sp" />
-    </LinearLayout>
-
-    <View
-        android:id="@+id/line_1"
-        style="@style/ry_line_style" />
-
-    <LinearLayout
-        style="@style/itemstyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
             android:id="@+id/tv_item_name_string"
             android:layout_width="@dimen/layout_70dp"
             android:layout_height="wrap_content"
@@ -60,7 +36,7 @@
     </LinearLayout>
 
     <View
-        android:id="@+id/line_2"
+        android:id="@+id/line_1"
         style="@style/ry_line_style" />
 
     <LinearLayout
@@ -78,6 +54,30 @@
 
         <TextView
             android:id="@+id/tv_item_format"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textSize_14sp" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/line_2"
+        style="@style/ry_line_style" />
+
+    <LinearLayout
+        style="@style/itemstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_item_no_string"
+            android:layout_width="@dimen/layout_70dp"
+            android:layout_height="wrap_content"
+            android:text="@string/item_no"
+            android:textSize="@dimen/textSize_14sp" />
+
+        <TextView
+            android:id="@+id/tv_item_no"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/textSize_14sp" />
@@ -103,13 +103,13 @@
                 android:layout_width="@dimen/layout_70dp"
                 android:layout_height="wrap_content"
                 android:text="@string/sales_dealers"
-                android:textSize="@dimen/textSize_12sp" />
+                android:textSize="@dimen/textSize_14sp" />
 
             <TextView
                 android:id="@+id/tv_material_return"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/textSize_12sp" />
+                android:textSize="@dimen/textSize_14sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -122,13 +122,13 @@
                 android:layout_width="@dimen/layout_70dp"
                 android:layout_height="wrap_content"
                 android:text="@string/stock_balance"
-                android:textSize="@dimen/textSize_12sp" />
+                android:textSize="@dimen/textSize_14sp" />
 
             <TextView
                 android:id="@+id/tv_material_return_big"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/textSize_12sp" />
+                android:textSize="@dimen/textSize_14sp" />
 
         </LinearLayout>
     </LinearLayout>
@@ -144,21 +144,21 @@
 
         <LinearLayout
             style="@style/itemstyle"
-            android:layout_weight="5"
-            android:layout_width="@dimen/layout_0dp"
-            android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
             <TextView
                 android:id="@+id/tv_actual_yield_string"
                 android:layout_width="@dimen/layout_70dp"
                 android:layout_height="match_parent"
                 android:text="@string/actual_yield"
-                android:textSize="@dimen/textSize_12sp" />
+                android:textSize="@dimen/textSize_14sp" />
 
             <TextView
                 android:id="@+id/tv_feeding_amount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/textSize_12sp" />
+                android:textSize="@dimen/textSize_14sp" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

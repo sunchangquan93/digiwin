@@ -173,10 +173,11 @@ public class StoreAllotSumFg extends BaseFragment {
                 showCommitSuccessDialog(msg, new OnDialogClickListener() {
                     @Override
                     public void onCallback() {
-                        pactivity.mZXVp.setCurrentItem(0);
-                        pactivity.createNewModuleId(pactivity.module);
-                        pactivity.scanFg.initData();
-                        initData();
+                        pactivity.finish();
+//                        pactivity.mZXVp.setCurrentItem(0);
+//                        pactivity.createNewModuleId(pactivity.module);
+//                        pactivity.scanFg.initData();
+//                        initData();
                     }
                 });
             }

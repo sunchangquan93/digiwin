@@ -143,8 +143,8 @@ public class ReturnMaterialSumFg extends BaseFragment {
 
         order = extras.getString(AddressContants.DOC_NO);
         tvScanOrder.setText(order);
-        tvDate.setText(extras.getString("date"));
-        tvSupplier.setText(extras.getString("supplier"));
+        tvDate.setText(extras.getString(AddressContants.DATE));
+        tvSupplier.setText(extras.getString(AddressContants.SUPPLIER));
         mPutBean=new ClickItemPutBean();
         mPutBean.setDoc_no(extras.getString(AddressContants.DOC_NO));
         mPutBean.setWarehouse_out_no(LoginLogic.getWare());
@@ -233,5 +233,6 @@ public class ReturnMaterialSumFg extends BaseFragment {
             }
         });
     }
+
 
 }

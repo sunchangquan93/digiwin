@@ -27,22 +27,22 @@
                 android:padding="@dimen/layout_5dp">
 
                 <LinearLayout
-                    android:id="@+id/ll_scan_lot_no"
+                    android:id="@+id/ll_scan_barcode"
                     style="@style/itemstyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/tv_lot_no"
+                        android:id="@+id/tv_barcode"
                         android:layout_width="@dimen/layout_70dp"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:text="@string/LOT_no"
+                        android:text="@string/barcode_no"
                         android:textColor="@color/black_32"
                         android:textSize="@dimen/textSize_14sp" />
 
                     <EditText
-                        android:id="@+id/et_scan_lot_no"
+                        android:id="@+id/et_scan_barocde"
                         android:layout_width="@dimen/layout_0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/layout_10dp"
@@ -55,23 +55,24 @@
                 </LinearLayout>
 
                 <View style="@style/fg_line_style" />
+
                 <LinearLayout
-                    android:id="@+id/ll_scan_technics_number"
+                    android:id="@+id/ll_scan_locator"
                     style="@style/itemstyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/tv_technics_number"
+                        android:id="@+id/tv_locator"
                         android:layout_width="@dimen/layout_70dp"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:text="@string/technics_number"
+                        android:text="@string/locator"
                         android:textColor="@color/black_32"
                         android:textSize="@dimen/textSize_14sp" />
 
                     <EditText
-                        android:id="@+id/et_scan_technics_number"
+                        android:id="@+id/et_scan_locator"
                         android:layout_width="@dimen/layout_0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/layout_10dp"
@@ -81,89 +82,12 @@
                         android:textColor="@color/black_32"
                         android:textCursorDrawable="@drawable/et_cursor_yellow"
                         android:textSize="@dimen/textSize_14sp" />
-                </LinearLayout>
-
-
-                <View style="@style/fg_line_style" />
-                <LinearLayout
-                    android:id="@+id/ll_scan_workers"
-                    style="@style/itemstyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/tv_workers"
-                        android:layout_width="@dimen/layout_70dp"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:text="@string/workers"
-                        android:textColor="@color/black_32"
-                        android:textSize="@dimen/textSize_14sp" />
-
-                    <EditText
-                        android:id="@+id/et_scan_workers"
-                        android:layout_width="@dimen/layout_0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/layout_10dp"
-                        android:layout_weight="1"
-                        android:background="@null"
-                        android:singleLine="true"
-                        android:textColor="@color/black_32"
-                        android:textCursorDrawable="@drawable/et_cursor_yellow"
-                        android:textSize="@dimen/textSize_14sp" />
-                </LinearLayout>
-
-                <View style="@style/fg_line_style" />
-                <LinearLayout
-                    android:id="@+id/ll_scan_class_other"
-                    style="@style/itemstyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/tv_class_other"
-                        android:layout_width="@dimen/layout_70dp"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:text="@string/class_other"
-                        android:textColor="@color/black_32"
-                        android:textSize="@dimen/textSize_14sp" />
-
-                    <EditText
-                        android:id="@+id/et_scan_class_other"
-                        android:layout_width="@dimen/layout_0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/layout_10dp"
-                        android:layout_weight="1"
-                        android:background="@null"
-                        android:singleLine="true"
-                        android:textColor="@color/black_32"
-                        android:textCursorDrawable="@drawable/et_cursor_yellow"
-                        android:textSize="@dimen/textSize_14sp" />
-                </LinearLayout>
-                <View style="@style/fg_line_style" />
-                <LinearLayout
-                    android:id="@+id/ll_scan_whether_outsourcing"
-                    style="@style/itemstyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/tv_whether_outsourcing"
-                        android:layout_width="@dimen/layout_0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_centerVertical="true"
-                        android:text="@string/whether_outsourcing"
-                        android:textColor="@color/black_32"
-                        android:textSize="@dimen/textSize_14sp" />
-
                     <CheckBox
-                        android:id="@+id/cb_scan_whether_outsourcing"
+                        android:id="@+id/cb_locatorlock"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:button="@drawable/all_checkbox"
-                        android:layout_marginLeft="@dimen/layout_10dp"/>
+                        android:layout_height="@dimen/layout_20dp"
+                        android:button="@drawable/lock_checkbox"
+                        />
                 </LinearLayout>
 
                 <View style="@style/fg_line_style" />
@@ -179,7 +103,7 @@
                         android:layout_width="@dimen/layout_70dp"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:text="@string/into_number"
+                        android:text="@string/num"
                         android:textColor="@color/black_32"
                         android:textSize="@dimen/textSize_14sp" />
 
@@ -195,6 +119,34 @@
                         android:singleLine="true"
                         android:textColor="@color/black_32"
                         android:textCursorDrawable="@drawable/et_cursor_yellow"
+                        android:textSize="@dimen/textSize_14sp" />
+                </LinearLayout>
+
+                <View style="@style/fg_line_style" />
+
+                <LinearLayout
+                    android:id="@+id/ll_hasScan"
+                    style="@style/itemstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_hasScan"
+                        android:layout_width="@dimen/layout_70dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/scaned_numb"
+                        android:textColor="@color/black_32"
+                        android:textSize="@dimen/textSize_14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_scan_hasScan"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_10dp"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        android:textColor="@color/black_32"
                         android:textSize="@dimen/textSize_14sp" />
                 </LinearLayout>
 

@@ -217,11 +217,8 @@ public class PostMaterialScanFg extends BaseFragment {
                 case BARCODEWHAT:
                     HashMap<String, String> barcodeMap = new HashMap<>();
                     barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
-                    AccoutBean accoutBean = LoginLogic.getUserInfo();
-                    if(null != accoutBean){
-                        barcodeMap.put("warehouse_no",accoutBean.getWare());
-                    }
-                    barcodeMap.put("Doc_no",orderData.getDoc_no());
+                    barcodeMap.put(AddressContants.WAREHOUSE_NO,LoginLogic.getWare());
+                    barcodeMap.put(AddressContants.DOC_NO,orderData.getDoc_no());
                     commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                         @Override
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
@@ -428,7 +425,7 @@ public class PostMaterialScanFg extends BaseFragment {
         et_scan_barocde.setText("");
         et_scan_locator.setText("");
         tv_product_name.setText("");
-        et_scan_barocde.requestFocus();
+        et_scan_locator.requestFocus();
         cb_locatorlock.setChecked(false);
         barcodeShow = "";
         locatorShow = "";

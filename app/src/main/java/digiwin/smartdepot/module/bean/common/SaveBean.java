@@ -47,6 +47,18 @@ public class SaveBean {
      * 可入库量
      */
     private String available_in_qty;
+    /**
+     * 箱条码
+     */
+    private String package_no;
+
+    public String getPackage_no() {
+        return package_no;
+    }
+
+    public void setPackage_no(String package_no) {
+        this.package_no = package_no;
+    }
 
     public String getScan_sumqty() {
         return scan_sumqty;
@@ -68,6 +80,10 @@ public class SaveBean {
      * 部门
      */
     private String department_no;
+    /**
+     * 人员
+     */
+    private String employee_no;
     /**
      * 工作站
      */
@@ -121,6 +137,14 @@ public class SaveBean {
 
     public void setDepartment_no(String department_no) {
         this.department_no = department_no;
+    }
+
+    public String getEmployee_no() {
+        return employee_no;
+    }
+
+    public void setEmployee_no(String employee_no) {
+        this.employee_no = employee_no;
     }
 
     public String getWorkstation_no() {

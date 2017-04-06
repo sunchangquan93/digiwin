@@ -1,5 +1,6 @@
 package digiwin.smartdepot.module.activity.sale.scanout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -131,7 +132,6 @@ public class ScanOutStoreListActivity extends BaseTitleActivity {
     @BindView(R.id.ll_operating_department)
     LinearLayout llOperatingDepartment;
 
-
     /**
      * 开始日期
      */
@@ -213,7 +213,7 @@ public class ScanOutStoreListActivity extends BaseTitleActivity {
             @Override
             public void onFailed(String error) {
                 dismissLoadingDialog();
-                showCommitFailDialog(error);
+                showFailedDialog(error);
             }
         });
     }
@@ -259,10 +259,6 @@ public class ScanOutStoreListActivity extends BaseTitleActivity {
     LinearLayout llSearchInput;
     @BindView(R.id.ry_list)
     RecyclerView ryList;
-    /**
-     * 作业编号
-     */
-    private String mode;
 
     /**
      * 标题
@@ -275,6 +271,7 @@ public class ScanOutStoreListActivity extends BaseTitleActivity {
     @BindView(R.id.iv_title_setting)
     ImageView search;
     private boolean isSearching;
+    @OnClick(R.id.iv_title_setting)
     void search(){
         if (isSearching) {
             isSearching=false;
@@ -298,16 +295,15 @@ public class ScanOutStoreListActivity extends BaseTitleActivity {
 
     @Override
     public String moduleCode() {
-        mode = ModuleCode.SCANOUTSTORE;
-        return mode;
+        module = ModuleCode.SCANOUTSTORE;
+        return module;
     }
 
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        activity = this;
         mName.setText(R.string.filter_condition);
-        ivScan.setVisibility(View.GONE);
+//        ivScan.setVisibility(View.GONE);
         search.setVisibility(View.VISIBLE);
         search.setImageResource(R.drawable.search);
         isSearching = true;
@@ -320,8 +316,17 @@ public class ScanOutStoreListActivity extends BaseTitleActivity {
 
     @Override
     protected void doBusiness() {
+        activity = ScanOutStoreListActivity.this;
         list = new ArrayList<>();
-        commonLogic = CommonLogic.getInstance(activity,mode,mTimestamp.toString());
+        commonLogic = CommonLogic.getInstance(activity,module,mTimestamp.toString());
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == TOCOMMIT){
+            list.clear();
+            searchData();
+        }
+    }
 }

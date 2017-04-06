@@ -8,6 +8,18 @@ import java.io.Serializable;
 
 public class ListSumBean implements Serializable {
     /**
+     * 到货日期(工单日期)
+     */
+    private String create_date;
+    /**
+     * 工单号
+     */
+    private String wo_no;
+    /**
+     * 部门名称
+     */
+    private String department_name;
+    /**
      * 料号
      */
     private String item_no;
@@ -15,6 +27,29 @@ public class ListSumBean implements Serializable {
      * 品名
      */
     private String item_name;
+    /**
+     * 工单数量
+     */
+    private String wo_qty;
+    /**
+     * 备货数量（发料数量）
+     */
+    private String distribute_qty;
+    /**
+     * 入货数量
+     */
+    private String stock_in_qty;
+    /**
+     * 可入库量
+     */
+    private String available_in_qty;
+    /**
+     * 实发量、匹配量
+     */
+    private String scan_sumqty;
+
+
+
     /**
      * 规格
      */
@@ -31,11 +66,6 @@ public class ListSumBean implements Serializable {
      * 库存量
      */
     private String stock_qty;
-    /**
-     * 实发量
-     */
-    private String scan_sumqty;
-
     /**
      * 供应商
      */
@@ -73,10 +103,7 @@ public class ListSumBean implements Serializable {
      * 接收仓
      */
     private String warehouse_in_no;
-    /**
-     * 部门名称
-     */
-    private String department_name;
+
     /**
      * 人员名称
      */
@@ -94,10 +121,7 @@ public class ListSumBean implements Serializable {
      */
     private String req_qty;
 
-    /**
-     * 备货数量
-     */
-    private String distribute_qty;
+
     /**
      * 接收数量
      */
@@ -132,11 +156,6 @@ public class ListSumBean implements Serializable {
     private String low_order_item_spec;
 
     /**
-     * 可入库量
-     */
-    private String available_in_qty;
-
-    /**
      * 匹配量
      */
     private String qty;
@@ -150,10 +169,7 @@ public class ListSumBean implements Serializable {
      */
     private String doc_no;
 
-    /**
-     * 到货日期
-     */
-    private String create_date;
+
 
     /**
      * 是否确认数量 1为未确认 2为确认
@@ -180,8 +196,29 @@ public class ListSumBean implements Serializable {
 
     private String match_qty;
 
+    public String getWo_no() {
+        return wo_no;
+    }
 
+    public void setWo_no(String wo_no) {
+        this.wo_no = wo_no;
+    }
 
+    public String getWo_qty() {
+        return wo_qty;
+    }
+
+    public void setWo_qty(String wo_qty) {
+        this.wo_qty = wo_qty;
+    }
+
+    public String getStock_in_qty() {
+        return stock_in_qty;
+    }
+
+    public void setStock_in_qty(String stock_in_qty) {
+        this.stock_in_qty = stock_in_qty;
+    }
 
     public String getSupplier_name() {
         return supplier_name;

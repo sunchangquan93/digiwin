@@ -44,6 +44,31 @@ public class ProductBinningBean {
      */
     public String flag;
 
+    /**
+     * 仓库编号
+     */
+    public String warehouse_no;
+    /**
+     * 库位编号
+     */
+    public String storage_spaces_no;
+
+    public String getWarehouse_no() {
+        return warehouse_no;
+    }
+
+    public void setWarehouse_no(String warehouse_no) {
+        this.warehouse_no = warehouse_no;
+    }
+
+    public String getStorage_spaces_no() {
+        return storage_spaces_no;
+    }
+
+    public void setStorage_spaces_no(String storage_spaces_no) {
+        this.storage_spaces_no = storage_spaces_no;
+    }
+
     public String getFlag() {
         return flag;
     }

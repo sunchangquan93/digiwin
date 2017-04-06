@@ -14,7 +14,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="@dimen/layout_70dp"
+            android:layout_width="@dimen/layout_50dp"
             android:layout_height="wrap_content"
             android:text="@string/order_number" />
 

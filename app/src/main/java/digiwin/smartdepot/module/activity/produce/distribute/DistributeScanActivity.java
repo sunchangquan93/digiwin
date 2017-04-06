@@ -5,6 +5,7 @@ import android.os.Message;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.method.TextKeyListener;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -272,12 +273,7 @@ public class DistributeScanActivity extends BaseTitleActivity {
                             saveBean.setItem_no(barcodeBackBean.getItem_no());
                             saveBean.setUnit_no(barcodeBackBean.getUnit_no());
                             saveBean.setLot_no(barcodeBackBean.getLot_no());
-
-                            if (cb_locatorlock.isChecked()){
-                                et_input_num.requestFocus();
-                            }else {
-                                et_scan_locator.requestFocus();
-                            }
+                            et_input_num.requestFocus();
                         }
 
                         @Override
@@ -316,7 +312,7 @@ public class DistributeScanActivity extends BaseTitleActivity {
 //                            show();
                             saveBean.setStorage_spaces_out_no(locatorBackBean.getStorage_spaces_no());
                             saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
-                            et_input_num.requestFocus();
+                            et_scan_barocde.requestFocus();
                         }
 
                         @Override
@@ -432,6 +428,7 @@ public class DistributeScanActivity extends BaseTitleActivity {
             @Override
             public void onSuccess(SaveBackBean saveBackBean) {
                 dismissLoadingDialog();
+                tv_scanned_num.setText(saveBackBean.getScan_sumqty());
                 clear();
             }
 
@@ -443,53 +440,30 @@ public class DistributeScanActivity extends BaseTitleActivity {
         });
 
     }
-//
-//    /**
-//     * 公共区域展示
-//     */
-//    private void show() {
-//        tvDetailShow.setText(StringUtils.lineChange(barcodeShow + "\\n" + locatorShow));
-//        includeDetail.setVisibility(View.VISIBLE);
-//    }
-
 
     /**
      * 保存完成之后的操作
      */
     private void clear() {
-//        //保存成功已扫描改变数量
-//        float num = StringUtils.string2Float(saveBean.getScan_sumqty());
-//        num += StringUtils.string2Float(et_input_num.getText().toString());
-//        tv_scanned_num.setText(StringUtils.deleteZero(String.valueOf(num)));
-//        saveBean.setScan_sumqty(tv_scanned_num.getText().toString());
-//        //更新FIFO建议 实发量
-//        if(null != fiFoList && fiFoList.size()>0){
-//            for (int i = 0;i<fiFoList.size();i++){
-//                //扫描的条码和库位与FIFO中的条码/库位一致
-//                if(saveBean.getBarcode_no().equals(fiFoList.get(i).getBarcode_no())
-//                        && saveBean.getStorage_spaces_out_no().equals(fiFoList.get(i).getStorage_spaces_no())){
-//                    fiFoList.get(i).setScan_sumqty(saveBean.getScan_sumqty());
-//                }
-//            }
-//            adapter.notifyDataSetChanged();
-//        }
         //保存成功，重新获取FIFO
         getFIFO(sumshoubean);
         //如果条码类型为1，不清空扫码框
         if(!sumshoubean.getItem_barcode_type().equals("1")){
             et_scan_barocde.setText("");
-            et_scan_barocde.requestFocus();
             if (cb_locatorlock.isChecked()){
                 barcodeFlag = false;
+                et_scan_barocde.requestFocus();
             }else {
                 et_scan_locator.setText("");
+                locatorFlag = false;
+                et_scan_locator.requestFocus();
             }
         }else{
             if (cb_locatorlock.isChecked()){
-                barcodeFlag = false;
                 et_input_num.requestFocus();
             }else {
                 et_scan_locator.setText("");
+                locatorFlag = false;
                 et_scan_locator.requestFocus();
             }
         }
@@ -501,7 +475,6 @@ public class DistributeScanActivity extends BaseTitleActivity {
      */
     private void initData() {
         et_scan_barocde.setText("");
-        et_scan_barocde.requestFocus();
         et_scan_locator.setText("");
         barcodeShow = "";
         locatorShow = "";
@@ -512,10 +485,7 @@ public class DistributeScanActivity extends BaseTitleActivity {
         headData = (DistributeOrderHeadData) getIntent().getExtras().getSerializable("headData");
         //物料条码类型为1，则进入界面时显示在扫描框
         if(sumshoubean.getItem_barcode_type().equals("1")){
-            //
             et_scan_barocde.setText(sumshoubean.getItem_no());
-        }else{
-            et_scan_barocde.requestFocus();
         }
         tv_product_name.setText(sumshoubean.getItem_name());
         tv_item_model.setText(sumshoubean.getItem_spec());
@@ -540,6 +510,7 @@ public class DistributeScanActivity extends BaseTitleActivity {
         saveBean.setDepartment_no(headData.getDepartment_no());
         //获取FIFO
         getFIFO(sumshoubean);
+        et_scan_locator.requestFocus();
     }
 
 }

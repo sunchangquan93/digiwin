@@ -281,7 +281,6 @@ public class SaleReturnActivity extends BaseTitleActivity {
                 final FilterResultOrderBean orderData = sumShowBeanList.get(position);
                 Bundle bundle = new Bundle();
                         bundle.putSerializable("orderData", orderData);
-                        bundle.putString(AddressContants.MODULEID_INTENT, pactivity.mTimestamp.toString());
                         ActivityManagerUtils.startActivityBundleForResult(pactivity, SaleReturnSecondActivity.class, bundle, SUMCODE);
             }
         });
@@ -381,6 +380,8 @@ public class SaleReturnActivity extends BaseTitleActivity {
         try {
 
             if (requestCode == SUMCODE) {
+                adapter = new SaleReturnAdapter(pactivity,new ArrayList<FilterResultOrderBean>());
+                ryList.setAdapter(adapter);
                 upDateList();
             }
 

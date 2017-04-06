@@ -244,7 +244,7 @@ public class StoreTransLockActivity extends BaseTitleActivity{
             if(msg.what == BARCODEWHAT){
                 HashMap<String,String> map = new HashMap<>();
                 String str = (String) msg.obj;
-                map.put("barcode_no",str);
+                map.put(AddressContants.BARCODE_NO,str);
                 commonLogic.scanBarcode(map, new CommonLogic.ScanBarcodeListener() {
                     @Override
                     public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
@@ -266,7 +266,7 @@ public class StoreTransLockActivity extends BaseTitleActivity{
             if(msg.what == WAREHOUSEWHAT){
                 HashMap<String,String> map = new HashMap<>();
                 String str = (String) msg.obj;
-                map.put("barcode_no",str);
+                map.put(AddressContants.WAREHOUSE_NO,str);
                 commonLogic.scanLocator(map, new CommonLogic.ScanLocatorListener() {
                     @Override
                     public void onSuccess(ScanLocatorBackBean locatorBackBean) {

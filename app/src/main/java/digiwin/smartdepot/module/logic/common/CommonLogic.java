@@ -32,6 +32,7 @@ import digiwin.smartdepot.module.bean.common.ScanReasonCodeBackBean;
 import digiwin.smartdepot.module.bean.common.SumShowBean;
 import digiwin.smartdepot.module.bean.common.UnCompleteBean;
 import digiwin.smartdepot.module.bean.produce.FiFoBean;
+import digiwin.smartdepot.module.bean.produce.InBinningBean;
 import digiwin.smartdepot.module.bean.produce.PostMaterialFIFOBean;
 import digiwin.smartdepot.module.bean.stock.ProductBinningBean;
 
@@ -656,6 +657,40 @@ public class CommonLogic {
             }
         }, null);
     }
+    /**
+     * 从待办事项进入汇总页面
+     */
+    public void getOrderSumData(final InBinningBean clickItemPutBean, final GetOrderSumListener listener) {
+        ThreadPoolManager.getInstance().executeTask(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Map<String, String> map = ObjectAndMapUtils.getValueMap(clickItemPutBean);
+                    final String xml = CreateParaXmlReqIm.getInstance(map, mModule, ReqTypeName.POSTMATERIALSUMDATA, mTimestamp).toXml();
+                    OkhttpRequest.getInstance(mContext).post(xml, new IRequestCallbackImp() {
+                        @Override
+                        public void onResponse(String string) {
+                            ParseXmlResp xmlResp = ParseXmlResp.fromXml(ReqTypeName.POSTMATERIALSUMDATA, string);
+                            String error = mContext.getString(R.string.unknow_error);
+                            if (null != xmlResp) {
+                                if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
+                                    List<ListSumBean> showBeanList = xmlResp.getMasterDatas(ListSumBean.class);
+                                    listener.onSuccess(showBeanList);
+                                    return;
+                                } else {
+                                    error = xmlResp.getDescription();
+                                }
+                            }
+                            listener.onFailed(error);
+                        }
+                    });
+                } catch (Exception e) {
+                    listener.onFailed(mContext.getString(R.string.unknow_error));
+                    LogUtils.e(TAG, "getSum--->" + e);
+                }
+            }
+        }, null);
+    }
 
     /**
      * 扫描入库单 提交监听
@@ -960,6 +995,49 @@ public class CommonLogic {
                         listener.onFailed(error);
                     }
                 });
+            }
+        }, null);
+    }
+
+    /**
+     * 装箱保存
+     */
+    public interface SaveBinningListener {
+        public void onSuccess();
+
+        public void onFailed(String error);
+    }
+
+    /**
+     * 装箱保存
+     */
+    public void scanBinningSave(final SaveBean saveBean, final SaveBinningListener listener) {
+        ThreadPoolManager.getInstance().executeTask(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Map<String, String> map = ObjectAndMapUtils.getValueMap(saveBean);
+                    final String xml = CreateParaXmlReqIm.getInstance(map, mModule, ReqTypeName.BINNINGSAVE, mTimestamp).toXml();
+                    OkhttpRequest.getInstance(mContext).post(xml, new IRequestCallbackImp() {
+                        @Override
+                        public void onResponse(String string) {
+                            ParseXmlResp xmlResp = ParseXmlResp.fromXml(ReqTypeName.BINNINGSAVE, string);
+                            String error = mContext.getString(R.string.unknow_error);
+                            if (null != xmlResp) {
+                                if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
+                                    listener.onSuccess();
+                                    return;
+                                } else {
+                                    error = xmlResp.getDescription();
+                                }
+                            }
+                            listener.onFailed(error);
+                        }
+                    });
+                } catch (Exception e) {
+                    listener.onFailed(mContext.getString(R.string.unknow_error));
+                    LogUtils.e(TAG, "scanBinningSave--->" + e);
+                }
             }
         }, null);
     }

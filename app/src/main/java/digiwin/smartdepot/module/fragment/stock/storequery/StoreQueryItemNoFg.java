@@ -19,11 +19,11 @@ import digiwin.smartdepot.module.adapter.stock.StoreQueryItemNoAdapter;
 import digiwin.smartdepot.module.bean.common.ClickItemPutBean;
 import digiwin.smartdepot.module.bean.common.ListSumBean;
 import digiwin.smartdepot.module.logic.common.CommonLogic;
-
 /**
- * Created by xiemeng on 2017/3/22.
+ * @author xiemeng
+ * @des 库存查询---条码库存
+ * @date 2017/3/22
  */
-
 public class StoreQueryItemNoFg extends BaseFragment {
     @BindView(R.id.ry_list)
     RecyclerView ryList;
@@ -39,7 +39,6 @@ public class StoreQueryItemNoFg extends BaseFragment {
     @Override
     protected void doBusiness() {
         EventBus.getDefault().register(this);
-        LogUtils.e(TAG,"doBusiness");
         pactivity = (StoreQueryActivity) activity;
         logic = CommonLogic.getInstance(pactivity, pactivity.module, pactivity.mTimestamp.toString());
         ryList.setLayoutManager(new LinearLayoutManager(activity));
@@ -53,7 +52,6 @@ public class StoreQueryItemNoFg extends BaseFragment {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void upDateList(ClickItemPutBean bean) {
         try {
-            LogUtils.e(TAG,"updateList");
             bean.setFlag(AddressContants.ONE);
             logic.getOrderSumData(bean, new CommonLogic.GetOrderSumListener() {
                 @Override

@@ -393,6 +393,7 @@ public class SettingActivity extends BaseTitleActivity {
                     }
                 }
             });
+
             tv_storageSetting.setText(accoutBean.getWare());
             StorageDialog.setCallBack(new StorageDialog.StorageCallBack() {
                 @Override

@@ -204,7 +204,7 @@ public class StoreReturnMaterialActivity extends BaseTitleActivity {
             @Override
             public void onFailed(String error) {
                 dismissLoadingDialog();
-                showCommitFailDialog(error);
+                showFailedDialog(error);
             }
         });
     }
@@ -304,7 +304,6 @@ public class StoreReturnMaterialActivity extends BaseTitleActivity {
                 bundle.putString(AddressContants.DOC_NO,list.get(position).getDoc_no());
                 bundle.putString(AddressContants.DATE,list.get(position).getCreate_date());
                 bundle.putString(AddressContants.SUPPLIER,list.get(position).getSupplier_name());
-                bundle.putString(AddressContants.MODULEID_INTENT,activity.mTimestamp.toString());
                 ActivityManagerUtils.startActivityBundleForResult(activity,ReturnMaterialActivity.class,bundle,TOCOMMIT);
             }
         });

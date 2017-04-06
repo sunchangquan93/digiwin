@@ -40,6 +40,10 @@ public interface ReqTypeName {
      */
     static final String SCANINFOSAVE = "app.scaninfo.keep";
     /**
+     * 装箱保存
+     */
+    static final String BINNINGSAVE = "app.package.keep";
+    /**
      * 汇总数据展示
      */
     static final String SUMUPDATE = "app.aggregate.page.get";
@@ -210,4 +214,16 @@ public interface ReqTypeName {
      * 包装箱号
      */
     static final String  GETPACKBOXNUMBER = "app.get.package.info";
+    /**
+     * 扫码出货保存
+     */
+    static final String  SCANOUTSAVE = "app.package.keep";
+    /**
+     * 扫码出货明细
+     */
+    static final String  SCANOUTDETAIL = "app.get.package.scandetail";
+    /**
+     * 删除扫码出货明细
+     */
+    static final String  DELETESCANOUTDETAIL = "app.del.package.scandetail";
 }

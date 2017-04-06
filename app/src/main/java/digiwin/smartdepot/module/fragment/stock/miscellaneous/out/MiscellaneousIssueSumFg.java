@@ -90,6 +90,7 @@ public class MiscellaneousIssueSumFg extends BaseFragment {
                 @Override
                 public void onSuccess(List<SumShowBean> list) {
                     dismissLoadingDialog();
+                    sumShowBeanList = new ArrayList<SumShowBean>();
                     sumShowBeanList = list;
                     if (list.size() > 0) {
                         adapter = new MiscellaneousOutSumAdapter(pactivity, sumShowBeanList);
@@ -113,33 +114,6 @@ public class MiscellaneousIssueSumFg extends BaseFragment {
                     }
                 }
             });
-//            commonLogic.getOrderSumData(clickItemPutData, new CommonLogic.GetOrderSumListener() {
-//                @Override
-//                public void onSuccess(List<ListSumBean> list) {
-//                    dismissLoadingDialog();
-//                    sumShowBeanList = list;
-//                    if(list.size()>0){
-//                        adapter = new MiscellaneousOutSumAdapter(pactivity, sumShowBeanList);
-//                        ryList.setAdapter(adapter);
-//                        upDateFlag = true;
-//                        toDetail();
-//                    }
-//                }
-//
-//                @Override
-//                public void onFailed(String error) {
-//                   dismissLoadingDialog();
-//                    upDateFlag = false;
-//                    try {
-//                        showFailedDialog(error);
-//                        sumShowBeanList = new ArrayList<ListSumBean>();
-//                        adapter = new MiscellaneousOutSumAdapter(pactivity, sumShowBeanList);
-//                        ryList.setAdapter(adapter);
-//                    } catch (Exception e) {
-//                        LogUtils.e(TAG, "updateList--getSum--onFailed" + e);
-//                    }
-//                }
-//            });
         } catch (Exception e) {
             LogUtils.e(TAG, "updateList--getSum--Exception" + e);
         }
@@ -207,8 +181,11 @@ public class MiscellaneousIssueSumFg extends BaseFragment {
                 showCommitSuccessDialog(msg, new OnDialogClickListener() {
                     @Override
                     public void onCallback() {
-                        pactivity.mZXVp.setCurrentItem(0);
+                        sumShowBeanList = new ArrayList<SumShowBean>();
+                        adapter = new MiscellaneousOutSumAdapter(pactivity,sumShowBeanList);
+                        ryList.setAdapter(adapter);
                         pactivity.createNewModuleId(pactivity.module);
+                        pactivity.mZXVp.setCurrentItem(0);
                         pactivity.scanFg.initData();
                         initData();
                     }

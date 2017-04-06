@@ -18,6 +18,7 @@ public class PostMaterialFIFOBean implements Serializable {
 //    recommended_qty     number       建议量
 //    scan_sumqty          number       实发量
 //    lot_no          number       批号
+//    lot_date          string       批次日期
 
     /**
      * 料号
@@ -69,6 +70,19 @@ public class PostMaterialFIFOBean implements Serializable {
      * 实发量
      */
     private String scan_sumqty;
+
+    /**
+     * 批次日期
+     */
+    private String lot_date;
+
+    public String getLot_date() {
+        return lot_date;
+    }
+
+    public void setLot_date(String lot_date) {
+        this.lot_date = lot_date;
+    }
 
     public String getItem_no() {
         return item_no;

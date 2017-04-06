@@ -3,6 +3,7 @@ package digiwin.smartdepot.module.fragment.stock.miscellaneous.out;
 import android.os.Handler;
 import android.os.Message;
 import android.text.method.TextKeyListener;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -130,7 +131,7 @@ public class MiscellaneousIssueScanFg extends BaseFragment {
     List<EditText> editTexts;
     @BindViews({R.id.ll_reason_code,R.id.ll_department,R.id.ll_scan_barcode, R.id.ll_scan_locator, R.id.ll_input_num})
     List<View> views;
-    @BindViews({R.id.tv_reason_code,R.id.tv_department, R.id.tv_locator, R.id.tv_number})
+    @BindViews({R.id.tv_reason_code,R.id.tv_department, R.id.tv_barcode, R.id.tv_locator, R.id.tv_number})
     List<TextView> textViews;
 
     /**
@@ -390,8 +391,9 @@ public class MiscellaneousIssueScanFg extends BaseFragment {
                         public void onSuccess(ScanEmployeeBackBean barcodeBackBean) {
                             departmentShow = barcodeBackBean.getShow();
                             department_no = barcodeBackBean.getDepartment_no();
+                            employee_no = barcodeBackBean.getEmployee_no();
                             saveBean.setDepartment_no(department_no);
-                            employee_no = barcode;
+                            saveBean.setEmployee_no(employee_no);
                             departmentFlag = true;
                             show();
                             cb_department.setChecked(true);
@@ -488,7 +490,6 @@ public class MiscellaneousIssueScanFg extends BaseFragment {
     @Override
     protected void doBusiness() {
         pactivity = (MiscellaneousissuesOutActivity) activity;
-        commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
         initData();
     }
 
@@ -496,7 +497,7 @@ public class MiscellaneousIssueScanFg extends BaseFragment {
      * 公共区域展示
      */
     private void show() {
-        tvDetailShow.setText(StringUtils.lineChange(reasonCodeShow + "\\n" +departmentShow + "\\n" +barcodeShow + "\\n" + locatorShow));
+        tvDetailShow.setText(StringUtils.lineChange(barcodeShow + "\\n" + locatorShow + "\\n" +departmentShow+ "\\n" + reasonCodeShow ));
         if (!StringUtils.isBlank(tvDetailShow.getText().toString())){
         includeDetail.setVisibility(View.VISIBLE);}else {
         includeDetail.setVisibility(View.GONE);
@@ -511,28 +512,24 @@ public class MiscellaneousIssueScanFg extends BaseFragment {
         et_scan_barocde.setText("");
         et_input_num.setText("");
         barcodeFlag = false;
-        if(!cb_department.isChecked()){
-            departmentFlag = false;
-            et_department.setText("");
-            et_department.requestFocus();
-            departmentShow = "";
-        }
         if(!cb_reason_code.isChecked()){
             reasonCodeFlag = false;
             et_reason_code.setText("");
-            et_reason_code.requestFocus();
             reasonCodeShow = "";
         }
-        if (cb_locatorlock.isChecked()){
-            et_scan_barocde.requestFocus();
-        }else {
+        if(!cb_department.isChecked()){
+            departmentFlag = false;
+            et_department.setText("");
+            departmentShow = "";
+        }
+        if (!cb_locatorlock.isChecked()){
             locatorFlag = false;
             locatorShow = "";
             et_scan_locator.setText("");
-            et_scan_locator.requestFocus();
         }
         barcodeShow = "";
         show();
+        initFocus();
     }
 
     /**
@@ -558,5 +555,25 @@ public class MiscellaneousIssueScanFg extends BaseFragment {
         locatorFlag = false;
         saveBean = new SaveBean();
         et_reason_code.requestFocus();
+        commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
         }
+
+    public void initFocus(){
+        if(!cb_reason_code.isChecked()){
+            et_reason_code.requestFocus();
         }
+        else {
+            if(!cb_department.isChecked()){
+                et_department.requestFocus();
+            }
+            else{
+                if(!cb_locatorlock.isChecked()){
+                    et_scan_locator.requestFocus();
+                }else{
+                    et_scan_barocde.requestFocus();
+                }
+            }
+        }
+    }
+        
+}

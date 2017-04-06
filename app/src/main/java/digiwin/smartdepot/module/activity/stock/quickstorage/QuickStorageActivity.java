@@ -1,11 +1,16 @@
 package digiwin.smartdepot.module.activity.stock.quickstorage;
 
+import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -16,14 +21,19 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.dialog.OnDialogTwoListener;
+import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.ObjectAndMapUtils;
+import digiwin.library.utils.StringUtils;
 import digiwin.pulltorefreshlibrary.recyclerview.FullyLinearLayoutManager;
+import digiwin.pulltorefreshlibrary.recyclerviewAdapter.BaseRecyclerAdapter;
+import digiwin.pulltorefreshlibrary.recyclerviewAdapter.RecyclerViewHolder;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseFirstModuldeActivity;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
-import digiwin.smartdepot.module.adapter.stock.QuickStorageAdapter;
+import digiwin.smartdepot.main.logic.GetStorageLogic;
+import digiwin.smartdepot.module.activity.common.WareHouseDialog;
 import digiwin.smartdepot.module.bean.common.ClickItemPutBean;
 import digiwin.smartdepot.module.bean.common.FilterResultOrderBean;
 import digiwin.smartdepot.module.bean.common.ListSumBean;
@@ -70,6 +80,8 @@ public class QuickStorageActivity extends BaseFirstModuldeActivity{
 
     CommonLogic commonLogic;
 
+    List<ListSumBean> checkedList;
+
     /**
      * 提交
      */
@@ -78,15 +90,22 @@ public class QuickStorageActivity extends BaseFirstModuldeActivity{
 
     @OnClick(R.id.commit)
     void commit(){
-        final List<ListSumBean> checkedList;
         try {
-            checkedList = adapter.getCheckData();
             if(checkedList.size() > 0){
                 showCommitSureDialog(new OnDialogTwoListener() {
                     @Override
                     public void onCallback1() {
                         showLoadingDialog();
-                        commitData(checkedList);
+                        List<ListSumBean> commitList = new ArrayList<ListSumBean>();
+                        for(int i = 0;i < checkedList.size();i++){
+                            if(!StringUtils.isBlank(checkedList.get(i).getMatch_qty()) ||
+                                    Float.valueOf(checkedList.get(i).getMatch_qty()) > 0){
+                                checkedList.get(i).setReceipt_qty(StringUtils.deleteZero(checkedList.get(i).getReq_qty()));
+                                checkedList.get(i).setQty(StringUtils.deleteZero(checkedList.get(i).getMatch_qty()));
+                                commitList.add(checkedList.get(i));
+                            }
+                        }
+                        commitData(commitList);
                     }
                     @Override
                     public void onCallback2() {
@@ -136,7 +155,12 @@ public class QuickStorageActivity extends BaseFirstModuldeActivity{
                 commonLogic.getOrderSumData(putBean, new CommonLogic.GetOrderSumListener() {
                     @Override
                     public void onSuccess(List<ListSumBean> list) {
-                        adapter = new QuickStorageAdapter(activity,list);
+                        for (int i = 0;i < list.size();i++) {
+                            list.get(i).setWarehouse_no(LoginLogic.getWare());
+                        }
+                        checkedList = new ArrayList<ListSumBean>();
+                        checkedList = list;
+                        adapter = new QuickStorageAdapter(activity,checkedList);
                         ry_list.setAdapter(adapter);
                         dismissLoadingDialog();
                     }
@@ -175,7 +199,6 @@ public class QuickStorageActivity extends BaseFirstModuldeActivity{
                 showCommitSuccessDialog(msg, new OnDialogClickListener() {
                     @Override
                     public void onCallback() {
-                        createNewModuleId(module);
                         commonLogic = CommonLogic.getInstance(activity,activity.module,activity.mTimestamp.toString());
                         activity.finish();
                     }
@@ -211,5 +234,78 @@ public class QuickStorageActivity extends BaseFirstModuldeActivity{
         super.initNavigationTitle();
         activity = this;
         mName.setText(R.string.title_quickstorage);
+    }
+
+    public class QuickStorageAdapter extends BaseRecyclerAdapter<ListSumBean> {
+
+        public QuickStorageAdapter(final Context ctx,List<ListSumBean> list) {
+            super(ctx, list);
+        }
+
+        @Override
+        protected int getItemLayout(int viewType) {
+            return R.layout.ryitem_quickstorage;
+        }
+
+        @Override
+        protected void bindData(final RecyclerViewHolder holder, final int position, final ListSumBean item) {
+
+            holder.setText(R.id.tv_item_seq, item.getReceipt_seq());
+            holder.setText(R.id.tv_item_name, item.getItem_name());
+            holder.setText(R.id.tv_unit,item.getUnit_no());
+            holder.setText(R.id.tv_item_format, item.getItem_spec());
+            holder.setText(R.id.tv_item_no, item.getItem_no());
+            holder.setText(R.id.tv_storage, item.getWarehouse_no());
+            holder.setText(R.id.tv_in_storage_number, StringUtils.deleteZero(item.getReq_qty()));
+            holder.setText(R.id.tv_match_number, StringUtils.deleteZero(item.getMatch_qty()));
+
+            final TextView wareHouseTv = holder.findViewById(R.id.tv_storage);
+            wareHouseTv.setTag(position);
+            final List<String> list = GetStorageLogic.getWareString();
+            wareHouseTv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    WareHouseDialog.showWareHouseDialog(activity,LoginLogic.getWare(),list);
+                }
+            });
+
+            //更新库位
+            WareHouseDialog.setCallBack(new WareHouseDialog.WareHouseCallBack() {
+                @Override
+                public void wareHouseCallBack(String wareHouse) {
+                    LogUtils.i("wareHouse===:",wareHouse);
+                    LogUtils.i("getTag===:",(int) wareHouseTv.getTag());
+                    checkedList.get((int) wareHouseTv.getTag()).setWarehouse_no(wareHouse);
+                    notifyDataSetChanged();
+                }
+            });
+
+            final EditText match_numberEt = holder.findViewById(R.id.tv_match_number);
+            match_numberEt.setTag(position);
+            holder.getEditText(R.id.tv_match_number).addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    if(StringUtils.isBlank(s.toString().trim())){
+                        checkedList.get((int) match_numberEt.getTag()).setMatch_qty("0");
+                        notifyDataSetChanged();
+                    }else if(Float.valueOf(item.getReq_qty()) < Float.valueOf(s.toString())){
+                        showFailedDialog(getResources().getString(R.string.match_so_big));
+                        checkedList.get((int) match_numberEt.getTag()).setMatch_qty(item.getMatch_qty());
+                        notifyDataSetChanged();
+
+                    }else{
+                        checkedList.get((int) match_numberEt.getTag()).setMatch_qty(s.toString());
+                    }
+                }
+            });
+        }
     }
 }

@@ -350,6 +350,12 @@
         <activity
             android:name=".module.activity.sale.pickupshipment.PickUpShipmentActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+        <!-- 二次提交-->
+        <activity
+            android:name=".module.activity.sale.pickupshipment.PickUpShipmentCommitActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+
+
 
         <activity
         android:name=".module.activity.produce.enchaseprint.EnchasePrintActivity"
@@ -491,6 +497,22 @@
             </intent-filter>
         </activity>
 
+
+        <!--装箱入库-清单-->
+        <activity
+            android:name=".module.activity.produce.inbinning.InBinningListActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.digiwin.InBinningListActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!--装箱入库-->
+        <activity
+            android:name=".module.activity.produce.inbinning.InBinningActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+
+
         <!-- 生产超领-->
         <activity
             android:name=".module.activity.produce.productionleader.ProductionLeaderActivity"
@@ -498,7 +520,7 @@
 
         <!-- 快速入库-清单-->
         <activity
-            android:name=".module.activity.stock.quickstorage.QuickStorageListActivity"
+            android:name=".module.activity.purchase.quickstorage.QuickStorageListActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.digiwin.QuickStorageListActivity" />
@@ -508,7 +530,7 @@
 
         <!-- 快速入库-->
         <activity
-            android:name=".module.activity.stock.quickstorage.QuickStorageActivity"
+            android:name=".module.activity.purchase.quickstorage.QuickStorageActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
 
         <!-- 扫入扫描 -->
@@ -521,8 +543,32 @@
             </intent-filter>
         </activity>
         <!-- 开工扫描 -->
+        <activity
+            android:name=".module.activity.dailywork.dailworkscan.StartWorkActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.digiwin.StartWorkActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <!-- 完工扫描 -->
+        <activity
+            android:name=".module.activity.dailywork.dailworkscan.FinishWorkActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.digiwin.FinishWorkActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <!-- 扫出扫描 -->
+        <activity
+            android:name=".module.activity.dailywork.dailworkscan.StockRemovalActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.digiwin.StockRemovalActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <!-- 扫码出货列表 -->
         <activity
@@ -538,7 +584,11 @@
             android:name=".module.activity.sale.scanout.ScanOutStoreActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
         </activity>
-
+        <!-- 扫码出货明细 -->
+        <activity
+            android:name=".module.activity.sale.scanout.ScanOutDetailActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+        </activity>
         <!-- Required SDK 核心功能极光推送需要 -->
         <!-- 可配置android:process参数将PushService放在其他进程中 -->
         <service

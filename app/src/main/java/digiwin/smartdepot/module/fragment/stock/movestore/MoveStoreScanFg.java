@@ -234,7 +234,7 @@ public class MoveStoreScanFg extends BaseFragment {
                             locatorFlag = true;
                             saveBean.setStorage_spaces_out_no(locatorBackBean.getStorage_spaces_no());
                             saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
-                            etInputNum.requestFocus();
+                            etScanBarocde.requestFocus();
                             locatorShow = locatorBackBean.getShow();
                             show();
                         }

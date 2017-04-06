@@ -30,7 +30,6 @@ import digiwin.smartdepot.module.activity.produce.workorderreturn.WorkOrderRetur
 import digiwin.smartdepot.module.activity.produce.workorderreturn.WorkOrderReturnListActivity;
 import digiwin.smartdepot.module.adapter.produce.WorkOrderReturnSumAdapter;
 import digiwin.smartdepot.module.adapter.produce.WorkOrderSumAdapter;
-import digiwin.smartdepot.module.adapter.sale.SaleOutletSumAdapter;
 import digiwin.smartdepot.module.bean.common.ClickItemPutBean;
 import digiwin.smartdepot.module.bean.common.DetailShowBean;
 import digiwin.smartdepot.module.bean.common.FilterResultOrderBean;

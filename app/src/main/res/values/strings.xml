@@ -101,6 +101,7 @@
     <string name="barcode">条码</string>
     <string name="delete">删除</string>
     <string name="scan_barcode">请扫描物料条码</string>
+    <string name="scan_box_number">请扫描箱码</string>
     <string name="scan_work_order">请扫描工单单号</string>
     <string name="scan_card_number">请扫描流转卡号</string>
     <string name="scan_material">请扫描退料单号</string>
@@ -161,6 +162,7 @@
     <string name="transfers_to_reviewlist">调拨复核清单</string>
 
     <string name="filter_condition">筛选条件</string>
+    <string name="title_in_binning">装箱入库</string>
 
 
     <string name="post_material_order">单号</string>
@@ -177,6 +179,7 @@
     <string name="waithour">等待小时</string>
     <string name="delivery_uncheck_board">收货待检货看板</string>
     <string name="tcts_board">检货完成待入库看板</string>
+    <string name="wareuse_error">返回仓库与当前仓库不一致</string>
 
     <string name="inlocator">拨入库位</string>
     <string name="outlocator">拨出库位</string>
@@ -186,6 +189,7 @@
     <string name="scan_inlocator">请扫描拨入库位</string>
     <string name="scan_outlocator">请扫描拨出库位</string>
     <string name="scandetail">扫描明细</string>
+    <string name="in_binning_detail">装箱入库明细</string>
 
 
     <string name="purchase_in_store">扫码入库</string>
@@ -231,7 +235,11 @@
     <string name="in_store_order">入库单号</string>
     <string name="put_in_store">入库上架</string>
     <string name="item_lot_no">批次</string>
-
+    <string name="fat_feed">已发料</string>
+    <string name="yet_inwarehouse">已入库</string>
+    <string name="inwarehouse">可入库</string>
+    <string name="now_inwarehouse">本次入</string>
+    <string name="item_lot_no_date">批次日期</string>
 
     <string name="title_completing_store">完工入库</string>
     <string name="work_order_code">工单条码</string>
@@ -409,12 +417,27 @@
 
 
     <string name="start_scan">开工扫描</string>
+    <string name="start_num">开工数量</string>
+    <string name="pcs">PCS</string>
     <string name="finish_scan">完工扫描</string>
+    <string name="finish_num">完工数量</string>
+    <string name="over_num">报废数量</string>
+    <string name="back_num">返工数量</string>
+    <string name="machineNum">机械数量</string>
+    <string name="people_num">人数</string>
+    <string name="remark">备注</string>
     <string name="scanout_scan">扫出扫描</string>
     <string name="sales_dealers">出货量</string>
 
     <string name="scan_out_store">扫码出货</string>
+    <string name="warehouse_error">返回仓库与当前仓库不一致</string>
+    <string name="scan_out_store_detail">扫码出货明细</string>
     <string name="scan_out_store_list">扫码出货清单</string>
+    <string name="caseNo_barcode">箱码</string>
+    <string name="case_no">箱号</string>
+    <string name="warehouse_failed">箱码仓库与当前仓库不一致,请重新扫描</string>
+    <string name="scan_case_first">请扫描箱号条码</string>
 
-
+    <string name="match_so_big">匹配量不可大于入库量</string>
+    <string name="ordersale">订单出货</string>
 </resources>

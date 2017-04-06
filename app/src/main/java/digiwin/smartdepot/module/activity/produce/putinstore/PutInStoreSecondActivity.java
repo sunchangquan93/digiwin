@@ -74,10 +74,6 @@ public class PutInStoreSecondActivity extends BaseFirstModuldeActivity {
      */
     public final int DETAILCODE = 1234;
 
-    /**
-     * 清空扫描界面信息
-     */
-    public final int CLEAR = 1005;
     @Override
     protected Toolbar toolbar() {
         return toolbarTitle;
@@ -88,18 +84,6 @@ public class PutInStoreSecondActivity extends BaseFirstModuldeActivity {
         module = ModuleCode.PUTINSTORE;
         return module;
     }
-
-    public Handler handler =  new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            if(msg.what == CLEAR){
-                Log.d(TAG,"clear");
-                scanFg.initData();
-                activity.finish();
-            }
-        }
-    };
 
     @Override
     protected void initNavigationTitle() {

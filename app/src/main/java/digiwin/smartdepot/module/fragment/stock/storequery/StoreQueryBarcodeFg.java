@@ -1,5 +1,4 @@
 package digiwin.smartdepot.module.fragment.stock.storequery;
-
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -21,8 +20,6 @@ import digiwin.smartdepot.module.activity.stock.storequery.StoreQueryActivity;
 import digiwin.smartdepot.module.adapter.stock.StoreQueryBacodeAdapter;
 import digiwin.smartdepot.module.bean.common.ClickItemPutBean;
 import digiwin.smartdepot.module.bean.common.ListSumBean;
-
-
 /**
  * @author xiemeng
  * @des 库存查询---条码库存

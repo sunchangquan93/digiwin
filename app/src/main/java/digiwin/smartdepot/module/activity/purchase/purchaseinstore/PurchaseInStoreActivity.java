@@ -257,7 +257,6 @@ public class PurchaseInStoreActivity extends BaseTitleActivity {
                 final FilterResultOrderBean orderData = sumShowBeanList.get(position);
                 Bundle bundle = new Bundle();
                         bundle.putSerializable("orderData", orderData);
-                        bundle.putString(AddressContants.MODULEID_INTENT, pactivity.mTimestamp.toString());
                         ActivityManagerUtils.startActivityBundleForResult(pactivity, PurchaseInStoreSecondActivity.class, bundle, SUMCODE);
             }
         });
@@ -353,6 +352,8 @@ public class PurchaseInStoreActivity extends BaseTitleActivity {
         try {
 
             if (requestCode == SUMCODE) {
+                adapter = new PurchaseInStorageAdapter(pactivity,new ArrayList<FilterResultOrderBean>());
+                ryList.setAdapter(adapter);
                 upDateList();
             }
 

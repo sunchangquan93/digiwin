@@ -160,6 +160,8 @@ public class MiscellaneousissuesOutActivity extends BaseFirstModuldeActivity {
             public void onPageSelected(int position) {
                 if (position == 1) {
                     sumFg.upDateList();
+                }else{
+                    scanFg.initFocus();
                 }
             }
 

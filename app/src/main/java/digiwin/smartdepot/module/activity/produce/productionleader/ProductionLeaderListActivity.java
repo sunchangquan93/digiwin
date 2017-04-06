@@ -231,7 +231,6 @@ public class ProductionLeaderListActivity extends BaseTitleActivity {
                             Bundle bundle = new Bundle();
                             FilterResultOrderBean data = list.get(position);
                             bundle.putSerializable("data",data);
-                            bundle.putString(AddressContants.MODULEID_INTENT,activity.mTimestamp.toString());
                             ActivityManagerUtils.startActivityBundleForResult(activity,ProductionLeaderActivity.class,bundle,SCANCODE);
                         }
                     });

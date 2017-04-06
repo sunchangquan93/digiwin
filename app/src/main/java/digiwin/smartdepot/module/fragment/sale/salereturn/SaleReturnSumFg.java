@@ -213,8 +213,8 @@ public class SaleReturnSumFg extends BaseFragment {
                 showCommitSuccessDialog(msg, new OnDialogClickListener() {
                     @Override
                     public void onCallback() {
-                        pactivity.mZXVp.setCurrentItem(0);
                         pactivity.createNewModuleId(pactivity.module);
+                        pactivity.mZXVp.setCurrentItem(0);
                         tv_head_plan_date.setText("");
                         tv_head_custom.setText("");
                         tv_head_return_order_no.setText("");

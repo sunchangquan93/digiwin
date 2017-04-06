@@ -257,7 +257,6 @@ public class PurchaseGoodsScanActivity extends BaseTitleActivity {
                 final FilterResultOrderBean orderData = sumShowBeanList.get(position);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("orderData", orderData);
-                bundle.putString(AddressContants.MODULEID_INTENT, pactivity.mTimestamp.toString());
                 ActivityManagerUtils.startActivityBundleForResult(pactivity, PurchaseGoodsScanSecondActivity.class, bundle, SUMCODE);
 //                ClickItemPutBean clickItemPutData = new ClickItemPutBean();
 //                clickItemPutData.setDoc_no(orderData.getDoc_no());
@@ -290,7 +289,7 @@ public class PurchaseGoodsScanActivity extends BaseTitleActivity {
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        mName.setText(R.string.purchase_goods_scan);
+        mName.setText(R.string.title_purchase_goods_scan);
         iv_title_setting.setVisibility(View.VISIBLE);
         iv_title_setting.setImageResource(R.drawable.search);
     }
@@ -377,6 +376,8 @@ public class PurchaseGoodsScanActivity extends BaseTitleActivity {
         try {
 
             if (requestCode == SUMCODE) {
+                adapter = new PurchaseGoodsScanAdapter(pactivity,new ArrayList<FilterResultOrderBean>());
+                ryList.setAdapter(adapter);
                 upDateList();
             }
 

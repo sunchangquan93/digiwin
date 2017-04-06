@@ -134,9 +134,9 @@ public class CompletingStoreActivity extends BaseFirstModuldeActivity{
 //                warehouse_no        string        仓库
 //                qty            number(15,3)      数量
                 Map<String,String> map = new HashMap<String, String>();
-                map.put("wo_no",et_work_order_code.getText().toString().trim());
-                map.put("item_no",tv_item_no.getText().toString().trim());
-                map.put("warehouse_no",tv_label_storage.getText().toString().trim());
+                map.put(AddressContants.WO_NO,et_work_order_code.getText().toString().trim());
+                map.put(AddressContants.ITEM_NO,tv_item_no.getText().toString().trim());
+                map.put(AddressContants.WAREHOUSE_NO,tv_label_storage.getText().toString().trim());
                 map.put("stock_in_qty",et_input_num.getText().toString().trim());
 
                 List<ClickItemPutBean> checkedList = new ArrayList<ClickItemPutBean>();

@@ -23,6 +23,7 @@ import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseFirstModuldeActivity;
 import digiwin.smartdepot.core.modulecommon.ModuleViewPagerAdapter;
+import digiwin.smartdepot.module.activity.common.HaveSourceUnComActivity;
 import digiwin.smartdepot.module.activity.common.NoComeUnComActivity;
 import digiwin.smartdepot.module.fragment.sale.pickupshipment.PickUpShipmentScanFg;
 import digiwin.smartdepot.module.fragment.sale.pickupshipment.PickUpShipmentSumFg;
@@ -69,6 +70,8 @@ public class PickUpShipmentActivity extends BaseFirstModuldeActivity{
      */
     public final int DETAILCODE = 1234;
 
+    String code = "1";
+
     /**
      * 未完事项
      */
@@ -80,7 +83,7 @@ public class PickUpShipmentActivity extends BaseFirstModuldeActivity{
         Bundle bundle = new Bundle();
         bundle.putString(AddressContants.MODULEID_INTENT, mTimestamp.toString());
         bundle.putString(NoComeUnComActivity.MODULECODE, module);
-        ActivityManagerUtils.startActivityForBundleData(activity, NoComeUnComActivity.class, bundle);
+        ActivityManagerUtils.startActivityForBundleData(activity, HaveSourceUnComActivity.class, bundle);
     }
 
 
@@ -180,6 +183,6 @@ public class PickUpShipmentActivity extends BaseFirstModuldeActivity{
 
     @Override
     public ExitMode exitOrDel() {
-        return ExitMode.EXITD;
+        return ExitMode.EXITISD;
     }
 }

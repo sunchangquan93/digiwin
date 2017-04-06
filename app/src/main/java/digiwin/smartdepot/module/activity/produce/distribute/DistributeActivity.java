@@ -40,8 +40,11 @@ import digiwin.smartdepot.core.modulecommon.ModuleUtils;
 import digiwin.smartdepot.login.bean.AccoutBean;
 import digiwin.smartdepot.module.activity.common.CommonDetailActivity;
 import digiwin.smartdepot.module.adapter.produce.DistributeSumAdapter;
+import digiwin.smartdepot.module.adapter.purchase.PurchaseInStorageAdapter;
 import digiwin.smartdepot.module.bean.common.DetailShowBean;
 import digiwin.smartdepot.module.bean.common.FilterBean;
+import digiwin.smartdepot.module.bean.common.FilterResultOrderBean;
+import digiwin.smartdepot.module.bean.common.ListSumBean;
 import digiwin.smartdepot.module.bean.common.SumShowBean;
 import digiwin.smartdepot.module.bean.produce.DistributeOrderHeadData;
 import digiwin.smartdepot.module.bean.produce.DistributeSumShowBean;
@@ -509,17 +512,13 @@ public class DistributeActivity extends BaseFirstModuldeActivity {
                     bundle.putSerializable(CommonDetailActivity.DETAIL, (Serializable) detailShowBeen);
                     dismissLoadingDialog();
                     ActivityManagerUtils.startActivityBundleForResult(distributeActivity, CommonDetailActivity.class, bundle, pactivity.DETAILCODE);
-                }else{
-                    dismissLoadingDialog();
-                    showFailedDialog(getResources().getString(R.string.nodate));
-                    return;
                 }
             }
 
             @Override
             public void onFailed(String error) {
                 dismissLoadingDialog();
-                showCommitFailDialog(error);
+                showFailedDialog(error);
             }
         });
     }
@@ -530,6 +529,8 @@ public class DistributeActivity extends BaseFirstModuldeActivity {
         try{
 
             if(requestCode == DETAILCODE || requestCode ==SCANCODE){
+                adapter = new DistributeSumAdapter(pactivity,new ArrayList<DistributeSumShowBean>());
+                ryList.setAdapter(adapter);
                 upDateList();
             }
 

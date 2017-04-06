@@ -95,9 +95,9 @@ public class MainLogic {
 
         ModuleBean materialreceipt = new ModuleBean(R.string.title_material_receipt, R.mipmap.material_receipt, ModuleCode.MATERIALRECEIPTCODE, "android.intent.action.digiwin.MaterialReceiptActivity");
 
-        ModuleBean purchaseGoodsScan = new ModuleBean(R.string.title_purchase_goods_scan, R.mipmap.material_receipt, ModuleCode.PURCHASEGOODSSCAN, "android.intent.action.digiwin.PurchaseGoodsScanActivity");
+        ModuleBean purchaseGoodsScan = new ModuleBean(R.string.title_purchase_goods_scan, R.mipmap.scan_inapection, ModuleCode.PURCHASEGOODSSCAN, "android.intent.action.digiwin.PurchaseGoodsScanActivity");
 
-        ModuleBean purchaseCheck = new ModuleBean(R.string.purchase_check, R.mipmap.material_receipt, ModuleCode.PURCHASECHECK, "android.intent.action.digiwin.PurchaseCheckActivity");
+        ModuleBean purchaseCheck = new ModuleBean(R.string.purchase_check, R.mipmap.inspection_tests, ModuleCode.PURCHASECHECK, "android.intent.action.digiwin.PurchaseCheckActivity");
 
         ModuleBean storeReturnMaterial = new ModuleBean(R.string.store_return_material, R.mipmap.warehouse_return, ModuleCode.STORERETURNMATERIAL, "android.intent.action.digiwin.StoreReturnMaterialActivity");
 
@@ -147,6 +147,8 @@ public class MainLogic {
 
         ModuleBean productionleaderlist = new ModuleBean(R.string.title_production_leader,R.mipmap.production_receive,ModuleCode.PRODUCTIONLEADER,  "android.intent.action.digiwin.ProductionLeaderListActivity");
 
+        ModuleBean inbinninglist = new ModuleBean(R.string.title_in_binning,R.mipmap.inbox,ModuleCode.INBINNING,  "android.intent.action.digiwin.InBinningListActivity");
+
         produceItems.add(finishedStorageActivity);
 
         produceItems.add(transfersToReviewActivity);
@@ -177,6 +179,8 @@ public class MainLogic {
 
         produceItems.add(productionleaderlist);
 
+        produceItems.add(inbinninglist);
+
         //初始化库存管理
         ModuleBean storeallotactivity = new ModuleBean(R.string.nocome_allot, R.mipmap.nocome_alllot, ModuleCode.NOCOMESTOREALLOT, "android.intent.action.digiwin.StoreAllotActivity");
         storageItems.add(storeallotactivity);
@@ -205,10 +209,12 @@ public class MainLogic {
         ModuleBean pickupshipment = new ModuleBean(R.string.title_pickupshipment, R.mipmap.pickup_shipment, ModuleCode.PICKUPSHIPMENT, "android.intent.action.digiwin.PickUpShipmentListActivity");
         ModuleBean saleReturnActivity = new ModuleBean(R.string.title_sale_return, R.mipmap.ntsale_return, ModuleCode.SALERETURN, "android.intent.action.digiwin.SaleReturnActivity");
         ModuleBean scanOutStoreActivity = new ModuleBean(R.string.scan_out_store, R.mipmap.scan_shipment, ModuleCode.SCANOUTSTORE, "android.intent.action.digiwin.ScanOutStoreListActivity");
+        ModuleBean orderSaleActivity = new ModuleBean(R.string.ordersale, R.mipmap.ordersale, ModuleCode.ORDERSALE, "开发中");
         salesItems.add(saleoutletactivity);
         salesItems.add(pickupshipment);
         salesItems.add(saleReturnActivity);
         salesItems.add(scanOutStoreActivity);
+        salesItems.add(orderSaleActivity);
 
         //初始化报工管理
         ModuleBean rcttboardactivity = new ModuleBean(R.string.delivery_uncheck_board, R.drawable.receiptout, ModuleCode.RCCTBOARD, "android.intent.action.digiwin.RcttBoardActivity");

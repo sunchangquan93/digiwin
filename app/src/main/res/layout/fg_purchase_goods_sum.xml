@@ -38,7 +38,7 @@ tools:context="digiwin.smartdepot.module.activity.produce.distribute.DistributeA
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/layout_60dp"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:textColor="@color/back47"
@@ -64,7 +64,7 @@ tools:context="digiwin.smartdepot.module.activity.produce.distribute.DistributeA
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/layout_60dp"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:textColor="@color/back47"
@@ -108,7 +108,7 @@ tools:context="digiwin.smartdepot.module.activity.produce.distribute.DistributeA
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/layout_60dp"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:textColor="@color/back47"

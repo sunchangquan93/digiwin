@@ -33,6 +33,10 @@ public class ScanEmployeeBackBean {
      */
     private String employee_name;
     /**
+     *  人员编号
+     */
+    private String employee_no;
+    /**
      * 展示
      */
     private String show;
@@ -55,6 +59,14 @@ public class ScanEmployeeBackBean {
 
     public void setEmployee_name(String employee_name) {
         this.employee_name = employee_name;
+    }
+
+    public String getEmployee_no() {
+        return employee_no;
+    }
+
+    public void setEmployee_no(String employee_no) {
+        this.employee_no = employee_no;
     }
 
     public String getShow() {

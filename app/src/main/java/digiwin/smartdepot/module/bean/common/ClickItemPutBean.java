@@ -42,6 +42,10 @@ public class ClickItemPutBean {
      * 工单编号
      */
     private String wo_no;
+    /**
+     * 部门编码
+     */
+    private String department_no;
 
     /**
      * 数量
@@ -69,6 +73,14 @@ public class ClickItemPutBean {
      * 标记（1：物料库存；2：物料条码库存）
      */
     private  String flag;
+
+    public String getDepartment_no() {
+        return department_no;
+    }
+
+    public void setDepartment_no(String department_no) {
+        this.department_no = department_no;
+    }
 
     public String getStorage_space() {
         return storage_space;

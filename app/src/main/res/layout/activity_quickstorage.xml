@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent">
     <include layout="@layout/activity_title_toolbar_bar"></include>
 
@@ -54,53 +55,49 @@
                     <LinearLayout
                         style="@style/itemstyle"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="@dimen/layout_70dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/data"
+                            android:textColor="@color/back47"
+                            android:paddingRight="@dimen/layout_5dp"
+                            android:textSize="@dimen/textSize_14sp" />
 
-                        <LinearLayout
-                            android:orientation="horizontal"
-                            android:layout_weight="1"
-                            android:layout_width="@dimen/layout_0dp"
-                            android:layout_height="match_parent">
-                            <TextView
-                                android:layout_width="@dimen/layout_70dp"
-                                android:layout_height="wrap_content"
-                                android:text="@string/data"
-                                android:paddingRight="@dimen/layout_5dp"
-                                android:textSize="@dimen/textSize_14sp" />
+                        <TextView
+                            android:id="@+id/tv_date"
+                            android:layout_marginLeft="@dimen/layout_10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/textSize_14sp" />
+                    </LinearLayout>
 
-                            <TextView
-                                android:id="@+id/tv_date"
-                                android:layout_marginLeft="@dimen/layout_10dp"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/textSize_14sp" />
+                    <View style="@style/act_line_style"></View>
 
-                        </LinearLayout>
 
-                        <LinearLayout
-                            android:orientation="horizontal"
-                            android:layout_weight="1"
-                            android:layout_width="@dimen/layout_0dp"
-                            android:layout_height="match_parent">
-                            <TextView
-                                android:layout_width="@dimen/layout_70dp"
-                                android:layout_height="wrap_content"
-                                android:text="@string/supplier"
-                                android:paddingRight="@dimen/layout_5dp"
-                                android:textSize="@dimen/textSize_14sp" />
+                    <LinearLayout
+                        style="@style/itemstyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="@dimen/layout_70dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/supplier"
+                            android:textColor="@color/back47"
+                            android:paddingRight="@dimen/layout_5dp"
+                            android:textSize="@dimen/textSize_14sp" />
 
-                            <TextView
-                                android:id="@+id/tv_supplier"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/textSize_14sp" />
-                        </LinearLayout>
+                        <TextView
+                            android:id="@+id/tv_supplier"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:layout_marginLeft="@dimen/layout_10dp"
+                            android:textSize="@dimen/textSize_14sp" />
                     </LinearLayout>
                 </LinearLayout>
-            <include  layout="@layout/ryitem_fifo_common" />
+            <include  layout="@layout/ryitem_common" />
         </LinearLayout>
     </ScrollView>
     <include layout="@layout/inclu_commit"></include>

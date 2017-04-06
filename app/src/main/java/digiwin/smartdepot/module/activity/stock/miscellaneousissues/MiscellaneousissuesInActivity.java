@@ -62,7 +62,7 @@ public class MiscellaneousissuesInActivity extends BaseFirstModuldeActivity {
     /**
      * 扫码
      */
-  public   MiscellaneousIssueInScanFg scanFg;
+    public MiscellaneousIssueInScanFg scanFg;
     /**
      * 汇总提交
      */
@@ -156,6 +156,8 @@ public class MiscellaneousissuesInActivity extends BaseFirstModuldeActivity {
             public void onPageSelected(int position) {
                 if (position == 1) {
                     sumFg.upDateList();
+                }else{
+                    scanFg.initFocus();
                 }
             }
 

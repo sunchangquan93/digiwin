@@ -31,9 +31,11 @@ import digiwin.smartdepot.core.base.BaseTitleActivity;
 import digiwin.smartdepot.core.modulecommon.ModuleUtils;
 import digiwin.smartdepot.login.bean.AccoutBean;
 import digiwin.smartdepot.module.activity.common.NoComeUnComActivity;
+import digiwin.smartdepot.module.adapter.produce.DistributeSumAdapter;
 import digiwin.smartdepot.module.adapter.produce.FilterResultOrderAdapter;
 import digiwin.smartdepot.module.bean.common.FilterBean;
 import digiwin.smartdepot.module.bean.common.FilterResultOrderBean;
+import digiwin.smartdepot.module.bean.produce.DistributeSumShowBean;
 import digiwin.smartdepot.module.logic.common.CommonLogic;
 
 import static digiwin.smartdepot.login.loginlogic.LoginLogic.getUserInfo;
@@ -277,7 +279,6 @@ public class PostMaterialActivity extends BaseTitleActivity {
                 final FilterResultOrderBean orderData = dataList.get(position);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("orderData",orderData);
-                bundle.putString(AddressContants.MODULEID_INTENT, pactivity.mTimestamp.toString());
                 ActivityManagerUtils.startActivityBundleForResult(pactivity,PostMaterialSecondActivity.class,bundle,SECONDCODE);
             }
         });
@@ -391,6 +392,8 @@ public class PostMaterialActivity extends BaseTitleActivity {
         super.onActivityResult(requestCode, resultCode, data);
         try{
             if(requestCode == SECONDCODE){
+                adapter = new FilterResultOrderAdapter(pactivity,new ArrayList<FilterResultOrderBean>());
+                ryList.setAdapter(adapter);
                 upDateList();
             }
         }catch (Exception e){

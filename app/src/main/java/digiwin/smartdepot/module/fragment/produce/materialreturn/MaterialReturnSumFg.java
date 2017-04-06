@@ -29,8 +29,6 @@ import digiwin.smartdepot.login.loginlogic.LoginLogic;
 import digiwin.smartdepot.module.activity.common.CommonDetailActivity;
 import digiwin.smartdepot.module.activity.produce.materialreturn.MaterialReturnActivity;
 import digiwin.smartdepot.module.adapter.produce.MaterialReturnSumAdapter;
-import digiwin.smartdepot.module.adapter.produce.WorkOrderReturnSumAdapter;
-import digiwin.smartdepot.module.adapter.sale.SaleOutletSumAdapter;
 import digiwin.smartdepot.module.bean.common.ClickItemPutBean;
 import digiwin.smartdepot.module.bean.common.DetailShowBean;
 import digiwin.smartdepot.module.bean.common.FilterResultOrderBean;

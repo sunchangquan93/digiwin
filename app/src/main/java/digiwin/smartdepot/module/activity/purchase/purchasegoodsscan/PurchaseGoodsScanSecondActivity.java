@@ -101,7 +101,7 @@ public class PurchaseGoodsScanSecondActivity extends BaseFirstModuldeActivity {
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        mName.setText(R.string.purchase_in_store);
+        mName.setText(R.string.title_purchase_goods_scan);
         iv_un_com.setVisibility(View.VISIBLE);
     }
 

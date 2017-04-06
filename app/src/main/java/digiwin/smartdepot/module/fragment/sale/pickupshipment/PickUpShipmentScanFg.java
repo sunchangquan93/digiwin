@@ -217,15 +217,14 @@ public class PickUpShipmentScanFg extends BaseFragment {
             }
 
         }
+
         if (!isSave){
             showFailedDialog(R.string.fifo_scan_error);
             return;
         }
-        showLoadingDialog();
         commonLogic.scanSave(saveBean, new CommonLogic.SaveListener() {
             @Override
             public void onSuccess(SaveBackBean saveBackBean) {
-                dismissLoadingDialog();
                 clear();
                 if("Y".equals(saveBean.getFifo_check())){
                     upDateList();
@@ -234,7 +233,6 @@ public class PickUpShipmentScanFg extends BaseFragment {
 
             @Override
             public void onFailed(String error) {
-                dismissLoadingDialog();
                 showFailedDialog(error);
             }
         });

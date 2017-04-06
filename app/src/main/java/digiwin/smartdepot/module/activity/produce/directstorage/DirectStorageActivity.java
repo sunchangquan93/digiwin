@@ -222,10 +222,6 @@ public class DirectStorageActivity extends BaseFirstModuldeActivity {
 
     @OnClick(R.id.commit)
     void commit() {
-        if (!barcodeFlag) {
-            showFailedDialog(R.string.scan_barcode);
-            return;
-        }
         if (!workOrderFlag) {
             showFailedDialog(R.string.scan_work_order);
             return;
@@ -234,7 +230,10 @@ public class DirectStorageActivity extends BaseFirstModuldeActivity {
             showFailedDialog(R.string.scan_locator);
             return;
         }
-
+        if (!barcodeFlag) {
+            showFailedDialog(R.string.scan_barcode);
+            return;
+        }
         if (StringUtils.isBlank(etInputNum.getText().toString())) {
             showFailedDialog(R.string.input_num);
             return;
@@ -279,12 +278,7 @@ public class DirectStorageActivity extends BaseFirstModuldeActivity {
                             saveBean.setItem_no(barcodeBackBean.getItem_no());
                             saveBean.setUnit_no(barcodeBackBean.getUnit_no());
                             saveBean.setLot_no(barcodeBackBean.getLot_no());
-
-                            if (cbLocatorlock.isChecked()) {
                                 etInputNum.requestFocus();
-                            } else {
-                                etScanLocator.requestFocus();
-                            }
                         }
 
                         @Override
@@ -310,7 +304,7 @@ public class DirectStorageActivity extends BaseFirstModuldeActivity {
                             show();
                             saveBean.setStorage_spaces_in_no(locatorBackBean.getStorage_spaces_no());
                             saveBean.setWarehouse_in_no(locatorBackBean.getWarehouse_no());
-                            etInputNum.requestFocus();
+                            etScanBarocde.requestFocus();
                         }
 
                         @Override
@@ -357,15 +351,16 @@ public class DirectStorageActivity extends BaseFirstModuldeActivity {
      */
     private void clear() {
         etInputNum.setText("");
-        if (!cbLocatorlock.isChecked()) {
-            locatorFlag = false;
-            etScanLocator.setText("");
-            locatorShow = "";
-        }
         barcodeFlag = false;
         etScanBarocde.setText("");
         barcodeShow = "";
         etScanBarocde.requestFocus();
+        if (!cbLocatorlock.isChecked()) {
+            locatorFlag = false;
+            etScanLocator.setText("");
+            locatorShow = "";
+            etScanLocator.requestFocus();
+        }
         show();
     }
 
