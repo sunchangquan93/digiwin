@@ -33,6 +33,7 @@
     <dimen name="refresh_header_height_jd">100dp</dimen>
     <dimen name="layout_0dp">0dp</dimen>
     <dimen name="layout_0.5dp">0.5dip</dimen>
+    <dimen name="layout_0.7dp">0.7dip</dimen>
     <dimen name="layout_1dp">1dp</dimen>
     <dimen name="layout_5dp">5dp</dimen>
     <dimen name="layout_8dp">8dp</dimen>

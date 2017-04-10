@@ -1,12 +1,20 @@
 package digiwin.library.utils;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
+import android.os.Build;
+import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.telephony.TelephonyManager;
 
 import java.io.File;
@@ -188,26 +196,70 @@ public class TelephonyUtils {
         }
 
     }
-
     /**
-     * 设备号
+     * 获取唯一设备号
+     * @param context
      */
-    public static String szImei = "0000";
+    public static String getDeviceId(Context aty) {
+       StringBuffer sb=new StringBuffer();
+        sb.append(getIME(aty));
+
+        String wifi = getWifi(aty);
+        if (wifi.length()>6){
+            sb.append(wifi.substring(0,5));
+        }else {
+            sb.append(wifi);
+        }
+
+        String androidId = getAndroidId(aty);
+        if (androidId.length()>6){
+            sb.append(androidId.substring(0,5));
+        }else {
+            sb.append(androidId);
+        }
+        return sb.toString();
+    }
 
     /**
      * 获取设备号
-     *
      * @param context
      */
-    public static String getDeviceId(Context context) {
-        szImei = "0000";
+    public static String getIME(Context context) {
+        String szImei = "0000";
         try {
+//            if (Build.VERSION.SDK_INT >= 23) {
+//                if (ContextCompat.checkSelfPermission(aty, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+//                    {
+//                        ActivityCompat.requestPermissions(aty, new String[]{Manifest.permission.READ_PHONE_STATE}, 0);
+//                    }
+//                }
+//            }
             TelephonyManager TelephonyMgr = (TelephonyManager) context.getSystemService(TELEPHONY_SERVICE);
-            szImei = TelephonyMgr.getDeviceId();
+            if (null!= TelephonyMgr.getDeviceId()) {
+                szImei = TelephonyMgr.getDeviceId();
+            }
         } catch (Exception e) {
             LogUtils.e(TAG, "getDeviceId异常");
         }
         return szImei;
+    }
+
+    public static String getWifi(Context context){
+        String mac="";
+        WifiManager wifi = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        WifiInfo info = wifi.getConnectionInfo();
+        String wifiMac = info.getMacAddress();
+        if(!StringUtils.isBlank(wifiMac)){
+            mac=wifiMac;
+            return mac;
+        }
+        LogUtils.e(TAG,"getDeviceId : "+mac);
+        return mac;
+    }
+
+    public  static String getAndroidId(Context context){
+        String m_szAndroidID = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
+        return m_szAndroidID;
     }
 
     /**
