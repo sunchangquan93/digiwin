@@ -1,6 +1,13 @@
 apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
 
+def releaseTime() {
+    return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
+}
+def name() {
+    return "智能物流"
+}
+
 android {
     compileSdkVersion 23
     buildToolsVersion '25.0.0'
@@ -21,6 +28,20 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    productFlavors{
+        dev{}
+    }
+    android.applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                //这里修改apk文件名
+             //   def fileName = "${variant.productFlavors[0].name}-${releaseTime() }"+"-v"+"${defaultConfig.versionName}.apk"
+                def fileName = "${name()}-${releaseTime() }"+"-v"+"${defaultConfig.versionName}.apk"
+                output.outputFile = new File(outputFile.parent, fileName)
+            }
         }
     }
 }
