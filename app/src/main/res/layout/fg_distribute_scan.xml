@@ -98,7 +98,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="@dimen/layout_70dp"
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
                             android:textColor="@color/back47"
@@ -116,7 +116,7 @@
                             android:textSize="@dimen/textSize_14sp"
                             />
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="@dimen/layout_70dp"
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
                             android:textColor="@color/back47"
@@ -134,25 +134,30 @@
                             android:textColor="@color/white"
                             android:textSize="@dimen/textSize_14sp"
                             />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:textColor="@color/back47"
-                            android:textSize="@dimen/textSize_14sp"
-                            android:layout_marginLeft="@dimen/layout_10dp"
-                            android:text="@string/scanned"
-                            />
-                        <TextView
-                            android:id="@+id/tv_scanned_num"
-                            android:layout_width="@dimen/layout_0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/layout_10dp"
-                            android:layout_weight="1"
-                            android:background="@null"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/textSize_14sp"
-                            />
+                    </LinearLayout>
+
+                    <View style="@style/act_line_style"></View>
+
+                    <LinearLayout
+                        style="@style/itemstyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="@dimen/layout_70dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/back47"
+                        android:textSize="@dimen/textSize_14sp"
+                        android:text="@string/scanned"
+                        />
+                    <TextView
+                        android:id="@+id/tv_scanned_num"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_10dp"
+                        android:background="@null"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/textSize_14sp"
+                        />
                     </LinearLayout>
                 </LinearLayout>
             <LinearLayout

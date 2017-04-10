@@ -87,18 +87,19 @@
                         android:layout_height="match_parent">
                         <TextView
                             android:id="@+id/tv_returned_material_department_string"
-                            android:layout_width="wrap_content"
+                            android:layout_width="@dimen/layout_70dp"
                             android:layout_height="wrap_content"
                             android:text="@string/returned_material_department"
                             android:paddingRight="@dimen/layout_5dp"
-                            android:textSize="@dimen/textSize_12sp" />
+                            android:textSize="@dimen/textSize_14sp" />
 
                         <TextView
                             android:id="@+id/tv_returned_material_department"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/textSize_12sp" />
+                            android:layout_marginLeft="@dimen/layout_10dp"
+                            android:textSize="@dimen/textSize_14sp" />
 
                     </LinearLayout>
 
@@ -109,18 +110,19 @@
                         android:layout_height="match_parent">
                         <TextView
                             android:id="@+id/tv_returned_person_string"
-                            android:layout_width="wrap_content"
+                            android:layout_width="@dimen/layout_70dp"
                             android:layout_height="wrap_content"
                             android:text="@string/returned_person"
                             android:paddingRight="@dimen/layout_5dp"
-                            android:textSize="@dimen/textSize_12sp" />
+                            android:textSize="@dimen/textSize_14sp" />
 
                         <TextView
                             android:id="@+id/tv_returned_person"
+                            android:layout_marginLeft="@dimen/layout_10dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/textSize_12sp" />
+                            android:textSize="@dimen/textSize_14sp" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>

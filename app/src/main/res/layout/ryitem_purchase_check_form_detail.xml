@@ -83,10 +83,10 @@
             <EditText
                 android:id="@+id/et_defect_num"
                 android:layout_width="@dimen/layout_0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center"
                 android:background="@null"
+                android:layout_marginLeft="@dimen/layout_10dp"
                 android:textCursorDrawable="@color/yellow_text"
                 android:textColor="@color/check_detail_form_text"
                 android:textSize="@dimen/textSize_14sp" />

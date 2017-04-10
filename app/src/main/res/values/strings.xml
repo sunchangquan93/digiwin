@@ -270,7 +270,7 @@
     <string name="the_workers_scan">请扫描报工人</string>
 
 
-    <string name="scan_sale">请先扫描出通单号</string>
+    <string name="scan_sale"> 扫描出通单号</string>
 
     <string name="barcode_sp">物料</string>
     <string name="custom">客户</string>
@@ -440,4 +440,53 @@
 
     <string name="match_so_big">匹配量不可大于入库量</string>
     <string name="ordersale">订单出货</string>
+
+    <string name="single_package_lager">单包数量不能超过总数量</string>
+
+    <string name="trace_product_quality">产品质量追溯</string>
+    <string name="trace_quality">质量追溯</string>
+    <string name="product_process">生产过程</string>
+    <string name="current_iventory">当前库存</string>
+    <string name="order_info">工单信息</string>
+    <string name="shipment_to">出货流向</string>
+    <string name="time">时间</string>
+    <string name="line">线别</string>
+    <string name="pallet">工序</string>
+    <string name="device">设备</string>
+    <string name="feeding">投料否</string>
+    <string name="employee_group">员工组</string>
+    <string name="check">检验否</string>
+    <string name="custom_order">客户订单号</string>
+    <string name="shipment_store">出货仓库</string>
+    <string name="shipment_num">出货数量</string>
+    <string name="make_department">制造部门</string>
+    <string name="version">版本</string>
+    <string name="product_draw_no">产品图号</string>
+    <string name="order_no">订单号</string>
+    <string name="production">生产量</string>
+    <string name="craft_route">工艺路线</string>
+    <string name="standard_dosage">标准用量</string>
+    <string name="reality_dosage">实际用量</string>
+    <string name="should_num">应发量</string>
+    <string name="reality_num">实发量</string>
+    <string name="device_unbind">设备解绑</string>
+    <string name="total">总数</string>
+    <string name="used">已使用</string>
+    <string name="chooseunbind">请选择解绑方式</string>
+    <string name="chooseunbind_use">按用户解绑</string>
+    <string name="chooseunbind_device">按设备解绑</string>
+    <string name="scan_finished_barcode">请扫描成品条码</string>
+    <string name="feeding_batche">投料批次</string>
+    <string name="work_group">工作组</string>
+    <string name="check_detail">检验状况</string>
+    <string name="please_select_data">请选择一笔数据</string>
+    <string name="employee_no">员工编号</string>
+    <string name="employee_name">员工姓名</string>
+    <string name="blone_department">所属部门</string>
+    <string name="bad_no">不良原因代码</string>
+    <string name="bad_string">不良原因说明</string>
+    <string name="bad_qty">不良原因数量</string>
+    <string name="check_employee">检验员</string>
+    <string name="print_psw">请输入登入密码</string>
+    <string name="psw_error">密码错误</string>
 </resources>

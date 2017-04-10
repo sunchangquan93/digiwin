@@ -2,6 +2,7 @@ package digiwin.smartdepot.module.logic.common;
 
 import android.content.Context;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -62,7 +63,6 @@ public class CommonLogic {
         mModule = module;
 
     }
-
 
     public static CommonLogic getInstance(Context context, String module, String timestamp) {
 
@@ -552,12 +552,17 @@ public class CommonLogic {
                         if (null != xmlResp) {
                             if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
                                 List<FiFoBean> fiFoBeanList = xmlResp.getMasterDatas(FiFoBean.class);
-                                for (int i = 0; i < fiFoBeanList.size(); i++) {
-                                    FiFoBean fifoBean = fiFoBeanList.get(i);
-                                    fifoBean.setRecommended_qty(StringUtils.deleteZero(fifoBean.getRecommended_qty()));
-                                    fifoBean.setScan_sumqty(StringUtils.deleteZero(fifoBean.getScan_sumqty()));
+                                if(null != fiFoBeanList && fiFoBeanList.size() > 0){
+                                    for (int i = 0; i < fiFoBeanList.size(); i++) {
+                                        FiFoBean fifoBean = fiFoBeanList.get(i);
+                                        fifoBean.setRecommended_qty(StringUtils.deleteZero(fifoBean.getRecommended_qty()));
+                                        fifoBean.setScan_sumqty(StringUtils.deleteZero(fifoBean.getScan_sumqty()));
+                                    }
+                                    listener.onSuccess(fiFoBeanList);
+                                }else{
+                                    List<FiFoBean> list = new ArrayList<FiFoBean>();
+                                    listener.onSuccess(list);
                                 }
-                                listener.onSuccess(fiFoBeanList);
                                 return;
                             } else {
                                 error = xmlResp.getDescription();
@@ -760,12 +765,18 @@ public class CommonLogic {
                         if (null != xmlResp) {
                             if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
                                 List<PostMaterialFIFOBean> fiFoBeanList = xmlResp.getMasterDatas(PostMaterialFIFOBean.class);
-                                for (int i = 0; i < fiFoBeanList.size(); i++) {
-                                    PostMaterialFIFOBean fifoBean = fiFoBeanList.get(i);
-                                    fifoBean.setRecommended_qty(StringUtils.deleteZero(fifoBean.getRecommended_qty()));
-                                    fifoBean.setScan_sumqty(StringUtils.deleteZero(fifoBean.getScan_sumqty()));
+                                if(null != fiFoBeanList && fiFoBeanList.size() > 0){
+                                    for (int i = 0; i < fiFoBeanList.size(); i++) {
+                                        PostMaterialFIFOBean fifoBean = fiFoBeanList.get(i);
+                                        fifoBean.setRecommended_qty(StringUtils.deleteZero(fifoBean.getRecommended_qty()));
+                                        fifoBean.setScan_sumqty(StringUtils.deleteZero(fifoBean.getScan_sumqty()));
+                                    }
+                                    listener.onSuccess(fiFoBeanList);
+                                }else{
+                                    List<PostMaterialFIFOBean> list = new ArrayList<PostMaterialFIFOBean>();
+                                    listener.onSuccess(list);
                                 }
-                                listener.onSuccess(fiFoBeanList);
+
                                 return;
                             } else {
                                 error = xmlResp.getDescription();
@@ -803,12 +814,17 @@ public class CommonLogic {
                         if (null != xmlResp) {
                             if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
                                 List<FifoAccordingBean> fiFoBeanList = xmlResp.getMasterDatas(FifoAccordingBean.class);
-                                for (int i = 0; i < fiFoBeanList.size(); i++) {
-                                    FifoAccordingBean fifoBean = fiFoBeanList.get(i);
-                                    fifoBean.setRecommended_qty(StringUtils.deleteZero(fifoBean.getRecommended_qty()));
-                                    fifoBean.setScan_sumqty(StringUtils.deleteZero(fifoBean.getScan_sumqty()));
+                                if(null != fiFoBeanList && fiFoBeanList.size() >0){
+                                    for (int i = 0; i < fiFoBeanList.size(); i++) {
+                                        FifoAccordingBean fifoBean = fiFoBeanList.get(i);
+                                        fifoBean.setRecommended_qty(StringUtils.deleteZero(fifoBean.getRecommended_qty()));
+                                        fifoBean.setScan_sumqty(StringUtils.deleteZero(fifoBean.getScan_sumqty()));
+                                    }
+                                    listener.onSuccess(fiFoBeanList);
+                                }else {
+                                    List<FifoAccordingBean> list = new ArrayList<FifoAccordingBean>();
+                                    listener.onSuccess(fiFoBeanList);
                                 }
-                                listener.onSuccess(fiFoBeanList);
                                 return;
                             } else {
                                 error = xmlResp.getDescription();

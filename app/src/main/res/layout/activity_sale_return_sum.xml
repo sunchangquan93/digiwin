@@ -55,6 +55,7 @@ tools:context="digiwin.smartdepot.module.activity.produce.distribute.DistributeA
                     android:textSize="@dimen/textSize_14sp"
                     />
             </LinearLayout>
+            <View style="@style/act_line_style"></View>
 
             <LinearLayout
                 style="@style/itemstyle"
@@ -80,6 +81,7 @@ tools:context="digiwin.smartdepot.module.activity.produce.distribute.DistributeA
                     android:textSize="@dimen/textSize_14sp" />
 
             </LinearLayout>
+            <View style="@style/act_line_style"></View>
             <LinearLayout
                 style="@style/itemstyle"
                 android:layout_width="match_parent"

@@ -25,7 +25,7 @@ import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.base.BaseFragment;
 import digiwin.smartdepot.core.modulecommon.ModuleUtils;
-import digiwin.smartdepot.module.activity.stock.store.ReturnMaterialActivity;
+import digiwin.smartdepot.module.activity.stock.store.StoreReturnMaterialActivity;
 import digiwin.smartdepot.module.bean.common.SaveBackBean;
 import digiwin.smartdepot.module.bean.common.SaveBean;
 import digiwin.smartdepot.module.bean.common.ScanBarcodeBackBean;
@@ -65,7 +65,7 @@ public class ReturnMaterialScanFg extends BaseFragment {
 
     SaveBean saveBean;
 
-    private ReturnMaterialActivity rmActivity;
+    private StoreReturnMaterialActivity rmActivity;
 
     private CommonLogic commonLogic;
 
@@ -287,7 +287,7 @@ public class ReturnMaterialScanFg extends BaseFragment {
 
     @Override
     protected void doBusiness() {
-        rmActivity = (ReturnMaterialActivity) activity;
+        rmActivity = (StoreReturnMaterialActivity) activity;
         initData();
     }
     /**

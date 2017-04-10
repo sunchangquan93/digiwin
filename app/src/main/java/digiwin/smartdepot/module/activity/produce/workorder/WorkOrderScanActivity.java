@@ -71,6 +71,10 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
      * 库位
      */
     final int LOCATORWHAT = 1002;
+    /**
+     * 工单单号
+     */
+    final int FIFOWHAT = 1003;
 
     /**
      * 标题
@@ -122,7 +126,7 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
      */
     @BindView(R.id.tv_barcode)
     TextView tvBarcode;
-    @BindView(et_scan_barocde)
+    @BindView(R.id.et_scan_barocde)
     EditText etScanBarocde;
     @BindView(R.id.ll_scan_barcode)
     LinearLayout llScanBarcode;
@@ -147,7 +151,7 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
     @BindView(R.id.ll_input_num)
     LinearLayout llInputNum;
 
-    @BindViews({et_scan_barocde, R.id.et_scan_locator, et_input_num})
+    @BindViews({R.id.et_scan_barocde, R.id.et_scan_locator, R.id.et_input_num})
     List<EditText> editTexts;
     @BindViews({R.id.ll_scan_barcode, R.id.ll_scan_locator, R.id.ll_input_num})
     List<View> views;
@@ -175,6 +179,8 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
     List<FiFoBean> localFifoList;
 
     boolean fifo_check = false;
+
+    ListSumBean localData;
 
     /**
      * 提交按钮
@@ -208,7 +214,6 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
             return;
         }
 
-        showLoadingDialog();
 //        barcode_no           string              物料条码
 //        item_no              string              物料代码
 //        warehouse_out_no     string              出仓库代码
@@ -231,24 +236,10 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
             @Override
             public void onSuccess(SaveBackBean saveBackBean) {
                 dismissLoadingDialog();
-                showToast(getResources().getString(R.string.save_success));
-              /*  float scan_sum = sum(etInputNum.getText().toString(),tv_actual_yield.getText().toString());
-                tv_actual_yield.setText(StringUtils.deleteZero(String.valueOf(scan_sum)));*/
-                if(localFifoList.size() > 0){
-                    for (int i = 0; i < localFifoList.size(); i++) {
-                        FiFoBean fifoBean = localFifoList.get(i);
-                        if(fifoBean.getBarcode_no().equals(saveBean.getBarcode_no()) &&
-                                fifoBean.getStorage_spaces_no().equals(saveBean.getStorage_spaces_out_no())){
-                            Float sum = StringUtils.sum(fifoBean.getScan_sumqty(),etInputNum.getText().toString().trim());
-                            Log.d("sum====:",sum+"");
-                            fifoBean.setScan_sumqty(StringUtils.deleteZero(String.valueOf(sum)));
-                            break;
-                        }
+                if(null != localFifoList){
+                    if(localFifoList.size() > 0 && fifo_check == true){
+                        getFifo();
                     }
-
-                    adapter = new AccordingMaterialFiFoAdapter(activity,localFifoList);
-                    mRc_list.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();
                 }
                 clearData(type);
             }
@@ -321,58 +312,6 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
     @Override
     public boolean handleMessage(Message msg) {
         switch (msg.what) {
-            case BARCODEWHAT:
-                HashMap<String, String> barcodeMap = new HashMap<>();
-                barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
-                barcodeMap.put(AddressContants.DOC_NO, tv_gongDan_no.getText().toString().trim());
-                barcodeMap.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
-                commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
-                    @Override
-                    public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
-                        dismissLoadingDialog();
-                        if(fifo_check == true){
-                            if(localFifoList.size() > 0){
-                                for(int i = 0;i < localFifoList.size();i++){
-                                    FiFoBean fifodata = localFifoList.get(i);
-                                    Log.d(TAG,barcodeBackBean.getBarcode_no());
-                                    Log.d(TAG,fifodata.getBarcode_no());
-                                    if(barcodeBackBean.getBarcode_no().equals(fifodata.getBarcode_no())){
-                                        showBarcode(barcodeBackBean);
-                                        break;
-                                    }else if(i == localFifoList.size() - 1 && !barcodeBackBean.getBarcode_no().equals(fifodata.getBarcode_no())){
-                                        showFailedDialog(getResources().getString(R.string.fifo_scan_error), new OnDialogClickListener() {
-                                            @Override
-                                            public void onCallback() {
-                                                etScanBarocde.setText("");
-                                            }
-                                        });
-                                    }
-                                }
-                            }else{
-                                showFailedDialog(getResources().getString(R.string.fifo_scan_error), new OnDialogClickListener() {
-                                    @Override
-                                    public void onCallback() {
-                                        etScanBarocde.setText("");
-                                    }
-                                });
-                            }
-                        }else{
-                            showBarcode(barcodeBackBean);
-                        }
-                    }
-
-                    @Override
-                    public void onFailed(String error) {
-                        barcodeFlag = false;
-                        showFailedDialog(error, new OnDialogClickListener() {
-                            @Override
-                            public void onCallback() {
-                                etScanBarocde.setText("");
-                            }
-                        });
-                    }
-                });
-                break;
             case LOCATORWHAT:
                 HashMap<String, String> locatorMap = new HashMap<>();
                 locatorMap.put(AddressContants.STORAGE_SPACES_BARCODE, String.valueOf(msg.obj));
@@ -405,23 +344,100 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
                     }
                 });
                 break;
+
+            case BARCODEWHAT:
+                HashMap<String, String> barcodeMap = new HashMap<>();
+                barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
+                barcodeMap.put(AddressContants.DOC_NO, tv_gongDan_no.getText().toString().trim());
+                barcodeMap.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
+                commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
+                    @Override
+                    public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
+                        dismissLoadingDialog();
+                        if(fifo_check == true) {
+                            if (null != localFifoList) {
+                                if (localFifoList.size() > 0) {
+                                    for (int i = 0; i < localFifoList.size(); i++) {
+                                        FiFoBean fifodata = localFifoList.get(i);
+                                        Log.d(TAG, barcodeBackBean.getBarcode_no());
+                                        Log.d(TAG, fifodata.getBarcode_no());
+                                        if (barcodeBackBean.getBarcode_no().equals(fifodata.getBarcode_no()) && fifodata.getStorage_spaces_no().
+                                                equals(etScanLocator.getText().toString().split("%")[1])) {
+                                            showBarcode(barcodeBackBean);
+                                            break;
+                                        } else if (i == localFifoList.size() - 1 && !barcodeBackBean.getBarcode_no().equals(fifodata.getBarcode_no())) {
+                                            showFailedDialog(getResources().getString(R.string.fifo_scan_error), new OnDialogClickListener() {
+                                                @Override
+                                                public void onCallback() {
+                                                    etScanBarocde.setText("");
+                                                }
+                                            });
+                                        }
+                                    }
+                                } else {
+                                    showFailedDialog(getResources().getString(R.string.fifo_scan_error), new OnDialogClickListener() {
+                                        @Override
+                                        public void onCallback() {
+                                            etScanBarocde.setText("");
+                                        }
+                                    });
+                                }
+                            }
+                        }else{
+                            showBarcode(barcodeBackBean);
+                        }
+                    }
+
+                    @Override
+                    public void onFailed(String error) {
+                        barcodeFlag = false;
+                        showFailedDialog(error, new OnDialogClickListener() {
+                            @Override
+                            public void onCallback() {
+                                etScanBarocde.setText("");
+                            }
+                        });
+                    }
+                });
+                break;
+
+            case FIFOWHAT:
+                showLoadingDialog();
+                HashMap<String,String> map = (HashMap<String, String>) msg.obj;
+                commonLogic.getFifo(map, new CommonLogic.FIFOGETListener() {
+                    @Override
+                    public void onSuccess(List<FiFoBean> fiFoBeanList) {
+                        dismissLoadingDialog();
+                        if(null != fiFoBeanList && fiFoBeanList.size() > 0){
+                            localFifoList = new ArrayList<FiFoBean>();
+                            localFifoList = fiFoBeanList;
+                            adapter = new AccordingMaterialFiFoAdapter(activity,fiFoBeanList);
+                            mRc_list.setAdapter(adapter);
+                        }else{
+                            localFifoList = new ArrayList<FiFoBean>();
+                            adapter = new AccordingMaterialFiFoAdapter(activity,localFifoList);
+                            mRc_list.setAdapter(adapter);
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailed(String error) {
+                        dismissLoadingDialog();
+                        showFailedDialog(error, new OnDialogClickListener() {
+                            @Override
+                            public void onCallback() {
+                                activity.finish();
+                            }
+                        });
+                    }
+                });
+
+                break;
         }
         return false;
     }
 });
-
-    @Override
-    protected void initNavigationTitle() {
-        super.initNavigationTitle();
-        activity = this;
-        mName.setText(getResources().getString(R.string.work_order_scan));
-    }
-
-    @Override
-    public String moduleCode() {
-        module = ModuleCode.WORKORDERCODE;
-        return module;
-    }
 
     @Override
     protected int bindLayoutId() {
@@ -430,14 +446,16 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
 
     @Override
     protected void doBusiness() {
-
+        initData();
+        localData = new ListSumBean();
         ListSumBean data = (ListSumBean) getIntent().getSerializableExtra("sumdata");
-        tv_gongDan_no.setText(getIntent().getExtras().getString("work_no"));
+        localData = data;
 
+        tv_gongDan_no.setText(getIntent().getExtras().getString("work_no"));
         mTv_item_name.setText(data.getItem_name());
         et_format.setText(data.getLow_order_item_spec());
-        tv_under_feed.setText(data.getShortage_qty());
-        tv_stock_balance.setText(data.getStock_qty());
+        tv_under_feed.setText(StringUtils.deleteZero(data.getShortage_qty()));
+        tv_stock_balance.setText(StringUtils.deleteZero(data.getStock_qty()));
 
         String code = getIntent().getExtras().getString("modilecode");
         type = data.getItem_barcode_type();
@@ -457,75 +475,65 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
         commonLogic = CommonLogic.getInstance(context,module, code);
         FullyLinearLayoutManager fullyLinearLayoutManager = new FullyLinearLayoutManager(activity);
         mRc_list.setLayoutManager(fullyLinearLayoutManager);
+        getFifo();
+    }
+
+    public void getFifo(){
         HashMap<String,String> map = new HashMap<String,String>();
         //判断库存 欠料数量  哪个小取哪一个 然后减去实发量
         if(Float.valueOf(tv_under_feed.getText().toString()) > Float.valueOf(tv_stock_balance.getText().toString())){
-            float num = StringUtils.sub(tv_stock_balance.getText().toString(),data.getScan_sumqty());
+            float num = StringUtils.sub(tv_stock_balance.getText().toString(),localData.getScan_sumqty());
             map.put("qty",String.valueOf(num));
 
         }else if(Float.valueOf(tv_under_feed.getText().toString()) < Float.valueOf(tv_stock_balance.getText().toString())){
-            float num = StringUtils.sub(tv_under_feed.getText().toString(),data.getScan_sumqty());
+            float num = StringUtils.sub(tv_under_feed.getText().toString(),localData.getScan_sumqty());
             map.put("qty",String.valueOf(num));
 
         }else{
-            float num = StringUtils.sub(tv_stock_balance.getText().toString(),data.getScan_sumqty());
+            float num = StringUtils.sub(tv_stock_balance.getText().toString(),localData.getScan_sumqty());
             map.put("qty",String.valueOf(num));
         }
-        map.put("item_no",data.getLow_order_item_no());
+        map.put("item_no",localData.getLow_order_item_no());
         map.put("lot_no","");
         map.put("warehouse_no", LoginLogic.getUserInfo().getWare());
 
-        commonLogic.getFifo(map, new CommonLogic.FIFOGETListener() {
-            @Override
-            public void onSuccess(List<FiFoBean> fiFoBeanList) {
-                dismissLoadingDialog();
-                localFifoList = new ArrayList<FiFoBean>();
-                localFifoList = fiFoBeanList;
-                adapter = new AccordingMaterialFiFoAdapter(activity,fiFoBeanList);
-                mRc_list.setAdapter(adapter);
-            }
-
-            @Override
-            public void onFailed(String error) {
-                dismissLoadingDialog();
-                showFailedDialog(error, new OnDialogClickListener() {
-                    @Override
-                    public void onCallback() {
-                        activity.finish();
-                    }
-                });
-            }
-        });
+        mHandler.sendMessageDelayed(mHandler.obtainMessage(FIFOWHAT, map), AddressContants.DELAYTIME);
     }
 
     public void clearData(String type){
-        if(type.equals(codetype)){
-            etScanLocator.setText("");
-            etInputNum.setText("");
-            etScanLocator.requestFocus();
-        }else{
-            etScanBarocde.setText("");
-            etScanLocator.setText("");
-            etInputNum.setText("");
-            etScanLocator.requestFocus();
-        }
-    }
-
-    /**
-     * 初始化一些变量
-     */
-    private void initData() {
-        etScanBarocde.setText("");
-        etScanBarocde.requestFocus();
-        etScanLocator.setText("");
-        barcodeFlag = false;
-        locatorFlag = false;
         saveBean = new SaveBean();
-    }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
+        if(cbLocatorlock.isChecked()){
+            if(StringUtils.isBlank(etScanLocator.getText().toString().trim())){
+                locatorFlag = false;
+            }else {
+                saveBean.setStorage_spaces_out_no(etScanLocator.getText().toString().split("%")[1]);
+                saveBean.setWarehouse_out_no(etScanLocator.getText().toString().split("%")[0]);
+            }
+        }
+
+        if(type.equals(codetype)){
+            barcodeFlag = true;
+            etInputNum.setText("");
+            if(!cbLocatorlock.isChecked()){
+                locatorFlag = false;
+                etScanLocator.setText("");
+                etScanLocator.requestFocus();
+            }else{
+                etInputNum.requestFocus();
+            }
+        }else{
+            barcodeFlag = false;
+            etInputNum.setText("");
+            etScanBarocde.setText("");
+            if(!cbLocatorlock.isChecked()){
+                locatorFlag = false;
+                etScanLocator.setText("");
+                etScanLocator.requestFocus();
+            }else{
+                etScanBarocde.requestFocus();
+            }
+        }
     }
 
     /**
@@ -541,16 +549,36 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
         saveBean.setItem_no(barcodeBackBean.getItem_no());
         saveBean.setUnit_no(barcodeBackBean.getUnit_no());
         saveBean.setLot_no(barcodeBackBean.getLot_no());
+        etInputNum.requestFocus();
+    }
 
-        if(codetype.equals(type) && StringUtils.isBlank(etScanLocator.getText().toString().trim())){
-            etScanLocator.requestFocus();
-            return;
-        }
+    /**
+     * 初始化一些变量
+     */
+    private void initData() {
+        etScanBarocde.setText("");
+        etScanLocator.setText("");
+        barcodeFlag = false;
+        locatorFlag = false;
+        saveBean = new SaveBean();
+        etScanLocator.requestFocus();
+    }
 
-        if (cbLocatorlock.isChecked()){
-            etScanLocator.requestFocus();
-        }else {
-            etInputNum.requestFocus();
-        }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    protected void initNavigationTitle() {
+        super.initNavigationTitle();
+        activity = this;
+        mName.setText(getResources().getString(R.string.work_order_scan));
+    }
+
+    @Override
+    public String moduleCode() {
+        module = ModuleCode.WORKORDERCODE;
+        return module;
     }
 }

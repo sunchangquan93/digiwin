@@ -1,4 +1,4 @@
-package digiwin.smartdepot.main.activity.storagesetting;
+package digiwin.smartdepot.main.activity.settingdialog;
 
 import android.app.Activity;
 import android.support.v7.widget.LinearLayoutManager;

@@ -45,7 +45,7 @@
 
             </LinearLayout>
 
-            <View style="@style/fg_line_style" />
+            <View style="@style/act_line_style"></View>
 
             <LinearLayout
                 style="@style/itemstyle"
@@ -87,7 +87,7 @@
                     android:textSize="@dimen/textSize_14sp" />
             </LinearLayout>
 
-            <View style="@style/fg_line_style" />
+            <View style="@style/act_line_style"></View>
 
             <LinearLayout
                 style="@style/itemstyle"

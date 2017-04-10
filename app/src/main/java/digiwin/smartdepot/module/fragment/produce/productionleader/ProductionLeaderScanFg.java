@@ -35,7 +35,6 @@ import digiwin.smartdepot.module.bean.common.ScanLocatorBackBean;
 import digiwin.smartdepot.module.logic.common.CommonLogic;
 
 
-
 /**
  * @author 赵浩然
  * @des 生产超领 扫描页
@@ -173,13 +172,13 @@ public class ProductionLeaderScanFg extends BaseFragment {
 
     @OnClick(R.id.save)
     void save() {
-        if (!barcodeFlag) {
-            showFailedDialog(R.string.scan_barcode);
+        if (!locatorFlag) {
+            showFailedDialog(R.string.scan_locator);
             return;
         }
 
-        if (!locatorFlag) {
-            showFailedDialog(R.string.scan_locator);
+        if (!barcodeFlag) {
+            showFailedDialog(R.string.scan_barcode);
             return;
         }
 
@@ -210,21 +209,33 @@ public class ProductionLeaderScanFg extends BaseFragment {
     /**
      * 条码展示
      */
-    String barcodeShow;
+    String barcodeShow = "";
     /**
      * 库位展示
      */
-    String locatorShow;
+    String locatorShow = "";
 
 
     public void clear(){
+        saveBean = new SaveBean();
+        includeDetail.setVisibility(View.GONE);
+        barcodeShow = "";
+        locatorShow = "";
         etInputNum.setText("");
         et_barcode_no.setText("");
-        barcodeFlag=false;
-        barcodeShow="";
-        if (!cbLocatorlock.isChecked()) {
-            locatorShow="";
-            locatorFlag=false;
+
+        if(cbLocatorlock.isChecked()){
+            if(StringUtils.isBlank(etScanLocator.getText().toString().trim())){
+                locatorFlag = false;
+            }else {
+                saveBean.setStorage_spaces_out_no(etScanLocator.getText().toString().split("%")[1]);
+                saveBean.setWarehouse_out_no(etScanLocator.getText().toString().split("%")[0]);
+            }
+            barcodeFlag = false;
+            et_barcode_no.requestFocus();
+        }else if(!cbLocatorlock.isChecked()){
+            locatorFlag = false;
+            barcodeFlag = false;
             etScanLocator.setText("");
             etScanLocator.requestFocus();
         }
@@ -235,6 +246,37 @@ public class ProductionLeaderScanFg extends BaseFragment {
         @Override
         public boolean handleMessage(Message msg) {
         switch (msg.what){
+
+            case LOCATORWHAT:
+                HashMap<String, String> locatorMap = new HashMap<>();
+                locatorMap.put(AddressContants.STORAGE_SPACES_BARCODE, String.valueOf(msg.obj));
+                commonLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
+                    @Override
+                    public void onSuccess(ScanLocatorBackBean locatorBackBean) {
+                        dismissLoadingDialog();
+                        locatorFlag = true;
+                        saveBean.setStorage_spaces_out_no(locatorBackBean.getStorage_spaces_no());
+                        saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
+                        et_barcode_no.requestFocus();
+                        locatorShow = locatorBackBean.getShow();
+                        show();
+                    }
+
+                    @Override
+                    public void onFailed(String error) {
+                        dismissLoadingDialog();
+                        showFailedDialog(error, new OnDialogClickListener() {
+                            @Override
+                            public void onCallback() {
+                                etScanLocator.setText("");
+                                etScanLocator.requestFocus();
+                            }
+                        });
+                        locatorFlag = false;
+                    }
+                });
+                break;
+
             case BARCODEWHAT:
                 HashMap<String, String> barcodeMap = new HashMap<>();
                 barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
@@ -244,18 +286,7 @@ public class ProductionLeaderScanFg extends BaseFragment {
                     @Override
                     public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
                         dismissLoadingDialog();
-                        tv_swept_volume.setText(StringUtils.deleteZero(barcodeBackBean.getScan_sumqty()));
-                        etInputNum.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
-                        barcodeFlag = true;
-                        saveBean.setAvailable_in_qty(barcodeBackBean.getAvailable_in_qty());
-                        saveBean.setBarcode_no(barcodeBackBean.getBarcode_no());
-                        saveBean.setItem_no(barcodeBackBean.getItem_no());
-                        saveBean.setUnit_no(barcodeBackBean.getUnit_no());
-                        saveBean.setLot_no(barcodeBackBean.getLot_no());
-                        saveBean.setDoc_no(localData.getDoc_no());
-                        saveBean.setFifo_check(barcodeBackBean.getFifo_check());
-                        show();
-                        etInputNum.requestFocus();
+                        showBarcode(barcodeBackBean);
                     }
 
                     @Override
@@ -271,38 +302,31 @@ public class ProductionLeaderScanFg extends BaseFragment {
                     }
                 });
                 break;
-
-            case LOCATORWHAT:
-                HashMap<String, String> locatorMap = new HashMap<>();
-                locatorMap.put(AddressContants.STORAGE_SPACES_BARCODE, String.valueOf(msg.obj));
-                commonLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
-                    @Override
-                    public void onSuccess(ScanLocatorBackBean locatorBackBean) {
-                        dismissLoadingDialog();
-                        locatorFlag = true;
-                        saveBean.setStorage_spaces_out_no(locatorBackBean.getStorage_spaces_no());
-                        saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
-                        et_barcode_no.requestFocus();
-                        show();
-                    }
-
-                    @Override
-                    public void onFailed(String error) {
-                        dismissLoadingDialog();
-                        showFailedDialog(error, new OnDialogClickListener() {
-                            @Override
-                            public void onCallback() {
-                                etScanLocator.setText("");
-                            }
-                        });
-                        locatorFlag = false;
-                    }
-                });
-                break;
         }
         return false;
         }
     });
+
+    /**
+     * 对比物料条码
+     * @param barcodeBackBean
+     */
+    public void showBarcode(ScanBarcodeBackBean barcodeBackBean){
+        locatorShow = barcodeBackBean.getShow();
+
+        tv_swept_volume.setText(StringUtils.deleteZero(barcodeBackBean.getScan_sumqty()));
+        etInputNum.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
+        barcodeFlag = true;
+        saveBean.setAvailable_in_qty(barcodeBackBean.getAvailable_in_qty());
+        saveBean.setBarcode_no(barcodeBackBean.getBarcode_no());
+        saveBean.setItem_no(barcodeBackBean.getItem_no());
+        saveBean.setUnit_no(barcodeBackBean.getUnit_no());
+        saveBean.setLot_no(barcodeBackBean.getLot_no());
+        saveBean.setDoc_no(localData.getDoc_no());
+        saveBean.setFifo_check(barcodeBackBean.getFifo_check());
+        show();
+        etInputNum.requestFocus();
+    }
 
     @Override
     protected int bindLayoutId() {
@@ -314,6 +338,19 @@ public class ProductionLeaderScanFg extends BaseFragment {
         pactivity = (ProductionLeaderActivity) activity;
         commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
         initData();
+    }
+
+    public void upDateList() {
+        if(cbLocatorlock.isChecked()){
+            et_barcode_no.requestFocus();
+        }
+        if(!cbLocatorlock.isChecked() && StringUtils.isBlank(etScanLocator.getText().toString())){
+            etScanLocator.requestFocus();
+        }else if(StringUtils.isBlank(et_barcode_no.getText().toString().trim())){
+            et_barcode_no.requestFocus();
+        }else if(StringUtils.isBlank(etInputNum.getText().toString().trim())){
+            etInputNum.requestFocus();
+        }
     }
 
     /**
@@ -328,7 +365,7 @@ public class ProductionLeaderScanFg extends BaseFragment {
         barcodeFlag = false;
         locatorFlag = false;
         saveBean = new SaveBean();
-        et_barcode_no.requestFocus();
+        etScanLocator.requestFocus();
 
         FilterResultOrderBean data = (FilterResultOrderBean) getActivity().getIntent().getSerializableExtra("data");
         localData = new FilterResultOrderBean();

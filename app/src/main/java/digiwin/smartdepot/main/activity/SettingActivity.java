@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import org.litepal.crud.DataSupport;
 import org.litepal.tablemanager.Connector;
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ import butterknife.OnClick;
 import digiwin.library.constant.SharePreKey;
 import digiwin.library.dialog.CustomDialog;
 import digiwin.library.dialog.OnDialogClickgetTextListener;
+import digiwin.library.dialog.OnDialogTwoListener;
 import digiwin.library.utils.ActivityManagerUtils;
 import digiwin.library.utils.AlertDialogUtils;
 import digiwin.library.utils.LogUtils;
@@ -42,21 +44,24 @@ import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseApplication;
 import digiwin.smartdepot.core.base.BaseTitleActivity;
 import digiwin.smartdepot.core.printer.BlueToothManager;
+import digiwin.smartdepot.login.activity.LoginActivity;
 import digiwin.smartdepot.login.activity.operating_center_pw.OperatingCenterDialog;
 import digiwin.smartdepot.login.bean.AccoutBean;
 import digiwin.smartdepot.login.bean.AppVersionBean;
 import digiwin.smartdepot.login.loginlogic.AppVersionLogic;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
-import digiwin.smartdepot.main.activity.storagesetting.StorageDialog;
+import digiwin.smartdepot.main.activity.settingdialog.DeviceDialog;
+import digiwin.smartdepot.main.activity.settingdialog.StorageDialog;
 import digiwin.smartdepot.main.activity.versions.VersionsSettingDialog;
+import digiwin.smartdepot.main.bean.DeviceInfoBean;
 import digiwin.smartdepot.main.bluetooth.BlueToothDialog;
+import digiwin.smartdepot.main.logic.DeviceLogic;
 import digiwin.smartdepot.main.logic.GetStorageLogic;
 import digiwin.smartdepot.main.voicer.VoicerChooseDialog;
 
 import static digiwin.library.constant.SharePreKey.VOICER_SELECTED;
 import static digiwin.library.constant.SystemConstant.VIBRATEMETION;
 import static digiwin.library.constant.SystemConstant.VIBRATEMETIONNOT;
-import static digiwin.smartdepot.R.id.rl_versionsSetting;
 import static digiwin.smartdepot.main.bluetooth.BlueToothDialog.REQUEST_ENABLE_BT;
 
 
@@ -78,11 +83,10 @@ public class SettingActivity extends BaseTitleActivity {
     LinearLayout llVoicerSetting;
     @BindView(R.id.ll_vibrateSetting)
     LinearLayout llVibrateSetting;
-    @BindView(R.id.ll_manuscriptSetting)
-    LinearLayout llManuscriptSetting;
+
     @BindView(R.id.ll_blueToothSetting)
     LinearLayout llBlueToothSetting;
-    @BindView(rl_versionsSetting)
+    @BindView(R.id.rl_versionsSetting)
     RelativeLayout rlVersionsSetting;
     @BindView(R.id.activity_setting)
     LinearLayout activitySetting;
@@ -127,13 +131,6 @@ public class SettingActivity extends BaseTitleActivity {
     @BindView(R.id.tb_vibrateSetting)
     ToggleButton tb_vibrateSetting;
 
-    /**
-     * 手写设置
-     */
-    @BindView(R.id.tv_manuscriptSetting)
-    TextView tv_manuscriptSetting;
-    @BindView(R.id.tb_manuscriptSetting)
-    ToggleButton tb_manuscriptSetting;
 
     /**
      * 蓝牙
@@ -158,6 +155,11 @@ public class SettingActivity extends BaseTitleActivity {
      */
     @BindView(R.id.tv_repeat_time)
     TextView tvRepeaTime;
+    /**
+     * 设备解绑
+     */
+    @BindView(R.id.tv_deviceinfo)
+    TextView tvDeviceinfo;
 
     private LoginLogic loginlogic;
     /**
@@ -254,7 +256,7 @@ public class SettingActivity extends BaseTitleActivity {
     /**
      * 点击展示版本信息
      */
-    @OnClick(rl_versionsSetting)
+    @OnClick(R.id.rl_versionsSetting)
     public void versionsSetting() {
         VersionsSettingDialog dialog = new VersionsSettingDialog();
         dialog.showVersionDialog(activity, versionBean);
@@ -271,6 +273,32 @@ public class SettingActivity extends BaseTitleActivity {
             }
         });
     }
+    @OnClick(R.id.ll_device_unbind)
+    void unBindDialog(){
+        DeviceDialog.showUnBindStatuDailog(this, new DeviceDialog.DeviceInfoListener() {
+            @Override
+            public void unBindByDevice(String psw) {
+                AccoutBean info = LoginLogic.getUserInfo();
+                if (null!=info&&psw.equals(info.getPassword())){
+                    getDeviceInfo("1");
+                }else {
+                    showFailedDialog(getString(R.string.psw_error));
+                }
+            }
+
+            @Override
+            public void unBindByUse(String psw) {
+                AccoutBean info = LoginLogic.getUserInfo();
+                if (null!=info&&psw.equals(info.getPassword())){
+                    getDeviceInfo("1");
+                }else {
+                    showFailedDialog(getString(R.string.psw_error));
+                }
+            }
+        });
+    }
+
+
 
     @Override
     protected int bindLayoutId() {
@@ -319,6 +347,7 @@ public class SettingActivity extends BaseTitleActivity {
         setBlueToothUI(open);
         changeTooth();
         updatePlantStorage();
+        getDeviceInfo("0");
         UpdateVer();
     }
 
@@ -509,6 +538,38 @@ public class SettingActivity extends BaseTitleActivity {
     }
 
     /**
+     * 获取设备信息
+     */
+    private void getDeviceInfo(final String statu){
+        Map<String, String> hashMap = new HashMap<>();
+        hashMap.put("statu",statu);
+        DeviceLogic.getInstance(context,module,mTimestamp.toString()).getDevice(hashMap, new DeviceLogic.DeviceListener() {
+            @Override
+            public void onSuccess(List<DeviceInfoBean> deviceInfoBeen) {
+                if ("0".equals(statu)){
+                    if (deviceInfoBeen.size()>0)
+                    tvDeviceinfo.setText(activity.getString(R.string.total)+deviceInfoBeen.get(0).getTotal()
+                    +activity.getString(R.string.used)+deviceInfoBeen.get(0).getUse());
+                }else {
+                    DataSupport.deleteAll(AccoutBean.class);
+                    ActivityManagerUtils.startActivity(activity, LoginActivity.class);
+                    List<Activity> activityLists = ActivityManagerUtils.getActivityLists();
+                    for (Activity mActivity:activityLists){
+                        if(!mActivity.getClass().getSimpleName().equals("LoginActivity")){
+                            if(mActivity!=null &&!mActivity.isFinishing()){
+                                mActivity.finish();
+                            }
+                        }
+                    }
+                }
+            }
+            @Override
+            public void onFailed(String msg) {
+                showFailedDialog(msg);
+            }
+        });
+    }
+    /**
      * 检测更新
      */
     private void UpdateVer() {
@@ -537,7 +598,6 @@ public class SettingActivity extends BaseTitleActivity {
             }
         });
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

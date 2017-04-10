@@ -75,6 +75,22 @@ public class AddressContants {
      */
     public static  final  String FLAG="flag";
     /**
+     * 流转卡号
+     */
+    public static  final  String PROCESSCARD="process_card";
+    /**
+     * 时间
+     */
+    public static  final  String REPOSTDATETIME="report_datetime";
+    /**
+     * 线别
+     */
+    public static  final  String LINENO="line_no";
+    /**
+     * 工序
+     */
+    public static  final  String SUBOP_NO="subop_no";
+    /**
      * 退出界面传输xml的value值，后台判断是否有数据
      */
     public static final  String EXIT0="0";
@@ -110,6 +126,22 @@ public class AddressContants {
      * 仓库代码
      */
     public static final String WAREHOUSE_NO = "warehouse_no";
+    /**
+     * 储位代码
+     */
+    public static final String WAREHOUSE_STORAGE = "warehouse_storage";
+    /**
+     * 批次
+     */
+    public static final String ITEMLOTNO = "item_lot_no";
+    /**
+     * 锁定原因
+     */
+    public static final String LOCKREASON = "lock_reason";
+    /**
+     * 人员编号
+     */
+    public static final String EMPLOYEENO = "employee_no";
     /**
      * 收货完成待检验看板中标记合格
      */
@@ -156,4 +188,8 @@ public class AddressContants {
      *出货单号
      */
     public static  final String RECEIPTNO="receipt_no";
+    /**
+     *时间
+     */
+    public static  final String RECEIPTDATE="receipt_date";
 }

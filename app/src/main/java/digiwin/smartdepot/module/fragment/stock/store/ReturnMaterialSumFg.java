@@ -26,7 +26,7 @@ import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.base.BaseFragment;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
 import digiwin.smartdepot.module.activity.common.CommonDetailActivity;
-import digiwin.smartdepot.module.activity.stock.store.ReturnMaterialActivity;
+import digiwin.smartdepot.module.activity.stock.store.StoreReturnMaterialActivity;
 import digiwin.smartdepot.module.adapter.stock.store.StoreReturnMaterialSumAdapter;
 import digiwin.smartdepot.module.bean.common.ClickItemPutBean;
 import digiwin.smartdepot.module.bean.common.DetailShowBean;
@@ -58,7 +58,7 @@ public class ReturnMaterialSumFg extends BaseFragment {
     @BindView(R.id.ry_list)
     RecyclerView ryList;
 
-    ReturnMaterialActivity rmActivity;
+    StoreReturnMaterialActivity rmActivity;
 
     boolean upDateFlag;
 
@@ -131,7 +131,7 @@ public class ReturnMaterialSumFg extends BaseFragment {
 
     @Override
     protected void doBusiness() {
-        rmActivity = (ReturnMaterialActivity) activity;
+        rmActivity = (StoreReturnMaterialActivity) activity;
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity);
         ryList.setLayoutManager(linearLayoutManager);
         initData();

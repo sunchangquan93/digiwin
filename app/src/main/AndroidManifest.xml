@@ -377,6 +377,7 @@
 
         <activity
             android:name=".module.activity.purchase.purchasecheck.BadReasonActivity"
+            android:screenOrientation="landscape"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
             android:name=".module.activity.stock.movestore.MoveStoreActivity"
@@ -388,6 +389,7 @@
         </activity>
         <activity
             android:name=".module.activity.purchase.purchasecheck.CheckShowImageActivity"
+            android:screenOrientation="landscape"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
 
         <activity
@@ -474,16 +476,16 @@
         </activity>
         <!-- 仓库退料清单 -->
         <activity
-            android:name=".module.activity.stock.store.StoreReturnMaterialActivity"
+            android:name=".module.activity.stock.store.StoreReturnMaterialListActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
-                <action android:name="android.intent.action.digiwin.StoreReturnMaterialActivity" />
+                <action android:name="android.intent.action.digiwin.StoreReturnMaterialListActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <!-- 仓库退料 -->
         <activity
-            android:name=".module.activity.stock.store.ReturnMaterialActivity"
+            android:name=".module.activity.stock.store.StoreReturnMaterialActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
         </activity>
 
@@ -587,6 +589,22 @@
         <!-- 扫码出货明细 -->
         <activity
             android:name=".module.activity.sale.scanout.ScanOutDetailActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+        </activity>
+        <!-- 产品质量追溯-->
+        <activity
+            android:name=".module.activity.sale.tranceproduct.TraceProductActivity"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.digiwin.TraceProductActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- 产品质量追溯明细-->
+        <activity
+            android:name=".module.activity.sale.tranceproduct.TraceProductDetailActivity"
+            android:screenOrientation="landscape"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
         </activity>
         <!-- Required SDK 核心功能极光推送需要 -->

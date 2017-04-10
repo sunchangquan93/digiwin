@@ -220,7 +220,7 @@ public class StoreTransLockActivity extends BaseTitleActivity{
             if(msg.what == ITEMWHAT){
                 HashMap<String,String> map = new HashMap<>();
                 String str = (String) msg.obj;
-                map.put("item_no",str);
+                map.put(AddressContants.ITEM_NO,str);
                 transLogic.getScanBarcode(map, new StoreTransLogic.ScanItemNoListener() {
                     @Override
                     public void onSuccess(StoreTransItemNoBean transItemNoBean) {
@@ -334,13 +334,13 @@ public class StoreTransLockActivity extends BaseTitleActivity{
                     return;
                 }
                 HashMap<String,String> map = new HashMap<String, String>();
-                map.put("warehouse_no",et_lock_store.getText().toString().trim());
-                map.put("warehouse_storage",et_loctor_no.getText().toString().trim());
-                map.put("item_no",et_item_no.getText().toString().trim());
-                map.put("item_lot_no",et_batch_no.getText().toString().trim());
-                map.put("employee_no","");
-                map.put("receipt_date","");
-                map.put("lock_reason",et_lock_reason.getText().toString().trim());
+                map.put(AddressContants.WAREHOUSE_NO,et_lock_store.getText().toString().trim());
+                map.put(AddressContants.WAREHOUSE_STORAGE,et_loctor_no.getText().toString().trim());
+                map.put(AddressContants.ITEM_NO,et_item_no.getText().toString().trim());
+                map.put(AddressContants.ITEMLOTNO,et_batch_no.getText().toString().trim());
+                map.put(AddressContants.EMPLOYEENO,"");
+                map.put(AddressContants.RECEIPTDATE,"");
+                map.put(AddressContants.LOCKREASON,et_lock_reason.getText().toString().trim());
                 commonLogic.commit(map, new CommonLogic.CommitListener() {
                     @Override
                     public void onSuccess(String msg) {

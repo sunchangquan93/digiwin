@@ -142,16 +142,14 @@ public class PutInStoreScanFg extends BaseFragment {
             showFailedDialog(R.string.input_num);
             return;
         }
+        //库位栏位加锁，保存时从库位栏位取值
+        String locator = etScanLocator.getText().toString();
+        if(locator.contains("%")){
+            saveBean.setStorage_spaces_in_no(locator.split("%")[1]);
+            saveBean.setWarehouse_in_no(locator.split("%")[0]);
+        }
+        saveBean.setDoc_no(orderBean.getDoc_no());
         saveBean.setQty(etInputNum.getText().toString());
-//        float qty = StringUtils.string2Float(saveBean.getQty());
-//        float scansum_qty = StringUtils.string2Float(saveBean.getScan_sumqty());
-//        if(!StringUtils.isBlank(saveBean.getAvailable_in_qty())){
-//            float avaliable_in_qty = StringUtils.string2Float(saveBean.getAvailable_in_qty());
-//            if(qty + scansum_qty > avaliable_in_qty){
-//                showFailedDialog(pactivity.getResources().getString(R.string.scan_sumqty_larger_than_need_qty));
-//                return;
-//            }
-//        }
         showLoadingDialog();
         commonLogic.scanSave(saveBean, new CommonLogic.SaveListener() {
             @Override
@@ -209,11 +207,8 @@ public class PutInStoreScanFg extends BaseFragment {
                 case BARCODEWHAT:
                     HashMap<String, String> barcodeMap = new HashMap<>();
                     barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
-                    barcodeMap.put("doc_no",orderBean.getDoc_no());
-                    AccoutBean accoutBean = LoginLogic.getUserInfo();
-                    if(null != accoutBean){
-                        barcodeMap.put("warehouse_no",accoutBean.getWare());
-                    }
+                    barcodeMap.put(AddressContants.DOC_NO,orderBean.getDoc_no());
+                    barcodeMap.put(AddressContants.WAREHOUSE_NO,LoginLogic.getWare());
                     commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                         @Override
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
@@ -313,6 +308,7 @@ public class PutInStoreScanFg extends BaseFragment {
         barcodeFlag=false;
         etScanBarocde.setText("");
         barcodeShow="";
+        saveBean = new SaveBean();
         if (!cb_locatorlock2.isChecked()){
             locatorFlag=false;
             etScanLocator.setText("");
@@ -338,8 +334,6 @@ public class PutInStoreScanFg extends BaseFragment {
         locatorFlag = false;
         saveBean = new SaveBean();
         orderBean = (FilterResultOrderBean) pactivity.getIntent().getExtras().getSerializable("orderData");
-        saveBean.setDoc_no(orderBean.getDoc_no());
         commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
-
     }
 }

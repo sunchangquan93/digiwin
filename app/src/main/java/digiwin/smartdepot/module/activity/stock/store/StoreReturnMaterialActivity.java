@@ -1,268 +1,82 @@
 package digiwin.smartdepot.module.activity.stock.store;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.BindViews;
-import butterknife.OnClick;
-import butterknife.OnFocusChange;
-import digiwin.library.datepicker.DatePickerUtils;
-import digiwin.library.utils.ActivityManagerUtils;
 import digiwin.library.utils.LogUtils;
-import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
 import digiwin.smartdepot.R;
-import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
-import digiwin.smartdepot.core.base.BaseTitleActivity;
-import digiwin.smartdepot.core.modulecommon.ModuleUtils;
-import digiwin.smartdepot.login.loginlogic.LoginLogic;
-import digiwin.smartdepot.module.adapter.stock.store.StoreReturnMaterialListAdapter;
-import digiwin.smartdepot.module.bean.common.FilterBean;
-import digiwin.smartdepot.module.bean.common.FilterResultOrderBean;
-import digiwin.smartdepot.module.logic.common.CommonLogic;
+import digiwin.smartdepot.core.base.BaseFirstModuldeActivity;
+import digiwin.smartdepot.core.modulecommon.ModuleViewPagerAdapter;
+import digiwin.smartdepot.module.fragment.stock.store.ReturnMaterialScanFg;
+import digiwin.smartdepot.module.fragment.stock.store.ReturnMaterialSumFg;
 
 /**
  * @author maoheng
- * @des 仓库退料清单
+ * @des 仓库退料
  * @date 2017/3/30
  */
 
-public class StoreReturnMaterialActivity extends BaseTitleActivity {
-    StoreReturnMaterialActivity activity;
+public class StoreReturnMaterialActivity extends BaseFirstModuldeActivity {
 
-    /**
-     * 返回刷新页面
-     */
-    int TOCOMMIT = 1001;
-
-    /**
-     * 作业编号
-     */
-    public String module;
+    StoreReturnMaterialActivity pactivity;
 
     @BindView(R.id.toolbar_title)
     Toolbar toolbarTitle;
+    /**
+     * tab
+     */
+    @BindView(R.id.tl_tab)
+    TabLayout tlTab;
 
-    private CommonLogic commonLogic;
-
-    private List<FilterResultOrderBean> list;
-
-    private StoreReturnMaterialListAdapter adapter;
-
-    private boolean isSearching;
+    @BindView(R.id.module_vp)
+    public
+    ViewPager moduleVp;
 
     /**
-     * 退货单号
+     * 跳转明细使用
      */
-    @BindView(R.id.tv_return_material)
-    TextView tvReturnMaterial;
-    @BindView(R.id.et_return_material)
-    EditText etReturnMaterial;
-    @OnFocusChange(R.id.et_return_material)
-    void storeReturnMaterialFocusChange() {
-        ModuleUtils.viewChange(llReturnMaterial, views);
-        ModuleUtils.etChange(activity, etReturnMaterial, editTexts);
-        ModuleUtils.tvChange(activity, tvReturnMaterial, textViews);
-    }
-    @BindView(R.id.ll_return_material)
-    LinearLayout llReturnMaterial;
+    public final int DETAILCODE = 1234;
+
 
     /**
-     * 供应商编码
+     * Fragment设置
      */
-    @BindView(R.id.tv_supplier_no)
-    TextView tvSupplierNo;
-    @BindView(R.id.et_supplier_no)
-    EditText etSupplierNo;
-    @OnFocusChange(R.id.et_supplier_no)
-    void supplierNoFocusChange() {
-        ModuleUtils.viewChange(llSupplierNo, views);
-        ModuleUtils.etChange(activity, etSupplierNo, editTexts);
-        ModuleUtils.tvChange(activity, tvSupplierNo, textViews);
-    }
-    @BindView(R.id.ll_supplier_no)
-    LinearLayout llSupplierNo;
+    private List<Fragment> fragments;
+    private List<String> titles;
+    private FragmentManager fragmentManager;
 
     /**
-     * 申请人
+     * 扫码
      */
-    @BindView(R.id.tv_applicant)
-    TextView tvApplicant;
-    @BindView(R.id.et_applicant)
-    EditText etApplicant;
-    @OnFocusChange(R.id.et_applicant)
-    void applicationFocusChange() {
-        ModuleUtils.viewChange(llApplicant, views);
-        ModuleUtils.etChange(activity, etApplicant, editTexts);
-        ModuleUtils.tvChange(activity, tvApplicant, textViews);
-    }
-    @BindView(R.id.ll_applicant)
-    LinearLayout llApplicant;
-
+    public ReturnMaterialScanFg scanFg;
     /**
-     * 部门
+     * 汇总提交
      */
-    @BindView(R.id.tv_department)
-    TextView tvDepartment;
-    @BindView(R.id.et_department)
-    EditText etDepartment;
-    @OnFocusChange(R.id.et_department)
-    void departmentFocusChange() {
-        ModuleUtils.viewChange(llDepartment, views);
-        ModuleUtils.etChange(activity, etDepartment, editTexts);
-        ModuleUtils.tvChange(activity, tvDepartment, textViews);
-    }
-    @BindView(R.id.ll_department)
-    LinearLayout llDepartment;
-
-    /**
-     * 开始日期
-     */
-    private String startDate;
-    /**
-     * 结束日期
-     */
-    private String endDate;
-
-    /**
-     * 日期
-     */
-    @BindView(R.id.tv_date)
-    TextView tvDate;
-    @BindView(R.id.et_date)
-    EditText etDate;
-    @OnFocusChange(R.id.et_date)
-    void dateFocusChange() {
-        ModuleUtils.viewChange(llDate, views);
-        ModuleUtils.etChange(activity, etDate, editTexts);
-        ModuleUtils.tvChange(activity, tvDate, textViews);
-    }
-    @BindView(R.id.date)
-    ImageView date;
-    @OnClick(R.id.date)
-    void getDate(){
-        DatePickerUtils.getDoubleDate(activity, new DatePickerUtils.GetDoubleDateListener() {
-            @Override
-            public void getTime(String mStartDate, String mEndDate,String mShowDate) {
-                startDate=mStartDate;
-                endDate=mEndDate;
-                etDate.setText(mShowDate);
-                etDate.requestFocus();
-            }
-        });
-    }
-    @BindView(R.id.ll_date)
-    LinearLayout llDate;
-
-    @BindViews({R.id.et_return_material, R.id.et_supplier_no, R.id.et_applicant, R.id.et_department, R.id.et_date})
-    List<EditText> editTexts;
-    @BindViews({R.id.ll_return_material, R.id.ll_supplier_no, R.id.ll_applicant, R.id.ll_department, R.id.ll_date})
-    List<View> views;
-    @BindViews({R.id.tv_return_material, R.id.tv_supplier_no, R.id.tv_applicant, R.id.tv_department, R.id.tv_date})
-    List<TextView> textViews;
-
-    @BindView(R.id.btn_search_sure)
-    Button btnSearchSure;
-    @OnClick(R.id.btn_search_sure)
-    void searchSure(){
-        searchData();
-    }
-
-    private void searchData() {
-        updateUI();
-        showLoadingDialog();
-        FilterBean bean = new FilterBean();
-        bean.setWarehouse_out_no(LoginLogic.getWare());
-        bean.setDoc_no(etReturnMaterial.getText().toString().trim());
-        bean.setSupplier_no(etSupplierNo.getText().toString().trim());
-        bean.setEmployee_no(etApplicant.getText().toString().trim());
-        bean.setDepartment_no(etDepartment.getText().toString().trim());
-        bean.setDate_begin(startDate);
-        bean.setDate_end(endDate);
-        commonLogic.getOrderData(bean, new CommonLogic.GetOrderListener() {
-            @Override
-            public void onSuccess(List<FilterResultOrderBean> beanList) {
-                dismissLoadingDialog();
-                list = beanList;
-                showData();
-                updateUI();
-            }
-
-            @Override
-            public void onFailed(String error) {
-                dismissLoadingDialog();
-                showFailedDialog(error);
-            }
-        });
-    }
-
-    @BindView(R.id.ll_search_input)
-    LinearLayout llSearchInput;
-    @BindView(R.id.ry_list)
-    RecyclerView ryList;
-
-    /**
-     * 展示信息
-     */
-    private void showData() {
-        try {
-            isSearching=true;
-            ryList.setVisibility(View.VISIBLE);
-            llSearchInput.setVisibility(View.GONE);
-            mName.setText(R.string.store_return_material_list);
-        } catch (Exception e) {
-            LogUtils.e(TAG, "showDates---Exception>" + e);
-        }
-    }
-
-    /**
-     * 筛选按钮
-     */
-    @BindView(R.id.iv_title_setting)
-    ImageView search;@OnClick(R.id.iv_title_setting)
-    void search(){
-        if (isSearching) {
-            isSearching=false;
-            ryList.setVisibility(View.VISIBLE);
-            llSearchInput.setVisibility(View.GONE);
-            mName.setText(R.string.store_return_material_list);
-            return;
-        } else {
-            isSearching=true;
-            ryList.setVisibility(View.GONE);
-            llSearchInput.setVisibility(View.VISIBLE);
-            mName.setText(R.string.filter_condition);
-        }
-    }
-
-
-    @Override
-    protected Toolbar toolbar() {
-        return toolbarTitle;
-    }
+    ReturnMaterialSumFg sumFg;
+    ModuleViewPagerAdapter adapter;
 
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        activity = this;
-        mName.setText(R.string.filter_condition);
-        ivScan.setVisibility(View.GONE);
-        search.setVisibility(View.VISIBLE);
-        search.setImageResource(R.drawable.search);
-        isSearching=true;
+        pactivity = (StoreReturnMaterialActivity) activity;
+        mName.setText(R.string.store_return_material);
+    }
+
+
+    private String mode;
+
+    @Override
+    protected Toolbar toolbar() {
+        return toolbarTitle;
     }
 
     @Override
@@ -273,38 +87,60 @@ public class StoreReturnMaterialActivity extends BaseTitleActivity {
 
     @Override
     protected int bindLayoutId() {
-        return R.layout.activity_storereturnmaterial_list;
+        return R.layout.activity_returnmaterial;
     }
 
     @Override
     protected void doBusiness() {
-        commonLogic = CommonLogic.getInstance(activity,module,mTimestamp.toString());
-        list = new ArrayList<>();
-        updateUI();
-    }
-    /**
-     * 更新界面
-     */
-    private void updateUI() {
-        adapter = new StoreReturnMaterialListAdapter(activity,list);
-        ryList.setLayoutManager(new LinearLayoutManager(activity));
-        ryList.setAdapter(adapter);
-        itemClick();
+        initFragment();
     }
 
-    private String DOC_NO = "doc_no";
     /**
-     * 条目点击
+     * 初始化Fragment
      */
-    private void itemClick() {
-        adapter.setOnItemClickListener(new OnItemClickListener() {
+    private void initFragment() {
+
+        scanFg = new ReturnMaterialScanFg();
+        sumFg = new ReturnMaterialSumFg();
+        fragments = new ArrayList<>();
+        fragments.add(scanFg);
+        fragments.add(sumFg);
+        titles = new ArrayList<>();
+        titles.add(getResources().getString(R.string.ScanCode));
+        titles.add(getResources().getString(R.string.SumData));
+        fragmentManager = getSupportFragmentManager();
+        adapter = new ModuleViewPagerAdapter(fragmentManager, fragments, titles);
+        moduleVp.setAdapter(adapter);
+        tlTab.addTab(tlTab.newTab().setText(titles.get(0)));
+        tlTab.addTab(tlTab.newTab().setText(titles.get(1)));
+        //Tablayout和ViewPager关联起来
+        tlTab.setupWithViewPager(moduleVp);
+        tlTab.setTabsFromPagerAdapter(adapter);
+        select();
+    }
+    /**
+     * 滑动
+     */
+    private void select() {
+        moduleVp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onItemClick(View itemView, int position) {
-                Bundle bundle = new Bundle();
-                bundle.putString(AddressContants.DOC_NO,list.get(position).getDoc_no());
-                bundle.putString(AddressContants.DATE,list.get(position).getCreate_date());
-                bundle.putString(AddressContants.SUPPLIER,list.get(position).getSupplier_name());
-                ActivityManagerUtils.startActivityBundleForResult(activity,ReturnMaterialActivity.class,bundle,TOCOMMIT);
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if(position == 0){
+                    scanFg.updateView();
+                }
+                if (position == 1) {
+                    sumFg.upDateList();
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
             }
         });
     }
@@ -312,9 +148,18 @@ public class StoreReturnMaterialActivity extends BaseTitleActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == TOCOMMIT){
-            list.clear();
-            searchData();
+        try {
+            if(requestCode == DETAILCODE){
+                sumFg.upDateList();
+            }
+        } catch (Exception e) {
+            LogUtils.e(TAG, "onActivityResult-->" + e);
         }
+
+    }
+
+    @Override
+    public ExitMode exitOrDel() {
+        return ExitMode.EXITD;
     }
 }

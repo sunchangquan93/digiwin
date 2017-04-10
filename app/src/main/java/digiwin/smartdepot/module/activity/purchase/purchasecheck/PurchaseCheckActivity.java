@@ -2,6 +2,8 @@ package digiwin.smartdepot.module.activity.purchase.purchasecheck;
 
 import android.content.Context;
 import android.content.pm.ActivityInfo;
+import android.content.res.Resources;
+import android.hardware.input.InputManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -11,7 +13,9 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,6 +25,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -114,7 +119,7 @@ public class PurchaseCheckActivity extends BaseActivity {
     /**
      * 不良原因
      */
-    @OnClick(R.id.iv_bad_reason)
+    @OnClick(R.id.ll_bad_reason)
     void lookBadReason(){
         if(purchaseCheckDetailBean == null){
             showToast(R.string.please_select_one_data);
@@ -124,6 +129,12 @@ public class PurchaseCheckActivity extends BaseActivity {
             Bundle bundle = new Bundle();
             bundle.putSerializable("purchaseCheckBean",purchaseCheckBean);
             bundle.putSerializable("purchaseCheckDetailBean",purchaseCheckDetailBean);
+            if(null != badReasonMap && badReasonMap.size()>0){
+                List<BadReasonBean> list = badReasonMap.get(String.valueOf(positionMap.get(selectPosition)));
+                if(null != list && list.size()>0){
+                    bundle.putSerializable("badReasonList", (Serializable) list);
+                }
+            }
             bundle.putString(AddressContants.MODULEID_INTENT,module);
             ActivityManagerUtils.startActivityForBundleData(pactivity,BadReasonActivity.class,bundle);
         }
@@ -132,7 +143,7 @@ public class PurchaseCheckActivity extends BaseActivity {
     /**
      * 检查图纸
      */
-    @OnClick(R.id.iv_check_pic)
+    @OnClick(R.id.ll_check_pic)
     void checkPic(){
         //TODO 跳转到检查图纸界面
         if(purchaseCheckBean == null){
@@ -148,7 +159,7 @@ public class PurchaseCheckActivity extends BaseActivity {
     /**
      * 拍照上传
      */
-    @OnClick(R.id.iv_take_photo)
+    @OnClick(R.id.ll_take_photo)
     void takePhoto(){
         //TODO 跳转到拍照上传
     }
@@ -282,6 +293,7 @@ public class PurchaseCheckActivity extends BaseActivity {
         allDataMap.clear();
         positionMap.clear();
         badReasonMap.clear();
+        defectMap.clear();
         badReasonList = null;
         isShow = false;
         defect_num = 0;
@@ -334,21 +346,22 @@ public class PurchaseCheckActivity extends BaseActivity {
      */
     float defect_num = 0;
 
+    Map<Integer,Integer> defectMap = new HashMap<>();
     /**
      * 接收来自不良原因界面的数据
      */
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onEventMainT(List<BadReasonBean> badReasonBeanList){
-        showToast("badReasonBeanList Return!");
-        LogUtils.d(TAG,"badReasonBeanList.size()"+badReasonBeanList.size());
         if(badReasonBeanList.size()>0){
             badReasonList = new ArrayList<>();
             badReasonList.addAll(badReasonBeanList);
-            badReasonMap.put(positionMap.get(selectPosition)+""+selectPosition,badReasonList);
+            badReasonMap.put(String.valueOf(positionMap.get(selectPosition)),badReasonList);
             for (int i = 0; i < badReasonBeanList.size(); i++) {
                 defect_num += StringUtils.string2Float(badReasonBeanList.get(i).getDefect_qty());
             }
             Log.d(TAG,"defect_num:"+defect_num);
+            defectMap.put(positionMap.get(selectPosition),(int) defect_num);
+            defect_num = 0;
             detailAdapter.notifyDataSetChanged();
         }
     }
@@ -393,12 +406,26 @@ public class PurchaseCheckActivity extends BaseActivity {
                                 tv_receipt_goods_order.setText(purchaseCheckBean.get(0).getReceipt_no());
                                 tv_get_material_time.setText(purchaseCheckBean.get(0).getReceipt_date());
                                 tv_to_get_material_time.setText(purchaseCheckBean.get(0).getWait_min());
+                                purchaseCheckBeanList = new ArrayList<PurchaseCheckBean>();
+                                purchaseCheckBeanList = purchaseCheckBean;
+                                adapter1 = new PurchaseCheckAdapter(pactivity,purchaseCheckBeanList);
+                                rc_list.setAdapter(adapter1);
+                                isShow = false;
+                                purchaseCheckDetailList = new ArrayList<PurchaseCheckDetailBean>();
+                                allDataMap = new HashMap<Integer, List<PurchaseCheckDetailBean>>();
+                                detailAdapter = new PurchaseCheckDetailAdapter(pactivity,purchaseCheckDetailList);
+                                badReasonList = new ArrayList<BadReasonBean>();
+                                clickItem();
+                            }else{
+                                tv_send_goods_order.setText("");
+                                tv_supplier.setText("");
+                                tv_receipt_goods_order.setText("");
+                                tv_get_material_time.setText("");
+                                tv_to_get_material_time.setText("");
+                                purchaseCheckBeanList = new ArrayList<PurchaseCheckBean>();
+                                adapter1 = new PurchaseCheckAdapter(pactivity,purchaseCheckBeanList);
+                                rc_list.setAdapter(adapter1);
                             }
-                            purchaseCheckBeanList = new ArrayList<PurchaseCheckBean>();
-                            purchaseCheckBeanList = purchaseCheckBean;
-                            adapter1 = new PurchaseCheckAdapter(pactivity,purchaseCheckBean);
-                            rc_list.setAdapter(adapter1);
-                            clickItem();
                         }
 
                         @Override
@@ -440,7 +467,6 @@ public class PurchaseCheckActivity extends BaseActivity {
                             detailAdapter = new PurchaseCheckDetailAdapter(pactivity,allDataMap.get(selectPosition));
                             isShow = true;
                             adapter1.notifyDataSetChanged();
-
                             detailAdapter.setOnItemClickListener(new OnItemClickListener() {
                                 @Override
                                 public void onItemClick(View itemView, int position) {
@@ -458,7 +484,7 @@ public class PurchaseCheckActivity extends BaseActivity {
                                     {
                                         clickPosition = -1;
                                         positionMap.put(selectPosition,clickPosition);
-                                        purchaseCheckDetailBean = null;
+                                        purchaseCheckDetailBean = new PurchaseCheckDetailBean();
                                     }
                                     detailAdapter.notifyDataSetChanged();
                                 }
@@ -503,7 +529,7 @@ public class PurchaseCheckActivity extends BaseActivity {
                                     {
                                         clickPosition = -1;
                                         positionMap.put(selectPosition,clickPosition);
-                                        purchaseCheckDetailBean = null;
+                                        purchaseCheckDetailBean = new PurchaseCheckDetailBean();
                                     }
                                      detailAdapter.notifyDataSetChanged();
                                 }
@@ -567,14 +593,16 @@ public class PurchaseCheckActivity extends BaseActivity {
 
                 @Override
                 public void afterTextChanged(Editable s) {
+                    int tag = (int) et_ok_num.getTag();
                     if(!StringUtils.isBlank(s.toString().trim())){
-                        int tag = (int) et_ok_num.getTag();
                         purchaseCheckBeanList.get(tag).setOk_qty(s.toString().trim());
                             if(StringUtils.string2Float(et_ok_num.getText().toString().trim()) == 0){
                                 holder.setText(R.id.tv_check_state,"P");
                             }else{
                                 holder.setText(R.id.tv_check_state,"N");
                             }
+                    }else{
+                        purchaseCheckBeanList.get(tag).setOk_qty("0");
                     }
                 }
             });
@@ -625,6 +653,75 @@ public class PurchaseCheckActivity extends BaseActivity {
         @Override
         protected void bindData(final RecyclerViewHolder holder, int position, final PurchaseCheckDetailBean item) {
             viewHolder = holder;
+            final TextView tv_project_check = holder.findViewById(R.id.tv_project_check);
+            tv_project_check.setTag(position);
+            final EditText et_defect_num = holder.getEditText(R.id.et_defect_num);
+            et_defect_num.setTag(position);
+            et_defect_num.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if(hasFocus){
+                        et_defect_num.addTextChangedListener(new TextWatcher() {
+                            @Override
+                            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                            }
+
+                            @Override
+                            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                            }
+
+                            @Override
+                            public void afterTextChanged(Editable s) {
+                                if(!StringUtils.isBlank(s.toString().trim())){
+                                    int tag = (int) et_defect_num.getTag();
+                                    purchaseCheckDetailList.get(tag).setDefect_qty(s.toString().trim());
+                                    /**
+                                     * 当单身任何一个缺点数超过对应RE值时，
+                                     * 则该笔明细项目的“项目判定”栏位就变成退货；
+                                     * 然后单头的合格量=0，判定状态就变成N;
+                                     */
+                                    if(StringUtils.string2Float(s.toString().trim()) > StringUtils.string2Float(item.getRe_qty())){
+                                        holder.setText(R.id.tv_project_check,getResources().getString(R.string.goods_return));
+                                        purchaseCheckDetailList.get(tag).setItem_deter(getResources().getString(R.string.goods_return));
+                                        for (int i = 0; i < purchaseCheckBeanList.size(); i++) {
+                                            if(purchaseCheckBeanList.get(i).getSeq().equals(item.getHead_seq())){
+                                                purchaseCheckBeanList.get(i).setOk_qty("0");
+                                            }
+                                        }
+                                    }else{
+                                        holder.setText(R.id.tv_project_check,item.getItem_deter());
+                                    }
+                                    et_defect_num.clearFocus();
+                                    allDataMap.put(selectPosition,purchaseCheckDetailList);
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+
+
+            /**
+             * 不良数量大于Ac值，项目判定为退货
+             */
+
+            try {
+                if(defectMap.size() > 0 ) {
+                    if(position == positionMap.get(selectPosition)){
+                        if(null != defectMap.get(position)){
+                            if (defectMap.get(position) > StringUtils.string2Float(purchaseCheckDetailBean.getAc_qty())) {
+                                purchaseCheckDetailList.get(position).setDefect_qty(String.valueOf(defectMap.get(position)));
+                                purchaseCheckDetailList.get(position).setItem_deter(getResources().getString(R.string.goods_return));
+                            }
+                        }
+                    }
+                }
+            } catch (Resources.NotFoundException e) {
+                e.printStackTrace();
+            }
+
             holder.setText(R.id.et_defect_num,item.getDefect_qty());
             holder.setText(R.id.tv_project_check,item.getItem_deter());
             holder.setText(R.id.tv_item_seq, item.getSeq());
@@ -633,49 +730,6 @@ public class PurchaseCheckActivity extends BaseActivity {
             holder.setText(R.id.tv_select_check_num,item.getSample_qty());
             holder.setText(R.id.tv_ac,item.getAc_qty());
             holder.setText(R.id.tv_re,item.getRe_qty());
-            final EditText et_defect_num = holder.getEditText(R.id.et_defect_num);
-            et_defect_num.setTag(position);
-            et_defect_num.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-                    if(!StringUtils.isBlank(s.toString().trim())){
-                        int tag = (int) et_defect_num.getTag();
-                        purchaseCheckDetailList.get(tag).setDefect_qty(s.toString().trim());
-                        /**
-                         * 当单身任何一个缺点数超过对应RE值时，
-                         * 则该笔明细项目的“项目判定”栏位就变成退货；
-                         * 然后单头的合格量=0，判定状态就变成N;
-                         */
-                        if(StringUtils.string2Float(s.toString().trim()) > StringUtils.string2Float(item.getRe_qty())){
-                            holder.setText(R.id.tv_project_check,getResources().getString(R.string.goods_return));
-                            for (int i = 0; i < purchaseCheckBeanList.size(); i++) {
-                                if(purchaseCheckBeanList.get(i).getSeq().equals(item.getHead_seq())){
-                                    purchaseCheckBeanList.get(i).setOk_qty("0");
-                                }
-                            }
-                        }else{
-                            holder.setText(R.id.tv_project_check,item.getItem_deter());
-                        }
-                        allDataMap.put(selectPosition,purchaseCheckDetailList);
-                    }
-                }
-            });
-            /**
-             * 不良数量大于Ac值，项目判定为退货
-             */
-            if(defect_num > 0 && defect_num > StringUtils.string2Float(purchaseCheckDetailBean.getAc_qty())){
-                holder.setText(R.id.tv_project_check,getResources().getString(R.string.goods_return));
-            }
 
             if (position == positionMap.get(selectPosition)){
                 holder.setBackground(R.id.item_ll,R.color.green7d);

@@ -15,6 +15,10 @@ public interface ReqTypeName {
      */
     static final String GETAC = "GetAc";
     /**
+     * 解绑设备
+     */
+    static  final  String GETAP="GetAp";
+    /**
      * 获取营用中心
      */
     static final String GETOC = "GetOc";
@@ -226,4 +230,24 @@ public interface ReqTypeName {
      * 删除扫码出货明细
      */
     static final String  DELETESCANOUTDETAIL = "app.del.package.scandetail";
+    /**
+     * 生产过程信息查询
+     */
+    static final String  PRODUCTPROCESS = "app.get.production.process";
+    /**
+     * 条码库存信息查询
+     */
+    static final String  CURRENTINVENTORY = "app.get.barcode.inv";
+    /**
+     * 工单信息查询
+     */
+    static final String  ORDERINFO = "app.get.wo.info.detail";
+    /**
+     * 出货流向信息查询
+     */
+    static final String  SHIPMENTTO = "app.get.barcode.delivery.info";
+    /**
+     * 质量追溯明细查询
+     */
+    static final String  TRACEPRODUCT = "app.get.item.in.detail";
 }

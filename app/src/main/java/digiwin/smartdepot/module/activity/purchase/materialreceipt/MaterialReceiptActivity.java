@@ -228,29 +228,6 @@ public class MaterialReceiptActivity extends BaseTitleActivity implements View.O
         return module;
     }
 
-    @Override
-    protected int bindLayoutId() {
-        return R.layout.activity_material_receipt;
-    }
-
-    @Override
-    protected void initNavigationTitle() {
-        super.initNavigationTitle();
-        activity = this;
-        mName.setText(getResources().getString(R.string.title_material_receipt));
-    }
-
-    @Override
-    public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-        //old是改变前的左上右下坐标点值，没有old的是改变后的左上右下坐标点值
-        //现在认为只要控件将Activity向上推的高度超过了1/3屏幕高，就认为软键盘弹起
-        if (oldBottom != 0 && bottom != 0 && (oldBottom - bottom > keyHeight)) {
-            commit.setVisibility(View.INVISIBLE);
-        } else if (oldBottom != 0 && bottom != 0 && (bottom - oldBottom > keyHeight)) {
-            commit.setVisibility(View.VISIBLE);
-        }
-    }
-
     public void commitData(final List<ListSumBean> checkedList){
         final List<Map<String, String>> listMap = ObjectAndMapUtils.getListMap(checkedList);
         commonLogic.commitList(listMap, new CommonLogic.CommitListListener() {
@@ -274,4 +251,27 @@ public class MaterialReceiptActivity extends BaseTitleActivity implements View.O
             }
         });
     }
+    @Override
+    protected int bindLayoutId() {
+        return R.layout.activity_material_receipt;
+    }
+
+    @Override
+    protected void initNavigationTitle() {
+        super.initNavigationTitle();
+        activity = this;
+        mName.setText(getResources().getString(R.string.title_material_receipt));
+    }
+
+    @Override
+    public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+        //old是改变前的左上右下坐标点值，没有old的是改变后的左上右下坐标点值
+        //现在认为只要控件将Activity向上推的高度超过了1/3屏幕高，就认为软键盘弹起
+        if (oldBottom != 0 && bottom != 0 && (oldBottom - bottom > keyHeight)) {
+            commit.setVisibility(View.INVISIBLE);
+        } else if (oldBottom != 0 && bottom != 0 && (bottom - oldBottom > keyHeight)) {
+            commit.setVisibility(View.VISIBLE);
+        }
+    }
+
 }

@@ -32,7 +32,7 @@ import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseFirstModuldeActivity;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
-import digiwin.smartdepot.main.activity.storagesetting.StorageDialog;
+import digiwin.smartdepot.main.activity.settingdialog.StorageDialog;
 import digiwin.smartdepot.main.logic.GetStorageLogic;
 import digiwin.smartdepot.module.bean.common.ClickItemPutBean;
 import digiwin.smartdepot.module.bean.common.FilterResultOrderBean;
@@ -339,8 +339,8 @@ public class QuickStorageActivity extends BaseFirstModuldeActivity{
                 holder.setTextColor(R.id.tv_storage, mContext.getResources().getColor(R.color.outside_yellow));
                 holder.setTextColor(R.id.tv_in_storage_number, mContext.getResources().getColor(R.color.outside_yellow));
                 holder.setTextColor(R.id.tv_match_number, mContext.getResources().getColor(R.color.outside_yellow));
-                holder.setBackground(R.id.warehouse_img_ll,R.drawable.focus_get_bg);
-                holder.setBackground(R.id.match_num_ll,R.drawable.focus_get_bg);
+                holder.setBackground(R.id.warehouse_img_ll,R.drawable.numchange_bg_yellow);
+                holder.setBackground(R.id.match_num_ll,R.drawable.numchange_bg_yellow);
             } else if (numb1 == numb2) {
 
                 holder.setBackground(R.id.item_ll, R.drawable.green_scandetail_bg);

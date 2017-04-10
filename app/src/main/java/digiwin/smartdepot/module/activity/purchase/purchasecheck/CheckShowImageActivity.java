@@ -7,6 +7,7 @@ import android.os.Message;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -22,6 +23,7 @@ import java.util.Map;
 import butterknife.BindView;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
+import digiwin.smartdepot.core.base.BaseTitleActivity;
 import digiwin.smartdepot.core.base.BaseTitleHActivity;
 import digiwin.smartdepot.module.bean.purchase.ImageUrl;
 import digiwin.smartdepot.module.logic.purchase.PurcahseCheckLogic;
@@ -31,7 +33,7 @@ import digiwin.smartdepot.module.logic.purchase.PurcahseCheckLogic;
  * @author 唐孟宇
  *
  */
-public class CheckShowImageActivity extends BaseTitleHActivity{
+public class CheckShowImageActivity extends BaseTitleHActivity {
 	CheckShowImageActivity pactivity;
 
 	PurcahseCheckLogic logic;
@@ -56,6 +58,7 @@ public class CheckShowImageActivity extends BaseTitleHActivity{
 	protected void doBusiness() {
 		pactivity = (CheckShowImageActivity) activity;
 		logic = PurcahseCheckLogic.getInstance(pactivity,module,mTimestamp.toString());
+		Log.d(TAG,"doBusiness:");
 		item_no = getIntent().getExtras().getString("item_no");
 		Message msg = new Message();
 		msg.what = 1;

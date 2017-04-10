@@ -253,7 +253,14 @@ public class DistributeScanActivity extends BaseTitleActivity {
                                     int n = 0;
                                     for (int i = 0;i<fiFoList.size();i++){
                                         if(barcodeBackBean.getBarcode_no().equals(fiFoList.get(i).getBarcode_no())){
-                                            n++;
+                                            if(locatorFlag){
+                                                String locator = et_scan_locator.getText().toString();
+                                                if(locator.contains("%")){
+                                                    if(locator.split("%")[1].equals(fiFoList.get(i).getStorage_spaces_no())){
+                                                        n++;
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
                                     if(n ==0){
@@ -421,8 +428,14 @@ public class DistributeScanActivity extends BaseTitleActivity {
             return;
         }
         showLoadingDialog();
-        Map<String, String> map = new HashMap<>();
-        saveBean.setQty(et_input_num.getText().toString().trim());    
+        initSaveBean();
+        saveBean.setQty(et_input_num.getText().toString().trim());
+        //库位栏位加锁，保存时从库位栏位取值
+        String locator = et_scan_locator.getText().toString();
+        if(locator.contains("%")){
+            saveBean.setStorage_spaces_out_no(locator.split("%")[1]);
+            saveBean.setWarehouse_out_no(locator.split("%")[0]);
+        }
         commonLogic.scanSave(saveBean, new CommonLogic.SaveListener() {
 
             @Override
@@ -468,6 +481,7 @@ public class DistributeScanActivity extends BaseTitleActivity {
             }
         }
         et_input_num.setText("");
+        saveBean = new SaveBean();
     }
 
     /**
@@ -492,6 +506,15 @@ public class DistributeScanActivity extends BaseTitleActivity {
         tv_locator_num.setText(StringUtils.deleteZero(sumshoubean.getStock_qty()));
         tv_left_material_num.setText(StringUtils.deleteZero(sumshoubean.getShortage_qty()));
         tv_scanned_num.setText(StringUtils.deleteZero(sumshoubean.getScan_sumqty()));
+        //获取FIFO
+        getFIFO(sumshoubean);
+        et_scan_locator.requestFocus();
+    }
+
+    /**
+     * 初始化一些从清单页面带过来的要保存的数据
+     */
+    private void initSaveBean() {
         saveBean.setUnit_no(sumshoubean.getUnit_no());
         //欠料量
         float num1 = StringUtils.string2Float(sumshoubean.getShortage_qty());
@@ -508,9 +531,6 @@ public class DistributeScanActivity extends BaseTitleActivity {
         saveBean.setStorage_spaces_in_no(headData.getWarein());
         saveBean.setWorkgroup_no(headData.getWorkgroup_no());
         saveBean.setDepartment_no(headData.getDepartment_no());
-        //获取FIFO
-        getFIFO(sumshoubean);
-        et_scan_locator.requestFocus();
     }
 
 }

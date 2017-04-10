@@ -1,5 +1,6 @@
 package digiwin.smartdepot.core.json;
 
+import android.app.Activity;
 import android.content.Context;
 
 import com.alibaba.fastjson.JSON;

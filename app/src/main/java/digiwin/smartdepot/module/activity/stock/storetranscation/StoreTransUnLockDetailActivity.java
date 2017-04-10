@@ -12,6 +12,7 @@ import java.util.List;
 import butterknife.BindView;
 import digiwin.library.utils.LogUtils;
 import digiwin.smartdepot.R;
+import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseTitleActivity;
 import digiwin.smartdepot.module.adapter.stock.store.StoreTransUnLockDetailAdapter;
@@ -84,7 +85,7 @@ public class StoreTransUnLockDetailActivity extends BaseTitleActivity{
     protected void doBusiness() {
 //        ry_list = (RecyclerView) findViewById(R.id.ry_list);
         ry_list.setLayoutManager(new LinearLayoutManager(activity));
-        DOC_NO = "doc_no";
+        DOC_NO = AddressContants.DOC_NO;
         Bundle extras = getIntent().getExtras();
         doc_no = extras.getString(DOC_NO);
         commonLogic = CommonLogic.getInstance(activity,module,mTimestamp.toString());

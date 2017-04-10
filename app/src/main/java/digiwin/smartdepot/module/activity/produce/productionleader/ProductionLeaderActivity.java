@@ -100,6 +100,10 @@ public class ProductionLeaderActivity extends BaseFirstModuldeActivity{
 
             @Override
             public void onPageSelected(int position) {
+                if(position == 0){
+                    scanFg.upDateList();
+                }
+
                 if (position == 1) {
                     sumFg.upDateList();
                 }

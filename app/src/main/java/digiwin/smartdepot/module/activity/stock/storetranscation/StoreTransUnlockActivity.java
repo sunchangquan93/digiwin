@@ -26,6 +26,7 @@ import digiwin.library.utils.ActivityManagerUtils;
 import digiwin.library.utils.LogUtils;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
 import digiwin.smartdepot.R;
+import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseTitleActivity;
 import digiwin.smartdepot.core.modulecommon.ModuleUtils;
@@ -205,7 +206,7 @@ public class StoreTransUnlockActivity extends BaseTitleActivity{
             List<Map<String,String>> maps = new ArrayList<>();
             for (int i = 0; i < deleteList.size(); i++) {
                 Map<String,String> map1 = new HashMap<>();
-                map1.put("doc_no",deleteList.get(i).getDoc_no());
+                map1.put(AddressContants.DOC_NO,deleteList.get(i).getDoc_no());
                 maps.add(map1);
             }
             commonLogic.commitListMap(maps, new CommonLogic.CommitListener() {
@@ -389,7 +390,7 @@ public class StoreTransUnlockActivity extends BaseTitleActivity{
 
     @Override
     protected void doBusiness() {
-        DOC_NO = "doc_no";
+        DOC_NO = AddressContants.DOC_NO;
         commonLogic = CommonLogic.getInstance(activity,module,mTimestamp.toString());
         list=new ArrayList<>();
         ryList.setLayoutManager(new LinearLayoutManager(activity));

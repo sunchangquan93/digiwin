@@ -56,8 +56,8 @@ public abstract class BaseTitleHActivity extends BaseActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        super.onCreate(savedInstanceState);
     }
 
     @OnClick(R.id.iv_back)

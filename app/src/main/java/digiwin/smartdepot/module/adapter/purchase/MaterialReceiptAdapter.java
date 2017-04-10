@@ -6,6 +6,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,18 +62,27 @@ import digiwin.smartdepot.module.bean.common.ListSumBean;
         holder.setText(R.id.tv_delivery_quantity, StringUtils.deleteZero(item.getShortage_qty()));
         holder.setText(R.id.tv_actual_yield_num, StringUtils.deleteZero(item.getQty()));
 
-        holder.getEditText(R.id.tv_actual_yield_num).addTextChangedListener(new TextWatcher() {
+        final EditText inputNum = holder.findViewById(R.id.tv_actual_yield_num);
+        inputNum.setTag(position);
+
+        inputNum.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(StringUtils.isBlank(s.toString().trim())){
+                if(".".equals(s.toString().trim())){
+                    inputNum.setText("0");
+                    item.setQty("0");
+                } else if(StringUtils.isBlank(s.toString().trim())){
+                    inputNum.setText("0");
                     item.setQty("0");
                 }else{
                     item.setQty(s.toString().trim());

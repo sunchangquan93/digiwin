@@ -314,51 +314,6 @@
                 android:background="@color/gray_f0"></View>
 
             <LinearLayout
-                android:id="@+id/ll_manuscriptSetting"
-                style="@style/SettingLinearLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="@dimen/layout_20dp"
-                    android:layout_height="@dimen/layout_20dp"
-                    android:src="@drawable/manuscript" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/layout_5dp"
-                    android:layout_weight="1"
-                    android:gravity="left"
-                    android:text="@string/manuspript"
-                    android:textColor="@color/black_32"
-                    android:textSize="@dimen/textSize_14sp" />
-
-                <TextView
-                    android:id="@+id/tv_manuscriptSetting"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black_32"
-                    android:textSize="@dimen/textSize_14sp" />
-
-                <ToggleButton
-                    android:id="@+id/tb_manuscriptSetting"
-                    android:layout_width="@dimen/layout_50dp"
-                    android:layout_height="@dimen/layout_20dp"
-                    android:background="@android:color/transparent"
-                    android:button="@drawable/togglebutton_bg"
-                    android:text=""
-                    android:textOff=""
-                    android:textOn="" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/layout_0.5dp"
-                android:background="@color/gray_f0"></View>
-
-            <LinearLayout
                 android:id="@+id/ll_blueToothSetting"
                 style="@style/SettingLinearLayout"
                 android:layout_width="match_parent"
@@ -397,6 +352,45 @@
                     android:text=""
                     android:textOff=""
                     android:textOn="" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/layout_0.5dp"
+                android:background="@color/gray_f0"></View>
+
+            <LinearLayout
+                android:id="@+id/ll_device_unbind"
+                style="@style/SettingLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/layout_20dp"
+                    android:layout_height="@dimen/layout_20dp"
+                    android:src="@mipmap/device_unbind" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/layout_5dp"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="@string/device_unbind"
+                    android:textColor="@color/black_32"
+                    android:textSize="@dimen/textSize_14sp" />
+
+                <TextView
+                    android:id="@+id/tv_deviceinfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black_32"
+                    android:textSize="@dimen/textSize_14sp" />
+                <ImageView
+                    android:layout_width="@dimen/layout_15dp"
+                    android:layout_height="@dimen/layout_15dp"
+                    android:layout_marginLeft="@dimen/layout_10dp"
+                    android:src="@drawable/right" />
             </LinearLayout>
 
 

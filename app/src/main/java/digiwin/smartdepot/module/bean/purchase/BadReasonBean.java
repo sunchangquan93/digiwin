@@ -1,11 +1,13 @@
 package digiwin.smartdepot.module.bean.purchase;
 
+import java.io.Serializable;
+
 /**
  * Created by MacheNike on 2017/3/22.
  * 不良原因
  */
 
-public class BadReasonBean {
+public class BadReasonBean implements Serializable{
 
 //    defect_reason             string     不良原因编号
 //    defect_reason_name       string      不良原因名称

@@ -195,8 +195,6 @@ public class PurcahseCheckLogic {
                                     if (badReasonBeen.size() > 0) {
                                         listener.onSuccess(badReasonBeen);
                                         return;
-                                    } else {
-                                        error = mContext.getString(R.string.data_null);
                                     }
                                 } else {
                                     error = xmlResp.getDescription();
@@ -238,12 +236,8 @@ public class PurcahseCheckLogic {
                             if (null != xmlResp) {
                                 if (ReqTypeName.SUCCCESSCODE .equals( xmlResp.getCode())) {
                                     List<BadReasonBean> badReasonBeen = xmlResp.getMasterDatas(BadReasonBean.class);
-                                    if (badReasonBeen.size() > 0) {
                                         listener.onSuccess(badReasonBeen);
                                         return;
-                                    } else {
-                                        error = mContext.getString(R.string.data_null);
-                                    }
                                 } else {
                                     error = xmlResp.getDescription();
                                 }

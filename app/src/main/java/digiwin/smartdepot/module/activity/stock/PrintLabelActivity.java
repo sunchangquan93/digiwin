@@ -2,7 +2,9 @@ package digiwin.smartdepot.module.activity.stock;
 
 import android.os.Handler;
 import android.os.Message;
+import android.renderscript.ScriptGroup;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -17,6 +19,7 @@ import butterknife.BindViews;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
+import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.utils.StringUtils;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
@@ -114,7 +117,14 @@ public class PrintLabelActivity extends BaseTitleActivity {
         ModuleUtils.tvChange(activity, tv_resource_barcode, textViews);
     }
 
+    /**
+     * 扫描条码
+     */
     final int BARCODEWHAT = 1234;
+    /**
+     * 更新打印张数
+     */
+    final int UPDATENUM = 1235;
 
     @OnTextChanged(value = R.id.et_resource_barcode, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void barcodeChange(CharSequence s) {
@@ -129,14 +139,10 @@ public class PrintLabelActivity extends BaseTitleActivity {
         if (!StringUtils.isBlank(s.toString().trim())) {
             if(!StringUtils.isBlank(et_sum_num.getText().toString().trim())){
                 if(StringUtils.string2Float(et_sum_num.getText().toString())!= 0){
-                    int sum_num = (int)StringUtils.string2Float(et_sum_num.getText().toString());
-                    int single_num = (int)StringUtils.string2Float(et_single_package_num.getText().toString());
-                    if(single_num != 0){
-                        int num = (int) StringUtils.div(sum_num,single_num,0);
-                        tv_num_of_print_pieces.setText(String.valueOf(num));
-                        printBarcodeBean.setQty(String.valueOf(single_num));
-                        printBarcodeBean.setPrint_num(String.valueOf(num));
-                    }
+                    Message msg = new Message();
+                    msg.what = UPDATENUM;
+                    mHandler.sendMessageDelayed(msg,AddressContants.DELAYTIME);
+
                 }
             }
         }
@@ -170,6 +176,7 @@ public class PrintLabelActivity extends BaseTitleActivity {
 
     CommonLogic logic;
 
+    String [] barcodeType = new String[]{"1:物料级","2：批次级","3：单箱级","4:单件级"};
     PrintBarcodeBean printBarcodeBean;
     @Override
     protected Toolbar toolbar() {
@@ -210,6 +217,7 @@ public class PrintLabelActivity extends BaseTitleActivity {
         et_sum_num.setText("");
         et_single_package_num.setText("");
         tv_num_of_print_pieces.setText("");
+        et_single_package_num.setInputType(InputType.TYPE_CLASS_NUMBER);
     }
 
     private Handler mHandler = new Handler(){
@@ -227,9 +235,11 @@ public class PrintLabelActivity extends BaseTitleActivity {
                             tv_item_name.setText(barcodeBackBean.getItem_name());
                             tv_model.setText(barcodeBackBean.getItem_spec());
                             tv_item_no.setText(barcodeBackBean.getItem_no());
-                            tv_barcode_type.setText(barcodeBackBean.getItem_barcode_type());
+                            String type = barcodeBackBean.getItem_barcode_type();
+                            if(null != type){
+                                tv_barcode_type.setText(barcodeType[Integer.valueOf(type) -1]);
+                            }
                             et_sum_num.setText(barcodeBackBean.getBarcode_qty());
-
                             printBarcodeBean = new PrintBarcodeBean();
                             printBarcodeBean.setBarcode(barcode);
                             printBarcodeBean.setItem_name(barcodeBackBean.getItem_name());
@@ -241,9 +251,43 @@ public class PrintLabelActivity extends BaseTitleActivity {
 
                         @Override
                         public void onFailed(String error) {
-                            showFailedDialog(error);
+                            showFailedDialog(error, new OnDialogClickListener() {
+                                @Override
+                                public void onCallback() {
+                                    et_resource_barcode.setText("");
+                                    et_resource_barcode.requestFocus();
+                                }
+                            });
                         }
                     });
+                    break;
+                case UPDATENUM:
+                    int sum_num = (int)StringUtils.string2Float(et_sum_num.getText().toString());
+                    int single_num = (int)StringUtils.string2Float(et_single_package_num.getText().toString());
+                    if(single_num > sum_num){
+                        showFailedDialog(R.string.single_package_lager, new OnDialogClickListener() {
+                            @Override
+                            public void onCallback() {
+                                et_single_package_num.setText("");
+                                et_single_package_num.requestFocus();
+                                tv_num_of_print_pieces.setText("");
+                            }
+                        });
+                    }else if(single_num == 0){
+                        showFailedDialog(R.string.ac, new OnDialogClickListener() {
+                            @Override
+                            public void onCallback() {
+                                et_single_package_num.setText("");
+                                et_single_package_num.requestFocus();
+                                tv_num_of_print_pieces.setText("");
+                            }
+                        });
+                    }else{
+                        int num = StringUtils.div(sum_num,single_num);
+                        tv_num_of_print_pieces.setText(String.valueOf(num));
+                        printBarcodeBean.setQty(String.valueOf(single_num));
+                        printBarcodeBean.setPrint_num(String.valueOf(num));
+                    }
                     break;
             }
         }

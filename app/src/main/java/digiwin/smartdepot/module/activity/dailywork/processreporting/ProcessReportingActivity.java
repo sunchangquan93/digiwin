@@ -229,11 +229,11 @@ public class ProcessReportingActivity extends BaseTitleActivity{
 
     @OnClick(R.id.commit)
     void commit(){
-        showLoadingDialog();
-
         showCommitSureDialog(new OnDialogTwoListener() {
             @Override
             public void onCallback1() {
+                showLoadingDialog();
+
                 if(StringUtils.isBlank(et_gongDan_no.getText().toString())){
                     showFailedDialog(R.string.scan_work_order);
                     return;
@@ -246,7 +246,6 @@ public class ProcessReportingActivity extends BaseTitleActivity{
                     showFailedDialog(R.string.the_workers_scan);
                     return;
                 }
-
                 List<ProcessReportingCommitBean> list = new ArrayList<ProcessReportingCommitBean>();
                 ProcessReportingCommitBean bean = new ProcessReportingCommitBean();
                 bean.setWo_no(et_gongDan_no.getText().toString());
@@ -274,6 +273,7 @@ public class ProcessReportingActivity extends BaseTitleActivity{
 
                     @Override
                     public void onFailed(String error) {
+                        dismissLoadingDialog();
                         showFailedDialog(error);
                     }
                 });

@@ -15,6 +15,7 @@
         <TextView
             android:id="@+id/tv_item_no_string"
             android:layout_width="@dimen/layout_70dp"
+            android:textColor="@color/MAIN_BELOW"
             android:layout_height="wrap_content"
             android:text="@string/item_no"
             android:textSize="@dimen/textSize_14sp" />
@@ -50,6 +51,7 @@
             android:layout_width="@dimen/layout_70dp"
             android:layout_height="wrap_content"
             android:text="@string/item_name"
+            android:textColor="@color/MAIN_BELOW"
             android:textSize="@dimen/textSize_14sp" />
 
         <TextView
@@ -74,6 +76,7 @@
             android:layout_width="@dimen/layout_70dp"
             android:layout_height="wrap_content"
             android:text="@string/model"
+            android:textColor="@color/MAIN_BELOW"
             android:textSize="@dimen/textSize_14sp" />
 
         <TextView
@@ -103,6 +106,7 @@
                 android:layout_width="@dimen/layout_70dp"
                 android:layout_height="wrap_content"
                 android:text="@string/under_feed"
+                android:textColor="@color/MAIN_BELOW"
                 android:textSize="@dimen/textSize_14sp" />
 
             <TextView
@@ -122,6 +126,7 @@
                 android:layout_width="@dimen/layout_70dp"
                 android:layout_height="wrap_content"
                 android:text="@string/stock_balance"
+                android:textColor="@color/MAIN_BELOW"
                 android:textSize="@dimen/textSize_14sp" />
 
             <TextView
@@ -152,6 +157,7 @@
             android:layout_width="@dimen/layout_70dp"
             android:layout_height="match_parent"
             android:text="@string/actual_yield"
+            android:textColor="@color/MAIN_BELOW"
             android:textSize="@dimen/textSize_14sp" />
 
         <TextView

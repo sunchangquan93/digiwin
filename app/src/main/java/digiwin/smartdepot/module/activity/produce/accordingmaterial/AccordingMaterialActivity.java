@@ -41,7 +41,6 @@ import digiwin.smartdepot.module.bean.common.ListSumBean;
 import digiwin.smartdepot.module.bean.common.SumShowBean;
 import digiwin.smartdepot.module.logic.common.CommonLogic;
 
-
 /**
  * @author 赵浩然
  * @module 依成品发料
@@ -227,9 +226,9 @@ public class AccordingMaterialActivity extends BaseFirstModuldeActivity {
                         ListSumBean data = list.get(position);
                         bundle.putSerializable("sumdata", data);
                         bundle.putString("modilecode",mTimestamp.toString());
-//                        ActivityManagerUtils.startActivityBundleForResult(activity,AccordingMaterialScanActivity.class,bundle,SCANCODE);
+                        ActivityManagerUtils.startActivityBundleForResult(activity,AccordingMaterialScanActivity.class,bundle,SCANCODE);
                         //调用新的FIFO
-                        ActivityManagerUtils.startActivityBundleForResult(activity,AccordingMaterialScanNewActivity.class,bundle,SCANCODE);
+//                        ActivityManagerUtils.startActivityBundleForResult(activity,AccordingMaterialScanNewActivity.class,bundle,SCANCODE);
                     }
                 });
             }

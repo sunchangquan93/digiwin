@@ -53,7 +53,7 @@ public class ChooseAllotDailog {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            LogUtils.e(TAG, "showChooseAllotDailog-----Error"+e);
+            LogUtils.e(TAG, "showUnBindStatuDailog-----Error"+e);
         }
     }
 

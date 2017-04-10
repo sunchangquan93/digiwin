@@ -106,7 +106,7 @@ public class GetStorageLogic {
                 }
             });
         } catch (Exception e) {
-            LogUtils.e(TAG, "getNewVersion异常");
+            LogUtils.e(TAG, "getStorage");
             listener.onFailed(mContext.getString(R.string.unknow_error));
         }
     }

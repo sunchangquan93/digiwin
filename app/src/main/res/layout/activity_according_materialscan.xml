@@ -22,8 +22,8 @@
             android:layout_marginLeft="@dimen/layout_10dp"
             android:layout_marginRight="@dimen/layout_10dp"
             android:orientation="vertical"
-            android:background="@drawable/accordingmaterialtop_sharp"
-            android:padding="@dimen/layout_5dp">
+            android:padding="@dimen/layout_5dp"
+            android:background="@drawable/accordingmaterialtop_sharp">
 
             <LinearLayout
                 style="@style/itemstyle"
@@ -91,18 +91,19 @@
                     android:layout_height="match_parent">
                     <TextView
                         android:id="@+id/tv_stock_balance_string"
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/layout_70dp"
                         android:layout_height="wrap_content"
                         android:text="@string/locator_num"
                         android:paddingRight="@dimen/layout_5dp"
-                        android:textSize="@dimen/textSize_12sp" />
+                        android:textSize="@dimen/textSize_14sp" />
 
                     <TextView
                         android:id="@+id/tv_material_return_big"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/textSize_12sp" />
+                        android:layout_marginLeft="@dimen/layout_10dp"
+                        android:textSize="@dimen/textSize_14sp" />
 
                 </LinearLayout>
 
@@ -117,35 +118,40 @@
                         android:layout_height="wrap_content"
                         android:text="@string/left_material_num"
                         android:paddingRight="@dimen/layout_5dp"
-                        android:textSize="@dimen/textSize_12sp" />
+                        android:textSize="@dimen/textSize_14sp" />
 
                     <TextView
                         android:id="@+id/tv_material_return"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_10dp"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/textSize_12sp" />
+                        android:textSize="@dimen/textSize_14sp" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_weight="1"
-                    android:layout_width="@dimen/layout_0dp"
-                    android:layout_height="match_parent">
-                    <TextView
-                        android:id="@+id/tv_actual_yield_string"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/scanned"
-                        android:paddingRight="@dimen/layout_5dp"
-                        android:textSize="@dimen/textSize_12sp" />
+            </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/tv_feeding_amount"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/textSize_12sp" />
-                </LinearLayout>
+            <View style="@style/act_line_style"></View>
+
+            <LinearLayout
+                style="@style/itemstyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tv_actual_yield_string"
+                    android:layout_width="@dimen/layout_70dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/scanned"
+                    android:paddingRight="@dimen/layout_5dp"
+                    android:textSize="@dimen/textSize_14sp" />
+
+                <TextView
+                    android:id="@+id/tv_feeding_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_marginLeft="@dimen/layout_10dp"
+                    android:textSize="@dimen/textSize_14sp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -182,6 +188,7 @@
                     android:layout_weight="1"
                     android:background="@null"
                     android:textColor="@color/black_32"
+                    android:singleLine="true"
                     android:textCursorDrawable="@drawable/et_cursor_yellow"
                     android:textSize="@dimen/textSize_14sp" />
                 <CheckBox
@@ -217,6 +224,7 @@
                     android:layout_weight="1"
                     android:background="@null"
                     android:textColor="@color/black_32"
+                    android:singleLine="true"
                     android:textCursorDrawable="@drawable/et_cursor_yellow"
                     android:textSize="@dimen/textSize_14sp" />
             </LinearLayout>
@@ -246,6 +254,7 @@
                     android:layout_weight="1"
                     android:background="@null"
                     android:hint="@string/input_num"
+                    android:singleLine="true"
                     android:inputType="numberDecimal"
                     android:textColor="@color/black_32"
                     android:textCursorDrawable="@drawable/et_cursor_yellow"

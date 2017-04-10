@@ -169,6 +169,10 @@ public interface ModuleCode {
      * 扫码出货
      */
     public final String SCANOUTSTORE="D005";
+    /**
+     * 产品质量追溯
+     */
+    public final String TRANSPRODUCTQUALITY="D006";
 
     /**
      * 报工

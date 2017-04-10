@@ -69,12 +69,6 @@ public class MoveStoreSumFg extends BaseFragment {
     TextView tvLocator;
     @BindView(R.id.ry_list)
     RecyclerView ryList;
-    @OnFocusChange(R.id.et_scan_moveinlocator)
-    void moveinlocatorFocusChange(){
-        ModuleUtils.viewChange(llScanInlocator, views);
-        ModuleUtils.etChange(activity, etScanMoveinlocator, editTexts);
-        ModuleUtils.tvChange(activity, tvMoveinlocator, textViews);
-    }
     @OnTextChanged(value = R.id.et_scan_moveinlocator, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void locatorChange(CharSequence s) {
         if (!StringUtils.isBlank(s.toString())) {

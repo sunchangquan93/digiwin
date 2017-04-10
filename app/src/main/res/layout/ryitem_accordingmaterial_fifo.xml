@@ -45,13 +45,13 @@
                 android:layout_width="@dimen/layout_70dp"
                 android:layout_height="wrap_content"
                 android:text="@string/batch_date"
-                android:textSize="@dimen/textSize_12sp" />
+                android:textSize="@dimen/textSize_14sp" />
 
             <TextView
                 android:id="@+id/tv_batch_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/textSize_12sp" />
+                android:textSize="@dimen/textSize_14sp" />
         </LinearLayout>
      </LinearLayout>
 
@@ -99,13 +99,13 @@
                 android:layout_width="@dimen/layout_70dp"
                 android:layout_height="wrap_content"
                 android:text="@string/rdna_num"
-                android:textSize="@dimen/textSize_12sp" />
+                android:textSize="@dimen/textSize_14sp" />
 
             <TextView
                 android:id="@+id/tv_rdna_num"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/textSize_12sp" />
+                android:textSize="@dimen/textSize_14sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -118,13 +118,13 @@
                 android:layout_width="@dimen/layout_70dp"
                 android:layout_height="wrap_content"
                 android:text="@string/actual_yield"
-                android:textSize="@dimen/textSize_12sp" />
+                android:textSize="@dimen/textSize_14sp" />
 
             <TextView
                 android:id="@+id/tv_feeding_amount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/textSize_12sp" />
+                android:textSize="@dimen/textSize_14sp" />
         </LinearLayout>
     </LinearLayout>
     <View style="@style/fifo_line_style" />

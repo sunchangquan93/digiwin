@@ -112,6 +112,7 @@ public class CompletingStoreActivity extends BaseFirstModuldeActivity{
             @Override
             public void onCallback1() {
                 showLoadingDialog();
+
                 if(StringUtils.isBlank(et_work_order_code.getText().toString().trim())){
                     dismissLoadingDialog();
                     showFailedDialog(R.string.please_scan_job_number);
@@ -184,6 +185,13 @@ public class CompletingStoreActivity extends BaseFirstModuldeActivity{
         ModuleUtils.viewChange(ll_input_num, views);
         ModuleUtils.etChange(activity, et_input_num, editTexts);
         ModuleUtils.tvChange(activity, tv_number, textViews);
+    }
+
+    @OnTextChanged(value = R.id.et_input_num, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
+    void num(CharSequence s) {
+        if ((".").equals(s.toString())) {
+            et_input_num.setText("");
+        }
     }
 
     @OnTextChanged(value = R.id.et_work_order_code, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)

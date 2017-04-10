@@ -1,5 +1,5 @@
 
-package digiwin.smartdepot.main.activity.storagesetting;
+package digiwin.smartdepot.main.activity.settingdialog;
 
 import android.content.Context;
 import android.graphics.Color;

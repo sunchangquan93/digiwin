@@ -142,6 +142,11 @@ public class PurchaseGoodsScanFg extends BaseFragment {
             showFailedDialog(R.string.input_num);
             return;
         }
+        saveBean.setDoc_no(orderBean.getDoc_no());
+        AccoutBean accoutBean = LoginLogic.getUserInfo();
+        if(null != accoutBean){
+            saveBean.setWarehouse_in_no(accoutBean.getWare());
+        }
         saveBean.setQty(et_input_num.getText().toString());
         showLoadingDialog();
         commonLogic.scanSave(saveBean, new CommonLogic.SaveListener() {
@@ -172,11 +177,8 @@ public class PurchaseGoodsScanFg extends BaseFragment {
                 case BARCODEWHAT:
                     HashMap<String, String> barcodeMap = new HashMap<>();
                     barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
-                    AccoutBean accoutBean = LoginLogic.getUserInfo();
-                    if(null != accoutBean){
-                        barcodeMap.put("warehouse_no",accoutBean.getWare());
-                    }
-                    barcodeMap.put("doc_no",saveBean.getDoc_no());
+                    barcodeMap.put(AddressContants.WAREHOUSE_NO,LoginLogic.getWare());
+                    barcodeMap.put(AddressContants.DOC_NO,orderBean.getDoc_no());
                     commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                         @Override
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
@@ -261,11 +263,6 @@ public class PurchaseGoodsScanFg extends BaseFragment {
         saveBean = new SaveBean();
         commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
         orderBean = (FilterResultOrderBean) pactivity.getIntent().getExtras().getSerializable("orderData");
-        saveBean.setDoc_no(orderBean.getDoc_no());
-        AccoutBean accoutBean = LoginLogic.getUserInfo();
-        if(null != accoutBean){
-            saveBean.setWarehouse_in_no(accoutBean.getWare());
-        }
         et_scan_barocde.requestFocus();
         }
         }

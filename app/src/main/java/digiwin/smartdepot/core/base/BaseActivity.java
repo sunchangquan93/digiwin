@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -132,6 +133,10 @@ public abstract class BaseActivity extends BaseAppActivity {
         LogUtils.i("createNewModuleId=====:",mTimestamp.toString());
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
 
     /**
      * @return 作业编号
