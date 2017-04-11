@@ -34,7 +34,7 @@ public class AlertDialogUtils {
                     dialog = null;
                 }
                 CustomDialog.Builder builder = new CustomDialog.Builder(context)
-                        .view(R.layout.commit_success_dialog)
+                        .view(R.layout.dialog_commit_success)
                         .style(R.style.CustomDialog)
                         .addViewOnclick(R.id.button_sure, new View.OnClickListener() {
                             @Override
@@ -71,7 +71,7 @@ public class AlertDialogUtils {
                     dialog = null;
                 }
                 CustomDialog.Builder builder = new CustomDialog.Builder(context)
-                        .view(R.layout.commit_success_dialog)
+                        .view(R.layout.dialog_commit_success)
                         .style(R.style.CustomDialog)
                         .addViewOnclick(R.id.button_sure, new View.OnClickListener() {
                             @Override
@@ -110,7 +110,7 @@ public class AlertDialogUtils {
                     dialog = null;
                 }
                 CustomDialog.Builder builder = new CustomDialog.Builder(context)
-                        .view(R.layout.commit_fail_dialog)
+                        .view(R.layout.dialog_commit_fail)
                         .style(R.style.CustomDialog)
                         .addViewOnclick(R.id.button_sure, new View.OnClickListener() {
                             @Override
@@ -148,7 +148,7 @@ public class AlertDialogUtils {
                     dialog = null;
                 }
                 CustomDialog.Builder builder = new CustomDialog.Builder(context)
-                        .view(R.layout.commit_fail_dialog)
+                        .view(R.layout.dialog_commit_fail)
                         .style(R.style.CustomDialog)
                         .addViewOnclick(R.id.button_sure, new View.OnClickListener() {
                             @Override
@@ -186,7 +186,7 @@ public class AlertDialogUtils {
                     dialog = null;
                 }
                 CustomDialog.Builder builder = new CustomDialog.Builder(context)
-                        .view(R.layout.exit_dialog)
+                        .view(R.layout.dialog_exit)
                         .style(R.style.CustomDialog)
                         .addViewOnclick(R.id.btn_ok, new View.OnClickListener() {
                             @Override
@@ -231,7 +231,7 @@ public class AlertDialogUtils {
                     dialog = null;
                 }
                 CustomDialog.Builder builder = new CustomDialog.Builder(context)
-                        .view(R.layout.exit_dialog)
+                        .view(R.layout.dialog_exit)
                         .style(R.style.CustomDialog)
                         .addViewOnclick(R.id.btn_ok, new View.OnClickListener() {
                             @Override
@@ -282,7 +282,7 @@ public class AlertDialogUtils {
                     editDialog = null;
                 }
                 final CustomDialog.Builder builder = new CustomDialog.Builder(context)
-                        .view(R.layout.updatenumber_dialog_layout)
+                        .view(R.layout.dialog_updatenumber)
                         .style(R.style.CustomDialog)
                         .setViewText(R.id.et_text, text);
                 String editText = builder.getViewText(R.id.et_text);
@@ -331,7 +331,7 @@ public class AlertDialogUtils {
                     dialog.dismiss();
                     dialog = null;
                 }
-                dialog = builder.view(R.layout.wait_dialog)
+                dialog = builder.view(R.layout.dialog_wait)
                         .style(R.style.CustomDialog)
                         .cancelTouchout(false)
                         .widthpx((int) (ViewUtils.getScreenWidth(context)))
@@ -359,7 +359,7 @@ public class AlertDialogUtils {
                     dialog = null;
                 }
                 CustomDialog.Builder builder = new CustomDialog.Builder(context)
-                        .view(R.layout.network_dialog)
+                        .view(R.layout.dialog_network)
                         .style(R.style.CustomDialog)
                         .addViewOnclick(R.id.button_sure, new View.OnClickListener() {
                             @Override
@@ -397,7 +397,7 @@ public class AlertDialogUtils {
                     dialog = null;
                 }
                 CustomDialog.Builder builder = new CustomDialog.Builder(context)
-                        .view(R.layout.network_error_dialog)
+                        .view(R.layout.dialog_network_error)
                         .style(R.style.CustomDialog)
                         .addViewOnclick(R.id.button_sure, new View.OnClickListener() {
                             @Override
@@ -438,7 +438,7 @@ public class AlertDialogUtils {
                     dialog = null;
                 }
                 CustomDialog.Builder builder = new CustomDialog.Builder(context)
-                        .view(R.layout.network_error_dialog)
+                        .view(R.layout.dialog_network_error)
                         .style(R.style.CustomDialog)
                         .addViewOnclick(R.id.button_sure, new View.OnClickListener() {
                             @Override
@@ -482,7 +482,7 @@ public class AlertDialogUtils {
                     dialog.dismiss();
                     dialog = null;
                 }
-                dialog = builder.view(R.layout.userexitdialog_layout)
+                dialog = builder.view(R.layout.dialog_userexit)
                         .style(R.style.MyDialog)
                         .addViewOnclick(R.id.rl_userInfo_exit, new View.OnClickListener() {
                             @Override
