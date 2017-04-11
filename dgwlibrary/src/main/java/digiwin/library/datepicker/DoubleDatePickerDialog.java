@@ -57,13 +57,12 @@ public class DoubleDatePickerDialog extends AlertDialog implements OnClickListen
     private final DatePicker mDatePicker_end;
     
     private final OnDateSetListener mCallBack;
-    
+
     /**
      * The callback used to indicate the user is done filling in the date.
      */
     public interface OnDateSetListener
     {
-        
         /**
          * @param view
          *            The view associated with this listener.
@@ -122,12 +121,11 @@ public class DoubleDatePickerDialog extends AlertDialog implements OnClickListen
         Context themeContext = getContext();
         setButton(BUTTON_POSITIVE, context.getResources().getString(R.string.label_sure), this);
         setButton(BUTTON_NEGATIVE,  context.getResources().getString(R.string.label_cancel), this);
-        // setButton(BUTTON_POSITIVE,
-        // themeContext.getText(android.R.string.date_time_done), this);
+
+
         setIcon(0);
-        
         LayoutInflater inflater = (LayoutInflater)themeContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.date_picker_dialog, null);
+        View view = inflater.inflate(R.layout.dialog_date_picker_h, null);
         setView(view);
         mDatePicker_start = (DatePicker)view.findViewById(R.id.datePickerStart);
         mDatePicker_start.setCalendarViewShown(false);
@@ -138,13 +136,55 @@ public class DoubleDatePickerDialog extends AlertDialog implements OnClickListen
         mDatePicker_start.init(year, monthOfYear, dayOfMonth, this);
         mDatePicker_end.init(year, monthOfYear, dayOfMonth, this);
         // updateTitle(year, monthOfYear, dayOfMonth);
-        
         if (!isDayVisible)
         {
             hidDay(mDatePicker_start);
             hidDay(mDatePicker_end);
         }
     }
+
+    /**
+     * @param context
+     *            The context the dialog is to run in.
+     * @param theme
+     *            the theme to apply to this dialog
+     * @param callBack
+     *            How the parent is notified that the date is set.
+     * @param year
+     *            The initial year of the dialog.
+     * @param monthOfYear
+     *            The initial month of the dialog.
+     * @param dayOfMonth
+     *            The initial day of the dialog.
+     * 竖屏
+     */
+    public DoubleDatePickerDialog(Context context, int theme, OnDateSetListener callBack, int year, int monthOfYear, int dayOfMonth, String ver)
+    {
+        super(context, theme);
+
+        mCallBack = callBack;
+
+        Context themeContext = getContext();
+        setButton(BUTTON_POSITIVE, context.getResources().getString(R.string.label_sure), this);
+        setButton(BUTTON_NEGATIVE,  context.getResources().getString(R.string.label_cancel), this);
+
+
+        setIcon(0);
+        LayoutInflater inflater = (LayoutInflater)themeContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.dialog_date_picker_h, null);
+        setView(view);
+        mDatePicker_start = (DatePicker)view.findViewById(R.id.datePickerStart);
+        mDatePicker_start.setCalendarViewShown(false);
+        mDatePicker_start.setSpinnersShown(true);
+        // mDatePicker_start.setBackgroundColor(context.getResources().getColor(R.color.Base_color));
+        mDatePicker_end = (DatePicker)view.findViewById(R.id.datePickerEnd);
+        //  mDatePicker_end.setBackgroundColor(context.getResources().getColor(R.color.Base_color));
+        mDatePicker_start.init(year, monthOfYear, dayOfMonth, this);
+        mDatePicker_end.init(year, monthOfYear, dayOfMonth, this);
+        // updateTitle(year, monthOfYear, dayOfMonth);
+    }
+
+
     
     /**
      * 隐藏日期
