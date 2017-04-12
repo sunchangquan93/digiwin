@@ -215,6 +215,15 @@ public class PostMaterialScanFg extends BaseFragment {
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
                 case BARCODEWHAT:
+                    if(!locatorFlag){
+                        showFailedDialog(R.string.scan_locator, new OnDialogClickListener() {
+                            @Override
+                            public void onCallback() {
+                                et_scan_barocde.setText("");
+                                et_scan_locator.requestFocus();
+                            }
+                        });
+                    }
                     HashMap<String, String> barcodeMap = new HashMap<>();
                     barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
                     barcodeMap.put(AddressContants.WAREHOUSE_NO,LoginLogic.getWare());
@@ -224,12 +233,12 @@ public class PostMaterialScanFg extends BaseFragment {
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
                             //管控建议
                             try{
-                                if(barcodeBackBean.getFifo_check().equals("Y")){
+                                if(barcodeBackBean.getFifo_check().equals(AddressContants.FIFOY)){
                                     fifo_check = true;
                                     if(null != fiFoList && fiFoList.size()>0){
                                         int n = 0;
                                         for (int i = 0;i<fiFoList.size();i++){
-                                            if(barcodeBackBean.getBarcode_no().equals(fiFoList.get(i).getBarcode_no())){
+                                            if(barcodeBackBean.getBarcode_no().equals(fiFoList.get(i).getBarcode_no()) && saveBean.getStorage_spaces_out_no().equals(fiFoList.get(i).getStorage_spaces_no())){
                                                 n++;
                                             }
                                         }
@@ -281,6 +290,19 @@ public class PostMaterialScanFg extends BaseFragment {
                     commonLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
                         @Override
                         public void onSuccess(ScanLocatorBackBean locatorBackBean) {
+                            if(null != fiFoList && fiFoList.size()>0){
+                                int n = 0;
+                                for (int i = 0;i<fiFoList.size();i++){
+                                    if(locatorBackBean.getStorage_spaces_no().equals(fiFoList.get(i).getStorage_spaces_no())){
+                                        n++;
+                                    }
+                                }
+                                if(n ==0){
+                                    showFailedDialog(pactivity.getResources().getString(R.string.barcode_not_in_fifo));
+                                    et_scan_barocde.setText("");
+                                    return;
+                                }
+                            }
                             locatorShow = locatorBackBean.getShow();
                             locatorFlag = true;
 //                            show();
@@ -308,13 +330,8 @@ public class PostMaterialScanFg extends BaseFragment {
 
     private void getFIFO(ListSumBean sumshoubean ){
         HashMap<String,String> map = new HashMap<String,String>();
-        map.put("issuing_no",orderData.getDoc_no());
-        AccoutBean accoutBean = LoginLogic.getUserInfo();
-        String ware = "";
-        if(null != accoutBean){
-            ware = accoutBean.getWare();
-        }
-        map.put("warehouse_no",ware);
+        map.put(AddressContants.ISSUING_NO,orderData.getDoc_no());
+        map.put(AddressContants.WAREHOUSE_NO,LoginLogic.getWare());
         showLoadingDialog();
         commonLogic.postMaterialFIFO(map, new CommonLogic.PostMaterialFIFOListener() {
             @Override
@@ -358,23 +375,23 @@ public class PostMaterialScanFg extends BaseFragment {
         }
         saveBean.setDoc_no(orderData.getDoc_no());
         saveBean.setQty(et_input_num.getText().toString().trim());
-        //管控建议
-        if(fifo_check){
-            if(null != fiFoList && fiFoList.size()>0){
-                int n = 0;
-                for (int i = 0;i<fiFoList.size();i++){
-                    if(saveBean.getStorage_spaces_out_no().equals(fiFoList.get(i).getStorage_spaces_no())
-                            && saveBean.getBarcode_no().equals(fiFoList.get(i).getBarcode_no())){
-                        n++;
-                    }
-                }
-                if(n ==0){
-                    showFailedDialog(pactivity.getResources().getString(R.string.locator_not_in_fifo));
-                    et_scan_locator.setText("");
-                    return;
-                }
-            }
-        }
+//        //管控建议
+//        if(fifo_check){
+//            if(null != fiFoList && fiFoList.size()>0){
+//                int n = 0;
+//                for (int i = 0;i<fiFoList.size();i++){
+//                    if(saveBean.getStorage_spaces_out_no().equals(fiFoList.get(i).getStorage_spaces_no())
+//                            && saveBean.getBarcode_no().equals(fiFoList.get(i).getBarcode_no())){
+//                        n++;
+//                    }
+//                }
+//                if(n ==0){
+//                    showFailedDialog(pactivity.getResources().getString(R.string.locator_not_in_fifo));
+//                    et_scan_locator.setText("");
+//                    return;
+//                }
+//            }
+//        }
         showLoadingDialog();
         commonLogic.scanSave(saveBean, new CommonLogic.SaveListener() {
             @Override

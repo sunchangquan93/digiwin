@@ -52,8 +52,6 @@ public class AccordingMaterialSumAdapter extends BaseRecyclerAdapter<ListSumBean
                 SumShowBean bean = new SumShowBean();
                 bean.setItem_no(item.getLow_order_item_no());
                 bean.setItem_name(item.getItem_name());
-                Log.d("bean.setItem_no====:",bean.getItem_no());
-                Log.d("bean.setItem_name==:",bean.getItem_name());
                 AccordingMaterialActivity activity = (AccordingMaterialActivity) mContext;
                 activity.ToDetailAct(bean);
             }

@@ -14,20 +14,22 @@ import digiwin.smartdepot.module.bean.common.FilterResultOrderBean;
  * @author 唐孟宇
  */
 
-public class FilterResultOrderAdapter extends BaseRecyclerAdapter<FilterResultOrderBean> {
+public class PostMaterialOrderAdapter extends BaseRecyclerAdapter<FilterResultOrderBean> {
 
-    public FilterResultOrderAdapter(Context ctx, List<FilterResultOrderBean> list) {
+    public PostMaterialOrderAdapter(Context ctx, List<FilterResultOrderBean> list) {
         super(ctx, list);
     }
 
     @Override
     protected int getItemLayout(int viewType) {
-        return R.layout.ryitem_filter_result;
+        return R.layout.ryitem_post_material;
     }
 
     @Override
     protected void bindData(RecyclerViewHolder holder, int position, final FilterResultOrderBean item) {
         holder.setText(R.id.tv_item_post_material_order, item.getDoc_no());
         holder.setText(R.id.tv_item_plan_date,item.getCreate_date());
+        holder.setText(R.id.tv_item_applicant, item.getEmployee_name());
+        holder.setText(R.id.tv_item_department,item.getDepartment_name());
     }
 }

@@ -146,7 +146,7 @@
 
     <string name="department">部门</string>
 
-    <string name="barcode_not_in_fifo">该条码不在FIFO建议中</string>
+    <string name="barcode_not_in_fifo">该条码或库位与FIFO建议不符</string>
     <string name="locator_not_in_fifo">该库位不在FIFO建议中</string>
 
     <string name="item_seq">项次</string>
@@ -429,7 +429,7 @@
     <string name="scanout_scan">扫出扫描</string>
     <string name="sales_dealers">出货量</string>
 
-    <string name="scan_out_store">扫码出货</string>
+    <string name="scan_out_store">扫箱码出货</string>
     <string name="warehouse_error">返回仓库与当前仓库不一致</string>
     <string name="scan_out_store_detail">扫码出货明细</string>
     <string name="scan_out_store_list">扫码出货清单</string>
@@ -439,11 +439,11 @@
     <string name="scan_case_first">请扫描箱号条码</string>
 
     <string name="match_so_big">匹配量不可大于入库量</string>
-    <string name="ordersale">订单出货</string>
+    <string name="ordersale">门店要货</string>
 
     <string name="single_package_lager">单包数量不能超过总数量</string>
 
-    <string name="trace_product_quality">产品质量追溯</string>
+    <string name="trace_product_quality">成品质量追溯</string>
     <string name="trace_quality">质量追溯</string>
     <string name="product_process">生产过程</string>
     <string name="current_iventory">当前库存</string>
@@ -489,4 +489,5 @@
     <string name="check_employee">检验员</string>
     <string name="print_psw">请输入登入密码</string>
     <string name="psw_error">密码错误</string>
+    <string name="check_all">全选</string>
 </resources>

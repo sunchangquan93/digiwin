@@ -12,9 +12,17 @@ public class ScanLocatorBackBean {
      */
     private String storage_spaces_no;
     /**
+     * 储位名称
+     */
+    private  String storage_spaces_name;
+    /**
      *  仓库编号
      */
     private String warehouse_no;
+    /**
+     *  仓库名称
+     */
+    private String warehouse_name;
     /**
      * 展示
      */
@@ -34,6 +42,22 @@ public class ScanLocatorBackBean {
 
     public void setWarehouse_no(String warehouse_no) {
         this.warehouse_no = warehouse_no;
+    }
+
+    public String getStorage_spaces_name() {
+        return storage_spaces_name;
+    }
+
+    public void setStorage_spaces_name(String storage_spaces_name) {
+        this.storage_spaces_name = storage_spaces_name;
+    }
+
+    public String getWarehouse_name() {
+        return warehouse_name;
+    }
+
+    public void setWarehouse_name(String warehouse_name) {
+        this.warehouse_name = warehouse_name;
     }
 
     public String getShow() {

@@ -125,7 +125,7 @@ public class ScanOutDetailActivity extends BaseTitleActivity{
         super.initNavigationTitle();
         mName.setText(R.string.scan_out_store_detail);
         ivScan.setVisibility(View.GONE);
-        tvCheckAll.setText("全选");
+        tvCheckAll.setText(R.string.check_all);
         tvCheckAll.setVisibility(View.VISIBLE);
     }
 

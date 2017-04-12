@@ -251,7 +251,7 @@ public class AccordingMaterialActivity extends BaseFirstModuldeActivity {
      */
     public void ToDetailAct(final SumShowBean bean){
         HashMap<String,String> map = new HashMap<String,String>();
-        map.put("item_no",bean.getItem_no());
+        map.put(AddressContants.ITEM_NO,bean.getItem_no());
         managerCommon.getDetail(map, new CommonLogic.GetDetailListener() {
             @Override
             public void onSuccess(final List<DetailShowBean> detailShowBeen) {

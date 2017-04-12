@@ -266,13 +266,14 @@ public class StoreTransLockActivity extends BaseTitleActivity{
             if(msg.what == WAREHOUSEWHAT){
                 HashMap<String,String> map = new HashMap<>();
                 String str = (String) msg.obj;
-                map.put(AddressContants.WAREHOUSE_NO,str);
+                map.put(AddressContants.STORAGE_SPACES_BARCODE,str);
                 commonLogic.scanLocator(map, new CommonLogic.ScanLocatorListener() {
                     @Override
                     public void onSuccess(ScanLocatorBackBean locatorBackBean) {
                         if(null!=locatorBackBean){
                             dismissLoadingDialog();
                             et_loctor_no.setText(locatorBackBean.getStorage_spaces_no());
+                            et_lock_store.setText(locatorBackBean.getWarehouse_no());
                         }
                     }
 

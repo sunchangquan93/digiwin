@@ -103,7 +103,6 @@ public class ProductionLeaderSumFg extends BaseFragment {
             ClickItemPutBean putBean = new ClickItemPutBean();
             putBean.setDoc_no(localData.getDoc_no());
             putBean.setWarehouse_out_no(LoginLogic.getUserInfo().getWare());
-            Log.d("====",pactivity.mTimestamp.toString());
 
             commonLogic = CommonLogic.getInstance(pactivity, pactivity.module, pactivity.mTimestamp.toString());
 
@@ -186,7 +185,7 @@ public class ProductionLeaderSumFg extends BaseFragment {
             public void onCallback1() {
                 showLoadingDialog();
                 HashMap<String, String> map = new HashMap<>();
-                map.put("doc_no",tv_super_number.getText().toString().trim());
+                map.put(AddressContants.DOC_NO,tv_super_number.getText().toString().trim());
                 commonLogic.commit(map, new CommonLogic.CommitListener() {
                     @Override
                     public void onSuccess(String msg) {

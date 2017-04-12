@@ -15,11 +15,11 @@
         <TextView
             android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
-            android:text="@string/purchase_order"
+            android:text="@string/post_material_order"
             android:textSize="@dimen/textSize_14sp" />
 
         <TextView
-            android:id="@+id/tv_item_purchase_order"
+            android:id="@+id/tv_item_post_material_order"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/textSize_14sp" />
@@ -41,21 +41,8 @@
             android:textSize="@dimen/textSize_14sp" />
 
         <TextView
-            android:id="@+id/tv_item_date"
-            android:layout_width="@dimen/layout_0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/textSize_14sp" />
-        <TextView
-            android:layout_width="@dimen/layout_60dp"
-            android:layout_height="wrap_content"
-            android:text="@string/supplier"
-            android:textSize="@dimen/textSize_14sp" />
-
-        <TextView
-            android:id="@+id/tv_item_supplier"
-            android:layout_width="@dimen/layout_0dp"
-            android:layout_weight="1"
+            android:id="@+id/tv_item_plan_date"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/textSize_14sp" />
     </LinearLayout>

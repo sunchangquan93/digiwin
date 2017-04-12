@@ -225,9 +225,9 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
         saveBean.setQty(etInputNum.getText().toString());
         saveBean.setDoc_no(tv_gongDan_no.getText().toString().trim());
         //判断库存 欠料数量  哪个小取哪一个
-        if(Float.valueOf(tv_under_feed.getText().toString()) > Float.valueOf(tv_stock_balance.getText().toString())){
+        if(StringUtils.string2Float(tv_under_feed.getText().toString()) > StringUtils.string2Float(tv_stock_balance.getText().toString())){
             saveBean.setAvailable_in_qty(tv_stock_balance.getText().toString());
-        }else if(Float.valueOf(tv_under_feed.getText().toString()) < Float.valueOf(tv_stock_balance.getText().toString())){
+        }else if(StringUtils.string2Float(tv_under_feed.getText().toString()) < StringUtils.string2Float(tv_stock_balance.getText().toString())){
             saveBean.setAvailable_in_qty(tv_under_feed.getText().toString());
         }else{
             saveBean.setAvailable_in_qty(tv_under_feed.getText().toString());
@@ -466,7 +466,7 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
             etScanBarocde.setText(data.getLow_order_item_no());
         }
 
-        if(data.getFifo_check().equals("Y")){
+        if(data.getFifo_check().equals(AddressContants.FIFOY)){
             fifo_check = true;
         }else{
             fifo_check = false;
@@ -481,11 +481,11 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
     public void getFifo(){
         HashMap<String,String> map = new HashMap<String,String>();
         //判断库存 欠料数量  哪个小取哪一个 然后减去实发量
-        if(Float.valueOf(tv_under_feed.getText().toString()) > Float.valueOf(tv_stock_balance.getText().toString())){
+        if(StringUtils.string2Float(tv_under_feed.getText().toString()) > StringUtils.string2Float(tv_stock_balance.getText().toString())){
             float num = StringUtils.sub(tv_stock_balance.getText().toString(),localData.getScan_sumqty());
             map.put("qty",String.valueOf(num));
 
-        }else if(Float.valueOf(tv_under_feed.getText().toString()) < Float.valueOf(tv_stock_balance.getText().toString())){
+        }else if(StringUtils.string2Float(tv_under_feed.getText().toString()) < StringUtils.string2Float(tv_stock_balance.getText().toString())){
             float num = StringUtils.sub(tv_under_feed.getText().toString(),localData.getScan_sumqty());
             map.put("qty",String.valueOf(num));
 
@@ -493,9 +493,8 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
             float num = StringUtils.sub(tv_stock_balance.getText().toString(),localData.getScan_sumqty());
             map.put("qty",String.valueOf(num));
         }
-        map.put("item_no",localData.getLow_order_item_no());
-        map.put("lot_no","");
-        map.put("warehouse_no", LoginLogic.getUserInfo().getWare());
+        map.put(AddressContants.ITEM_NO,localData.getLow_order_item_no());
+        map.put(AddressContants.WAREHOUSE_NO, LoginLogic.getUserInfo().getWare());
 
         mHandler.sendMessageDelayed(mHandler.obtainMessage(FIFOWHAT, map), AddressContants.DELAYTIME);
     }

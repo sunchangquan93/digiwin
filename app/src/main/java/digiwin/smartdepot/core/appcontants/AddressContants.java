@@ -192,4 +192,8 @@ public class AddressContants {
      *时间
      */
     public static  final String RECEIPTDATE="receipt_date";
+    /**
+     * 部分模块使用的单号key值
+     */
+    public static  final String ISSUING_NO="issuing_no";
 }

@@ -142,7 +142,7 @@ public class MiscellaneousIssueSumFg extends BaseFragment {
     private void getDetail(final SumShowBean orderSumData) {
         Map<String, String> map = new HashMap<>();
         showLoadingDialog();
-        map.put("item_no", orderSumData.getItem_no());
+        map.put(AddressContants.ITEM_NO, orderSumData.getItem_no());
         commonLogic.getDetail(map, new CommonLogic.GetDetailListener() {
             @Override
             public void onSuccess(List<DetailShowBean> detailShowBeen) {

@@ -160,11 +160,7 @@ public class QuickStorageListActivity extends BaseTitleActivity{
         try {
             showLoadingDialog();
 
-            AccoutBean accoutBean = LoginLogic.getUserInfo();
-            if(null == accoutBean){
-                return;
-            }
-            FilterBean.setWarehouse_in_no(accoutBean.getWare());
+            FilterBean.setWarehouse_in_no(LoginLogic.getWare());
 
             if(!StringUtils.isBlank(et_provider_code.getText().toString().trim())){
                 FilterBean.setDoc_no(et_provider_code.getText().toString().trim());

@@ -30,5 +30,6 @@ public class PurchaseInStorageAdapter extends BaseRecyclerAdapter<FilterResultOr
     protected void bindData(RecyclerViewHolder holder, int position, final FilterResultOrderBean item) {
         holder.setText(R.id.tv_item_purchase_order, item.getDoc_no());
         holder.setText(R.id.tv_item_date,item.getCreate_date());
+        holder.setText(R.id.tv_item_supplier,item.getSupplier_name());
     }
 }

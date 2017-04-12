@@ -337,8 +337,8 @@ public class PickUpShipmentScanFg extends BaseFragment {
             case FIFOWHAT:
                 showLoadingDialog();
                 Map<String,String> map = new HashMap<String,String>();
-                map.put("issuing_no",String.valueOf(msg.obj));
-                map.put("warehouse_no", LoginLogic.getUserInfo().getWare());
+                map.put(AddressContants.ISSUING_NO,String.valueOf(msg.obj));
+                map.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
                 commonLogic.postMaterialFIFO(map, new CommonLogic.PostMaterialFIFOListener() {
                     @Override
                     public void onSuccess(List<PostMaterialFIFOBean> fiFoBeanList) {
@@ -348,7 +348,6 @@ public class PickUpShipmentScanFg extends BaseFragment {
                             adapter = new PickUpShipmentFIFoAdapter(context,fiFoBeanList);
                             mRy_list.setAdapter(adapter);
                         }else{
-                            LogUtils.i("null == fiFoBeanList==","");
                             fiFoList = new ArrayList<PostMaterialFIFOBean>();
                             adapter = new PickUpShipmentFIFoAdapter(context,fiFoList);
                             mRy_list.setAdapter(adapter);
@@ -401,7 +400,6 @@ public class PickUpShipmentScanFg extends BaseFragment {
     protected void doBusiness() {
         initData();
         pactivity = (PickUpShipmentActivity) activity;
-        Log.d(TAG,"pactivity:"+pactivity);
         commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(pactivity);
         mRy_list.setLayoutManager(linearLayoutManager);

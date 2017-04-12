@@ -260,7 +260,7 @@ public class SaleOutletScanFg extends BaseFragment {
             switch (msg.what) {
                 case SALEWHAT:
                     HashMap<String, String> map = new HashMap<String, String>();
-                    map.put("issuing_no", String.valueOf(msg.obj));
+                    map.put(AddressContants.ISSUING_NO, String.valueOf(msg.obj));
                     map.put(AddressContants.WAREHOUSE_NO, ware);
                     ClickItemPutBean itemPutBean = new ClickItemPutBean();
                     itemPutBean.setNotice_no(notice_no);

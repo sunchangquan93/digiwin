@@ -217,9 +217,9 @@ public class AccordingMaterialScanNewActivity extends BaseTitleActivity {
 
         saveBean.setQty(etInputNum.getText().toString());
         //判断库存 欠料数量  哪个小取哪一个
-        if(Float.valueOf(tv_under_feed.getText().toString()) > Float.valueOf(tv_stock_balance.getText().toString())){
+        if(StringUtils.string2Float(tv_under_feed.getText().toString()) > StringUtils.string2Float(tv_stock_balance.getText().toString())){
             saveBean.setAvailable_in_qty(tv_stock_balance.getText().toString());
-        }else if(Float.valueOf(tv_under_feed.getText().toString()) < Float.valueOf(tv_stock_balance.getText().toString())){
+        }else if(StringUtils.string2Float(tv_under_feed.getText().toString()) < StringUtils.string2Float(tv_stock_balance.getText().toString())){
             saveBean.setAvailable_in_qty(tv_under_feed.getText().toString());
         }else{
             saveBean.setAvailable_in_qty(tv_under_feed.getText().toString());
@@ -484,16 +484,16 @@ public class AccordingMaterialScanNewActivity extends BaseTitleActivity {
 
     public void getFifo(){
         HashMap<String,String> map = new HashMap<String,String>();
-        map.put("item_no",localdata.getLow_order_item_no());
+        map.put(AddressContants.ITEM_NO,localdata.getLow_order_item_no());
         map.put("lot_no","");
-        map.put("warehouse_no", LoginLogic.getUserInfo().getWare());
+        map.put(AddressContants.WAREHOUSE_NO, LoginLogic.getUserInfo().getWare());
 
         //判断库存 欠料数量  哪个小取哪一个 然后减去实发量
-        if(Float.valueOf(tv_under_feed.getText().toString()) > Float.valueOf(tv_stock_balance.getText().toString())){
+        if(StringUtils.string2Float(tv_under_feed.getText().toString()) > StringUtils.string2Float(tv_stock_balance.getText().toString())){
             float num = StringUtils.sub(tv_stock_balance.getText().toString(),tv_actual_yield.getText().toString());
             map.put("qty",String.valueOf(num));
 
-        }else if(Float.valueOf(tv_under_feed.getText().toString()) < Float.valueOf(tv_stock_balance.getText().toString())){
+        }else if(StringUtils.string2Float(tv_under_feed.getText().toString()) < StringUtils.string2Float(tv_stock_balance.getText().toString())){
             float num = StringUtils.sub(tv_under_feed.getText().toString(),tv_actual_yield.getText().toString());
             map.put("qty",String.valueOf(num));
 

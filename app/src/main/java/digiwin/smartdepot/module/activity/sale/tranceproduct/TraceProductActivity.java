@@ -108,7 +108,7 @@ public class TraceProductActivity extends BaseActivity {
             switch (msg.what) {
                 case BARCODEWHAT:
                     Map<String, String> map = new HashMap<>();
-                    map.put("barcode_no", (String) msg.obj);
+                    map.put(AddressContants.BARCODE_NO, (String) msg.obj);
                     commonLogic.scanBarcode(map, new CommonLogic.ScanBarcodeListener() {
                         @Override
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {

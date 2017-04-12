@@ -151,7 +151,7 @@ public class PurchaseCheckActivity extends BaseActivity {
             return;
         }
         Bundle bundle = new Bundle();
-        bundle.putString("item_no",purchaseCheckBean.getItem_no());
+        bundle.putString(AddressContants.ITEM_NO,purchaseCheckBean.getItem_no());
         bundle.putString(AddressContants.MODULEID_INTENT,module);
         ActivityManagerUtils.startActivityForBundleData(pactivity,CheckShowImageActivity.class,bundle);
     }
@@ -199,7 +199,7 @@ public class PurchaseCheckActivity extends BaseActivity {
     @OnClick(R.id.commit)
     void commit(){
         if(null != purchaseCheckBean){
-            if(purchaseCheckBean.getQc_state().equals("Y")){
+            if(purchaseCheckBean.getQc_state().equals(AddressContants.FIFOY)){
                final List<Map<String,String>> maps = new ArrayList<>();
                 for (int i = 0; i < purchaseCheckBeanList.size(); i++) {
                     Map<String, String> map = new HashMap<>();
@@ -252,7 +252,7 @@ public class PurchaseCheckActivity extends BaseActivity {
                 if(purchaseCheckBeanList != null){
                     for (int i = 0; i < purchaseCheckBeanList.size(); i++) {
                         Map<String,String> map = new HashMap<>();
-                        map.put("receipt_no",purchaseCheckBeanList.get(i).getReceipt_no());
+                        map.put(AddressContants.RECEIPT_NO,purchaseCheckBeanList.get(i).getReceipt_no());
                         map.put("receipt_seq",purchaseCheckBeanList.get(i).getSeq());
                         map.put("ok_qty",purchaseCheckBeanList.get(i).getOk_qty());
                         float unqua_qty = StringUtils.string2Float(purchaseCheckBeanList.get(i).getQty()) - StringUtils.string2Float(purchaseCheckBeanList.get(i).getOk_qty());
@@ -392,7 +392,7 @@ public class PurchaseCheckActivity extends BaseActivity {
             switch (msg.what){
                 case BARCODEWHAT:
                     Map<String,String> map = new HashMap<>();
-                    map.put("barcode_no",msg.obj.toString().trim());
+                    map.put(AddressContants.BARCODE_NO,msg.obj.toString().trim());
                     map.put("pagesize", (String)SharedPreferencesUtils.get(pactivity,SharePreKey.PAGE_SETTING,AddressContants.PAGE_NUM));
                     showLoadingDialog();
                     logic.getMaterialToCheck(map, new PurcahseCheckLogic.GetMaterialToCheckListener() {
@@ -496,10 +496,10 @@ public class PurchaseCheckActivity extends BaseActivity {
 //                    receipt_no   string          收货单号
 //                    turn_order   string          分批顺序
 //                    seq          string          项次号
-                    map.put("receipt_no",purchaseCheckBean.getReceipt_no());
+                    map.put(AddressContants.RECEIPT_NO,purchaseCheckBean.getReceipt_no());
                     map.put("turn_order",purchaseCheckBean.getTurn_order());
                     map.put("seq",purchaseCheckBean.getSeq());
-                    seq = map.get("seq")+map.get("receipt_no");
+                    seq = map.get("seq")+map.get(AddressContants.RECEIPT_NO);
                     showLoadingDialog();
                     logic.getIQCDetailList(map, new PurcahseCheckLogic.GetIQCListListener() {
                         @Override

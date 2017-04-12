@@ -12,7 +12,7 @@ public interface ModuleCode {
     public final String OTHER="OTHER";
 
     /**
-     * 采购收货扫描
+     * 扫码收获
      */
     public final String PURCHASEGOODSSCAN = "A003";
     /**
@@ -21,7 +21,7 @@ public interface ModuleCode {
     public final String PURCHASECHECK = "A004";
 
     /**
-     * 采购入库
+     * 扫码入库
      */
     public final String PURCHASEINSTORE="A005";
     /**
@@ -42,7 +42,7 @@ public interface ModuleCode {
      */
     public final String WORKORDERCODE = "B003";
     /**
-     * 直接入库编号
+     * 直接入库编号--快速入库
      */
     public final  String DIRECTSTORAGE="B005";
     /**
@@ -56,7 +56,7 @@ public interface ModuleCode {
     public final String PUTINSTORE = "B007";
 
     /**
-     * 生产退料
+     * 退料过账
      */
     public final  String MATERIALRETURNING="B010";
     /**
@@ -64,7 +64,7 @@ public interface ModuleCode {
      */
     public final String PRODUCTIONLEADER = "B011";
     /**
-     * 生产完工入库上架编号
+     * 依成品入库
      */
     public final  String FINISHEDSTORAGE="B012";
 
@@ -80,7 +80,7 @@ public interface ModuleCode {
 
 
     /**
-     * 调拨复核编号
+     * 配货复核编号
      */
     public final String TRANSFERS_TO_REVIEW="B015";
 
@@ -93,9 +93,8 @@ public interface ModuleCode {
      */
     public final String WORKORDERRETURN="B022";
 
-
     /**
-     * 依工单补料
+     * 依退料补料
      */
     public final String WORKSUPPLEMENT="B023";
 
@@ -116,19 +115,17 @@ public interface ModuleCode {
      */
     public final String STOREQUERY="C004";
     /**
-     * 调拨，无来源
+     * 杂项收料
      */
-    public final String NOCOMESTOREALLOT ="C010";
-
+    public final String MISCELLANEOUSISSUESIN="C008";
     /**
      * 杂项发料
      */
     public final String MISCELLANEOUSISSUESOUT="C009";
     /**
-     * 杂项收料
+     * 调拨，无来源
      */
-    public final String MISCELLANEOUSISSUESIN="C008";
-
+    public final String NOCOMESTOREALLOT ="C010";
     /**
      * 条码移库
      */
@@ -154,9 +151,12 @@ public interface ModuleCode {
      * 通知出货
      */
     public final String SALEOUTLET="D001";
-
     /**
-     * 捡料出货
+     * 门店要货
+     */
+    public final String ORDERSALE = "D002";
+    /**
+     * 出货过账
      */
     public final String PICKUPSHIPMENT = "D003";
 
@@ -166,11 +166,11 @@ public interface ModuleCode {
     public final String SALERETURN="D004";
 
     /**
-     * 扫码出货
+     * 扫箱码出货
      */
     public final String SCANOUTSTORE="D005";
     /**
-     * 产品质量追溯
+     * 成品质量追溯
      */
     public final String TRANSPRODUCTQUALITY="D006";
 
@@ -195,14 +195,6 @@ public interface ModuleCode {
      * 扫出扫描
      */
     public final String SCANOUTSCAN = "E004";
-
-
-    /**
-     * 订单出货
-     */
-    public final String ORDERSALE = "D007";
-
-
     /**
      * 工序报工
      */

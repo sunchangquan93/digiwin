@@ -22,7 +22,7 @@
 
             <TextView
                 android:id="@+id/tv_moveinlocator"
-                android:layout_width="@dimen/layout_70dp"
+                android:layout_width="@dimen/layout_60dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="@string/move_instore"
@@ -33,11 +33,10 @@
                 android:id="@+id/et_scan_moveinlocator"
                 android:layout_width="@dimen/layout_0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/layout_10dp"
                 android:layout_weight="1"
                 android:background="@null"
                 android:singleLine="true"
-                android:textColor="@color/back47"
+                android:textColor="@color/white"
                 android:textCursorDrawable="@drawable/et_cursor_yellow"
                 android:textSize="@dimen/textSize_14sp" />
 
@@ -51,7 +50,6 @@
             <TextView
                 android:layout_width="@dimen/layout_60dp"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
                 android:textColor="@color/back47"
                 android:textSize="@dimen/textSize_14sp"
                 android:text="@string/label_storage"
@@ -60,14 +58,13 @@
                 android:id="@+id/tv_storage"
                 android:layout_width="@dimen/layout_0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_marginLeft="@dimen/layout_5dp"
                 android:layout_weight="1"
                 android:textColor="@color/white"
                 android:textSize="@dimen/textSize_14sp"/>
             <TextView
-                android:layout_width="@dimen/layout_60dp"
+                android:layout_width="@dimen/layout_30dp"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
                 android:textColor="@color/back47"
                 android:textSize="@dimen/textSize_14sp"
                 android:text="@string/locator"
@@ -76,7 +73,7 @@
                 android:id="@+id/tv_locator"
                 android:layout_width="@dimen/layout_0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_marginLeft="@dimen/layout_5dp"
                 android:layout_weight="1"
                 android:textColor="@color/white"
                 android:textSize="@dimen/textSize_14sp"/>

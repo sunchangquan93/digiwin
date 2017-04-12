@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/item_ll"
-    android:layout_marginTop="@dimen/layout_10dp"
     android:paddingRight="@dimen/layout_10dp"
     android:paddingLeft="@dimen/layout_10dp"
     android:layout_width="match_parent"

@@ -248,7 +248,7 @@ public class DistributeScanActivity extends BaseTitleActivity {
                         @Override
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
                             //管控建议
-                            if(sumshoubean.getFifo_check().equals("Y")){
+                            if(sumshoubean.getFifo_check().equals(AddressContants.FIFOY)){
                                 if(null != fiFoList && fiFoList.size()>0){
                                     int n = 0;
                                     for (int i = 0;i<fiFoList.size();i++){
@@ -341,14 +341,8 @@ public class DistributeScanActivity extends BaseTitleActivity {
 
     private void getFIFO(DistributeSumShowBean sumshoubean ){
         HashMap<String,String> map = new HashMap<String,String>();
-        map.put("item_no",sumshoubean.getItem_no());
-        map.put("lot_no","");
-        AccoutBean accoutBean = LoginLogic.getUserInfo();
-        String ware = "";
-        if(null != accoutBean){
-            ware = accoutBean.getWare();
-        }
-        map.put("warehouse_no",ware);
+        map.put(AddressContants.ITEM_NO,sumshoubean.getItem_no());
+        map.put(AddressContants.WAREHOUSE_NO,LoginLogic.getWare());
         //欠料量
         float num1 = StringUtils.string2Float(sumshoubean.getShortage_qty());
         //库存量

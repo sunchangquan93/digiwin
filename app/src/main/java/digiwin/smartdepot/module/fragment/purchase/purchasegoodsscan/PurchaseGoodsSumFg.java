@@ -181,7 +181,7 @@ public class PurchaseGoodsSumFg extends BaseFragment {
     private void getDetail(final ListSumBean orderSumData) {
         Map<String, String> map = new HashMap<>();
         showLoadingDialog();
-        map.put("item_no", orderSumData.getItem_no());
+        map.put(AddressContants.ITEM_NO, orderSumData.getItem_no());
         final SumShowBean sumShowBean = new SumShowBean();
         sumShowBean.setItem_name(orderSumData.getItem_name());
         sumShowBean.setItem_no(orderSumData.getItem_no());
@@ -227,6 +227,7 @@ public class PurchaseGoodsSumFg extends BaseFragment {
                         tv_head_provider.setText("");
                         tv_head_receipt_address.setText("");
                         pactivity.scanFg.initData();
+                        activity.finish();
                     }
                 });
             }

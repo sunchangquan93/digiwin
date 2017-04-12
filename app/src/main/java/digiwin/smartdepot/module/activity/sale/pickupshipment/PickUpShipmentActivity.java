@@ -169,7 +169,6 @@ public class PickUpShipmentActivity extends BaseFirstModuldeActivity{
     @Override
     public String moduleCode() {
         module = ModuleCode.PICKUPSHIPMENT;
-        Log.d("moduleCode=====",module);
         return module;
     }
 

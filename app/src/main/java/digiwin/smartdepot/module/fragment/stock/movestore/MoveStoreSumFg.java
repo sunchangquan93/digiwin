@@ -110,8 +110,8 @@ public class MoveStoreSumFg extends BaseFragment {
                     commonLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
                         @Override
                         public void onSuccess(ScanLocatorBackBean locatorBackBean) {
-                            tvLocator.setText(locatorBackBean.getStorage_spaces_no());
-                            tvStorage.setText(locatorBackBean.getWarehouse_no());
+                            tvLocator.setText(locatorBackBean.getStorage_spaces_name());
+                            tvStorage.setText(locatorBackBean.getWarehouse_name());
                             locatorFlag=true;
                         }
 

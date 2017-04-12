@@ -42,7 +42,7 @@ public class QuickStorageAdapter extends BaseRecyclerAdapter<ListSumBean> {
     public List<ListSumBean> getCheckData(){
         List<ListSumBean> checkedList = new ArrayList<ListSumBean>();
         for(ListSumBean detailData : listData){
-            if(Float.valueOf(detailData.getMatch_qty()) > 0){
+            if(StringUtils.string2Float(detailData.getMatch_qty()) > 0){
                 checkedList.add(detailData);
             }else{
                 checkedList.clear();
@@ -108,7 +108,7 @@ public class QuickStorageAdapter extends BaseRecyclerAdapter<ListSumBean> {
                 if(StringUtils.isBlank(s.toString().trim())){
                     item.setQty("0");
                     holder.setText(R.id.tv_match_number, "0");
-                }else if(Float.valueOf(item.getReq_qty()) < Float.valueOf(item.getMatch_qty())){
+                }else if(StringUtils.string2Float(item.getReq_qty()) < StringUtils.string2Float(item.getMatch_qty())){
                     item.setQty(item.getMatch_qty());
                     holder.setText(R.id.tv_match_number, StringUtils.deleteZero(item.getMatch_qty()));
                 }else{

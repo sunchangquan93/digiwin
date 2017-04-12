@@ -99,7 +99,7 @@ public class QuickStorageActivity extends BaseFirstModuldeActivity{
                         List<ListSumBean> commitList = new ArrayList<ListSumBean>();
                         for(int i = 0;i < checkedList.size();i++){
                             if(!StringUtils.isBlank(checkedList.get(i).getMatch_qty()) ||
-                                    Float.valueOf(checkedList.get(i).getMatch_qty()) > 0){
+                                    StringUtils.string2Float(checkedList.get(i).getMatch_qty()) > 0){
                                 checkedList.get(i).setReceipt_qty(StringUtils.deleteZero(checkedList.get(i).getReq_qty()));
                                 checkedList.get(i).setQty(StringUtils.deleteZero(checkedList.get(i).getMatch_qty()));
                                 commitList.add(checkedList.get(i));
@@ -273,8 +273,6 @@ public class QuickStorageActivity extends BaseFirstModuldeActivity{
             WareHouseDialog.setCallBack(new WareHouseDialog.WareHouseCallBack() {
                 @Override
                 public void wareHouseCallBack(String wareHouse) {
-                    LogUtils.i("wareHouse===:",wareHouse);
-                    LogUtils.i("getTag===:",(int) wareHouseTv.getTag());
                     checkedList.get((int) wareHouseTv.getTag()).setWarehouse_no(wareHouse);
                     notifyDataSetChanged();
                 }
@@ -296,7 +294,7 @@ public class QuickStorageActivity extends BaseFirstModuldeActivity{
                     if(StringUtils.isBlank(s.toString().trim())){
                         checkedList.get((int) match_numberEt.getTag()).setMatch_qty("0");
                         notifyDataSetChanged();
-                    }else if(Float.valueOf(item.getReq_qty()) < Float.valueOf(s.toString())){
+                    }else if(StringUtils.string2Float(item.getReq_qty()) < StringUtils.string2Float(s.toString())){
                         showFailedDialog(getResources().getString(R.string.match_so_big));
                         checkedList.get((int) match_numberEt.getTag()).setMatch_qty(item.getMatch_qty());
                         notifyDataSetChanged();

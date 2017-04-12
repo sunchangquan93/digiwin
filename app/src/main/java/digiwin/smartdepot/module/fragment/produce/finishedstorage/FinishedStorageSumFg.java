@@ -134,7 +134,7 @@ public class FinishedStorageSumFg extends BaseFragment {
     private void getDetail(final SumShowBean sumShowBean) {
         Map<String, String> map = new HashMap<>();
         showLoadingDialog();
-        map.put("item_no", sumShowBean.getItem_no());
+        map.put(AddressContants.ITEM_NO, sumShowBean.getItem_no());
         commonLogic.getDetail(map, new CommonLogic.GetDetailListener() {
             @Override
             public void onSuccess(List<DetailShowBean> detailShowBeen) {

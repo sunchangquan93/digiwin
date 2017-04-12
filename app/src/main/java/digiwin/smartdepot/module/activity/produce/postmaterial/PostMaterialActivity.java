@@ -33,6 +33,7 @@ import digiwin.smartdepot.login.bean.AccoutBean;
 import digiwin.smartdepot.module.activity.common.NoComeUnComActivity;
 import digiwin.smartdepot.module.adapter.produce.DistributeSumAdapter;
 import digiwin.smartdepot.module.adapter.produce.FilterResultOrderAdapter;
+import digiwin.smartdepot.module.adapter.produce.PostMaterialOrderAdapter;
 import digiwin.smartdepot.module.bean.common.FilterBean;
 import digiwin.smartdepot.module.bean.common.FilterResultOrderBean;
 import digiwin.smartdepot.module.bean.produce.DistributeSumShowBean;
@@ -216,7 +217,7 @@ public class PostMaterialActivity extends BaseTitleActivity {
                 ll_search_dialog.setVisibility(View.GONE);
                 scrollview.setVisibility(View.VISIBLE);
                 iv_un_com.setVisibility(View.VISIBLE);
-                adapter = new FilterResultOrderAdapter(pactivity,dataList);
+                adapter = new PostMaterialOrderAdapter(pactivity,dataList);
                 ryList.setAdapter(adapter);
                 onItemClick();
             }
@@ -316,7 +317,7 @@ public class PostMaterialActivity extends BaseTitleActivity {
 
     private List<FilterResultOrderBean> dataList = new ArrayList<>();
 
-    FilterResultOrderAdapter adapter;
+    PostMaterialOrderAdapter adapter;
 
     CommonLogic logic;
     /**
@@ -362,7 +363,7 @@ public class PostMaterialActivity extends BaseTitleActivity {
                     //TODO setAdapter
                     dataList.clear();
                     dataList = list;
-                    adapter = new FilterResultOrderAdapter(pactivity,dataList);
+                    adapter = new PostMaterialOrderAdapter(pactivity,dataList);
                     ryList.setAdapter(adapter);
                     onItemClick();
                     }
@@ -375,7 +376,7 @@ public class PostMaterialActivity extends BaseTitleActivity {
                         showFailedDialog(error);
                         //TODO setAdapter
                         dataList = new ArrayList<FilterResultOrderBean>();
-                        adapter = new FilterResultOrderAdapter(pactivity,dataList);
+                        adapter = new PostMaterialOrderAdapter(pactivity,dataList);
                     } catch (Exception e) {
                         LogUtils.e(TAG, "updateList--getSum--onFailed" + e);
                     }
@@ -392,7 +393,7 @@ public class PostMaterialActivity extends BaseTitleActivity {
         super.onActivityResult(requestCode, resultCode, data);
         try{
             if(requestCode == SECONDCODE){
-                adapter = new FilterResultOrderAdapter(pactivity,new ArrayList<FilterResultOrderBean>());
+                adapter = new PostMaterialOrderAdapter(pactivity,new ArrayList<FilterResultOrderBean>());
                 ryList.setAdapter(adapter);
                 upDateList();
             }

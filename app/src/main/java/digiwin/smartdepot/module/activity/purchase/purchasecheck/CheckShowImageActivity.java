@@ -22,6 +22,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 import digiwin.smartdepot.R;
+import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseTitleActivity;
 import digiwin.smartdepot.core.base.BaseTitleHActivity;
@@ -58,8 +59,7 @@ public class CheckShowImageActivity extends BaseTitleHActivity {
 	protected void doBusiness() {
 		pactivity = (CheckShowImageActivity) activity;
 		logic = PurcahseCheckLogic.getInstance(pactivity,module,mTimestamp.toString());
-		Log.d(TAG,"doBusiness:");
-		item_no = getIntent().getExtras().getString("item_no");
+		item_no = getIntent().getExtras().getString(AddressContants.ITEM_NO);
 		Message msg = new Message();
 		msg.what = 1;
 		handler.sendMessage(msg);
@@ -121,7 +121,7 @@ public class CheckShowImageActivity extends BaseTitleHActivity {
 			switch(msg.what){
 				case 1:
 					Map<String,String> map = new HashMap<>();
-					map.put("item_no",item_no);
+					map.put(AddressContants.ITEM_NO,item_no);
 					showLoadingDialog();
 					logic.getDrawing(map, new PurcahseCheckLogic.GetDrawingListener() {
 						@Override

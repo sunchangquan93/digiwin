@@ -221,7 +221,6 @@ public class BadReasonActivity extends BaseActivity {
                     @Override
                     protected void bindData(RecyclerViewHolder holder, int position, BadReasonBean item) {
                         int color = (int) (Math.random() * 5);
-                        Log.d(TAG, "color:" + color);
                         if (color == 0) {
                             holder.setTextColor(R.id.tv_detail_reason, R.color.RED);
                         } else if (color == 1) {
@@ -318,6 +317,9 @@ public class BadReasonActivity extends BaseActivity {
                                 rc_list_search_result.setVisibility(View.VISIBLE);
                                 badReasonList1 = new ArrayList<BadReasonBean>();
                                 badReasonList1 = badReasonBeenList;
+                                for (int i = 0; i < badReasonList1.size(); i++) {
+                                    badReasonList1.get(i).setDefect_qty("1");
+                                }
                                 badReasonAdapter1 = new BadReasonAdapter(pactivity,badReasonList1);
                                 rc_list_search_result.setAdapter(badReasonAdapter1);
                                 badReasonAdapter1.setOnItemClickListener(new OnItemClickListener() {
@@ -358,7 +360,7 @@ public class BadReasonActivity extends BaseActivity {
                     try {
                         showLoadingDialog();
                         Map<String,String> hashMap = new HashMap<>();
-                        hashMap.put("item_no",msg.obj.toString());
+                        hashMap.put(AddressContants.ITEM_NO,msg.obj.toString());
                         logic.getQCReasonTop5Info(hashMap, new PurcahseCheckLogic.GetQCReasonTop5Listener() {
                             @Override
                             public void onSuccess(List<BadReasonBean> badReasonBeenList) {

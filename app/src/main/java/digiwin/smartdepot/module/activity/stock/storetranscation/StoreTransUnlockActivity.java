@@ -381,7 +381,7 @@ public class StoreTransUnlockActivity extends BaseTitleActivity{
     protected void initNavigationTitle() {
         super.initNavigationTitle();
         mName.setText(R.string.store_trans_unlock);
-        ivScan.setVisibility(View.GONE);
+        ivScan.setVisibility(View.VISIBLE);
         search.setVisibility(View.VISIBLE);
         search.setImageResource(R.drawable.search);
         isSearching=true;

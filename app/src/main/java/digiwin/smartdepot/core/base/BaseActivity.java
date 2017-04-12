@@ -130,7 +130,7 @@ public abstract class BaseActivity extends BaseAppActivity {
         mTimestamp.append(TelephonyUtils.getDeviceId(this))
                 .append(module)
                 .append(TelephonyUtils.getTime());
-        LogUtils.i("createNewModuleId=====:",mTimestamp.toString());
+        LogUtils.i(TAG,"createNewModuleId=="+mTimestamp.toString());
     }
 
     @Override

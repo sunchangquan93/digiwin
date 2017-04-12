@@ -101,7 +101,7 @@ public class DeviceLogic {
                 }
             });
         } catch (Exception e) {
-            LogUtils.e(TAG, "getDevice");
+            LogUtils.e(TAG, "getDevice"+e);
             listener.onFailed(mContext.getString(R.string.unknow_error));
         }
     }

@@ -344,8 +344,8 @@ public class WorkSupplementScanFg extends BaseFragment {
             case FIFOWHAT:
                 showLoadingDialog();
                 Map<String,String> map = new HashMap<String,String>();
-                map.put("issuing_no",String.valueOf(msg.obj));
-                map.put("warehouse_no", LoginLogic.getUserInfo().getWare());
+                map.put(AddressContants.ISSUING_NO,String.valueOf(msg.obj));
+                map.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
                 commonLogic.postMaterialFIFO(map, new CommonLogic.PostMaterialFIFOListener() {
                     @Override
                     public void onSuccess(List<PostMaterialFIFOBean> fiFoBeanList) {
