@@ -51,8 +51,6 @@ public class WorkOrderSumAdapter extends BaseRecyclerAdapter<ListSumBean>{
                 SumShowBean bean = new SumShowBean();
                 bean.setItem_no(item.getLow_order_item_no());
                 bean.setItem_name(item.getItem_name());
-                Log.d("bean.setItem_no====:",bean.getItem_no());
-                Log.d("bean.setItem_name==:",bean.getItem_name());
                 WorkOrderActivity activity = (WorkOrderActivity) mContext;
                 activity.ToDetailAct(bean);
             }

@@ -202,12 +202,6 @@ public class PurchaseInStoreScanFg extends BaseFragment {
             showFailedDialog(R.string.input_num);
             return;
         }
-        //库位栏位加锁，保存时从库位栏位取值
-        String locator = et_scan_locator.getText().toString();
-        if(locator.contains("%")){
-            saveBean.setStorage_spaces_in_no(locator.split("%")[1]);
-            saveBean.setWarehouse_in_no(locator.split("%")[0]);
-        }
         saveBean.setDoc_no(orderBean.getDoc_no());
         saveBean.setQty(et_input_num.getText().toString());
         showLoadingDialog();
@@ -345,7 +339,6 @@ public class PurchaseInStoreScanFg extends BaseFragment {
         }
         barcodeShow = "";
         show();
-        saveBean = new SaveBean();
     }
 
     /**

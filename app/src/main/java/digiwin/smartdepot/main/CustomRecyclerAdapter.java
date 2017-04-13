@@ -60,7 +60,6 @@ public class CustomRecyclerAdapter extends RecyclerView.Adapter<CustomRecyclerAd
                 if (listener!=null){
                     listener.onClick(view,position);
                 }else {
-                    Log.i(TAG,"点击事件对象为空");
                 }
             }
         });

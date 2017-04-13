@@ -124,9 +124,9 @@
 
     </LinearLayout>
 
-    <View
-        style="@style/ry_line_style"
-        android:layout_below="@id/llview"
-        android:layout_marginLeft="@dimen/layout_10dp" />
+    <!--<View-->
+        <!--style="@style/ry_line_style2"-->
+        <!--android:layout_below="@id/llview"-->
+         <!--/>-->
 
 </RelativeLayout>

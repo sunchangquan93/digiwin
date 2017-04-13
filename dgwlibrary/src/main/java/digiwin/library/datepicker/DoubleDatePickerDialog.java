@@ -73,7 +73,7 @@ public class DoubleDatePickerDialog extends AlertDialog implements OnClickListen
          * @param dayOfMonth
          *            The day of the month that was set.
          */
-        void onDateSet(DatePicker startDatePicker, int startYear, int startMonthOfYear, int startDayOfMonth, DatePicker endDatePicker, int endYear, int endMonthOfYear, int endDayOfMonth);
+        void onDateSet(DatePicker startDatePicker, int startYear, int startMonthOfYear, int startDayOfMonth, DatePicker endDatePicker, int endYear, int endMonthOfYear, int endDayOfMonth ,boolean flag);
     }
     
     /**
@@ -120,6 +120,7 @@ public class DoubleDatePickerDialog extends AlertDialog implements OnClickListen
         
         Context themeContext = getContext();
         setButton(BUTTON_POSITIVE, context.getResources().getString(R.string.label_sure), this);
+        setButton(BUTTON_NEUTRAL,context.getResources().getString(R.string.label_clear),this);
         setButton(BUTTON_NEGATIVE,  context.getResources().getString(R.string.label_cancel), this);
 
 
@@ -166,12 +167,13 @@ public class DoubleDatePickerDialog extends AlertDialog implements OnClickListen
 
         Context themeContext = getContext();
         setButton(BUTTON_POSITIVE, context.getResources().getString(R.string.label_sure), this);
+        setButton(BUTTON_NEUTRAL,context.getResources().getString(R.string.label_clear),this);
         setButton(BUTTON_NEGATIVE,  context.getResources().getString(R.string.label_cancel), this);
 
 
         setIcon(0);
         LayoutInflater inflater = (LayoutInflater)themeContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.dialog_date_picker_h, null);
+        View view = inflater.inflate(R.layout.dialog_date_picker_v, null);
         setView(view);
         mDatePicker_start = (DatePicker)view.findViewById(R.id.datePickerStart);
         mDatePicker_start.setCalendarViewShown(false);
@@ -217,11 +219,18 @@ public class DoubleDatePickerDialog extends AlertDialog implements OnClickListen
             }
         }
     }
-    
+
     public void onClick(DialogInterface dialog, int which)
     {
-        if (which == BUTTON_POSITIVE)
-            tryNotifyDateSet();
+        int TYPE;
+        if (which == BUTTON_POSITIVE){
+            TYPE = 1;
+            tryNotifyDateSet(TYPE);
+        }else if(which == BUTTON_NEUTRAL){
+            TYPE = 2;
+            tryNotifyDateSet(TYPE);
+        }
+
     }
     
     @Override
@@ -284,18 +293,29 @@ public class DoubleDatePickerDialog extends AlertDialog implements OnClickListen
         mDatePicker_end.updateDate(year, monthOfYear, dayOfMonth);
     }
     
-    private void tryNotifyDateSet()
+    private void tryNotifyDateSet(int TYPE)
     {
         if (mCallBack != null)
         {
-            mDatePicker_start.clearFocus();
-            mDatePicker_end.clearFocus();
-            int startMonth = mDatePicker_start.getMonth();
-            int startDay = mDatePicker_start.getDayOfMonth();
-            int endMonth = mDatePicker_end.getMonth();
-            int endDay = mDatePicker_end.getDayOfMonth();
-            
-            mCallBack.onDateSet(mDatePicker_start, mDatePicker_start.getYear(), startMonth, startDay, mDatePicker_end, mDatePicker_end.getYear(), endMonth, endDay);
+            if(TYPE == 1){
+                mDatePicker_start.clearFocus();
+                mDatePicker_end.clearFocus();
+                int startMonth = mDatePicker_start.getMonth();
+                int startDay = mDatePicker_start.getDayOfMonth();
+                int endMonth = mDatePicker_end.getMonth();
+                int endDay = mDatePicker_end.getDayOfMonth();
+
+                mCallBack.onDateSet(mDatePicker_start, mDatePicker_start.getYear(), startMonth, startDay, mDatePicker_end, mDatePicker_end.getYear(), endMonth, endDay,true);
+            }else if(TYPE == 2){
+                mDatePicker_start.clearFocus();
+                mDatePicker_end.clearFocus();
+                int startMonth = mDatePicker_start.getMonth();
+                int startDay = mDatePicker_start.getDayOfMonth();
+                int endMonth = mDatePicker_end.getMonth();
+                int endDay = mDatePicker_end.getDayOfMonth();
+
+                mCallBack.onDateSet(mDatePicker_start, mDatePicker_start.getYear(), startMonth, startDay, mDatePicker_end, mDatePicker_end.getYear(), endMonth, endDay,false);
+            }
         }
     }
     

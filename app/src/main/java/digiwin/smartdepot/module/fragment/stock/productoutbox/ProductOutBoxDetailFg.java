@@ -16,6 +16,7 @@ import butterknife.OnClick;
 import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.ObjectAndMapUtils;
 import digiwin.library.utils.StringUtils;
+import digiwin.pulltorefreshlibrary.recyclerview.DividerItemDecoration;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.base.BaseFragment;
@@ -124,6 +125,7 @@ public class ProductOutBoxDetailFg extends BaseFragment {
         };
         adapter.setMap(map);
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
+        recyclerView.addItemDecoration(new DividerItemDecoration(pactivity,DividerItemDecoration.VERTICAL_LIST));
         recyclerView.setAdapter(adapter);
     }
 

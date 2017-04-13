@@ -128,7 +128,6 @@ public class TvRecyclerView extends RecyclerView {
         super.setLayoutManager(layoutManager);
         if (layoutManager instanceof LinearLayoutManager) {
             mOrientation = ((LinearLayoutManager)layoutManager).getOrientation();
-            Log.i(TAG, "setLayoutManager: =======orientation==" + mOrientation);
         }
     }
 
@@ -290,7 +289,6 @@ public class TvRecyclerView extends RecyclerView {
                     mNextFocused = FocusFinder.getInstance().findNextFocus(this, mSelectedItem, View.FOCUS_DOWN);
                 }
             } catch (Exception e) {
-                Log.i(TAG, "dispatchKeyEvent: get next focus item error: " + e.getMessage());
                 mNextFocused = null;
             }
         }

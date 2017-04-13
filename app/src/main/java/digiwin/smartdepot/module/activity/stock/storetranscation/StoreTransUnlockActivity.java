@@ -21,9 +21,11 @@ import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
+import butterknife.OnTextChanged;
 import digiwin.library.datepicker.DatePickerUtils;
 import digiwin.library.utils.ActivityManagerUtils;
 import digiwin.library.utils.LogUtils;
+import digiwin.library.utils.StringUtils;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
@@ -79,13 +81,13 @@ public class StoreTransUnlockActivity extends BaseTitleActivity{
             isSearching=false;
             ryList.setVisibility(View.VISIBLE);
             input_top.setVisibility(View.GONE);
-            delete.setVisibility(View.VISIBLE);
+            unlock.setVisibility(View.VISIBLE);
             return;
         } else {
             isSearching=true;
             ryList.setVisibility(View.GONE);
             input_top.setVisibility(View.VISIBLE);
-            delete.setVisibility(View.INVISIBLE);
+            unlock.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -160,6 +162,13 @@ public class StoreTransUnlockActivity extends BaseTitleActivity{
     LinearLayout ll_lock_date;
     @BindView(R.id.et_lock_date)
     EditText et_lock_date;
+    @OnTextChanged(value = R.id.et_lock_date, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
+    void lockDateChange(CharSequence s) {
+        if (StringUtils.isBlank(s.toString())) {
+            startDate = "";
+            endDate = "";
+        }
+    }
     @BindView(R.id.tv_lock_date)
     TextView tv_lock_date;
     @BindView(R.id.lock_date)
@@ -183,9 +192,9 @@ public class StoreTransUnlockActivity extends BaseTitleActivity{
     /**
      * 删除
      */
-    @BindView(R.id.delete)
-    Button delete;
-    @OnClick(R.id.delete)
+    @BindView(R.id.unlock)
+    Button unlock;
+    @OnClick(R.id.unlock)
     void delete(){
         showLoadingDialog();
         List<FilterResultOrderBean> beanList = new ArrayList<>();
@@ -253,7 +262,7 @@ public class StoreTransUnlockActivity extends BaseTitleActivity{
             @Override
             public void onFailed(String error) {
                 dismissLoadingDialog();
-                showCommitFailDialog(error);
+                showFailedDialog(error);
             }
         });
     }
@@ -264,7 +273,7 @@ public class StoreTransUnlockActivity extends BaseTitleActivity{
     private void showData() {
         try {
             isSearching=true;
-            delete.setVisibility(View.VISIBLE);
+            unlock.setVisibility(View.VISIBLE);
             ryList.setVisibility(View.VISIBLE);
             input_top.setVisibility(View.GONE);
             adapter = new StoreTransUnLockAdapter(activity, list);
@@ -385,11 +394,12 @@ public class StoreTransUnlockActivity extends BaseTitleActivity{
         search.setVisibility(View.VISIBLE);
         search.setImageResource(R.drawable.search);
         isSearching=true;
-        delete.setVisibility(View.GONE);
+        unlock.setVisibility(View.GONE);
     }
 
     @Override
     protected void doBusiness() {
+        et_lock_date.setKeyListener(null);
         DOC_NO = AddressContants.DOC_NO;
         commonLogic = CommonLogic.getInstance(activity,module,mTimestamp.toString());
         list=new ArrayList<>();

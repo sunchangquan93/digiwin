@@ -326,12 +326,6 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
         saveBean.setReason_code_no(et_reason_code.getText().toString());
         saveBean.setDepartment_no(department_no);
         saveBean.setEmployee_no(employee_no);
-        //库位栏位加锁，保存时从库位栏位取值
-        String locator = et_scan_locator.getText().toString();
-        if(locator.contains("%")){
-            saveBean.setStorage_spaces_in_no(locator.split("%")[1]);
-            saveBean.setWarehouse_in_no(locator.split("%")[0]);
-        }
         saveBean.setQty(et_input_num.getText().toString());
         showLoadingDialog();
         commonLogic.scanSave(saveBean, new CommonLogic.SaveListener() {
@@ -540,7 +534,6 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
         }
         barcodeShow = "";
         show();
-        saveBean = new SaveBean();
         initFocus();
     }
 

@@ -30,7 +30,6 @@ import butterknife.OnClick;
 import digiwin.library.constant.SharePreKey;
 import digiwin.library.dialog.CustomDialog;
 import digiwin.library.dialog.OnDialogClickgetTextListener;
-import digiwin.library.dialog.OnDialogTwoListener;
 import digiwin.library.utils.ActivityManagerUtils;
 import digiwin.library.utils.AlertDialogUtils;
 import digiwin.library.utils.LogUtils;

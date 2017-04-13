@@ -292,7 +292,7 @@ public class ProcessReportingActivity extends BaseTitleActivity{
 
             if(msg.what == WO_NO){
                 Map<String,String> map = new HashMap<String, String>();
-                map.put("wo_no",String.valueOf(msg.obj));
+                map.put(AddressContants.WO_NO,String.valueOf(msg.obj));
                 map.put("process_no","");
                 manager.scanCode(map, new ProcessReportingLogic.ScanCodeListener() {
                     @Override
@@ -328,7 +328,7 @@ public class ProcessReportingActivity extends BaseTitleActivity{
                         }
                     });
                 }
-                map.put("wo_no",et_gongDan_no.getText().toString().trim());
+                map.put(AddressContants.WO_NO,et_gongDan_no.getText().toString().trim());
                 map.put("process_no",String.valueOf(msg.obj));
                 manager.scanCode(map, new ProcessReportingLogic.ScanCodeListener() {
                     @Override
@@ -354,7 +354,7 @@ public class ProcessReportingActivity extends BaseTitleActivity{
 
             if(msg.what == EMPLOYEE_NO) {
                 Map<String,String> map = new HashMap<String, String>();
-                map.put("employee_no",String.valueOf(msg.obj));
+                map.put(AddressContants.EMPLOYEENO,String.valueOf(msg.obj));
                 manager.scanPerson(map, new ProcessReportingLogic.ScanPersonListener() {
                     @Override
                     public void onSuccess(WorkerPerson WorkerPerson) {

@@ -286,6 +286,18 @@
         android:layout_weight="1"
         android:layout_height="@dimen/layout_0dp"></android.support.v7.widget.RecyclerView>
 
-    <include layout="@layout/inclu_delete"/>
+    <Button xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/unlock"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_60dp"
+        android:paddingTop="@dimen/layout_15dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/layout_10dp"
+        android:layout_marginRight="@dimen/layout_10dp"
+        android:gravity="center"
+        android:background="@mipmap/savecommit"
+        android:text="@string/unlock"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textSize_16sp" />
 
 </LinearLayout>

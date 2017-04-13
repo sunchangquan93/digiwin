@@ -3,6 +3,8 @@ package digiwin.smartdepot.login.activity;
 
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -28,6 +30,7 @@ import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.StringUtils;
 import digiwin.library.utils.TelephonyUtils;
 import digiwin.smartdepot.R;
+import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseActivity;
 import digiwin.smartdepot.core.jpush.JPushManager;
@@ -107,6 +110,8 @@ public class LoginActivity extends BaseActivity {
      */
     private List<String> mPlants;
 
+    private final int HANDLERWHAT = 100;
+
     @Override
     protected int bindLayoutId() {
         return R.layout.activity_login;
@@ -117,11 +122,42 @@ public class LoginActivity extends BaseActivity {
 
     }
 
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case HANDLERWHAT:
+                    MyAnimationDrawable.animateRawManuallyFromXML(R.drawable.login_bg, iv_login_bg, new Runnable() {
+                        @Override
+                        public void run() {
+                            //动画开始回调
+                        }
+                    }, new Runnable() {
+                        @Override
+                        public void run() {
+                            //动画结束回调
+                            handler.removeMessages(HANDLERWHAT);
+                            handler.sendEmptyMessage(HANDLERWHAT);
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+
+
     @Override
     protected void onResume() {
         super.onResume();
         animationDrawable = (AnimationDrawable) iv_login_bg.getBackground();
         animationDrawable.start();
+//        handler.sendEmptyMessageDelayed(HANDLERWHAT,100);
+//        animationDrawable = (AnimationDrawable) iv_login_sbg.getBackground();
+//        animationDrawable.start();
     }
 
     @Override
@@ -195,9 +231,9 @@ public class LoginActivity extends BaseActivity {
             return;
         }
         Map<String, String> map = new HashMap<>();
-        map.put("username", et_login_user.getText().toString());
-        map.put("password", et_login_lock.getText().toString());
-        map.put("plant", tv_login_eye.getText().toString());
+        map.put(AddressContants.USERNAME, et_login_user.getText().toString());
+        map.put(AddressContants.PASSWORD, et_login_lock.getText().toString());
+        map.put(AddressContants.PLANT, tv_login_eye.getText().toString());
         showLoadingDialog();
         logic.login(map, tv_login_eye.getText().toString(), new LoginLogic.LoginListener() {
             @Override
@@ -256,6 +292,10 @@ public class LoginActivity extends BaseActivity {
         super.onDestroy();
         dismissLoadingDialog();
         isFinished = true;
+        if(handler!=null){
+            handler.removeMessages(HANDLERWHAT);
+            handler = null;
+        }
     }
 
 

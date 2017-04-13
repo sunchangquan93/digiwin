@@ -169,8 +169,6 @@ public class ListSumBean implements Serializable {
      */
     private String doc_no;
 
-
-
     /**
      * 是否确认数量 1为未确认 2为确认
      */
@@ -193,8 +191,29 @@ public class ListSumBean implements Serializable {
      * 客户名称
      */
     private String customer_name;
-
+    /**
+     *
+     */
     private String match_qty;
+
+    /**
+     * #退料量
+     */
+    private String return_qty;
+
+    /**
+     * #（最大）可发量
+     */
+    private String issue_qty;
+    /**
+     * 批号
+     */
+    private String item_lot_no;
+    /**
+     *展示
+     */
+    private String show;
+
 
     public String getWo_no() {
         return wo_no;
@@ -534,16 +553,6 @@ public class ListSumBean implements Serializable {
         this.barcode_no = barcode_no;
     }
 
-    /**
-     * #退料量
-     */
-    private String return_qty;
-
-    /**
-     * #（最大）可发量
-     */
-    private String issue_qty;
-
     public String getReturn_qty() {
         return return_qty;
     }
@@ -560,16 +569,19 @@ public class ListSumBean implements Serializable {
         this.issue_qty = issue_qty;
     }
 
-    /**
-     * 批号
-     */
-    public String item_lot_no;
-
     public String getItem_lot_no() {
         return item_lot_no;
     }
 
     public void setItem_lot_no(String item_lot_no) {
         this.item_lot_no = item_lot_no;
+    }
+
+    public String getShow() {
+        return show;
+    }
+
+    public void setShow(String show) {
+        this.show = show;
     }
 }

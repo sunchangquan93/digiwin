@@ -1,5 +1,10 @@
 package digiwin.smartdepot.login.fragment;
 
+import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
+
+import butterknife.BindView;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.base.BaseFragment;
 
@@ -12,6 +17,9 @@ import digiwin.smartdepot.core.base.BaseFragment;
 
 public class FirstFragment extends BaseFragment {
     static FirstFragment pane=null;
+
+    @BindView(R.id.welcome_01)
+    ImageView welcome_01;
 
     public static FirstFragment newInstance() {
         if (null==pane){
@@ -27,7 +35,7 @@ public class FirstFragment extends BaseFragment {
 
     @Override
     protected void doBusiness() {
-
+        Picasso.with(activity).load(R.drawable.welcome_01).into(welcome_01);
     }
 
 

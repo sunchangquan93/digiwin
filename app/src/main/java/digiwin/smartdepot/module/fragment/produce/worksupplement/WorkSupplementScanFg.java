@@ -226,16 +226,12 @@ public class WorkSupplementScanFg extends BaseFragment {
     }
 
     public void clear(){
-        saveBean = new SaveBean();
         etInputNum.setText("");
         etScanBarocde.setText("");
 
         if(cbLocatorlock.isChecked()){
             if(StringUtils.isBlank(etScanLocator.getText().toString().trim())){
                 locatorFlag = false;
-            }else {
-                saveBean.setStorage_spaces_out_no(etScanLocator.getText().toString().split("%")[1]);
-                saveBean.setWarehouse_out_no(etScanLocator.getText().toString().split("%")[0]);
             }
             barcodeFlag = false;
             etScanBarocde.requestFocus();
@@ -288,18 +284,24 @@ public class WorkSupplementScanFg extends BaseFragment {
                     @Override
                     public void onSuccess(final ScanBarcodeBackBean barcodeBackBean) {
                         dismissLoadingDialog();
+                        if(StringUtils.isBlank(etScanLocator.getText().toString())){
+                            showFailedDialog(getResources().getString(R.string.scan_locator));
+                            return;
+                        }
+
                         if((AddressContants.FIFOY).equals(barcodeBackBean.getFifo_check())) {
                             if (null != fiFoList) {
                                 if (fiFoList.size() > 0) {
                                     for (int i = 0; i < fiFoList.size(); i++) {
                                         PostMaterialFIFOBean fifodata = fiFoList.get(i);
-                                        Log.d(TAG, barcodeBackBean.getBarcode_no());
-                                        Log.d(TAG, fifodata.getBarcode_no());
                                         if (barcodeBackBean.getBarcode_no().equals(fifodata.getBarcode_no()) && fifodata.getStorage_spaces_no().
-                                                equals(etScanLocator.getText().toString().split("%")[1])) {
+                                                equals(saveBean.getStorage_spaces_out_no())) {
                                             showBarcode(barcodeBackBean);
                                             break;
-                                        } else if (i == fiFoList.size() - 1 && !barcodeBackBean.getBarcode_no().equals(fifodata.getBarcode_no())) {
+                                        }
+
+                                        if (i == fiFoList.size() - 1 && !barcodeBackBean.getBarcode_no().equals(fifodata.getBarcode_no())  ||
+                                                !fifodata.getStorage_spaces_no().equals(saveBean.getStorage_spaces_out_no())) {
                                             showFailedDialog(getResources().getString(R.string.fifo_scan_error), new OnDialogClickListener() {
                                                 @Override
                                                 public void onCallback() {

@@ -24,7 +24,7 @@ import digiwin.smartdepot.R;
 
 public class VoicerChooseAdapter extends RecyclerView.Adapter<VoicerChooseAdapter.OCViewHolder> {
 
-    private String TAG = "StorageAdapter";
+    private final String TAG = "StorageAdapter";
     private List<String> list;
     private Context context;
     private LayoutInflater inflater;
@@ -56,7 +56,6 @@ public class VoicerChooseAdapter extends RecyclerView.Adapter<VoicerChooseAdapte
                 if (listener!=null){
                     listener.onClick(view,position);
                 }else {
-                    Log.i(TAG,"点击事件对象为空");
                 }
             }
         });

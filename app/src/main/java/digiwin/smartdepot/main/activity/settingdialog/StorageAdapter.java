@@ -26,7 +26,7 @@ import digiwin.smartdepot.R;
 
 public class StorageAdapter extends RecyclerView.Adapter<StorageAdapter.SViewHolder> {
 
-    private String TAG = "StorageAdapter";
+    private final String TAG = "StorageAdapter";
     private List<String> list;
     private Context context;
     private LayoutInflater inflater;
@@ -58,7 +58,6 @@ public class StorageAdapter extends RecyclerView.Adapter<StorageAdapter.SViewHol
                 if (listener!=null){
                     listener.onClick(view,position);
                 }else {
-                    Log.i(TAG,"点击事件对象为空");
                 }
             }
         });

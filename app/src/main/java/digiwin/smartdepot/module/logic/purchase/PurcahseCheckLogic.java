@@ -2,13 +2,10 @@ package digiwin.smartdepot.module.logic.purchase;
 
 import android.content.Context;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import digiwin.library.utils.LogUtils;
-import digiwin.library.utils.ObjectAndMapUtils;
-import digiwin.library.utils.StringUtils;
 import digiwin.library.utils.TelephonyUtils;
 import digiwin.library.utils.ThreadPoolManager;
 import digiwin.library.xml.ParseXmlResp;
@@ -21,21 +18,6 @@ import digiwin.smartdepot.core.xml.CreateParaXmlReqIm;
 import digiwin.smartdepot.core.xml.CreatePurchaseCheckReq;
 import digiwin.smartdepot.login.bean.AccoutBean;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
-import digiwin.smartdepot.module.bean.common.ClickItemPutBean;
-import digiwin.smartdepot.module.bean.common.DetailShowBean;
-import digiwin.smartdepot.module.bean.common.FifoAccordingBean;
-import digiwin.smartdepot.module.bean.common.FilterBean;
-import digiwin.smartdepot.module.bean.common.FilterResultOrderBean;
-import digiwin.smartdepot.module.bean.common.ListSumBean;
-import digiwin.smartdepot.module.bean.common.SaveBean;
-import digiwin.smartdepot.module.bean.common.ScanBarcodeBackBean;
-import digiwin.smartdepot.module.bean.common.ScanEmployeeBackBean;
-import digiwin.smartdepot.module.bean.common.ScanLocatorBackBean;
-import digiwin.smartdepot.module.bean.common.ScanReasonCodeBackBean;
-import digiwin.smartdepot.module.bean.common.SumShowBean;
-import digiwin.smartdepot.module.bean.common.UnCompleteBean;
-import digiwin.smartdepot.module.bean.produce.FiFoBean;
-import digiwin.smartdepot.module.bean.produce.PostMaterialFIFOBean;
 import digiwin.smartdepot.module.bean.purchase.BadReasonBean;
 import digiwin.smartdepot.module.bean.purchase.ImageUrl;
 import digiwin.smartdepot.module.bean.purchase.PurchaseCheckBean;

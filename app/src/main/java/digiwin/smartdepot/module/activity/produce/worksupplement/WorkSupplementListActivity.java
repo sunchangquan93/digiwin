@@ -25,14 +25,12 @@ import digiwin.library.utils.StringUtils;
 import digiwin.pulltorefreshlibrary.recyclerview.FullyLinearLayoutManager;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
 import digiwin.smartdepot.R;
-import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
-import digiwin.smartdepot.core.base.BaseFirstModuldeActivity;
+import digiwin.smartdepot.core.base.BaseTitleActivity;
 import digiwin.smartdepot.core.modulecommon.ModuleUtils;
 import digiwin.smartdepot.login.bean.AccoutBean;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
 import digiwin.smartdepot.module.adapter.produce.WorkSupplementListAdapter;
-import digiwin.smartdepot.module.adapter.stock.QuickStorageListAdapter;
 import digiwin.smartdepot.module.bean.common.FilterBean;
 import digiwin.smartdepot.module.bean.common.FilterResultOrderBean;
 import digiwin.smartdepot.module.logic.common.CommonLogic;
@@ -43,7 +41,7 @@ import digiwin.smartdepot.module.logic.common.CommonLogic;
  * @date 2017/3/27
  */
 
-public class WorkSupplementListActivity extends BaseFirstModuldeActivity{
+public class WorkSupplementListActivity extends BaseTitleActivity{
     private WorkSupplementListActivity activity;
 
     @BindView(R.id.toolbar_title)
@@ -289,11 +287,6 @@ public class WorkSupplementListActivity extends BaseFirstModuldeActivity{
     public String moduleCode() {
         module = ModuleCode.WORKSUPPLEMENT;
         return module;
-    }
-
-    @Override
-    public ExitMode exitOrDel() {
-        return ExitMode.EXITD;
     }
 
     @Override

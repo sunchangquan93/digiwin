@@ -3,6 +3,7 @@ package digiwin.smartdepot.core.base;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.method.KeyListener;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -47,8 +48,11 @@ public abstract class BaseTitleActivity extends BaseActivity {
                 View focusView = ViewUtils.getFocusView(activity);
                 if (focusView instanceof EditText){
                    EditText et= (EditText) focusView;
-                    et.setText(msg);
-                    et.setSelection(msg.length());
+                    KeyListener listener = et.getKeyListener();
+                    if (null!=listener){
+                        et.setText(msg);
+                        et.setSelection(msg.length());
+                    }
                 }
             }
         });

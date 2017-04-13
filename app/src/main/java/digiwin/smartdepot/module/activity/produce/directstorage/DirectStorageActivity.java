@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +29,11 @@ import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseFirstModuldeActivity;
 import digiwin.smartdepot.core.modulecommon.ModuleUtils;
+import digiwin.smartdepot.main.bean.StorageBean;
+import digiwin.smartdepot.main.logic.GetStorageLogic;
+import digiwin.smartdepot.module.activity.common.WareHouseDialog;
+import digiwin.smartdepot.module.bean.common.ClickItemPutBean;
+import digiwin.smartdepot.module.bean.common.ListSumBean;
 import digiwin.smartdepot.module.bean.common.SaveBean;
 import digiwin.smartdepot.module.bean.common.ScanBarcodeBackBean;
 import digiwin.smartdepot.module.bean.common.ScanLocatorBackBean;
@@ -35,7 +41,7 @@ import digiwin.smartdepot.module.logic.common.CommonLogic;
 
 /**
  * @author 孙长权
- * @des 直接入库
+ * @des 直接入库--快速完工
  */
 public class DirectStorageActivity extends BaseFirstModuldeActivity {
     /**
@@ -43,21 +49,6 @@ public class DirectStorageActivity extends BaseFirstModuldeActivity {
      */
     @BindView(R.id.toolbar_title)
     Toolbar toolbarTitle;
-
-    //物料条码
-    @BindView(R.id.tv_barcode)
-    TextView tvBarcode;
-    @BindView(R.id.et_scan_barocde)
-    EditText etScanBarocde;
-    @BindView(R.id.ll_scan_barcode)
-    LinearLayout llScanBarcode;
-    //库位
-    @BindView(R.id.tv_locator)
-    TextView tvLocator;
-    @BindView(R.id.et_scan_locator)
-    EditText etScanLocator;
-    @BindView(R.id.ll_scan_locator)
-    LinearLayout llScanLocator;
     //数量
     @BindView(R.id.tv_number)
     TextView tvNumber;
@@ -72,78 +63,40 @@ public class DirectStorageActivity extends BaseFirstModuldeActivity {
     EditText etWorkOrder;
     @BindView(R.id.ll_gongDan_no)
     LinearLayout llWorkOrder;
+    @BindView(R.id.tv_warehouse)
+    TextView tvWarehouse;
 
     @BindView(R.id.includedetail)
     View includeDetail;
 
     /**
-     * 物料条码
-     */
-    final int BARCODEWHAT = 1001;
-    /**
      * 工单号
      */
     final int WORKORDER = 1002;
-    /**
-     * 库位
-     */
-    final int LOCATORWHAT = 1003;
 
     CommonLogic commonLogic;
 
-    /**
-     * 条码展示
-     */
-    String barcodeShow;
     /**
      * 工单号
      */
     String workOrderShow;
     /**
-     * 库位展示
-     */
-    String locatorShow;
-    /**
-     * 条码扫描
-     */
-    boolean barcodeFlag;
-    /**
      * 工单号
      */
     boolean workOrderFlag;
-    /**
-     * 库位扫描
-     */
-    boolean locatorFlag;
 
     SaveBean saveBean;
 
-    @BindViews({R.id.et_scan_barocde, R.id.et_gongDan, R.id.et_scan_locator, R.id.et_input_num,})
+    @BindViews({ R.id.et_gongDan,  R.id.et_input_num,})
     List<EditText> editTexts;
-    @BindViews({R.id.ll_scan_barcode, R.id.ll_gongDan_no, R.id.ll_scan_locator, R.id.ll_input_num})
+    @BindViews({ R.id.ll_gongDan_no, R.id.ll_input_num})
     List<View> views;
-    @BindViews({R.id.tv_barcode, R.id.tv_gongDan_no, R.id.tv_locator, R.id.tv_number})
+    @BindViews({ R.id.tv_gongDan_no,  R.id.tv_number})
     List<TextView> textViews;
-    @BindView(R.id.cb_locatorlock)
-    CheckBox cbLocatorlock;
+
     @BindView(R.id.tv_detail_show)
     TextView tvDetailShow;
 
-    @OnCheckedChanged(R.id.cb_locatorlock)
-    void isLock(boolean checked) {
-        if (checked) {
-            etScanLocator.setKeyListener(null);
-        } else {
-            etScanLocator.setKeyListener(new TextKeyListener(TextKeyListener.Capitalize.CHARACTERS, true));
-        }
-    }
-
-    @OnFocusChange(R.id.et_scan_barocde)
-    void barcodeFocusChanage() {
-        ModuleUtils.viewChange(llScanBarcode, views);
-        ModuleUtils.etChange(activity, etScanBarocde, editTexts);
-        ModuleUtils.tvChange(activity, tvBarcode, textViews);
-    }
 
     @OnFocusChange(R.id.et_gongDan)
     void workOrderFocusChanage() {
@@ -152,21 +105,12 @@ public class DirectStorageActivity extends BaseFirstModuldeActivity {
         ModuleUtils.tvChange(activity, tvWorkOrder, textViews);
     }
 
-    @OnFocusChange(R.id.et_scan_locator)
-    void locatorFocusChanage() {
-        ModuleUtils.viewChange(llScanLocator, views);
-        ModuleUtils.etChange(activity, etScanLocator, editTexts);
-        ModuleUtils.tvChange(activity, tvLocator, textViews);
-    }
-
     @OnFocusChange(R.id.et_input_num)
     void numFocusChanage() {
         ModuleUtils.viewChange(llInputNum, views);
         ModuleUtils.etChange(activity, etInputNum, editTexts);
         ModuleUtils.tvChange(activity, tvNumber, textViews);
     }
-
-    //TODO 等待后台接口
 
     /**
      * 工单号扫描
@@ -177,20 +121,13 @@ public class DirectStorageActivity extends BaseFirstModuldeActivity {
             mHandler.sendMessageDelayed(mHandler.obtainMessage(WORKORDER, s.toString()), AddressContants.DELAYTIME);
         }
     }
-
-    @OnTextChanged(value = R.id.et_scan_barocde, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
-    void barcodeChange(CharSequence s) {
-        if (!StringUtils.isBlank(s.toString())) {
-            mHandler.sendMessageDelayed(mHandler.obtainMessage(BARCODEWHAT, s.toString()), AddressContants.DELAYTIME);
-        }
+    @OnClick(R.id.tv_warehouse)
+    void chooseWare(){
+        String text = tvWarehouse.getText().toString();
+        List<String> ware = GetStorageLogic.getWareString();
+        WareHouseDialog.showWareHouseDialog(activity,text,ware);
     }
 
-    @OnTextChanged(value = R.id.et_scan_locator, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
-    void locatorChange(CharSequence s) {
-        if (!StringUtils.isBlank(s.toString())) {
-            mHandler.sendMessageDelayed(mHandler.obtainMessage(LOCATORWHAT, s.toString()), AddressContants.DELAYTIME);
-        }
-    }
 
     @Override
     protected Toolbar toolbar() {
@@ -218,6 +155,13 @@ public class DirectStorageActivity extends BaseFirstModuldeActivity {
     protected void doBusiness() {
         commonLogic = CommonLogic.getInstance(context, module, mTimestamp.toString());
         initData();
+        WareHouseDialog.setCallBack(new WareHouseDialog.WareHouseCallBack() {
+            @Override
+            public void wareHouseCallBack(String wareHouse) {
+                tvWarehouse.setText(wareHouse);
+            }
+        });
+
     }
 
     @OnClick(R.id.commit)
@@ -226,34 +170,32 @@ public class DirectStorageActivity extends BaseFirstModuldeActivity {
             showFailedDialog(R.string.scan_work_order);
             return;
         }
-        if (!locatorFlag) {
-            showFailedDialog(R.string.scan_locator);
+        if (StringUtils.isBlank(tvWarehouse.getText().toString())) {
+            showFailedDialog(R.string.store_failed_be_empty);
             return;
         }
-        if (!barcodeFlag) {
-            showFailedDialog(R.string.scan_barcode);
-            return;
-        }
-        if (StringUtils.isBlank(etInputNum.getText().toString())) {
+        if (StringUtils.isBlank(etInputNum.getText().toString().trim())) {
             showFailedDialog(R.string.input_num);
             return;
         }
-
+        saveBean.setWarehouse_no(tvWarehouse.getText().toString());
+        saveBean.setQty(etInputNum.getText().toString().trim());
         showLoadingDialog();
-
-        Map<String, String> map = ObjectAndMapUtils.getValueMap(saveBean);
-
-        commonLogic.commit(map, new CommonLogic.CommitListener() {
+        List<SaveBean> list = new ArrayList<>();
+        list.add(saveBean);
+        List<Map<String, String>> maps = ObjectAndMapUtils.getListMap(list);
+        commonLogic.commitListMap(maps, new CommonLogic.CommitListener() {
             @Override
             public void onSuccess(String msg) {
                 dismissLoadingDialog();
                 clear();
+                showCommitSuccessDialog(msg);
             }
 
             @Override
             public void onFailed(String error) {
                 dismissLoadingDialog();
-                showFailedDialog(error);
+                showCommitFailDialog(error);
             }
         });
 
@@ -263,83 +205,35 @@ public class DirectStorageActivity extends BaseFirstModuldeActivity {
         @Override
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
-                case BARCODEWHAT:
-                    HashMap<String, String> barcodeMap = new HashMap<>();
-                    barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
-                    commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
-                        @Override
-                        public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
-                            barcodeShow = barcodeBackBean.getShow();
-                            etInputNum.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
-                            barcodeFlag = true;
-                            show();
-                            saveBean.setAvailable_in_qty(barcodeBackBean.getAvailable_in_qty());
-                            saveBean.setBarcode_no(barcodeBackBean.getBarcode_no());
-                            saveBean.setItem_no(barcodeBackBean.getItem_no());
-                            saveBean.setUnit_no(barcodeBackBean.getUnit_no());
-                            saveBean.setLot_no(barcodeBackBean.getLot_no());
-                                etInputNum.requestFocus();
-                        }
-
-                        @Override
-                        public void onFailed(String error) {
-                            barcodeFlag = false;
-                            showFailedDialog(error, new OnDialogClickListener() {
-                                @Override
-                                public void onCallback() {
-                                    etScanBarocde.setText("");
-                                }
-                            });
-                        }
-                    });
-                    break;
-                case LOCATORWHAT:
-                    HashMap<String, String> locatorMap = new HashMap<>();
-                    locatorMap.put(AddressContants.STORAGE_SPACES_BARCODE, String.valueOf(msg.obj));
-                    commonLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
-                        @Override
-                        public void onSuccess(ScanLocatorBackBean locatorBackBean) {
-                            locatorShow = locatorBackBean.getShow();
-                            locatorFlag = true;
-                            show();
-                            saveBean.setStorage_spaces_in_no(locatorBackBean.getStorage_spaces_no());
-                            saveBean.setWarehouse_in_no(locatorBackBean.getWarehouse_no());
-                            etScanBarocde.requestFocus();
-                        }
-
-                        @Override
-                        public void onFailed(String error) {
-                            showFailedDialog(error, new OnDialogClickListener() {
-                                @Override
-                                public void onCallback() {
-                                    etScanLocator.setText("");
-                                }
-                            });
-                            locatorFlag = false;
-                        }
-                    });
-                    break;
                 case WORKORDER:
-//                    commonLogic.getOrderSumData(bean, new CommonLogic.GetOrderSumListener() {
-//                        @Override
-//                        public void onSuccess(List<ListSumData> list) {
-//                            workOrderShow = list.get(0).getShow();
-//                            workOrderFlag = true;
-//                            show();
-//                            etScanLocator.requestFocus();
-//                        }
-//
-//                        @Override
-//                        public void onFailed(String error) {
-//                            showFailedDialog(error, new OnDialogClickListener() {
-//                                @Override
-//                                public void onCallback() {
-//                                    etWorkOrder.setText("");
-//                                }
-//                            });
-//                            locatorFlag = false;
-//                        }
-//                    });
+                    ClickItemPutBean itemPutBean = new ClickItemPutBean();
+                    itemPutBean.setWo_no(String.valueOf(msg.obj));
+                    commonLogic.getOrderSumData(itemPutBean, new CommonLogic.GetOrderSumListener() {
+
+                        @Override
+                        public void onSuccess(List<ListSumBean> list) {
+                            if (list.size()>0) {
+                                workOrderShow = list.get(0).getShow();
+                                workOrderFlag = true;
+                                show();
+                                saveBean.setWo_no(list.get(0).getWo_no());
+                                saveBean.setItem_no(list.get(0).getItem_no());
+                                tvWarehouse.setText(list.get(0).getWarehouse_no());
+                                etInputNum.setText(StringUtils.deleteZero(list.get(0).getQty()));
+                                etInputNum.requestFocus();
+                            }
+                        }
+                        @Override
+                        public void onFailed(String error) {
+                            workOrderFlag = false;
+                            showFailedDialog(error, new OnDialogClickListener() {
+                                @Override
+                                public void onCallback() {
+                                    etWorkOrder.setText("");
+                                }
+                            });
+                        }
+                    });
                     break;
             }
             return false;
@@ -347,20 +241,16 @@ public class DirectStorageActivity extends BaseFirstModuldeActivity {
     });
 
     /**
-     * 保存完成之后的操作
+     * 提交完成之后的操作
      */
     private void clear() {
+        workOrderShow = "";
+        saveBean = new SaveBean();
         etInputNum.setText("");
-        barcodeFlag = false;
-        etScanBarocde.setText("");
-        barcodeShow = "";
-        etScanBarocde.requestFocus();
-        if (!cbLocatorlock.isChecked()) {
-            locatorFlag = false;
-            etScanLocator.setText("");
-            locatorShow = "";
-            etScanLocator.requestFocus();
-        }
+        etWorkOrder.setText("");
+        tvWarehouse.setText("");
+        etWorkOrder.requestFocus();
+        workOrderFlag=false;
         show();
     }
 
@@ -368,12 +258,8 @@ public class DirectStorageActivity extends BaseFirstModuldeActivity {
      * 初始化一些变量
      */
     private void initData() {
-        barcodeShow = "";
         workOrderShow = "";
-        locatorShow = "";
-        barcodeFlag = false;
         workOrderFlag = false;
-        locatorFlag = false;
         saveBean = new SaveBean();
     }
 
@@ -381,7 +267,7 @@ public class DirectStorageActivity extends BaseFirstModuldeActivity {
      * 公共区域展示
      */
     private void show() {
-        tvDetailShow.setText(StringUtils.lineChange(barcodeShow + "\\n" + workOrderShow + "\\n" + locatorShow));
+        tvDetailShow.setText(StringUtils.lineChange(workOrderShow));
         if (!StringUtils.isBlank(tvDetailShow.getText().toString())) {
             includeDetail.setVisibility(View.VISIBLE);
         } else {

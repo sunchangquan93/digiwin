@@ -14,6 +14,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.ViewUtils;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
@@ -349,7 +350,7 @@ public class MainLogic {
             }
 
         } catch (Exception e) {
-            Log.e(TAG, "MainActivity--showTitle-----error");
+            LogUtils.e(TAG, "MainActivity--showTitle-----error");
         }
     }
 

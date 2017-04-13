@@ -4,6 +4,9 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -33,6 +36,9 @@ public class LastFragment extends BaseFragment {
     @BindView(R.id.welcome_outcircle)
     View welcome_outcircle;
 
+    @BindView(R.id.welcome_03)
+    ImageView welcome_03;
+
     /**
      * 立即开启
      */
@@ -56,6 +62,7 @@ public class LastFragment extends BaseFragment {
 
     @Override
     protected void doBusiness() {
+        Picasso.with(activity).load(R.drawable.welcome_03).into(welcome_03);
         rotate();
     }
 

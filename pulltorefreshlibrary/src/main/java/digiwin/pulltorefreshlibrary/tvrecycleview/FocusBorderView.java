@@ -276,14 +276,12 @@ public class FocusBorderView extends View {
             if (itemView != null) {
                 int[] itemLocation = new int[2];
                 itemView.getLocationInWindow(itemLocation);
-                Log.i(TAG, "drawFocus: ===itemLocationX===" + itemLocation[0] + "===itemLocationY==" + itemLocation[1]);
 
                 int itemWidth = itemView.getWidth();
                 int itemHeight = itemView.getHeight();
                 float scaleValue = mTvRecyclerView.getSelectedScaleValue();
                 float itemPositionX = itemLocation[0] - (scaleValue - 1) / 2 * itemWidth;
                 float itemPositionY = itemLocation[1] - (scaleValue - 1) / 2 * itemHeight;
-                Log.i(TAG, "drawFocus: ======itemPositionX=====" + itemPositionX + "===itemPositionY===" + itemPositionY);
 
                 //draw focus image
                 Drawable drawableFocus = mTvRecyclerView.getDrawableFocus();
@@ -291,7 +289,6 @@ public class FocusBorderView extends View {
                 int drawHeight = itemHeight + mTopFocusBoundWidth + mBottomFocusBoundWidth;
                 float drawPositionX = itemPositionX - scaleValue * mLeftFocusBoundWidth;
                 float drawPositionY = itemPositionY - scaleValue * mTopFocusBoundWidth;
-                Log.i(TAG, "drawFocus: ===drawPositionX==" + drawPositionX + "===drawPositionY===" + drawPositionY);
 
                 if (drawableFocus != null) {
                     canvas.save();

@@ -217,7 +217,6 @@ public class ProductionLeaderScanFg extends BaseFragment {
 
 
     public void clear(){
-        saveBean = new SaveBean();
         includeDetail.setVisibility(View.GONE);
         barcodeShow = "";
         locatorShow = "";
@@ -227,10 +226,8 @@ public class ProductionLeaderScanFg extends BaseFragment {
         if(cbLocatorlock.isChecked()){
             if(StringUtils.isBlank(etScanLocator.getText().toString().trim())){
                 locatorFlag = false;
-            }else {
-                saveBean.setStorage_spaces_out_no(etScanLocator.getText().toString().split("%")[1]);
-                saveBean.setWarehouse_out_no(etScanLocator.getText().toString().split("%")[0]);
             }
+
             barcodeFlag = false;
             et_barcode_no.requestFocus();
         }else if(!cbLocatorlock.isChecked()){
@@ -282,10 +279,15 @@ public class ProductionLeaderScanFg extends BaseFragment {
                 barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
                 barcodeMap.put(AddressContants.DOC_NO, localData.getDoc_no());
                 barcodeMap.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
+
                 commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                     @Override
                     public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
                         dismissLoadingDialog();
+                        if(StringUtils.isBlank(etScanLocator.getText().toString())){
+                            showFailedDialog(getResources().getString(R.string.scan_locator));
+                            return;
+                        }
                         showBarcode(barcodeBackBean);
                     }
 
@@ -351,6 +353,7 @@ public class ProductionLeaderScanFg extends BaseFragment {
         }else if(StringUtils.isBlank(etInputNum.getText().toString().trim())){
             etInputNum.requestFocus();
         }
+        tv_swept_volume.setText("");
     }
 
     /**

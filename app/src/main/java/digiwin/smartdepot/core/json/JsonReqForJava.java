@@ -1,12 +1,10 @@
 package digiwin.smartdepot.core.json;
 
-import android.app.Activity;
 import android.content.Context;
 
 import com.alibaba.fastjson.JSON;
 
 import digiwin.library.constant.SharePreKey;
-import digiwin.library.constant.SystemConstant;
 import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.SharedPreferencesUtils;
 import digiwin.library.utils.TelephonyUtils;

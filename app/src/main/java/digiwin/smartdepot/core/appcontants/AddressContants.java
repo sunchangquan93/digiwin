@@ -75,6 +75,14 @@ public class AddressContants {
      */
     public static  final  String FLAG="flag";
     /**
+     * 删除
+     */
+    public static  final  String DELETE="d";
+    /**
+     * 新增
+     */
+    public static  final  String INSTER="i";
+    /**
      * 流转卡号
      */
     public static  final  String PROCESSCARD="process_card";
@@ -196,4 +204,16 @@ public class AddressContants {
      * 部分模块使用的单号key值
      */
     public static  final String ISSUING_NO="issuing_no";
+    /**
+     * 用户名
+     */
+    public static final String USERNAME = "username";
+    /**
+     * 密码
+     */
+    public static final String PASSWORD = "password";
+    /**
+     * 营运中心
+     */
+    public static final String PLANT = "plant";
 }

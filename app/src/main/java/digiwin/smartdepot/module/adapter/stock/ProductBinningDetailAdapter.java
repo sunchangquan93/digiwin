@@ -7,6 +7,7 @@ import android.widget.CompoundButton;
 
 import java.util.List;
 
+import digiwin.library.utils.StringUtils;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.BaseDetailRecyclerAdapter;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.RecyclerViewHolder;
 import digiwin.smartdepot.R;
@@ -33,7 +34,7 @@ public abstract class ProductBinningDetailAdapter extends BaseDetailRecyclerAdap
         //项次
         holder.setText(R.id.tv_item_seq, item.getSeq());
         //数量
-        holder.setText(R.id.tv_number, item.getItem_qty());
+        holder.setText(R.id.tv_number, StringUtils.deleteZero(item.getItem_qty()));
         //条码
         holder.setText(R.id.tv_product_number, item.getBarcode_no());
         //品名

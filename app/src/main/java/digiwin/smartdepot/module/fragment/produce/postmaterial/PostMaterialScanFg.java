@@ -367,12 +367,6 @@ public class PostMaterialScanFg extends BaseFragment {
             showFailedDialog(R.string.input_num);
             return;
         }
-        //库位栏位加锁，保存时从库位栏位取值
-        String locator = et_scan_locator.getText().toString();
-        if(locator.contains("%")){
-            saveBean.setStorage_spaces_out_no(locator.split("%")[1]);
-            saveBean.setWarehouse_out_no(locator.split("%")[0]);
-        }
         saveBean.setDoc_no(orderData.getDoc_no());
         saveBean.setQty(et_input_num.getText().toString().trim());
 //        //管控建议
@@ -440,7 +434,6 @@ public class PostMaterialScanFg extends BaseFragment {
             et_scan_locator.requestFocus();
             locatorShow="";
         }
-        saveBean = new SaveBean();
     }
 
     /**

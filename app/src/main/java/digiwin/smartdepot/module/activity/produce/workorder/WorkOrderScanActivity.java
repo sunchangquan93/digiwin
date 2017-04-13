@@ -354,18 +354,25 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
                     @Override
                     public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
                         dismissLoadingDialog();
+
+                        if(StringUtils.isBlank(etScanLocator.getText().toString())){
+                            showFailedDialog(getResources().getString(R.string.scan_locator));
+                            return;
+                        }
+
                         if(fifo_check == true) {
                             if (null != localFifoList) {
                                 if (localFifoList.size() > 0) {
                                     for (int i = 0; i < localFifoList.size(); i++) {
                                         FiFoBean fifodata = localFifoList.get(i);
-                                        Log.d(TAG, barcodeBackBean.getBarcode_no());
-                                        Log.d(TAG, fifodata.getBarcode_no());
                                         if (barcodeBackBean.getBarcode_no().equals(fifodata.getBarcode_no()) && fifodata.getStorage_spaces_no().
-                                                equals(etScanLocator.getText().toString().split("%")[1])) {
+                                                equals(saveBean.getStorage_spaces_out_no())) {
                                             showBarcode(barcodeBackBean);
                                             break;
-                                        } else if (i == localFifoList.size() - 1 && !barcodeBackBean.getBarcode_no().equals(fifodata.getBarcode_no())) {
+                                        }
+
+                                        if (i == localFifoList.size() - 1 && !barcodeBackBean.getBarcode_no().equals(fifodata.getBarcode_no()) ||
+                                                !fifodata.getStorage_spaces_no().equals(saveBean.getStorage_spaces_out_no())) {
                                             showFailedDialog(getResources().getString(R.string.fifo_scan_error), new OnDialogClickListener() {
                                                 @Override
                                                 public void onCallback() {
@@ -500,14 +507,9 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
     }
 
     public void clearData(String type){
-        saveBean = new SaveBean();
-
         if(cbLocatorlock.isChecked()){
             if(StringUtils.isBlank(etScanLocator.getText().toString().trim())){
                 locatorFlag = false;
-            }else {
-                saveBean.setStorage_spaces_out_no(etScanLocator.getText().toString().split("%")[1]);
-                saveBean.setWarehouse_out_no(etScanLocator.getText().toString().split("%")[0]);
             }
         }
 
@@ -542,7 +544,6 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
     public void showBarcode(ScanBarcodeBackBean barcodeBackBean){
         etInputNum.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
         barcodeFlag = true;
-        Log.d("====",barcodeBackBean.getAvailable_in_qty());
         saveBean.setAvailable_in_qty(barcodeBackBean.getAvailable_in_qty());
         saveBean.setBarcode_no(barcodeBackBean.getBarcode_no());
         saveBean.setItem_no(barcodeBackBean.getItem_no());

@@ -4,6 +4,7 @@
     <string name="label_exit_activity_sure">是否确定退出当前界面?</string>
     <string name="label_sure">确定</string>
     <string name="label_cancel">取消</string>
+    <string name="label_clear">清除</string>
     <string name="message_net_wifi">正在使用无线网络</string>
     <string name="message_net_local">正在使用本地流量</string>
     <string name="message_net_none">没有可用的网络 请检查网络设置</string>

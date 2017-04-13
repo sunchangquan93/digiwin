@@ -41,6 +41,12 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:background">@color/gray_f0</item>
     </style>
+    <!--列表中线条样式2-->
+    <style name="ry_line_style2">
+        <item name="android:layout_height">@dimen/layout_1dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/gray_c2</item>
+    </style>
     <!--扫描条目线条使用 -->
     <style name="fg_line_style">
         <item name="android:layout_width">match_parent</item>

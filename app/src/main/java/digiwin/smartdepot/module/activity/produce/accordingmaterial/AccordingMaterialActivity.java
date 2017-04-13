@@ -172,7 +172,6 @@ public class AccordingMaterialActivity extends BaseFirstModuldeActivity {
 
     @Override
     protected void doBusiness() {
-        Log.d(TAG,activity.module);
         managerCommon = CommonLogic.getInstance(activity,activity.module,activity.mTimestamp.toString());
         FullyLinearLayoutManager fullyLinearLayoutManager = new FullyLinearLayoutManager(activity);
         mRc_list.setLayoutManager(fullyLinearLayoutManager);

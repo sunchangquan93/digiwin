@@ -353,10 +353,13 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
                                 for(int i = 0;i < localFifoList.size();i++){
                                     FiFoBean fifodata = localFifoList.get(i);
                                     if(barcodeBackBean.getBarcode_no().equals(fifodata.getBarcode_no()) && fifodata.getStorage_spaces_no().
-                                            equals(etScanLocator.getText().toString().split("%")[1])){
+                                            equals(saveBean.getStorage_spaces_out_no())){
                                         showBarcode(barcodeBackBean);
                                         break;
-                                    }else if(i == localFifoList.size() - 1 && !barcodeBackBean.getBarcode_no().equals(fifodata.getBarcode_no())){
+                                    }
+
+                                    if(i == localFifoList.size() - 1 && !barcodeBackBean.getBarcode_no().equals(fifodata.getBarcode_no()) ||
+                                            !fifodata.getStorage_spaces_no().equals(saveBean.getStorage_spaces_out_no())){
                                         showFailedDialog(getResources().getString(R.string.fifo_scan_error), new OnDialogClickListener() {
                                             @Override
                                             public void onCallback() {
@@ -502,14 +505,9 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
      * 保存后 根据条码类型 以及是否锁定库位
      */
     public void clearData(String type){
-        saveBean = new SaveBean();
-
         if(cbLocatorlock.isChecked()){
             if(StringUtils.isBlank(etScanLocator.getText().toString().trim())){
                 locatorFlag = false;
-            }else {
-                saveBean.setStorage_spaces_out_no(etScanLocator.getText().toString().split("%")[1]);
-                saveBean.setWarehouse_out_no(etScanLocator.getText().toString().split("%")[0]);
             }
         }
 

@@ -332,7 +332,6 @@ public class VoiceUtils {
         //关于解析Json的代码可参见 Demo中JsonParser 类；
         //isLast等于true 时会话结束。
         public void onResult(RecognizerResult results, boolean isLast) {
-            Log.e (TAG, results.getResultString());
             System.out.println(results.getResultString()) ;
             sppechresult = results.getResultString();
             showTip(results.getResultString()) ;
@@ -420,10 +419,10 @@ public class VoiceUtils {
         {
             if(error != null)
             {
-                Log.d(TAG,error.toString());
+                LogUtils.d(TAG,error.toString());
             }else
             {
-                Log.d(TAG,"上传成功！");
+                LogUtils.d(TAG,"上传成功！");
             }
         }
     };

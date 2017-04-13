@@ -18,8 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:scaleType="fitXY"
-            android:src="@drawable/welcome_03" />
+            android:scaleType="fitXY" />
 
         <ImageView
             android:id="@+id/welcome_outcircle"

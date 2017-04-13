@@ -359,7 +359,6 @@ public class PurchaseCheckActivity extends BaseActivity {
             for (int i = 0; i < badReasonBeanList.size(); i++) {
                 defect_num += StringUtils.string2Float(badReasonBeanList.get(i).getDefect_qty());
             }
-            Log.d(TAG,"defect_num:"+defect_num);
             defectMap.put(positionMap.get(selectPosition),(int) defect_num);
             defect_num = 0;
             detailAdapter.notifyDataSetChanged();

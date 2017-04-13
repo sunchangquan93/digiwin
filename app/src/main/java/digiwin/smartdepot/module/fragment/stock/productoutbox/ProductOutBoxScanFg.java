@@ -31,7 +31,7 @@ import digiwin.smartdepot.module.logic.common.CommonLogic;
 
 /**
  * @author 孙长权
- * @des 产品装箱--扫描
+ * @des 产品出箱--扫描
  * @date 2017/3/23
  */
 public class ProductOutBoxScanFg extends BaseFragment {
@@ -143,7 +143,6 @@ public class ProductOutBoxScanFg extends BaseFragment {
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
                 case PACKBOXNUMBER://扫描包装箱号
-                    boxFlag = true;
                     String number = msg.obj.toString().trim();
                     //获取包装箱号
                     if (!StringUtils.isBlank(number)) {
@@ -156,28 +155,32 @@ public class ProductOutBoxScanFg extends BaseFragment {
                             public void onSuccess(List<ProductBinningBean> productBinningBeans) {
                                 if (productBinningBeans != null && productBinningBeans.size() > 0) {
                                     ProductBinningBean bean = productBinningBeans.get(productBinningBeans.size() - 1);
-                                    tvBoxNumber.setText(bean.getItem_qty());
+                                    tvBoxNumber.setText(StringUtils.deleteZero(bean.getQty()));
                                     etProductBarcode.requestFocus();
+                                    boxFlag = true;
                                 }
                             }
                             @Override
                             public void onFailed(String error) {
                                 showFailedDialog(error);
+                                etPackBoxNumber.setText("");
+                                boxFlag=false;
                             }
                         });
                     }
                     break;
-                case PRODUCTBARCODE:
+                case PRODUCTBARCODE://扫描产品条码
                     showLoadingDialog();
                     HashMap<String, String> map = new HashMap<>();
-                    map.put("package_no", pactivity.packBoxNumber);
-                    map.put("barcode_no", msg.obj.toString().trim());
-                    map.put("flag", "d");
+                    map.put(AddressContants.PACKAGE_NO, pactivity.packBoxNumber);
+                    map.put(AddressContants.BARCODE_NO, msg.obj.toString().trim());
+                    map.put(AddressContants.FLAG,AddressContants.DELETE);
                     List<Map<String, String>> list = new ArrayList<>();
                     list.add(map);
                     commonLogic.insertAndDelete(list, new CommonLogic.InsertAndDeleteListener() {
                         @Override
                         public void onSuccess(String show) {
+                            etProductBarcode.requestFocus();
                             dismissLoadingDialog();
                             barcodeShow = show;
                             show();
@@ -187,6 +190,8 @@ public class ProductOutBoxScanFg extends BaseFragment {
                         public void onFailed(String error) {
                             dismissLoadingDialog();
                             showFailedDialog(error);
+                            etProductBarcode.setText("");
+                            etProductBarcode.requestFocus();
                         }
                     });
                     break;

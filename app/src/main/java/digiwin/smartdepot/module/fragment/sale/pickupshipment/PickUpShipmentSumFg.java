@@ -96,8 +96,6 @@ public class PickUpShipmentSumFg extends BaseFragment {
             ClickItemPutBean putBean = new ClickItemPutBean();
             putBean.setDoc_no(localData.getDoc_no());
             putBean.setWarehouse_no(LoginLogic.getUserInfo().getWare());
-            Log.d("====",pactivity.mTimestamp.toString());
-
             commonLogic = CommonLogic.getInstance(pactivity, pactivity.module, pactivity.mTimestamp.toString());
 
             showLoadingDialog();

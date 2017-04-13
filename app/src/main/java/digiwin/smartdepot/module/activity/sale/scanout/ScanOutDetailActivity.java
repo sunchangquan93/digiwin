@@ -72,6 +72,7 @@ public class ScanOutDetailActivity extends BaseTitleActivity{
     ExpandableListView expandLv;
     @BindView(R.id.delete)
     Button delete;
+
     @OnClick(R.id.delete)
     void delete(){
         showLoadingDialog();

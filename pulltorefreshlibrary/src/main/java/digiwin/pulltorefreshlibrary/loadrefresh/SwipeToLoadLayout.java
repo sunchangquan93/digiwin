@@ -472,7 +472,6 @@ public class SwipeToLoadLayout extends ViewGroup {
                     // abort autoScrolling, not trigger the method #autoScrollFinished()
                     mAutoScroller.abortIfRunning();
                     if (mDebug) {
-                        Log.i(TAG, "Another finger down, abort auto scrolling, let the new finger handle");
                     }
                 }
 
@@ -1231,7 +1230,6 @@ public class SwipeToLoadLayout extends ViewGroup {
         }
 
         if (mDebug) {
-            Log.i(TAG, "mTargetOffset = " + mTargetOffset);
         }
         layoutChildren();
         invalidate();
@@ -1363,7 +1361,6 @@ public class SwipeToLoadLayout extends ViewGroup {
         }
 
         if (mDebug) {
-            Log.i(TAG, STATUS.getStatus(mLastStatus) + " -> " + STATUS.getStatus(mStatus));
         }
     }
 
@@ -1700,7 +1697,6 @@ public class SwipeToLoadLayout extends ViewGroup {
         }
 
         private static void printStatus(int status) {
-            Log.i(TAG, "printStatus:" + getStatus(status));
         }
     }
 }

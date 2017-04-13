@@ -56,7 +56,6 @@ public class OperatingCenterAdapter extends RecyclerView.Adapter<OperatingCenter
                 if (listener!=null){
                     listener.onClick(view,position);
                 }else {
-                    Log.i(TAG,"点击事件对象为空");
                 }
             }
         });

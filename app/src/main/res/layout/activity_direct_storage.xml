@@ -49,7 +49,6 @@
                         android:id="@+id/et_gongDan"
                         android:layout_width="@dimen/layout_0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/layout_10dp"
                         android:layout_weight="1"
                         android:singleLine="true"
                         android:background="@null"
@@ -71,50 +70,14 @@
                         android:layout_width="@dimen/layout_70dp"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:text="@string/locator"
+                        android:text="@string/label_storage"
                         android:textColor="@color/black_32"
                         android:textSize="@dimen/textSize_14sp" />
-
-                    <EditText
-                        android:id="@+id/et_scan_locator"
-                        android:layout_width="@dimen/layout_0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/layout_10dp"
-                        android:layout_weight="1"
-                        android:background="@null"
-                        android:singleLine="true"
-                        android:textColor="@color/black_32"
-                        android:textCursorDrawable="@drawable/et_cursor_yellow"
-                        android:textSize="@dimen/textSize_14sp" />
-                    <CheckBox
-                        android:id="@+id/cb_locatorlock"
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/layout_20dp"
-                        android:button="@drawable/lock_checkbox"
-                        />
-                </LinearLayout>
-
-                <View style="@style/fg_line_style" />
-                <LinearLayout
-                    android:id="@+id/ll_scan_barcode"
-                    style="@style/itemstyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/tv_barcode"
-                        android:layout_width="@dimen/layout_70dp"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:text="@string/barcode_no"
-                        android:textColor="@color/black_32"
-                        android:textSize="@dimen/textSize_14sp" />
-
-                    <EditText
-                        android:id="@+id/et_scan_barocde"
+                        android:id="@+id/tv_warehouse"
                         android:layout_width="@dimen/layout_0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/layout_10dp"
                         android:layout_weight="1"
                         android:background="@null"
                         android:singleLine="true"
@@ -143,7 +106,6 @@
                         android:id="@+id/et_input_num"
                         android:layout_width="@dimen/layout_0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/layout_10dp"
                         android:layout_weight="1"
                         android:background="@null"
                         android:hint="@string/input_num"

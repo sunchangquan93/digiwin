@@ -381,7 +381,6 @@ public class BadReasonActivity extends BaseActivity {
                                         @Override
                                         protected void bindData(RecyclerViewHolder holder, int position, BadReasonBean item) {
                                             int color = (int)(Math.random()*5);
-                                            Log.d(TAG,"color:"+color);
                                             if(color == 0){
                                                 holder.setTextColor(R.id.tv_detail_reason,R.color.RED);
                                             }

@@ -167,7 +167,6 @@ public class QuickStorageActivity extends BaseFirstModuldeActivity{
 
                     @Override
                     public void onFailed(String error) {
-                        Log.d(TAG,error);
                         dismissLoadingDialog();
                         showFailedDialog(error, new OnDialogClickListener() {
                             @Override

@@ -424,12 +424,6 @@ public class DistributeScanActivity extends BaseTitleActivity {
         showLoadingDialog();
         initSaveBean();
         saveBean.setQty(et_input_num.getText().toString().trim());
-        //库位栏位加锁，保存时从库位栏位取值
-        String locator = et_scan_locator.getText().toString();
-        if(locator.contains("%")){
-            saveBean.setStorage_spaces_out_no(locator.split("%")[1]);
-            saveBean.setWarehouse_out_no(locator.split("%")[0]);
-        }
         commonLogic.scanSave(saveBean, new CommonLogic.SaveListener() {
 
             @Override
@@ -475,7 +469,6 @@ public class DistributeScanActivity extends BaseTitleActivity {
             }
         }
         et_input_num.setText("");
-        saveBean = new SaveBean();
     }
 
     /**

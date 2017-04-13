@@ -172,7 +172,6 @@ public class MaterialReceiptActivity extends BaseTitleActivity implements View.O
 
                         rl_top.setVisibility(View.VISIBLE);
                         ListSumBean bean = list.get(0);
-                        Log.d(TAG,bean.getCheck());
                         tv_delivery_note_no.setText(bean.getDoc_no());
                         tv_delivery_date.setText(bean.getCreate_date());
                         tv_supplier.setText(bean.getSupplier_name());
@@ -183,7 +182,6 @@ public class MaterialReceiptActivity extends BaseTitleActivity implements View.O
 
                     @Override
                     public void onFailed(String error) {
-                        Log.d(TAG,error);
                         dismissLoadingDialog();
                         showFailedDialog(error, new OnDialogClickListener() {
                             @Override

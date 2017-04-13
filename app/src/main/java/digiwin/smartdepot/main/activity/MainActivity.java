@@ -83,15 +83,12 @@ public class MainActivity extends BaseTitleActivity {
         voiceUtils.voiceToText(new VoiceUtils.GetVoiceTextListener() {
             @Override
             public String getVoiceText(String str) {
-                Log.d(TAG,"resulttext"+str);
                 command = str;
-                Log.d(TAG,"list.size()"+list.size());
                 if(list.size()>0){
                     for (int i = 0;i<list.size();i++){
                         if(command.contains(getResources().getString(list.get(i).getNameRes()))){
                             //
-                            Log.d(TAG,"command"+command);
-                            voice("正在为您打开"+getResources().getString(list.get(i).getNameRes()));
+                            voice(getResources().getString(R.string.openning)+getResources().getString(list.get(i).getNameRes()));
                             ActivityManagerUtils.startActivity(MainActivity.this,list.get(i).getIntent());
                         }
                     }

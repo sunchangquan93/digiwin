@@ -40,10 +40,10 @@ public class NotificationClickEventReceiver
      */
     public void onEvent(NotificationClickEvent notificationClickEvent)
     {
-        Log.d(TAG, "[onEvent] NotificationClickEvent !!!!");
+      LogUtils.d(TAG, "[onEvent] NotificationClickEvent !!!!");
         if (null == notificationClickEvent)
         {
-            Log.w(TAG, "[onNotificationClick] message is null");
+          LogUtils.w(TAG, "[onNotificationClick] message is null");
             return;
         }
         Message msg = notificationClickEvent.getMessage();
@@ -60,7 +60,7 @@ public class NotificationClickEventReceiver
                 conv = JMessageClient.getSingleConversation(targetId, appKey);
                 notificationIntent.putExtra(BaseApplication.TARGET_ID, targetId);
                 notificationIntent.putExtra(BaseApplication.TARGET_APP_KEY, appKey);
-                LogUtils.i("Notification", "msg.fromAppKey() " + appKey);
+                LogUtils.i(TAG, "msg.fromAppKey() " + appKey);
             }
             //群聊使用
             else

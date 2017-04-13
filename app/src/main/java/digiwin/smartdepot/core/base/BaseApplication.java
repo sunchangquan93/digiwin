@@ -10,6 +10,7 @@ import com.iflytek.cloud.SpeechConstant;
 import com.iflytek.cloud.SpeechUtility;
 import com.umeng.analytics.MobclickAgent;
 
+import digiwin.library.utils.LogUtils;
 import org.litepal.LitePalApplication;
 
 import cn.jpush.im.android.api.JMessageClient;
@@ -117,7 +118,7 @@ public class BaseApplication extends LitePalApplication {
                     @Override
                     public void run() {
                         try {
-                            Log.e("AndroidRuntime", "--->CockroachException:" + thread + "---", throwable);
+                            LogUtils.e("AndroidRuntime", "--->CockroachException:" + thread + "---"+ throwable);
                         } catch (Throwable e) {
 
                         }

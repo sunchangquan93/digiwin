@@ -42,7 +42,6 @@ import digiwin.smartdepot.module.bean.common.ListSumBean;
                 return checkedList;
             }
         }
-        Log.d("ListSumData==:",checkedList.size()+"");
         return checkedList;
     }
 
@@ -94,7 +93,6 @@ import digiwin.smartdepot.module.bean.common.ListSumBean;
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Log.d("onCheckedChanged===:","onCheckedChanged");
                 if(isChecked == true){
                     item.setCheck("2");
                     checkBox.setChecked(true);

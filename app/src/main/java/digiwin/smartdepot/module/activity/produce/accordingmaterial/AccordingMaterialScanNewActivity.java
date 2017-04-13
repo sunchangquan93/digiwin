@@ -4,7 +4,6 @@ import android.os.Message;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.method.TextKeyListener;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -357,10 +356,13 @@ public class AccordingMaterialScanNewActivity extends BaseTitleActivity {
                                 for(int i = 0;i < localFifoList.size();i++){
                                     FifoAccordingBean fifodata = localFifoList.get(i);
                                     if(barcodeBackBean.getItem_no().equals(fifodata.getItem_no()) && fifodata.getStorage_spaces_no().
-                                            equals(etScanLocator.getText().toString().split("%")[1])){
+                                            equals(saveBean.getStorage_spaces_out_no())){
                                         showBarcode(barcodeBackBean);
                                         break;
-                                    }else if(i == localFifoList.size() - 1 && !barcodeBackBean.getItem_no().equals(fifodata.getItem_no())){
+                                    }
+
+                                    if(i == localFifoList.size() - 1 && !barcodeBackBean.getItem_no().equals(fifodata.getItem_no()) ||
+                                            !fifodata.getStorage_spaces_no().equals(saveBean.getStorage_spaces_out_no())){
                                         showFailedDialog(getResources().getString(R.string.fifo_scan_error), new OnDialogClickListener() {
                                             @Override
                                             public void onCallback() {
@@ -505,14 +507,10 @@ public class AccordingMaterialScanNewActivity extends BaseTitleActivity {
     }
 
     public void clearData(String type){
-        saveBean = new SaveBean();
 
         if(cbLocatorlock.isChecked()){
             if(StringUtils.isBlank(etScanLocator.getText().toString().trim())){
                 locatorFlag = false;
-            }else {
-                saveBean.setStorage_spaces_out_no(etScanLocator.getText().toString().split("%")[1]);
-                saveBean.setWarehouse_out_no(etScanLocator.getText().toString().split("%")[0]);
             }
         }
 
@@ -564,8 +562,6 @@ public class AccordingMaterialScanNewActivity extends BaseTitleActivity {
     public void showBarcode(ScanBarcodeBackBean barcodeBackBean){
         etInputNum.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
         barcodeFlag = true;
-        saveBean = new SaveBean();
-        Log.d("====",barcodeBackBean.getAvailable_in_qty());
         saveBean.setAvailable_in_qty(barcodeBackBean.getAvailable_in_qty());
         saveBean.setBarcode_no(barcodeBackBean.getBarcode_no());
         saveBean.setItem_no(barcodeBackBean.getItem_no());

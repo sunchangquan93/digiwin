@@ -52,22 +52,6 @@ public class SaveBean {
      */
     private String package_no;
 
-    public String getPackage_no() {
-        return package_no;
-    }
-
-    public void setPackage_no(String package_no) {
-        this.package_no = package_no;
-    }
-
-    public String getScan_sumqty() {
-        return scan_sumqty;
-    }
-
-    public void setScan_sumqty(String scan_sumqty) {
-        this.scan_sumqty = scan_sumqty;
-    }
-
     /**
      * 扫描汇总量
      */
@@ -113,6 +97,26 @@ public class SaveBean {
      * 批次日期
      */
     private String lot_date;
+    /**
+     * 仓库
+     */
+    private  String warehouse_no;
+
+    public String getPackage_no() {
+        return package_no;
+    }
+
+    public void setPackage_no(String package_no) {
+        this.package_no = package_no;
+    }
+
+    public String getScan_sumqty() {
+        return scan_sumqty;
+    }
+
+    public void setScan_sumqty(String scan_sumqty) {
+        this.scan_sumqty = scan_sumqty;
+    }
 
     public String getLot_date() {
         return lot_date;
@@ -121,7 +125,6 @@ public class SaveBean {
     public void setLot_date(String lot_date) {
         this.lot_date = lot_date;
     }
-
 
     public String getWorkgroup_no() {
         return workgroup_no;
@@ -275,4 +278,11 @@ public class SaveBean {
         this.fifo_check = fifo_check;
     }
 
+    public String getWarehouse_no() {
+        return warehouse_no;
+    }
+
+    public void setWarehouse_no(String warehouse_no) {
+        this.warehouse_no = warehouse_no;
+    }
 }
