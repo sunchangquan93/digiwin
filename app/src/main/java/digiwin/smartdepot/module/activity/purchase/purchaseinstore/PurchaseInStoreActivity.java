@@ -162,6 +162,7 @@ public class PurchaseInStoreActivity extends BaseTitleActivity {
         DatePickerUtils.getDoubleDate(pactivity, new DatePickerUtils.GetDoubleDateListener() {
             @Override
             public void getTime(String mStartDate, String mEndDate, String showDate) {
+                et_date.requestFocus();
                 startDate = mStartDate;
                 endDate = mEndDate;
                 et_date.setText(showDate);
@@ -240,6 +241,7 @@ public class PurchaseInStoreActivity extends BaseTitleActivity {
 
     @Override
     protected void doBusiness() {
+        et_date.setKeyListener(null);
         pactivity = (PurchaseInStoreActivity) activity;
         commonLogic = CommonLogic.getInstance(pactivity, module, mTimestamp.toString());
         FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(activity);
@@ -256,7 +258,7 @@ public class PurchaseInStoreActivity extends BaseTitleActivity {
             public void onItemClick(View itemView, int position) {
                 final FilterResultOrderBean orderData = sumShowBeanList.get(position);
                 Bundle bundle = new Bundle();
-                        bundle.putSerializable("orderData", orderData);
+                        bundle.putSerializable(AddressContants.ORDERDATA, orderData);
                         ActivityManagerUtils.startActivityBundleForResult(pactivity, PurchaseInStoreSecondActivity.class, bundle, SUMCODE);
             }
         });

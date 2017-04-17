@@ -28,6 +28,11 @@ public class ScanLocatorBackBean {
      */
     private String show;
 
+    /**
+     * 是否允许仓负库存
+     */
+    private String allow_negative_stock;
+
     public String getStorage_spaces_no() {
         return storage_spaces_no;
     }
@@ -66,5 +71,13 @@ public class ScanLocatorBackBean {
 
     public void setShow(String show) {
         this.show = show;
+    }
+
+    public String getAllow_negative_stock() {
+        return allow_negative_stock;
+    }
+
+    public void setAllow_negative_stock(String allow_negative_stock) {
+        this.allow_negative_stock = allow_negative_stock;
     }
 }

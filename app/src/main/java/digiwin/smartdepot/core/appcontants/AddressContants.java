@@ -181,6 +181,10 @@ public class AddressContants {
      */
     public static final  String FIFOY="Y";
     /**
+     * fifoY
+     */
+    public static final  String FIFON="N";
+    /**
      * 物料条码标记1
      */
     public static  final String ONE="1";
@@ -216,4 +220,25 @@ public class AddressContants {
      * 营运中心
      */
     public static final String PLANT = "plant";
+    /**
+     * 部门编号
+     */
+    public static final String DEPARTMENTNO = "department_no";
+    /**
+     * orderData
+     */
+    public static final String ORDERDATA = "orderData";
+    /**
+     * 出仓库
+     */
+    public static final String WAREHOUSEOUTNO = "warehouse_out_no";
+    /**
+     * 工单号
+     */
+    public static final String WORKNO = "work_no";
+    /**
+     * qty
+     */
+    public static final String QTY = "qty";
+
 }

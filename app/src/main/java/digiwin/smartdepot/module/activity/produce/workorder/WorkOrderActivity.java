@@ -89,6 +89,8 @@ public class WorkOrderActivity extends BaseFirstModuldeActivity {
      */
     public final int SCANCODE = 0123;
 
+    private final String SUMDATA = "sumdata";
+
     CommonLogic managerCommon;
 
     @BindViews({R.id.et_job_number_scan})
@@ -184,6 +186,9 @@ public class WorkOrderActivity extends BaseFirstModuldeActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == SCANCODE){
             if(!StringUtils.isBlank(et_job_number_scan.getText().toString().trim())){
+                List<ListSumBean> list = new ArrayList<ListSumBean>();
+                adapter = new WorkOrderSumAdapter(activity,list);
+                mRc_list.setAdapter(adapter);
                 updateList(et_job_number_scan.getText().toString().trim());
             }
         }
@@ -206,7 +211,6 @@ public class WorkOrderActivity extends BaseFirstModuldeActivity {
      * @param item_no
      */
     void updateList(String item_no){
-        showLoadingDialog();
         ClickItemPutBean putBean = new ClickItemPutBean();
         putBean.setWo_no(item_no);
         putBean.setWarehouse_no(LoginLogic.getUserInfo().getWare());
@@ -214,7 +218,9 @@ public class WorkOrderActivity extends BaseFirstModuldeActivity {
         managerCommon.getOrderSumData(putBean, new CommonLogic.GetOrderSumListener() {
             @Override
             public void onSuccess(final List<ListSumBean> list) {
-                mTv_item_name.setText(list.get(0).getItem_name());
+                if (list.size()==0) {
+                    mTv_item_name.setText(list.get(0).getItem_name());
+                }
                 adapter = new WorkOrderSumAdapter(activity,list);
                 mRc_list.setAdapter(adapter);
                 dismissLoadingDialog();
@@ -224,9 +230,9 @@ public class WorkOrderActivity extends BaseFirstModuldeActivity {
                     public void onItemClick(View itemView, int position) {
                         Bundle bundle = new Bundle();
                         ListSumBean data = list.get(position);
-                        bundle.putSerializable("sumdata", data);
-                        bundle.putString("work_no",et_job_number_scan.getText().toString().trim());
-                        bundle.putString("modilecode",mTimestamp.toString());
+                        bundle.putSerializable(SUMDATA, data);
+                        bundle.putString(AddressContants.WORKNO,et_job_number_scan.getText().toString().trim());
+                        bundle.putString(AddressContants.MODULEID_INTENT,mTimestamp.toString());
                         ActivityManagerUtils.startActivityBundleForResult(activity,WorkOrderScanActivity.class,bundle,SCANCODE);
                     }
                 });

@@ -22,6 +22,7 @@
             android:id="@+id/tv_item_purchase_order"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/Base_color"
             android:textSize="@dimen/textSize_14sp" />
     </LinearLayout>
 
@@ -43,11 +44,13 @@
         <TextView
             android:id="@+id/tv_item_date"
             android:layout_width="@dimen/layout_0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/Base_color"
             android:textSize="@dimen/textSize_14sp" />
+
         <TextView
-            android:layout_width="@dimen/layout_60dp"
+            android:layout_width="@dimen/layout_50dp"
             android:layout_height="wrap_content"
             android:text="@string/supplier"
             android:textSize="@dimen/textSize_14sp" />
@@ -55,8 +58,9 @@
         <TextView
             android:id="@+id/tv_item_supplier"
             android:layout_width="@dimen/layout_0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/Base_color"
             android:textSize="@dimen/textSize_14sp" />
     </LinearLayout>
 

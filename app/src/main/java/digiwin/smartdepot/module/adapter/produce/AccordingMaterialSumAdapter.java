@@ -1,7 +1,6 @@
 package digiwin.smartdepot.module.adapter.produce;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 
 import java.util.List;
@@ -34,8 +33,9 @@ public class AccordingMaterialSumAdapter extends BaseRecyclerAdapter<ListSumBean
     @Override
     protected void bindData(RecyclerViewHolder holder, int position, final ListSumBean item) {
         //判断实发量 和 欠料量
-        float numb1 = StringUtils.string2Float(item.getShortage_qty());
-        float numb2 = StringUtils.string2Float(item.getScan_sumqty());
+        final float numb1 = StringUtils.string2Float(item.getShortage_qty());
+        final float numb2 = StringUtils.string2Float(item.getScan_sumqty());
+        final float numb3 = StringUtils.string2Float(item.getStock_qty());
 
         holder.setText(R.id.tv_item_no, item.getLow_order_item_no());
         holder.setText(R.id.tv_unit,item.getUnit_no());
@@ -52,6 +52,15 @@ public class AccordingMaterialSumAdapter extends BaseRecyclerAdapter<ListSumBean
                 SumShowBean bean = new SumShowBean();
                 bean.setItem_no(item.getLow_order_item_no());
                 bean.setItem_name(item.getItem_name());
+
+                if(numb1 > numb3){
+                    bean.setAvailable_in_qty(item.getStock_qty());
+                } else if(numb1 < numb3){
+                    bean.setAvailable_in_qty(item.getShortage_qty());
+                }else if(numb1 == numb3){
+                    bean.setAvailable_in_qty(item.getStock_qty());
+                }
+
                 AccordingMaterialActivity activity = (AccordingMaterialActivity) mContext;
                 activity.ToDetailAct(bean);
             }

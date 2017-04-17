@@ -65,11 +65,11 @@ public class QuickStorageListActivity extends BaseTitleActivity{
     @BindView(R.id.scrollview)
     ScrollView scrollview;
 
-    @BindViews({R.id.ll_provider_code,R.id.ll_barcode_no,R.id.ll_item_name})
+    @BindViews({R.id.ll_provider_code,R.id.ll_barcode_no,R.id.ll_item_name,R.id.ll_plan_date})
     List<View> views;
-    @BindViews({R.id.tv_provider_code,R.id.tv_barcode_no,R.id.tv_item_name})
+    @BindViews({R.id.tv_provider_code,R.id.tv_barcode_no,R.id.tv_item_name,R.id.tv_plan_date})
     List<TextView> textViews;
-    @BindViews({R.id.et_provider_code,R.id.et_barcode_no, R.id.et_item_name})
+    @BindViews({R.id.et_provider_code,R.id.et_barcode_no, R.id.et_item_name,R.id.et_plan_date})
     List<EditText> editTexts;
 
     /**
@@ -126,12 +126,21 @@ public class QuickStorageListActivity extends BaseTitleActivity{
     /**
      * 筛选框 计划日
      */
+    @BindView(R.id.ll_plan_date)
+    LinearLayout ll_plan_date;
+
     @BindView(R.id.iv_plan_date)
     ImageView iv_plan_date;
-
+    @BindView(R.id.tv_plan_date)
+    TextView tv_plan_date;
     @BindView(R.id.et_plan_date)
     EditText et_plan_date;
-
+    @OnFocusChange(R.id.et_plan_date)
+    void plan_dateFocusChanage() {
+        ModuleUtils.viewChange(ll_plan_date, views);
+        ModuleUtils.tvChange(activity, tv_plan_date, textViews);
+        ModuleUtils.etChange(activity, et_plan_date, editTexts);
+    }
     String startDate = "";
     String endDate = "";
 
@@ -140,6 +149,7 @@ public class QuickStorageListActivity extends BaseTitleActivity{
         DatePickerUtils.getDoubleDate(activity, new DatePickerUtils.GetDoubleDateListener() {
             @Override
             public void getTime(String mStartDate, String mEndDate, String showDate) {
+                et_plan_date.requestFocus();
                 startDate = mStartDate;
                 endDate = mEndDate;
                 et_plan_date.setText(showDate);
@@ -148,6 +158,8 @@ public class QuickStorageListActivity extends BaseTitleActivity{
     }
 
     private final int SCANCODE = 1234;
+
+    private final String DATA = "data";
 
     private List<FilterResultOrderBean> dataList;
 
@@ -200,7 +212,7 @@ public class QuickStorageListActivity extends BaseTitleActivity{
                         public void onItemClick(View itemView, int position) {
                             Bundle bundle = new Bundle();
                             FilterResultOrderBean data = list.get(position);
-                            bundle.putSerializable("data",data);
+                            bundle.putSerializable(DATA,data);
                             ActivityManagerUtils.startActivityBundleForResult(activity,QuickStorageActivity.class,bundle,SCANCODE);
                         }
                     });
@@ -222,6 +234,7 @@ public class QuickStorageListActivity extends BaseTitleActivity{
 
     @Override
     protected void doBusiness() {
+        et_plan_date.setKeyListener(null);
         commonLogic = CommonLogic.getInstance(activity,module,mTimestamp.toString());
         FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(activity);
         ry_list.setLayoutManager(linearLayoutManager);
@@ -252,6 +265,9 @@ public class QuickStorageListActivity extends BaseTitleActivity{
         super.onActivityResult(requestCode, resultCode, data);
         try{
             if(requestCode == SCANCODE){
+                dataList.clear();
+                adapter = new QuickStorageListAdapter(activity,dataList);
+                ry_list.setAdapter(adapter);
                 search();
             }
         }catch (Exception e){

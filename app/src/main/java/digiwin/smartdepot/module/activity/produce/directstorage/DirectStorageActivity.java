@@ -118,6 +118,7 @@ public class DirectStorageActivity extends BaseFirstModuldeActivity {
     @OnTextChanged(value = R.id.et_gongDan, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void workOrderNumberChange(CharSequence s) {
         if (!StringUtils.isBlank(s.toString())) {
+            mHandler.removeMessages(WORKORDER);
             mHandler.sendMessageDelayed(mHandler.obtainMessage(WORKORDER, s.toString()), AddressContants.DELAYTIME);
         }
     }

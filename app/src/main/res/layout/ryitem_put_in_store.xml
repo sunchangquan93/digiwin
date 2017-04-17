@@ -24,6 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/layout_10dp"
             android:layout_weight="1"
+            android:textColor="@color/Base_color"
             android:textSize="@dimen/textSize_14sp" />
     </LinearLayout>
 
@@ -49,6 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/layout_10dp"
             android:layout_weight="1"
+            android:textColor="@color/Base_color"
             android:textSize="@dimen/textSize_14sp" />
     </LinearLayout>
 
@@ -73,6 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/layout_10dp"
             android:layout_weight="1"
+            android:textColor="@color/Base_color"
             android:textSize="@dimen/textSize_14sp" />
         <TextView
             android:layout_width="@dimen/layout_30dp"
@@ -87,6 +90,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/layout_10dp"
             android:layout_weight="1"
+            android:textColor="@color/Base_color"
             android:textSize="@dimen/textSize_14sp" />
     </LinearLayout>
 

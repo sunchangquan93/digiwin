@@ -28,15 +28,16 @@ import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseTitleActivity;
+import digiwin.smartdepot.core.coreutil.FiFoCheckUtils;
 import digiwin.smartdepot.core.modulecommon.ModuleUtils;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
 import digiwin.smartdepot.module.adapter.produce.AccordingMaterialFiFoAdapter;
+import digiwin.smartdepot.module.bean.common.FifoCheckBean;
 import digiwin.smartdepot.module.bean.common.ListSumBean;
 import digiwin.smartdepot.module.bean.common.SaveBackBean;
 import digiwin.smartdepot.module.bean.common.SaveBean;
 import digiwin.smartdepot.module.bean.common.ScanBarcodeBackBean;
 import digiwin.smartdepot.module.bean.common.ScanLocatorBackBean;
-import digiwin.smartdepot.module.bean.produce.FiFoBean;
 import digiwin.smartdepot.module.logic.common.CommonLogic;
 
 import static digiwin.smartdepot.R.id.et_input_num;
@@ -74,7 +75,6 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
      * FIFO
      */
     final int FIFOWHAT = 1003;
-
 
     /**
      * 标题
@@ -170,9 +170,7 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
 
     CommonLogic commonLogic;
 
-    List<FiFoBean> localFifoList;
-
-    boolean fifo_check = false;
+    List<FifoCheckBean> localFifoList;
 
     /**
      * 提交按钮
@@ -208,24 +206,23 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
             showFailedDialog(R.string.input_num);
             return;
         }
-
-//        showLoadingDialog();
         saveBean.setQty(etInputNum.getText().toString());
         //判断库存 欠料数量  哪个小取哪一个
-        if(StringUtils.string2Float(tv_under_feed.getText().toString()) > StringUtils.string2Float(tv_stock_balance.getText().toString())){
-            saveBean.setAvailable_in_qty(tv_stock_balance.getText().toString());
-        }else if(StringUtils.string2Float(tv_under_feed.getText().toString()) < StringUtils.string2Float(tv_stock_balance.getText().toString())){
-            saveBean.setAvailable_in_qty(tv_under_feed.getText().toString());
-        }else{
-            saveBean.setAvailable_in_qty(tv_under_feed.getText().toString());
+        saveBean.setAvailable_in_qty(StringUtils.getMinQty(tv_under_feed.getText().toString(),tv_stock_balance.getText().toString()));
+        String fifoCheck = FiFoCheckUtils.fifoCheck(saveBean,localFifoList);
+        if(!StringUtils.isBlank(fifoCheck)){
+            showFailedDialog(fifoCheck);
+            return;
         }
+
+        showLoadingDialog();
         commonLogic.scanSave(saveBean, new CommonLogic.SaveListener() {
             @Override
             public void onSuccess(SaveBackBean saveBackBean) {
                 dismissLoadingDialog();
                 tv_actual_yield.setText(StringUtils.deleteZero(String.valueOf(saveBackBean.getScan_sumqty())));
                 if(null != localFifoList){
-                    if(localFifoList.size() > 0 && fifo_check == true){
+                    if(localFifoList.size() > 0 && AddressContants.FIFOY.equals(saveBean.getFifo_check())){
                         getFifo();
                     }
                 }
@@ -235,12 +232,7 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
             @Override
             public void onFailed(String error) {
                 dismissLoadingDialog();
-                showFailedDialog(error, new OnDialogClickListener() {
-                    @Override
-                    public void onCallback() {
-                        clearData(type);
-                    }
-                });
+                showFailedDialog(error);
             }
         });
     }
@@ -284,7 +276,7 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
     @OnTextChanged(value = et_scan_barocde, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void barcodeChange(CharSequence s) {
         if (!StringUtils.isBlank(s.toString())) {
-            showLoadingDialog();
+            mHandler.removeMessages(BARCODEWHAT);
             mHandler.sendMessageDelayed(mHandler.obtainMessage(BARCODEWHAT, s.toString()), AddressContants.DELAYTIME);
         }
     }
@@ -292,7 +284,7 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
     @OnTextChanged(value = R.id.et_scan_locator, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void locatorChange(CharSequence s) {
         if (!StringUtils.isBlank(s.toString())) {
-            showLoadingDialog();
+            mHandler.removeMessages(LOCATORWHAT);
             mHandler.sendMessageDelayed(mHandler.obtainMessage(LOCATORWHAT, s.toString()), AddressContants.DELAYTIME);
         }
     }
@@ -312,7 +304,7 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
                         locatorFlag = true;
                         saveBean.setStorage_spaces_out_no(locatorBackBean.getStorage_spaces_no());
                         saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
-
+                        saveBean.setAllow_negative_stock(locatorBackBean.getAllow_negative_stock());
                         if(type.equals(codetype)){
                             etInputNum.requestFocus();
                         }else{
@@ -342,43 +334,7 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
                     @Override
                     public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
                         dismissLoadingDialog();
-
-                        if(StringUtils.isBlank(etScanLocator.getText().toString())){
-                            showFailedDialog(getResources().getString(R.string.scan_locator));
-                            return;
-                        }
-
-                        if(fifo_check == true){
-                            if(localFifoList.size() > 0){
-                                for(int i = 0;i < localFifoList.size();i++){
-                                    FiFoBean fifodata = localFifoList.get(i);
-                                    if(barcodeBackBean.getBarcode_no().equals(fifodata.getBarcode_no()) && fifodata.getStorage_spaces_no().
-                                            equals(saveBean.getStorage_spaces_out_no())){
-                                        showBarcode(barcodeBackBean);
-                                        break;
-                                    }
-
-                                    if(i == localFifoList.size() - 1 && !barcodeBackBean.getBarcode_no().equals(fifodata.getBarcode_no()) ||
-                                            !fifodata.getStorage_spaces_no().equals(saveBean.getStorage_spaces_out_no())){
-                                        showFailedDialog(getResources().getString(R.string.fifo_scan_error), new OnDialogClickListener() {
-                                            @Override
-                                            public void onCallback() {
-                                                etScanBarocde.setText("");
-                                            }
-                                        });
-                                    }
-                                }
-                            }else{
-                                showFailedDialog(getResources().getString(R.string.fifo_scan_error), new OnDialogClickListener() {
-                                    @Override
-                                    public void onCallback() {
-                                        etScanBarocde.setText("");
-                                    }
-                                });
-                            }
-                        }else{
-                            showBarcode(barcodeBackBean);
-                        }
+                        showBarcode(barcodeBackBean);
                     }
 
                     @Override
@@ -395,19 +351,18 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
                 break;
 
             case FIFOWHAT:
-                showLoadingDialog();
                 HashMap<String,String> map = (HashMap<String, String>) msg.obj;
                 commonLogic.getFifo(map, new CommonLogic.FIFOGETListener() {
                     @Override
-                    public void onSuccess(List<FiFoBean> fiFoBeanList) {
+                    public void onSuccess(List<FifoCheckBean> fiFoBeanList) {
                         dismissLoadingDialog();
                         if(null != fiFoBeanList && fiFoBeanList.size() > 0){
-                            localFifoList = new ArrayList<FiFoBean>();
+                            localFifoList = new ArrayList<FifoCheckBean>();
                             localFifoList = fiFoBeanList;
                             adapter = new AccordingMaterialFiFoAdapter(activity,fiFoBeanList);
                             mRc_list.setAdapter(adapter);
                         }else {
-                            localFifoList = new ArrayList<FiFoBean>();
+                            localFifoList = new ArrayList<FifoCheckBean>();
                             adapter = new AccordingMaterialFiFoAdapter(activity,fiFoBeanList);
                             mRc_list.setAdapter(adapter);
                         }
@@ -416,12 +371,7 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
                     @Override
                     public void onFailed(String error) {
                         dismissLoadingDialog();
-                        showFailedDialog(error, new OnDialogClickListener() {
-                            @Override
-                            public void onCallback() {
-                                activity.finish();
-                            }
-                        });
+                        showFailedDialog(error);
                     }
                 });
                 break;
@@ -461,20 +411,13 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
         tv_actual_yield.setText(StringUtils.deleteZero(data.getScan_sumqty()));
         localData = data;
 
-        String code = getIntent().getExtras().getString("modilecode");
         type = data.getItem_barcode_type();
 
-        if(type.equals(codetype)){
+        if(codetype.equals(type)){
             etScanBarocde.setText(data.getLow_order_item_no());
         }
 
-        if(data.getFifo_check().equals(AddressContants.FIFOY)){
-            fifo_check = true;
-        }else{
-            fifo_check = false;
-        }
-
-        commonLogic = CommonLogic.getInstance(context, module, code);
+        commonLogic = CommonLogic.getInstance(context, module, mTimestamp.toString());
         FullyLinearLayoutManager fullyLinearLayoutManager = new FullyLinearLayoutManager(activity);
         mRc_list.setLayoutManager(fullyLinearLayoutManager);
         getFifo();
@@ -548,6 +491,7 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
         saveBean.setItem_no(barcodeBackBean.getItem_no());
         saveBean.setUnit_no(barcodeBackBean.getUnit_no());
         saveBean.setLot_no(barcodeBackBean.getLot_no());
+        saveBean.setFifo_check(barcodeBackBean.getFifo_check());
         if(StringUtils.isBlank(etScanLocator.getText().toString()) && !cbLocatorlock.isChecked()){
             etScanLocator.requestFocus();
         }else{

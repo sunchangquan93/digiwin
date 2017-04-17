@@ -25,7 +25,7 @@ import digiwin.smartdepot.module.bean.common.DetailShowBean;
  * @date 2017/03/09
  */
 public class PurchaseGoodsDetailAdapter extends BaseDetailRecyclerAdapter<DetailShowBean> {
-    private static final String TAG = "FinishedStorageDetailAd";
+    private static final String TAG = "PurchaseGoodsDetailAdapter";
     private Map<Integer, Boolean> map;
 
     public Map<Integer, Boolean> getMap() {

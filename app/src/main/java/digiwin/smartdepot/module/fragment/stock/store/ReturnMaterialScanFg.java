@@ -33,7 +33,9 @@ import digiwin.smartdepot.module.bean.common.ScanLocatorBackBean;
 import digiwin.smartdepot.module.logic.common.CommonLogic;
 
 /**
- * Created by Administrator on 2017/3/30 0030.
+ * @author maoheng
+ * @des 仓库退料 扫码页
+ * @date 2017/3/30
  */
 
 public class ReturnMaterialScanFg extends BaseFragment {

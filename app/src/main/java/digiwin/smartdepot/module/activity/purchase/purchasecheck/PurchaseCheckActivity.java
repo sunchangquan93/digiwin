@@ -310,6 +310,8 @@ public class PurchaseCheckActivity extends BaseActivity {
      */
     final int BARCODEWHAT = 1234;
 
+    private String PAGESIZE = "pagesize";
+
     /**
      * 是否展示item明细
      */
@@ -392,7 +394,7 @@ public class PurchaseCheckActivity extends BaseActivity {
                 case BARCODEWHAT:
                     Map<String,String> map = new HashMap<>();
                     map.put(AddressContants.BARCODE_NO,msg.obj.toString().trim());
-                    map.put("pagesize", (String)SharedPreferencesUtils.get(pactivity,SharePreKey.PAGE_SETTING,AddressContants.PAGE_NUM));
+                    map.put(PAGESIZE, (String)SharedPreferencesUtils.get(pactivity,SharePreKey.PAGE_SETTING,AddressContants.PAGE_NUM));
                     showLoadingDialog();
                     logic.getMaterialToCheck(map, new PurcahseCheckLogic.GetMaterialToCheckListener() {
                         @Override

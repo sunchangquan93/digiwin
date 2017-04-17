@@ -162,6 +162,7 @@ public class PostMaterialActivity extends BaseTitleActivity {
         DatePickerUtils.getDoubleDate(pactivity, new DatePickerUtils.GetDoubleDateListener() {
             @Override
             public void getTime(String mStartDate, String mEndDate, String showDate) {
+                et_plan_date.requestFocus();
                 startDate = mStartDate;
                 endDate = mEndDate;
                 et_plan_date.setText(showDate);
@@ -263,6 +264,7 @@ public class PostMaterialActivity extends BaseTitleActivity {
 
     @Override
     protected void doBusiness() {
+        et_plan_date.setKeyListener(null);
         pactivity = (PostMaterialActivity) activity;
         logic = CommonLogic.getInstance(pactivity, module, mTimestamp.toString());
         FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(activity);
@@ -279,7 +281,7 @@ public class PostMaterialActivity extends BaseTitleActivity {
             public void onItemClick(View itemView, int position) {
                 final FilterResultOrderBean orderData = dataList.get(position);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("orderData",orderData);
+                bundle.putSerializable(AddressContants.ORDERDATA,orderData);
                 ActivityManagerUtils.startActivityBundleForResult(pactivity,PostMaterialSecondActivity.class,bundle,SECONDCODE);
             }
         });

@@ -25,13 +25,14 @@ import digiwin.pulltorefreshlibrary.recyclerviewAdapter.BaseRecyclerAdapter;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.base.BaseFragment;
+import digiwin.smartdepot.core.coreutil.FiFoCheckUtils;
 import digiwin.smartdepot.login.bean.AccoutBean;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
 import digiwin.smartdepot.module.activity.sale.scanout.ScanOutStoreActivity;
 import digiwin.smartdepot.module.adapter.sale.scanout.ScanOutFifoAdapter;
 import digiwin.smartdepot.module.bean.common.ClickItemPutBean;
-import digiwin.smartdepot.module.bean.produce.PostMaterialFIFOBean;
-import digiwin.smartdepot.module.bean.sale.scanout.ScanOutSaveBean;
+import digiwin.smartdepot.module.bean.common.FifoCheckBean;
+import digiwin.smartdepot.module.bean.common.SaveBean;
 import digiwin.smartdepot.module.bean.stock.ProductBinningBean;
 import digiwin.smartdepot.module.logic.common.CommonLogic;
 import digiwin.smartdepot.module.logic.sale.scanoutstore.ScanOutStoreLogic;
@@ -76,6 +77,12 @@ public class ScanOutStoreScanFg extends BaseFragment {
             showFailedDialog(R.string.scan_case_first);
             return;
         }
+        String fifoCheck = FiFoCheckUtils.fifoCheck(saveBean, fiFoList);
+        if(StringUtils.isBlank(fifoCheck)){
+            showFailedDialog(fifoCheck);
+            return;
+        }
+
         showLoadingDialog();
         storeLogic.saveScanOutStore(saveBean, new ScanOutStoreLogic.ScanOutSaveListener() {
             @Override
@@ -115,9 +122,9 @@ public class ScanOutStoreScanFg extends BaseFragment {
      */
     boolean barcodeFlag;
 
-    ScanOutSaveBean saveBean;
+    SaveBean saveBean;
 
-    private List<PostMaterialFIFOBean> fiFoList;
+    private List<FifoCheckBean> fiFoList;
 
     private BaseRecyclerAdapter adapter;
 
@@ -139,15 +146,15 @@ public class ScanOutStoreScanFg extends BaseFragment {
                     adapter = new ScanOutFifoAdapter(sActivity,fiFoList);
                     ryList.setAdapter(adapter);
                     HashMap<String, String> map = new HashMap<String, String>();
-                    map.put("receipt_no", String.valueOf(msg.obj));
-                    map.put("warehouse_out_no", ware);
+                    map.put(AddressContants.RECEIPT_NO, String.valueOf(msg.obj));
+                    map.put(AddressContants.WAREHOUSEOUTNO, ware);
                     ClickItemPutBean itemPutBean = new ClickItemPutBean();
                     itemPutBean.setNotice_no(notice_no);
                     itemPutBean.setWarehouse_no(ware);
                     EventBus.getDefault().post(itemPutBean);
                     commonLogic.postMaterialFIFO(map, new CommonLogic.PostMaterialFIFOListener() {
                         @Override
-                        public void onSuccess(List<PostMaterialFIFOBean> fiFoBeanList) {
+                        public void onSuccess(List<FifoCheckBean> fiFoBeanList) {
                             fiFoList.clear();
                             fiFoList = fiFoBeanList;
                             adapter = new ScanOutFifoAdapter(sActivity, fiFoList);
@@ -234,7 +241,7 @@ public class ScanOutStoreScanFg extends BaseFragment {
      */
     public void initData() {
         barcodeFlag = false;
-        saveBean = new ScanOutSaveBean();
+        saveBean = new SaveBean();
         fiFoList = new ArrayList<>();
         notice_no="";
         ware = "";

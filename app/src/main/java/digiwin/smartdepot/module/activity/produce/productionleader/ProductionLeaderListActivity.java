@@ -68,13 +68,13 @@ public class ProductionLeaderListActivity extends BaseTitleActivity {
     CommonLogic commonLogic;
 
     @BindViews({R.id.ll_super_number,R.id.ll_order_number,R.id.ll_applicant,
-            R.id.ll_department})
+            R.id.ll_department,R.id.ll_plan_date})
     List<View> views;
     @BindViews({R.id.tv_super_number,R.id.tv_order_number,R.id.tv_applicant,
-            R.id.tv_department})
+            R.id.tv_department,R.id.tv_plan_date})
     List<TextView> textViews;
     @BindViews({R.id.et_super_number,R.id.et_order_number,R.id.et_applicant,
-            R.id.et_department})
+            R.id.et_department,R.id.et_plan_date})
     List<EditText> editTexts;
 
     /**
@@ -150,9 +150,19 @@ public class ProductionLeaderListActivity extends BaseTitleActivity {
      */
     @BindView(R.id.iv_plan_date)
     ImageView iv_plan_date;
-
+    @BindView(R.id.tv_plan_date)
+    TextView tv_plan_date;
+    @BindView(R.id.ll_plan_date)
+    LinearLayout ll_plan_date;
     @BindView(R.id.et_plan_date)
     EditText et_plan_date;
+    @OnFocusChange(R.id.et_plan_date)
+    void plan_dateFocusChanage() {
+        ModuleUtils.viewChange(ll_plan_date, views);
+        ModuleUtils.tvChange(activity, tv_plan_date, textViews);
+        ModuleUtils.etChange(activity, et_plan_date, editTexts);
+    }
+
 
     String startDate = "";
     String endDate = "";
@@ -162,6 +172,7 @@ public class ProductionLeaderListActivity extends BaseTitleActivity {
         DatePickerUtils.getDoubleDate(activity, new DatePickerUtils.GetDoubleDateListener() {
             @Override
             public void getTime(String mStartDate, String mEndDate, String showDate) {
+                et_plan_date.requestFocus();
                 startDate = mStartDate;
                 endDate = mEndDate;
                 et_plan_date.setText(showDate);
@@ -170,6 +181,8 @@ public class ProductionLeaderListActivity extends BaseTitleActivity {
     }
 
     private final int SCANCODE = 1234;
+
+    private String DATA = "data";
 
     private List<FilterResultOrderBean> dataList;
 
@@ -230,7 +243,7 @@ public class ProductionLeaderListActivity extends BaseTitleActivity {
                         public void onItemClick(View itemView, int position) {
                             Bundle bundle = new Bundle();
                             FilterResultOrderBean data = list.get(position);
-                            bundle.putSerializable("data",data);
+                            bundle.putSerializable(DATA,data);
                             ActivityManagerUtils.startActivityBundleForResult(activity,ProductionLeaderActivity.class,bundle,SCANCODE);
                         }
                     });
@@ -271,6 +284,7 @@ public class ProductionLeaderListActivity extends BaseTitleActivity {
 
     @Override
     protected void doBusiness() {
+        et_plan_date.setKeyListener(null);
         commonLogic =  CommonLogic.getInstance(activity,ModuleCode.PRODUCTIONLEADER,mTimestamp.toString());
         LinearLayoutManager linearlayoutmanager = new LinearLayoutManager(activity);
         ry_list.setLayoutManager(linearlayoutmanager);

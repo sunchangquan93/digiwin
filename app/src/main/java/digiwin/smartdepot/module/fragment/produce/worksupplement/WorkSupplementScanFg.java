@@ -5,7 +5,6 @@ import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.method.TextKeyListener;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -28,16 +27,17 @@ import digiwin.library.utils.StringUtils;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.base.BaseFragment;
+import digiwin.smartdepot.core.coreutil.FiFoCheckUtils;
 import digiwin.smartdepot.core.modulecommon.ModuleUtils;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
 import digiwin.smartdepot.module.activity.produce.worksupplement.WorkSupplementActivity;
 import digiwin.smartdepot.module.adapter.purchase.WorkSupplementFIFoAdapter;
+import digiwin.smartdepot.module.bean.common.FifoCheckBean;
 import digiwin.smartdepot.module.bean.common.FilterResultOrderBean;
 import digiwin.smartdepot.module.bean.common.SaveBackBean;
 import digiwin.smartdepot.module.bean.common.SaveBean;
 import digiwin.smartdepot.module.bean.common.ScanBarcodeBackBean;
 import digiwin.smartdepot.module.bean.common.ScanLocatorBackBean;
-import digiwin.smartdepot.module.bean.produce.PostMaterialFIFOBean;
 import digiwin.smartdepot.module.logic.common.CommonLogic;
 
 
@@ -66,7 +66,7 @@ public class WorkSupplementScanFg extends BaseFragment {
     final int FIFOWHAT = 1003;
 
 
-    private List<PostMaterialFIFOBean> fiFoList;
+    private List<FifoCheckBean> fiFoList;
 
     FilterResultOrderBean localData;
 
@@ -173,7 +173,6 @@ public class WorkSupplementScanFg extends BaseFragment {
     @OnTextChanged(value = R.id.et_barcode, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void barcodeChange(CharSequence s) {
         if (!StringUtils.isBlank(s.toString())) {
-            showLoadingDialog();
             mHandler.sendMessageDelayed(mHandler.obtainMessage(BARCODEWHAT, s.toString()), AddressContants.DELAYTIME);
         }
     }
@@ -181,7 +180,6 @@ public class WorkSupplementScanFg extends BaseFragment {
     @OnTextChanged(value = R.id.et_scan_locator, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void locatorChange(CharSequence s) {
         if (!StringUtils.isBlank(s.toString())) {
-            showLoadingDialog();
             mHandler.sendMessageDelayed(mHandler.obtainMessage(LOCATORWHAT, s.toString()), AddressContants.DELAYTIME);
         }
     }
@@ -206,12 +204,22 @@ public class WorkSupplementScanFg extends BaseFragment {
 
         saveBean.setQty(etInputNum.getText().toString());
 
+        // 判断fifo
+        final String fifoCheck = FiFoCheckUtils.fifoCheck(saveBean, fiFoList);
+        if (!StringUtils.isBlank(fifoCheck)){
+            showFailedDialog(fifoCheck);
+            return;
+        }
+
+        showLoadingDialog();
         commonLogic.scanSave(saveBean, new CommonLogic.SaveListener() {
             @Override
             public void onSuccess(SaveBackBean saveBackBean) {
                 dismissLoadingDialog();
-                if (AddressContants.FIFOY.equals(saveBean.getFifo_check())) {
-                    mHandler.sendMessageDelayed(mHandler.obtainMessage(FIFOWHAT, localData.getDoc_no()), AddressContants.DELAYTIME);
+                if(fiFoList.size()>0) {
+                    if (AddressContants.FIFOY.equals(saveBean.getFifo_check())) {
+                        mHandler.sendMessageDelayed(mHandler.obtainMessage(FIFOWHAT, localData.getDoc_no()), AddressContants.DELAYTIME);
+                    }
                 }
                 clear();
             }
@@ -254,16 +262,15 @@ public class WorkSupplementScanFg extends BaseFragment {
                 commonLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
                     @Override
                     public void onSuccess(ScanLocatorBackBean locatorBackBean) {
-                        dismissLoadingDialog();
                         locatorFlag = true;
                         saveBean.setStorage_spaces_out_no(locatorBackBean.getStorage_spaces_no());
                         saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
+                        saveBean.setAllow_negative_stock(locatorBackBean.getAllow_negative_stock());
                         etScanBarocde.requestFocus();
                     }
 
                     @Override
                     public void onFailed(String error) {
-                        dismissLoadingDialog();
                         showFailedDialog(error, new OnDialogClickListener() {
                             @Override
                             public void onCallback() {
@@ -283,46 +290,7 @@ public class WorkSupplementScanFg extends BaseFragment {
                 commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                     @Override
                     public void onSuccess(final ScanBarcodeBackBean barcodeBackBean) {
-                        dismissLoadingDialog();
-                        if(StringUtils.isBlank(etScanLocator.getText().toString())){
-                            showFailedDialog(getResources().getString(R.string.scan_locator));
-                            return;
-                        }
-
-                        if((AddressContants.FIFOY).equals(barcodeBackBean.getFifo_check())) {
-                            if (null != fiFoList) {
-                                if (fiFoList.size() > 0) {
-                                    for (int i = 0; i < fiFoList.size(); i++) {
-                                        PostMaterialFIFOBean fifodata = fiFoList.get(i);
-                                        if (barcodeBackBean.getBarcode_no().equals(fifodata.getBarcode_no()) && fifodata.getStorage_spaces_no().
-                                                equals(saveBean.getStorage_spaces_out_no())) {
-                                            showBarcode(barcodeBackBean);
-                                            break;
-                                        }
-
-                                        if (i == fiFoList.size() - 1 && !barcodeBackBean.getBarcode_no().equals(fifodata.getBarcode_no())  ||
-                                                !fifodata.getStorage_spaces_no().equals(saveBean.getStorage_spaces_out_no())) {
-                                            showFailedDialog(getResources().getString(R.string.fifo_scan_error), new OnDialogClickListener() {
-                                                @Override
-                                                public void onCallback() {
-                                                    etScanBarocde.setText("");
-                                                }
-                                            });
-                                        }
-                                    }
-                                } else {
-                                    showFailedDialog(getResources().getString(R.string.fifo_scan_error), new OnDialogClickListener() {
-                                        @Override
-                                        public void onCallback() {
-                                            etScanBarocde.setText("");
-                                        }
-                                    });
-                                }
-                            }
-                        }else{
-                            showBarcode(barcodeBackBean);
-                        }
-
+                        showBarcode(barcodeBackBean);
 
 //                        tv_item_format.setText(barcodeBackBean.getItem_spec());
 //                        tv_item_name.setText(barcodeBackBean.getItem_name());
@@ -344,21 +312,19 @@ public class WorkSupplementScanFg extends BaseFragment {
                 break;
 
             case FIFOWHAT:
-                showLoadingDialog();
                 Map<String,String> map = new HashMap<String,String>();
                 map.put(AddressContants.ISSUING_NO,String.valueOf(msg.obj));
                 map.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
                 commonLogic.postMaterialFIFO(map, new CommonLogic.PostMaterialFIFOListener() {
                     @Override
-                    public void onSuccess(List<PostMaterialFIFOBean> fiFoBeanList) {
+                    public void onSuccess(List<FifoCheckBean> fiFoBeanList) {
                         dismissLoadingDialog();
                         if(null != fiFoBeanList && fiFoBeanList.size() > 0){
-                            fiFoList = new ArrayList<PostMaterialFIFOBean>();
                             fiFoList = fiFoBeanList;
                             adapter = new WorkSupplementFIFoAdapter(context,fiFoBeanList);
                             mRy_list.setAdapter(adapter);
                         }else{
-                            fiFoList = new ArrayList<PostMaterialFIFOBean>();
+                            fiFoList = new ArrayList<FifoCheckBean>();
                             adapter = new WorkSupplementFIFoAdapter(context,fiFoList);
                             mRy_list.setAdapter(adapter);
                         }
@@ -367,12 +333,7 @@ public class WorkSupplementScanFg extends BaseFragment {
                     @Override
                     public void onFailed(String error) {
                         dismissLoadingDialog();
-                        showFailedDialog(error, new OnDialogClickListener() {
-                            @Override
-                            public void onCallback() {
-
-                            }
-                        });
+                        showFailedDialog(error);
                     }
                 });
                 break;
@@ -420,6 +381,7 @@ public class WorkSupplementScanFg extends BaseFragment {
     @Override
     protected void doBusiness() {
         pactivity = (WorkSupplementActivity) activity;
+        fiFoList = new ArrayList<FifoCheckBean>();
         commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(pactivity);
         mRy_list.setLayoutManager(linearLayoutManager);

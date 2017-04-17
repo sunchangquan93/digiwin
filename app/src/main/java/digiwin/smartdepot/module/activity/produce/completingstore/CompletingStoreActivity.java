@@ -47,6 +47,8 @@ public class CompletingStoreActivity extends BaseFirstModuldeActivity{
      */
     private final int BARCODEWHAT = 1001;
 
+    private final String STOCKINQTY = "stock_in_qty";
+
     CommonLogic commonLogic;
 
     @BindView(R.id.toolbar_title)
@@ -138,7 +140,7 @@ public class CompletingStoreActivity extends BaseFirstModuldeActivity{
                 map.put(AddressContants.WO_NO,et_work_order_code.getText().toString().trim());
                 map.put(AddressContants.ITEM_NO,tv_item_no.getText().toString().trim());
                 map.put(AddressContants.WAREHOUSE_NO,tv_label_storage.getText().toString().trim());
-                map.put("stock_in_qty",et_input_num.getText().toString().trim());
+                map.put(STOCKINQTY,et_input_num.getText().toString().trim());
 
                 List<ClickItemPutBean> checkedList = new ArrayList<ClickItemPutBean>();
                 ClickItemPutBean data = new ClickItemPutBean();
@@ -197,7 +199,7 @@ public class CompletingStoreActivity extends BaseFirstModuldeActivity{
     @OnTextChanged(value = R.id.et_work_order_code, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void barcodeChange(CharSequence s) {
         if (!StringUtils.isBlank(s.toString())) {
-            showLoadingDialog();
+            mHandler.removeMessages(BARCODEWHAT);
             mHandler.sendMessageDelayed(mHandler.obtainMessage(BARCODEWHAT, s.toString()), AddressContants.DELAYTIME);
         }
     }

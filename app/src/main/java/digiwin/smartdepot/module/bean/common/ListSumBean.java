@@ -20,6 +20,10 @@ public class ListSumBean implements Serializable {
      */
     private String department_name;
     /**
+     * 部门编号
+     */
+    private String department_no;
+    /**
      * 料号
      */
     private String item_no;
@@ -205,15 +209,24 @@ public class ListSumBean implements Serializable {
      * #（最大）可发量
      */
     private String issue_qty;
+
     /**
      * 批号
      */
+
     private String item_lot_no;
     /**
      *展示
      */
     private String show;
 
+    public String getDepartment_no() {
+        return department_no;
+    }
+
+    public void setDepartment_no(String department_no) {
+        this.department_no = department_no;
+    }
 
     public String getWo_no() {
         return wo_no;

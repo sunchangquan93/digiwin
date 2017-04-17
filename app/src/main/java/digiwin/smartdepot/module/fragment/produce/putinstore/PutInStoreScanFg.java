@@ -326,7 +326,7 @@ public class PutInStoreScanFg extends BaseFragment {
         barcodeFlag = false;
         locatorFlag = false;
         saveBean = new SaveBean();
-        orderBean = (FilterResultOrderBean) pactivity.getIntent().getExtras().getSerializable("orderData");
+        orderBean = (FilterResultOrderBean) pactivity.getIntent().getExtras().getSerializable(AddressContants.ORDERDATA);
         commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
     }
 }

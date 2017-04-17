@@ -59,7 +59,8 @@
         android:theme="@style/AppTheme">
         <activity android:name=".main.activity.MainActivity"></activity>
         <activity android:name=".login.activity.LoginActivity"
-           />
+            android:theme="@style/AppThemeTWO"
+            android:process=":picture"/>
         <activity
             android:name=".login.activity.WelcomeGuideActivity"
             android:theme="@style/SplashTheme">
@@ -584,6 +585,11 @@
         <!-- 扫码出货 -->
         <activity
             android:name=".module.activity.sale.scanout.ScanOutStoreActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+        </activity>
+        <!-- 扫码出货二次提交 -->
+        <activity
+            android:name=".module.activity.sale.scanout.ScanOutCommitActiivty"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
         </activity>
         <!-- 扫码出货明细 -->

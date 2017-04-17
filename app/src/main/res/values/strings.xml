@@ -159,7 +159,7 @@
     <string name="receipt_date">备货日期</string>
     <string name="apply_depart">申请部门</string>
     <string name="apply_person">申请人</string>
-    <string name="transfers_to_reviewlist">调拨复核清单</string>
+    <string name="transfers_to_reviewlist">配货复核清单</string>
 
     <string name="filter_condition">筛选条件</string>
     <string name="title_in_binning">装箱入库</string>

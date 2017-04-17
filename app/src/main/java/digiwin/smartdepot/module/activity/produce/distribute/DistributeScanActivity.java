@@ -5,7 +5,6 @@ import android.os.Message;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.method.TextKeyListener;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -17,7 +16,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.BindViews;
@@ -33,16 +31,15 @@ import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseTitleActivity;
 import digiwin.smartdepot.core.modulecommon.ModuleUtils;
-import digiwin.smartdepot.login.bean.AccoutBean;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
 import digiwin.smartdepot.module.adapter.produce.AccordingMaterialFiFoAdapter;
+import digiwin.smartdepot.module.bean.common.FifoCheckBean;
 import digiwin.smartdepot.module.bean.common.SaveBackBean;
 import digiwin.smartdepot.module.bean.common.SaveBean;
 import digiwin.smartdepot.module.bean.common.ScanBarcodeBackBean;
 import digiwin.smartdepot.module.bean.common.ScanLocatorBackBean;
 import digiwin.smartdepot.module.bean.produce.DistributeOrderHeadData;
 import digiwin.smartdepot.module.bean.produce.DistributeSumShowBean;
-import digiwin.smartdepot.module.bean.produce.FiFoBean;
 import digiwin.smartdepot.module.logic.common.CommonLogic;
 
 /**
@@ -182,7 +179,7 @@ public class DistributeScanActivity extends BaseTitleActivity {
 
     AccordingMaterialFiFoAdapter adapter;
 
-    List<FiFoBean> fiFoList = new ArrayList<FiFoBean>();
+    List<FifoCheckBean> fiFoList = new ArrayList<FifoCheckBean>();
 
     @BindView(R.id.ry_list)
     RecyclerView ryList;
@@ -352,9 +349,9 @@ public class DistributeScanActivity extends BaseTitleActivity {
         map.put("qty",String.valueOf(num));
         commonLogic.getFifo(map, new CommonLogic.FIFOGETListener() {
             @Override
-            public void onSuccess(List<FiFoBean> fiFoBeanList ) {
+            public void onSuccess(List<FifoCheckBean> fiFoBeanList ) {
                 if(null != fiFoBeanList && fiFoBeanList.size()>0)
-                fiFoList = new ArrayList<FiFoBean>();
+                fiFoList = new ArrayList<FifoCheckBean>();
                 fiFoList = fiFoBeanList;
                 adapter = new AccordingMaterialFiFoAdapter(pactivity,fiFoBeanList);
                 ryList.setAdapter(adapter);
@@ -503,15 +500,7 @@ public class DistributeScanActivity extends BaseTitleActivity {
      */
     private void initSaveBean() {
         saveBean.setUnit_no(sumshoubean.getUnit_no());
-        //欠料量
-        float num1 = StringUtils.string2Float(sumshoubean.getShortage_qty());
-        //库存量
-        float num2 = StringUtils.string2Float(sumshoubean.getStock_qty());
-        if(num1<=num2){
-            saveBean.setAvailable_in_qty(sumshoubean.getShortage_qty());
-        }else{
-            saveBean.setAvailable_in_qty(sumshoubean.getStock_qty());
-        }
+        saveBean.setAvailable_in_qty(StringUtils.getMinQty(sumshoubean.getShortage_qty(),sumshoubean.getStock_qty()));
         //单头信息
         saveBean.setWarehouse_out_no(headData.getWareout());
         saveBean.setWarehouse_in_no(headData.getWarein());

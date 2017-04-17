@@ -36,7 +36,10 @@ public interface ModuleCode {
      * 仓库退料
      */
     public final String STORERETURNMATERIAL="A008";
-
+    /**
+     * 依成品调拨
+     */
+    public final String ENDPRODUCTALLOT="B001";
     /**
      * 依工单发料
      */

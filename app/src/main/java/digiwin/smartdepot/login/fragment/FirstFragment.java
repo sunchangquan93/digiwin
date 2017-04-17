@@ -1,7 +1,9 @@
 package digiwin.smartdepot.login.fragment;
 
+import android.graphics.Bitmap;
 import android.widget.ImageView;
 
+import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
@@ -35,10 +37,5 @@ public class FirstFragment extends BaseFragment {
 
     @Override
     protected void doBusiness() {
-        Picasso.with(activity).load(R.drawable.welcome_01).into(welcome_01);
     }
-
-
-
-
 }

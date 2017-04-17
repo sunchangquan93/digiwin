@@ -64,13 +64,13 @@ public class PickUpShipmentListActivity extends BaseTitleActivity{
     ScrollView scrollview;
 
     @BindViews({R.id.ll_shipping_order,R.id.ll_item_no,R.id.ll_custom,
-            R.id.ll_salesman,R.id.ll_operating_department})
+            R.id.ll_salesman,R.id.ll_operating_department,R.id.ll_plan_date})
     List<View> views;
     @BindViews({R.id.tv_shipping_order,R.id.tv_item_no,R.id.tv_custom,
-            R.id.tv_salesman,R.id.tv_operating_department})
+            R.id.tv_salesman,R.id.tv_operating_department,R.id.tv_plan_date})
     List<TextView> textViews;
     @BindViews({R.id.et_shipping_order,R.id.et_item_no,R.id.et_custom,
-            R.id.et_salesman,R.id.et_operating_department})
+            R.id.et_salesman,R.id.et_operating_department,R.id.et_plan_date})
     List<EditText> editTexts;
 
     /**
@@ -163,9 +163,19 @@ public class PickUpShipmentListActivity extends BaseTitleActivity{
      */
     @BindView(R.id.iv_plan_date)
     ImageView iv_plan_date;
+    @BindView(R.id.tv_plan_date)
+    TextView tv_plan_date;
+    @BindView(R.id.ll_plan_date)
+    LinearLayout ll_plan_date;
 
     @BindView(R.id.et_plan_date)
     EditText et_plan_date;
+    @OnFocusChange(R.id.et_plan_date)
+    void plan_dateFocusChanage() {
+        ModuleUtils.viewChange(ll_plan_date, views);
+        ModuleUtils.tvChange(activity, tv_plan_date, textViews);
+        ModuleUtils.etChange(activity, et_plan_date, editTexts);
+    }
 
     String startDate = "";
     String endDate = "";
@@ -175,6 +185,7 @@ public class PickUpShipmentListActivity extends BaseTitleActivity{
         DatePickerUtils.getDoubleDate(activity, new DatePickerUtils.GetDoubleDateListener() {
             @Override
             public void getTime(String mStartDate, String mEndDate, String showDate) {
+                et_plan_date.requestFocus();
                 startDate = mStartDate;
                 endDate = mEndDate;
                 et_plan_date.setText(showDate);
@@ -265,6 +276,7 @@ public class PickUpShipmentListActivity extends BaseTitleActivity{
 
     @Override
     protected void doBusiness() {
+        et_plan_date.setKeyListener(null);
         commonLogic = CommonLogic.getInstance(activity,module,mTimestamp.toString());
         FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(activity);
         ryList.setLayoutManager(linearLayoutManager);

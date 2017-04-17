@@ -41,7 +41,7 @@ import digiwin.smartdepot.module.logic.common.CommonLogic;
 import static digiwin.smartdepot.login.loginlogic.LoginLogic.getUserInfo;
 
 /**
- * 快速收货 汇总界面
+ * 扫码收货 汇总界面
  *
  * @author 唐孟宇
  */
@@ -162,6 +162,7 @@ public class PurchaseGoodsScanActivity extends BaseTitleActivity {
         DatePickerUtils.getDoubleDate(pactivity, new DatePickerUtils.GetDoubleDateListener() {
             @Override
             public void getTime(String mStartDate, String mEndDate, String showDate) {
+                et_date.requestFocus();
                 startDate = mStartDate;
                 endDate = mEndDate;
                 et_date.setText(showDate);
@@ -240,6 +241,7 @@ public class PurchaseGoodsScanActivity extends BaseTitleActivity {
 
     @Override
     protected void doBusiness() {
+        et_date.setKeyListener(null);
         pactivity = (PurchaseGoodsScanActivity) activity;
         commonLogic = CommonLogic.getInstance(pactivity, module, mTimestamp.toString());
         FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(activity);
@@ -256,7 +258,7 @@ public class PurchaseGoodsScanActivity extends BaseTitleActivity {
             public void onItemClick(View itemView, int position) {
                 final FilterResultOrderBean orderData = sumShowBeanList.get(position);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("orderData", orderData);
+                bundle.putSerializable(AddressContants.ORDERDATA, orderData);
                 ActivityManagerUtils.startActivityBundleForResult(pactivity, PurchaseGoodsScanSecondActivity.class, bundle, SUMCODE);
 //                ClickItemPutBean clickItemPutData = new ClickItemPutBean();
 //                clickItemPutData.setDoc_no(orderData.getDoc_no());

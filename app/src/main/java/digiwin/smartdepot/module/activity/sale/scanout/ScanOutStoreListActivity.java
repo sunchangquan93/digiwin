@@ -316,6 +316,7 @@ public class ScanOutStoreListActivity extends BaseTitleActivity {
 
     @Override
     protected void doBusiness() {
+        etDate.setKeyListener(null);
         activity = ScanOutStoreListActivity.this;
         list = new ArrayList<>();
         commonLogic = CommonLogic.getInstance(activity,module,mTimestamp.toString());

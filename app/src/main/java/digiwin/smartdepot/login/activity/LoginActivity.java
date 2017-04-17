@@ -3,16 +3,12 @@ package digiwin.smartdepot.login.activity;
 
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.squareup.picasso.Picasso;
 
 import org.litepal.crud.DataSupport;
 import org.litepal.tablemanager.Connector;
@@ -29,6 +25,7 @@ import digiwin.library.utils.AlertDialogUtils;
 import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.StringUtils;
 import digiwin.library.utils.TelephonyUtils;
+import digiwin.pulltorefreshlibrary.recyclerview.RecyclerImageView;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
@@ -52,7 +49,7 @@ public class LoginActivity extends BaseActivity {
      * 设置背景动画
      */
     @BindView(R.id.iv_login_bg)
-    ImageView iv_login_bg;
+    RecyclerImageView iv_login_bg;
     /**
      * 系统设置
      */
@@ -122,31 +119,31 @@ public class LoginActivity extends BaseActivity {
 
     }
 
-    private Handler handler = new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what){
-                case HANDLERWHAT:
-                    MyAnimationDrawable.animateRawManuallyFromXML(R.drawable.login_bg, iv_login_bg, new Runnable() {
-                        @Override
-                        public void run() {
-                            //动画开始回调
-                        }
-                    }, new Runnable() {
-                        @Override
-                        public void run() {
-                            //动画结束回调
-                            handler.removeMessages(HANDLERWHAT);
-                            handler.sendEmptyMessage(HANDLERWHAT);
-                        }
-                    });
-                    break;
-                default:
-                    break;
-            }
-        }
-    };
+//    private Handler handler = new Handler(){
+//        @Override
+//        public void handleMessage(Message msg) {
+//            super.handleMessage(msg);
+//            switch (msg.what){
+//                case HANDLERWHAT:
+//                    MyAnimationDrawable.animateRawManuallyFromXML(R.drawable.login_bg, iv_login_bg, new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            //动画开始回调
+//                        }
+//                    }, new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            //动画结束回调
+//                            handler.removeMessages(HANDLERWHAT);
+//                            handler.sendEmptyMessage(HANDLERWHAT);
+//                        }
+//                    });
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }
+//    };
 
 
 
@@ -292,10 +289,10 @@ public class LoginActivity extends BaseActivity {
         super.onDestroy();
         dismissLoadingDialog();
         isFinished = true;
-        if(handler!=null){
-            handler.removeMessages(HANDLERWHAT);
-            handler = null;
-        }
+//        if(handler!=null){
+//            handler.removeMessages(HANDLERWHAT);
+//            handler = null;
+//        }
     }
 
 

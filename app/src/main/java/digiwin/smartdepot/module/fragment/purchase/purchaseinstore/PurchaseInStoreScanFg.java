@@ -356,7 +356,7 @@ public class PurchaseInStoreScanFg extends BaseFragment {
         cb_locatorlock.setChecked(false);
         saveBean = new SaveBean();
         commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
-        orderBean = (FilterResultOrderBean) pactivity.getIntent().getExtras().getSerializable("orderData");
+        orderBean = (FilterResultOrderBean) pactivity.getIntent().getExtras().getSerializable(AddressContants.ORDERDATA);
         et_scan_locator.requestFocus();
         }
         }

@@ -28,7 +28,7 @@ import digiwin.smartdepot.module.fragment.produce.finishedstorage.FinishedStorag
 
 /**
  * @author xiemeng
- * @des 生产完工入库上架
+ * @des 生产完工入库上架 依成品入库
  * @date 2017/2/22
  */
 public class FinishedStorageActivity extends BaseFirstModuldeActivity {

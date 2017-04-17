@@ -36,6 +36,7 @@ import digiwin.smartdepot.core.base.BaseTitleActivity;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
 import digiwin.smartdepot.module.activity.produce.workorderreturn.WorkOrderReturnCommitActivity;
 import digiwin.smartdepot.module.activity.sale.pickupshipment.PickUpShipmentCommitActivity;
+import digiwin.smartdepot.module.activity.sale.scanout.ScanOutCommitActiivty;
 import digiwin.smartdepot.module.bean.common.ClickItemPutBean;
 import digiwin.smartdepot.module.bean.common.ListSumBean;
 import digiwin.smartdepot.module.bean.common.UnCompleteBean;
@@ -221,6 +222,11 @@ public class HaveSourceUnComActivity extends BaseTitleActivity {
             case ModuleCode.WORKORDERRETURN:
                 bundle.putSerializable(WorkOrderReturnCommitActivity.COMMITLIST, list);
                 ActivityManagerUtils.startActivityForBundleData(activity, WorkOrderReturnCommitActivity.class, bundle);
+                break;
+
+            case ModuleCode.SCANOUTSTORE:
+                bundle.putSerializable(WorkOrderReturnCommitActivity.COMMITLIST, list);
+                ActivityManagerUtils.startActivityForBundleData(activity, ScanOutCommitActiivty.class, bundle);
                 break;
 
             case ModuleCode.PICKUPSHIPMENT:

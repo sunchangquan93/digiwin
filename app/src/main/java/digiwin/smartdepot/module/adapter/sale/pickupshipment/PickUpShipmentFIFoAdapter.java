@@ -7,7 +7,7 @@ import java.util.List;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.BaseRecyclerAdapter;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.RecyclerViewHolder;
 import digiwin.smartdepot.R;
-import digiwin.smartdepot.module.bean.produce.PostMaterialFIFOBean;
+import digiwin.smartdepot.module.bean.common.FifoCheckBean;
 
 /**
  * @author 赵浩然
@@ -15,9 +15,9 @@ import digiwin.smartdepot.module.bean.produce.PostMaterialFIFOBean;
  * @date 2017/3/24
  */
 
-public class PickUpShipmentFIFoAdapter extends BaseRecyclerAdapter<PostMaterialFIFOBean> {
+public class PickUpShipmentFIFoAdapter extends BaseRecyclerAdapter<FifoCheckBean> {
 
-    public PickUpShipmentFIFoAdapter(Context ctx, List<PostMaterialFIFOBean> list) {
+    public PickUpShipmentFIFoAdapter(Context ctx, List<FifoCheckBean> list) {
         super(ctx, list);
     }
 
@@ -27,7 +27,7 @@ public class PickUpShipmentFIFoAdapter extends BaseRecyclerAdapter<PostMaterialF
     }
 
     @Override
-    protected void bindData(RecyclerViewHolder holder, int position, PostMaterialFIFOBean item) {
+    protected void bindData(RecyclerViewHolder holder, int position, FifoCheckBean item) {
         holder.setText(R.id.tv_item_name, item.getItem_name());
         holder.setText(R.id.tv_locator,item.getStorage_spaces_no());
         holder.setText(R.id.tv_barcode, item.getBarcode_no());

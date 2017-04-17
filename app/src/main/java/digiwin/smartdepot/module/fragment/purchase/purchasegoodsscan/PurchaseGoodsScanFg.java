@@ -262,7 +262,7 @@ public class PurchaseGoodsScanFg extends BaseFragment {
         barcodeFlag = false;
         saveBean = new SaveBean();
         commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
-        orderBean = (FilterResultOrderBean) pactivity.getIntent().getExtras().getSerializable("orderData");
+        orderBean = (FilterResultOrderBean) pactivity.getIntent().getExtras().getSerializable(AddressContants.ORDERDATA);
         et_scan_barocde.requestFocus();
         }
         }

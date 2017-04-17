@@ -101,6 +101,7 @@
             android:layout_weight="1"
             android:layout_width="@dimen/layout_0dp"
             android:layout_height="match_parent">
+
             <TextView
                 android:id="@+id/tv_under_feed_string"
                 android:layout_width="@dimen/layout_70dp"

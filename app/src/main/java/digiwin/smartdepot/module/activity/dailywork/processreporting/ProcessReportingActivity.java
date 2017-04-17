@@ -39,7 +39,7 @@ import digiwin.smartdepot.module.logic.dailywok.ProcessReportingLogic;
  * @date 2017/3/15
  */
 
-public class ProcessReportingActivity extends BaseTitleActivity{
+public class ProcessReportingActivity extends BaseTitleActivity {
 
     private ProcessReportingActivity activity;
 
@@ -148,14 +148,14 @@ public class ProcessReportingActivity extends BaseTitleActivity{
     @BindView(R.id.ll_work_time)
     LinearLayout ll_work_time;
 
-    @BindViews({R.id.et_gongDan_no,R.id.et_job_num,R.id.et_the_workers,
-            R.id.et_good_amount,R.id.et_not_good_amount,R.id.et_work_time})
+    @BindViews({R.id.et_gongDan_no, R.id.et_job_num, R.id.et_the_workers,
+            R.id.et_good_amount, R.id.et_not_good_amount, R.id.et_work_time})
     List<EditText> editTexts;
-    @BindViews({R.id.tv_gongDan_no_code,R.id.tv_job_num,R.id.tv_the_workers,
-            R.id.tv_good_amount,R.id.tv_not_good_amount,R.id.tv_work_time})
+    @BindViews({R.id.tv_gongDan_no_code, R.id.tv_job_num, R.id.tv_the_workers,
+            R.id.tv_good_amount, R.id.tv_not_good_amount, R.id.tv_work_time})
     List<TextView> textViews;
-    @BindViews({R.id.ll_gongDan_no,R.id.ll_job_num,R.id.ll_the_workers,
-            R.id.ll_good_amount,R.id.ll_not_good_amount,R.id.ll_work_time})
+    @BindViews({R.id.ll_gongDan_no, R.id.ll_job_num, R.id.ll_the_workers,
+            R.id.ll_good_amount, R.id.ll_not_good_amount, R.id.ll_work_time})
     List<View> views;
 
     @OnFocusChange(R.id.et_gongDan_no)
@@ -204,7 +204,8 @@ public class ProcessReportingActivity extends BaseTitleActivity{
     void gongDanChange(CharSequence s) {
         if (!StringUtils.isBlank(s.toString())) {
             showLoadingDialog();
-            mHandler.sendMessageDelayed(mHandler.obtainMessage(WO_NO, s.toString().trim()), AddressContants.DELAYTIME);
+            mHandler.sendMessageDelayed(mHandler.obtainMessage(WO_NO, s.toString().trim()),
+                    AddressContants.DELAYTIME);
         }
     }
 
@@ -212,7 +213,8 @@ public class ProcessReportingActivity extends BaseTitleActivity{
     void jobChange(CharSequence s) {
         if (!StringUtils.isBlank(s.toString())) {
             showLoadingDialog();
-            mHandler.sendMessageDelayed(mHandler.obtainMessage(PROCESS_NO, s.toString().trim()), AddressContants.DELAYTIME);
+            mHandler.sendMessageDelayed(mHandler.obtainMessage(PROCESS_NO, s.toString().trim()),
+                    AddressContants.DELAYTIME);
         }
     }
 
@@ -220,7 +222,8 @@ public class ProcessReportingActivity extends BaseTitleActivity{
     void workersChange(CharSequence s) {
         if (!StringUtils.isBlank(s.toString())) {
             showLoadingDialog();
-            mHandler.sendMessageDelayed(mHandler.obtainMessage(EMPLOYEE_NO, s.toString().trim()), AddressContants.DELAYTIME);
+            mHandler.sendMessageDelayed(mHandler.obtainMessage(EMPLOYEE_NO, s.toString().trim()),
+                    AddressContants.DELAYTIME);
         }
     }
 
@@ -228,21 +231,21 @@ public class ProcessReportingActivity extends BaseTitleActivity{
     Button commit;
 
     @OnClick(R.id.commit)
-    void commit(){
+    void commit() {
         showCommitSureDialog(new OnDialogTwoListener() {
             @Override
             public void onCallback1() {
                 showLoadingDialog();
 
-                if(StringUtils.isBlank(et_gongDan_no.getText().toString())){
+                if (StringUtils.isBlank(et_gongDan_no.getText().toString())) {
                     showFailedDialog(R.string.scan_work_order);
                     return;
                 }
-                if(StringUtils.isBlank(et_job_num.getText().toString())){
+                if (StringUtils.isBlank(et_job_num.getText().toString())) {
                     showFailedDialog(R.string.job_num_scan);
                     return;
                 }
-                if(StringUtils.isBlank(et_the_workers.getText().toString())){
+                if (StringUtils.isBlank(et_the_workers.getText().toString())) {
                     showFailedDialog(R.string.the_workers_scan);
                     return;
                 }
@@ -266,7 +269,8 @@ public class ProcessReportingActivity extends BaseTitleActivity{
                             public void onCallback() {
                                 clear();
                                 createNewModuleId(module);
-                                manager = ProcessReportingLogic.getInstance(activity,activity.module,activity.mTimestamp.toString());
+                                manager = ProcessReportingLogic
+                                        .getInstance(activity, activity.module, activity.mTimestamp.toString());
                             }
                         });
                     }
@@ -290,10 +294,10 @@ public class ProcessReportingActivity extends BaseTitleActivity{
         @Override
         public boolean handleMessage(Message msg) {
 
-            if(msg.what == WO_NO){
-                Map<String,String> map = new HashMap<String, String>();
-                map.put(AddressContants.WO_NO,String.valueOf(msg.obj));
-                map.put("process_no","");
+            if (msg.what == WO_NO) {
+                Map<String, String> map = new HashMap<String, String>();
+                map.put(AddressContants.WO_NO, String.valueOf(msg.obj));
+                map.put("process_no", "");
                 manager.scanCode(map, new ProcessReportingLogic.ScanCodeListener() {
                     @Override
                     public void onSuccess(ProcessReportingBean data) {
@@ -317,9 +321,9 @@ public class ProcessReportingActivity extends BaseTitleActivity{
                 });
             }
 
-            if(msg.what == PROCESS_NO){
-                Map<String,String> map = new HashMap<String, String>();
-                if(StringUtils.isBlank(et_gongDan_no.getText().toString().trim())){
+            if (msg.what == PROCESS_NO) {
+                Map<String, String> map = new HashMap<String, String>();
+                if (StringUtils.isBlank(et_gongDan_no.getText().toString().trim())) {
                     dismissLoadingDialog();
                     showFailedDialog(R.string.scan_work_order, new OnDialogClickListener() {
                         @Override
@@ -328,8 +332,8 @@ public class ProcessReportingActivity extends BaseTitleActivity{
                         }
                     });
                 }
-                map.put(AddressContants.WO_NO,et_gongDan_no.getText().toString().trim());
-                map.put("process_no",String.valueOf(msg.obj));
+                map.put(AddressContants.WO_NO, et_gongDan_no.getText().toString().trim());
+                map.put("process_no", String.valueOf(msg.obj));
                 manager.scanCode(map, new ProcessReportingLogic.ScanCodeListener() {
                     @Override
                     public void onSuccess(ProcessReportingBean data) {
@@ -352,9 +356,9 @@ public class ProcessReportingActivity extends BaseTitleActivity{
                 });
             }
 
-            if(msg.what == EMPLOYEE_NO) {
-                Map<String,String> map = new HashMap<String, String>();
-                map.put(AddressContants.EMPLOYEENO,String.valueOf(msg.obj));
+            if (msg.what == EMPLOYEE_NO) {
+                Map<String, String> map = new HashMap<String, String>();
+                map.put(AddressContants.EMPLOYEENO, String.valueOf(msg.obj));
                 manager.scanPerson(map, new ProcessReportingLogic.ScanPersonListener() {
                     @Override
                     public void onSuccess(WorkerPerson WorkerPerson) {
@@ -380,7 +384,7 @@ public class ProcessReportingActivity extends BaseTitleActivity{
         }
     });
 
-    public void clear(){
+    public void clear() {
         tv_item_name.setText("");
         tv_item_no.setText("");
         tv_job_name.setText("");
@@ -396,7 +400,7 @@ public class ProcessReportingActivity extends BaseTitleActivity{
         et_gongDan_no.requestFocus();
     }
 
-    public void clearJob(){
+    public void clearJob() {
         tv_job_name.setText("");
         tv_day_has_passed.setText("");
         tv_person_name.setText("");
@@ -404,7 +408,7 @@ public class ProcessReportingActivity extends BaseTitleActivity{
         et_job_num.requestFocus();
     }
 
-    public void clearPerson(){
+    public void clearPerson() {
         tv_person_name.setText("");
         et_the_workers.setText("");
         et_the_workers.requestFocus();
@@ -412,7 +416,8 @@ public class ProcessReportingActivity extends BaseTitleActivity{
 
     @Override
     protected void doBusiness() {
-        manager = ProcessReportingLogic.getInstance(activity,activity.module,activity.mTimestamp.toString());
+        manager = ProcessReportingLogic
+                .getInstance(activity, activity.module, activity.mTimestamp.toString());
     }
 
     @Override

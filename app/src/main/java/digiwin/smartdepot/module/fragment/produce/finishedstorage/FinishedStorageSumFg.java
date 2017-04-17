@@ -142,7 +142,7 @@ public class FinishedStorageSumFg extends BaseFragment {
                 bundle.putString(AddressContants.MODULEID_INTENT, pactivity.mTimestamp.toString());
                 bundle.putString(CommonDetailActivity.MODULECODE, pactivity.module);
                 bundle.putSerializable(CommonDetailActivity.ONESUM, sumShowBean);
-                bundle.putSerializable(CommonDetailActivity.DETAIL, (Serializable) detailShowBeen);
+                bundle.putSerializable(CommonDetailActivity.DETAIL, (Serializable)detailShowBeen);
                 ActivityManagerUtils.startActivityBundleForResult(activity, CommonDetailActivity.class, bundle, pactivity.DETAILCODE);
                 dismissLoadingDialog();
             }

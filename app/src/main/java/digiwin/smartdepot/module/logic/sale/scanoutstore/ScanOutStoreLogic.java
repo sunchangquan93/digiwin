@@ -14,8 +14,8 @@ import digiwin.smartdepot.core.appcontants.ReqTypeName;
 import digiwin.smartdepot.core.net.IRequestCallbackImp;
 import digiwin.smartdepot.core.net.OkhttpRequest;
 import digiwin.smartdepot.core.xml.CreateParaXmlReqIm;
+import digiwin.smartdepot.module.bean.common.SaveBean;
 import digiwin.smartdepot.module.bean.sale.scanout.ScanOutDetailData;
-import digiwin.smartdepot.module.bean.sale.scanout.ScanOutSaveBean;
 
 /**
  * @author maoheng
@@ -63,7 +63,7 @@ public class ScanOutStoreLogic {
     /**
      * 保存
      */
-    public void saveScanOutStore(final ScanOutSaveBean saveBean, final ScanOutSaveListener listener){
+    public void saveScanOutStore(final SaveBean saveBean, final ScanOutSaveListener listener){
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {

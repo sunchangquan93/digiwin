@@ -10,7 +10,9 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import butterknife.BindView;
 import digiwin.library.constant.SharePreKey;
@@ -77,6 +79,7 @@ public class WelcomeGuideActivity extends BaseActivity {
             return false;
         }
     });
+
     @Override
     protected int bindLayoutId() {
         return R.layout.activity_welcomeguide;
@@ -110,7 +113,7 @@ public class WelcomeGuideActivity extends BaseActivity {
         boolean isFirst = (boolean) SharedPreferencesUtils.get(activity, SharePreKey.ISFIRSTKEY, true);
         if (!isFirst){
             pager.setVisibility(View.GONE);
-            mHandler.sendMessageDelayed(mHandler.obtainMessage(FINISH),3000);
+            mHandler.sendMessageDelayed(mHandler.obtainMessage(FINISH),2000);
         }else {
             rootlayout.setVisibility(View.GONE);
             viewPager();

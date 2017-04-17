@@ -30,18 +30,19 @@ import digiwin.pulltorefreshlibrary.recyclerviewAdapter.BaseRecyclerAdapter;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.base.BaseFragment;
+import digiwin.smartdepot.core.coreutil.FiFoCheckUtils;
 import digiwin.smartdepot.core.modulecommon.ModuleUtils;
 import digiwin.smartdepot.login.bean.AccoutBean;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
 import digiwin.smartdepot.module.activity.sale.saleoutlet.SaleOutletActivity;
 import digiwin.smartdepot.module.adapter.sale.SaleOutletFiFoAdapter;
 import digiwin.smartdepot.module.bean.common.ClickItemPutBean;
+import digiwin.smartdepot.module.bean.common.FifoCheckBean;
 import digiwin.smartdepot.module.bean.common.FilterResultOrderBean;
 import digiwin.smartdepot.module.bean.common.SaveBackBean;
 import digiwin.smartdepot.module.bean.common.SaveBean;
 import digiwin.smartdepot.module.bean.common.ScanBarcodeBackBean;
 import digiwin.smartdepot.module.bean.common.ScanLocatorBackBean;
-import digiwin.smartdepot.module.bean.produce.PostMaterialFIFOBean;
 import digiwin.smartdepot.module.logic.common.CommonLogic;
 
 
@@ -172,26 +173,31 @@ public class SaleOutletScanFg extends BaseFragment {
             showFailedDialog(R.string.input_num);
             return;
         }
-        boolean isSave=true;
         saveBean.setQty(etInputNum.getText().toString());
-        if (AddressContants.FIFOY.equals(saveBean.getFifo_check())) {
-            isSave=false;
-            for (PostMaterialFIFOBean bean : fiFoList) {
-                if (saveBean.getBarcode_no().equals(bean.getBarcode_no())
-                 &&saveBean.getStorage_spaces_out_no().equals(bean.getStorage_spaces_no())){
-                    float canNum = StringUtils.string2Float(bean.getRecommended_qty())-StringUtils.string2Float(bean.getScan_sumqty());
-                    if (StringUtils.string2Float(saveBean.getQty())>canNum)
-                    {
-                        showFailedDialog(R.string.input_num_toobig);
-                        return;
-                    }
-                    isSave=true;
-                    break;
-                }
-            }
-        }
-        if (!isSave){
-            showFailedDialog(R.string.fifo_scan_error);
+//        boolean isSave=true;
+//        if (AddressContants.FIFOY.equals(saveBean.getFifo_check())) {
+//            isSave=false;
+//            for (FifoCheckBean bean : fiFoList) {
+//                if (saveBean.getBarcode_no().equals(bean.getBarcode_no())
+//                 &&saveBean.getStorage_spaces_out_no().equals(bean.getStorage_spaces_no())){
+//                    float canNum = StringUtils.string2Float(bean.getRecommended_qty())-StringUtils.string2Float(bean.getScan_sumqty());
+//                    if (StringUtils.string2Float(saveBean.getQty())>canNum)
+//                    {
+//                        showFailedDialog(R.string.input_num_toobig);
+//                        return;
+//                    }
+//                    isSave=true;
+//                    break;
+//                }
+//            }
+//        }
+//        if (!isSave){
+//            showFailedDialog(R.string.fifo_scan_error);
+//            return;
+//        }
+        String fifoCheck = FiFoCheckUtils.fifoCheck(saveBean, fiFoList);
+        if (!StringUtils.isBlank(fifoCheck)){
+            showFailedDialog(fifoCheck);
             return;
         }
         showLoadingDialog();
@@ -242,7 +248,7 @@ public class SaleOutletScanFg extends BaseFragment {
 
     SaveBean saveBean;
 
-    private List<PostMaterialFIFOBean> fiFoList;
+    private List<FifoCheckBean> fiFoList;
 
     private BaseRecyclerAdapter adapter;
     /**
@@ -268,7 +274,7 @@ public class SaleOutletScanFg extends BaseFragment {
                     EventBus.getDefault().post(itemPutBean);
                     commonLogic.postMaterialFIFO(map, new CommonLogic.PostMaterialFIFOListener() {
                         @Override
-                        public void onSuccess(List<PostMaterialFIFOBean> fiFoBeanList) {
+                        public void onSuccess(List<FifoCheckBean> fiFoBeanList) {
                             fiFoList.clear();
                             fiFoList = fiFoBeanList;
                             saleFlag = true;
@@ -331,6 +337,7 @@ public class SaleOutletScanFg extends BaseFragment {
                             locatorFlag = true;
                             saveBean.setStorage_spaces_out_no(locatorBackBean.getStorage_spaces_no());
                             saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
+                            saveBean.setAllow_negative_stock(locatorBackBean.getAllow_negative_stock());
                             etScanBarocde.requestFocus();
                         }
 

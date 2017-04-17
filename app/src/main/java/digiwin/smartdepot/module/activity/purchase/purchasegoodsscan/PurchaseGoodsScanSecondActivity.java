@@ -33,7 +33,7 @@ import digiwin.smartdepot.module.fragment.purchase.purchaseinstore.PurchaseInSto
 
 /**
  * @author 唐孟宇
- * @des 采购入库扫描 扫描/汇总页面
+ * @des 扫码收货 扫描/汇总页面
  */
 public class PurchaseGoodsScanSecondActivity extends BaseFirstModuldeActivity {
     /**

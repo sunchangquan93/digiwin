@@ -88,7 +88,7 @@ public class ScanOutStoreActivity extends BaseFirstModuldeActivity{
     void toUmcom(){
         Bundle bundle = new Bundle();
         bundle.putString(AddressContants.MODULEID_INTENT, mTimestamp.toString());
-        bundle.putString(NoComeUnComActivity.MODULECODE, module);
+        bundle.putString(HaveSourceUnComActivity.MODULECODE, module);
         ActivityManagerUtils.startActivityForBundleData(activity, HaveSourceUnComActivity.class, bundle);
     }
 

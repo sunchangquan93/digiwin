@@ -232,7 +232,8 @@ public class StoreReturnMaterialListActivity extends BaseTitleActivity {
      * 筛选按钮
      */
     @BindView(R.id.iv_title_setting)
-    ImageView search;@OnClick(R.id.iv_title_setting)
+    ImageView search;
+    @OnClick(R.id.iv_title_setting)
     void search(){
         if (isSearching) {
             isSearching=false;
@@ -278,6 +279,7 @@ public class StoreReturnMaterialListActivity extends BaseTitleActivity {
 
     @Override
     protected void doBusiness() {
+        etDate.setKeyListener(null);
         commonLogic = CommonLogic.getInstance(activity,module,mTimestamp.toString());
         list = new ArrayList<>();
         updateUI();
@@ -292,7 +294,6 @@ public class StoreReturnMaterialListActivity extends BaseTitleActivity {
         itemClick();
     }
 
-    private String DOC_NO = "doc_no";
     /**
      * 条目点击
      */

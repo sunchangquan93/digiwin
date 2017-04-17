@@ -198,6 +198,7 @@ public class DistributeActivity extends BaseFirstModuldeActivity {
         DatePickerUtils.getDoubleDate(pactivity, new DatePickerUtils.GetDoubleDateListener() {
             @Override
             public void getTime(String mStartDate, String mEndDate, String showDate) {
+                et_plan_date.requestFocus();
                 startDate = mStartDate;
                 endDate = mEndDate;
                 et_plan_date.setText(showDate);
@@ -286,7 +287,6 @@ public class DistributeActivity extends BaseFirstModuldeActivity {
      */
     @OnClick(R.id.btn_search_sure)
     void Search(){
-        //TODO
         upDateList();
     }
 
@@ -308,6 +308,7 @@ public class DistributeActivity extends BaseFirstModuldeActivity {
 
     @Override
     protected void doBusiness() {
+        et_plan_date.setKeyListener(null);
         distributeActivity = this;
         pactivity = (DistributeActivity) activity;
         logic = DistributeLogic.getInstance(distributeActivity,module,pactivity.mTimestamp.toString());

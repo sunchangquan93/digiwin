@@ -8,7 +8,66 @@ import java.io.Serializable;
  * @date 2017/3/15
  */
 
-public class FifoAccordingBean implements Serializable{
+public class FifoCheckBean implements Serializable{
+    /**
+     * 品名
+     */
+    private String item_name;
+    /**
+     * 規格
+     */
+    private String item_spec;
+
+    /**
+     * 批号
+     */
+    private String lot_no;
+
+    public String getItem_name() {
+        return item_name;
+    }
+
+    public void setItem_name(String item_name) {
+        this.item_name = item_name;
+    }
+
+    public String getItem_spec() {
+        return item_spec;
+    }
+
+    public void setItem_spec(String item_spec) {
+        this.item_spec = item_spec;
+    }
+
+    public String getLot_no() {
+        return lot_no;
+    }
+
+    public void setLot_no(String lot_no) {
+        this.lot_no = lot_no;
+    }
+
+    public String getShortage_qty() {
+        return shortage_qty;
+    }
+
+    public void setShortage_qty(String shortage_qty) {
+        this.shortage_qty = shortage_qty;
+    }
+
+    public String getBarcode_no() {
+        return barcode_no;
+    }
+
+    public void setBarcode_no(String barcode_no) {
+        this.barcode_no = barcode_no;
+    }
+
+    /**
+     * 需求量
+     */
+
+    private String shortage_qty;
 
     /**
      * 储位编号
@@ -24,6 +83,11 @@ public class FifoAccordingBean implements Serializable{
      * 批次日期
      */
     private String lot_date;
+
+    /**
+     * 物料条码
+     */
+    private String barcode_no;
 
     /**
      * 库存量

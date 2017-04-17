@@ -70,7 +70,7 @@ public class InBinningSumFg extends BaseFragment {
             InBinningBean putBean = new InBinningBean();
             putBean.setWo_no(listSumBean.getWo_no());
             putBean.setItem_no(listSumBean.getItem_no());
-            putBean.setDepartment_no(listSumBean.getDepartment_name());
+            putBean.setDepartment_no(listSumBean.getDepartment_no());
 
             showLoadingDialog();
             commonLogic.getOrderSumData(putBean, new CommonLogic.GetOrderSumListener() {
@@ -116,7 +116,7 @@ public class InBinningSumFg extends BaseFragment {
                 Bundle bundle = new Bundle();
                 bundle.putString(AddressContants.ITEM_NO, orderSumData.getItem_no());
                 bundle.putString(AddressContants.MODULEID_INTENT, pactivity.mTimestamp.toString());
-                ActivityManagerUtils.startActivityForBundleData(activity, ScanOutDetailActivity.class,bundle);
+                ActivityManagerUtils.startActivityBundleForResult(activity, ScanOutDetailActivity.class,bundle,pactivity.DETAILCODE);
     }
 
     private void sureCommit(){

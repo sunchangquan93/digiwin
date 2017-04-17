@@ -21,7 +21,7 @@ import digiwin.smartdepot.module.fragment.stock.store.ReturnMaterialSumFg;
 
 /**
  * @author maoheng
- * @des 仓库退料
+ * @des 仓库退料 扫码/明细页
  * @date 2017/3/30
  */
 

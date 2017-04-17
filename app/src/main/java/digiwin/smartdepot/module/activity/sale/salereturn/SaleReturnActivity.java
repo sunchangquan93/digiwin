@@ -186,6 +186,7 @@ public class SaleReturnActivity extends BaseTitleActivity {
         DatePickerUtils.getDoubleDate(pactivity, new DatePickerUtils.GetDoubleDateListener() {
             @Override
             public void getTime(String mStartDate, String mEndDate, String showDate) {
+                et_date.requestFocus();
                 startDate = mStartDate;
                 endDate = mEndDate;
                 et_date.setText(showDate);
@@ -264,6 +265,7 @@ public class SaleReturnActivity extends BaseTitleActivity {
 
     @Override
     protected void doBusiness() {
+        et_date.setKeyListener(null);
         pactivity = (SaleReturnActivity) activity;
         commonLogic = CommonLogic.getInstance(pactivity, module, mTimestamp.toString());
         FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(activity);

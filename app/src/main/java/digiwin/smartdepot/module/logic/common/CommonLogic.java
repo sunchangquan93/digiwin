@@ -20,7 +20,7 @@ import digiwin.smartdepot.core.xml.CreateParaXmlReqIm;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
 import digiwin.smartdepot.module.bean.common.ClickItemPutBean;
 import digiwin.smartdepot.module.bean.common.DetailShowBean;
-import digiwin.smartdepot.module.bean.common.FifoAccordingBean;
+import digiwin.smartdepot.module.bean.common.FifoCheckBean;
 import digiwin.smartdepot.module.bean.common.FilterBean;
 import digiwin.smartdepot.module.bean.common.FilterResultOrderBean;
 import digiwin.smartdepot.module.bean.common.ListSumBean;
@@ -32,9 +32,7 @@ import digiwin.smartdepot.module.bean.common.ScanLocatorBackBean;
 import digiwin.smartdepot.module.bean.common.ScanReasonCodeBackBean;
 import digiwin.smartdepot.module.bean.common.SumShowBean;
 import digiwin.smartdepot.module.bean.common.UnCompleteBean;
-import digiwin.smartdepot.module.bean.produce.FiFoBean;
 import digiwin.smartdepot.module.bean.produce.InBinningBean;
-import digiwin.smartdepot.module.bean.produce.PostMaterialFIFOBean;
 import digiwin.smartdepot.module.bean.stock.ProductBinningBean;
 
 /**
@@ -531,7 +529,7 @@ public class CommonLogic {
      * 获取FIFO
      */
     public interface FIFOGETListener {
-        public void onSuccess(List<FiFoBean> fiFoBeanList);
+        public void onSuccess(List<FifoCheckBean> fiFoBeanList);
 
         public void onFailed(String error);
     }
@@ -551,16 +549,16 @@ public class CommonLogic {
                         String error = mContext.getString(R.string.unknow_error);
                         if (null != xmlResp) {
                             if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
-                                List<FiFoBean> fiFoBeanList = xmlResp.getMasterDatas(FiFoBean.class);
+                                List<FifoCheckBean> fiFoBeanList = xmlResp.getMasterDatas(FifoCheckBean.class);
                                 if(null != fiFoBeanList && fiFoBeanList.size() > 0){
                                     for (int i = 0; i < fiFoBeanList.size(); i++) {
-                                        FiFoBean fifoBean = fiFoBeanList.get(i);
+                                        FifoCheckBean fifoBean = fiFoBeanList.get(i);
                                         fifoBean.setRecommended_qty(StringUtils.deleteZero(fifoBean.getRecommended_qty()));
                                         fifoBean.setScan_sumqty(StringUtils.deleteZero(fifoBean.getScan_sumqty()));
                                     }
                                     listener.onSuccess(fiFoBeanList);
                                 }else{
-                                    List<FiFoBean> list = new ArrayList<FiFoBean>();
+                                    List<FifoCheckBean> list = new ArrayList<FifoCheckBean>();
                                     listener.onSuccess(list);
                                 }
                                 return;
@@ -744,7 +742,7 @@ public class CommonLogic {
      * 领料过账 获取FIFO
      */
     public interface PostMaterialFIFOListener {
-        public void onSuccess(List<PostMaterialFIFOBean> fiFoBeanList);
+        public void onSuccess(List<FifoCheckBean> fiFoBeanList);
 
         public void onFailed(String error);
     }
@@ -764,16 +762,16 @@ public class CommonLogic {
                         String error = mContext.getString(R.string.unknow_error);
                         if (null != xmlResp) {
                             if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
-                                List<PostMaterialFIFOBean> fiFoBeanList = xmlResp.getMasterDatas(PostMaterialFIFOBean.class);
+                                List<FifoCheckBean> fiFoBeanList = xmlResp.getMasterDatas(FifoCheckBean.class);
                                 if(null != fiFoBeanList && fiFoBeanList.size() > 0){
                                     for (int i = 0; i < fiFoBeanList.size(); i++) {
-                                        PostMaterialFIFOBean fifoBean = fiFoBeanList.get(i);
+                                        FifoCheckBean fifoBean = fiFoBeanList.get(i);
                                         fifoBean.setRecommended_qty(StringUtils.deleteZero(fifoBean.getRecommended_qty()));
                                         fifoBean.setScan_sumqty(StringUtils.deleteZero(fifoBean.getScan_sumqty()));
                                     }
                                     listener.onSuccess(fiFoBeanList);
                                 }else{
-                                    List<PostMaterialFIFOBean> list = new ArrayList<PostMaterialFIFOBean>();
+                                    List<FifoCheckBean> list = new ArrayList<FifoCheckBean>();
                                     listener.onSuccess(list);
                                 }
 
@@ -793,7 +791,7 @@ public class CommonLogic {
      * 获取FIFO
      */
     public interface FIFOAccordingGETListener {
-        public void onSuccess(List<FifoAccordingBean> fiFoBeanList);
+        public void onSuccess(List<FifoCheckBean> fiFoBeanList);
 
         public void onFailed(String error);
     }
@@ -813,16 +811,16 @@ public class CommonLogic {
                         String error = mContext.getString(R.string.unknow_error);
                         if (null != xmlResp) {
                             if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
-                                List<FifoAccordingBean> fiFoBeanList = xmlResp.getMasterDatas(FifoAccordingBean.class);
+                                List<FifoCheckBean> fiFoBeanList = xmlResp.getMasterDatas(FifoCheckBean.class);
                                 if(null != fiFoBeanList && fiFoBeanList.size() >0){
                                     for (int i = 0; i < fiFoBeanList.size(); i++) {
-                                        FifoAccordingBean fifoBean = fiFoBeanList.get(i);
+                                        FifoCheckBean fifoBean = fiFoBeanList.get(i);
                                         fifoBean.setRecommended_qty(StringUtils.deleteZero(fifoBean.getRecommended_qty()));
                                         fifoBean.setScan_sumqty(StringUtils.deleteZero(fifoBean.getScan_sumqty()));
                                     }
                                     listener.onSuccess(fiFoBeanList);
                                 }else {
-                                    List<FifoAccordingBean> list = new ArrayList<FifoAccordingBean>();
+                                    List<FifoCheckBean> list = new ArrayList<FifoCheckBean>();
                                     listener.onSuccess(fiFoBeanList);
                                 }
                                 return;

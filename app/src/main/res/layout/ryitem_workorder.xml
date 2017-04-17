@@ -89,6 +89,27 @@
     <View
         android:id="@+id/line_3"
         style="@style/ry_line_style" />
+    <LinearLayout
+        style="@style/itemstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/layout_70dp"
+            android:layout_height="wrap_content"
+            android:text="@string/locator_num_"
+            android:textColor="@color/MAIN_BELOW"
+            android:textSize="@dimen/textSize_14sp" />
+
+        <TextView
+            android:id="@+id/tv_locator_num"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textSize_14sp" />
+    </LinearLayout>
+    <View
+        style="@style/ry_line_style" />
 
     <LinearLayout
         style="@style/itemstyle"

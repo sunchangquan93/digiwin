@@ -101,7 +101,11 @@ public class ProductBinningDetailFg extends BaseFragment {
                 @Override
                 public void onSuccess(List<ProductBinningBean> productBinningBeans) {
                     mDetailShowBeen=productBinningBeans;
-                    Map<Integer, Boolean> map = new HashMap<>();
+                    boolean checked = cbAll.isChecked();
+                    HashMap<Integer, Boolean> map = new HashMap<>();
+                    for (int i = 0; i < mDetailShowBeen.size(); i++) {
+                        map.put(i, checked);
+                    }
                     updateUI(map);
                 }
 

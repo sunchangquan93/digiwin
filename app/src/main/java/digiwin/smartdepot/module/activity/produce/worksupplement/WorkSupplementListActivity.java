@@ -66,13 +66,13 @@ public class WorkSupplementListActivity extends BaseTitleActivity{
     CommonLogic commonLogic;
 
     @BindViews({R.id.ll_material_returning_number,R.id.ll_returning_item_no,R.id.ll_applicant,
-            R.id.ll_apply_branch})
+            R.id.ll_apply_branch,R.id.ll_plan_date})
     List<View> views;
     @BindViews({R.id.tv_material_returning_number,R.id.tv_returning_item_no,R.id.tv_applicant,
-            R.id.tv_apply_branch})
+            R.id.tv_apply_branch,R.id.tv_plan_date})
     List<TextView> textViews;
     @BindViews({R.id.et_material_returning_number,R.id.et_returning_item_no,R.id.et_applicant,
-            R.id.et_apply_branch})
+            R.id.et_apply_branch,R.id.et_plan_date})
     List<EditText> editTexts;
 
     /**
@@ -148,9 +148,19 @@ public class WorkSupplementListActivity extends BaseTitleActivity{
      */
     @BindView(R.id.iv_plan_date)
     ImageView iv_plan_date;
-
+    @BindView(R.id.ll_plan_date)
+    LinearLayout ll_plan_date;
+    @BindView(R.id.tv_plan_date)
+    TextView tv_plan_date;
     @BindView(R.id.et_plan_date)
     EditText et_plan_date;
+    @OnFocusChange(R.id.et_plan_date)
+    void plan_dateFocusChanage() {
+        ModuleUtils.viewChange(ll_plan_date, views);
+        ModuleUtils.tvChange(activity, tv_plan_date, textViews);
+        ModuleUtils.etChange(activity, et_plan_date, editTexts);
+    }
+
 
     String startDate = "";
     String endDate = "";
@@ -160,6 +170,7 @@ public class WorkSupplementListActivity extends BaseTitleActivity{
         DatePickerUtils.getDoubleDate(activity, new DatePickerUtils.GetDoubleDateListener() {
             @Override
             public void getTime(String mStartDate, String mEndDate, String showDate) {
+                et_plan_date.requestFocus();
                 startDate = mStartDate;
                 endDate = mEndDate;
                 et_plan_date.setText(showDate);
@@ -249,6 +260,7 @@ public class WorkSupplementListActivity extends BaseTitleActivity{
 
     @Override
     protected void doBusiness() {
+        et_plan_date.setKeyListener(null);
         commonLogic = CommonLogic.getInstance(activity,module,mTimestamp.toString());
         FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(activity);
         ry_list.setLayoutManager(linearLayoutManager);
@@ -308,6 +320,9 @@ public class WorkSupplementListActivity extends BaseTitleActivity{
         super.onActivityResult(requestCode, resultCode, data);
         try{
             if(requestCode == SCANCODE){
+                dataList.clear();
+                adapter = new WorkSupplementListAdapter(activity,dataList);
+                ry_list.setAdapter(adapter);
                 search();
             }
         }catch (Exception e){

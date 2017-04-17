@@ -101,6 +101,10 @@ public class SaveBean {
      * 仓库
      */
     private  String warehouse_no;
+    /**
+     * 是否允许仓负库存
+     */
+    private String allow_negative_stock;
 
     public String getPackage_no() {
         return package_no;
@@ -284,5 +288,13 @@ public class SaveBean {
 
     public void setWarehouse_no(String warehouse_no) {
         this.warehouse_no = warehouse_no;
+    }
+
+    public String getAllow_negative_stock() {
+        return allow_negative_stock;
+    }
+
+    public void setAllow_negative_stock(String allow_negative_stock) {
+        this.allow_negative_stock = allow_negative_stock;
     }
 }

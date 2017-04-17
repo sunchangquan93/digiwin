@@ -108,9 +108,7 @@ public class AccordingMaterialActivity extends BaseFirstModuldeActivity {
         showCommitSureDialog(new OnDialogTwoListener() {
             @Override
             public void onCallback1() {
-                showLoadingDialog();
                 if(StringUtils.isBlank(mEt_barcode_scan.getText().toString().trim())){
-                    dismissLoadingDialog();
                     showFailedDialog(getResources().getString(R.string.please_scan_item_no));
                     return;
                 }
@@ -136,6 +134,7 @@ public class AccordingMaterialActivity extends BaseFirstModuldeActivity {
     @OnTextChanged(value = R.id.et_item_no_scan, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void barcodeChange(CharSequence s) {
         if (!StringUtils.isBlank(s.toString())) {
+            mHandler.removeMessages(BARCODEWHAT);
             mHandler.sendMessageDelayed(mHandler.obtainMessage(BARCODEWHAT, s.toString().trim()), AddressContants.DELAYTIME);
         }
     }
@@ -224,7 +223,7 @@ public class AccordingMaterialActivity extends BaseFirstModuldeActivity {
                         Bundle bundle = new Bundle();
                         ListSumBean data = list.get(position);
                         bundle.putSerializable("sumdata", data);
-                        bundle.putString("modilecode",mTimestamp.toString());
+                        bundle.putString(AddressContants.MODULEID_INTENT,mTimestamp.toString());
                         ActivityManagerUtils.startActivityBundleForResult(activity,AccordingMaterialScanActivity.class,bundle,SCANCODE);
                         //调用新的FIFO
 //                        ActivityManagerUtils.startActivityBundleForResult(activity,AccordingMaterialScanNewActivity.class,bundle,SCANCODE);

@@ -7,7 +7,7 @@ import java.util.List;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.BaseRecyclerAdapter;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.RecyclerViewHolder;
 import digiwin.smartdepot.R;
-import digiwin.smartdepot.module.bean.common.FifoAccordingBean;
+import digiwin.smartdepot.module.bean.common.FifoCheckBean;
 
 /**
  * @author 赵浩然
@@ -15,9 +15,9 @@ import digiwin.smartdepot.module.bean.common.FifoAccordingBean;
  * @date 2017/3/3
  */
 
-public class AccordingMaterialFiFo_Adapter extends BaseRecyclerAdapter<FifoAccordingBean>{
+public class AccordingMaterialFiFo_Adapter extends BaseRecyclerAdapter<FifoCheckBean>{
 
-    public AccordingMaterialFiFo_Adapter(Context ctx, List<FifoAccordingBean> list) {
+    public AccordingMaterialFiFo_Adapter(Context ctx, List<FifoCheckBean> list) {
         super(ctx, list);
     }
 
@@ -27,7 +27,7 @@ public class AccordingMaterialFiFo_Adapter extends BaseRecyclerAdapter<FifoAccor
     }
 
     @Override
-    protected void bindData(RecyclerViewHolder holder, int position, FifoAccordingBean item) {
+    protected void bindData(RecyclerViewHolder holder, int position, FifoCheckBean item) {
         holder.setText(R.id.tv_locator, item.getStorage_spaces_no());
         holder.setText(R.id.tv_batch_date,item.getLot_date());
         holder.setText(R.id.tv_item_no,item.getItem_no());

@@ -150,7 +150,6 @@ public class ProductionLeaderScanFg extends BaseFragment {
     @OnTextChanged(value = R.id.et_barcode_no, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void barcodeChange(CharSequence s) {
         if (!StringUtils.isBlank(s.toString())) {
-            showLoadingDialog();
             mHandler.sendMessageDelayed(mHandler.obtainMessage(BARCODEWHAT, s.toString()), AddressContants.DELAYTIME);
         }
     }
@@ -158,7 +157,6 @@ public class ProductionLeaderScanFg extends BaseFragment {
     @OnTextChanged(value = R.id.et_scan_locator, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void locatorChange(CharSequence s) {
         if (!StringUtils.isBlank(s.toString())) {
-            showLoadingDialog();
             mHandler.sendMessageDelayed(mHandler.obtainMessage(LOCATORWHAT, s.toString()), AddressContants.DELAYTIME);
         }
     }
@@ -250,7 +248,6 @@ public class ProductionLeaderScanFg extends BaseFragment {
                 commonLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
                     @Override
                     public void onSuccess(ScanLocatorBackBean locatorBackBean) {
-                        dismissLoadingDialog();
                         locatorFlag = true;
                         saveBean.setStorage_spaces_out_no(locatorBackBean.getStorage_spaces_no());
                         saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
@@ -261,7 +258,6 @@ public class ProductionLeaderScanFg extends BaseFragment {
 
                     @Override
                     public void onFailed(String error) {
-                        dismissLoadingDialog();
                         showFailedDialog(error, new OnDialogClickListener() {
                             @Override
                             public void onCallback() {
@@ -283,7 +279,6 @@ public class ProductionLeaderScanFg extends BaseFragment {
                 commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                     @Override
                     public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
-                        dismissLoadingDialog();
                         if(StringUtils.isBlank(etScanLocator.getText().toString())){
                             showFailedDialog(getResources().getString(R.string.scan_locator));
                             return;
