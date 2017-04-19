@@ -144,6 +144,9 @@ public class MainLogic {
 
         ModuleBean inbinninglist = new ModuleBean(R.string.title_in_binning,R.mipmap.inbox,ModuleCode.INBINNING,  "android.intent.action.digiwin.InBinningListActivity");
 
+        ModuleBean endproductAllot = new ModuleBean(R.string.endproduct_allot,R.mipmap.endproduct_allot,ModuleCode.ENDPRODUCTALLOT,  "android.intent.action.digiwin.EndProductAllotActivity");
+
+
         produceItems.add(finishedStorageActivity);
 
         produceItems.add(transfersToReviewActivity);
@@ -174,6 +177,8 @@ public class MainLogic {
 
         produceItems.add(inbinninglist);
 
+        produceItems.add(endproductAllot);
+
         //初始化库存管理
         ModuleBean storeallotactivity = new ModuleBean(R.string.nocome_allot, R.mipmap.nocome_alllot, ModuleCode.NOCOMESTOREALLOT, "android.intent.action.digiwin.StoreAllotActivity");
         storageItems.add(storeallotactivity);
@@ -195,6 +200,8 @@ public class MainLogic {
         storageItems.add(productbinning);
         ModuleBean productoutbox = new ModuleBean(R.string.product_outbox, R.mipmap.outbox, ModuleCode.PRODUCTOUTBOX, "android.intent.action.digiwin.ProductOutBoxActivity");
         storageItems.add(productoutbox);
+        ModuleBean postallocateactivity = new ModuleBean(R.string.title_post_allocate, R.mipmap.allot_post, ModuleCode.POSTALLOCATE, "android.intent.action.digiwin.PostAllocateActivity");
+        storageItems.add(postallocateactivity);
 
         //初始化销售管理
         ModuleBean saleoutletactivity = new ModuleBean(R.string.saleoutlet, R.mipmap.saleoutlet, ModuleCode.SALEOUTLET, "android.intent.action.digiwin.SaleOutletListActivity");

@@ -251,12 +251,9 @@ public class DistributeScanActivity extends BaseTitleActivity {
                                     for (int i = 0;i<fiFoList.size();i++){
                                         if(barcodeBackBean.getBarcode_no().equals(fiFoList.get(i).getBarcode_no())){
                                             if(locatorFlag){
-                                                String locator = et_scan_locator.getText().toString();
-                                                if(locator.contains("%")){
-                                                    if(locator.split("%")[1].equals(fiFoList.get(i).getStorage_spaces_no())){
+                                                    if(saveBean.getStorage_spaces_out_no().equals(fiFoList.get(i).getStorage_spaces_no())){
                                                         n++;
                                                     }
-                                                }
                                             }
                                         }
                                     }

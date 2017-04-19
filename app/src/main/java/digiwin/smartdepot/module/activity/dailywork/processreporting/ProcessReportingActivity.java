@@ -203,7 +203,7 @@ public class ProcessReportingActivity extends BaseTitleActivity {
     @OnTextChanged(value = R.id.et_gongDan_no, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void gongDanChange(CharSequence s) {
         if (!StringUtils.isBlank(s.toString())) {
-            showLoadingDialog();
+            mHandler.removeMessages(WO_NO);
             mHandler.sendMessageDelayed(mHandler.obtainMessage(WO_NO, s.toString().trim()),
                     AddressContants.DELAYTIME);
         }
@@ -212,7 +212,7 @@ public class ProcessReportingActivity extends BaseTitleActivity {
     @OnTextChanged(value = R.id.et_job_num, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void jobChange(CharSequence s) {
         if (!StringUtils.isBlank(s.toString())) {
-            showLoadingDialog();
+            mHandler.removeMessages(PROCESS_NO);
             mHandler.sendMessageDelayed(mHandler.obtainMessage(PROCESS_NO, s.toString().trim()),
                     AddressContants.DELAYTIME);
         }
@@ -221,7 +221,7 @@ public class ProcessReportingActivity extends BaseTitleActivity {
     @OnTextChanged(value = R.id.et_the_workers, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void workersChange(CharSequence s) {
         if (!StringUtils.isBlank(s.toString())) {
-            showLoadingDialog();
+            mHandler.removeMessages(EMPLOYEE_NO);
             mHandler.sendMessageDelayed(mHandler.obtainMessage(EMPLOYEE_NO, s.toString().trim()),
                     AddressContants.DELAYTIME);
         }
@@ -235,8 +235,6 @@ public class ProcessReportingActivity extends BaseTitleActivity {
         showCommitSureDialog(new OnDialogTwoListener() {
             @Override
             public void onCallback1() {
-                showLoadingDialog();
-
                 if (StringUtils.isBlank(et_gongDan_no.getText().toString())) {
                     showFailedDialog(R.string.scan_work_order);
                     return;
@@ -249,6 +247,8 @@ public class ProcessReportingActivity extends BaseTitleActivity {
                     showFailedDialog(R.string.the_workers_scan);
                     return;
                 }
+                showLoadingDialog();
+
                 List<ProcessReportingCommitBean> list = new ArrayList<ProcessReportingCommitBean>();
                 ProcessReportingCommitBean bean = new ProcessReportingCommitBean();
                 bean.setWo_no(et_gongDan_no.getText().toString());
@@ -297,11 +297,10 @@ public class ProcessReportingActivity extends BaseTitleActivity {
             if (msg.what == WO_NO) {
                 Map<String, String> map = new HashMap<String, String>();
                 map.put(AddressContants.WO_NO, String.valueOf(msg.obj));
-                map.put("process_no", "");
+                map.put(AddressContants.PROCESSNO, "");
                 manager.scanCode(map, new ProcessReportingLogic.ScanCodeListener() {
                     @Override
                     public void onSuccess(ProcessReportingBean data) {
-                        dismissLoadingDialog();
                         ll_show.setVisibility(View.VISIBLE);
                         tv_item_name.setText(data.getItem_name());
                         tv_item_no.setText(data.getItem_no());
@@ -310,7 +309,6 @@ public class ProcessReportingActivity extends BaseTitleActivity {
 
                     @Override
                     public void onFailed(String error) {
-                        dismissLoadingDialog();
                         showFailedDialog(error, new OnDialogClickListener() {
                             @Override
                             public void onCallback() {
@@ -324,7 +322,6 @@ public class ProcessReportingActivity extends BaseTitleActivity {
             if (msg.what == PROCESS_NO) {
                 Map<String, String> map = new HashMap<String, String>();
                 if (StringUtils.isBlank(et_gongDan_no.getText().toString().trim())) {
-                    dismissLoadingDialog();
                     showFailedDialog(R.string.scan_work_order, new OnDialogClickListener() {
                         @Override
                         public void onCallback() {
@@ -333,11 +330,10 @@ public class ProcessReportingActivity extends BaseTitleActivity {
                     });
                 }
                 map.put(AddressContants.WO_NO, et_gongDan_no.getText().toString().trim());
-                map.put("process_no", String.valueOf(msg.obj));
+                map.put(AddressContants.PROCESSNO, String.valueOf(msg.obj));
                 manager.scanCode(map, new ProcessReportingLogic.ScanCodeListener() {
                     @Override
                     public void onSuccess(ProcessReportingBean data) {
-                        dismissLoadingDialog();
                         tv_job_name.setText(data.getProcess_name());
                         tv_day_has_passed.setText(data.getWorking_num());
                         et_the_workers.requestFocus();
@@ -362,14 +358,12 @@ public class ProcessReportingActivity extends BaseTitleActivity {
                 manager.scanPerson(map, new ProcessReportingLogic.ScanPersonListener() {
                     @Override
                     public void onSuccess(WorkerPerson WorkerPerson) {
-                        dismissLoadingDialog();
                         tv_person_name.setText(WorkerPerson.getEmployee_name());
                         et_good_amount.requestFocus();
                     }
 
                     @Override
                     public void onFailed(String error) {
-                        dismissLoadingDialog();
                         showFailedDialog(error, new OnDialogClickListener() {
                             @Override
                             public void onCallback() {

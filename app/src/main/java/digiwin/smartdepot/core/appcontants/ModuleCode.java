@@ -114,6 +114,10 @@ public interface ModuleCode {
      */
     public final String PRINTLABEL="C001";
     /**
+     * 调拨过账
+     */
+    public final String POSTALLOCATE="C002";
+    /**
      * 库存查询
      */
     public final String STOREQUERY="C004";

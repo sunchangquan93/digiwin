@@ -224,7 +224,6 @@ public class StoreTransLockActivity extends BaseTitleActivity{
                 transLogic.getScanBarcode(map, new StoreTransLogic.ScanItemNoListener() {
                     @Override
                     public void onSuccess(StoreTransItemNoBean transItemNoBean) {
-                        dismissLoadingDialog();
                         if(null!=transItemNoBean){
                             tv_name_value.setText(transItemNoBean.getItem_name());
                             tv_spc_value.setText(transItemNoBean.getItem_spec());
@@ -235,7 +234,6 @@ public class StoreTransLockActivity extends BaseTitleActivity{
 
                     @Override
                     public void onFailed(String error) {
-                        dismissLoadingDialog();
                         showFailedDialog(error);
                         et_item_no.setText("");
                     }
@@ -249,7 +247,6 @@ public class StoreTransLockActivity extends BaseTitleActivity{
                     @Override
                     public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
                         if(null!=barcodeBackBean){
-                            dismissLoadingDialog();
                             et_item_no.setText(barcodeBackBean.getItem_no());
                             et_batch_no.setText(barcodeBackBean.getLot_no());
                         }
@@ -257,7 +254,6 @@ public class StoreTransLockActivity extends BaseTitleActivity{
 
                     @Override
                     public void onFailed(String error) {
-                        dismissLoadingDialog();
                         showFailedDialog(error);
                         et_materiel_barcode.setText("");
                     }
@@ -271,7 +267,6 @@ public class StoreTransLockActivity extends BaseTitleActivity{
                     @Override
                     public void onSuccess(ScanLocatorBackBean locatorBackBean) {
                         if(null!=locatorBackBean){
-                            dismissLoadingDialog();
                             et_loctor_no.setText(locatorBackBean.getStorage_spaces_no());
                             et_lock_store.setText(locatorBackBean.getWarehouse_no());
                         }
@@ -279,7 +274,6 @@ public class StoreTransLockActivity extends BaseTitleActivity{
 
                     @Override
                     public void onFailed(String error) {
-                        dismissLoadingDialog();
                         showFailedDialog(error);
                         et_barcode_store.setText("");
                     }
@@ -291,7 +285,6 @@ public class StoreTransLockActivity extends BaseTitleActivity{
     void barcodeChange(CharSequence s) {
         if (!StringUtils.isBlank(s.toString())) {
             mHandler.removeMessages(BARCODEWHAT);
-            showLoadingDialog();
             mHandler.sendMessageDelayed(mHandler.obtainMessage(BARCODEWHAT, s.toString()), AddressContants.DELAYTIME);
         }
     }
@@ -299,7 +292,6 @@ public class StoreTransLockActivity extends BaseTitleActivity{
     void warehouseChange(CharSequence s) {
         if (!StringUtils.isBlank(s.toString())) {
             mHandler.removeMessages(WAREHOUSEWHAT);
-            showLoadingDialog();
             mHandler.sendMessageDelayed(mHandler.obtainMessage(WAREHOUSEWHAT, s.toString()), AddressContants.DELAYTIME);
         }
     }
@@ -307,7 +299,6 @@ public class StoreTransLockActivity extends BaseTitleActivity{
     void itemChange(CharSequence s) {
         if (!StringUtils.isBlank(s.toString())) {
             mHandler.removeMessages(ITEMWHAT);
-            showLoadingDialog();
             mHandler.sendMessageDelayed(mHandler.obtainMessage(ITEMWHAT, s.toString()), AddressContants.DELAYTIME);
         }
     }
@@ -339,8 +330,8 @@ public class StoreTransLockActivity extends BaseTitleActivity{
                 map.put(AddressContants.WAREHOUSE_STORAGE,et_loctor_no.getText().toString().trim());
                 map.put(AddressContants.ITEM_NO,et_item_no.getText().toString().trim());
                 map.put(AddressContants.ITEMLOTNO,et_batch_no.getText().toString().trim());
-                map.put(AddressContants.EMPLOYEENO,"");
-                map.put(AddressContants.RECEIPTDATE,"");
+//                map.put(AddressContants.EMPLOYEENO,"");
+//                map.put(AddressContants.RECEIPTDATE,"");
                 map.put(AddressContants.LOCKREASON,et_lock_reason.getText().toString().trim());
                 commonLogic.commit(map, new CommonLogic.CommitListener() {
                     @Override

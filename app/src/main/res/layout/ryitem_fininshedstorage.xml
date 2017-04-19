@@ -16,6 +16,7 @@
             android:id="@+id/tv_item_no_string"
             android:layout_width="@dimen/layout_70dp"
             android:layout_height="wrap_content"
+            android:textColor="@color/black_32"
             android:text="@string/item_no"
             android:textSize="@dimen/textSize_14sp" />
 
@@ -37,6 +38,7 @@
         <TextView
             android:id="@+id/tv_item_name_string"
             android:layout_width="@dimen/layout_70dp"
+            android:textColor="@color/black_32"
             android:layout_height="wrap_content"
             android:text="@string/item_name"
             android:textSize="@dimen/textSize_14sp" />
@@ -63,6 +65,7 @@
             android:layout_width="@dimen/layout_70dp"
             android:layout_height="wrap_content"
             android:text="@string/storage_capacity"
+            android:textColor="@color/black_32"
             android:textSize="@dimen/textSize_14sp" />
 
         <TextView
@@ -76,6 +79,7 @@
             android:id="@+id/tv_scaned_numb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black_32"
             android:layout_alignParentRight="true"
             android:textSize="@dimen/textSize_14sp" />
 

@@ -70,8 +70,8 @@
         <TextView
             android:id="@+id/tv_item_model"
             android:layout_width="@dimen/layout_0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:textSize="@dimen/textSize_14sp" />
     </LinearLayout>
 
@@ -114,13 +114,12 @@
             android:textSize="@dimen/textSize_14sp" />
 
         <ImageView
-            android:layout_marginLeft="@dimen/layout_10dp"
             android:layout_width="@dimen/layout_30dp"
             android:layout_height="@dimen/layout_20dp"
-            android:src="@mipmap/suspension"
             android:layout_gravity="center_vertical"
-            android:visibility="invisible"
-            />
+            android:layout_marginLeft="@dimen/layout_10dp"
+            android:src="@mipmap/suspension"
+            android:visibility="invisible" />
     </LinearLayout>
 
     <View
@@ -131,51 +130,51 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-    <LinearLayout
-        style="@style/itemstyle"
-        android:layout_width="@dimen/layout_0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tv_wait_recheck_numb_string"
-            android:layout_width="@dimen/layout_50dp"
-            android:layout_height="wrap_content"
-            android:text="@string/wait_recheck"
-            android:textSize="@dimen/textSize_14sp" />
-
-        <TextView
-            android:id="@+id/tv_wait_recheck_numb"
+        <LinearLayout
+            style="@style/itemstyle"
             android:layout_width="@dimen/layout_0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="@dimen/textSize_14sp" />
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tv_act_send_numb_string"
-            android:layout_width="@dimen/layout_50dp"
-            android:layout_height="wrap_content"
-            android:text="@string/act_send_num"
-            android:textSize="@dimen/textSize_14sp" />
+            <TextView
+                android:id="@+id/tv_wait_recheck_numb_string"
+                android:layout_width="@dimen/layout_50dp"
+                android:layout_height="wrap_content"
+                android:text="@string/wait_recheck"
+                android:textSize="@dimen/textSize_14sp" />
 
-        <TextView
-            android:id="@+id/tv_act_send_numb"
-            android:layout_width="@dimen/layout_0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="@dimen/textSize_14sp" />
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tv_wait_recheck_numb"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="@dimen/textSize_14sp" />
+
+            <TextView
+                android:id="@+id/tv_act_send_numb_string"
+                android:layout_width="@dimen/layout_50dp"
+                android:layout_height="wrap_content"
+                android:text="@string/act_send_num"
+                android:textSize="@dimen/textSize_14sp" />
+
+            <TextView
+                android:id="@+id/tv_act_send_numb"
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="@dimen/textSize_14sp" />
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/iv_detail_look"
-            android:layout_marginLeft="@dimen/layout_10dp"
-            android:minHeight="@dimen/layout_0dp"
             android:layout_width="@dimen/layout_30dp"
             android:layout_height="match_parent"
-            android:src="@mipmap/suspension"
             android:layout_gravity="center_vertical"
-            />
+            android:layout_marginLeft="@dimen/layout_10dp"
+            android:minHeight="@dimen/layout_0dp"
+            android:src="@mipmap/suspension" />
 
     </LinearLayout>
 </LinearLayout>

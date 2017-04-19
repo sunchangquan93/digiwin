@@ -189,6 +189,7 @@ public class WorkOrderActivity extends BaseFirstModuldeActivity {
                 List<ListSumBean> list = new ArrayList<ListSumBean>();
                 adapter = new WorkOrderSumAdapter(activity,list);
                 mRc_list.setAdapter(adapter);
+                showLoadingDialog();
                 updateList(et_job_number_scan.getText().toString().trim());
             }
         }
@@ -218,7 +219,7 @@ public class WorkOrderActivity extends BaseFirstModuldeActivity {
         managerCommon.getOrderSumData(putBean, new CommonLogic.GetOrderSumListener() {
             @Override
             public void onSuccess(final List<ListSumBean> list) {
-                if (list.size()==0) {
+                if (list.size() > 0) {
                     mTv_item_name.setText(list.get(0).getItem_name());
                 }
                 adapter = new WorkOrderSumAdapter(activity,list);

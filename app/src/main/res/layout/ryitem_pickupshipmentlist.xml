@@ -87,46 +87,35 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <LinearLayout
+
+        <TextView
+            android:id="@+id/tv_apply_branch_string"
+            android:layout_width="@dimen/layout_70dp"
+            android:layout_height="wrap_content"
+            android:text="@string/apply_branch"
+            android:textSize="@dimen/textSize_14sp" />
+
+        <TextView
+            android:id="@+id/tv_apply_branch"
             android:layout_width="@dimen/layout_0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:textColor="@color/Base_color"
+            android:textSize="@dimen/textSize_14sp" />
 
-            <TextView
-                android:id="@+id/tv_apply_branch_string"
-                android:layout_width="@dimen/layout_70dp"
-                android:layout_height="wrap_content"
-                android:text="@string/apply_branch"
-                android:textSize="@dimen/textSize_14sp" />
+        <TextView
+            android:id="@+id/tv_applicant_string"
+            android:layout_width="@dimen/layout_70dp"
+            android:layout_height="wrap_content"
+            android:text="@string/applicant"
+            android:textSize="@dimen/textSize_14sp" />
 
-            <TextView
-                android:id="@+id/tv_apply_branch"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/Base_color"
-                android:textSize="@dimen/textSize_14sp" />
-        </LinearLayout>
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/tv_applicant"
             android:layout_width="@dimen/layout_0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tv_applicant_string"
-                android:layout_width="@dimen/layout_70dp"
-                android:layout_height="wrap_content"
-                android:text="@string/applicant"
-                android:textSize="@dimen/textSize_14sp" />
-
-            <TextView
-                android:id="@+id/tv_applicant"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/Base_color"
-                android:textSize="@dimen/textSize_14sp" />
-        </LinearLayout>
+            android:textColor="@color/Base_color"
+            android:textSize="@dimen/textSize_14sp" />
     </LinearLayout>
 </LinearLayout>

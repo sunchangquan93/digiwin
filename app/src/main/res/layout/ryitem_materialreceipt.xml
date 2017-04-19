@@ -52,8 +52,8 @@
             android:id="@+id/tv_item_name_string"
             android:layout_width="@dimen/layout_70dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/MAIN_BELOW"
             android:text="@string/item_name"
+            android:textColor="@color/MAIN_BELOW"
             android:textSize="@dimen/textSize_14sp" />
 
         <TextView
@@ -78,8 +78,8 @@
             android:id="@+id/tv_item_format_string"
             android:layout_width="@dimen/layout_70dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/MAIN_BELOW"
             android:text="@string/model"
+            android:textColor="@color/MAIN_BELOW"
             android:textSize="@dimen/textSize_14sp" />
 
         <TextView
@@ -106,8 +106,8 @@
             android:id="@+id/tv_locator_string"
             android:layout_width="@dimen/layout_70dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/MAIN_BELOW"
             android:text="@string/locator"
+            android:textColor="@color/MAIN_BELOW"
             android:textSize="@dimen/textSize_14sp" />
 
         <TextView
@@ -130,16 +130,17 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_weight="1"
             android:layout_width="@dimen/layout_0dp"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/tv_delivery_quantity_string"
                 android:layout_width="@dimen/layout_70dp"
                 android:layout_height="wrap_content"
-                android:textColor="@color/MAIN_BELOW"
                 android:text="@string/delivery_quantity"
+                android:textColor="@color/MAIN_BELOW"
                 android:textSize="@dimen/textSize_14sp" />
 
             <TextView
@@ -151,42 +152,43 @@
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_weight="1"
             android:layout_width="@dimen/layout_0dp"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/tv_actual_yield_num_string"
                 android:layout_width="@dimen/layout_70dp"
                 android:layout_height="wrap_content"
-                android:textColor="@color/MAIN_BELOW"
                 android:text="@string/actual_yield_num"
+                android:textColor="@color/MAIN_BELOW"
                 android:textSize="@dimen/textSize_14sp" />
 
             <EditText
                 android:id="@+id/tv_actual_yield_num"
-                android:background="@null"
-                android:selectAllOnFocus="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@null"
                 android:inputType="numberDecimal"
+                android:selectAllOnFocus="true"
                 android:textColor="@color/outside_yellow"
                 android:textSize="@dimen/textSize_14sp" />
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_weight="0.2"
             android:layout_width="@dimen/layout_0dp"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:orientation="horizontal">
             >
+
             <CheckBox
                 android:id="@+id/cb_confirm_num"
-                android:layout_gravity="center"
+                style="@style/checkbox_selector"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                style="@style/checkbox_selector"
-                />
+                android:layout_gravity="center" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

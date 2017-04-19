@@ -26,8 +26,7 @@
             android:textSize="@dimen/textSize_14sp" />
     </LinearLayout>
 
-    <View
-        style="@style/ry_line_style" />
+    <View style="@style/ry_line_style" />
 
     <LinearLayout
         style="@style/itemstyle"
@@ -48,8 +47,9 @@
             android:textColor="@color/Base_color"
             android:textSize="@dimen/textSize_14sp" />
     </LinearLayout>
-    <View
-        style="@style/ry_line_style" />
+
+    <View style="@style/ry_line_style" />
+
     <LinearLayout
         style="@style/itemstyle"
         android:layout_width="match_parent"
@@ -65,11 +65,12 @@
         <TextView
             android:id="@+id/tv_item_department"
             android:layout_width="@dimen/layout_0dp"
-            android:layout_weight="1"
-            android:layout_marginLeft="@dimen/layout_10dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/layout_10dp"
+            android:layout_weight="1"
             android:textColor="@color/Base_color"
             android:textSize="@dimen/textSize_14sp" />
+
         <TextView
             android:layout_width="@dimen/layout_50dp"
             android:layout_height="wrap_content"
@@ -79,8 +80,8 @@
         <TextView
             android:id="@+id/tv_item_applicant"
             android:layout_width="@dimen/layout_0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:textColor="@color/Base_color"
             android:textSize="@dimen/textSize_14sp" />
     </LinearLayout>

@@ -45,7 +45,7 @@ import static digiwin.smartdepot.R.id.et_input_num;
 
 /**
  * @author 赵浩然
- * @des 捡料出货扫描页
+ * @des 出货过账扫描页
  * @date 2017/3/23
  */
 public class PickUpShipmentScanFg extends BaseFragment {
@@ -133,8 +133,8 @@ public class PickUpShipmentScanFg extends BaseFragment {
 //    @BindView(R.id.tv_item_name)
 //    TextView tv_item_name;
 //
-//    @BindView(R.id.tv_item_format)
-//    TextView tv_item_format;
+    @BindView(R.id.tv_swept_volume)
+    TextView tv_swept_volume;
 
     @OnCheckedChanged(R.id.cb_locatorlock)
     void isLock(boolean checked) {
@@ -204,9 +204,12 @@ public class PickUpShipmentScanFg extends BaseFragment {
             showFailedDialog(fifoCheck);
             return;
         }
+        showLoadingDialog();
         commonLogic.scanSave(saveBean, new CommonLogic.SaveListener() {
             @Override
             public void onSuccess(SaveBackBean saveBackBean) {
+                dismissLoadingDialog();
+                tv_swept_volume.setText(StringUtils.deleteZero(saveBackBean.getScan_sumqty()));
                 if(AddressContants.FIFOY.equals(saveBean.getFifo_check())){
                     upDateList();
                 }
@@ -215,6 +218,7 @@ public class PickUpShipmentScanFg extends BaseFragment {
 
             @Override
             public void onFailed(String error) {
+                dismissLoadingDialog();
                 showFailedDialog(error);
             }
         });
@@ -226,6 +230,7 @@ public class PickUpShipmentScanFg extends BaseFragment {
 //        tv_item_format.setText("");
 //        tv_storage.setText("");
 //        tv_locator_tv.setText("");
+        tv_swept_volume.setText("");
         etInputNum.setText("");
         etScanBarocde.setText("");
 
@@ -303,14 +308,12 @@ public class PickUpShipmentScanFg extends BaseFragment {
                 break;
 
             case FIFOWHAT:
-                showLoadingDialog();
                 Map<String,String> map = new HashMap<String,String>();
                 map.put(AddressContants.ISSUING_NO,String.valueOf(msg.obj));
                 map.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
                 commonLogic.postMaterialFIFO(map, new CommonLogic.PostMaterialFIFOListener() {
                     @Override
                     public void onSuccess(List<FifoCheckBean> fiFoBeanList) {
-                        dismissLoadingDialog();
                         if(null != fiFoBeanList && fiFoBeanList.size() > 0){
                             fiFoList = fiFoBeanList;
                             adapter = new PickUpShipmentFIFoAdapter(context,fiFoBeanList);
@@ -324,7 +327,6 @@ public class PickUpShipmentScanFg extends BaseFragment {
 
                     @Override
                     public void onFailed(String error) {
-                        dismissLoadingDialog();
                         showFailedDialog(error);
                     }
                 });

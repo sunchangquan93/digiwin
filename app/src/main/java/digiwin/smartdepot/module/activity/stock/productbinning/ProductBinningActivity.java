@@ -76,8 +76,7 @@ public class ProductBinningActivity extends BaseFirstModuldeActivity {
 
     @Override
     protected void initNavigationTitle() {
-        super.initNavigationTitle();
-        mName.setText(R.string.product_binning);
+
     }
 
     @Override

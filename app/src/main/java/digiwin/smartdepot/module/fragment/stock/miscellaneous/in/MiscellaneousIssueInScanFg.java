@@ -353,7 +353,7 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
             switch (msg.what) {
                 case REASONCODEWHAT:
                     HashMap<String, String> reasonMap = new HashMap<>();
-                    reasonMap.put("reason_code_no", String.valueOf(msg.obj));
+                    reasonMap.put(AddressContants.REASONCODENO, String.valueOf(msg.obj));
                     commonLogic.scanReasonCode(reasonMap, new CommonLogic.ScanReasonCodeListener() {
                         @Override
                         public void onSuccess(ScanReasonCodeBackBean barcodeBackBean) {
@@ -387,7 +387,7 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
                     break;
                 case DEPARTMENTWHAT:
                     final HashMap<String, String> departmentMap = new HashMap<>();
-                    departmentMap.put("employee_no", String.valueOf(msg.obj));
+                    departmentMap.put(AddressContants.EMPLOYEENO, String.valueOf(msg.obj));
                     commonLogic.scanEmployeeCode(departmentMap, new CommonLogic.ScanEmployeementListener() {
                         @Override
                         public void onSuccess(ScanEmployeeBackBean barcodeBackBean) {

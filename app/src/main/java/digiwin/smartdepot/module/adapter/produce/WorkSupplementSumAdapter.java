@@ -29,9 +29,9 @@ public class WorkSupplementSumAdapter extends BaseRecyclerAdapter<ListSumBean> {
 
     @Override
     protected void bindData(RecyclerViewHolder holder, int position, final ListSumBean item) {
-        //判断实发量 和 欠料量
-        float numb1 = StringUtils.string2Float(item.getShortage_qty());
-        float numb2 = StringUtils.string2Float(item.getScan_sumqty());
+        //判断实发量 和 补料量
+        float numb1 = StringUtils.string2Float(item.getReturn_qty());
+        float numb2 = StringUtils.string2Float(item.getMatch_qty());
 
         holder.setText(R.id.tv_item_no, item.getItem_no());
         holder.setText(R.id.tv_unit,item.getUnit_no());

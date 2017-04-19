@@ -112,7 +112,9 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/ll_workorderreturn_head"
         android:layout_marginTop="@dimen/layout_10dp">
+
         <include layout="@layout/ryitem_common" />
     </LinearLayout>
+
     <include layout="@layout/inclu_commit" />
 </RelativeLayout>

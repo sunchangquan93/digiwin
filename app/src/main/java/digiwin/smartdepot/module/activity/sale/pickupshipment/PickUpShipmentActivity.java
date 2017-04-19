@@ -30,7 +30,7 @@ import digiwin.smartdepot.module.fragment.sale.pickupshipment.PickUpShipmentSumF
 
 /**
  * @author 赵浩然
- * @module 减料出货
+ * @module 出货过账
  * @date 2017/3/24
  */
 

@@ -4,7 +4,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -124,23 +123,23 @@ public class MaterialReceiptActivity extends BaseTitleActivity implements
     try {
       checkedList = adapter.getCheckData();
       if (checkedList.size() > 0) {
-        showCommitSureDialog(new OnDialogTwoListener() {
-          @Override
-          public void onCallback1() {
-            showLoadingDialog();
-            if (StringUtils.isBlank(et_delivery_note.getText().toString())) {
-              dismissLoadingDialog();
-              showFailedDialog(getResources().getString(R.string.please_delivery_note));
-              return;
+          showCommitSureDialog(new OnDialogTwoListener() {
+            @Override
+            public void onCallback1() {
+              showLoadingDialog();
+              if (StringUtils.isBlank(et_delivery_note.getText().toString())) {
+                dismissLoadingDialog();
+                showFailedDialog(getResources().getString(R.string.please_delivery_note));
+                return;
+              }
+              commitData(checkedList);
             }
-            commitData(checkedList);
-          }
 
-          @Override
-          public void onCallback2() {
+            @Override
+            public void onCallback2() {
 
-          }
-        });
+            }
+          });
       } else {
         showFailedDialog(getResources().getString(R.string.please_delivery_note_num));
       }
@@ -169,8 +168,8 @@ public class MaterialReceiptActivity extends BaseTitleActivity implements
           @Override
           public void onSuccess(List<ListSumBean> list) {
             for (int i = 0; i < list.size(); i++) {
-              ListSumBean bean = list.get(i);
-              bean.setCheck("1");
+                ListSumBean bean = list.get(i);
+                bean.setCheck("1");
             }
 
             rl_top.setVisibility(View.VISIBLE);
@@ -206,28 +205,28 @@ public class MaterialReceiptActivity extends BaseTitleActivity implements
 
   @Override
   protected void doBusiness() {
-    commonLogic = CommonLogic
-        .getInstance(activity, activity.module, activity.mTimestamp.toString());
-    FullyLinearLayoutManager fullyLinearLayoutManager = new FullyLinearLayoutManager(activity);
-    ry_list.setLayoutManager(fullyLinearLayoutManager);
+      commonLogic = CommonLogic
+          .getInstance(activity, activity.module, activity.mTimestamp.toString());
+      FullyLinearLayoutManager fullyLinearLayoutManager = new FullyLinearLayoutManager(activity);
+      ry_list.setLayoutManager(fullyLinearLayoutManager);
   }
 
   public void clearData() {
-    tv_delivery_note_no.setText("");
-    tv_delivery_date.setText("");
-    tv_supplier.setText("");
-    et_delivery_note.setText("");
-    et_delivery_note.requestFocus();
-    ArrayList<ListSumBean> list = new ArrayList<ListSumBean>();
-    adapter = new MaterialReceiptAdapter(activity, list);
-    ry_list.setAdapter(adapter);
-    rl_top.setVisibility(View.GONE);
+      tv_delivery_note_no.setText("");
+      tv_delivery_date.setText("");
+      tv_supplier.setText("");
+      et_delivery_note.setText("");
+      et_delivery_note.requestFocus();
+      ArrayList<ListSumBean> list = new ArrayList<ListSumBean>();
+      adapter = new MaterialReceiptAdapter(activity, list);
+      ry_list.setAdapter(adapter);
+      rl_top.setVisibility(View.GONE);
   }
 
   @Override
   public String moduleCode() {
-    module = ModuleCode.MATERIALRECEIPTCODE;
-    return module;
+      module = ModuleCode.MATERIALRECEIPTCODE;
+      return module;
   }
 
   public void commitData(final List<ListSumBean> checkedList) {
@@ -262,21 +261,21 @@ public class MaterialReceiptActivity extends BaseTitleActivity implements
 
   @Override
   protected void initNavigationTitle() {
-    super.initNavigationTitle();
-    activity = this;
-    mName.setText(getResources().getString(R.string.title_material_receipt));
+      super.initNavigationTitle();
+      activity = this;
+      mName.setText(getResources().getString(R.string.title_material_receipt));
   }
 
   @Override
   public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft,
       int oldTop, int oldRight, int oldBottom) {
-    //old是改变前的左上右下坐标点值，没有old的是改变后的左上右下坐标点值
-    //现在认为只要控件将Activity向上推的高度超过了1/3屏幕高，就认为软键盘弹起
-    if (oldBottom != 0 && bottom != 0 && (oldBottom - bottom > keyHeight)) {
-      commit.setVisibility(View.INVISIBLE);
-    } else if (oldBottom != 0 && bottom != 0 && (bottom - oldBottom > keyHeight)) {
-      commit.setVisibility(View.VISIBLE);
-    }
+      //old是改变前的左上右下坐标点值，没有old的是改变后的左上右下坐标点值
+      //现在认为只要控件将Activity向上推的高度超过了1/3屏幕高，就认为软键盘弹起
+      if (oldBottom != 0 && bottom != 0 && (oldBottom - bottom > keyHeight)) {
+        commit.setVisibility(View.INVISIBLE);
+      } else if (oldBottom != 0 && bottom != 0 && (bottom - oldBottom > keyHeight)) {
+        commit.setVisibility(View.VISIBLE);
+      }
   }
 
 }

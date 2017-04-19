@@ -300,7 +300,6 @@ public class PostMaterialScanFg extends BaseFragment {
 
             @Override
             public void onFailed(String error) {
-                showFailedDialog(error);
                 fiFoList = new ArrayList<FifoCheckBean>();
                 adapter = new PostmaterialFiFoAdapter(pactivity,fiFoList);
             }

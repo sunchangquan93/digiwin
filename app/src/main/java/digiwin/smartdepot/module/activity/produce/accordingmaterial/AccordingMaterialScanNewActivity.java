@@ -294,7 +294,7 @@ public class AccordingMaterialScanNewActivity extends BaseTitleActivity {
     @OnTextChanged(value = et_scan_barocde, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void barcodeChange(CharSequence s) {
         if (!StringUtils.isBlank(s.toString())) {
-            showLoadingDialog();
+            mHandler.removeMessages(BARCODEWHAT);
             mHandler.sendMessageDelayed(mHandler.obtainMessage(BARCODEWHAT, s.toString()), AddressContants.DELAYTIME);
         }
     }
@@ -302,7 +302,7 @@ public class AccordingMaterialScanNewActivity extends BaseTitleActivity {
     @OnTextChanged(value = R.id.et_scan_locator, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void locatorChange(CharSequence s) {
         if (!StringUtils.isBlank(s.toString())) {
-            showLoadingDialog();
+            mHandler.removeMessages(LOCATORWHAT);
             mHandler.sendMessageDelayed(mHandler.obtainMessage(LOCATORWHAT, s.toString()), AddressContants.DELAYTIME);
         }
     }
@@ -368,7 +368,6 @@ public class AccordingMaterialScanNewActivity extends BaseTitleActivity {
                 break;
 
             case FIFOWHAT:
-                showLoadingDialog();
                 Map<String,String> map = (Map<String, String>) msg.obj;
                 commonLogic.getFifoAccording(map, new CommonLogic.FIFOAccordingGETListener() {
                     @Override
@@ -383,13 +382,11 @@ public class AccordingMaterialScanNewActivity extends BaseTitleActivity {
                             adapter = new AccordingMaterialFiFo_Adapter(activity,localFifoList);
                             mRc_list.setAdapter(adapter);
                         }
-
                     }
 
                     @Override
                     public void onFailed(String error) {
                         dismissLoadingDialog();
-                        showFailedDialog(error);
                     }
                 });
                 break;
@@ -462,6 +459,7 @@ public class AccordingMaterialScanNewActivity extends BaseTitleActivity {
             float num = StringUtils.sub(tv_stock_balance.getText().toString(),tv_actual_yield.getText().toString());
             map.put("qty",String.valueOf(num));
         }
+        mHandler.removeMessages(FIFOWHAT);
         mHandler.sendMessageDelayed(mHandler.obtainMessage(FIFOWHAT,map), AddressContants.DELAYTIME);
     }
 

@@ -133,7 +133,6 @@ public class InBinningScanFg extends BaseFragment {
     @OnTextChanged(value = R.id.et_box_code, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void barcodeChange(CharSequence s) {
         if (!StringUtils.isBlank(s.toString())) {
-            showLoadingDialog();
             mHandler.sendMessageDelayed(mHandler.obtainMessage(BARCODEWHAT, s.toString()), AddressContants.DELAYTIME);
         }
     }
@@ -141,7 +140,6 @@ public class InBinningScanFg extends BaseFragment {
     @OnTextChanged(value = R.id.et_scan_locator, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void locatorChange(CharSequence s) {
         if (!StringUtils.isBlank(s.toString())) {
-            showLoadingDialog();
             mHandler.sendMessageDelayed(mHandler.obtainMessage(LOCATORWHAT, s.toString()), AddressContants.DELAYTIME);
         }
     }
@@ -208,14 +206,12 @@ public class InBinningScanFg extends BaseFragment {
                     commonLogic.scanPackBoxNumber(barcodeMap, new CommonLogic.ScanPackBoxNumberListener() {
                         @Override
                         public void onSuccess(List<ProductBinningBean> productBinningBeans) {
-                            dismissLoadingDialog();
                             barcodeFlag = true;
                         }
 
                         @Override
                         public void onFailed(String error) {
                             barcodeFlag = false;
-                            dismissLoadingDialog();
                             showFailedDialog(error, new OnDialogClickListener() {
                                 @Override
                                 public void onCallback() {
@@ -233,7 +229,6 @@ public class InBinningScanFg extends BaseFragment {
                     commonLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
                         @Override
                         public void onSuccess(ScanLocatorBackBean locatorBackBean) {
-                            dismissLoadingDialog();
                             //判断返回仓库是否与全局仓库一致
                             if(!LoginLogic.getWare().equals(locatorBackBean.getWarehouse_no())){
                                 showFailedDialog(activity.getString(R.string.wareuse_error));

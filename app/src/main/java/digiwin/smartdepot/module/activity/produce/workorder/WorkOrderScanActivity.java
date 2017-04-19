@@ -431,7 +431,7 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
         }
         map.put(AddressContants.ITEM_NO,localData.getLow_order_item_no());
         map.put(AddressContants.WAREHOUSE_NO, LoginLogic.getUserInfo().getWare());
-
+        mHandler.removeMessages(FIFOWHAT);
         mHandler.sendMessageDelayed(mHandler.obtainMessage(FIFOWHAT, map), AddressContants.DELAYTIME);
     }
 

@@ -173,6 +173,7 @@ public class WorkSupplementScanFg extends BaseFragment {
     @OnTextChanged(value = R.id.et_barcode, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void barcodeChange(CharSequence s) {
         if (!StringUtils.isBlank(s.toString())) {
+            mHandler.removeMessages(BARCODEWHAT);
             mHandler.sendMessageDelayed(mHandler.obtainMessage(BARCODEWHAT, s.toString()), AddressContants.DELAYTIME);
         }
     }
@@ -180,6 +181,7 @@ public class WorkSupplementScanFg extends BaseFragment {
     @OnTextChanged(value = R.id.et_scan_locator, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void locatorChange(CharSequence s) {
         if (!StringUtils.isBlank(s.toString())) {
+            mHandler.removeMessages(LOCATORWHAT);
             mHandler.sendMessageDelayed(mHandler.obtainMessage(LOCATORWHAT, s.toString()), AddressContants.DELAYTIME);
         }
     }
@@ -319,21 +321,15 @@ public class WorkSupplementScanFg extends BaseFragment {
                     @Override
                     public void onSuccess(List<FifoCheckBean> fiFoBeanList) {
                         dismissLoadingDialog();
-                        if(null != fiFoBeanList && fiFoBeanList.size() > 0){
-                            fiFoList = fiFoBeanList;
-                            adapter = new WorkSupplementFIFoAdapter(context,fiFoBeanList);
-                            mRy_list.setAdapter(adapter);
-                        }else{
-                            fiFoList = new ArrayList<FifoCheckBean>();
-                            adapter = new WorkSupplementFIFoAdapter(context,fiFoList);
-                            mRy_list.setAdapter(adapter);
-                        }
+                        fiFoList = fiFoBeanList;
+                        adapter = new WorkSupplementFIFoAdapter(context,fiFoBeanList);
+                        mRy_list.setAdapter(adapter);
                     }
 
                     @Override
                     public void onFailed(String error) {
                         dismissLoadingDialog();
-                        showFailedDialog(error);
+//                        showFailedDialog(error);
                     }
                 });
                 break;
@@ -401,7 +397,7 @@ public class WorkSupplementScanFg extends BaseFragment {
         FilterResultOrderBean data = (FilterResultOrderBean) getActivity().getIntent().getSerializableExtra("data");
         localData = new FilterResultOrderBean();
         localData = data;
-
+        mHandler.removeMessages(FIFOWHAT);
         mHandler.sendMessageDelayed(mHandler.obtainMessage(FIFOWHAT, localData.getDoc_no()), AddressContants.DELAYTIME);
     }
 

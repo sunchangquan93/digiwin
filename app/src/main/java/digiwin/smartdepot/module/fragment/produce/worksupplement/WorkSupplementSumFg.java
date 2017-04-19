@@ -3,7 +3,6 @@ package digiwin.smartdepot.module.fragment.produce.worksupplement;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -18,6 +17,7 @@ import butterknife.OnClick;
 import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.dialog.OnDialogTwoListener;
 import digiwin.library.utils.ActivityManagerUtils;
+import digiwin.library.utils.StringUtils;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
@@ -149,13 +149,24 @@ public class WorkSupplementSumFg extends BaseFragment {
         Map<String, String> map = new HashMap<>();
         showLoadingDialog();
         map.put(AddressContants.ITEM_NO, orderSumData.getItem_no());
+
         final SumShowBean sumShowBean = new SumShowBean();
+        float numb1 = StringUtils.string2Float(orderSumData.getReturn_qty());
+        float numb2 = StringUtils.string2Float(orderSumData.getIssue_qty());
+        if(numb1 > numb2){
+            sumShowBean.setAvailable_in_qty(orderSumData.getIssue_qty());
+        }else if(numb1 < numb2){
+            sumShowBean.setAvailable_in_qty(orderSumData.getReturn_qty());
+        }else if(numb1 == numb2){
+            sumShowBean.setAvailable_in_qty(orderSumData.getReturn_qty());
+        }
         sumShowBean.setItem_no(orderSumData.getItem_no());
         sumShowBean.setItem_name(orderSumData.getItem_name());
-        sumShowBean.setAvailable_in_qty(orderSumData.getShortage_qty());
+
         commonLogic.getDetail(map, new CommonLogic.GetDetailListener() {
             @Override
             public void onSuccess(List<DetailShowBean> detailShowBeen) {
+
                 Bundle bundle = new Bundle();
                 bundle.putString(AddressContants.MODULEID_INTENT, pactivity.mTimestamp.toString());
                 bundle.putString(CommonDetailActivity.MODULECODE, pactivity.module);

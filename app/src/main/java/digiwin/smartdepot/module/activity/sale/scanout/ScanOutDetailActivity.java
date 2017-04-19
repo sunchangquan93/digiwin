@@ -23,6 +23,7 @@ import butterknife.OnClick;
 import digiwin.library.utils.StringUtils;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
+import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseTitleActivity;
 import digiwin.smartdepot.module.adapter.ExpandAdapter;
 import digiwin.smartdepot.module.bean.sale.scanout.ScanOutDetailData;
@@ -111,8 +112,7 @@ public class ScanOutDetailActivity extends BaseTitleActivity{
 
     @Override
     public String moduleCode() {
-        Bundle extras = getIntent().getExtras();
-        mode = extras.getString(AddressContants.MODULEID_INTENT);
+        mode = ModuleCode.SCANOUTSTORE;
         return mode;
     }
 

@@ -65,10 +65,11 @@
         <TextView
             android:id="@+id/tv_depart"
             android:layout_width="@dimen/layout_0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:textColor="@color/Base_color"
             android:textSize="@dimen/textSize_14sp" />
+
         <TextView
             android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
@@ -79,8 +80,8 @@
         <TextView
             android:id="@+id/tv_applicant"
             android:layout_width="@dimen/layout_0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:textColor="@color/Base_color"
             android:textSize="@dimen/textSize_14sp" />
     </LinearLayout>

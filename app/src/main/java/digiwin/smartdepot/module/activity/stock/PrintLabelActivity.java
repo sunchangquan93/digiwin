@@ -193,7 +193,6 @@ public class PrintLabelActivity extends BaseTitleActivity {
     protected void initNavigationTitle() {
         super.initNavigationTitle();
         mName.setText(R.string.print_label);
-        ivScan.setVisibility(View.GONE);
     }
 
     @Override
@@ -228,7 +227,7 @@ public class PrintLabelActivity extends BaseTitleActivity {
                 case BARCODEWHAT:
                     Map<String,String> map = new HashMap<>();
                     final String barcode = msg.obj.toString().trim();
-                    map.put("barcode_no",msg.obj.toString());
+                    map.put(AddressContants.BARCODE_NO,msg.obj.toString());
                     logic.scanBarcode(map, new CommonLogic.ScanBarcodeListener() {
                         @Override
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {

@@ -36,7 +36,7 @@
 
                     <TextView
                         android:id="@+id/tv_locator"
-                        android:layout_width="@dimen/layout_50dp"
+                        android:layout_width="@dimen/layout_70dp"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/locator"
@@ -72,7 +72,7 @@
 
                     <TextView
                         android:id="@+id/tv_barcode_string"
-                        android:layout_width="@dimen/layout_50dp"
+                        android:layout_width="@dimen/layout_70dp"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/barcode"
@@ -101,7 +101,7 @@
 
                     <TextView
                         android:id="@+id/tv_number"
-                        android:layout_width="@dimen/layout_50dp"
+                        android:layout_width="@dimen/layout_70dp"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/num"
@@ -118,6 +118,33 @@
                         android:hint="@string/input_num"
                         android:singleLine="true"
                         android:inputType="numberDecimal"
+                        android:textColor="@color/black_32"
+                        android:textCursorDrawable="@drawable/et_cursor_yellow"
+                        android:textSize="@dimen/textSize_14sp" />
+                </LinearLayout>
+
+                <View style="@style/fg_line_style" />
+                <LinearLayout
+                    style="@style/itemstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="@dimen/layout_70dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/swept_volume"
+                        android:textColor="@color/black_32"
+                        android:textSize="@dimen/textSize_14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_swept_volume"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_10dp"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:singleLine="true"
                         android:textColor="@color/black_32"
                         android:textCursorDrawable="@drawable/et_cursor_yellow"
                         android:textSize="@dimen/textSize_14sp" />

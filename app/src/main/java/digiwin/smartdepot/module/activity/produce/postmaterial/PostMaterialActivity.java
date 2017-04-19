@@ -53,11 +53,11 @@ public class PostMaterialActivity extends BaseTitleActivity {
     @BindView(R.id.toolbar_title)
     Toolbar toolbarTitle;
 
-    @BindViews({R.id.et_post_order, R.id.et_department, R.id.et_applicant,R.id.et_plan_date})
+    @BindViews({R.id.et_post_order, R.id.et_material_code, R.id.et_department, R.id.et_applicant,R.id.et_plan_date})
     List<EditText> editTexts;
-    @BindViews({R.id.ll_post_order, R.id.ll_department, R.id.ll_applicant, R.id.ll_plan_date})
+    @BindViews({R.id.ll_post_order, R.id.ll_material_code, R.id.ll_department, R.id.ll_applicant, R.id.ll_plan_date})
     List<View> views;
-    @BindViews({R.id.tv_post_order, R.id.tv_department, R.id.tv_applicant, R.id.tv_plan_date})
+    @BindViews({R.id.tv_post_order, R.id.tv_material_code, R.id.tv_department, R.id.tv_applicant, R.id.tv_plan_date})
     List<TextView> textViews;
 
     /**
@@ -81,6 +81,28 @@ public class PostMaterialActivity extends BaseTitleActivity {
         ModuleUtils.viewChange(ll_post_order, views);
         ModuleUtils.etChange(activity, et_post_order, editTexts);
         ModuleUtils.tvChange(activity, tv_post_order, textViews);
+    }
+    /**
+     * 筛选框 料号
+     */
+    @BindView(R.id.et_material_code)
+    EditText et_material_code;
+    /**
+     * 筛选框 料号
+     */
+    @BindView(R.id.ll_material_code)
+    LinearLayout ll_material_code;
+    /**
+     * 筛选框 料号
+     */
+    @BindView(R.id.tv_material_code)
+    TextView tv_material_code;
+
+    @OnFocusChange(R.id.et_material_code)
+    void materialCodeFocusChanage() {
+        ModuleUtils.viewChange(ll_material_code, views);
+        ModuleUtils.etChange(activity, et_material_code, editTexts);
+        ModuleUtils.tvChange(activity, tv_material_code, textViews);
     }
 
     /**
@@ -125,7 +147,7 @@ public class PostMaterialActivity extends BaseTitleActivity {
     TextView tv_applicant;
 
     @OnFocusChange(R.id.et_applicant)
-    void materialCodeFocusChanage() {
+    void applicantFocusChanage() {
         ModuleUtils.viewChange(ll_applicant, views);
         ModuleUtils.etChange(activity, et_applicant, editTexts);
         ModuleUtils.tvChange(activity, tv_applicant, textViews);
@@ -285,36 +307,6 @@ public class PostMaterialActivity extends BaseTitleActivity {
                 ActivityManagerUtils.startActivityBundleForResult(pactivity,PostMaterialSecondActivity.class,bundle,SECONDCODE);
             }
         });
-//        adapter.setOnItemClickListener(new OnItemClickListener() {
-//            @Override
-//            public void onItemClick(View itemView, int position) {
-//                final FilterResultOrderBean orderData = dataList.get(position);
-//                ClickItemPutBean clickItemPutData = new ClickItemPutBean();
-//                clickItemPutData.setDoc_no(orderData.getDoc_no());
-//                AccoutBean accoutBean = LoginLogic.getUserInfo();
-//                if (null != accoutBean) {
-//                   clickItemPutData.setWarehouse_out_no(accoutBean.getWare());
-//                }
-//                showLoadingDialog();
-//                logic.getOrderSumData(clickItemPutData, new CommonLogic.GetOrderSumListener() {
-//                    @Override
-//                    public void onSuccess(List<ListSumBean> list) {
-//                        Bundle bundle = new Bundle();
-//                        bundle.putSerializable("orderData",orderData);
-//                        bundle.putSerializable("list", (Serializable) list);
-//                        bundle.putString(AddressContants.MODULEID_INTENT, pactivity.mTimestamp.toString());
-////                        dismissLoadingDialog();
-//                        ActivityManagerUtils.startActivityBundleForResult(pactivity,PostMaterialSecondActivity.class,bundle,SECONDCODE);
-//                    }
-//
-//                    @Override
-//                    public void onFailed(String error) {
-//                        dismissLoadingDialog();
-//                        showFailedDialog(error);
-//                    }
-//                });
-//            }
-//        });
     }
 
     private List<FilterResultOrderBean> dataList = new ArrayList<>();
@@ -337,6 +329,10 @@ public class PostMaterialActivity extends BaseTitleActivity {
             //发料单号
             if(!StringUtils.isBlank(et_post_order.getText().toString())){
                 filterBean.setDoc_no(et_post_order.getText().toString());
+            }
+            //料号
+            if(!StringUtils.isBlank(et_material_code.getText().toString())){
+                filterBean.setItem_no(et_material_code.getText().toString());
             }
             //部门
             if(!StringUtils.isBlank(et_department.getText().toString())){

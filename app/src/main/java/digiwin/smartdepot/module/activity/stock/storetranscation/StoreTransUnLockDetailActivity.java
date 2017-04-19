@@ -51,8 +51,6 @@ public class StoreTransUnLockDetailActivity extends BaseTitleActivity{
      */
     private String doc_no;
 
-    private String DOC_NO;
-
     private CommonLogic commonLogic;
 
     private StoreTransUnLockDetailAdapter adapter;
@@ -85,9 +83,8 @@ public class StoreTransUnLockDetailActivity extends BaseTitleActivity{
     protected void doBusiness() {
 //        ry_list = (RecyclerView) findViewById(R.id.ry_list);
         ry_list.setLayoutManager(new LinearLayoutManager(activity));
-        DOC_NO = AddressContants.DOC_NO;
         Bundle extras = getIntent().getExtras();
-        doc_no = extras.getString(DOC_NO);
+        doc_no = extras.getString(AddressContants.DOC_NO);
         commonLogic = CommonLogic.getInstance(activity,module,mTimestamp.toString());
         list = new ArrayList<>();
         ClickItemPutBean bean = new ClickItemPutBean();

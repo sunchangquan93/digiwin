@@ -3,7 +3,6 @@ package digiwin.smartdepot.module.fragment.sale.pickupshipment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -18,6 +17,7 @@ import butterknife.OnClick;
 import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.dialog.OnDialogTwoListener;
 import digiwin.library.utils.ActivityManagerUtils;
+import digiwin.library.utils.StringUtils;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
@@ -144,7 +144,16 @@ public class PickUpShipmentSumFg extends BaseFragment {
         final SumShowBean sumShowBean = new SumShowBean();
         sumShowBean.setItem_no(orderSumData.getItem_no());
         sumShowBean.setItem_name(orderSumData.getItem_name());
-        sumShowBean.setAvailable_in_qty(orderSumData.getShortage_qty());
+        float numb1 = StringUtils.string2Float(orderSumData.getReq_qty());
+        float numb2 = StringUtils.string2Float(orderSumData.getStock_qty());
+        if(numb1 > numb2){
+            sumShowBean.setAvailable_in_qty(orderSumData.getStock_qty());
+        }else if(numb1 < numb2){
+            sumShowBean.setAvailable_in_qty(orderSumData.getReq_qty());
+        }else if(numb1 == numb2){
+            sumShowBean.setAvailable_in_qty(orderSumData.getReq_qty());
+        }
+
         commonLogic.getDetail(map, new CommonLogic.GetDetailListener() {
             @Override
             public void onSuccess(List<DetailShowBean> detailShowBeen) {

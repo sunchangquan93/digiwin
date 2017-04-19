@@ -493,6 +493,14 @@
     <string name="check_all">全选</string>
 
     <string name="please_scan_box">请扫描包装箱号</string>
-  <string name="openning">正在为您打开</string>
+    <string name="openning">正在为您打开</string>
+
+    <string name="title_post_allocate">调拨过账</string>
+    <string name="product_depart">车间</string>
+    <string name="target_store">目的仓</string>
+    <string name="endproduct_allot">依成品调拨</string>
+    <string name="source">来源</string>
+    <string name="target">目的</string>
+    <string name="target_qty">目的仓库存</string>
 
 </resources>

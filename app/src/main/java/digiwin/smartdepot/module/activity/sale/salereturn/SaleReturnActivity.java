@@ -61,17 +61,17 @@ public class SaleReturnActivity extends BaseTitleActivity {
     List<TextView> textViews;
 
     /**
-     * 筛选框 物料条码
+     * 筛选框 调拨单号
      */
     @BindView(R.id.et_return_order_no)
     EditText et_return_order_no;
     /**
-     * 筛选框 物料条码
+     * 筛选框 调拨单号
      */
     @BindView(R.id.ll_return_order_no)
     LinearLayout ll_return_order_no;
     /**
-     * 筛选框 物料条码
+     * 筛选框 调拨单号
      */
     @BindView(R.id.tv_return_order_no)
     TextView tv_return_order_no;
@@ -84,18 +84,18 @@ public class SaleReturnActivity extends BaseTitleActivity {
     }
 
     /**
-     * 筛选框 供应商代码
+     * 筛选框 客户编码
      */
     @BindView(R.id.et_customer_no)
     EditText et_customer_no;
 
     /**
-     * 筛选框 供应商代码
+     * 筛选框 客户编码
      */
     @BindView(R.id.ll_customer_no)
     LinearLayout ll_customer_no;
     /**
-     * 筛选框 供应商代码
+     * 筛选框 客户编码
      */
     @BindView(R.id.tv_customer_no)
     TextView tv_customer_no;
@@ -282,7 +282,7 @@ public class SaleReturnActivity extends BaseTitleActivity {
             public void onItemClick(View itemView, int position) {
                 final FilterResultOrderBean orderData = sumShowBeanList.get(position);
                 Bundle bundle = new Bundle();
-                        bundle.putSerializable("orderData", orderData);
+                        bundle.putSerializable(AddressContants.ORDERDATA, orderData);
                         ActivityManagerUtils.startActivityBundleForResult(pactivity, SaleReturnSecondActivity.class, bundle, SUMCODE);
             }
         });

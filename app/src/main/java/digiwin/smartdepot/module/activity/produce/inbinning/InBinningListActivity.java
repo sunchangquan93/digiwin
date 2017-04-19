@@ -1,5 +1,6 @@
 package digiwin.smartdepot.module.activity.produce.inbinning;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -160,7 +161,7 @@ public class InBinningListActivity extends BaseTitleActivity {
                     ll_search_dialog.setVisibility(View.GONE);
                     scrollview.setVisibility(View.VISIBLE);
                     dataList = list;
-                    adapter = new InBinningListAdapter(activity,false,list);
+                    adapter = new InBinningListAdapter(activity,false,dataList);
                     ry_list.setAdapter(adapter);
 
                     adapter.setOnItemClickListener(new OnItemClickListener() {
@@ -232,5 +233,16 @@ public class InBinningListActivity extends BaseTitleActivity {
     public String moduleCode() {
         module = ModuleCode.INBINNING;
         return module;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == SCANCODE){
+            dataList.clear();
+            adapter = new InBinningListAdapter(activity,false,dataList);
+            ry_list.setAdapter(adapter);
+            search();
+        }
     }
 }

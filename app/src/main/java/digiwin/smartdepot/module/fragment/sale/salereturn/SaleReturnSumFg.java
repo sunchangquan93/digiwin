@@ -100,7 +100,7 @@ public class SaleReturnSumFg extends BaseFragment {
         ryList.setLayoutManager(linearLayoutManager);
         upDateFlag = false;
         Bundle bundle = getActivity().getIntent().getExtras();
-        orderData = (FilterResultOrderBean) bundle.getSerializable("orderData");
+        orderData = (FilterResultOrderBean) bundle.getSerializable(AddressContants.ORDERDATA);
         tv_head_plan_date.setText(orderData.getCreate_date());
         tv_head_return_order_no.setText(orderData.getDoc_no());
         tv_head_custom.setText(orderData.getCustomer_name());

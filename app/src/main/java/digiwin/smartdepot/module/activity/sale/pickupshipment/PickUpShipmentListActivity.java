@@ -25,7 +25,6 @@ import digiwin.library.utils.StringUtils;
 import digiwin.pulltorefreshlibrary.recyclerview.FullyLinearLayoutManager;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
 import digiwin.smartdepot.R;
-import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseTitleActivity;
 import digiwin.smartdepot.core.modulecommon.ModuleUtils;
@@ -38,7 +37,7 @@ import digiwin.smartdepot.module.logic.common.CommonLogic;
 
 /**
  * @author 赵浩然
- * @module 捡料出货清单
+ * @module 捡料出货清单 出货过账
  * @date 2017/3/22
  */
 
@@ -331,6 +330,9 @@ public class PickUpShipmentListActivity extends BaseTitleActivity{
         super.onActivityResult(requestCode, resultCode, data);
         try{
             if(requestCode == SCANCODE){
+                dataList.clear();
+                adapter = new PickUpShipmentListAdapter(activity,dataList);
+                ryList.setAdapter(adapter);
                 search();
             }
         }catch (Exception e){

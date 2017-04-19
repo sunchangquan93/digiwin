@@ -371,7 +371,6 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
                     @Override
                     public void onFailed(String error) {
                         dismissLoadingDialog();
-                        showFailedDialog(error);
                     }
                 });
                 break;
@@ -441,6 +440,7 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
             float num = StringUtils.sub(tv_stock_balance.getText().toString(),tv_actual_yield.getText().toString());
             map.put("qty",String.valueOf(num));
         }
+        mHandler.removeMessages(FIFOWHAT);
         mHandler.sendMessageDelayed(mHandler.obtainMessage(FIFOWHAT, map), AddressContants.DELAYTIME);
     }
 

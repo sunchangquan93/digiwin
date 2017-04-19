@@ -148,6 +148,9 @@ public class CommonDetailActivity extends BaseTitleActivity {
             case ModuleCode.PURCHASEGOODSSCAN:
                 adapter = new PurchaseGoodsDetailAdapter(activity, mDetailShowBeen);
                 break;
+            case ModuleCode.POSTALLOCATE:
+                adapter = new StoreAllotDetailAdapter(activity, mDetailShowBeen);
+                break;
             default:
                 adapter = new CommonDetailAdapter(activity, mDetailShowBeen);
                 break;

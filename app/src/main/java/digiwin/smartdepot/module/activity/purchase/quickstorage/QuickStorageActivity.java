@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -140,6 +139,7 @@ public class QuickStorageActivity extends BaseFirstModuldeActivity{
         tv_date.setText(data.getCreate_date());
         tv_supplier.setText(data.getSupplier_name());
 
+        mHandler.removeMessages(QUICKSTORAGECODE);
         mHandler.sendMessageDelayed(mHandler.obtainMessage(QUICKSTORAGECODE, data.getDoc_no()), AddressContants.DELAYTIME);
 
     }

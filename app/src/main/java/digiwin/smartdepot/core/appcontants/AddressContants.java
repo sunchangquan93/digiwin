@@ -87,6 +87,10 @@ public class AddressContants {
      */
     public static  final  String PROCESSCARD="process_card";
     /**
+     * 工序报工
+     */
+    public static  final  String PROCESSNO="process_no";
+    /**
      * 时间
      */
     public static  final  String REPOSTDATETIME="report_datetime";
@@ -241,4 +245,8 @@ public class AddressContants {
      */
     public static final String QTY = "qty";
 
+    /**
+     * 理由码
+     */
+    public static final String REASONCODENO = "reason_code_no";
 }

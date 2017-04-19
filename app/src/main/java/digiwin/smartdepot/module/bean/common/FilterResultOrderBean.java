@@ -62,10 +62,34 @@ public class FilterResultOrderBean implements Serializable {
         this.employee_name = employee_name;
     }
 
+    public String getEmployee_no() {
+        return employee_no;
+    }
+
+    public void setEmployee_no(String employee_no) {
+        this.employee_no = employee_no;
+    }
+
+    public String getDepartment_no() {
+        return department_no;
+    }
+
+    public void setDepartment_no(String department_no) {
+        this.department_no = department_no;
+    }
+
     /**
      * 人员
      */
     private String employee_name ;
+    /**
+     * 人员编号
+     */
+    private String employee_no ;
+    /**
+     * 部门编号
+     */
+    private String department_no ;
     /**
      * 供应商名称
      */

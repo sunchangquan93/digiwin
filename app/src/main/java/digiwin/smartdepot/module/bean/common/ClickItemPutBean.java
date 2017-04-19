@@ -70,6 +70,14 @@ public class ClickItemPutBean {
      */
     private String storage_space;
     /**
+     * 员工编号
+     */
+    private String employee_no;
+    /**
+     * 日期
+     */
+    private String create_date;
+    /**
      * 标记（1：物料库存；2：物料条码库存）
      */
     private  String flag;
@@ -80,6 +88,22 @@ public class ClickItemPutBean {
 
     public void setDepartment_no(String department_no) {
         this.department_no = department_no;
+    }
+
+    public String getEmployee_no() {
+        return employee_no;
+    }
+
+    public void setEmployee_no(String employee_no) {
+        this.employee_no = employee_no;
+    }
+
+    public String getCreate_date() {
+        return create_date;
+    }
+
+    public void setCreate_date(String create_date) {
+        this.create_date = create_date;
     }
 
     public String getStorage_space() {

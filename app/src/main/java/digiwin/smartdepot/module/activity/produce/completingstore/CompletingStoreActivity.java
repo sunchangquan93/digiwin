@@ -221,12 +221,10 @@ public class CompletingStoreActivity extends BaseFirstModuldeActivity{
                         tv_label_storage.setText(data.getWarehouse_no());
                         tv_storage_capacity.setText(StringUtils.deleteZero(data.getAvailable_in_qty()));
                         et_input_num.requestFocus();
-                        dismissLoadingDialog();
                     }
 
                     @Override
                     public void onFailed(String error) {
-                        dismissLoadingDialog();
                         showFailedDialog(error);
                         clearData();
                     }

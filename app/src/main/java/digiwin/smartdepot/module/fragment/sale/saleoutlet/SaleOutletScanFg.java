@@ -97,8 +97,6 @@ public class SaleOutletScanFg extends BaseFragment {
         }
     }
 
-
-
     @OnFocusChange(R.id.et_scan_locator)
     void locatorFocusChanage() {
         ModuleUtils.viewChange(llScanLocator, views);
@@ -174,27 +172,7 @@ public class SaleOutletScanFg extends BaseFragment {
             return;
         }
         saveBean.setQty(etInputNum.getText().toString());
-//        boolean isSave=true;
-//        if (AddressContants.FIFOY.equals(saveBean.getFifo_check())) {
-//            isSave=false;
-//            for (FifoCheckBean bean : fiFoList) {
-//                if (saveBean.getBarcode_no().equals(bean.getBarcode_no())
-//                 &&saveBean.getStorage_spaces_out_no().equals(bean.getStorage_spaces_no())){
-//                    float canNum = StringUtils.string2Float(bean.getRecommended_qty())-StringUtils.string2Float(bean.getScan_sumqty());
-//                    if (StringUtils.string2Float(saveBean.getQty())>canNum)
-//                    {
-//                        showFailedDialog(R.string.input_num_toobig);
-//                        return;
-//                    }
-//                    isSave=true;
-//                    break;
-//                }
-//            }
-//        }
-//        if (!isSave){
-//            showFailedDialog(R.string.fifo_scan_error);
-//            return;
-//        }
+
         String fifoCheck = FiFoCheckUtils.fifoCheck(saveBean, fiFoList);
         if (!StringUtils.isBlank(fifoCheck)){
             showFailedDialog(fifoCheck);

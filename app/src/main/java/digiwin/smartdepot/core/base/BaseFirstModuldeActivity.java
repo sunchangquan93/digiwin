@@ -85,6 +85,15 @@ public abstract class BaseFirstModuldeActivity extends  BaseTitleActivity{
         EXITISD("0");
         // 成员变量
         private String name;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
         // 构造方法
         private ExitMode(String name) {
             this.name = name;

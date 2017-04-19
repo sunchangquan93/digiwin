@@ -142,7 +142,8 @@ public class CommonLogic {
                                     List<ScanLocatorBackBean> locatorBackBeen = xmlResp.getParameterDatas(ScanLocatorBackBean.class);
                                     if (locatorBackBeen.size() > 0) {
                                         if (!ModuleCode.NOCOMESTOREALLOT.equals(mModule)&&
-                                       ! ModuleCode.TRANSFERS_TO_REVIEW.equals(mModule)
+                                       ! ModuleCode.TRANSFERS_TO_REVIEW.equals(mModule)&&
+                                       ! ModuleCode.POSTALLOCATE.equals(mModule)
                                                 && !locatorBackBeen.get(0).getWarehouse_no().equals(LoginLogic.getWare())) {
                                             error = mContext.getString(R.string.ware_error);
                                         } else {

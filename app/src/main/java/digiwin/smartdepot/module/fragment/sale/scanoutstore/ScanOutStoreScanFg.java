@@ -167,14 +167,13 @@ public class ScanOutStoreScanFg extends BaseFragment {
                             fiFoList.clear();
                             adapter = new ScanOutFifoAdapter(sActivity, fiFoList);
                             ryList.setAdapter(adapter);
-                            showFailedDialog(error);
                         }
                     });
                     break;
                 case BARCODEWHAT:
                     HashMap<String, String> barcodeMap = new HashMap<>();
                     barcodeMap.put(AddressContants.RECEIPTNO, notice_no);
-                    barcodeMap.put(AddressContants.ITEM_NO, "");
+//                    barcodeMap.put(AddressContants.ITEM_NO, "");
                     barcodeMap.put(AddressContants.PACKAGENO, String.valueOf(msg.obj));
                     commonLogic.scanPackBoxNumber(barcodeMap, new CommonLogic.ScanPackBoxNumberListener() {
                         @Override

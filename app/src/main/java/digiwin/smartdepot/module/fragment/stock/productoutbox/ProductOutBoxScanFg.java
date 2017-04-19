@@ -170,7 +170,6 @@ public class ProductOutBoxScanFg extends BaseFragment {
                     }
                     break;
                 case PRODUCTBARCODE://扫描产品条码
-                    showLoadingDialog();
                     HashMap<String, String> map = new HashMap<>();
                     map.put(AddressContants.PACKAGE_NO, pactivity.packBoxNumber);
                     map.put(AddressContants.BARCODE_NO, msg.obj.toString().trim());
@@ -181,14 +180,12 @@ public class ProductOutBoxScanFg extends BaseFragment {
                         @Override
                         public void onSuccess(String show) {
                             etProductBarcode.requestFocus();
-                            dismissLoadingDialog();
                             barcodeShow = show;
                             show();
                         }
 
                         @Override
                         public void onFailed(String error) {
-                            dismissLoadingDialog();
                             showFailedDialog(error);
                             etProductBarcode.setText("");
                             etProductBarcode.requestFocus();

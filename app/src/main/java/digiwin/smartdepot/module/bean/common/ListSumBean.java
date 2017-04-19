@@ -52,8 +52,6 @@ public class ListSumBean implements Serializable {
      */
     private String scan_sumqty;
 
-
-
     /**
      * 规格
      */
@@ -219,6 +217,11 @@ public class ListSumBean implements Serializable {
      *展示
      */
     private String show;
+
+    /**
+     * 线边仓库存
+     */
+    private String  w_stock_qty;
 
     public String getDepartment_no() {
         return department_no;
@@ -588,6 +591,14 @@ public class ListSumBean implements Serializable {
 
     public void setItem_lot_no(String item_lot_no) {
         this.item_lot_no = item_lot_no;
+    }
+
+    public String getW_stock_qty() {
+        return w_stock_qty;
+    }
+
+    public void setW_stock_qty(String w_stock_qty) {
+        this.w_stock_qty = w_stock_qty;
     }
 
     public String getShow() {

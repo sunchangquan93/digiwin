@@ -36,7 +36,7 @@ import digiwin.smartdepot.module.logic.common.CommonLogic;
 
 /**
  * @author maoheng
- * @des 扫码出货
+ * @des 扫箱码出货
  * @date 2017/4/3
  */
 

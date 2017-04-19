@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Message;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -181,6 +180,10 @@ public class AccordingMaterialActivity extends BaseFirstModuldeActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == SCANCODE){
             if(!StringUtils.isBlank(mEt_barcode_scan.getText().toString().trim())){
+                List<ListSumBean> list = new ArrayList<ListSumBean>();
+                adapter = new AccordingMaterialSumAdapter(activity,list);
+                mRc_list.setAdapter(adapter);
+                showLoadingDialog();
                 updateList(mEt_barcode_scan.getText().toString().trim());
             }
         }
@@ -203,8 +206,6 @@ public class AccordingMaterialActivity extends BaseFirstModuldeActivity {
      * @param item_no
      */
     void updateList(String item_no){
-        showLoadingDialog();
-
         ClickItemPutBean putBean = new ClickItemPutBean();
         putBean.setItem_no(item_no);
         putBean.setWarehouse_no(LoginLogic.getUserInfo().getWare());
@@ -269,6 +270,7 @@ public class AccordingMaterialActivity extends BaseFirstModuldeActivity {
     }
 
     public void commitData(){
+        showLoadingDialog();
         HashMap<String, String> barcodeMap = new HashMap<String, String>();
         managerCommon.commit(barcodeMap, new CommonLogic.CommitListener() {
             @Override

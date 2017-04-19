@@ -613,6 +613,33 @@
             android:screenOrientation="landscape"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
         </activity>
+
+        <!-- 调拨过账-->
+        <activity
+            android:name=".module.activity.stock.postallocate.PostAllocateActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.digiwin.PostAllocateActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- 调拨过账扫描-->
+        <activity
+            android:name=".module.activity.stock.postallocate.PostAllocateScanActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+        </activity>
+        <!-- 依成品调拨汇总 -->
+        <activity android:name=".module.activity.produce.endproductallot.EndProductAllotActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.digiwin.EndProductAllotActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- 依成品调拨扫描 -->
+        <activity android:name = ".module.activity.produce.endproductallot.EndProductAllotScanActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
         <!-- Required SDK 核心功能极光推送需要 -->
         <!-- 可配置android:process参数将PushService放在其他进程中 -->
         <service

@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/layout_10dp"
-        android:background="@drawable/allscanedit_bg"
+        android:background="@drawable/green_scandetail_bg"
         android:orientation="vertical"
         android:padding="@dimen/layout_5dp">
 
