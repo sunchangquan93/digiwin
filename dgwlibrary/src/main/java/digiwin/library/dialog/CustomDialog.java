@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import digiwin.library.R;
 import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.ViewUtils;
 
@@ -86,7 +87,7 @@ public class CustomDialog extends Dialog {
         private boolean cancelTouchout;
         private boolean backCancel = true;
         private View view;
-        private int resStyle = -1;
+        private int resStyle = R.style.DialogAnimation;
 
         public Builder(Context context) {
             this.context = context;
