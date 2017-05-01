@@ -14,23 +14,24 @@
 
         <TextView
             android:id="@+id/tv_item_name_string"
+            style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_50dp"
             android:layout_height="wrap_content"
-            android:text="@string/item_name"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/item_name" />
 
         <TextView
             android:id="@+id/tv_item_name"
+            style="@style/ry_ser_text_inwhite"
             android:layout_width="@dimen/layout_0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_weight="1" />
+
         <TextView
             android:id="@+id/tv_unit_no"
-            android:layout_marginLeft="@dimen/layout_10dp"
+            style="@style/ry_ser_text_inwhite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_marginLeft="@dimen/layout_10dp" />
     </LinearLayout>
 
     <View style="@style/ry_line_style" />
@@ -43,17 +44,17 @@
 
         <TextView
             android:id="@+id/tv_item_model_string"
+            style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_50dp"
             android:layout_height="wrap_content"
-            android:text="@string/model"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/model" />
 
         <TextView
             android:id="@+id/tv_item_model"
+            style="@style/ry_ser_text_inwhite"
             android:layout_width="@dimen/layout_0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_weight="1" />
     </LinearLayout>
 
     <View style="@style/ry_line_style" />
@@ -66,18 +67,20 @@
 
         <TextView
             android:id="@+id/tv_item_no_string"
+            style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_50dp"
             android:layout_height="wrap_content"
-            android:text="@string/item_no"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/item_no" />
 
         <TextView
             android:id="@+id/tv_item_no"
+            style="@style/ry_ser_text_inwhite"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
+
     <View style="@style/ry_line_style" />
+
     <LinearLayout
         style="@style/itemstyle"
         android:layout_width="match_parent"
@@ -85,30 +88,30 @@
         android:orientation="horizontal">
 
         <TextView
+            style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_50dp"
             android:layout_height="wrap_content"
-            android:text="@string/can_return_num"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/can_return_num" />
 
         <TextView
             android:id="@+id/tv_can_return_num"
+            style="@style/ry_ser_text_inwhite"
             android:layout_width="@dimen/layout_0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_weight="1" />
 
         <TextView
+            style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_50dp"
             android:layout_height="wrap_content"
-            android:text="@string/actual_return_num"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/actual_return_num" />
 
         <TextView
             android:id="@+id/tv_actual_return_num"
+            style="@style/ry_ser_text_inwhite"
             android:layout_width="@dimen/layout_0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_weight="1" />
     </LinearLayout>
 
 </LinearLayout>

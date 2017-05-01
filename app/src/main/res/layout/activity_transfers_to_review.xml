@@ -7,11 +7,15 @@
 
     <include layout="@layout/activity_title_toolbar_bar"></include>
 
+
+    <include layout="@layout/ryitem_common" android:visibility="gone"/>
+
     <LinearLayout
         android:id="@+id/ll_search_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/layout_10dp"
+        android:layout_marginTop="@dimen/layout_6dp"
         android:background="@drawable/green_scandetail_bg"
         android:orientation="vertical"
         android:padding="@dimen/layout_5dp">
@@ -28,8 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="@string/transfers_list"
-                android:textColor="@color/black_32"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_inwhite"/>
 
             <EditText
                 android:id="@+id/et_transfers_list"
@@ -45,6 +48,7 @@
         </LinearLayout>
 
         <View style="@style/fg_line_style" />
+
         <LinearLayout
             android:id="@+id/ll_department"
             style="@style/itemstyle"
@@ -57,8 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="@string/department"
-                android:textColor="@color/black_32"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_inwhite" />
 
             <EditText
                 android:id="@+id/et_department"
@@ -72,7 +75,9 @@
                 android:textCursorDrawable="@drawable/et_cursor_yellow"
                 android:textSize="@dimen/textSize_14sp" />
         </LinearLayout>
+
         <View style="@style/fg_line_style" />
+
         <LinearLayout
             android:id="@+id/ll_applicant"
             style="@style/itemstyle"
@@ -85,8 +90,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="@string/applicant"
-                android:textColor="@color/black_32"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_inwhite"/>
 
             <EditText
                 android:id="@+id/et_applicant"
@@ -102,6 +106,7 @@
         </LinearLayout>
 
         <View style="@style/fg_line_style" />
+
         <LinearLayout
             android:id="@+id/ll_in_warehouse"
             style="@style/itemstyle"
@@ -114,8 +119,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="@string/in_warehouse"
-                android:textColor="@color/black_32"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_inwhite"/>
 
             <EditText
                 android:id="@+id/et_in_warehouse"
@@ -129,7 +133,9 @@
                 android:textCursorDrawable="@drawable/et_cursor_yellow"
                 android:textSize="@dimen/textSize_14sp" />
         </LinearLayout>
+
         <View style="@style/fg_line_style" />
+
         <LinearLayout
             android:id="@+id/ll_out_warehouse"
             style="@style/itemstyle"
@@ -142,8 +148,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="@string/out_warehouse"
-                android:textColor="@color/black_32"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_inwhite"/>
 
             <EditText
                 android:id="@+id/et_out_warehouse"
@@ -159,8 +164,8 @@
         </LinearLayout>
 
 
-
         <View style="@style/fg_line_style" />
+
         <LinearLayout
             android:id="@+id/ll_date"
             style="@style/itemstyle"
@@ -173,8 +178,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="@string/data"
-                android:textColor="@color/black_32"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_inwhite" />
 
             <EditText
                 android:id="@+id/et_date"
@@ -187,13 +191,16 @@
                 android:textColor="@color/black_32"
                 android:textCursorDrawable="@drawable/et_cursor_yellow"
                 android:textSize="@dimen/textSize_14sp" />
+
             <ImageView
                 android:id="@+id/date"
-                android:src="@drawable/time"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/layout_20dp" />
+                android:layout_height="@dimen/layout_20dp"
+                android:src="@drawable/time" />
         </LinearLayout>
+
         <View style="@style/fg_line_style" />
+
         <LinearLayout
             android:id="@+id/ll_item_no"
             style="@style/itemstyle"
@@ -206,8 +213,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="@string/item_no"
-                android:textColor="@color/black_32"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_inwhite"/>
 
             <EditText
                 android:id="@+id/et_item_no"
@@ -228,16 +234,13 @@
             android:id="@+id/btn_search_sure"
             android:layout_width="match_parent"
             android:layout_height="@dimen/layout_40dp"
+            android:layout_margin="@dimen/layout_10dp"
+            android:background="@drawable/accordingmaterialtop_sharp"
             android:text="@string/label_sure"
             android:textColor="@color/WHITE"
-            android:textSize="@dimen/textSize_18sp"
-            android:layout_margin="@dimen/layout_10dp"
-            android:background="@drawable/accordingmaterialtop_sharp"/>
+            android:textSize="@dimen/textSize_18sp" />
 
     </LinearLayout>
-
-
-    <include layout="@layout/ryitem_common" android:visibility="gone"/>
 
 
 </LinearLayout>

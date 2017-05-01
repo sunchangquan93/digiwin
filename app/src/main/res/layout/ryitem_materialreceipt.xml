@@ -14,28 +14,25 @@
 
         <TextView
             android:id="@+id/tv_item_no_string"
-            android:layout_width="@dimen/layout_70dp"
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
-            android:text="@string/item_no"
-            android:textColor="@color/MAIN_BELOW"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/item_no" />
 
         <TextView
             android:id="@+id/tv_item_no"
+            style="@style/ser_text_inwhite"
             android:layout_width="@dimen/layout_0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:textColor="@color/Base_color"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_weight="2" />
 
         <TextView
             android:id="@+id/tv_unit"
+            style="@style/ser_text_inwhite"
             android:layout_width="@dimen/layout_0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:paddingRight="@dimen/layout_10dp"
-            android:textColor="@color/Base_color"
-            android:textSize="@dimen/textSize_14sp" />
+            android:paddingRight="@dimen/layout_10dp" />
     </LinearLayout>
 
     <View
@@ -50,18 +47,16 @@
 
         <TextView
             android:id="@+id/tv_item_name_string"
-            android:layout_width="@dimen/layout_70dp"
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
-            android:text="@string/item_name"
-            android:textColor="@color/MAIN_BELOW"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/item_name" />
 
         <TextView
             android:id="@+id/tv_item_name"
+            style="@style/ser_text_inwhite"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/Base_color"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <View
@@ -76,18 +71,16 @@
 
         <TextView
             android:id="@+id/tv_item_format_string"
-            android:layout_width="@dimen/layout_70dp"
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
-            android:text="@string/model"
-            android:textColor="@color/MAIN_BELOW"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/model" />
 
         <TextView
             android:id="@+id/tv_item_format"
+            style="@style/ser_text_inwhite"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/Base_color"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
@@ -104,18 +97,16 @@
 
         <TextView
             android:id="@+id/tv_locator_string"
-            android:layout_width="@dimen/layout_70dp"
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
-            android:text="@string/locator"
-            android:textColor="@color/MAIN_BELOW"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/locator" />
 
         <TextView
             android:id="@+id/tv_locator"
+            style="@style/ser_text_inwhite"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/Base_color"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
@@ -137,18 +128,16 @@
 
             <TextView
                 android:id="@+id/tv_delivery_quantity_string"
-                android:layout_width="@dimen/layout_70dp"
+                style="@style/app_text_inwhite"
+                android:layout_width="@dimen/layout_60dp"
                 android:layout_height="wrap_content"
-                android:text="@string/delivery_quantity"
-                android:textColor="@color/MAIN_BELOW"
-                android:textSize="@dimen/textSize_14sp" />
+                android:text="@string/delivery_quantity" />
 
             <TextView
                 android:id="@+id/tv_delivery_quantity"
+                style="@style/ser_text_inwhite"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/Base_color"
-                android:textSize="@dimen/textSize_14sp" />
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
         <LinearLayout
@@ -159,11 +148,10 @@
 
             <TextView
                 android:id="@+id/tv_actual_yield_num_string"
+                style="@style/app_text_inwhite"
                 android:layout_width="@dimen/layout_70dp"
                 android:layout_height="wrap_content"
-                android:text="@string/actual_yield_num"
-                android:textColor="@color/MAIN_BELOW"
-                android:textSize="@dimen/textSize_14sp" />
+                android:text="@string/actual_yield_num" />
 
             <EditText
                 android:id="@+id/tv_actual_yield_num"

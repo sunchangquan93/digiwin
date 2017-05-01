@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:id="@+id/item_ll"
     style="@style/ry_style"
-
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <LinearLayout
         style="@style/itemstyle"
@@ -15,21 +15,20 @@
 
         <TextView
             android:id="@+id/tv_item_transfers_list"
+            style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_70dp"
             android:layout_height="wrap_content"
-            android:text="@string/transfers_list_no"
-            android:textColor="@color/black_32"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/transfers_list_no" />
 
         <TextView
             android:id="@+id/tv_receipt_no"
             android:layout_width="@dimen/layout_0dp"
-            android:layout_weight="1"
-            android:textColor="@color/Base_color"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_weight="1"
+            style="@style/ser_text_inwhite" />
 
     </LinearLayout>
+
     <View
         android:id="@+id/line_1"
         style="@style/ry_line_style"
@@ -42,19 +41,17 @@
         android:orientation="horizontal">
 
         <TextView
+            style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_70dp"
             android:layout_height="wrap_content"
-            android:text="@string/data"
-            android:textColor="@color/black_32"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/data" />
 
         <TextView
-            android:textColor="@color/Base_color"
-            android:layout_marginLeft="@dimen/layout_5dp"
             android:id="@+id/tv_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_marginLeft="@dimen/layout_5dp"
+            style="@style/ser_text_inwhite" />
 
     </LinearLayout>
 

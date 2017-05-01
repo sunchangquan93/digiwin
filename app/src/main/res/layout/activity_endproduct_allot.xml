@@ -8,6 +8,7 @@
     <include layout="@layout/activity_title_toolbar_bar"></include>
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar_title">
@@ -21,7 +22,10 @@
                 android:id="@+id/ll_search_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/layout_10dp"
+                android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_marginRight="@dimen/layout_10dp"
+                android:layout_marginTop="@dimen/layout_6dp"
+                android:layout_marginBottom="@dimen/layout_6dp"
                 android:background="@drawable/allscanedit_bg"
                 android:orientation="vertical"
                 android:padding="@dimen/layout_5dp">
@@ -38,8 +42,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/item_no"
-                        android:textColor="@color/black_32"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/app_text_inwhite"/>
 
                     <EditText
                         android:id="@+id/et_item_no"
@@ -67,8 +70,7 @@
                         android:layout_width="@dimen/layout_50dp"
                         android:layout_height="wrap_content"
                         android:text="@string/product_depart"
-                        android:textColor="@color/black_32"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/app_text_inwhite"/>
 
                     <EditText
                         android:id="@+id/et_department"
@@ -97,8 +99,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/target_store"
-                        android:textColor="@color/black_32"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/app_text_inwhite"/>
 
                     <EditText
                         android:id="@+id/et_target_store"
@@ -130,7 +131,10 @@
                 android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/layout_10dp"
+                android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_marginRight="@dimen/layout_10dp"
+                android:layout_marginTop="@dimen/layout_6dp"
+                android:layout_marginBottom="@dimen/layout_6dp"
                 android:background="@drawable/accordingmaterialtop_sharp"
                 android:orientation="vertical"
                 android:padding="@dimen/layout_5dp">

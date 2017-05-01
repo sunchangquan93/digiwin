@@ -3,7 +3,7 @@
     android:id="@+id/item_ll"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/layout_10dp"
+    android:layout_marginTop="@dimen/layout_6dp"
     android:orientation="vertical"
     android:paddingLeft="@dimen/layout_10dp"
     android:paddingRight="@dimen/layout_10dp">
@@ -16,31 +16,31 @@
 
         <TextView
             android:id="@+id/tv_locator_string"
+            style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_50dp"
             android:layout_height="wrap_content"
-            android:text="@string/locator"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/locator" />
 
         <TextView
             android:id="@+id/tv_locator"
+            style="@style/ser_text_inwhite"
             android:layout_width="@dimen/layout_0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_weight="1" />
 
         <TextView
             android:id="@+id/tv_lot_no_string"
+            style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_50dp"
             android:layout_height="wrap_content"
-            android:text="@string/item_lot_no"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/item_lot_no" />
 
         <TextView
             android:id="@+id/tv_lot_no"
+            style="@style/ser_text_inwhite"
             android:layout_width="@dimen/layout_0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_weight="1" />
     </LinearLayout>
 
     <View style="@style/ry_line_style" />
@@ -52,17 +52,17 @@
         android:orientation="horizontal">
 
         <TextView
+            style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_50dp"
             android:layout_height="wrap_content"
-            android:text="@string/barcode_sp"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/barcode_sp" />
 
         <TextView
             android:id="@+id/tv_barcode"
+            style="@style/ser_text_inwhite"
             android:layout_width="@dimen/layout_0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_weight="1" />
     </LinearLayout>
 
     <View style="@style/ry_line_style" />
@@ -76,31 +76,31 @@
 
         <TextView
             android:id="@+id/tv_rdna_num_string"
+            style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_50dp"
             android:layout_height="wrap_content"
-            android:text="@string/rdna_num"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/rdna_num" />
 
         <TextView
             android:id="@+id/tv_rdna_num"
+            style="@style/ser_text_inwhite"
             android:layout_width="@dimen/layout_0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_weight="1" />
 
         <TextView
             android:id="@+id/tv_actual_yield_string"
+            style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_50dp"
             android:layout_height="wrap_content"
-            android:text="@string/actual_yield"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/actual_yield" />
 
         <TextView
             android:id="@+id/tv_feeding_amount"
+            style="@style/ser_text_inwhite"
             android:layout_width="@dimen/layout_0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_weight="1" />
     </LinearLayout>
 
     <View style="@style/fifo_line_style" />

@@ -20,13 +20,28 @@ android {
         minSdkVersion 17
         targetSdkVersion 23
         versionCode 1
-        versionName "1.0"
+        versionName "1.10"
         resConfigs "en"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+//    signingConfigs{
+//        release{
+//            def Properties  localProps=new Properties()
+//            localProps.load(new FileInputStream(file('../local.properties')))//读取本地配置文件
+//            def Properties  keyProps=new Properties()
+//            //读取自定义的配置文件,这里的(keystore.props.file)是自定义配置文件的绝对路径
+//            assert localProps['keystore.props.file'];
+//            keyProps.load(new FileInputStream(file(localProps['keystore.props.file'])))
+//            storeFile file(keyProps["storeFile"])
+//            keyAlias keyProps["keyAlias"]
+//            storePassword keyProps["storePssword"]
+//            keyPassword keyProps["keyPassword"]
+//        }
+//    }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true//去掉不用资源
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

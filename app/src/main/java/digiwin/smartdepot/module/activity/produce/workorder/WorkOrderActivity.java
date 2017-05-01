@@ -14,6 +14,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.BindViews;
@@ -91,7 +92,7 @@ public class WorkOrderActivity extends BaseFirstModuldeActivity {
 
     private final String SUMDATA = "sumdata";
 
-    CommonLogic managerCommon;
+    CommonLogic commonLogic;
 
     @BindViews({R.id.et_job_number_scan})
     List<EditText> editTexts;
@@ -136,10 +137,22 @@ public class WorkOrderActivity extends BaseFirstModuldeActivity {
     }
 
     @OnTextChanged(value = R.id.et_job_number_scan, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
-    void barcodeChange(CharSequence s) {
+    void barcodeChange(final CharSequence s) {
         if (!StringUtils.isBlank(s.toString())) {
-            mHandler.removeMessages(WORKORDERWHAT);
-            mHandler.sendMessageDelayed(mHandler.obtainMessage(WORKORDERWHAT, s.toString().trim()), AddressContants.DELAYTIME);
+            Map<String, String> map = new HashMap<>();
+            map.put(AddressContants.FLAG, ExitMode.EXITD.getName());
+            commonLogic.exit(map, new CommonLogic.ExitListener() {
+                @Override
+                public void onSuccess(String msg) {
+                    mHandler.removeMessages(WORKORDERWHAT);
+                    mHandler.sendMessageDelayed(mHandler.obtainMessage(WORKORDERWHAT, s.toString().trim()), AddressContants.DELAYTIME);
+                }
+
+                @Override
+                public void onFailed(String error) {
+                    showFailedDialog(error);
+                }
+            });
         }
     }
 
@@ -175,8 +188,7 @@ public class WorkOrderActivity extends BaseFirstModuldeActivity {
 
     @Override
     protected void doBusiness() {
-        managerCommon = CommonLogic.getInstance(activity,activity.module,activity.mTimestamp.toString());
-
+        commonLogic = CommonLogic.getInstance(activity,activity.module,activity.mTimestamp.toString());
         FullyLinearLayoutManager fullyLinearLayoutManager = new FullyLinearLayoutManager(activity);
         mRc_list.setLayoutManager(fullyLinearLayoutManager);
     }
@@ -216,7 +228,7 @@ public class WorkOrderActivity extends BaseFirstModuldeActivity {
         putBean.setWo_no(item_no);
         putBean.setWarehouse_no(LoginLogic.getUserInfo().getWare());
 
-        managerCommon.getOrderSumData(putBean, new CommonLogic.GetOrderSumListener() {
+        commonLogic.getOrderSumData(putBean, new CommonLogic.GetOrderSumListener() {
             @Override
             public void onSuccess(final List<ListSumBean> list) {
                 if (list.size() > 0) {
@@ -258,7 +270,7 @@ public class WorkOrderActivity extends BaseFirstModuldeActivity {
     public void ToDetailAct(final SumShowBean bean){
         HashMap<String,String> map = new HashMap<String,String>();
         map.put(AddressContants.ITEM_NO,bean.getItem_no());
-        managerCommon.getDetail(map, new CommonLogic.GetDetailListener() {
+        commonLogic.getDetail(map, new CommonLogic.GetDetailListener() {
             @Override
             public void onSuccess(final List<DetailShowBean> detailShowBeen) {
                 Bundle bundle = new Bundle();
@@ -271,21 +283,21 @@ public class WorkOrderActivity extends BaseFirstModuldeActivity {
 
             @Override
             public void onFailed(String error) {
-                showToast(error);
+                showFailedDialog(error);
             }
         });
     }
 
     public void commitData(){
         HashMap<String, String> barcodeMap = new HashMap<String, String>();
-        managerCommon.commit(barcodeMap, new CommonLogic.CommitListener() {
+        commonLogic.commit(barcodeMap, new CommonLogic.CommitListener() {
             @Override
             public void onSuccess(String msg) {
                 dismissLoadingDialog();
                 showCommitSuccessDialog(msg);
                 clearData();
                 createNewModuleId(module);
-                managerCommon = CommonLogic.getInstance(activity,activity.module,activity.mTimestamp.toString());
+                commonLogic = CommonLogic.getInstance(activity,activity.module,activity.mTimestamp.toString());
             }
 
             @Override

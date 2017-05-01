@@ -2,7 +2,11 @@ package digiwin.smartdepot.core.net;
 
 import android.content.Context;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import digiwin.library.net.IRequestManager;
+import digiwin.library.net.IUpdateCallBack;
 import digiwin.library.net.RequestFactory;
 import digiwin.smartdepot.core.appcontants.URLPath;
 
@@ -24,7 +28,7 @@ public class OkhttpRequestJson {
     }
 
     private OkhttpRequestJson(Context context) {
-         RequestManager= RequestFactory.getRequestManager(context);
+         RequestManager= RequestFactory.getRequestJsonManager(context);
          url= URLPath.MAINURL;
     }
 
@@ -32,12 +36,30 @@ public class OkhttpRequestJson {
         RequestManager.get(url,requestCallBack);
     }
 
-    public void post(String urlPath,String requestBody, IRequestCallbackImp requestCallBack){
-        RequestManager.post(url+urlPath,"token",requestBody,requestCallBack);
+
+    public void post(String urlPath, Map<String,String> postMap, IRequestCallbackImp requestCallBack){
+        if (null==postMap){
+            postMap=new HashMap<>();
+        }
+        postMap.put("token","token");
+        RequestManager.post(url+urlPath,postMap,requestCallBack);
     }
+
+    public void post(String urlPath,String requestBody, IRequestCallbackImp requestCallBack){
+        RequestManager.post(url+urlPath,requestBody,requestCallBack);
+    }
+
 
     public void downLoad(String downLoadUrl,String filePath,String apkName,IDownLoadCallBackImp downLoadCallBack){
         RequestManager.downLoadFile(downLoadUrl,filePath,apkName,downLoadCallBack);
+    }
+
+    public void update(String urlPath, Map<String,Object> postMap, IUpdateCallBack requestCallBack){
+        if (null==postMap){
+            postMap=new HashMap<>();
+        }
+        postMap.put("token","token");
+        RequestManager.updateFile(urlPath,postMap,requestCallBack);
     }
 
 }

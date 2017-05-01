@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/layout_10dp"
         android:layout_marginRight="@dimen/layout_10dp"
+        android:layout_marginTop="@dimen/layout_6dp"
         android:background="@drawable/accordingmaterialtop_sharp"
         android:orientation="vertical"
         android:padding="@dimen/layout_5dp">
@@ -24,8 +25,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:text="@string/general_number"
-                android:textColor="@color/back47"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_ingreen"/>
 
             <TextView
                 android:id="@+id/tv_head_post_order"
@@ -33,8 +33,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/layout_10dp"
                 android:layout_weight="1"
-                android:textColor="@color/white"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/ser_text_ingreen"/>
 
         </LinearLayout>
 
@@ -50,8 +49,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:text="@string/custom"
-                android:textColor="@color/back47"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_ingreen" />
 
             <TextView
                 android:id="@+id/tv_custom"
@@ -59,8 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/layout_10dp"
                 android:layout_weight="1"
-                android:textColor="@color/white"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/ser_text_ingreen"/>
 
         </LinearLayout>
     </LinearLayout>
@@ -69,7 +66,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/ll_salehead"
-        android:layout_marginTop="@dimen/layout_10dp">
+        android:layout_marginTop="@dimen/layout_6dp">
 
         <include layout="@layout/ryitem_common" />
     </LinearLayout>

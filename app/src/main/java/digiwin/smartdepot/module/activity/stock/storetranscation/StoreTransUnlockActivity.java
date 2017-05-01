@@ -218,7 +218,7 @@ public class StoreTransUnlockActivity extends BaseTitleActivity{
                 map1.put(AddressContants.DOC_NO,deleteList.get(i).getDoc_no());
                 maps.add(map1);
             }
-            commonLogic.commitListMap(maps, new CommonLogic.CommitListener() {
+            commonLogic.commitList(maps, new CommonLogic.CommitListListener() {
                 @Override
                 public void onSuccess(String msg) {
                     dismissLoadingDialog();

@@ -13,21 +13,19 @@
         android:orientation="horizontal">
 
         <TextView
+            style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
-            android:text="@string/purchase_order"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/purchase_order" />
 
         <TextView
             android:id="@+id/tv_item_purchase_order"
+            style="@style/ser_text_inwhite"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/Base_color"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
-    <View
-        style="@style/ry_line_style" />
+    <View style="@style/ry_line_style" />
 
     <LinearLayout
         style="@style/itemstyle"
@@ -36,32 +34,30 @@
         android:orientation="horizontal">
 
         <TextView
+            style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
-            android:text="@string/data"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/data" />
 
         <TextView
             android:id="@+id/tv_item_date"
+            style="@style/ser_text_inwhite"
             android:layout_width="@dimen/layout_0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textColor="@color/Base_color"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_weight="1" />
 
         <TextView
+            style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_50dp"
             android:layout_height="wrap_content"
-            android:text="@string/supplier"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/supplier" />
 
         <TextView
             android:id="@+id/tv_item_supplier"
+            style="@style/ser_text_inwhite"
             android:layout_width="@dimen/layout_0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textColor="@color/Base_color"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_weight="1" />
     </LinearLayout>
 
 </LinearLayout>

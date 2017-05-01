@@ -6,6 +6,7 @@
     android:background="@color/white"
     tools:context="digiwin.smartdepot.module.activity.common.CommonDetailActivity">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,8 +33,7 @@
                     android:id="@+id/cb_all"
                     android:layout_width="@dimen/layout_30dp"
                     android:layout_height="wrap_content"
-                    android:button="@drawable/all_checkbox"
-                    />
+                    android:button="@drawable/all_checkbox" />
 
                 <TextView
                     android:id="@+id/tv_item_no"
@@ -64,5 +64,5 @@
         </LinearLayout>
     </LinearLayout>
 
-  <include  layout="@layout/inclu_delete"/>
+    <include layout="@layout/inclu_delete" />
 </RelativeLayout>

@@ -19,7 +19,8 @@
                 android:id="@+id/item_ll"
                 android:layout_marginLeft="@dimen/layout_10dp"
                 android:layout_marginRight="@dimen/layout_10dp"
-                android:layout_marginBottom="@dimen/layout_10dp"
+                android:layout_marginBottom="@dimen/layout_6dp"
+                android:layout_marginTop="@dimen/layout_6dp"
                 android:background="@drawable/accordingmaterialtop_sharp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -36,14 +37,13 @@
                         android:layout_width="@dimen/layout_60dp"
                         android:layout_height="wrap_content"
                         android:text="@string/material_returning_number"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/app_text_ingreen"/>
 
                     <TextView
                         android:id="@+id/tv_material_return_number"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/ser_text_ingreen" />
                 </LinearLayout>
 
                 <View style="@style/ry_line_style" />
@@ -58,14 +58,13 @@
                         android:layout_width="@dimen/layout_60dp"
                         android:layout_height="wrap_content"
                         android:text="@string/data"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/app_text_ingreen"/>
 
                     <TextView
                         android:id="@+id/tv_item_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/ser_text_ingreen"/>
                 </LinearLayout>
 
                 <View style="@style/ry_line_style" />
@@ -80,30 +79,28 @@
                         android:layout_width="@dimen/layout_60dp"
                         android:layout_height="wrap_content"
                         android:text="@string/department"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/app_text_ingreen"/>
 
                     <TextView
                         android:id="@+id/tv_depart"
                         android:layout_width="@dimen/layout_0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/ser_text_ingreen" />
 
                     <TextView
                         android:layout_width="@dimen/layout_60dp"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/layout_10dp"
                         android:text="@string/applicant"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/app_text_ingreen" />
 
                     <TextView
                         android:id="@+id/tv_applicant"
                         android:layout_width="@dimen/layout_0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/ser_text_ingreen"/>
                 </LinearLayout>
             </LinearLayout>
 

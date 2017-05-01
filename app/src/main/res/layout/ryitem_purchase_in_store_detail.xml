@@ -7,11 +7,10 @@
 
     <CheckBox
         android:id="@+id/cb_ischoose"
-        android:button="@drawable/child_checkbox"
         android:layout_width="@dimen/layout_30dp"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        />
+        android:button="@drawable/child_checkbox" />
 
     <LinearLayout
         android:id="@+id/llview"
@@ -27,16 +26,16 @@
             android:orientation="horizontal">
 
             <!--<TextView-->
-                <!--android:layout_width="@dimen/layout_50dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="@string/barcode"-->
-                <!--android:textSize="@dimen/textSize_14sp" />-->
+            <!--android:layout_width="@dimen/layout_50dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/barcode"-->
+            <!--android:textSize="@dimen/textSize_14sp" />-->
 
             <TextView
                 android:id="@+id/tv_barcode"
+                style="@style/ser_text_indetail"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/textSize_14sp" />
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
         <View style="@style/ry_line_style" />
@@ -45,20 +44,20 @@
             style="@style/itemstyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="visible"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="visible">
 
             <TextView
+                style="@style/app_text_inwhite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/material_follow_order"
-                android:textSize="@dimen/textSize_14sp" />
+                android:text="@string/material_follow_order" />
 
             <TextView
                 android:id="@+id/tv_material_follow_order"
+                style="@style/ser_text_indetail"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/textSize_14sp" />
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
         <View style="@style/ry_line_style" />
@@ -70,32 +69,32 @@
             android:orientation="horizontal">
 
             <TextView
+                style="@style/app_text_inwhite"
                 android:layout_width="@dimen/layout_50dp"
                 android:layout_height="wrap_content"
-                android:text="@string/locator"
-                android:textSize="@dimen/textSize_14sp" />
+                android:text="@string/locator" />
 
             <TextView
                 android:id="@+id/tv_locator"
+                style="@style/ser_text_indetail"
                 android:layout_width="@dimen/layout_0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="3.5"
-                android:textSize="@dimen/textSize_14sp" />
+                android:layout_weight="3.5" />
 
             <TextView
+                style="@style/app_text_inwhite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/layout_10dp"
-                android:layout_marginRight="@dimen/layout_20dp"
-                android:text="@string/num"
-                android:textSize="@dimen/textSize_14sp" />
+                android:layout_marginRight="@dimen/layout_10dp"
+                android:text="@string/num" />
 
             <TextView
                 android:id="@+id/tv_number"
+                style="@style/ser_num_indetail"
                 android:layout_width="@dimen/layout_0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:textSize="@dimen/textSize_14sp" />
+                android:layout_weight="1" />
 
         </LinearLayout>
     </LinearLayout>

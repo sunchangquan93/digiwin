@@ -3,6 +3,7 @@
     <solid android:color="@color/green7d" />
     <corners android:topLeftRadius="@dimen/layout_9dp"
         android:topRightRadius="@dimen/layout_9dp"  />
-    <stroke android:width="@dimen/layout_1dp"/>
+    <stroke android:width="@dimen/layout_1dp"
+        android:color="@color/Base_color"/>
 </shape>
 

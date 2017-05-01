@@ -18,6 +18,66 @@ public class InBinningBean {
      * 物料条码
      */
     private String item_no;
+    /**
+     * 每页笔数
+     */
+    private String pagesize;
+    /**
+     * 单号
+     */
+    private String doc_no;
+    /**
+     * 人员
+     */
+    private String employee_no;
+    /**
+     * 开始日期
+     */
+    private String date_begin;
+    /**
+     * 结束日期
+     */
+    private String date_end;
+
+    public String getPagesize() {
+        return pagesize;
+    }
+
+    public void setPagesize(String pagesize) {
+        this.pagesize = pagesize;
+    }
+
+    public String getDoc_no() {
+        return doc_no;
+    }
+
+    public void setDoc_no(String doc_no) {
+        this.doc_no = doc_no;
+    }
+
+    public String getEmployee_no() {
+        return employee_no;
+    }
+
+    public void setEmployee_no(String employee_no) {
+        this.employee_no = employee_no;
+    }
+
+    public String getDate_begin() {
+        return date_begin;
+    }
+
+    public void setDate_begin(String date_begin) {
+        this.date_begin = date_begin;
+    }
+
+    public String getDate_end() {
+        return date_end;
+    }
+
+    public void setDate_end(String date_end) {
+        this.date_end = date_end;
+    }
 
     public String getWo_no() {
         return wo_no;

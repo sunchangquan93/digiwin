@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.BindViews;
@@ -23,6 +24,7 @@ import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.StringUtils;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
+import digiwin.smartdepot.core.base.BaseFirstModuldeActivity;
 import digiwin.smartdepot.core.base.BaseFragment;
 import digiwin.smartdepot.core.modulecommon.ModuleUtils;
 import digiwin.smartdepot.module.activity.produce.workorderreturn.WorkOrderReturnActivity;
@@ -323,4 +325,5 @@ public class WorkOrderReturnScanFg extends BaseFragment {
             LogUtils.e(TAG,"initData()" +e);
         }
     }
+
 }

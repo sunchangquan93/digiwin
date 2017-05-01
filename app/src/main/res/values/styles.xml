@@ -23,12 +23,15 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowAnimationStyle">@style/splashActivityAnimation</item>
     </style>
+
     <style name="ToolBar" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="actionMenuTextColor">@color/white</item>
     </style>
+
     <style name="ClubToolbar" parent="Widget.AppCompat.Toolbar">
         <item name="contentInsetStart">@dimen/layout_0dp</item><!-- 设置该属性解决空白部分-->
     </style>
+
     <style name="SettingLinearLayout">
         <item name="android:paddingRight">@dimen/layout_10dp</item>
         <item name="android:paddingTop">@dimen/layout_10dp</item>
@@ -38,8 +41,8 @@
     <!--扫描条目使用 -->
     <style name="itemstyle">
         <item name="android:gravity">center_vertical</item>
-        <item name="android:paddingTop">@dimen/layout_7dp</item>
-        <item name="android:paddingBottom">@dimen/layout_7dp</item>
+        <item name="android:paddingTop">@dimen/digiwin_top</item>
+        <item name="android:paddingBottom">@dimen/digiwin_top</item>
         <item name="android:paddingLeft">@dimen/layout_7dp</item>
         <item name="android:paddingRight">@dimen/layout_7dp</item>
     </style>
@@ -63,25 +66,28 @@
         <item name="android:layout_marginRight">@dimen/layout_5dp</item>
         <item name="android:background">@color/gray_f0</item>
     </style>
+
     <style name="ry_style">
         <item name="android:layout_marginRight">@dimen/layout_10dp</item>
         <item name="android:layout_marginLeft">@dimen/layout_10dp</item>
-        <item name="android:layout_marginBottom">@dimen/layout_2dp</item>
+        <item name="android:layout_marginBottom">@dimen/digiwin_top</item>
         <item name="android:paddingLeft">@dimen/layout_10dp</item>
         <item name="android:paddingRight">@dimen/layout_10dp</item>
         <item name="android:background">@drawable/green_scandetail_bg</item>
     </style>
+
     <style name="ry_style1">
         <item name="android:layout_marginRight">@dimen/layout_10dp</item>
         <item name="android:layout_marginLeft">@dimen/layout_10dp</item>
-        <item name="android:layout_marginBottom">@dimen/layout_10dp</item>
+        <item name="android:layout_marginBottom">@dimen/digiwin_top</item>
         <item name="android:paddingLeft">@dimen/layout_10dp</item>
         <item name="android:paddingRight">@dimen/layout_10dp</item>
         <item name="android:background">@drawable/item_detail_bg</item>
     </style>
+
     <style name="uncom_itemstyle">
-        <item name="android:paddingTop">@dimen/layout_10dp</item>
-        <item name="android:paddingBottom">@dimen/layout_10dp</item>
+        <item name="android:paddingTop">@dimen/digiwin_top</item>
+        <item name="android:paddingBottom">@dimen/digiwin_top</item>
         <item name="android:paddingLeft">@dimen/layout_7dp</item>
         <item name="android:paddingRight">@dimen/layout_7dp</item>
     </style>
@@ -113,4 +119,44 @@
         <item name="android:background">@color/gray_f0</item>
     </style>
 
+    <!--绿色背景下本地文字样式-->
+    <style name="app_text_ingreen">
+        <item name="android:textSize">@dimen/digiwin_textsize</item>
+        <item name="android:textColor">@color/back47</item>
+    </style>
+    <!--绿色背景下服务器返回文字样式-->
+    <style name="ser_text_ingreen">
+        <item name="android:textSize">@dimen/digiwin_textsize</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <!--白色背景下本地文字样式-->
+    <style name="app_text_inwhite">
+        <item name="android:textSize">@dimen/digiwin_textsize</item>
+        <item name="android:textColor">@color/black_32</item>
+    </style>
+    <!--白色背景下服务器返回文字样式-->
+    <style name="ser_text_inwhite">
+        <item name="android:textSize">@dimen/digiwin_textsize</item>
+        <item name="android:textColor">@color/green7d</item>
+    </style>
+    <!--白色背景下服务器返回文字样式，当列表数据颜色随数量变化时使用-->
+    <style name="ry_ser_text_inwhite">
+        <item name="android:textSize">@dimen/digiwin_textsize</item>
+        <item name="android:textColor">@color/black_32</item>
+    </style>
+    <!--明细页面服务器返回字段-->
+    <style name="ser_text_indetail">
+        <item name="android:textSize">@dimen/digiwin_textsize</item>
+        <item name="android:textColor">@color/black_32</item>
+    </style>
+    <!--明细页面服务器返回字段可修改的数字-->
+    <style name="ser_num_indetail">
+        <item name="android:textSize">@dimen/digiwin_textsize</item>
+        <item name="android:textColor">@color/outside_yellow</item>
+    </style>
+    <!--横屏时服务器字体-->
+    <style name="ser_text_inhitem">
+        <item name="android:textSize">@dimen/digiwin_textsize</item>
+        <item name="android:textColor">@color/black_32</item>
+    </style>
 </resources>

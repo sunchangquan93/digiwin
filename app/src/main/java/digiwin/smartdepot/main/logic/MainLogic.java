@@ -3,7 +3,6 @@ package digiwin.smartdepot.main.logic;
 import android.content.Context;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -145,7 +144,7 @@ public class MainLogic {
         ModuleBean inbinninglist = new ModuleBean(R.string.title_in_binning,R.mipmap.inbox,ModuleCode.INBINNING,  "android.intent.action.digiwin.InBinningListActivity");
 
         ModuleBean endproductAllot = new ModuleBean(R.string.endproduct_allot,R.mipmap.endproduct_allot,ModuleCode.ENDPRODUCTALLOT,  "android.intent.action.digiwin.EndProductAllotActivity");
-
+        ModuleBean linesend= new ModuleBean(R.string.line_send, R.mipmap.pickup_shipment, ModuleCode.LINESEND,"android.intent.action.digiwin.LineSendActivity");
 
         produceItems.add(finishedStorageActivity);
 
@@ -179,6 +178,8 @@ public class MainLogic {
 
         produceItems.add(endproductAllot);
 
+        produceItems.add(linesend);
+
         //初始化库存管理
         ModuleBean storeallotactivity = new ModuleBean(R.string.nocome_allot, R.mipmap.nocome_alllot, ModuleCode.NOCOMESTOREALLOT, "android.intent.action.digiwin.StoreAllotActivity");
         storageItems.add(storeallotactivity);
@@ -200,6 +201,8 @@ public class MainLogic {
         storageItems.add(productbinning);
         ModuleBean productoutbox = new ModuleBean(R.string.product_outbox, R.mipmap.outbox, ModuleCode.PRODUCTOUTBOX, "android.intent.action.digiwin.ProductOutBoxActivity");
         storageItems.add(productoutbox);
+        ModuleBean stockcheck = new ModuleBean(R.string.check_stock, R.mipmap.inventory_lock, ModuleCode.STORECHECK, "android.intent.action.digiwin.StockCheckListActivity");
+        storageItems.add(stockcheck);
         ModuleBean postallocateactivity = new ModuleBean(R.string.title_post_allocate, R.mipmap.allot_post, ModuleCode.POSTALLOCATE, "android.intent.action.digiwin.PostAllocateActivity");
         storageItems.add(postallocateactivity);
 
@@ -246,9 +249,7 @@ public class MainLogic {
         ModuleList.addAll(salesItems);
         ModuleList.addAll(dailyworkItems);
         ModuleList.addAll(boardItems);
-
     }
-
     /**
      * 判断权限小模块
      */
@@ -282,7 +283,6 @@ public class MainLogic {
             }
         }
         storageItems = tempStorageItems;
-
         List<ModuleBean> tempSalesItems = new ArrayList<ModuleBean>();
         for (int i = 0; i < salesItems.size(); i++) {
             for (int j = 0; j < powerItems.size(); j++) {

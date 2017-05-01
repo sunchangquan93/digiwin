@@ -41,6 +41,10 @@ public interface ModuleCode {
      */
     public final String ENDPRODUCTALLOT="B001";
     /**
+     * 线边发料
+     */
+    public final String LINESEND="B002";
+    /**
      * 依工单发料
      */
     public final String WORKORDERCODE = "B003";
@@ -121,6 +125,10 @@ public interface ModuleCode {
      * 库存查询
      */
     public final String STOREQUERY="C004";
+    /**
+     * 库存盘点
+     */
+    public final String STORECHECK="C005";
     /**
      * 杂项收料
      */

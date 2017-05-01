@@ -18,7 +18,7 @@
         android:id="@+id/ll_zx_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/layout_10dp"
+        android:layout_marginTop="@dimen/layout_6dp"
         android:layout_marginLeft="@dimen/layout_10dp"
         android:layout_marginRight="@dimen/layout_10dp"
         android:padding="@dimen/layout_5dp"
@@ -37,8 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:text="@string/delivery_note"
-            android:textColor="@color/black_32"
-            android:textSize="@dimen/textSize_14sp" />
+              style="@style/app_text_inwhite"/>
 
           <EditText
             android:id="@+id/et_delivery_note"

@@ -16,6 +16,7 @@ import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.appcontants.ReqTypeName;
 import digiwin.smartdepot.core.net.IRequestCallbackImp;
 import digiwin.smartdepot.core.net.OkhttpRequest;
+import digiwin.smartdepot.core.net.OkhttpRequestJson;
 import digiwin.smartdepot.core.xml.CreateParaXmlReqIm;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
 import digiwin.smartdepot.module.bean.common.ClickItemPutBean;
@@ -301,18 +302,25 @@ public class CommonLogic {
             }
         }, null);
     }
+    /**
+     * 扫描入库单 提交监听
+     */
+    public interface CommitListListener {
+        public void onSuccess(String msg);
+
+        public void onFailed(String error);
+    }
 
     /**
      * 提交
-     *
-     * @param maps map可以直接为空 单头在master中
+     * recordset 提交请求
      */
-    public void commitListMap(final List<Map<String, String>> maps, final CommitListener listener) {
+    public void commitList(final List<Map<String, String>> listMap, final CommitListListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
                 try {
-                    final String xml = CreateParaXmlReqIm.getInstance(maps, mModule, ReqTypeName.COMMIT, mTimestamp).toXml();
+                    String xml = CreateParaXmlReqIm.getInstance(listMap, mModule, ReqTypeName.COMMIT, mTimestamp).toXml();
                     OkhttpRequest.getInstance(mContext).post(xml, new IRequestCallbackImp() {
                         @Override
                         public void onResponse(String string) {
@@ -331,7 +339,7 @@ public class CommonLogic {
                     });
                 } catch (Exception e) {
                     listener.onFailed(mContext.getString(R.string.unknow_error));
-                    LogUtils.e(TAG, "getSum--->" + e);
+                    LogUtils.e(TAG, "scanBarcode--->" + e);
                 }
             }
         }, null);
@@ -617,6 +625,39 @@ public class CommonLogic {
             }
         }, null);
     }
+    /**
+     * 筛选  获取待办事项
+     */
+    public void getOrderData(final Map<String, String> map, final GetOrderListener listener) {
+        ThreadPoolManager.getInstance().executeTask(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    final String xml = CreateParaXmlReqIm.getInstance(map, mModule, ReqTypeName.POSTMATERIALGETORDERLIST, mTimestamp).toXml();
+                    OkhttpRequest.getInstance(mContext).post(xml, new IRequestCallbackImp() {
+                        @Override
+                        public void onResponse(String string) {
+                            ParseXmlResp xmlResp = ParseXmlResp.fromXml(ReqTypeName.POSTMATERIALGETORDERLIST, string);
+                            String error = mContext.getString(R.string.unknow_error);
+                            if (null != xmlResp) {
+                                if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
+                                    List<FilterResultOrderBean> showBeanList = xmlResp.getMasterDatas(FilterResultOrderBean.class);
+                                    listener.onSuccess(showBeanList);
+                                    return;
+                                } else {
+                                    error = xmlResp.getDescription();
+                                }
+                            }
+                            listener.onFailed(error);
+                        }
+                    });
+                } catch (Exception e) {
+                    listener.onFailed(mContext.getString(R.string.unknow_error));
+                    LogUtils.e(TAG, "getSum--->" + e);
+                }
+            }
+        }, null);
+    }
 
     /**
      * 从待办事项进入汇总页面
@@ -691,49 +732,6 @@ public class CommonLogic {
                 } catch (Exception e) {
                     listener.onFailed(mContext.getString(R.string.unknow_error));
                     LogUtils.e(TAG, "getSum--->" + e);
-                }
-            }
-        }, null);
-    }
-
-    /**
-     * 扫描入库单 提交监听
-     */
-    public interface CommitListListener {
-        public void onSuccess(String msg);
-
-        public void onFailed(String error);
-    }
-
-    /**
-     * 需要先使用ObjectAndMapUtils.getListMap(checkedList);转换LIST
-     * recordset 提交请求
-     */
-    public void commitList(final List<Map<String, String>> listMap, final CommitListListener listener) {
-        ThreadPoolManager.getInstance().executeTask(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    String xml = CreateParaXmlReqIm.getInstance(listMap, mModule, ReqTypeName.COMMIT, mTimestamp).toXml();
-                    OkhttpRequest.getInstance(mContext).post(xml, new IRequestCallbackImp() {
-                        @Override
-                        public void onResponse(String string) {
-                            ParseXmlResp xmlResp = ParseXmlResp.fromXml(ReqTypeName.COMMIT, string);
-                            String error = mContext.getString(R.string.unknow_error);
-                            if (null != xmlResp) {
-                                if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
-                                    listener.onSuccess(xmlResp.getFieldString());
-                                    return;
-                                } else {
-                                    error = xmlResp.getDescription();
-                                }
-                            }
-                            listener.onFailed(error);
-                        }
-                    });
-                } catch (Exception e) {
-                    listener.onFailed(mContext.getString(R.string.unknow_error));
-                    LogUtils.e(TAG, "scanBarcode--->" + e);
                 }
             }
         }, null);
@@ -1056,5 +1054,4 @@ public class CommonLogic {
             }
         }, null);
     }
-
 }

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/item_ll"
-    android:layout_marginLeft="@dimen/layout_5dp"
-    android:layout_marginRight="@dimen/layout_5dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/layout_5dp"
+    android:layout_marginRight="@dimen/layout_5dp"
     android:orientation="vertical">
 
     <LinearLayout
@@ -27,6 +27,7 @@
                 android:gravity="center"
                 android:textColor="@color/check_detail_form_text"
                 android:textSize="@dimen/textSize_14sp" />
+
             <TextView
                 android:id="@+id/tv_lot_no"
                 android:layout_width="@dimen/layout_0dp"
@@ -35,6 +36,7 @@
                 android:gravity="center"
                 android:textColor="@color/check_detail_form_text"
                 android:textSize="@dimen/textSize_14sp" />
+
             <TextView
                 android:id="@+id/tv_qty"
                 android:layout_width="@dimen/layout_0dp"
@@ -47,6 +49,7 @@
         </LinearLayout>
 
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/layout_0.5dp"

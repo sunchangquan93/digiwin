@@ -260,7 +260,7 @@ public class WorkOrderReturnListActivity extends BaseTitleActivity {
             showLoadingDialog();
             FilterBean filterBean = new FilterBean();
             filterBean.setWarehouse_in_no(LoginLogic.getWare());
-            filterBean.setDoc_no(etWorkorder.getText().toString());
+            filterBean.setWo_no(etWorkorder.getText().toString());
             filterBean.setBarcode_no(etEndprduct.getText().toString());
             filterBean.setLow_order_item_no(etLowerItemNo.getText().toString());
             filterBean.setDepartment_no(etDepartSupplier.getText().toString());

@@ -10,6 +10,7 @@ import com.iflytek.cloud.SpeechConstant;
 import com.iflytek.cloud.SpeechUtility;
 import com.umeng.analytics.MobclickAgent;
 
+import digiwin.library.constant.SharePreKey;
 import digiwin.library.utils.LogUtils;
 import org.litepal.LitePalApplication;
 
@@ -19,6 +20,8 @@ import digiwin.library.netstate.NetChangeObserver;
 import digiwin.library.netstate.NetStateReceiver;
 import digiwin.library.netstate.NetworkUtils;
 import digiwin.library.utils.AlertDialogUtils;
+import digiwin.library.utils.SharedPreferencesUtils;
+import digiwin.library.voiceutils.VoiceUtils;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.jpush.NotificationClickEventReceiver;
 
@@ -68,6 +71,7 @@ public class BaseApplication extends LitePalApplication {
 
         //安装讯飞语音组件
         SpeechUtility.createUtility(instance, SpeechConstant.APPID + "=5868adcb");
+        VoiceUtils.getInstance(getApplicationContext(), SharePreKey.VOICER_SELECTED).submitUserWords();
         //全局异常捕捉
 //        initUnExceptionCatch();
     }

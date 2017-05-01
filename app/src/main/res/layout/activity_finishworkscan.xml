@@ -2,23 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/white_ff">
+    android:background="@color/white_ff"
+    android:orientation="vertical">
 
     <include layout="@layout/activity_title_toolbar_bar"></include>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="@dimen/layout_0dp"
-        android:layout_weight="1"
-        android:paddingTop="@dimen/layout_10dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_weight="1"
+        android:paddingTop="@dimen/layout_6dp">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/ll_zx_input"
@@ -42,8 +42,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/LOT_no"
-                        android:textColor="@color/black_32"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/app_text_inwhite" />
 
                     <EditText
                         android:id="@+id/et_LOT_no"
@@ -71,8 +70,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/technics_number"
-                        android:textColor="@color/black_32"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/app_text_inwhite" />
 
                     <EditText
                         android:id="@+id/et_technics_number"
@@ -100,8 +98,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/the_workers"
-                        android:textColor="@color/black_32"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/app_text_inwhite"/>
 
                     <EditText
                         android:id="@+id/et_the_workers"
@@ -129,8 +126,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/class_other"
-                        android:textColor="@color/black_32"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/app_text_inwhite"/>
 
                     <EditText
                         android:id="@+id/et_class_other"
@@ -159,8 +155,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/finish_num"
-                        android:textColor="@color/black_32"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/app_text_inwhite" />
 
                     <EditText
                         android:id="@+id/et_finish_num"
@@ -174,6 +169,7 @@
                         android:textColor="@color/black_32"
                         android:textCursorDrawable="@drawable/et_cursor_yellow"
                         android:textSize="@dimen/textSize_14sp" />
+
                     <TextView
                         android:layout_width="@dimen/layout_40dp"
                         android:layout_height="wrap_content"
@@ -183,6 +179,7 @@
                         android:textColor="@color/black_32"
                         android:textSize="@dimen/textSize_14sp" />
                 </LinearLayout>
+
                 <View style="@style/fg_line_style" />
 
                 <LinearLayout
@@ -197,8 +194,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/over_num"
-                        android:textColor="@color/black_32"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/app_text_inwhite" />
 
                     <EditText
                         android:id="@+id/et_over_num"
@@ -212,6 +208,7 @@
                         android:textColor="@color/black_32"
                         android:textCursorDrawable="@drawable/et_cursor_yellow"
                         android:textSize="@dimen/textSize_14sp" />
+
                     <TextView
                         android:layout_width="@dimen/layout_40dp"
                         android:layout_height="wrap_content"
@@ -221,6 +218,7 @@
                         android:textColor="@color/black_32"
                         android:textSize="@dimen/textSize_14sp" />
                 </LinearLayout>
+
                 <View style="@style/fg_line_style" />
 
                 <LinearLayout
@@ -235,8 +233,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/back_num"
-                        android:textColor="@color/black_32"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/app_text_inwhite"/>
 
                     <EditText
                         android:id="@+id/et_back_num"
@@ -250,6 +247,7 @@
                         android:textColor="@color/black_32"
                         android:textCursorDrawable="@drawable/et_cursor_yellow"
                         android:textSize="@dimen/textSize_14sp" />
+
                     <TextView
                         android:layout_width="@dimen/layout_40dp"
                         android:layout_height="wrap_content"
@@ -259,6 +257,7 @@
                         android:textColor="@color/black_32"
                         android:textSize="@dimen/textSize_14sp" />
                 </LinearLayout>
+
                 <View style="@style/fg_line_style" />
 
                 <LinearLayout
@@ -273,8 +272,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/machineNum"
-                        android:textColor="@color/black_32"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/app_text_inwhite"/>
 
                     <EditText
                         android:id="@+id/et_machineNum"
@@ -290,6 +288,7 @@
                         android:textSize="@dimen/textSize_14sp" />
 
                 </LinearLayout>
+
                 <View style="@style/fg_line_style" />
 
                 <LinearLayout
@@ -304,8 +303,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/people_num"
-                        android:textColor="@color/black_32"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/app_text_inwhite"/>
 
                     <EditText
                         android:id="@+id/et_people_num"
@@ -320,6 +318,7 @@
                         android:textCursorDrawable="@drawable/et_cursor_yellow"
                         android:textSize="@dimen/textSize_14sp" />
                 </LinearLayout>
+
                 <View style="@style/fg_line_style" />
 
                 <LinearLayout
@@ -334,8 +333,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/remark"
-                        android:textColor="@color/black_32"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/app_text_inwhite"/>
 
                     <EditText
                         android:id="@+id/et_remark"
@@ -353,5 +351,6 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
     <include layout="@layout/inclu_commit"></include>
 </LinearLayout>

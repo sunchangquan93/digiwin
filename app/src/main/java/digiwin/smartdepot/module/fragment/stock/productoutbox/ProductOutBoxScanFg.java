@@ -138,24 +138,27 @@ public class ProductOutBoxScanFg extends BaseFragment {
 
     CommonLogic commonLogic;
 
+    public int number;
+
     private Handler mHandler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
                 case PACKBOXNUMBER://扫描包装箱号
-                    String number = msg.obj.toString().trim();
+                    String barcodeNumber = msg.obj.toString().trim();
                     //获取包装箱号
-                    if (!StringUtils.isBlank(number)) {
+                    if (!StringUtils.isBlank(barcodeNumber)) {
                         //赋值，用于明细界面调接口得数据
-                        pactivity.packBoxNumber = number;
+                        pactivity.packBoxNumber = barcodeNumber;
                         HashMap<String, String> map = new HashMap<>();
-                        map.put(AddressContants.PACKAGENO, number);
+                        map.put(AddressContants.PACKAGENO, barcodeNumber);
                         commonLogic.scanPackBoxNumber(map, new CommonLogic.ScanPackBoxNumberListener() {
                             @Override
                             public void onSuccess(List<ProductBinningBean> productBinningBeans) {
                                 if (productBinningBeans != null && productBinningBeans.size() > 0) {
                                     ProductBinningBean bean = productBinningBeans.get(productBinningBeans.size() - 1);
-                                    tvBoxNumber.setText(StringUtils.deleteZero(bean.getQty()));
+                                    number=Integer.parseInt(StringUtils.deleteZero(bean.getQty()));
+                                    tvBoxNumber.setText(String.valueOf(number));
                                     etProductBarcode.requestFocus();
                                     boxFlag = true;
                                 }
@@ -180,8 +183,10 @@ public class ProductOutBoxScanFg extends BaseFragment {
                         @Override
                         public void onSuccess(String show) {
                             etProductBarcode.requestFocus();
+                            etProductBarcode.setText("");
                             barcodeShow = show;
                             show();
+                            tvBoxNumber.setText(String.valueOf(--number));
                         }
 
                         @Override

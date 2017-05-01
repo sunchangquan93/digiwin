@@ -191,13 +191,13 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
     ListSumBean localData;
 
     @OnClick(R.id.save)
-    void saveData(){
-        if(!locatorFlag){
+    void saveData() {
+        if (!locatorFlag) {
             showFailedDialog(R.string.scan_locator);
             return;
         }
 
-        if(!barcodeFlag){
+        if (!barcodeFlag) {
             showFailedDialog(R.string.scan_barcode);
             return;
         }
@@ -208,9 +208,9 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
         }
         saveBean.setQty(etInputNum.getText().toString());
         //判断库存 欠料数量  哪个小取哪一个
-        saveBean.setAvailable_in_qty(StringUtils.getMinQty(tv_under_feed.getText().toString(),tv_stock_balance.getText().toString()));
-        String fifoCheck = FiFoCheckUtils.fifoCheck(saveBean,localFifoList);
-        if(!StringUtils.isBlank(fifoCheck)){
+        saveBean.setAvailable_in_qty(StringUtils.getMinQty(tv_under_feed.getText().toString(), tv_stock_balance.getText().toString()));
+        String fifoCheck = FiFoCheckUtils.fifoCheck(saveBean, localFifoList);
+        if (!StringUtils.isBlank(fifoCheck)) {
             showFailedDialog(fifoCheck);
             return;
         }
@@ -221,12 +221,8 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
             public void onSuccess(SaveBackBean saveBackBean) {
                 dismissLoadingDialog();
                 tv_actual_yield.setText(StringUtils.deleteZero(String.valueOf(saveBackBean.getScan_sumqty())));
-                if(null != localFifoList){
-                    if(localFifoList.size() > 0 && AddressContants.FIFOY.equals(saveBean.getFifo_check())){
-                        getFifo();
-                    }
-                }
                 clearData(type);
+                getFifo();
             }
 
             @Override
@@ -290,94 +286,112 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
     }
 
     private android.os.Handler mHandler = new android.os.Handler(new android.os.Handler.Callback() {
-    @Override
-    public boolean handleMessage(Message msg) {
-        switch (msg.what) {
+        @Override
+        public boolean handleMessage(Message msg) {
+            switch (msg.what) {
 
-            case LOCATORWHAT:
-                HashMap<String, String> locatorMap = new HashMap<>();
-                locatorMap.put(AddressContants.STORAGE_SPACES_BARCODE, String.valueOf(msg.obj));
-                commonLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
-                    @Override
-                    public void onSuccess(ScanLocatorBackBean locatorBackBean) {
-                        dismissLoadingDialog();
-                        locatorFlag = true;
-                        saveBean.setStorage_spaces_out_no(locatorBackBean.getStorage_spaces_no());
-                        saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
-                        saveBean.setAllow_negative_stock(locatorBackBean.getAllow_negative_stock());
-                        if(type.equals(codetype)){
-                            etInputNum.requestFocus();
-                        }else{
-                            etScanBarocde.requestFocus();
-                        }
-                    }
-
-                    @Override
-                    public void onFailed(String error) {
-                        dismissLoadingDialog();
-                        showFailedDialog(error, new OnDialogClickListener() {
-                            @Override
-                            public void onCallback() {
-                                etScanLocator.setText("");
+                case LOCATORWHAT:
+                    HashMap<String, String> locatorMap = new HashMap<>();
+                    locatorMap.put(AddressContants.STORAGE_SPACES_BARCODE, String.valueOf(msg.obj));
+                    commonLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
+                        @Override
+                        public void onSuccess(ScanLocatorBackBean locatorBackBean) {
+                            dismissLoadingDialog();
+                            locatorFlag = true;
+                            saveBean.setStorage_spaces_out_no(locatorBackBean.getStorage_spaces_no());
+                            saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
+                            saveBean.setAllow_negative_stock(locatorBackBean.getAllow_negative_stock());
+                            if (type.equals(codetype)) {
+                                etInputNum.requestFocus();
+                            } else {
+                                etScanBarocde.requestFocus();
                             }
-                        });
-                        locatorFlag = false;
-                    }
-                });
-                break;
-
-            case BARCODEWHAT:
-                HashMap<String, String> barcodeMap = new HashMap<>();
-                barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
-                barcodeMap.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
-                commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
-                    @Override
-                    public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
-                        dismissLoadingDialog();
-                        showBarcode(barcodeBackBean);
-                    }
-
-                    @Override
-                    public void onFailed(String error) {
-                        barcodeFlag = false;
-                        showFailedDialog(error, new OnDialogClickListener() {
-                            @Override
-                            public void onCallback() {
-                                etScanBarocde.setText("");
-                            }
-                        });
-                    }
-                });
-                break;
-
-            case FIFOWHAT:
-                HashMap<String,String> map = (HashMap<String, String>) msg.obj;
-                commonLogic.getFifo(map, new CommonLogic.FIFOGETListener() {
-                    @Override
-                    public void onSuccess(List<FifoCheckBean> fiFoBeanList) {
-                        dismissLoadingDialog();
-                        if(null != fiFoBeanList && fiFoBeanList.size() > 0){
-                            localFifoList = new ArrayList<FifoCheckBean>();
-                            localFifoList = fiFoBeanList;
-                            adapter = new AccordingMaterialFiFoAdapter(activity,fiFoBeanList);
-                            mRc_list.setAdapter(adapter);
-                        }else {
-                            localFifoList = new ArrayList<FifoCheckBean>();
-                            adapter = new AccordingMaterialFiFoAdapter(activity,fiFoBeanList);
-                            mRc_list.setAdapter(adapter);
                         }
-                    }
 
-                    @Override
-                    public void onFailed(String error) {
-                        dismissLoadingDialog();
-                    }
-                });
-                break;
+                        @Override
+                        public void onFailed(String error) {
+                            dismissLoadingDialog();
+                            showFailedDialog(error, new OnDialogClickListener() {
+                                @Override
+                                public void onCallback() {
+                                    etScanLocator.setText("");
+                                }
+                            });
+                            locatorFlag = false;
+                        }
+                    });
+                    break;
+
+                case BARCODEWHAT:
+                    HashMap<String, String> barcodeMap = new HashMap<>();
+                    barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
+                    barcodeMap.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
+                    commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
+                        @Override
+                        public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
+                            try {
+                                if (!localData.getLow_order_item_no().equals(barcodeBackBean.getItem_no())) {
+                                    barcodeFlag = false;
+                                    showFailedDialog(R.string.scanbarcode_nomatch_item, new OnDialogClickListener() {
+                                        @Override
+                                        public void onCallback() {
+                                            etScanBarocde.setText("");
+                                        }
+                                    });
+                                    return;
+                                }
+                                showBarcode(barcodeBackBean);
+                            }catch (Exception e){
+                                showFailedDialog(R.string.scanbarcode_nomatch_item, new OnDialogClickListener() {
+                                    @Override
+                                    public void onCallback() {
+                                        etScanBarocde.setText("");
+                                    }
+                                });
+                            }
+                        }
+
+                        @Override
+                        public void onFailed(String error) {
+                            barcodeFlag = false;
+                            showFailedDialog(error, new OnDialogClickListener() {
+                                @Override
+                                public void onCallback() {
+                                    etScanBarocde.setText("");
+                                }
+                            });
+                        }
+                    });
+                    break;
+
+                case FIFOWHAT:
+                    HashMap<String, String> map = (HashMap<String, String>) msg.obj;
+                    commonLogic.getFifo(map, new CommonLogic.FIFOGETListener() {
+                        @Override
+                        public void onSuccess(List<FifoCheckBean> fiFoBeanList) {
+                            dismissLoadingDialog();
+                            if (null != fiFoBeanList && fiFoBeanList.size() > 0) {
+                                localFifoList = new ArrayList<FifoCheckBean>();
+                                localFifoList = fiFoBeanList;
+                                adapter = new AccordingMaterialFiFoAdapter(activity, fiFoBeanList);
+                                mRc_list.setAdapter(adapter);
+                            } else {
+                                localFifoList = new ArrayList<FifoCheckBean>();
+                                adapter = new AccordingMaterialFiFoAdapter(activity, fiFoBeanList);
+                                mRc_list.setAdapter(adapter);
+                            }
+                        }
+
+                        @Override
+                        public void onFailed(String error) {
+                            dismissLoadingDialog();
+                        }
+                    });
+                    break;
+            }
+            return false;
         }
-        return false;
-    }
-});
+    });
 
     @Override
     protected void initNavigationTitle() {
@@ -412,7 +426,7 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
 
         type = data.getItem_barcode_type();
 
-        if(codetype.equals(type)){
+        if (codetype.equals(type)) {
             etScanBarocde.setText(data.getLow_order_item_no());
         }
 
@@ -422,24 +436,11 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
         getFifo();
     }
 
-    public void getFifo(){
-        HashMap<String,String> map = new HashMap<String,String>();
-        map.put(AddressContants.ITEM_NO,localData.getLow_order_item_no());
-        map.put(AddressContants.WAREHOUSE_NO, LoginLogic.getUserInfo().getWare());
-
-        //判断库存 欠料数量  哪个小取哪一个 然后减去实发量
-        if(StringUtils.string2Float(tv_under_feed.getText().toString()) > StringUtils.string2Float(tv_stock_balance.getText().toString())){
-            float num = StringUtils.sub(tv_stock_balance.getText().toString(),tv_actual_yield.getText().toString());
-            map.put("qty",String.valueOf(num));
-
-        }else if(StringUtils.string2Float(tv_under_feed.getText().toString()) < StringUtils.string2Float(tv_stock_balance.getText().toString())){
-            float num = StringUtils.sub(tv_under_feed.getText().toString(),tv_actual_yield.getText().toString());
-            map.put("qty",String.valueOf(num));
-
-        }else{
-            float num = StringUtils.sub(tv_stock_balance.getText().toString(),tv_actual_yield.getText().toString());
-            map.put("qty",String.valueOf(num));
-        }
+    public void getFifo() {
+        HashMap<String, String> map = new HashMap<String, String>();
+        map.put(AddressContants.ITEM_NO, localData.getLow_order_item_no());
+        map.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
+        map.put(AddressContants.QTY, tv_under_feed.getText().toString());
         mHandler.removeMessages(FIFOWHAT);
         mHandler.sendMessageDelayed(mHandler.obtainMessage(FIFOWHAT, map), AddressContants.DELAYTIME);
     }
@@ -447,32 +448,32 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
     /**
      * 保存后 根据条码类型 以及是否锁定库位
      */
-    public void clearData(String type){
-        if(cbLocatorlock.isChecked()){
-            if(StringUtils.isBlank(etScanLocator.getText().toString().trim())){
+    public void clearData(String type) {
+        if (cbLocatorlock.isChecked()) {
+            if (StringUtils.isBlank(etScanLocator.getText().toString().trim())) {
                 locatorFlag = false;
             }
         }
 
-        if(type.equals(codetype)){
+        if (type.equals(codetype)) {
             barcodeFlag = true;
             etInputNum.setText("");
-            if(!cbLocatorlock.isChecked()){
+            if (!cbLocatorlock.isChecked()) {
                 locatorFlag = false;
                 etScanLocator.setText("");
                 etScanLocator.requestFocus();
-            }else{
+            } else {
                 etInputNum.requestFocus();
             }
-        }else{
+        } else {
             barcodeFlag = false;
             etInputNum.setText("");
             etScanBarocde.setText("");
-            if(!cbLocatorlock.isChecked()){
+            if (!cbLocatorlock.isChecked()) {
                 locatorFlag = false;
                 etScanLocator.setText("");
                 etScanLocator.requestFocus();
-            }else{
+            } else {
                 etScanBarocde.requestFocus();
             }
         }
@@ -480,9 +481,10 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
 
     /**
      * 对比物料条码 存入参数
+     *
      * @param barcodeBackBean
      */
-    public void showBarcode(ScanBarcodeBackBean barcodeBackBean){
+    public void showBarcode(ScanBarcodeBackBean barcodeBackBean) {
         etInputNum.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
         barcodeFlag = true;
 
@@ -492,9 +494,9 @@ public class AccordingMaterialScanActivity extends BaseTitleActivity {
         saveBean.setUnit_no(barcodeBackBean.getUnit_no());
         saveBean.setLot_no(barcodeBackBean.getLot_no());
         saveBean.setFifo_check(barcodeBackBean.getFifo_check());
-        if(StringUtils.isBlank(etScanLocator.getText().toString()) && !cbLocatorlock.isChecked()){
+        if (StringUtils.isBlank(etScanLocator.getText().toString()) && !cbLocatorlock.isChecked()) {
             etScanLocator.requestFocus();
-        }else{
+        } else {
             etInputNum.requestFocus();
         }
     }

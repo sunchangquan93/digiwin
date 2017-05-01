@@ -23,7 +23,6 @@ import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseFirstModuldeActivity;
 import digiwin.smartdepot.core.modulecommon.ModuleViewPagerAdapter;
 import digiwin.smartdepot.module.activity.common.HaveSourceUnComActivity;
-import digiwin.smartdepot.module.activity.common.NoComeUnComActivity;
 import digiwin.smartdepot.module.fragment.sale.scanoutstore.ScanOutStoreScanFg;
 import digiwin.smartdepot.module.fragment.sale.scanoutstore.ScanOutStoreSumFg;
 
@@ -105,7 +104,6 @@ public class ScanOutStoreActivity extends BaseFirstModuldeActivity{
 
     @Override
     protected void initNavigationTitle() {
-        super.initNavigationTitle();
         super.initNavigationTitle();
         mName.setText(R.string.scan_out_store);
         unCom.setVisibility(View.VISIBLE);

@@ -152,10 +152,10 @@ public class StoreQueryActivity extends BaseTitleHActivity {
             @Override
             public void onSuccess(List<ListSumBean> list) {
                 dismissLoadingDialog();
-                if (null==list||list.size()==0){
-                    showFailedDialog(R.string.nodate);
-                    return;
-                }
+//                if (null==list||list.size()==0){
+//                    showFailedDialog(R.string.nodate);
+//                    return;
+//                }
                 llTaylayout.setVisibility(View.VISIBLE);
                 llSearchInput.setVisibility(View.GONE);
                 isSearching=false;

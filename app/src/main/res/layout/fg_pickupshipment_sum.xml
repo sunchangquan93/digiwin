@@ -14,8 +14,8 @@
                 android:id="@+id/rl_top"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/layout_10dp"
-                android:layout_marginBottom="@dimen/layout_10dp"
+                android:layout_marginTop="@dimen/layout_6dp"
+                android:layout_marginBottom="@dimen/layout_6dp"
                 android:layout_marginLeft="@dimen/layout_10dp"
                 android:layout_marginRight="@dimen/layout_10dp"
                 android:orientation="vertical"
@@ -30,8 +30,7 @@
                         android:layout_width="@dimen/layout_70dp"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
-                        android:textColor="@color/back47"
-                        android:textSize="@dimen/textSize_14sp"
+                        style="@style/app_text_ingreen"
                         android:text="@string/shipping_order"
                         />
                     <TextView
@@ -41,8 +40,7 @@
                         android:layout_marginLeft="@dimen/layout_10dp"
                         android:layout_weight="1"
                         android:background="@null"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/textSize_14sp"
+                        style="@style/ser_text_ingreen"
                         />
                 </LinearLayout>
 
@@ -56,18 +54,16 @@
                         android:id="@+id/tv_apply_date_string"
                         android:layout_width="@dimen/layout_70dp"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/back47"
                         android:text="@string/apply_date_"
                         android:paddingRight="@dimen/layout_5dp"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/app_text_ingreen" />
 
                     <TextView
                         android:id="@+id/tv_apply_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white"
                         android:layout_marginLeft="@dimen/layout_10dp"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/ser_text_ingreen"/>
                 </LinearLayout>
 
                 <View style="@style/act_line_style"></View>
@@ -82,16 +78,14 @@
                         android:layout_height="wrap_content"
                         android:text="@string/custom"
                         android:paddingRight="@dimen/layout_5dp"
-                        android:textColor="@color/back47"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/app_text_ingreen" />
 
                     <TextView
                         android:id="@+id/tv_custom"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white"
                         android:layout_marginLeft="@dimen/layout_10dp"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/ser_text_ingreen"/>
                 </LinearLayout>
             </LinearLayout>
         <include  layout="@layout/ryitem_common" />

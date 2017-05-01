@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
     android:id="@+id/item_ll"
     style="@style/ry_style"
-    android:gravity="center"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal">
 
     <CheckBox
         android:id="@+id/cb_ischoose"
-        android:button="@drawable/child_checkbox"
         android:layout_width="@dimen/layout_30dp"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        />
+        android:button="@drawable/child_checkbox" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <LinearLayout
             style="@style/itemstyle"
             android:layout_width="match_parent"
@@ -26,21 +26,20 @@
             android:orientation="horizontal">
 
             <TextView
+                style="@style/app_text_inwhite"
                 android:layout_width="@dimen/layout_70dp"
                 android:layout_height="wrap_content"
-                android:text="@string/store_lock_no"
-                android:textColor="@color/black_32"
-                android:textSize="@dimen/textSize_14sp" />
+                android:text="@string/store_lock_no" />
 
             <TextView
                 android:id="@+id/tv_lock_no"
+                style="@style/ser_text_inwhite"
                 android:layout_width="@dimen/layout_0dp"
-                android:layout_weight="1"
-                android:textColor="@color/Base_color"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/textSize_14sp" />
+                android:layout_weight="1" />
 
         </LinearLayout>
+
         <View
             style="@style/ry_line_style"
             android:layout_width="wrap_content" />
@@ -52,35 +51,31 @@
             android:orientation="horizontal">
 
             <TextView
+                style="@style/app_text_inwhite"
                 android:layout_width="@dimen/layout_70dp"
                 android:layout_height="wrap_content"
-                android:text="@string/store_lock_date"
-                android:textColor="@color/black_32"
-                android:textSize="@dimen/textSize_14sp" />
+                android:text="@string/store_lock_date" />
 
             <TextView
-                android:textColor="@color/Base_color"
                 android:id="@+id/tv_lock_date"
-                android:layout_weight="2"
+                style="@style/ser_text_inwhite"
                 android:layout_width="@dimen/layout_0dp"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/textSize_14sp" />
+                android:layout_weight="2" />
 
             <TextView
+                style="@style/app_text_inwhite"
                 android:layout_width="@dimen/layout_30dp"
                 android:layout_height="wrap_content"
-                android:text="@string/person"
-                android:textColor="@color/black_32"
-                android:textSize="@dimen/textSize_14sp" />
+                android:text="@string/person" />
 
             <TextView
-                android:textColor="@color/Base_color"
-                android:layout_marginLeft="@dimen/layout_5dp"
                 android:id="@+id/tv_lock_people"
-                android:layout_weight="1"
+                style="@style/ser_text_inwhite"
                 android:layout_width="@dimen/layout_0dp"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/textSize_14sp" />
+                android:layout_marginLeft="@dimen/layout_5dp"
+                android:layout_weight="1" />
 
         </LinearLayout>
 
@@ -95,19 +90,16 @@
             android:orientation="horizontal">
 
             <TextView
+                style="@style/app_text_inwhite"
                 android:layout_width="@dimen/layout_70dp"
                 android:layout_height="wrap_content"
-                android:text="@string/lock_reason"
-                android:textColor="@color/black_32"
-                android:textSize="@dimen/textSize_14sp" />
+                android:text="@string/lock_reason" />
 
             <TextView
-                android:textColor="@color/Base_color"
                 android:id="@+id/tv_lock_reason"
+                style="@style/ser_text_inwhite"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/textSize_14sp" />
-
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
     </LinearLayout>

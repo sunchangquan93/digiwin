@@ -451,7 +451,6 @@ public class BadReasonActivity extends BaseActivity {
      *  @des 不良原因 adapter
      */
     class BadReasonAdapter extends BaseRecyclerAdapter<BadReasonBean> {
-
         RecyclerViewHolder viewHolder = null;
         public BadReasonAdapter(Context ctx, List<BadReasonBean> list) {
             super(ctx, list);

@@ -2,7 +2,6 @@ package digiwin.smartdepot.module.fragment.stock.miscellaneous.out;
 
 
 import android.os.Bundle;
-import android.os.Message;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -28,7 +27,6 @@ import digiwin.smartdepot.module.activity.stock.miscellaneousissues.Miscellaneou
 import digiwin.smartdepot.module.adapter.stock.MiscellaneousOutSumAdapter;
 import digiwin.smartdepot.module.bean.common.DetailShowBean;
 import digiwin.smartdepot.module.bean.common.SumShowBean;
-import digiwin.smartdepot.module.fragment.stock.miscellaneous.in.MiscellaneousIssueInScanFg;
 import digiwin.smartdepot.module.logic.common.CommonLogic;
 
 
@@ -174,7 +172,7 @@ public class MiscellaneousIssueSumFg extends BaseFragment {
         map.put("employee_no", MiscellaneousIssueScanFg.employee_no);
         map.put("department_no",MiscellaneousIssueScanFg.department_no);
         maps.add(map);
-        commonLogic.commitListMap(maps, new CommonLogic.CommitListener() {
+        commonLogic.commitList(maps, new CommonLogic.CommitListListener() {
             @Override
             public void onSuccess(String msg) {
                 dismissLoadingDialog();

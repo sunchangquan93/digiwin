@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.BindViews;
@@ -24,6 +25,7 @@ import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.utils.StringUtils;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
+import digiwin.smartdepot.core.base.BaseFirstModuldeActivity;
 import digiwin.smartdepot.core.base.BaseFragment;
 import digiwin.smartdepot.core.modulecommon.ModuleUtils;
 import digiwin.smartdepot.login.bean.AccoutBean;
@@ -356,7 +358,27 @@ public class PurchaseInStoreScanFg extends BaseFragment {
         cb_locatorlock.setChecked(false);
         saveBean = new SaveBean();
         commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
+        delete();
         orderBean = (FilterResultOrderBean) pactivity.getIntent().getExtras().getSerializable(AddressContants.ORDERDATA);
         et_scan_locator.requestFocus();
         }
-        }
+
+    /**
+     * 进入界面先清空后台存的表
+     */
+    private void delete() {
+        Map<String,String> map = new HashMap<>();
+        map.put(AddressContants.FLAG, BaseFirstModuldeActivity.ExitMode.EXITD.getName());
+        commonLogic.exit(map, new CommonLogic.ExitListener() {
+            @Override
+            public void onSuccess(String msg) {
+
+            }
+
+            @Override
+            public void onFailed(String error) {
+
+            }
+        });
+    }
+}

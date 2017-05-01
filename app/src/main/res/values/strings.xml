@@ -80,6 +80,7 @@
     <string name="reason_no">理由码</string>
     <string name="num">数量</string>
     <string name="input_num">请手动输入数量</string>
+    <string name="check_input_num">请手动输入盘点数量</string>
     <string name="input_num_exceed_iqty">输入数量大于可入库量</string>
     <string name="save">保存</string>
     <string name="commit">提交</string>
@@ -164,6 +165,15 @@
     <string name="filter_condition">筛选条件</string>
     <string name="title_in_binning">装箱入库</string>
 
+    <string name="check_stock">库存盘点</string>
+    <string name="check_stock_wait">库存盘点待办事项</string>
+    <string name="check_person">盘点人员</string>
+    <string name="check_order">盘点单号</string>
+    <string name="plan_data">计划日期</string>
+    <string name="chcek_warehouse">盘点仓库</string>
+    <string name="chcek_number">盘点量</string>
+    <string name="material_sum_number">累积量</string>
+    <string name="material_check_number">盘点笔数</string>
 
     <string name="post_material_order">单号</string>
     <string name="stock_apply_list">备货申请列表</string>
@@ -502,5 +512,20 @@
     <string name="source">来源</string>
     <string name="target">目的</string>
     <string name="target_qty">目的仓库存</string>
+    <string name="inputtext_here">在此输入文字</string>
+    <string name="choose_pic">选择图片</string>
 
+    <string name="remove_pic">确定移除图片吗?</string>
+
+    <string name="line_store">线边库存</string>
+    <string name="connect_bluedevice">请连接蓝牙设备</string>
+    <string name="blue_connected_failed">蓝牙设备连接失败</string>
+
+    <string name="line_send">线边发料</string>
+    <string name="produce_num">生产量</string>
+    <string name="order_max_num">工单最大发料套数</string>
+    <string name="line_max_num">线边最大发料套数</string>
+    <string name="current_max_num">本次发料套数</string>
+
+    <string name="scanbarcode_nomatch_item">扫描物料与所选料件不符</string>
 </resources>

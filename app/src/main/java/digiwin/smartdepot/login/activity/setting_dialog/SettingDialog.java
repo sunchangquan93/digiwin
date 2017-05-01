@@ -239,7 +239,7 @@ public class SettingDialog {
                 }else {
 
                 }
-                ActivityManagerUtils.startActivity(context, LoginActivity.class);
+                ActivityManagerUtils.startActivity(context,LoginActivity.class);
                 List<Activity> activityLists = ActivityManagerUtils.getActivityLists();
                 for (Activity mActivity:activityLists){
                     if(!mActivity.getClass().getSimpleName().equals("LoginActivity")){

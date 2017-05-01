@@ -11,10 +11,11 @@
 
         <include layout="@layout/activity_title_toolbar_bar"></include>
 
-        <include  layout="@layout/ryitem_common"
+        <include
+            layout="@layout/ryitem_common"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/layout_10dp"/>
+            android:layout_marginTop="@dimen/layout_6dp" />
 
     </LinearLayout>
 

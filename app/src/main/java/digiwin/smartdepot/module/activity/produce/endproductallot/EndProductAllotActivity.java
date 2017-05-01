@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.io.Serializable;
@@ -67,7 +68,7 @@ public class EndProductAllotActivity extends BaseFirstModuldeActivity {
      */
     private boolean isSearching;
 
-    CommonLogic managerCommon;
+    CommonLogic commonLogic;
 
     /**
      * 标题
@@ -166,7 +167,7 @@ public class EndProductAllotActivity extends BaseFirstModuldeActivity {
     void search_sure(){
         Map<String, String> map = new HashMap<>();
         map.put(AddressContants.FLAG, ExitMode.EXITD.getName());
-        managerCommon.exit(map, new CommonLogic.ExitListener() {
+        commonLogic.exit(map, new CommonLogic.ExitListener() {
             @Override
             public void onSuccess(String msg) {
                 onUpdate();
@@ -179,7 +180,8 @@ public class EndProductAllotActivity extends BaseFirstModuldeActivity {
         });
 
     }
-
+    @BindView(R.id.scrollView)
+    ScrollView scrollView;
     @BindView(R.id.commit)
     View commit;
 
@@ -233,7 +235,7 @@ public class EndProductAllotActivity extends BaseFirstModuldeActivity {
     @Override
     protected void doBusiness() {
         listSumBeen =new ArrayList<>();
-        managerCommon = CommonLogic.getInstance(activity, module,mTimestamp.toString());
+        commonLogic = CommonLogic.getInstance(activity, module,mTimestamp.toString());
         FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(activity);
         ryList.setLayoutManager(linearLayoutManager);
     }
@@ -262,7 +264,7 @@ public class EndProductAllotActivity extends BaseFirstModuldeActivity {
         putBean.setDepartment_no(etDepartment.getText().toString());
         putBean.setWarehouse_in_no(etTargetStore.getText().toString());
         putBean.setWarehouse_no(LoginLogic.getWare());
-        managerCommon.getOrderSumData(putBean, new CommonLogic.GetOrderSumListener() {
+        commonLogic.getOrderSumData(putBean, new CommonLogic.GetOrderSumListener() {
             @Override
             public void onSuccess(List<ListSumBean> list) {
                 dismissLoadingDialog();
@@ -297,6 +299,7 @@ public class EndProductAllotActivity extends BaseFirstModuldeActivity {
             adapter = new EndProductAllotSumAdapter(activity, listSumBeen);
             ryList.setAdapter(adapter);
             itemClick();
+            scrollView.smoothScrollTo(0,0);
         } catch (Exception e) {
             LogUtils.e(TAG, "showDates---Exception>" + e);
         }
@@ -325,7 +328,7 @@ public class EndProductAllotActivity extends BaseFirstModuldeActivity {
     public void ToDetailAct(final SumShowBean bean) {
         HashMap<String, String> map = new HashMap<String, String>();
         map.put(AddressContants.ITEM_NO, bean.getItem_no());
-        managerCommon.getDetail(map, new CommonLogic.GetDetailListener() {
+        commonLogic.getDetail(map, new CommonLogic.GetDetailListener() {
             @Override
             public void onSuccess(final List<DetailShowBean> detailShowBeen) {
                 Bundle bundle = new Bundle();
@@ -348,13 +351,13 @@ public class EndProductAllotActivity extends BaseFirstModuldeActivity {
      */
     public void commitData() {
         HashMap<String, String> barcodeMap = new HashMap<String, String>();
-        managerCommon.commit(barcodeMap, new CommonLogic.CommitListener() {
+        commonLogic.commit(barcodeMap, new CommonLogic.CommitListener() {
             @Override
             public void onSuccess(String msg) {
                 dismissLoadingDialog();
                 showCommitSuccessDialog(msg);
                 createNewModuleId(module);
-                managerCommon = CommonLogic.getInstance(activity, module, mTimestamp.toString());
+                commonLogic = CommonLogic.getInstance(activity, module, mTimestamp.toString());
                 isSearching=false;
                 search();
                 listSumBeen.clear();

@@ -14,27 +14,27 @@
             style="@style/itemstyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="@dimen/layout_0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/head_text"
-                android:text="@string/item_no"/>
-            <TextView
-                android:layout_width="@dimen/layout_0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/head_text"
-                android:text="@string/item_name"/>
-            <TextView
-                android:layout_width="@dimen/layout_0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/head_text"
-                android:text="@string/model"/>
+            <!--<TextView-->
+                <!--android:layout_width="@dimen/layout_0dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center"-->
+                <!--android:textColor="@color/head_text"-->
+                <!--android:text="@string/item_no"/>-->
+            <!--<TextView-->
+                <!--android:layout_width="@dimen/layout_0dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center"-->
+                <!--android:textColor="@color/head_text"-->
+                <!--android:text="@string/item_name"/>-->
+            <!--<TextView-->
+                <!--android:layout_width="@dimen/layout_0dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center"-->
+                <!--android:textColor="@color/head_text"-->
+                <!--android:text="@string/model"/>-->
             <TextView
                 android:layout_width="@dimen/layout_0dp"
                 android:layout_weight="1"
@@ -93,24 +93,24 @@
             style="@style/itemstyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/tv_item_no"
-                android:layout_width="@dimen/layout_0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:gravity="center"/>
-            <TextView
-                android:id="@+id/tv_item_name"
-                android:layout_width="@dimen/layout_0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:gravity="center"/>
-            <TextView
-                android:id="@+id/tv_model"
-                android:layout_width="@dimen/layout_0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:gravity="center"/>
+            <!--<TextView-->
+                <!--android:id="@+id/tv_item_no"-->
+                <!--android:layout_width="@dimen/layout_0dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center"/>-->
+            <!--<TextView-->
+                <!--android:id="@+id/tv_item_name"-->
+                <!--android:layout_width="@dimen/layout_0dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center"/>-->
+            <!--<TextView-->
+                <!--android:id="@+id/tv_model"-->
+                <!--android:layout_width="@dimen/layout_0dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center"/>-->
             <TextView
                 android:id="@+id/tv_gongDan_no"
                 android:layout_width="@dimen/layout_0dp"

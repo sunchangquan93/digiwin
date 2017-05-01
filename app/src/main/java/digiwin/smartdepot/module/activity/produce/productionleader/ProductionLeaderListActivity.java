@@ -202,11 +202,11 @@ public class ProductionLeaderListActivity extends BaseTitleActivity {
             FilterBean.setWarehouse_out_no(accoutBean.getWare());
 
             if(!StringUtils.isBlank(et_super_number.getText().toString().trim())){
-                FilterBean.setWo_no(et_super_number.getText().toString().trim());
+                FilterBean.setDoc_no(et_super_number.getText().toString().trim());
             }
 
             if(!StringUtils.isBlank(et_order_number.getText().toString().trim())){
-                FilterBean.setDoc_no(et_order_number.getText().toString().trim());
+                FilterBean.setWo_no(et_order_number.getText().toString().trim());
             }
 
             if(!StringUtils.isBlank(et_applicant.getText().toString().trim())){

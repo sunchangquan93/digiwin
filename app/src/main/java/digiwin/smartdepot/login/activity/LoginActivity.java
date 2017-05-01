@@ -1,6 +1,7 @@
 package digiwin.smartdepot.login.activity;
 
 
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
@@ -38,7 +39,9 @@ import digiwin.smartdepot.login.bean.AccoutBean;
 import digiwin.smartdepot.login.bean.AppVersionBean;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
 import digiwin.smartdepot.main.activity.MainActivity;
+import digiwin.smartdepot.main.activity.versions.VersionsSettingDialog;
 import digiwin.smartdepot.main.bean.StorageBean;
+import digiwin.smartdepot.module.activity.common.ChoosePicActivity;
 
 /**
  * 登录界面
@@ -203,6 +206,7 @@ public class LoginActivity extends BaseActivity {
     @OnClick(R.id.tv_setup_systemSettings)
     void showSetting() {
         SettingDialog.showSettingDialog(activity);
+       // ActivityManagerUtils.startActivity(activity, ChoosePicActivity.class);
     }
 
     @OnClick(R.id.iv_setup_systemSettings)
@@ -237,14 +241,15 @@ public class LoginActivity extends BaseActivity {
             public void onSuccess(AccoutBean accoutBean) {
                 String vernum = accoutBean.getVernum();
                 //TODO:由于开启自启动原因，所以该处会再次判断是否为最新版
-//                if (!StringUtils.isBlank(vernum) && StringUtils.string2Float(vernum)>TelephonyUtils.getMAppVersion(context)) {
-//                    AppVersionBean versionBean = new AppVersionBean();
-//                    versionBean.setVernum(accoutBean.getVernum());
-//                    versionBean.setVerurl(accoutBean.getVerurl());
-//                    versionBean.setVerwhat(accoutBean.getVerwhat());
-//                    matchVersion(versionBean);
-//                }
-//        else
+                if (!StringUtils.isBlank(vernum) && StringUtils.string2Float(vernum)>TelephonyUtils.getMAppVersion(context)) {
+                    AppVersionBean versionBean = new AppVersionBean();
+                    versionBean.setVernum(accoutBean.getVernum());
+                    versionBean.setVerurl(accoutBean.getVerurl());
+                    versionBean.setVerwhat(accoutBean.getVerwhat());
+                    dismissLoadingDialog();
+                    matchVersion(versionBean);
+                }
+        else
                 {
                     //传入权限
                     Bundle bundle=new Bundle();
@@ -264,11 +269,14 @@ public class LoginActivity extends BaseActivity {
                     if (storageList.size()>0){
                         accoutBean.setWare(storageList.get(0).getWare());
                     }
-                    Connector.getDatabase();
+                    SQLiteDatabase db = Connector.getDatabase();
+//                    SQLiteDatabase db = Connector.getDatabase();
+//                    db.beginTransaction();
                     DataSupport.deleteAll(StorageBean.class);
                     DataSupport.deleteAll(AccoutBean.class);
                     DataSupport.saveAll(storageList);
                     accoutBean.save();
+//                    db.endTransaction();
                     //上传用户词表
                     ActivityManagerUtils.startActivityForBundleDataFinish(activity,MainActivity.class,bundle);
                     JPushManager.login(TelephonyUtils.getDeviceId(activity),TelephonyUtils.getDeviceId(activity));
@@ -356,7 +364,6 @@ public class LoginActivity extends BaseActivity {
 
             @Override
             public void onFailed(String msg) {
-                mPlants.add("SP2");
                 if (mPlants.size() > 0) {
                     tv_login_eye.setText(mPlants.get(0));
                 }
@@ -374,7 +381,7 @@ public class LoginActivity extends BaseActivity {
         float mAppVersion = TelephonyUtils.getMAppVersion(activity);
         float newVersion = StringUtils.string2Float(version.getVernum());
         if (newVersion > mAppVersion) {
-//              VersionsSettingDialog.showVersionDialog(activity, version);
+              VersionsSettingDialog.showVersionDialog(activity, version);
         } else {
             return;
         }

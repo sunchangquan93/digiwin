@@ -78,6 +78,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/layout_10dp"
+        android:layout_marginTop="@dimen/layout_6dp"
+        android:layout_marginBottom="@dimen/layout_6dp"
         android:background="@drawable/accordingmaterialtop_sharp"
         android:orientation="vertical">
 
@@ -91,8 +93,8 @@
                 android:layout_width="@dimen/layout_60dp"
                 android:layout_height="wrap_content"
                 android:text="@string/item_no"
-                android:textSize="@dimen/textSize_14sp"
-                android:textColor="@color/head_text" />
+                android:gravity="center"
+                style="@style/app_text_ingreen"/>
 
             <TextView
                 android:id="@+id/tv_item_no"
@@ -107,10 +109,9 @@
             <TextView
                 android:layout_width="@dimen/layout_60dp"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:text="@string/check_item"
-                android:textSize="@dimen/textSize_14sp"
-                android:textColor="@color/head_text" />
+                android:gravity="center"
+                style="@style/app_text_ingreen" />
 
             <TextView
                 android:id="@+id/tv_check_item"
@@ -135,7 +136,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/item_name"
                 android:textSize="@dimen/textSize_14sp"
-                android:textColor="@color/head_text" />
+                android:gravity="center"
+                style="@style/app_text_ingreen"/>
 
             <TextView
                 android:id="@+id/tv_item_name"
@@ -145,15 +147,14 @@
                 android:layout_marginLeft="@dimen/layout_10dp"
                 android:layout_marginRight="@dimen/layout_10dp"
                 android:gravity="center"
-                android:textColor="@color/head_text" />
+                style="@style/app_text_ingreen" />
 
             <TextView
                 android:layout_width="@dimen/layout_60dp"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:text="@string/model"
-                android:textSize="@dimen/textSize_14sp"
-                android:textColor="@color/head_text" />
+                android:gravity="center"
+                style="@style/app_text_ingreen" />
 
             <TextView
                 android:id="@+id/tv_model"
@@ -176,8 +177,8 @@
                 android:layout_width="@dimen/layout_60dp"
                 android:layout_height="wrap_content"
                 android:text="@string/ac"
-                android:textSize="@dimen/textSize_14sp"
-                android:textColor="@color/head_text" />
+                android:gravity="center"
+                style="@style/app_text_ingreen" />
 
             <TextView
                 android:id="@+id/tv_ac"
@@ -192,10 +193,9 @@
             <TextView
                 android:layout_width="@dimen/layout_60dp"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:text="@string/re"
-                android:textSize="@dimen/textSize_14sp"
-                android:textColor="@color/head_text" />
+                android:gravity="center"
+                style="@style/app_text_ingreen"/>
 
             <TextView
                 android:id="@+id/tv_re"
@@ -209,10 +209,9 @@
             <TextView
                 android:layout_width="@dimen/layout_60dp"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:text="@string/select_check_num"
-                android:textSize="@dimen/textSize_14sp"
-                android:textColor="@color/head_text" />
+                android:gravity="center"
+                style="@style/app_text_ingreen"/>
 
             <TextView
                 android:id="@+id/tv_select_check_num"
@@ -226,10 +225,9 @@
             <TextView
                 android:layout_width="@dimen/layout_60dp"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:text="@string/defect_num"
-                android:textSize="@dimen/textSize_14sp"
-                android:textColor="@color/head_text" />
+                android:gravity="center"
+                style="@style/app_text_ingreen" />
 
             <TextView
                 android:id="@+id/tv_defect_num"

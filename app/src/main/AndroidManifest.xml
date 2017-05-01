@@ -58,9 +58,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".main.activity.MainActivity"></activity>
-        <activity android:name=".login.activity.LoginActivity"
-            android:theme="@style/AppThemeTWO"
-            android:process=":picture"/>
         <activity
             android:name=".login.activity.WelcomeGuideActivity"
             android:theme="@style/SplashTheme">
@@ -99,14 +96,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".module.activity.produce.distribute.DistributeScanActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
-        <activity
             android:name=".module.activity.common.NoComeUnComActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
             android:name=".module.activity.common.CommonTwoCommitActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <activity
+            android:name=".login.activity.LoginActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
 
         <activity android:name=".module.activity.produce.transtersreview.TransfersToReviewActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
@@ -130,6 +127,17 @@
             </intent-filter>
         </activity>
         <activity android:name=".module.activity.produce.materialreturn.MaterialReturnActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+        <!-- 退料过账 -->
+        <activity android:name=".module.activity.stock.storecheck.StockCheckListActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.digiwin.StockCheckListActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".module.activity.stock.storecheck.StockCheckActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
         <!--直接入库-->
         <activity android:name=".module.activity.produce.directstorage.DirectStorageActivity"
@@ -201,14 +209,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".module.activity.produce.workorder.WorkOrderScanActivity"
-            android:configChanges="keyboardHidden|screenSize"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
         </activity>
-
-
 
         <!-- 完工入库 -->
         <activity
@@ -452,6 +456,7 @@
         <activity
             android:name=".module.activity.produce.worksupplement.WorkSupplementActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+
         <!-- 库存交易锁定 -->
         <activity
             android:name=".module.activity.stock.storetranscation.StoreTransLockActivity"
@@ -640,6 +645,16 @@
         <!-- 依成品调拨扫描 -->
         <activity android:name = ".module.activity.produce.endproductallot.EndProductAllotScanActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+        <activity android:name = ".module.activity.common.ChoosePicActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+        <activity
+            android:name=".module.activity.produce.linesend.LineSendActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.digiwin.LineSendActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <!-- Required SDK 核心功能极光推送需要 -->
         <!-- 可配置android:process参数将PushService放在其他进程中 -->
         <service

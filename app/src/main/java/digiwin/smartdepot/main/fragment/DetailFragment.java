@@ -81,5 +81,4 @@ public class DetailFragment extends BaseFragment {
         });
     }
 
-
 }

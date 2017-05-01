@@ -210,17 +210,9 @@ public class AccordingMaterialScanNewActivity extends BaseTitleActivity {
             showFailedDialog(R.string.input_num);
             return;
         }
-
         saveBean.setQty(etInputNum.getText().toString());
         //判断库存 欠料数量  哪个小取哪一个
-        if(StringUtils.string2Float(tv_under_feed.getText().toString()) > StringUtils.string2Float(tv_stock_balance.getText().toString())){
-            saveBean.setAvailable_in_qty(tv_stock_balance.getText().toString());
-        }else if(StringUtils.string2Float(tv_under_feed.getText().toString()) < StringUtils.string2Float(tv_stock_balance.getText().toString())){
-            saveBean.setAvailable_in_qty(tv_under_feed.getText().toString());
-        }else{
-            saveBean.setAvailable_in_qty(tv_under_feed.getText().toString());
-        }
-
+        saveBean.setAvailable_in_qty(StringUtils.getMinQty(tv_stock_balance.getText().toString(),tv_under_feed.getText().toString()));
         String fifoCheck = FiFoCheckUtils.fifoCheck(saveBean,localFifoList);
         if(!StringUtils.isBlank(fifoCheck)){
             showFailedDialog(fifoCheck);
@@ -350,8 +342,26 @@ public class AccordingMaterialScanNewActivity extends BaseTitleActivity {
                 commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                     @Override
                     public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
-                        dismissLoadingDialog();
-                        showBarcode(barcodeBackBean);
+                        try {
+                            if (!localdata.getLow_order_item_no().equals(barcodeBackBean.getItem_no())) {
+                                barcodeFlag = false;
+                                showFailedDialog(R.string.scanbarcode_nomatch_item, new OnDialogClickListener() {
+                                    @Override
+                                    public void onCallback() {
+                                        etScanBarocde.setText("");
+                                    }
+                                });
+                                return;
+                            }
+                            showBarcode(barcodeBackBean);
+                        }catch (Exception e){
+                            showFailedDialog(R.string.scanbarcode_nomatch_item, new OnDialogClickListener() {
+                                @Override
+                                public void onCallback() {
+                                    etScanBarocde.setText("");
+                                }
+                            });
+                        }
                     }
 
                     @Override
@@ -445,20 +455,7 @@ public class AccordingMaterialScanNewActivity extends BaseTitleActivity {
         map.put(AddressContants.ITEM_NO,localdata.getLow_order_item_no());
         map.put("lot_no","");
         map.put(AddressContants.WAREHOUSE_NO, LoginLogic.getUserInfo().getWare());
-
-        //判断库存 欠料数量  哪个小取哪一个 然后减去实发量
-        if(StringUtils.string2Float(tv_under_feed.getText().toString()) > StringUtils.string2Float(tv_stock_balance.getText().toString())){
-            float num = StringUtils.sub(tv_stock_balance.getText().toString(),tv_actual_yield.getText().toString());
-            map.put("qty",String.valueOf(num));
-
-        }else if(StringUtils.string2Float(tv_under_feed.getText().toString()) < StringUtils.string2Float(tv_stock_balance.getText().toString())){
-            float num = StringUtils.sub(tv_under_feed.getText().toString(),tv_actual_yield.getText().toString());
-            map.put("qty",String.valueOf(num));
-
-        }else{
-            float num = StringUtils.sub(tv_stock_balance.getText().toString(),tv_actual_yield.getText().toString());
-            map.put("qty",String.valueOf(num));
-        }
+        map.put(AddressContants.QTY,tv_under_feed.getText().toString());
         mHandler.removeMessages(FIFOWHAT);
         mHandler.sendMessageDelayed(mHandler.obtainMessage(FIFOWHAT,map), AddressContants.DELAYTIME);
     }

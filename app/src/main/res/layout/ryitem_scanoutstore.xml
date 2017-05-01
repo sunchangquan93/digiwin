@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
+
     <LinearLayout
         style="@style/itemstyle"
         android:layout_width="match_parent"
@@ -13,20 +14,20 @@
 
         <TextView
             android:id="@+id/tv_shipping_order_string"
+            style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
-            android:text="@string/shipping_order"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/shipping_order" />
 
         <TextView
             android:id="@+id/tv_shipping_order"
+            style="@style/ser_text_inwhite"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/Base_color"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <View style="@style/ry_line_style" />
+
     <LinearLayout
         style="@style/itemstyle"
         android:layout_width="match_parent"
@@ -35,35 +36,36 @@
 
         <TextView
             android:id="@+id/tv_date_string"
+            style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
-            android:text="@string/shipping_date"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/shipping_date" />
 
         <TextView
             android:id="@+id/tv_date"
+            style="@style/ser_text_inwhite"
             android:layout_width="@dimen/layout_0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1.5"
-            android:textColor="@color/Base_color"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_weight="1.5" />
+
         <TextView
             android:id="@+id/tv_custom_string"
+            style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
-            android:text="@string/custom"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/custom" />
 
         <TextView
             android:id="@+id/tv_custom"
+            style="@style/ser_text_inwhite"
             android:layout_width="@dimen/layout_0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textColor="@color/Base_color"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_weight="1" />
 
     </LinearLayout>
+
     <View style="@style/ry_line_style" />
+
     <LinearLayout
         style="@style/itemstyle"
         android:layout_width="match_parent"
@@ -72,33 +74,31 @@
 
         <TextView
             android:id="@+id/tv_operating_department_string"
+            style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
-            android:text="@string/operating_department"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/operating_department" />
 
         <TextView
             android:id="@+id/tv_operating_department"
+            style="@style/ser_text_inwhite"
             android:layout_width="@dimen/layout_0dp"
-            android:layout_weight="1.5"
             android:layout_height="wrap_content"
-            android:textColor="@color/Base_color"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_weight="1.5" />
 
         <TextView
             android:id="@+id/tv_salesman_string"
+            style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
-            android:text="@string/salesman"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/salesman" />
 
         <TextView
             android:id="@+id/tv_salesman"
+            style="@style/ser_text_inwhite"
             android:layout_width="@dimen/layout_0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textColor="@color/Base_color"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_weight="1" />
 
     </LinearLayout>
 

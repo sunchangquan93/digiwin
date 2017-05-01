@@ -10,17 +10,21 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="@dimen/layout_0dp"
-        android:layout_weight="1"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
+        android:layout_weight="1">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <LinearLayout
                 android:id="@+id/ll_search_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/layout_10dp"
+                android:layout_marginTop="@dimen/layout_6dp"
+                android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_marginRight="@dimen/layout_10dp"
                 android:background="@drawable/allscanedit_bg"
                 android:orientation="vertical"
                 android:padding="@dimen/layout_5dp">
@@ -37,8 +41,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/lock_store"
-                        android:textColor="@color/black_32"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/app_text_inwhite" />
 
                     <EditText
                         android:id="@+id/et_lock_store"
@@ -67,8 +70,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/locator"
-                        android:textColor="@color/black_32"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/app_text_inwhite" />
 
                     <EditText
                         android:id="@+id/et_loctor_no"
@@ -97,8 +99,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/baocode_store"
-                        android:textColor="@color/black_32"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/app_text_inwhite"/>
 
                     <EditText
                         android:id="@+id/et_barcode_store"
@@ -127,8 +128,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/barcode_no"
-                        android:textColor="@color/black_32"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/app_text_inwhite" />
 
                     <EditText
                         android:id="@+id/et_materiel_barcode"
@@ -157,8 +157,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/item_no"
-                        android:textColor="@color/black_32"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/app_text_inwhite"/>
 
                     <EditText
                         android:id="@+id/et_item_no"
@@ -172,6 +171,7 @@
                         android:textCursorDrawable="@drawable/et_cursor_yellow"
                         android:textSize="@dimen/textSize_14sp" />
                 </LinearLayout>
+
                 <View style="@style/fg_line_style" />
 
                 <LinearLayout
@@ -186,8 +186,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/batch_no"
-                        android:textColor="@color/black_32"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/app_text_inwhite"/>
 
                     <EditText
                         android:id="@+id/et_batch_no"
@@ -201,6 +200,7 @@
                         android:textCursorDrawable="@drawable/et_cursor_yellow"
                         android:textSize="@dimen/textSize_14sp" />
                 </LinearLayout>
+
                 <View style="@style/fg_line_style" />
 
                 <LinearLayout
@@ -215,8 +215,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/lock_reason"
-                        android:textColor="@color/black_32"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/app_text_inwhite" />
 
                     <EditText
                         android:id="@+id/et_lock_reason"
@@ -236,18 +235,21 @@
                         android:layout_height="@dimen/layout_20dp"
                         android:src="@drawable/mac" />
                 </LinearLayout>
+
                 <View style="@style/fg_line_style" />
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_below="@id/ll_search_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/ll_search_input"
                 android:layout_marginLeft="@dimen/layout_10dp"
                 android:layout_marginRight="@dimen/layout_10dp"
+                android:layout_marginTop="@dimen/layout_6dp"
                 android:background="@drawable/zx_scandetail_bg"
                 android:orientation="vertical">
+
                 <LinearLayout
                     android:id="@+id/ll_name"
                     style="@style/itemstyle"
@@ -260,8 +262,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/item_name"
-                        android:textColor="@color/black_32"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/app_text_inwhite"/>
 
                     <TextView
                         android:id="@+id/tv_name_value"
@@ -270,8 +271,7 @@
                         android:layout_marginLeft="@dimen/layout_10dp"
                         android:layout_weight="1"
                         android:singleLine="true"
-                        android:textColor="@color/Base_color"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/ser_text_inwhite" />
                 </LinearLayout>
 
                 <View style="@style/fg_line_style" />
@@ -288,8 +288,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/model"
-                        android:textColor="@color/black_32"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/app_text_inwhite" />
 
                     <TextView
                         android:id="@+id/tv_spc_value"
@@ -298,12 +297,11 @@
                         android:layout_marginLeft="@dimen/layout_10dp"
                         android:layout_weight="1"
                         android:singleLine="true"
-                        android:textColor="@color/Base_color"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/ser_text_inwhite" />
                 </LinearLayout>
             </LinearLayout>
         </RelativeLayout>
     </ScrollView>
 
-    <include layout="@layout/inclu_commit"/>
+    <include layout="@layout/inclu_commit" />
 </LinearLayout>

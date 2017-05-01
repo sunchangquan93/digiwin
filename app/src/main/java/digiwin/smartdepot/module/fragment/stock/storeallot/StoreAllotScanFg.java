@@ -270,7 +270,7 @@ public class StoreAllotScanFg extends BaseFragment {
                             saveBean.setStorage_spaces_in_no(locatorBackBean.getStorage_spaces_no());
                             saveBean.setWarehouse_in_no(locatorBackBean.getWarehouse_no());
                             if (INOROUT.equals(IN)){
-                                cbInLocatorlock.setChecked(true);
+//                                cbInLocatorlock.setChecked(true);
                                 INOROUT="";
                             }
                             if (cbOutLocatorlock.isChecked()) {
@@ -304,7 +304,7 @@ public class StoreAllotScanFg extends BaseFragment {
                             saveBean.setStorage_spaces_out_no(locatorBackBean.getStorage_spaces_no());
                             saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
                             if (INOROUT.equals(OUT)){
-                                cbOutLocatorlock.setChecked(true);
+//                                cbOutLocatorlock.setChecked(true);
                                 INOROUT="";
                             }
                             etScanBarocde.requestFocus();

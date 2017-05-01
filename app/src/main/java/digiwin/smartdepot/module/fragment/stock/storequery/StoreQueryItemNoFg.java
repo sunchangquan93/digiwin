@@ -56,10 +56,10 @@ public class StoreQueryItemNoFg extends BaseFragment {
             logic.getOrderSumData(bean, new CommonLogic.GetOrderSumListener() {
                 @Override
                 public void onSuccess(List<ListSumBean> list) {
-                    if (null == list || list.size() == 0) {
-                        showFailedDialog(R.string.nodate);
-                        return;
-                    }
+//                    if (null == list || list.size() == 0) {
+//                        showFailedDialog(R.string.nodate);
+//                        return;
+//                    }
                     StoreQueryItemNoAdapter adapter = new StoreQueryItemNoAdapter(context, list);
                     ryList.setAdapter(adapter);
                 }

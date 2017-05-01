@@ -125,12 +125,12 @@
                     android:textSize="@dimen/textSize_14sp" />
 
                 <EditText
-                    android:textCursorDrawable="@drawable/et_cursor_yellow"
                     android:id="@+id/et_boxcode"
                     android:layout_width="@dimen/layout_0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@null"
+                    android:textCursorDrawable="@drawable/et_cursor_yellow"
                     android:textSize="@dimen/textSize_14sp" />
 
                 <ImageView
@@ -190,10 +190,10 @@
 
         <com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView
             android:id="@+id/rv_swipemenu"
-            android:layout_margin="@dimen/layout_10dp"
-            android:padding="@dimen/layout_5dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/layout_10dp"
+            android:padding="@dimen/layout_5dp" />
     </LinearLayout>
 
 </LinearLayout>

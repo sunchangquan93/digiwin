@@ -12,6 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/layout_10dp"
+        android:layout_marginTop="@dimen/layout_6dp"
+        android:layout_marginBottom="@dimen/layout_6dp"
         android:background="@drawable/green_scandetail_bg"
         android:orientation="vertical"
         android:padding="@dimen/layout_5dp">
@@ -28,8 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="@string/material_returning_number"
-                android:textColor="@color/black_32"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_inwhite"/>
 
             <EditText
                 android:id="@+id/et_mateialreturn_number"
@@ -58,8 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="@string/department"
-                android:textColor="@color/black_32"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_inwhite"/>
 
             <EditText
                 android:id="@+id/et_department"
@@ -88,8 +88,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="@string/person"
-                android:textColor="@color/black_32"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_inwhite" />
 
             <EditText
                 android:id="@+id/et_person"
@@ -118,8 +117,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="@string/data"
-                android:textColor="@color/black_32"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_inwhite"/>
 
             <EditText
                 android:id="@+id/et_date"
@@ -155,10 +153,10 @@
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
-    android:visibility="gone"
-    android:layout_marginTop="@dimen/layout_10dp"
-    android:id="@+id/ry_list"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+        android:id="@+id/ry_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/layout_6dp"
+        android:visibility="gone" />
 
 </LinearLayout>

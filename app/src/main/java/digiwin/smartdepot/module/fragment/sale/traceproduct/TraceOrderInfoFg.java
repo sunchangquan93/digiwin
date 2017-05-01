@@ -1,7 +1,9 @@
 package digiwin.smartdepot.module.fragment.sale.traceproduct;
 
+import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -10,11 +12,13 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
+import digiwin.library.utils.StringUtils;
+import digiwin.pulltorefreshlibrary.recyclerviewAdapter.BaseRecyclerAdapter;
+import digiwin.pulltorefreshlibrary.recyclerviewAdapter.RecyclerViewHolder;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.base.BaseFragment;
 import digiwin.smartdepot.module.activity.sale.tranceproduct.TraceProductActivity;
-import digiwin.smartdepot.module.adapter.sale.traceproduct.OrderInfoAdapter;
 import digiwin.smartdepot.module.bean.common.ScanBarcodeBackBean;
 import digiwin.smartdepot.module.bean.sale.traceproduct.OrderInfoBean;
 import digiwin.smartdepot.module.logic.sale.traceproduct.TraceProductLogic;
@@ -26,12 +30,12 @@ import digiwin.smartdepot.module.logic.sale.traceproduct.TraceProductLogic;
  */
 
 public class TraceOrderInfoFg extends BaseFragment {
-    @BindView(R.id.tv_item_no)
-    TextView tvItemNo;
-    @BindView(R.id.tv_item_name)
-    TextView tvItemName;
-    @BindView(R.id.tv_model)
-    TextView tvModel;
+//    @BindView(R.id.tv_item_no)
+//    TextView tvItemNo;
+//    @BindView(R.id.tv_item_name)
+//    TextView tvItemName;
+//    @BindView(R.id.tv_model)
+//    TextView tvModel;
     @BindView(R.id.tv_gongDan_no)
     TextView tvGongDanNo;
     @BindView(R.id.tv_make_department)
@@ -73,12 +77,6 @@ public class TraceOrderInfoFg extends BaseFragment {
     public void initData(){
         ScanBarcodeBackBean backBean = TraceProductActivity.backBean;
         if(null != backBean){
-//            tvItemNo.setText(backBean.getItem_no());
-//            tvItemName.setText(backBean.getItem_name());
-//            tvModel.setText(backBean.getItem_spec());
-//            tvGongDanNo.setText(backBean.get);
-//            tvMakeDepartment.setText(backBean.get);
-//            tvVersion.setText(backBean.get);
             upDateList();
         }
     }
@@ -97,6 +95,8 @@ public class TraceOrderInfoFg extends BaseFragment {
                 list = datas;
                 adapter = new OrderInfoAdapter(tactivity,list);
                 rcList.setAdapter(adapter);
+                OrderInfoBean bean = datas.get(prePosition);
+                upDateText(bean);
             }
 
             @Override
@@ -105,6 +105,67 @@ public class TraceOrderInfoFg extends BaseFragment {
                 showFailedDialog(error);
             }
         });
+    }
+
+    public static int prePosition = 0;
+
+    /**
+     * 适配器
+     */
+    class OrderInfoAdapter extends BaseRecyclerAdapter<OrderInfoBean> {
+
+        public OrderInfoAdapter(Context ctx, List<OrderInfoBean> list) {
+            super(ctx, list);
+        }
+
+        @Override
+        protected int getItemLayout(int viewType) {
+            return R.layout.ryitem_trace_order_info;
+        }
+
+        @Override
+        protected void bindData(RecyclerViewHolder holder, final int position, OrderInfoBean item) {
+            holder.setText(R.id.tv_item_no,item.getItem_no());
+            holder.setText(R.id.tv_item_name,item.getItem_name());
+            holder.setText(R.id.tv_item_spec,item.getItem_spec());
+            holder.setText(R.id.tv_unit,item.getUnit_no());
+            holder.setText(R.id.tv_biaozhun_use, StringUtils.deleteZero(item.getStandard_qpa()));
+            holder.setText(R.id.tv_relatity_use,StringUtils.deleteZero(item.getActual_qpa()));
+            holder.setText(R.id.tv_is_should,StringUtils.deleteZero(item.getRecommended_qty()));
+            holder.setText(R.id.tv_relatity,StringUtils.deleteZero(item.getQty()));
+
+            View view = holder.getView(R.id.item_ll);
+
+            if(position == prePosition){
+                view.setBackgroundColor(tactivity.getResources().getColor(R.color.gray_f0));
+            }else {
+                view.setBackground(null);
+            }
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    prePosition = position;
+                    upDateText(list.get(position));
+                    notifyDataSetChanged();
+                    view.setBackgroundColor(tactivity.getResources().getColor(R.color.gray_f0));
+                }
+            });
+        }
+    }
+
+    /**
+     * 更新TextView
+     * @param bean
+     */
+    private void upDateText(OrderInfoBean bean){
+        tvGongDanNo.setText(bean.getWo_no());
+        tvCraftRoute.setText(bean.getWo_process());
+        tvMakeDepartment.setText(bean.getDepartment_name());
+        tvVersion.setText(bean.getWo_ver());
+        tvOrderNo.setText(bean.getCustomer_po_no());
+        tvProductDrawNo.setText(bean.getDrawing_no());
+        tvProduction.setText(StringUtils.deleteZero(bean.getWo_qty()));
     }
 
 }

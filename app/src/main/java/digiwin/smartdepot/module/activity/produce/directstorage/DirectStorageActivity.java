@@ -3,21 +3,17 @@ package digiwin.smartdepot.module.activity.produce.directstorage;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.Toolbar;
-import android.text.method.TextKeyListener;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.BindViews;
-import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
@@ -29,14 +25,11 @@ import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseFirstModuldeActivity;
 import digiwin.smartdepot.core.modulecommon.ModuleUtils;
-import digiwin.smartdepot.main.bean.StorageBean;
 import digiwin.smartdepot.main.logic.GetStorageLogic;
 import digiwin.smartdepot.module.activity.common.WareHouseDialog;
 import digiwin.smartdepot.module.bean.common.ClickItemPutBean;
 import digiwin.smartdepot.module.bean.common.ListSumBean;
 import digiwin.smartdepot.module.bean.common.SaveBean;
-import digiwin.smartdepot.module.bean.common.ScanBarcodeBackBean;
-import digiwin.smartdepot.module.bean.common.ScanLocatorBackBean;
 import digiwin.smartdepot.module.logic.common.CommonLogic;
 
 /**
@@ -185,7 +178,7 @@ public class DirectStorageActivity extends BaseFirstModuldeActivity {
         List<SaveBean> list = new ArrayList<>();
         list.add(saveBean);
         List<Map<String, String>> maps = ObjectAndMapUtils.getListMap(list);
-        commonLogic.commitListMap(maps, new CommonLogic.CommitListener() {
+        commonLogic.commitList(maps, new CommonLogic.CommitListListener() {
             @Override
             public void onSuccess(String msg) {
                 dismissLoadingDialog();

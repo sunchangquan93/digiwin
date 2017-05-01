@@ -22,6 +22,7 @@
             android:textColor="@color/MAIN_BELOW"
             android:textSize="@dimen/textSize_16sp" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,9 +34,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
-            android:inputType="textPassword"
             android:gravity="center"
             android:hint="@string/print_psw"
+            android:inputType="textPassword"
             android:singleLine="true"
             android:textColor="@color/black_32"
             android:textCursorDrawable="@drawable/et_cursor_yellow"
@@ -49,43 +50,47 @@
         android:layout_height="@dimen/layout_50dp"
         android:layout_marginTop="@dimen/layout_30dp"
         android:orientation="horizontal">
+
         <RelativeLayout
-            android:layout_weight="1"
             android:layout_width="@dimen/layout_0dp"
-            android:layout_height="match_parent">
-        <TextView
-            android:id="@+id/tv_unbinddevice"
-            android:background="@drawable/sure_dialog_button_bg"
-            android:layout_width="match_parent"
-            android:layout_marginLeft="@dimen/layout_10dp"
-            android:layout_marginRight="@dimen/layout_10dp"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:paddingTop="@dimen/layout_5dp"
-            android:gravity="center"
-            android:paddingBottom="@dimen/layout_5dp"
-            android:paddingLeft="@dimen/layout_10dp"
-            android:paddingRight="@dimen/layout_10dp"
-            android:text="@string/chooseunbind_device"
-            android:textColor="@color/Base_color" />
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_weight="1"
-            android:layout_width="@dimen/layout_0dp"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
             <TextView
-                android:id="@+id/tv_unbinduser"
-                android:background="@drawable/sure_dialog_button_bg"
+                android:id="@+id/tv_unbinddevice"
                 android:layout_width="match_parent"
-                android:layout_marginLeft="@dimen/layout_10dp"
-                android:layout_marginRight="@dimen/layout_10dp"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:paddingTop="@dimen/layout_5dp"
+                android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_marginRight="@dimen/layout_10dp"
+                android:background="@drawable/sure_dialog_button_bg"
                 android:gravity="center"
                 android:paddingBottom="@dimen/layout_5dp"
                 android:paddingLeft="@dimen/layout_10dp"
                 android:paddingRight="@dimen/layout_10dp"
+                android:paddingTop="@dimen/layout_5dp"
+                android:text="@string/chooseunbind_device"
+                android:textColor="@color/Base_color" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_unbinduser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_marginRight="@dimen/layout_10dp"
+                android:background="@drawable/sure_dialog_button_bg"
+                android:gravity="center"
+                android:paddingBottom="@dimen/layout_5dp"
+                android:paddingLeft="@dimen/layout_10dp"
+                android:paddingRight="@dimen/layout_10dp"
+                android:paddingTop="@dimen/layout_5dp"
                 android:text="@string/chooseunbind_use"
                 android:textColor="@color/Base_color" />
         </RelativeLayout>

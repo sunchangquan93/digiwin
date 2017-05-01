@@ -9,32 +9,33 @@
         style="@style/itemstyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <LinearLayout
-        android:id="@+id/ll_detail_reason"
-        style="@style/itemstyle"
-        android:layout_width="@dimen/layout_0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:background="@drawable/green_scandetail_bg"
-        android:orientation="horizontal">
 
-        <TextView
+        <LinearLayout
+            android:id="@+id/ll_detail_reason"
             style="@style/itemstyle"
-            android:id="@+id/tv_detail_reason"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/green_scandetail_bg"
+            android:orientation="horizontal">
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tv_detail_reason"
+                style="@style/itemstyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="@dimen/textSize_14sp" />
+
+        </LinearLayout>
 
         <EditText
             android:id="@+id/tv_bad_num"
             android:layout_width="@dimen/layout_0dp"
             android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/layout_10dp"
             android:layout_weight="1"
             android:background="@null"
             android:inputType="number"
-            android:layout_marginLeft="@dimen/layout_10dp"
             android:textCursorDrawable="@color/yellow_text"
             android:textSize="@dimen/textSize_14sp" />
     </LinearLayout>

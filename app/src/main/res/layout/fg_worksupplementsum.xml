@@ -20,10 +20,10 @@
                 android:id="@+id/rl_top"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/layout_10dp"
+                android:layout_marginBottom="@dimen/layout_6dp"
                 android:layout_marginLeft="@dimen/layout_10dp"
                 android:layout_marginRight="@dimen/layout_10dp"
-                android:layout_marginTop="@dimen/layout_10dp"
+                android:layout_marginTop="@dimen/layout_6dp"
                 android:background="@drawable/accordingmaterialtop_sharp"
                 android:orientation="vertical"
                 android:padding="@dimen/layout_5dp">
@@ -38,8 +38,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:text="@string/material_returning_number"
-                        android:textColor="@color/back47"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/app_text_ingreen"  />
 
                     <TextView
                         android:id="@+id/tv_material_returning_number"
@@ -64,8 +63,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:text="@string/data"
-                        android:textColor="@color/back47"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/app_text_ingreen"  />
 
                     <TextView
                         android:id="@+id/tv_date"
@@ -93,7 +91,7 @@
                         android:layout_height="wrap_content"
                         android:paddingRight="@dimen/layout_5dp"
                         android:text="@string/returned_material_department"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/app_text_ingreen"  />
 
                     <TextView
                         android:id="@+id/tv_returned_material_department"
@@ -110,7 +108,7 @@
                         android:layout_height="wrap_content"
                         android:paddingRight="@dimen/layout_5dp"
                         android:text="@string/returned_person"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/app_text_ingreen" />
 
                     <TextView
                         android:id="@+id/tv_returned_person"

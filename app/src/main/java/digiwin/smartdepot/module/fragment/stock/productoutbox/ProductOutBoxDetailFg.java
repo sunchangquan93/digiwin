@@ -2,6 +2,7 @@ package digiwin.smartdepot.module.fragment.stock.productoutbox;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
@@ -47,6 +48,10 @@ public class ProductOutBoxDetailFg extends BaseFragment {
 
     public CommonLogic commonLogic;
 
+    //包装箱号下面的线
+    @BindView(R.id.line_group)
+    View line;
+
     @OnClick(R.id.delete)
     void delete() {
         Map<Integer, Boolean> map = adapter.getMap();
@@ -65,6 +70,7 @@ public class ProductOutBoxDetailFg extends BaseFragment {
         }
         toDelete(deletelist, AddressContants.DELETETPYE);
     }
+
     @OnClick(R.id.cb_all)
     void onCheckChange() {
         boolean checked = cbAll.isChecked();
@@ -83,29 +89,32 @@ public class ProductOutBoxDetailFg extends BaseFragment {
     @Override
     protected void doBusiness() {
         pactivity = (ProductOutBoxActivity) activity;
-        mDetailShowBeen=new ArrayList<>();
+        mDetailShowBeen = new ArrayList<>();
         commonLogic = CommonLogic.getInstance(activity, pactivity.module, pactivity.mTimestamp.toString());
-        Map<Integer,Boolean> map = new HashMap<>();
+        Map<Integer, Boolean> map = new HashMap<>();
         updateUI(map);
     }
 
 
-    public void upDateList(){
+    public void upDateList() {
         //获取包装箱号
-        String number=pactivity.packBoxNumber;
-        if(!StringUtils.isBlank(number)){
+        String number = pactivity.packBoxNumber;
+        if (!StringUtils.isBlank(number)) {
             tvPackNumber.setText(number);
-            HashMap<String,String> map=new HashMap<>();
-            map.put(AddressContants.PACKAGENO,number);
+            HashMap<String, String> map = new HashMap<>();
+            map.put(AddressContants.PACKAGENO, number);
             commonLogic.scanPackBoxNumber(map, new CommonLogic.ScanPackBoxNumberListener() {
                 @Override
                 public void onSuccess(List<ProductBinningBean> productBinningBeans) {
-                    mDetailShowBeen=productBinningBeans;
-                    cbAll.setChecked(false);
-                    boolean checked = cbAll.isChecked();
                     HashMap<Integer, Boolean> map = new HashMap<>();
-                    for (int i = 0; i < mDetailShowBeen.size(); i++) {
-                        map.put(i, checked);
+                    mDetailShowBeen.clear();
+                    if (productBinningBeans.size() > 0) {
+                        mDetailShowBeen = productBinningBeans;
+                        cbAll.setChecked(false);
+                        boolean checked = cbAll.isChecked();
+                        for (int i = 0; i < mDetailShowBeen.size(); i++) {
+                            map.put(i, checked);
+                        }
                     }
                     updateUI(map);
                 }
@@ -121,8 +130,13 @@ public class ProductOutBoxDetailFg extends BaseFragment {
     /**
      * 更新界面
      */
-    private void updateUI(Map<Integer,Boolean> map) {
-        adapter=new ProductBinningDetailAdapter(pactivity,mDetailShowBeen) {
+    private void updateUI(Map<Integer, Boolean> map) {
+        if (mDetailShowBeen.size() > 0) {
+            line.setVisibility(View.VISIBLE);
+        } else {
+            line.setVisibility(View.GONE);
+        }
+        adapter = new ProductBinningDetailAdapter(pactivity, mDetailShowBeen) {
             @Override
             public CheckBox getPCheckBox() {
                 return cbAll;
@@ -130,7 +144,7 @@ public class ProductOutBoxDetailFg extends BaseFragment {
         };
         adapter.setMap(map);
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
-        recyclerView.addItemDecoration(new DividerItemDecoration(pactivity,DividerItemDecoration.VERTICAL_LIST));
+        recyclerView.addItemDecoration(new DividerItemDecoration(pactivity, DividerItemDecoration.VERTICAL_LIST));
         recyclerView.setAdapter(adapter);
     }
 
@@ -148,6 +162,7 @@ public class ProductOutBoxDetailFg extends BaseFragment {
         }
 
     }
+
     /**
      * 修改删除
      */

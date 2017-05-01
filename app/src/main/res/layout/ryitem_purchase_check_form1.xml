@@ -3,8 +3,12 @@
     android:id="@+id/item_ll"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white_ff"
     android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_0.5dp"
+        android:background="@color/gray_da" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -186,9 +190,5 @@
         </LinearLayout>
     </LinearLayout>
     </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/layout_0.5dp"
-        android:background="@color/gray_da" />
 
 </LinearLayout>

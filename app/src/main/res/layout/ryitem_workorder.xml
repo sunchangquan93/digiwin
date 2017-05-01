@@ -14,18 +14,17 @@
 
         <TextView
             android:id="@+id/tv_item_name_string"
-            android:layout_width="@dimen/layout_70dp"
+            android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
             android:text="@string/item_name"
-            android:textColor="@color/MAIN_BELOW"
-            android:textSize="@dimen/textSize_14sp" />
+            style="@style/app_text_inwhite" />
 
         <TextView
             android:id="@+id/tv_item_name"
             android:layout_width="@dimen/layout_0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:textSize="@dimen/textSize_14sp" />
+            style="@style/ry_ser_text_inwhite" />
 
         <TextView
             android:id="@+id/tv_unit"
@@ -33,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:paddingRight="@dimen/layout_10dp"
-            android:textSize="@dimen/textSize_14sp" />
+            style="@style/ry_ser_text_inwhite"/>
     </LinearLayout>
 
     <View
@@ -48,17 +47,16 @@
 
         <TextView
             android:id="@+id/tv_item_format_string"
-            android:layout_width="@dimen/layout_70dp"
+            android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
             android:text="@string/model"
-            android:textColor="@color/MAIN_BELOW"
-            android:textSize="@dimen/textSize_14sp" />
+            style="@style/app_text_inwhite" />
 
         <TextView
             android:id="@+id/tv_item_format"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/textSize_14sp" />
+            style="@style/ry_ser_text_inwhite"/>
     </LinearLayout>
 
     <View
@@ -73,17 +71,16 @@
 
         <TextView
             android:id="@+id/tv_item_no_string"
-            android:layout_width="@dimen/layout_70dp"
+            android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
             android:text="@string/item_no"
-            android:textColor="@color/MAIN_BELOW"
-            android:textSize="@dimen/textSize_14sp" />
+            style="@style/app_text_inwhite"/>
 
         <TextView
             android:id="@+id/tv_item_no"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/textSize_14sp" />
+            style="@style/ry_ser_text_inwhite"/>
     </LinearLayout>
 
     <View
@@ -97,17 +94,16 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="@dimen/layout_70dp"
+            android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
             android:text="@string/locator_num_"
-            android:textColor="@color/MAIN_BELOW"
-            android:textSize="@dimen/textSize_14sp" />
+            style="@style/app_text_inwhite" />
 
         <TextView
             android:id="@+id/tv_locator_num"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/textSize_14sp" />
+            style="@style/ry_ser_text_inwhite"/>
     </LinearLayout>
 
     <View style="@style/ry_line_style" />
@@ -121,33 +117,31 @@
 
         <TextView
             android:id="@+id/tv_under_feed_string"
-            android:layout_width="@dimen/layout_70dp"
+            android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
             android:text="@string/under_feed"
-            android:textColor="@color/MAIN_BELOW"
-            android:textSize="@dimen/textSize_14sp" />
+            style="@style/app_text_inwhite"/>
 
         <TextView
             android:id="@+id/tv_material_return"
             android:layout_width="@dimen/layout_0dp"
             android:layout_weight="2"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/textSize_14sp" />
+            style="@style/ry_ser_text_inwhite"/>
 
         <TextView
             android:id="@+id/tv_match_number_string"
-            android:layout_width="@dimen/layout_70dp"
+            android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
             android:text="@string/match_number"
-            android:textColor="@color/MAIN_BELOW"
-            android:textSize="@dimen/textSize_14sp" />
+            style="@style/app_text_inwhite" />
 
         <TextView
             android:id="@+id/tv_match_number"
             android:layout_width="@dimen/layout_0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:textSize="@dimen/textSize_14sp" />
+            style="@style/ry_ser_text_inwhite"/>
 
         <ImageView
             android:id="@+id/img_detail"

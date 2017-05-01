@@ -14,17 +14,16 @@
 
         <TextView
             android:id="@+id/tv_super_number_string"
+            style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_70dp"
             android:layout_height="wrap_content"
-            android:text="@string/super_number"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/super_number" />
 
         <TextView
             android:id="@+id/tv_super_number"
+            style="@style/ser_text_inwhite"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/Base_color"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <View
@@ -39,17 +38,16 @@
 
         <TextView
             android:id="@+id/tv_date_string"
+            style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_70dp"
             android:layout_height="wrap_content"
-            android:text="@string/data"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/data" />
 
         <TextView
             android:id="@+id/tv_date"
+            style="@style/ser_text_inwhite"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/Base_color"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <View
@@ -65,33 +63,31 @@
 
         <TextView
             android:id="@+id/tv_department_string"
+            style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_70dp"
             android:layout_height="wrap_content"
-            android:text="@string/department"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/department" />
 
         <TextView
             android:id="@+id/tv_department"
+            style="@style/ser_text_inwhite"
             android:layout_width="@dimen/layout_0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textColor="@color/Base_color"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_weight="1" />
 
         <TextView
             android:id="@+id/tv_applicant_string"
-            android:layout_width="@dimen/layout_70dp"
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
-            android:text="@string/applicant"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/applicant" />
 
         <TextView
             android:id="@+id/tv_applicant"
+            style="@style/ser_text_inwhite"
             android:layout_width="@dimen/layout_0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textColor="@color/Base_color"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_weight="1" />
 
     </LinearLayout>
 </LinearLayout>

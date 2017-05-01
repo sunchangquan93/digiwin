@@ -11,7 +11,9 @@
         android:id="@+id/ll_search_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/layout_10dp"
+        android:layout_marginTop="@dimen/layout_6dp"
+        android:layout_marginLeft="@dimen/layout_10dp"
+        android:layout_marginRight="@dimen/layout_10dp"
         android:background="@drawable/green_scandetail_bg"
         android:orientation="vertical"
         android:padding="@dimen/layout_5dp">
@@ -28,8 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="@string/general_number"
-                android:textColor="@color/black_32"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_inwhite"/>
 
             <EditText
                 android:id="@+id/et_general_number"
@@ -58,8 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="@string/custom_no"
-                android:textColor="@color/black_32"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_inwhite"/>
 
             <EditText
                 android:id="@+id/et_custom_no"
@@ -88,8 +88,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="@string/department"
-                android:textColor="@color/black_32"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_inwhite"/>
 
             <EditText
                 android:id="@+id/et_department"
@@ -118,8 +117,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="@string/person"
-                android:textColor="@color/black_32"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_inwhite"/>
 
             <EditText
                 android:id="@+id/et_person"
@@ -148,8 +146,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="@string/item_no"
-                android:textColor="@color/black_32"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_inwhite"/>
 
             <EditText
                 android:id="@+id/et_item_no"
@@ -163,6 +160,7 @@
                 android:textCursorDrawable="@drawable/et_cursor_yellow"
                 android:textSize="@dimen/textSize_14sp" />
         </LinearLayout>
+
         <View style="@style/fg_line_style" />
 
         <LinearLayout
@@ -177,8 +175,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="@string/item_name"
-                android:textColor="@color/black_32"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_inwhite"/>
 
             <EditText
                 android:id="@+id/et_item_name"
@@ -192,6 +189,7 @@
                 android:textCursorDrawable="@drawable/et_cursor_yellow"
                 android:textSize="@dimen/textSize_14sp" />
         </LinearLayout>
+
         <View style="@style/fg_line_style" />
 
         <LinearLayout
@@ -206,8 +204,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="@string/data"
-                android:textColor="@color/black_32"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_inwhite"/>
 
             <EditText
                 android:id="@+id/et_date"
@@ -243,10 +240,10 @@
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
-    android:visibility="gone"
-    android:layout_marginTop="@dimen/layout_10dp"
-    android:id="@+id/ry_list"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+        android:id="@+id/ry_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/layout_6dp"
+        android:visibility="gone" />
 
 </LinearLayout>

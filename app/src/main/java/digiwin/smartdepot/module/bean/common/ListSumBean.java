@@ -8,6 +8,14 @@ import java.io.Serializable;
 
 public class ListSumBean implements Serializable {
     /**
+     * 工单最大发料套数
+     */
+    private String wo_set_qty;
+    /**
+     * 线边最大发料套数
+     */
+    private String set_qty;
+    /**
      * 到货日期(工单日期)
      */
     private String create_date;
@@ -167,6 +175,10 @@ public class ListSumBean implements Serializable {
      */
     private String warehouse_no;
     /**
+     * 仓库
+     */
+    private String warehouse_name;
+    /**
      * 到货单号
      */
     private String doc_no;
@@ -217,7 +229,38 @@ public class ListSumBean implements Serializable {
      *展示
      */
     private String show;
+    /**
+     *人员
+     */
+    private String employee_no;
+    /**
+     *备注
+     */
+    private String remark;
 
+    public String getEmployee_no() {
+        return employee_no;
+    }
+
+    public void setEmployee_no(String employee_no) {
+        this.employee_no = employee_no;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public String getWarehouse_name() {
+        return warehouse_name;
+    }
+
+    public void setWarehouse_name(String warehouse_name) {
+        this.warehouse_name = warehouse_name;
+    }
     /**
      * 线边仓库存
      */
@@ -472,7 +515,6 @@ public class ListSumBean implements Serializable {
         this.low_order_item_spec = low_order_item_spec;
     }
 
-
     public String getAvailable_in_qty() {
         return available_in_qty;
     }
@@ -607,5 +649,21 @@ public class ListSumBean implements Serializable {
 
     public void setShow(String show) {
         this.show = show;
+    }
+
+    public String getWo_set_qty() {
+        return wo_set_qty;
+    }
+
+    public void setWo_set_qty(String wo_set_qty) {
+        this.wo_set_qty = wo_set_qty;
+    }
+
+    public String getSet_qty() {
+        return set_qty;
+    }
+
+    public void setSet_qty(String set_qty) {
+        this.set_qty = set_qty;
     }
 }

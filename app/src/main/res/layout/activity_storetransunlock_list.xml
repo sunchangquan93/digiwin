@@ -17,7 +17,9 @@
             android:id="@+id/ll_search_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/layout_10dp"
+            android:layout_marginTop="@dimen/layout_6dp"
+            android:layout_marginLeft="@dimen/layout_10dp"
+            android:layout_marginRight="@dimen/layout_10dp"
             android:background="@drawable/green_scandetail_bg"
             android:orientation="vertical"
             android:padding="@dimen/layout_5dp">
@@ -34,8 +36,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="@string/label_storage"
-                    android:textColor="@color/black_32"
-                    android:textSize="@dimen/textSize_14sp" />
+                    style="@style/app_text_inwhite" />
 
                 <EditText
                     android:id="@+id/et_storage"
@@ -63,8 +64,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="@string/store_lock_no"
-                    android:textColor="@color/black_32"
-                    android:textSize="@dimen/textSize_14sp" />
+                    style="@style/app_text_inwhite"/>
 
                 <EditText
                     android:id="@+id/et_lock_no"
@@ -93,8 +93,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="@string/item_no"
-                    android:textColor="@color/black_32"
-                    android:textSize="@dimen/textSize_14sp" />
+                    style="@style/app_text_inwhite"/>
 
                 <EditText
                     android:id="@+id/et_item_no"
@@ -123,8 +122,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="@string/batch_no"
-                    android:textColor="@color/black_32"
-                    android:textSize="@dimen/textSize_14sp" />
+                    style="@style/app_text_inwhite"/>
 
                 <EditText
                     android:id="@+id/et_batch_no"
@@ -153,8 +151,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="@string/locator"
-                    android:textColor="@color/black_32"
-                    android:textSize="@dimen/textSize_14sp" />
+                    style="@style/app_text_inwhite"/>
 
                 <EditText
                     android:id="@+id/et_locator"
@@ -169,35 +166,6 @@
                     android:textSize="@dimen/textSize_14sp" />
             </LinearLayout>
 
-            <!--<View style="@style/fg_line_style" />-->
-
-            <!--<LinearLayout-->
-            <!--android:id="@+id/ll_date"-->
-            <!--style="@style/itemstyle"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content">-->
-
-            <!--<TextView-->
-            <!--android:id="@+id/tv_date"-->
-            <!--android:layout_width="@dimen/layout_70dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--android:text="@string/data"-->
-            <!--android:textColor="@color/black_32"-->
-            <!--android:textSize="@dimen/textSize_14sp" />-->
-
-            <!--<EditText-->
-            <!--android:id="@+id/et_date"-->
-            <!--android:layout_width="@dimen/layout_0dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginLeft="@dimen/layout_10dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:background="@null"-->
-            <!--android:singleLine="true"-->
-            <!--android:textColor="@color/black_32"-->
-            <!--android:textCursorDrawable="@drawable/et_cursor_yellow"-->
-            <!--android:textSize="@dimen/textSize_14sp" />-->
-            <!--</LinearLayout>-->
 
             <View style="@style/fg_line_style" />
 
@@ -213,8 +181,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="@string/store_lock_people"
-                    android:textColor="@color/black_32"
-                    android:textSize="@dimen/textSize_14sp" />
+                    style="@style/app_text_inwhite"/>
 
                 <EditText
                     android:id="@+id/et_lock_people"
@@ -243,8 +210,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="@string/store_lock_date"
-                    android:textColor="@color/black_32"
-                    android:textSize="@dimen/textSize_14sp" />
+                    style="@style/app_text_inwhite" />
 
                 <EditText
                     android:id="@+id/et_lock_date"
@@ -278,13 +244,14 @@
 
         </LinearLayout>
     </LinearLayout>
+
     <android.support.v7.widget.RecyclerView
         android:visibility="gone"
-        android:layout_marginTop="@dimen/layout_10dp"
+        android:layout_marginTop="@dimen/layout_6dp"
         android:id="@+id/ry_list"
         android:layout_width="match_parent"
         android:layout_weight="1"
-        android:layout_height="@dimen/layout_0dp"></android.support.v7.widget.RecyclerView>
+        android:layout_height="@dimen/layout_0dp" />
 
     <Button xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/unlock"

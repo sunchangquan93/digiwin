@@ -112,9 +112,6 @@ public class TraceProductionProcessFg extends BaseFragment {
     }
 
     public static int prePosition = -1;
-    public int getPrePosition() {
-        return prePosition;
-    }
 
     class ProductProcessAdapter extends BaseRecyclerAdapter<ProcuctProcessBean> {
 

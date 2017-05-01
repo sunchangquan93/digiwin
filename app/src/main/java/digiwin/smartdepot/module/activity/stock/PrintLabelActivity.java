@@ -235,8 +235,12 @@ public class PrintLabelActivity extends BaseTitleActivity {
                             tv_model.setText(barcodeBackBean.getItem_spec());
                             tv_item_no.setText(barcodeBackBean.getItem_no());
                             String type = barcodeBackBean.getItem_barcode_type();
-                            if(null != type){
-                                tv_barcode_type.setText(barcodeType[Integer.valueOf(type) -1]);
+                            try{
+                                if(null != type){
+                                    tv_barcode_type.setText(barcodeType[StringUtils.parseInt(type) -1]);
+                                }
+                            }catch (Exception e){
+
                             }
                             et_sum_num.setText(barcodeBackBean.getBarcode_qty());
                             printBarcodeBean = new PrintBarcodeBean();
@@ -310,7 +314,7 @@ public class PrintLabelActivity extends BaseTitleActivity {
             ToSettingLogic.showToSetdialog(activity,R.string.title_set_bluttooth);
             return;
         }else {
-            BlueToothManager.getManager(activity).printMaterialCode(printBarcodeBean,Integer.valueOf(printBarcodeBean.getSum_qty()));
+            BlueToothManager.getManager(activity).printMaterialCode(printBarcodeBean,StringUtils.parseInt(printBarcodeBean.getSum_qty()));
         }
         printBarcodeBean = new PrintBarcodeBean();
         initData();

@@ -115,11 +115,6 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
     @BindView(R.id.ry_list)
     RecyclerView mRc_list;
 
-    /**
-     * 工单单号
-     */
-    @BindView(R.id.tv_gongDan_no)
-    TextView tv_gongDan_no;
 
     /**
      * 物料条码
@@ -195,6 +190,10 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
      * 条码类型 料号类型
      */
     private String codetype = "1";
+    /**
+     * 工单号
+     */
+    private  String work_no;
 
     @OnClick(R.id.save)
     void saveData(){
@@ -212,7 +211,7 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
             return;
         }
         saveBean.setQty(etInputNum.getText().toString());
-        saveBean.setDoc_no(tv_gongDan_no.getText().toString().trim());
+        saveBean.setDoc_no(work_no);
         //判断库存 欠料数量  哪个小取哪一个
         saveBean.setAvailable_in_qty(StringUtils.getMinQty(tv_under_feed.getText().toString(),tv_stock_balance.getText().toString()));
 
@@ -337,13 +336,32 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
             case BARCODEWHAT:
                 HashMap<String, String> barcodeMap = new HashMap<>();
                 barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
-                barcodeMap.put(AddressContants.DOC_NO, tv_gongDan_no.getText().toString().trim());
+                barcodeMap.put(AddressContants.DOC_NO, work_no);
                 barcodeMap.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
                 commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                     @Override
                     public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
-                        dismissLoadingDialog();
-                        showBarcode(barcodeBackBean);
+                        try {
+                            if (!localData.getLow_order_item_no().equals(barcodeBackBean.getItem_no())) {
+                                barcodeFlag = false;
+                                showFailedDialog(R.string.scanbarcode_nomatch_item, new OnDialogClickListener() {
+                                    @Override
+                                    public void onCallback() {
+                                        etScanBarocde.setText("");
+                                    }
+                                });
+                                return;
+                            }
+                            showBarcode(barcodeBackBean);
+                        }catch (Exception e){
+                            barcodeFlag = false;
+                            showFailedDialog(R.string.scanbarcode_nomatch_item, new OnDialogClickListener() {
+                                @Override
+                                public void onCallback() {
+                                    etScanBarocde.setText("");
+                                }
+                            });
+                        }
                     }
 
                     @Override
@@ -393,8 +411,7 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
         localData = new ListSumBean();
         ListSumBean data = (ListSumBean) getIntent().getSerializableExtra("sumdata");
         localData = data;
-
-        tv_gongDan_no.setText(getIntent().getExtras().getString("work_no"));
+        work_no=getIntent().getExtras().getString("work_no");
         mTv_item_name.setText(data.getItem_name());
         et_format.setText(data.getLow_order_item_spec());
         tv_under_feed.setText(StringUtils.deleteZero(data.getShortage_qty()));
@@ -416,19 +433,7 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
 
     public void getFifo(){
         HashMap<String,String> map = new HashMap<String,String>();
-        //判断库存 欠料数量  哪个小取哪一个 然后减去实发量
-        if(StringUtils.string2Float(tv_under_feed.getText().toString()) > StringUtils.string2Float(tv_stock_balance.getText().toString())){
-            float num = StringUtils.sub(tv_stock_balance.getText().toString(),localData.getScan_sumqty());
-            map.put(AddressContants.QTY,String.valueOf(num));
-
-        }else if(StringUtils.string2Float(tv_under_feed.getText().toString()) < StringUtils.string2Float(tv_stock_balance.getText().toString())){
-            float num = StringUtils.sub(tv_under_feed.getText().toString(),localData.getScan_sumqty());
-            map.put(AddressContants.QTY,String.valueOf(num));
-
-        }else{
-            float num = StringUtils.sub(tv_stock_balance.getText().toString(),localData.getScan_sumqty());
-            map.put(AddressContants.QTY,String.valueOf(num));
-        }
+        map.put(AddressContants.QTY,tv_under_feed.getText().toString());
         map.put(AddressContants.ITEM_NO,localData.getLow_order_item_no());
         map.put(AddressContants.WAREHOUSE_NO, LoginLogic.getUserInfo().getWare());
         mHandler.removeMessages(FIFOWHAT);

@@ -72,14 +72,8 @@ public class ScanOutStoreScanFg extends BaseFragment {
     Button save;
     @OnClick(R.id.save)
     void save() {
-
         if (!barcodeFlag) {
             showFailedDialog(R.string.scan_case_first);
-            return;
-        }
-        String fifoCheck = FiFoCheckUtils.fifoCheck(saveBean, fiFoList);
-        if(StringUtils.isBlank(fifoCheck)){
-            showFailedDialog(fifoCheck);
             return;
         }
 

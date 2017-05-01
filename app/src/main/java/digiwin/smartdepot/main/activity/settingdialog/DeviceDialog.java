@@ -36,15 +36,15 @@ public class DeviceDialog {
                     dialog.dismiss();
                     dialog = null;
                 }
-                CustomDialog.Builder builder = new CustomDialog.Builder(context)
+               final CustomDialog.Builder builder = new CustomDialog.Builder(context)
                     .view(R.layout.dialog_device_unbind)
                         .style(R.style.CustomDialog);
-               final String editText = builder.getViewText(R.id.et_psw);
                 builder.addViewOnclick(R.id.tv_unbinddevice, new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 if (listener != null)
                                     dialog.dismiss();
+                                final String editText = builder.getViewText(R.id.et_psw);
                                 listener.unBindByDevice(editText);
                             }
                         })
@@ -53,6 +53,7 @@ public class DeviceDialog {
                             public void onClick(View view) {
                                 if (listener != null)
                                     dialog.dismiss();
+                                final String editText = builder.getViewText(R.id.et_psw);
                                 listener.unBindByUse(editText);
                             }
                         }).cancelTouchout(true).backCancelTouchout(true)

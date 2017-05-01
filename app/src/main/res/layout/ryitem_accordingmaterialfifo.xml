@@ -15,13 +15,14 @@
 
         <TextView
             android:id="@+id/tv_locator_string"
-            android:layout_width="@dimen/layout_70dp"
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
-            android:text="@string/locator"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/locator" />
 
         <TextView
             android:id="@+id/tv_locator"
+            style="@style/ser_text_inwhite"
             android:layout_width="@dimen/layout_0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
@@ -40,16 +41,16 @@
 
         <TextView
             android:id="@+id/tv_barcode_no_string"
-            android:layout_width="@dimen/layout_70dp"
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
-            android:text="@string/barcode_no"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/barcode_no" />
 
         <TextView
             android:id="@+id/tv_barcode_no"
+            style="@style/ser_text_inwhite"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <View
@@ -65,31 +66,32 @@
 
         <TextView
             android:id="@+id/tv_rdna_num_string"
-            android:layout_width="@dimen/layout_70dp"
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
-            android:text="@string/rdna_num"
-            android:textSize="@dimen/textSize_14sp" />
+
+            android:text="@string/rdna_num" />
 
         <TextView
             android:id="@+id/tv_rdna_num"
+            style="@style/ser_text_inwhite"
             android:layout_width="@dimen/layout_0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_weight="1" />
 
         <TextView
             android:id="@+id/tv_actual_yield_string"
-            android:layout_width="@dimen/layout_70dp"
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
-            android:text="@string/actual_yield"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/actual_yield" />
 
         <TextView
             android:id="@+id/tv_feeding_amount"
+            style="@style/ser_text_inwhite"
             android:layout_width="@dimen/layout_0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_weight="1" />
     </LinearLayout>
 
     <View style="@style/fifo_line_style" />

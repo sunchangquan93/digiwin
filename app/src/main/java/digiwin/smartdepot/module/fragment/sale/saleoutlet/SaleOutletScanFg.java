@@ -60,7 +60,6 @@ public class SaleOutletScanFg extends BaseFragment {
     @BindViews({R.id.tv_barcode, R.id.tv_locator, R.id.tv_number})
     List<TextView> textViews;
 
-
     @BindView(R.id.tv_locator)
     TextView tvLocator;
     @BindView(R.id.et_scan_locator)

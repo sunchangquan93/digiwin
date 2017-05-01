@@ -289,7 +289,7 @@ public class SettingActivity extends BaseTitleActivity {
             public void unBindByUse(String psw) {
                 AccoutBean info = LoginLogic.getUserInfo();
                 if (null!=info&&psw.equals(info.getPassword())){
-                    getDeviceInfo("1");
+                    getDeviceInfo("2");
                 }else {
                     showFailedDialog(getString(R.string.psw_error));
                 }

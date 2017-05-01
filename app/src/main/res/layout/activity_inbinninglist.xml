@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="11dp"
+        android:layout_marginTop="@dimen/layout_6dp"
         android:layout_marginLeft="@dimen/layout_10dp"
         android:layout_marginRight="@dimen/layout_10dp"
         android:background="@drawable/green_scandetail_bg"
@@ -28,7 +28,7 @@
             android:id="@+id/ll_search_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/layout_10dp"
+            android:layout_marginLeft="@dimen/layout_6dp"
             android:layout_marginRight="@dimen/layout_10dp"
             android:layout_marginBottom="@dimen/layout_15dp"
             android:background="@drawable/radiuswhiteback"
@@ -47,8 +47,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="@string/order_number"
-                    android:textColor="@color/black_32"
-                    android:textSize="@dimen/textSize_14sp" />
+                    style="@style/app_text_inwhite" />
 
                 <EditText
                     android:id="@+id/et_order_number"
@@ -78,8 +77,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="@string/item_no"
-                    android:textColor="@color/black_32"
-                    android:textSize="@dimen/textSize_14sp" />
+                    style="@style/app_text_inwhite"/>
 
                 <EditText
                     android:id="@+id/et_item_no"
@@ -107,8 +105,7 @@
                     android:layout_width="@dimen/layout_70dp"
                     android:layout_height="wrap_content"
                     android:text="@string/department"
-                    android:textColor="@color/black_32"
-                    android:textSize="@dimen/textSize_14sp" />
+                    style="@style/app_text_inwhite"/>
 
                 <EditText
                     android:id="@+id/et_department"
@@ -148,7 +145,7 @@
         android:layout_height="match_parent"
         android:visibility="gone"
         android:layout_below="@+id/toolbar_title"
-        android:layout_marginTop="@dimen/layout_10dp"
+        android:layout_marginTop="@dimen/layout_6dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true">
 

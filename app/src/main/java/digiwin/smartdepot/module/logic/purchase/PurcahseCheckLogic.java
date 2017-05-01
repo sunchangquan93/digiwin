@@ -6,18 +6,13 @@ import java.util.List;
 import java.util.Map;
 
 import digiwin.library.utils.LogUtils;
-import digiwin.library.utils.TelephonyUtils;
 import digiwin.library.utils.ThreadPoolManager;
 import digiwin.library.xml.ParseXmlResp;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.ReqTypeName;
-import digiwin.smartdepot.core.base.BaseApplication;
 import digiwin.smartdepot.core.net.IRequestCallbackImp;
 import digiwin.smartdepot.core.net.OkhttpRequest;
 import digiwin.smartdepot.core.xml.CreateParaXmlReqIm;
-import digiwin.smartdepot.core.xml.CreatePurchaseCheckReq;
-import digiwin.smartdepot.login.bean.AccoutBean;
-import digiwin.smartdepot.login.loginlogic.LoginLogic;
 import digiwin.smartdepot.module.bean.purchase.BadReasonBean;
 import digiwin.smartdepot.module.bean.purchase.ImageUrl;
 import digiwin.smartdepot.module.bean.purchase.PurchaseCheckBean;
@@ -246,20 +241,12 @@ public class PurcahseCheckLogic {
     /**
      * 检验单数据提交
      */
-    public void updateQcData(final List<Map<String, String>> maps, final Map<String,List<BadReasonBean>> badReasonBeanMap, final UpdateQCDataListener listener) {
+    public void updateQcData(final List<Map<String, String>> maps, final List<Map<String, String>> details, final UpdateQCDataListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
                 try {
-                    String userName="tiptop";
-                    String plant="SYSTEM";
-                    AccoutBean accoutBean = LoginLogic.getUserInfo();
-                    if (null!=accoutBean){
-                        userName = accoutBean.getUsername();
-                        plant = accoutBean.getPlant();
-                    }
-                    String deviceId= TelephonyUtils.getDeviceId(BaseApplication.getInstance());
-                    String xml = new CreatePurchaseCheckReq(userName,plant,maps,badReasonBeanMap,deviceId,mModule, ReqTypeName.UPDATEIQCSTATUS, mTimestamp).toXml();
+                    String xml = CreateParaXmlReqIm.getInstance(mModule, ReqTypeName.UPDATEIQCSTATUS,mTimestamp,maps,details).toXml();
                     OkhttpRequest.getInstance(mContext).post(xml, new IRequestCallbackImp() {
                         @Override
                         public void onResponse(String string) {
@@ -301,7 +288,8 @@ public class PurcahseCheckLogic {
             @Override
             public void run() {
                 try {
-                    String xml = CreateParaXmlReqIm.getInstance(maps,mModule, ReqTypeName.UPDRVBCHECKSTATUS, mTimestamp).toXml();
+                    String masterName = "rvb_file";
+                    String xml = CreateParaXmlReqIm.getInstance(maps,masterName,mModule, ReqTypeName.UPDRVBCHECKSTATUS, mTimestamp).toXml();
                     OkhttpRequest.getInstance(mContext).post(xml, new IRequestCallbackImp() {
                         @Override
                         public void onResponse(String string) {

@@ -14,24 +14,24 @@
 
         <TextView
             android:id="@+id/tv_item_name_string"
+            style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_50dp"
             android:layout_height="wrap_content"
-            android:text="@string/item_name"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/item_name" />
 
         <TextView
             android:id="@+id/tv_item_name"
+            style="@style/ser_text_inwhite"
             android:layout_width="@dimen/layout_0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_weight="3" />
 
         <TextView
             android:id="@+id/tv_item_danwei"
+            style="@style/ser_text_inwhite"
             android:layout_width="@dimen/layout_0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_weight="1" />
     </LinearLayout>
 
     <View
@@ -46,17 +46,17 @@
 
         <TextView
             android:id="@+id/tv_item_model_string"
+            style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_50dp"
             android:layout_height="wrap_content"
-            android:text="@string/model"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/model" />
 
         <TextView
             android:id="@+id/tv_item_model"
+            style="@style/ser_text_inwhite"
             android:layout_width="@dimen/layout_0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_weight="1" />
     </LinearLayout>
 
     <View
@@ -71,16 +71,16 @@
 
         <TextView
             android:id="@+id/tv_item_no_string"
+            style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_50dp"
             android:layout_height="wrap_content"
-            android:text="@string/item_no"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/item_no" />
 
         <TextView
             android:id="@+id/tv_item_no"
+            style="@style/ser_text_inwhite"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <View
@@ -95,16 +95,16 @@
 
         <TextView
             android:id="@+id/tv_wait_recheck_numb_string"
+            style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_50dp"
             android:layout_height="wrap_content"
-            android:text="@string/accept_material_num"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/accept_material_num" />
 
         <TextView
             android:id="@+id/tv_in_storage_number"
+            style="@style/ser_text_inwhite"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

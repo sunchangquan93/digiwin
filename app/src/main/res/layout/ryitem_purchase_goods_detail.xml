@@ -7,11 +7,10 @@
 
     <CheckBox
         android:id="@+id/cb_ischoose"
-        android:button="@drawable/child_checkbox"
         android:layout_width="@dimen/layout_30dp"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        />
+        android:button="@drawable/child_checkbox" />
 
     <LinearLayout
         android:id="@+id/llview"
@@ -27,33 +26,32 @@
             android:orientation="horizontal">
 
             <!--<TextView-->
-                <!--android:layout_width="@dimen/layout_50dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="@string/barcode"-->
-                <!--android:textSize="@dimen/textSize_14sp" />-->
+            <!--android:layout_width="@dimen/layout_50dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/barcode"-->
+            <!--android:textSize="@dimen/textSize_14sp" />-->
 
             <TextView
                 android:id="@+id/tv_barcode"
+                style="@style/ser_text_indetail"
                 android:layout_width="@dimen/layout_0dp"
-                android:layout_weight="3"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/textSize_14sp" />
+                android:layout_weight="3" />
 
             <TextView
+                style="@style/app_text_inwhite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/layout_10dp"
                 android:layout_marginRight="@dimen/layout_10dp"
-                android:text="@string/num"
-                android:textSize="@dimen/textSize_14sp" />
+                android:text="@string/num" />
 
             <TextView
                 android:id="@+id/tv_number"
+                style="@style/ser_num_indetail"
                 android:layout_width="@dimen/layout_0dp"
                 android:layout_height="wrap_content"
-                android:textColor="@color/outside_yellow"
-                android:layout_weight="1.5"
-                android:textSize="@dimen/textSize_14sp" />
+                android:layout_weight="1.5" />
         </LinearLayout>
 
     </LinearLayout>

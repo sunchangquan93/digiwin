@@ -7,6 +7,22 @@ package digiwin.smartdepot.module.bean.common;
  */
 public class ScanBarcodeBackBean {
 
+//    barcode          STRING  #条码
+//    item_no          STRING  #料号
+//    item_name        STRING  #品名
+//    item_spec         STRING  #规格
+//    unit_no           STRING  #单位
+//    lot_no            STRING  #批次号
+//    lot_date           STRING  #批次日期
+//    vld_date          STRING  #批次有效期至
+//    barcode_qty       STRING  #条码数量
+//    barcode_seq       STRING  #条码序列号
+//    item_barcode_type  STRING  #物料条码类型
+//    available_in_qty    STRING  #可入库量
+//    scan_sumqty       STRING  #扫描汇总量
+//    barcode_no        STRING  #返回的物料条码
+//    fifo_check        STRING  #先进先出管控否
+//    available_in_qty          #可发量
     /**
      *  条码
      */

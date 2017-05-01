@@ -7,11 +7,10 @@
 
     <CheckBox
         android:id="@+id/cb_ischoose"
-        android:button="@drawable/child_checkbox"
         android:layout_width="@dimen/layout_30dp"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        />
+        android:button="@drawable/child_checkbox" />
 
     <LinearLayout
         android:id="@+id/llview"
@@ -30,8 +29,10 @@
                 android:id="@+id/tv_barcode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/textSize_14sp" />
+                android:textSize="@dimen/textSize_14sp"
+                style="@style/ser_text_indetail"/>
         </LinearLayout>
+
         <View style="@style/ry_line_style" />
 
         <LinearLayout
@@ -41,19 +42,20 @@
             android:orientation="horizontal">
 
             <TextView
+                style="@style/app_text_inwhite"
                 android:layout_width="@dimen/layout_70dp"
                 android:layout_height="wrap_content"
-                android:text="@string/outlocator"
-                android:textSize="@dimen/textSize_14sp" />
+                android:text="@string/outlocator" />
 
             <TextView
                 android:id="@+id/tv_outlocator"
                 android:layout_width="@dimen/layout_0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3.5"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/ser_text_indetail"/>
 
         </LinearLayout>
+
         <View style="@style/ry_line_style" />
 
         <LinearLayout
@@ -63,33 +65,32 @@
             android:orientation="horizontal">
 
             <TextView
+                style="@style/app_text_inwhite"
                 android:layout_width="@dimen/layout_70dp"
                 android:layout_height="wrap_content"
-                android:text="@string/inlocator"
-                android:textSize="@dimen/textSize_14sp" />
+                android:text="@string/inlocator" />
 
             <TextView
                 android:id="@+id/tv_inlocator"
                 android:layout_width="@dimen/layout_0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/ser_text_indetail" />
 
             <TextView
+                style="@style/app_text_inwhite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/layout_10dp"
-                android:layout_marginRight="@dimen/layout_20dp"
-                android:text="@string/num"
-                android:textSize="@dimen/textSize_14sp" />
+                android:layout_marginRight="@dimen/layout_10dp"
+                android:text="@string/num" />
 
             <TextView
                 android:id="@+id/tv_number"
                 android:layout_width="@dimen/layout_0dp"
                 android:layout_height="wrap_content"
-                android:textColor="@color/outside_yellow"
                 android:layout_weight="1.5"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/ser_num_indetail" />
 
         </LinearLayout>
     </LinearLayout>

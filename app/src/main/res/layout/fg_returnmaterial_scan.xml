@@ -19,9 +19,9 @@
                 android:id="@+id/ll_zx_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/layout_10dp"
                 android:layout_marginLeft="@dimen/layout_10dp"
                 android:layout_marginRight="@dimen/layout_10dp"
+                android:layout_marginTop="@dimen/layout_6dp"
                 android:background="@drawable/allscanedit_bg"
                 android:orientation="vertical"
                 android:padding="@dimen/layout_5dp">
@@ -38,8 +38,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/locator"
-                        android:textColor="@color/black_32"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/app_text_inwhite"/>
 
                     <EditText
                         android:id="@+id/et_scan_locator"
@@ -74,8 +73,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/barcode_no"
-                        android:textColor="@color/black_32"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/app_text_inwhite" />
 
                     <EditText
                         android:id="@+id/et_scan_barocde"
@@ -105,8 +103,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/num"
-                        android:textColor="@color/black_32"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/app_text_inwhite"/>
 
                     <EditText
                         android:id="@+id/et_input_num"
@@ -136,8 +133,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="@string/scaned_numb"
-                        android:textColor="@color/black_32"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/app_text_inwhite" />
 
                     <TextView
                         android:id="@+id/tv_scan_hasScan"
@@ -146,9 +142,7 @@
                         android:layout_marginLeft="@dimen/layout_10dp"
                         android:layout_weight="1"
                         android:text="@string/zero"
-                        android:singleLine="true"
-                        android:textColor="@color/black_32"
-                        android:textSize="@dimen/textSize_14sp" />
+                        style="@style/ser_text_inwhite" />
 
                 </LinearLayout>
             </LinearLayout>

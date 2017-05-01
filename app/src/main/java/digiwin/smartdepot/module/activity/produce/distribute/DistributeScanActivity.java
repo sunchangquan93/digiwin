@@ -138,11 +138,6 @@ public class DistributeScanActivity extends BaseTitleActivity {
     @BindView(R.id.iv_title_setting)
     ImageView iv_title_setting;
 
-//    @BindView(R.id.tv_detail_show)
-//    TextView tvDetailShow;
-//    @BindView(R.id.includedetail)
-//    View includeDetail;
-
     @BindViews({R.id.et_scan_barocde, R.id.et_scan_locator, R.id.et_input_num})
     List<EditText> editTexts;
     @BindViews({R.id.ll_scan_barcode, R.id.ll_scan_locator, R.id.ll_input_num})

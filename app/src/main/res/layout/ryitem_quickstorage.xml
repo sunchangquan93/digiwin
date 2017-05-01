@@ -15,24 +15,23 @@
 
         <TextView
             android:id="@+id/tv_item_seq_string"
-            android:layout_width="@dimen/layout_70dp"
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
-            android:text="@string/item_seq"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/item_seq" />
 
         <TextView
             android:id="@+id/tv_item_seq"
+            style="@style/ser_text_inwhite"
             android:layout_width="@dimen/layout_0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textColor="@color/Base_color"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_weight="1" />
 
         <TextView
-            android:layout_width="@dimen/layout_70dp"
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
-            android:text="@string/label_storage"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/label_storage" />
 
         <LinearLayout
             android:id="@+id/warehouse_img_ll"
@@ -43,13 +42,12 @@
 
             <TextView
                 android:id="@+id/tv_storage"
+                style="@style/ser_text_inwhite"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:drawableRight="@drawable/bottomsp"
                 android:paddingLeft="@dimen/layout_2dp"
-                android:paddingRight="@dimen/layout_2dp"
-                android:textColor="@color/Base_color"
-                android:textSize="@dimen/textSize_14sp"></TextView>
+                android:paddingRight="@dimen/layout_2dp" />
 
             <!-- <ImageView
                  android:layout_marginTop="@dimen/layout_5dp"
@@ -73,27 +71,24 @@
 
         <TextView
             android:id="@+id/tv_item_name_string"
-            android:layout_width="@dimen/layout_70dp"
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
-            android:text="@string/item_name"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/item_name" />
 
         <TextView
             android:id="@+id/tv_item_name"
+            style="@style/ser_text_inwhite"
             android:layout_width="@dimen/layout_0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:textColor="@color/Base_color"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_weight="2" />
 
         <TextView
             android:id="@+id/tv_unit"
-            android:layout_width="@dimen/layout_0dp"
+            style="@style/ser_text_inwhite"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingRight="@dimen/layout_10dp"
-            android:textColor="@color/Base_color"
-            android:textSize="@dimen/textSize_14sp" />
+            android:paddingRight="@dimen/layout_10dp" />
     </LinearLayout>
 
     <View
@@ -108,17 +103,16 @@
 
         <TextView
             android:id="@+id/tv_item_format_string"
-            android:layout_width="@dimen/layout_70dp"
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
-            android:text="@string/model"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/model" />
 
         <TextView
             android:id="@+id/tv_item_format"
+            style="@style/ser_text_inwhite"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/Base_color"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
@@ -135,17 +129,16 @@
 
         <TextView
             android:id="@+id/tv_item_no_string"
-            android:layout_width="@dimen/layout_70dp"
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
-            android:text="@string/item_no"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/item_no" />
 
         <TextView
             android:id="@+id/tv_item_no"
+            style="@style/ser_text_inwhite"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/Base_color"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
@@ -162,31 +155,30 @@
 
         <TextView
             android:id="@+id/tv_in_storage_number_string"
-            android:layout_width="@dimen/layout_70dp"
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
-            android:text="@string/in_storage_number"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/in_storage_number" />
 
         <TextView
             android:id="@+id/tv_in_storage_number"
+            style="@style/ser_text_inwhite"
             android:layout_width="@dimen/layout_0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textColor="@color/Base_color"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_weight="1" />
 
         <TextView
             android:id="@+id/tv_match_number_string"
-            android:layout_width="@dimen/layout_70dp"
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
-            android:text="@string/match_number"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/match_number" />
 
         <LinearLayout
             android:id="@+id/match_num_ll"
             android:layout_width="@dimen/layout_0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:orientation="horizontal">
             >
 
@@ -198,7 +190,7 @@
                 android:inputType="numberDecimal"
                 android:paddingLeft="@dimen/layout_2dp"
                 android:selectAllOnFocus="true"
-                android:textColor="@color/Base_color"
+                android:textColor="@color/outside_yellow"
                 android:textSize="@dimen/textSize_14sp" />
         </LinearLayout>
     </LinearLayout>

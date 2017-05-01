@@ -14,23 +14,24 @@
 
         <TextView
             android:id="@+id/tv_item_name_string"
+            style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_50dp"
             android:layout_height="wrap_content"
-            android:text="@string/item_name"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/item_name" />
 
         <TextView
             android:id="@+id/tv_item_name"
+            style="@style/ry_ser_text_inwhite"
             android:layout_width="@dimen/layout_0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_weight="1" />
+
         <TextView
             android:id="@+id/tv_unit_no"
-            android:layout_marginLeft="@dimen/layout_10dp"
+            style="@style/ry_ser_text_inwhite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_marginLeft="@dimen/layout_10dp" />
     </LinearLayout>
 
     <View style="@style/ry_line_style" />
@@ -43,17 +44,17 @@
 
         <TextView
             android:id="@+id/tv_item_model_string"
+            style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_50dp"
             android:layout_height="wrap_content"
-            android:text="@string/model"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/model" />
 
         <TextView
             android:id="@+id/tv_item_model"
+            style="@style/ry_ser_text_inwhite"
             android:layout_width="@dimen/layout_0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_weight="1" />
     </LinearLayout>
 
     <View style="@style/ry_line_style" />
@@ -66,16 +67,16 @@
 
         <TextView
             android:id="@+id/tv_item_no_string"
+            style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_50dp"
             android:layout_height="wrap_content"
-            android:text="@string/item_no"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/item_no" />
 
         <TextView
             android:id="@+id/tv_item_no"
+            style="@style/ry_ser_text_inwhite"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <View style="@style/ry_line_style" />
@@ -88,33 +89,33 @@
 
         <TextView
             android:id="@+id/tv_wait_recheck_numb_string"
+            style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_50dp"
             android:layout_height="wrap_content"
-            android:text="@string/apply_number"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/apply_number" />
 
         <TextView
             android:id="@+id/tv_in_apply_number"
+            style="@style/ry_ser_text_inwhite"
             android:layout_width="@dimen/layout_0dp"
-            android:layout_marginRight="@dimen/layout_10dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_marginRight="@dimen/layout_10dp"
+            android:layout_weight="1" />
 
         <TextView
             android:id="@+id/tv_act_send_numb_string"
+            style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_50dp"
             android:layout_height="wrap_content"
-            android:text="@string/match_number"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/match_number" />
 
         <TextView
             android:id="@+id/tv_match_number"
+            style="@style/ry_ser_text_inwhite"
             android:layout_width="@dimen/layout_0dp"
-            android:layout_marginRight="@dimen/layout_10dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_marginRight="@dimen/layout_10dp"
+            android:layout_weight="1" />
     </LinearLayout>
 
     <View style="@style/ry_line_style" />
@@ -126,18 +127,18 @@
         android:orientation="horizontal">
 
         <TextView
+            style="@style/app_text_inwhite"
             android:layout_width="@dimen/layout_50dp"
             android:layout_height="wrap_content"
-            android:text="@string/locator_num_"
-            android:textSize="@dimen/textSize_14sp" />
+            android:text="@string/locator_num_" />
 
         <TextView
             android:id="@+id/tv_store_number"
+            style="@style/ry_ser_text_inwhite"
             android:layout_width="@dimen/layout_0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginLeft="@dimen/layout_10dp"
-            android:textSize="@dimen/textSize_14sp" />
+            android:layout_weight="1" />
 
     </LinearLayout>
 </LinearLayout>

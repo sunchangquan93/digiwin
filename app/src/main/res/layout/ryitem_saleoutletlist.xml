@@ -16,14 +16,13 @@
             android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
             android:text="@string/general_number"
-            android:textSize="@dimen/textSize_14sp" />
+            style="@style/app_text_inwhite"  />
 
         <TextView
             android:id="@+id/tv_item_general_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/Base_color"
-            android:textSize="@dimen/textSize_14sp" />
+            style="@style/ser_text_inwhite" />
     </LinearLayout>
 
     <View
@@ -39,14 +38,13 @@
             android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
             android:text="@string/data"
-            android:textSize="@dimen/textSize_14sp" />
+            style="@style/app_text_inwhite" />
 
         <TextView
             android:id="@+id/tv_item_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/Base_color"
-            android:textSize="@dimen/textSize_14sp" />
+            style="@style/ser_text_inwhite" />
     </LinearLayout>
 
 </LinearLayout>

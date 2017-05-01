@@ -7,30 +7,15 @@ import java.io.Serializable;
  */
 
 public class FilterResultOrderBean implements Serializable {
-    public String getDoc_no() {
-        return doc_no;
-    }
 
-    public void setDoc_no(String doc_no) {
-        this.doc_no = doc_no;
-    }
-
-    public String getCreate_date() {
-        return create_date;
-    }
-
-    public String getDelivery_address() {
-        return delivery_address;
-    }
-
-    public void setDelivery_address(String delivery_address) {
-        this.delivery_address = delivery_address;
-    }
-
-    public void setCreate_date(String create_date) {
-        this.create_date = create_date;
-    }
-
+    /**
+     * 仓库名称
+     */
+    private String warehouse_name;
+    /**
+     * 备注
+     */
+    private String remark;
     /**
      * 单号
      */
@@ -40,44 +25,11 @@ public class FilterResultOrderBean implements Serializable {
      */
     private String create_date;
 
-    public String getDepartment_name() {
-        return department_name;
-    }
-
-    public void setDepartment_name(String department_name) {
-        this.department_name = department_name;
-    }
-
     /**
      * 部门
      */
 
     private String department_name ;
-
-    public String getEmployee_name() {
-        return employee_name;
-    }
-
-    public void setEmployee_name(String employee_name) {
-        this.employee_name = employee_name;
-    }
-
-    public String getEmployee_no() {
-        return employee_no;
-    }
-
-    public void setEmployee_no(String employee_no) {
-        this.employee_no = employee_no;
-    }
-
-    public String getDepartment_no() {
-        return department_no;
-    }
-
-    public void setDepartment_no(String department_no) {
-        this.department_no = department_no;
-    }
-
     /**
      * 人员
      */
@@ -106,6 +58,88 @@ public class FilterResultOrderBean implements Serializable {
      * 品名
      */
     private String item_name;
+    /**
+     * 锁定原因
+     */
+    private String lock_reason ;
+
+    /**
+     * 退料单号
+     */
+    private String return_no;
+
+    public String getWarehouse_name() {
+        return warehouse_name;
+    }
+
+    public void setWarehouse_name(String warehouse_name) {
+        this.warehouse_name = warehouse_name;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public String getDoc_no() {
+        return doc_no;
+    }
+
+    public void setDoc_no(String doc_no) {
+        this.doc_no = doc_no;
+    }
+
+    public String getCreate_date() {
+        return create_date;
+    }
+
+    public String getDelivery_address() {
+        return delivery_address;
+    }
+
+    public void setDelivery_address(String delivery_address) {
+        this.delivery_address = delivery_address;
+    }
+
+    public void setCreate_date(String create_date) {
+        this.create_date = create_date;
+    }
+
+    public String getDepartment_name() {
+        return department_name;
+    }
+
+    public void setDepartment_name(String department_name) {
+        this.department_name = department_name;
+    }
+
+    public String getEmployee_name() {
+        return employee_name;
+    }
+
+    public void setEmployee_name(String employee_name) {
+        this.employee_name = employee_name;
+    }
+
+    public String getEmployee_no() {
+        return employee_no;
+    }
+
+    public void setEmployee_no(String employee_no) {
+        this.employee_no = employee_no;
+    }
+
+    public String getDepartment_no() {
+        return department_no;
+    }
+
+    public void setDepartment_no(String department_no) {
+        this.department_no = department_no;
+    }
+
 
     public String getSupplier_name() {
         return supplier_name;
@@ -138,10 +172,6 @@ public class FilterResultOrderBean implements Serializable {
     public void setItem_name(String item_name) {
         this.item_name = item_name;
     }
-    /**
-     * 锁定原因
-     */
-    private String lock_reason ;
 
     public String getLock_reason() {
         return lock_reason;
@@ -151,11 +181,6 @@ public class FilterResultOrderBean implements Serializable {
         this.lock_reason = lock_reason;
     }
 
-
-    /**
-     * 退料单号
-     */
-    private String return_no;
 
     public String getReturn_no() {
         return return_no;

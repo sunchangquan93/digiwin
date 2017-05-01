@@ -81,7 +81,7 @@ public class ProductionLeaderSumFg extends BaseFragment {
 
     boolean upDateFlag;
 
-    List<ListSumBean>  sumBeanList;
+    List<ListSumBean> sumBeanList;
 
     @Override
     protected void doBusiness() {
@@ -110,10 +110,10 @@ public class ProductionLeaderSumFg extends BaseFragment {
             commonLogic.getOrderSumData(putBean, new CommonLogic.GetOrderSumListener() {
                 @Override
                 public void onSuccess(List<ListSumBean> list) {
-                    if(list.size() > 0){
+                    if (list.size() > 0) {
                         dismissLoadingDialog();
                         upDateFlag = true;
-                        adapter = new ProductionLeaderAdapter(getActivity(),list);
+                        adapter = new ProductionLeaderAdapter(getActivity(), list);
                         ryList.setAdapter(adapter);
                         sumBeanList = new ArrayList<ListSumBean>();
                         sumBeanList = list;
@@ -174,8 +174,8 @@ public class ProductionLeaderSumFg extends BaseFragment {
         });
     }
 
-    private void sureCommit(){
-        if (!upDateFlag){
+    private void sureCommit() {
+        if (!upDateFlag) {
             showFailedDialog(R.string.nodate);
             return;
         }
@@ -185,7 +185,7 @@ public class ProductionLeaderSumFg extends BaseFragment {
             public void onCallback1() {
                 showLoadingDialog();
                 HashMap<String, String> map = new HashMap<>();
-                map.put(AddressContants.DOC_NO,tv_super_number.getText().toString().trim());
+                map.put(AddressContants.DOC_NO, tv_super_number.getText().toString().trim());
                 commonLogic.commit(map, new CommonLogic.CommitListener() {
                     @Override
                     public void onSuccess(String msg) {
@@ -205,6 +205,7 @@ public class ProductionLeaderSumFg extends BaseFragment {
                     }
                 });
             }
+
             @Override
             public void onCallback2() {
 

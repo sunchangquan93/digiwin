@@ -39,7 +39,7 @@ public class WorkOrderSumAdapter extends BaseRecyclerAdapter<ListSumBean>{
 
         holder.setText(R.id.tv_item_name, item.getLow_order_item_name());
         holder.setText(R.id.tv_unit,item.getUnit_no());
-        holder.setText(R.id.tv_item_format, item.getItem_spec());
+        holder.setText(R.id.tv_item_format, item.getLow_order_item_no());
         holder.setText(R.id.tv_item_no, item.getLow_order_item_no());
         holder.setText(R.id.tv_locator_num, StringUtils.deleteZero(item.getStock_qty()));
         holder.setText(R.id.tv_material_return, StringUtils.deleteZero(item.getShortage_qty()));
@@ -51,14 +51,8 @@ public class WorkOrderSumAdapter extends BaseRecyclerAdapter<ListSumBean>{
             public void onClick(View v) {
                 SumShowBean bean = new SumShowBean();
                 bean.setItem_no(item.getLow_order_item_no());
-                bean.setItem_name(item.getItem_name());
-                if(numb1 > numb3){
-                    bean.setAvailable_in_qty(item.getStock_qty());
-                } else if(numb1 < numb3){
-                    bean.setAvailable_in_qty(item.getShortage_qty());
-                }else if(numb1 == numb3){
-                    bean.setAvailable_in_qty(item.getStock_qty());
-                }
+                bean.setItem_name(item.getLow_order_item_name());
+                bean.setAvailable_in_qty(StringUtils.getMinQty(item.getShortage_qty(),item.getStock_qty()));
                 WorkOrderActivity activity = (WorkOrderActivity) mContext;
                 activity.ToDetailAct(bean);
             }

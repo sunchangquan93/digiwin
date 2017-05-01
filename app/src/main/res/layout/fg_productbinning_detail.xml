@@ -11,13 +11,16 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/layout_65dp"
         android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/layout_10dp"
+            android:layout_marginBottom="@dimen/layout_10dp"
+            android:layout_marginLeft="@dimen/layout_10dp"
+            android:layout_marginRight="@dimen/layout_10dp"
+            android:layout_marginTop="@dimen/layout_6dp"
             android:background="@drawable/detaillayout_bg"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/layout_10dp">
+            android:orientation="vertical">
 
             <LinearLayout
                 style="@style/itemstyle"
@@ -47,6 +50,7 @@
             </LinearLayout>
 
             <View
+                android:id="@+id/line_group"
                 style="@style/ry_line_style"
                 android:layout_marginLeft="@dimen/layout_15dp"
                 android:layout_marginRight="@dimen/layout_7dp" />
@@ -55,10 +59,12 @@
                 android:id="@+id/ry_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/layout_25dp"
+                android:layout_marginLeft="@dimen/layout_20dp"
                 android:layout_marginRight="@dimen/layout_10dp" />
         </LinearLayout>
+
     </LinearLayout>
 
-    <include  layout="@layout/inclu_delete"/>
+    <include layout="@layout/inclu_delete" />
+
 </RelativeLayout>

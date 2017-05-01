@@ -214,18 +214,32 @@ public class PurchaseCheckActivity extends BaseActivity {
                                 }
                                 list = (List<PurchaseCheckDetailBean>) val;
                                 for (int j = 0; j < list.size(); j++) {
-                                    map.putAll(ObjectAndMapUtils.getValueMap(list.get(positionMap.get(j))));
+                                    map.putAll(ObjectAndMapUtils.getValueMap(list.get(j)));
                                 }
                             }
                     }
                     map.putAll(ObjectAndMapUtils.getValueMap(purchaseCheckBean));
                     maps.add(map);
                 }
+
+                if (badReasonMap.size() > 0) {
+                    Set<Map.Entry<String, List<BadReasonBean>>> sets = badReasonMap.entrySet();
+                    for (Map.Entry<String, List<BadReasonBean>> entry : sets) {
+                        Object key = entry.getKey();
+                        Object val = entry.getValue();
+                        if (null == val) {
+                            val = new ArrayList<>();
+                        }
+                        List<BadReasonBean> list = (List<BadReasonBean>) val;
+                        details.clear();
+                        details.addAll(ObjectAndMapUtils.getListMap(list));
+                    }
+                }
                     showCommitSureDialog(new OnDialogTwoListener() {
                         @Override
                         public void onCallback1() {
                             showLoadingDialog();
-                            logic.updateQcData(maps, badReasonMap, new PurcahseCheckLogic.UpdateQCDataListener() {
+                            logic.updateQcData(maps, details, new PurcahseCheckLogic.UpdateQCDataListener() {
                                 @Override
                                 public void onSuccess(String msg) {
                                     dismissLoadingDialog();
@@ -248,7 +262,7 @@ public class PurchaseCheckActivity extends BaseActivity {
                         }
                     });
             }else if(purchaseCheckBean.getQc_state().equals("N")){
-                List<Map<String,String>> maps = new ArrayList<Map<String, String>>();
+                final List<Map<String,String>> maps = new ArrayList<Map<String, String>>();
                 if(purchaseCheckBeanList != null){
                     for (int i = 0; i < purchaseCheckBeanList.size(); i++) {
                         Map<String,String> map = new HashMap<>();
@@ -261,22 +275,33 @@ public class PurchaseCheckActivity extends BaseActivity {
                     }
                 }
                 showLoadingDialog();
-                logic.updateRvbCheck(maps, new PurcahseCheckLogic.UpdateRvbCheckListener() {
+                showCommitSureDialog(new OnDialogTwoListener() {
                     @Override
-                    public void onSuccess(String msg) {
-                        dismissLoadingDialog();
-                        showCommitSuccessDialog(msg);
-                        createNewModuleId(module);
-                        //TODO 清空本地临时数据
-                        clearData();
+                    public void onCallback1() {
+                        logic.updateRvbCheck(maps, new PurcahseCheckLogic.UpdateRvbCheckListener() {
+                            @Override
+                            public void onSuccess(String msg) {
+                                dismissLoadingDialog();
+                                showCommitSuccessDialog(msg);
+                                createNewModuleId(module);
+                                //TODO 清空本地临时数据
+                                clearData();
+                            }
+
+                            @Override
+                            public void onFailed(String error) {
+                                dismissLoadingDialog();
+                                showCommitFailDialog(error);
+                            }
+                        });
                     }
 
                     @Override
-                    public void onFailed(String error) {
-                        dismissLoadingDialog();
-                        showCommitFailDialog(error);
+                    public void onCallback2() {
+
                     }
                 });
+
             }
         }
     }
@@ -287,7 +312,11 @@ public class PurchaseCheckActivity extends BaseActivity {
         purchaseCheckDetailList = null;
         purchaseCheckDetailBean = new PurchaseCheckDetailBean();
         adapter1 = new PurchaseCheckAdapter(pactivity,purchaseCheckBeanList);
+        rc_list.setAdapter(adapter1);
         detailAdapter = new PurchaseCheckDetailAdapter(pactivity,purchaseCheckDetailList);
+        if(null != adapter1.rc_detail_list){
+            adapter1.rc_detail_list.setAdapter(detailAdapter);
+        }
         selectPosition = -1;
         seq = "";
         allDataMap.clear();
@@ -325,6 +354,11 @@ public class PurchaseCheckActivity extends BaseActivity {
     Map<String,List<BadReasonBean>> badReasonMap = new HashMap<>();
 
     List<BadReasonBean> badReasonList;
+
+    /**
+     * 提交使用
+     */
+    List<Map<String,String>> details = new ArrayList<>();
     @Override
     protected int bindLayoutId() {
         return R.layout.activity_purchase_check;
@@ -556,6 +590,7 @@ public class PurchaseCheckActivity extends BaseActivity {
 
         RecyclerViewHolder viewHolder = null;
 
+        public RecyclerView rc_detail_list = null;
         public PurchaseCheckAdapter(Context ctx, List<PurchaseCheckBean> list) {
             super(ctx, list);
         }
@@ -616,7 +651,7 @@ public class PurchaseCheckActivity extends BaseActivity {
                 if (isShow) {
                     if(selectPosition == position) {
                         holder.setVisibility(R.id.ll_form_detail, View.VISIBLE);
-                        RecyclerView rc_detail_list = holder.findViewById(R.id.rc_list_detail);
+                        rc_detail_list = holder.findViewById(R.id.rc_list_detail);
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(pactivity);
                         rc_detail_list.setLayoutManager(linearLayoutManager);
                         rc_detail_list.setAdapter(detailAdapter);

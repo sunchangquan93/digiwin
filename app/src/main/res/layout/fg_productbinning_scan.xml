@@ -7,125 +7,113 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
 
-        <RelativeLayout
+        <LinearLayout
+            android:id="@+id/ll_zx_input"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingBottom="@dimen/layout_60dp">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/layout_6dp"
+            android:layout_marginLeft="@dimen/layout_10dp"
+            android:layout_marginRight="@dimen/layout_10dp"
+            android:layout_marginTop="@dimen/layout_6dp"
+            android:background="@drawable/allscanedit_bg"
+            android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/ll_zx_input"
+                style="@style/itemstyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/layout_10dp"
-                android:layout_marginLeft="@dimen/layout_10dp"
-                android:layout_marginRight="@dimen/layout_10dp"
-                android:layout_marginTop="@dimen/layout_10dp"
-                android:background="@drawable/allscanedit_bg"
-                android:orientation="vertical"
-                >
+                android:background="@drawable/productbinning_scan_bg">
 
-                <LinearLayout
-                    style="@style/itemstyle"
-                    android:background="@drawable/productbinning_scan_bg"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="@dimen/layout_70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/box_number"
+                    style="@style/app_text_ingreen" />
 
-                    <TextView
-                        android:layout_width="@dimen/layout_70dp"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:text="@string/box_number"
-                        android:textColor="@color/black_32"
-                        android:textSize="@dimen/textSize_14sp" />
+                <TextView
+                    android:id="@+id/tv_box_number"
+                    android:layout_width="@dimen/layout_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/layout_10dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    style="@style/ser_text_ingreen" />
+            </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/tv_box_number"
-                        android:layout_width="@dimen/layout_0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/layout_10dp"
-                        android:layout_weight="1"
-                        android:background="@null"
-                        android:singleLine="true"
-                        android:textColor="@color/white"
-                        android:textCursorDrawable="@drawable/et_cursor_yellow"
-                        android:textSize="@dimen/textSize_14sp" />
-                </LinearLayout>
+            <View style="@style/fg_line_style" />
 
-                <View style="@style/fg_line_style" />
+            <LinearLayout
+                android:id="@+id/ll_pack_boxnumber"
+                style="@style/itemstyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-                <LinearLayout
-                    android:id="@+id/ll_pack_boxnumber"
-                    style="@style/itemstyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tv_pack_boxnumber"
+                    android:layout_width="@dimen/layout_70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/pack_boxnumber"
+                    style="@style/app_text_inwhite"/>
 
-                    <TextView
-                        android:id="@+id/tv_pack_boxnumber"
-                        android:layout_width="@dimen/layout_70dp"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:text="@string/pack_boxnumber"
-                        android:textColor="@color/black_32"
-                        android:textSize="@dimen/textSize_14sp" />
+                <EditText
+                    android:id="@+id/et_pack_boxnumber"
+                    android:layout_width="@dimen/layout_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/layout_10dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:singleLine="true"
+                    android:textColor="@color/black_32"
+                    android:textCursorDrawable="@drawable/et_cursor_yellow"
+                    android:textSize="@dimen/textSize_14sp" />
 
-                    <EditText
-                        android:id="@+id/et_pack_boxnumber"
-                        android:layout_width="@dimen/layout_0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/layout_10dp"
-                        android:layout_weight="1"
-                        android:background="@null"
-                        android:singleLine="true"
-                        android:textColor="@color/black_32"
-                        android:textCursorDrawable="@drawable/et_cursor_yellow"
-                        android:textSize="@dimen/textSize_14sp" />
+                <CheckBox
+                    android:id="@+id/cb_inlocatorlock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/layout_20dp"
+                    android:button="@drawable/lock_checkbox" />
+            </LinearLayout>
 
-                    <CheckBox
-                        android:id="@+id/cb_inlocatorlock"
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/layout_20dp"
-                        android:button="@drawable/lock_checkbox" />
-                </LinearLayout>
+            <View style="@style/fg_line_style" />
 
-                <View style="@style/fg_line_style" />
+            <LinearLayout
+                android:id="@+id/ll_product_number"
+                style="@style/itemstyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-                <LinearLayout
-                    android:id="@+id/ll_product_number"
-                    style="@style/itemstyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tv_product_number"
+                    android:layout_width="@dimen/layout_70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/product_number"
+                    style="@style/app_text_inwhite" />
 
-                    <TextView
-                        android:id="@+id/tv_product_number"
-                        android:layout_width="@dimen/layout_70dp"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:text="@string/product_number"
-                        android:textColor="@color/black_32"
-                        android:textSize="@dimen/textSize_14sp" />
-
-                    <EditText
-                        android:id="@+id/et_product_number"
-                        android:layout_width="@dimen/layout_0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/layout_10dp"
-                        android:layout_weight="1"
-                        android:textColor="@color/black_32"
-                        android:background="@null"
-                        android:singleLine="true"
-                        android:textCursorDrawable="@drawable/et_cursor_yellow"
-                        android:textSize="@dimen/textSize_14sp" />
-                </LinearLayout>
+                <EditText
+                    android:id="@+id/et_product_number"
+                    android:layout_width="@dimen/layout_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/layout_10dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:singleLine="true"
+                    android:textColor="@color/black_32"
+                    android:textCursorDrawable="@drawable/et_cursor_yellow"
+                    android:textSize="@dimen/textSize_14sp" />
             </LinearLayout>
 
             <include
                 android:id="@+id/includedetail"
                 layout="@layout/show_playdetail_layout"
                 android:visibility="gone" />
-        </RelativeLayout>
+        </LinearLayout>
+
     </ScrollView>
 
 </RelativeLayout>

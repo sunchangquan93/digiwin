@@ -26,7 +26,8 @@ tools:context="digiwin.smartdepot.module.activity.produce.distribute.DistributeA
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/layout_10dp"
             android:layout_marginRight="@dimen/layout_10dp"
-            android:layout_marginBottom="@dimen/layout_10dp"
+            android:layout_marginBottom="@dimen/layout_6dp"
+            android:layout_marginTop="@dimen/layout_6dp"
             android:orientation="vertical"
             android:focusable="true"
             android:background="@drawable/accordingmaterialtop_sharp"
@@ -41,8 +42,7 @@ tools:context="digiwin.smartdepot.module.activity.produce.distribute.DistributeA
                     android:layout_width="@dimen/layout_60dp"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:textColor="@color/back47"
-                    android:textSize="@dimen/textSize_14sp"
+                    style="@style/app_text_ingreen"
                     android:text="@string/send_goods_order"
                     />
                 <TextView
@@ -51,8 +51,7 @@ tools:context="digiwin.smartdepot.module.activity.produce.distribute.DistributeA
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/layout_5dp"
                     android:layout_weight="3"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/textSize_14sp"
+                    style="@style/ser_text_ingreen"
                     />
             </LinearLayout>
 
@@ -67,8 +66,7 @@ tools:context="digiwin.smartdepot.module.activity.produce.distribute.DistributeA
                     android:layout_width="@dimen/layout_60dp"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:textColor="@color/back47"
-                    android:textSize="@dimen/textSize_14sp"
+                    style="@style/app_text_ingreen"
                     android:text="@string/supplier"
                     />
                 <TextView
@@ -77,27 +75,24 @@ tools:context="digiwin.smartdepot.module.activity.produce.distribute.DistributeA
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/layout_5dp"
                     android:layout_weight="1"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/textSize_14sp"
+                    style="@style/ser_text_ingreen"
                     />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:textColor="@color/back47"
-                    android:textSize="@dimen/textSize_14sp"
+                    style="@style/app_text_ingreen"
                     android:layout_marginLeft="@dimen/layout_5dp"
                     android:text="@string/data"
                     />
+
                 <TextView
                     android:id="@+id/tv_head_plan_date"
                     android:layout_width="@dimen/layout_0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/layout_5dp"
                     android:layout_weight="1"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/textSize_14sp"
-                    />
+                    style="@style/ser_text_ingreen" />
             </LinearLayout>
 
             <View style="@style/act_line_style"></View>
@@ -111,8 +106,7 @@ tools:context="digiwin.smartdepot.module.activity.produce.distribute.DistributeA
                     android:layout_width="@dimen/layout_60dp"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:textColor="@color/back47"
-                    android:textSize="@dimen/textSize_14sp"
+                    style="@style/app_text_ingreen"
                     android:text="@string/receipt_address"
                     />
                 <TextView
@@ -121,8 +115,7 @@ tools:context="digiwin.smartdepot.module.activity.produce.distribute.DistributeA
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/layout_5dp"
                     android:layout_weight="1"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/textSize_14sp"
+                    style="@style/ser_text_ingreen"
                     />
             </LinearLayout>
 

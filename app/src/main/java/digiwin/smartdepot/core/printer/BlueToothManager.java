@@ -171,13 +171,13 @@ public class BlueToothManager {
     public boolean printBarocde(String box) {
         boolean flag = false;
         if (null == mBTDevice) {
-            AlertDialogUtils.showFailedDialog(mContext, "请连接蓝牙设备");
+            AlertDialogUtils.showFailedDialog(mContext, mContext.getString(R.string.connect_bluedevice));
             flag = false;
             return flag;
         }
 
         if (null == mPrintSend) {
-            AlertDialogUtils.showFailedDialog(mContext, "蓝牙设备连接式失败");
+            AlertDialogUtils.showFailedDialog(mContext, mContext.getString(R.string.blue_connected_failed));
             flag = false;
             return flag;
         }
@@ -197,13 +197,13 @@ public class BlueToothManager {
     public boolean printMaterialCode(PrintBarcodeBean printBarcodeBean,int sumnum) {
         boolean flag = false;
         if (null == mBTDevice) {
-            AlertDialogUtils.showFailedDialog(mContext, "请连接蓝牙设备");
+            AlertDialogUtils.showFailedDialog(mContext, mContext.getString(R.string.connect_bluedevice));
             flag = false;
             return flag;
         }
 
         if (null == mPrintSend) {
-            AlertDialogUtils.showFailedDialog(mContext, "蓝牙设备连接式失败");
+            AlertDialogUtils.showFailedDialog(mContext, mContext.getString(R.string.blue_connected_failed));
             flag = false;
             return flag;
         }
@@ -211,7 +211,7 @@ public class BlueToothManager {
         String encoding2 = "A\n" + "PS\n"
                 + "%0H0040V0020L0101P02C9B" + printBarcodeBean.getItem_name() + "\n"
                 + "%0H0040V0045L0101P02C9B" + printBarcodeBean.getItem_spec() + "\n"
-                + "%0H0040V0452D30,M,05,1,0DN"+printBarcodeBean.getBarcode().length()+","+printBarcodeBean.getBarcode()
+                + "%0H0040V00652D30,M,05,1,0DN"+printBarcodeBean.getBarcode().length()+","+printBarcodeBean.getBarcode()
                 + "%0H0040V0195L0101P02C9B" + printBarcodeBean.getBarcode() + "\n"
                  +"%0H0040V0225L0101P02C9B" +mContext.getResources().getString(R.string.num)+"   "+printBarcodeBean.getQty()
 //                + "  "+ unit+"\n"
@@ -229,7 +229,7 @@ public class BlueToothManager {
                 encoding2 = "A\n" + "PS\n"
                         + "%0H0040V0020L0101P02C9B" + printBarcodeBean.getItem_name() + "\n"
                         + "%0H0040V0045L0101P02C9B" + printBarcodeBean.getItem_spec() + "\n"
-                        + "%0H0040V0452D30,M,05,1,0DN"+printBarcodeBean.getBarcode().length()+","+printBarcodeBean.getBarcode()
+                        + "%0H0040V00652D30,M,05,1,0DN"+printBarcodeBean.getBarcode().length()+","+printBarcodeBean.getBarcode()
                         + "%0H0040V0195L0101P02C9B" + printBarcodeBean.getBarcode() + "\n"
                         +"%0H0040V0225L0101P02C9B" +mContext.getResources().getString(R.string.num)+"   "+num
 //                + "  "+ unit+"\n"

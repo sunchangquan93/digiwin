@@ -8,10 +8,12 @@
     android:orientation="vertical">
 
     <include layout="@layout/activity_title_toolbar_bar"></include>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/layout_0.5dp"
         android:background="@color/gray_f0"></View>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -19,8 +21,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingLeft="@dimen/layout_10dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/layout_10dp">
 
 
             <LinearLayout
@@ -181,6 +183,7 @@
                     android:layout_marginLeft="@dimen/layout_10dp"
                     android:src="@drawable/right" />
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/layout_0.5dp"
@@ -221,6 +224,7 @@
                     android:layout_marginLeft="@dimen/layout_10dp"
                     android:src="@drawable/right" />
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/layout_0.5dp"
@@ -353,6 +357,7 @@
                     android:textOff=""
                     android:textOn="" />
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/layout_0.5dp"
@@ -386,6 +391,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black_32"
                     android:textSize="@dimen/textSize_14sp" />
+
                 <ImageView
                     android:layout_width="@dimen/layout_15dp"
                     android:layout_height="@dimen/layout_15dp"
@@ -401,10 +407,10 @@
 
             <RelativeLayout
                 android:id="@+id/rl_versionsSetting"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 style="@style/SettingLinearLayout"
-                >
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
                 <ImageView
                     android:id="@+id/iv_version_icon"
                     android:layout_width="@dimen/layout_20dp"

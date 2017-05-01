@@ -49,28 +49,6 @@ import digiwin.pulltorefreshlibrary.recyclerview.FullyLinearLayoutManager;
 public class EndProductAllotScanActivity extends BaseTitleActivity {
 
     /**
-     * 条码扫描
-     */
-    boolean barcodeFlag;
-    /**
-     * 库位扫描
-     */
-    boolean locatorFlag;
-
-    /**
-     * 物料条码
-     */
-    final int BARCODEWHAT = 1001;
-    /**
-     * 库位
-     */
-    final int LOCATORWHAT = 1002;
-    /**
-     * FIFO
-     */
-    final int FIFOWHAT = 1003;
-
-    /**
      * 标题
      */
     @BindView(R.id.toolbar_title)
@@ -143,10 +121,48 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
     @BindView(R.id.cb_locatorlock)
     CheckBox cbLocatorlock;
 
+    /**
+     * 保存按钮
+     */
+    @BindView(R.id.save)
+    Button mBtn_save;
+
+    @BindView(R.id.tv_scan_hasScan)
+    TextView tvScanHasScan;
+
+    @BindView(R.id.tv_line_store)
+    TextView tvLineStore;
+
+    /**
+     * 条码类型 料号类型
+     */
+    private String codetype = "1";
+
     EndProductAllotFifoAdapter adapter;
 
     SaveBean saveBean;
 
+    /**
+     * 条码扫描
+     */
+    boolean barcodeFlag;
+    /**
+     * 库位扫描
+     */
+    boolean locatorFlag;
+
+    /**
+     * 物料条码
+     */
+    final int BARCODEWHAT = 1001;
+    /**
+     * 库位
+     */
+    final int LOCATORWHAT = 1002;
+    /**
+     * FIFO
+     */
+    final int FIFOWHAT = 1003;
     /**
      * 跳转明细使用
      */
@@ -162,26 +178,6 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
     List<FifoCheckBean> localFifoList;
 
     boolean fifo_check;
-
-    /**
-     * 保存按钮
-     */
-    @BindView(R.id.save)
-    Button mBtn_save;
-
-    /**
-     * 物料类型
-     */
-    String type;
-
-    @BindView(R.id.tv_scan_hasScan)
-    TextView tvScanHasScan;
-
-    /**
-     * 条码类型 料号类型
-     */
-    private String codetype = "1";
-
     ListSumBean localData;
     @OnClick(R.id.save)
     void saveData(){
@@ -226,6 +222,10 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
             }
         });
     }
+    /**
+     * 物料类型
+     */
+    String type;
 
     @Override
     protected Toolbar toolbar() {
@@ -322,8 +322,27 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
                 commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                     @Override
                     public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
-                        tvScanHasScan.setText(barcodeBackBean.getScan_sumqty());
-                        showBarcode(barcodeBackBean);
+                        try {
+                            if (!localData.getLow_order_item_no().equals(barcodeBackBean.getItem_no())) {
+                                barcodeFlag = false;
+                                showFailedDialog(R.string.scanbarcode_nomatch_item, new OnDialogClickListener() {
+                                    @Override
+                                    public void onCallback() {
+                                        etScanBarocde.setText("");
+                                    }
+                                });
+                                return;
+                            }
+                            tvScanHasScan.setText(barcodeBackBean.getScan_sumqty());
+                            showBarcode(barcodeBackBean);
+                        }catch (Exception e){
+                            showFailedDialog(R.string.scanbarcode_nomatch_item, new OnDialogClickListener() {
+                                @Override
+                                public void onCallback() {
+                                    etScanBarocde.setText("");
+                                }
+                            });
+                        }
                     }
 
                     @Override
@@ -395,6 +414,7 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
         et_format.setText(data.getLow_order_item_spec());
         tv_material_return.setText(StringUtils.deleteZero(data.getShortage_qty()));
         tv_material_return_big.setText(StringUtils.deleteZero(data.getStock_qty()));
+        tvLineStore.setText(StringUtils.deleteZero(data.getW_stock_qty()));
         localData = data;
 
         type = data.getItem_barcode_type();

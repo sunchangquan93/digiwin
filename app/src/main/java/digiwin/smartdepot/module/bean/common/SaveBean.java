@@ -27,10 +27,13 @@ public class SaveBean {
      * 入仓库代码
      */
     private String warehouse_in_no;
+
     /**
      * 入储位代码
      */
     private String storage_spaces_in_no;
+
+    private String storage_spaces_no;
     /**
      * 批次号
      */
@@ -105,6 +108,15 @@ public class SaveBean {
      * 是否允许仓负库存
      */
     private String allow_negative_stock;
+
+
+    public String getStorage_spaces_no() {
+        return storage_spaces_no;
+    }
+
+    public void setStorage_spaces_no(String storage_spaces_no) {
+        this.storage_spaces_no = storage_spaces_no;
+    }
 
     public String getPackage_no() {
         return package_no;
