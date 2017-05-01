@@ -34,6 +34,7 @@
     <dimen name="layout_0dp">0dp</dimen>
     <dimen name="layout_0.5dp">0.5dip</dimen>
     <dimen name="layout_0.7dp">0.7dip</dimen>
+    <dimen name="layout_0.8dp">0.8dip</dimen>
     <dimen name="layout_1dp">1dp</dimen>
     <dimen name="layout_5dp">5dp</dimen>
     <dimen name="layout_8dp">8dp</dimen>
@@ -77,6 +78,7 @@
     <dimen name="layout_110dp">110dp</dimen>
     <dimen name="layout_114dp">114dp</dimen>
     <dimen name="layout_120dp">120dp</dimen>
+    <dimen name="layout_124dp">124dp</dimen>
     <dimen name="layout_130dp">130dp</dimen>
     <dimen name="layout_140dp">140dp</dimen>
     <dimen name="layout_160dp">160dp</dimen>
@@ -125,4 +127,7 @@
     <dimen name="layout_80px">80px</dimen>
     <dimen name="item_height">50dp</dimen>
     <dimen name="item_width">70dp</dimen>
+    
+    <dimen name="digiwin_top">6dp</dimen>
+    <dimen name="digiwin_textsize">14sp</dimen>
 </resources>

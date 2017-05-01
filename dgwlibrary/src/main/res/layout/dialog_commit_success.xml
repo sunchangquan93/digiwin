@@ -43,7 +43,7 @@
 
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="114dp"
+        android:layout_height="@dimen/layout_114dp"
         android:src="@drawable/commit_ok"
         />
 

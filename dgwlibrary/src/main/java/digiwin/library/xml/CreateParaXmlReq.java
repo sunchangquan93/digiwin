@@ -17,7 +17,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import digiwin.library.utils.LogUtils;
-import digiwin.library.utils.ObjectAndMapUtils;
 
 /**
  * @author xiemeng
@@ -83,9 +82,10 @@ public class CreateParaXmlReq {
             }
             // 遍历Map的方法
             init(userName, plant, deviceId, appmodule,reqType, timestamp);
+            RecordSet recordset1 = new RecordSet(String.valueOf(1));
             for (int i = 0; i < maps.size(); i++) {
-                RecordSet recordset1 = new RecordSet(String.valueOf(i + 1));
                 Set<Entry<String, String>> sets = maps.get(i).entrySet();
+                Record record = new Record();
                 for (Entry<String, String> entry : sets) {
                     Object key = entry.getKey();
                     Object val = entry.getValue();
@@ -95,34 +95,35 @@ public class CreateParaXmlReq {
                     Field field1 = new Field(key.toString(), val.toString());
                     recordset1.A_Master.Record.Field.add(field1);
                 }
-                B_Body.Tip.TipRequest.Request.RequestContent.B_Document.RecordSet.add(recordset1);
             }
+            B_Body.Tip.TipRequest.Request.RequestContent.B_Document.RecordSet.add(recordset1);
         } catch (Exception e) {
             LogUtils.e("CreateParaXmlReq", "RecordSet中报文--组织报文异常");
         }
     }
-
     /**
-     *
-     * @param userName
-     * @param plant
-     * @param maps       Master
-     * @param detailMap  Detail
-     * @param deviceId
-     * @param appmodule
-     * @param reqType
-     * @param timestamp
+     * @param reqType   节点名
+     * @param userName  用户名
+     * @param masterName  Master节点名称
+     * @param plant     营用中心
+     * @param maps       RecordSet中报文循环recordset
+     * @param deviceId  设备号
+     * @param appmodule 模组名s
+     * @param timestamp 设备号+模组名+时间
+     * Master有多个Record
      */
-    public CreateParaXmlReq(String userName, String plant, List<Map<String, String>> maps, Map<String,List<Class<?>>> detailMap, String deviceId, String appmodule, String reqType, String timestamp) {
+    public CreateParaXmlReq(String userName, String masterName, String plant, List<Map<String, String>> maps, String deviceId, String appmodule, String reqType, String timestamp) {
         try {
             if(maps==null){
                 maps=new ArrayList<>();
             }
             // 遍历Map的方法
             init(userName, plant, deviceId, appmodule,reqType, timestamp);
+            RecordSet recordset1 = new RecordSet(String.valueOf(1));
+            recordset1.A_Master.name = masterName;
             for (int i = 0; i < maps.size(); i++) {
-                RecordSet recordset1 = new RecordSet(String.valueOf(i + 1));
                 Set<Entry<String, String>> sets = maps.get(i).entrySet();
+                Record record = new Record();
                 for (Entry<String, String> entry : sets) {
                     Object key = entry.getKey();
                     Object val = entry.getValue();
@@ -130,79 +131,86 @@ public class CreateParaXmlReq {
                         val = "";
                     }
                     Field field1 = new Field(key.toString(), val.toString());
-                    recordset1.A_Master.Record.Field.add(field1);
+                    record.Field.add(field1);
                 }
+                recordset1.A_Master.Records.add(record);
+            }
+            B_Body.Tip.TipRequest.Request.RequestContent.B_Document.RecordSet.add(recordset1);
+        } catch (Exception e) {
+            LogUtils.e("CreateParaXmlReq", "RecordSet中报文--组织报文异常");
+        }
+    }
+
+    /**
+     * 无master，两个detail，detail名称可能会变
+     */
+    public CreateParaXmlReq(String userName, String plant, List<Map<String, String>> detailMaps, List<Map<String, String>> detail2Maps, String deviceId, String appmodule, String reqType, String timestamp) {
+        try {
+            // 遍历Map的方法
+            init(userName, plant, deviceId, appmodule, reqType, timestamp);
+            RecordSet recordset1 = new RecordSet(String.valueOf(1));
+
+            if (null != detailMaps) {
                 Detail detail = new Detail();
-                detail.name = "Detail";
-                if (null != detailMap) {
-                    List<Class<?>> list = new ArrayList<>();
-                    Set<Entry<String, List<Class<?>>>> sets1 = detailMap.entrySet();
+                detail.name = "t003_file1";
+                for (int i = 0; i < detailMaps.size(); i++) {
+                    Set<Entry<String, String>> sets = detailMaps.get(i).entrySet();
+                    Record record = new Record();
                     for (Entry<String, String> entry : sets) {
                         Object key = entry.getKey();
                         Object val = entry.getValue();
                         if (null == val) {
-                            val = new ArrayList<>();
+                            val = "";
                         }
-                        list = (List<Class<?>>) val;
-                        Map<String,String> map = new HashMap<>();
-                        map = (Map<String, String>) ObjectAndMapUtils.getListMap(list);
-                        Record record = new Record();
-                       Set<Entry<String,String>> set1 = map.entrySet();
-                        for (Entry<String,String> entry1 : set1) {
-                            Field field1 = new Field(entry1.getKey(), entry1.getValue());
-                            record.Field.add(field1);
-                            detail.Record.add(record);
-                        }
+                        Field field1 = new Field(key.toString(), val.toString());
+                        record.Field.add(field1);
                     }
-                    recordset1.B_Detail.add(detail);
+                    detail.Record.add(record);
                 }
-                B_Body.Tip.TipRequest.Request.RequestContent.B_Document.RecordSet.add(recordset1);
+                recordset1.B_Detail.add(detail);
             }
-
+            //detail2
+            if (null != detail2Maps) {
+                Detail detail2 = new Detail();
+                detail2.name = "t003_file2";
+                for (int i = 0; i < detail2Maps.size(); i++) {
+                    Set<Entry<String, String>> sets = detail2Maps.get(i).entrySet();
+                    Record record = new Record();
+                    for (Entry<String, String> entry : sets) {
+                        Object key = entry.getKey();
+                        Object val = entry.getValue();
+                        if (null == val) {
+                            val = "";
+                        }
+                        Field field1 = new Field(key.toString(), val.toString());
+                        record.Field.add(field1);
+                    }
+                    detail2.Record.add(record);
+                }
+                recordset1.B_Detail.add(detail2);
+            }
+            B_Body.Tip.TipRequest.Request.RequestContent.B_Document.RecordSet.add(recordset1);
         } catch (Exception e) {
             LogUtils.e("CreateParaXmlReq", "RecordSet中报文--组织报文异常");
         }
     }
 
     /**
-     *
-     * @param userName
-     * @param plant
-     * @param map        Parameter
-     * @param maps       Master
-     * @param detailMap  Detail
-     * @param deviceId
-     * @param appmodule
-     * @param reqType
-     * @param timestamp
+     * 一个master，一个detail
      */
-    public CreateParaXmlReq(String userName, String plant, Map<String, String> map,List<Map<String, String>> maps, Map<String,List<Class<?>>> detailMap, String deviceId, String appmodule, String reqType, String timestamp) {
+    public CreateParaXmlReq(String userName, String plant, String deviceId, String appmodule, String reqType, String timestamp, List<Map<String, String>> maps, List<Map<String, String>> listDetails) {
         try {
-            if(map==null){
-                map=new HashMap<String,String>();
+            if (maps == null) {
+                maps = new ArrayList<>();
             }
             // 遍历Map的方法
-            init(userName, plant, deviceId, appmodule,reqType, timestamp);
-            Set<Entry<String, String>> sets = map.entrySet();
-            for (Entry<String, String> entry : sets) {
-                Object key = entry.getKey();
-                Object val = entry.getValue();
-                if (null == val) {
-                    val = "";
-                }
-                Field field1 = new Field(key.toString(), val.toString());
-                B_Body.Tip.TipRequest.Request.RequestContent.A_Parameter.Record.Field.add(field1);
-            }
-            if(maps==null){
-                maps=new ArrayList<>();
-            }
-
+            init(userName, plant, deviceId, appmodule, reqType, timestamp);
             for (int i = 0; i < maps.size(); i++) {
                 RecordSet recordset1 = new RecordSet(String.valueOf(i + 1));
-                Set<Entry<String, String>> masterSets = maps.get(i).entrySet();
-                for (Entry<String, String> masterEntry : masterSets) {
-                    Object key = masterEntry.getKey();
-                    Object val = masterEntry.getValue();
+                Set<Entry<String, String>> sets = maps.get(i).entrySet();
+                for (Entry<String, String> entry : sets) {
+                    Object key = entry.getKey();
+                    Object val = entry.getValue();
                     if (null == val) {
                         val = "";
                     }
@@ -212,27 +220,22 @@ public class CreateParaXmlReq {
 
                 Detail detail = new Detail();
                 detail.name = "Detail";
-                if (null != detailMap) {
-                    List<Class<?>> list = new ArrayList<>();
-                    Set<Entry<String, List<Class<?>>>> detailSets = detailMap.entrySet();
-                    for (Entry<String,  List<Class<?>>> detailEntry : detailSets) {
-                        Object key = detailEntry.getKey();
-                        Object val = detailEntry.getValue();
-                        if (null == val) {
-                            val = new ArrayList<>();
-                        }
-                        list = (List<Class<?>>) val;
-                        Map<String,String> map1 = new HashMap<>();
-                        map1 = (Map<String, String>) ObjectAndMapUtils.getListMap(list);
+                if (null != listDetails) {
+                    for (int j = 0; j < listDetails.size(); j++) {
+                        Set<Entry<String, String>> set = listDetails.get(j).entrySet();
                         Record record = new Record();
-                       Set<Entry<String,String>> set1 = map1.entrySet();
-                        for (Entry<String,String> entry1 : set1) {
-                            Field field1 = new Field(entry1.getKey(), entry1.getValue());
+                        for (Entry<String, String> entry : set) {
+                            Object key = entry.getKey();
+                            Object val = entry.getValue();
+                            if (null == val) {
+                                val = "";
+                            }
+                            Field field1 = new Field(key.toString(), val.toString());
                             record.Field.add(field1);
-                            detail.Record.add(record);
                         }
+                        detail.Record.add(record);
+                        recordset1.B_Detail.add(detail);
                     }
-                    recordset1.B_Detail.add(detail);
                 }
                 B_Body.Tip.TipRequest.Request.RequestContent.B_Document.RecordSet.add(recordset1);
             }
@@ -368,6 +371,8 @@ public class CreateParaXmlReq {
         public String name = "Master";
 
         public Record Record = new Record();
+
+        public List<Record> Records = new ArrayList<Record>();
     }
 
     public static class Detail {
@@ -428,12 +433,15 @@ public class CreateParaXmlReq {
         xStream.aliasField("Master", RecordSet.class, "A_Master");
         xStream.aliasField("Detail", RecordSet.class, "B_Detail");
 
-
         xStream.addImplicitCollection(RecordSet.class, "B_Detail");
         xStream.addImplicitCollection(Document.class, "RecordSet");
-
+        xStream.addImplicitCollection(Detail.class, "Record");
+        xStream.addImplicitCollection(Master.class, "Records");
         xStream.addImplicitCollection(Record.class, "Field");
+
         xStream.alias("Field", Field.class);
+        xStream.alias("Record", Record.class);
+        xStream.alias("Detail", Detail.class);
         xStream.alias("soapenv:Envelope", CreateParaXmlReq.class);
         xStream.autodetectAnnotations(true);
 

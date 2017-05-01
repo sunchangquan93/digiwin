@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
@@ -81,10 +82,13 @@ public class OkHttpRequestManager implements IRequestManager {
                 .build();
         addCallBack(context,requestCallBack, request);
     }
+
     @Override
-    public void post(String url, String token, String requestBody, IRequestCallBack requestCallBack) {
+    public void post(String url, Map<String, String> paramsMap, IRequestCallBack requestCallBack) {
 
     }
+
+
     @Override
     public void downLoadFile(String url, String filePath, String apkName, IDownLoadCallBack callBack) {
         Request request = new Request.Builder()
@@ -94,6 +98,10 @@ public class OkHttpRequestManager implements IRequestManager {
         downLoad(context,request, filePath, apkName, callBack);
     }
 
+    @Override
+    public void updateFile(String url, Map<String, Object> maps, IUpdateCallBack callBack) {
+
+    }
 
 
     private void addCallBack(final Context context, final IRequestCallBack requestCallback, final Request request) {

@@ -10,8 +10,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:layout_marginLeft="60dp"
+        android:layout_height="@dimen/layout_120dp"
+        android:layout_marginLeft="@dimen/layout_60dp"
         android:background="@drawable/commit_fail_background"
        >
         <TextView
@@ -44,7 +44,7 @@
 
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="124dp"
+        android:layout_height="@dimen/layout_124dp"
         android:src="@drawable/commit_fail"
         android:id="@+id/imageView" />
 

@@ -9,7 +9,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_margin="15dip"
+        android:layout_margin="@dimen/layout_15dp"
         android:textColor="@color/black"
         />
     
@@ -17,11 +17,11 @@
         android:id="@+id/btn_submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="15dip"
+        android:layout_marginLeft="@dimen/layout_20dp"
+        android:layout_marginRight="@dimen/layout_20dp"
+        android:layout_marginTop="@dimen/layout_15dp"
         android:gravity="center"
-        android:text="添加"
+        android:text="@string/add"
         android:textColor="@color/white" />
 
 </LinearLayout>

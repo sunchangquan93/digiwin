@@ -1,8 +1,6 @@
 package digiwin.library.utils;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -11,10 +9,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.os.Build;
 import android.provider.Settings;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.telephony.TelephonyManager;
 
 import java.io.File;
@@ -198,7 +193,7 @@ public class TelephonyUtils {
     }
     /**
      * 获取唯一设备号
-     * @param context
+     * @param
      */
     public static String getDeviceId(Context aty) {
        StringBuffer sb=new StringBuffer();
@@ -268,7 +263,7 @@ public class TelephonyUtils {
      * @return yyyy-MM-dd hh:mm:ss
      */
     public static String getTime() {
-        SimpleDateFormat sDateFormat = new SimpleDateFormat("yyMMddhhmmss");
+        SimpleDateFormat sDateFormat = new SimpleDateFormat("yyMMddHHmmss");
         String date = sDateFormat.format(new java.util.Date());
         return date;
     }

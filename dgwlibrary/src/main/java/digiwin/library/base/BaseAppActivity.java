@@ -2,7 +2,6 @@ package digiwin.library.base;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -115,6 +114,13 @@ public abstract class BaseAppActivity extends AppCompatActivity {
      */
     protected void showCommitSuccessDialog(Object content) {
         AlertDialogUtils.showCommitSuccessDialog(context, content);
+    }
+
+       /**
+     * 显示提交成功dialog（无回调）
+     */
+    protected void showCommitSuccessNoClickDialog(Object content) {
+        AlertDialogUtils.showCommitSuccessNoClickDialog(context, content);
     }
 
     /**

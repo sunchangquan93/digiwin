@@ -10,8 +10,8 @@
     <RelativeLayout
         android:id="@+id/rl_bg_dialog"
         android:layout_width="match_parent"
-        android:layout_height="110dp"
-        android:layout_marginLeft="60dp"
+        android:layout_height="@dimen/layout_110dp"
+        android:layout_marginLeft="@dimen/layout_60dp"
         android:background="@drawable/bg_dialog"
        >
         <TextView

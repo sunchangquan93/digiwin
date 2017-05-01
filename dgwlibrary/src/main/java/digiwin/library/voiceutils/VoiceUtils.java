@@ -20,12 +20,15 @@ import com.iflytek.cloud.SpeechSynthesizer;
 import com.iflytek.cloud.SynthesizerListener;
 import com.iflytek.cloud.ui.RecognizerDialog;
 import com.iflytek.cloud.ui.RecognizerDialogListener;
+import com.iflytek.cloud.util.UserWords;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 import digiwin.library.R;
 import digiwin.library.base.BaseAppActivity;
@@ -179,22 +182,6 @@ public class VoiceUtils {
             String text = JsonParser.parseIatResult(result);//解析过后的
             System.out.println(" 解析后的 :" + text);
 
-//            String sn = null;
-//            // 读取json结果中的 sn字段
-//            try {
-//                JSONObject resultJson = new JSONObject(results.getResultString());
-//                sn = resultJson.optString("sn");
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-//
-//            mIatResults.put(sn, text);//每得到一句，添加到
-//
-//            resultbuffer = new StringBuffer();
-//            for (String key : mIatResults.keySet()) {
-//                resultbuffer.append(mIatResults.get(key));
-//            }
-//            startAlarm(mContext);
             if(mTextListener != null){
                 mTextListener.getVoiceText(text);
             }
@@ -234,15 +221,6 @@ public class VoiceUtils {
             mTts.setParameter(SpeechConstant.PITCH, "50");
             //设置合成音量
             mTts.setParameter(SpeechConstant.VOLUME, "100");
-//		}else {
-//			mTts.setParameter(SpeechConstant.ENGINE_TYPE, SpeechConstant.TYPE_LOCAL);
-//			// 设置本地合成发音人 voicer为空，默认通过语记界面指定发音人。
-//			mTts.setParameter(SpeechConstant.VOICE_NAME, "");
-//			/**
-//			 * TODO 本地合成不设置语速、音调、音量，默认使用语记设置
-//			 * 开发者如需自定义参数，请参考在线合成参数设置
-//			 */
-//		}
             //设置播放器音频流类型
             mTts.setParameter(SpeechConstant.STREAM_TYPE, "3");
             // 设置播放合成音频打断音乐播放，默认为true
@@ -388,27 +366,32 @@ public class VoiceUtils {
         return result;
     }
 
-    //提示音
-    private static void startAlarm(Context context) {
-        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        if (notification == null) return;
-        Ringtone r = RingtoneManager.getRingtone(context, notification);
-        r.play();
-    }
-
     /**
      * 上传用户词表
      */
     public void submitUserWords(){
         SpeechRecognizer mIat = SpeechRecognizer.createRecognizer( mContext, null);
     // 上传用户词表，userwords 为用户词表文件。
-        String contents = mContext.getResources().getString(R.string.user_words);
+        UserWords userword = new UserWords(mContext.getResources().getString(R.string.user_words));
+//        List<String> keys = userword.getKeys();
+//        List<String> list = new ArrayList<>();
+//        for (int i = 0; i < keys.size(); i++) {
+//            String content = userword.getWords(keys.get(i)).toString();
+//            list.add(content);
+//        }
+//        String contents = list.toString();
+        String contents = userword.toString();
         Log.d(TAG,"contents:"+contents);
         mIat.setParameter(SpeechConstant.TEXT_ENCODING, "utf-8");
         // 指定引擎类型
          mIat.setParameter(SpeechConstant.ENGINE_TYPE, SpeechConstant.TYPE_CLOUD);
         int ret = mIat.updateLexicon("userword", contents, lexiconListener);
-        if(ret != ErrorCode.SUCCESS){  Log.d(TAG,"上传用户词表失败：" + ret); }
+        if(ret != ErrorCode.SUCCESS)
+        {
+            Log.d(TAG,"上传用户词表失败：" + ret);
+        }else{
+            Log.d(TAG,"上传用户词表成功：" + ret);
+        }
 
     }
     // 上传用户词表监听器。
@@ -419,7 +402,7 @@ public class VoiceUtils {
         {
             if(error != null)
             {
-                LogUtils.d(TAG,error.toString());
+                LogUtils.d(TAG,"error:"+error.toString());
             }else
             {
                 LogUtils.d(TAG,"上传成功！");

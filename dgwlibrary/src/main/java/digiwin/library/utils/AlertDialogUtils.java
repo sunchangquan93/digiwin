@@ -24,6 +24,37 @@ public class AlertDialogUtils {
     private static final String TAG = "AlertDialogUtils";
 
     /**
+     * 显示提交成功的dialog,没有点击按钮
+     */
+    public static void showCommitSuccessNoClickDialog(Context context, Object content) {
+        try {
+            if (context != null) {
+                if (dialog != null && dialog.isShowing()) {
+                    dialog.dismiss();
+                    dialog = null;
+                }
+                CustomDialog.Builder builder = new CustomDialog.Builder(context)
+                        .view(R.layout.dialog_commit_success_noclick)
+                        .style(R.style.CustomDialog)
+                        .cancelTouchout(false);
+                if (content instanceof String) {
+                    dialog = builder.setViewText(R.id.tv_commit_success_content, (String) content)
+                            .build();
+                    dialog.show();
+                } else if (content instanceof Integer) {
+                    dialog = builder.setViewText(R.id.tv_commit_success_content, (Integer) content)
+                            .build();
+                    dialog.show();
+                } else {
+                    LogUtils.e(TAG, "showCommitSuccessDialog-----content类型Error");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            LogUtils.e(TAG, "showCommitSuccessDialog-----Error");
+        }
+    }
+    /**
      * 显示提交成功的dialog
      */
     public static void showCommitSuccessDialog(Context context, Object content) {
@@ -248,7 +279,7 @@ public class AlertDialogUtils {
                                     listener.onCallback2();
                             }
                         }).cancelTouchout(true)
-                        .widthpx((int) (ViewUtils.getScreenWidth(context) * 0.6))
+                        .widthpx((int) (ViewUtils.getScreenWidth(context) * 0.8))
                         .heightpx(ViewGroup.LayoutParams.WRAP_CONTENT);
 
                 if (content instanceof String) {
