@@ -12,19 +12,24 @@ import android.widget.TextView;
 /**
  * Created by sunchangquan
  */
-public class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+public class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnLongClickListener{
     private SparseArray<View> mViews;
 
     private OnItemClickListener mClickListener;
+    private OnItemLongClickListener mLongClickListener;
 
     final public void setOnItemClickListener(OnItemClickListener listener) {
         mClickListener = listener;
+    }
+    final public void setOnItemLongClickListener(OnItemLongClickListener listener) {
+        mLongClickListener = listener;
     }
 
     public RecyclerViewHolder(View itemView) {
         super(itemView);
         mViews = new SparseArray<>();
         itemView.setOnClickListener(this);
+        itemView.setOnLongClickListener(this);
     }
 
     public View getItemView() {
@@ -45,6 +50,13 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.
         if (mClickListener != null) {
             mClickListener.onItemClick(itemView,getAdapterPosition());
         }
+    }
+    @Override
+    public boolean onLongClick(View view) {
+        if (mLongClickListener != null) {
+            mLongClickListener.onItemLongClick(itemView,getAdapterPosition());
+        }
+        return true;
     }
     public View getView(int viewId) {
         return findViewById(viewId);
@@ -93,9 +105,15 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.
         view.setOnClickListener(listener);
         return this;
     }
+    public RecyclerViewHolder setLongClickListener(int viewId, View.OnLongClickListener listener) {
+        View view = findViewById(viewId);
+        view.setOnLongClickListener(listener);
+        return this;
+    }
 
     public void setVisibility(int viewId,int visible){
         View view = findViewById(viewId);
         view.setVisibility(visible);
     }
+
 }

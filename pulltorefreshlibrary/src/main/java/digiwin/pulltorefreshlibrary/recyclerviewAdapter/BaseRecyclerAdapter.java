@@ -18,6 +18,8 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
     protected final Context mContext;
     protected LayoutInflater mInflater;
     private OnItemClickListener mClickListener;
+
+    private OnItemLongClickListener mLongClickListener;
     private AdapterView.OnItemSelectedListener mSelectedListener;
 
     public BaseRecyclerAdapter(Context ctx, List<T> list) {
@@ -32,6 +34,9 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
                 (mInflater.inflate(getItemLayout(viewType), parent, false));
         if (mClickListener != null) {
             holder.setOnItemClickListener(mClickListener);
+        }
+        if (mLongClickListener != null) {
+            holder.setOnItemLongClickListener(mLongClickListener);
         }
         return holder;
     }
@@ -64,6 +69,9 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
 
     final public void setOnItemClickListener(OnItemClickListener listener) {
         mClickListener = listener;
+    }
+    final public void setOnItemLongClickListener(OnItemLongClickListener listener) {
+        mLongClickListener = listener;
     }
     final public void setOnItemSelectedListener(AdapterView.OnItemSelectedListener listener) {
         mSelectedListener = listener;
