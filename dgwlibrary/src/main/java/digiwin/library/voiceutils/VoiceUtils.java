@@ -373,13 +373,6 @@ public class VoiceUtils {
         SpeechRecognizer mIat = SpeechRecognizer.createRecognizer( mContext, null);
     // 上传用户词表，userwords 为用户词表文件。
         UserWords userword = new UserWords(mContext.getResources().getString(R.string.user_words));
-//        List<String> keys = userword.getKeys();
-//        List<String> list = new ArrayList<>();
-//        for (int i = 0; i < keys.size(); i++) {
-//            String content = userword.getWords(keys.get(i)).toString();
-//            list.add(content);
-//        }
-//        String contents = list.toString();
         String contents = userword.toString();
         Log.d(TAG,"contents:"+contents);
         mIat.setParameter(SpeechConstant.TEXT_ENCODING, "utf-8");
