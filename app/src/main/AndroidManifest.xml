@@ -645,6 +645,22 @@
         <!-- 依成品调拨扫描 -->
         <activity android:name = ".module.activity.produce.endproductallot.EndProductAllotScanActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+        <!-- PQC检验-->
+        <activity
+            android:name=".module.activity.purchase.pqccheck.PQCCheckActivity"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.digiwin.PQCCheckActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- PQC检验-->
+        <activity
+            android:name=".module.activity.purchase.pqccheck.PQCValueActivity"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+        </activity>
         <activity android:name = ".module.activity.common.ChoosePicActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
         <activity

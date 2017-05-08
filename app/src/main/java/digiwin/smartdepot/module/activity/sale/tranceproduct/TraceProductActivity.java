@@ -89,7 +89,6 @@ public class TraceProductActivity extends BaseActivity {
 
     @OnTextChanged(value = R.id.et_input, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void scanBarcode(CharSequence s) {
-        //TODO 扫描条码
         if (!StringUtils.isBlank(s.toString().trim())) {
             mHandler.removeMessages(BARCODEWHAT);
             mHandler.sendMessageDelayed(mHandler.obtainMessage(BARCODEWHAT, s.toString()), AddressContants.DELAYTIME);

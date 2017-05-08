@@ -40,49 +40,49 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textColor="@color/head_text"
+                style="@style/app_text_ingreen"
                 android:text="@string/gongDan_no"/>
             <TextView
                 android:layout_width="@dimen/layout_0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textColor="@color/head_text"
+                style="@style/app_text_ingreen"
                 android:text="@string/make_department"/>
             <TextView
                 android:layout_width="@dimen/layout_0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textColor="@color/head_text"
+                style="@style/app_text_ingreen"
                 android:text="@string/version"/>
             <TextView
                 android:layout_width="@dimen/layout_0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textColor="@color/head_text"
+                style="@style/app_text_ingreen"
                 android:text="@string/product_draw_no"/>
             <TextView
                 android:layout_width="@dimen/layout_0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textColor="@color/head_text"
+                style="@style/app_text_ingreen"
                 android:text="@string/order_no"/>
             <TextView
                 android:layout_width="@dimen/layout_0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textColor="@color/head_text"
+                style="@style/app_text_ingreen"
                 android:text="@string/production"/>
             <TextView
                 android:layout_width="@dimen/layout_0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textColor="@color/head_text"
+                style="@style/app_text_ingreen"
                 android:text="@string/craft_route"/>
 
         </LinearLayout>
@@ -116,123 +116,130 @@
                 android:layout_width="@dimen/layout_0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
+                style="@style/ser_text_ingreen_yellow"
                 android:gravity="center"/>
             <TextView
                 android:id="@+id/tv_make_department"
                 android:layout_width="@dimen/layout_0dp"
                 android:layout_weight="1"
+                style="@style/ser_text_ingreen_yellow"
                 android:layout_height="wrap_content"
                 android:gravity="center"/>
             <TextView
                 android:id="@+id/tv_version"
                 android:layout_width="@dimen/layout_0dp"
                 android:layout_weight="1"
+                style="@style/ser_text_ingreen_yellow"
                 android:layout_height="wrap_content"
                 android:gravity="center"/>
             <TextView
                 android:id="@+id/tv_product_draw_no"
                 android:layout_width="@dimen/layout_0dp"
                 android:layout_weight="1"
+                style="@style/ser_text_ingreen_yellow"
                 android:layout_height="wrap_content"
                 android:gravity="center"/>
             <TextView
                 android:id="@+id/tv_order_no"
                 android:layout_width="@dimen/layout_0dp"
                 android:layout_weight="1"
+                style="@style/ser_text_ingreen_yellow"
                 android:layout_height="wrap_content"
                 android:gravity="center"/>
             <TextView
                 android:id="@+id/tv_production"
                 android:layout_width="@dimen/layout_0dp"
                 android:layout_weight="1"
+                style="@style/ser_text_ingreen_yellow"
                 android:layout_height="wrap_content"
                 android:gravity="center"/>
             <TextView
                 android:id="@+id/tv_craft_route"
                 android:layout_width="@dimen/layout_0dp"
                 android:layout_weight="1"
+                style="@style/ser_text_ingreen_yellow"
                 android:layout_height="wrap_content"
                 android:gravity="center"/>
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
-        style="@style/itemstyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/layout_5dp"
         android:layout_marginRight="@dimen/layout_5dp"
-        android:background="@drawable/form_head_back"
-        android:orientation="horizontal">
+        android:background="@drawable/zx_scandetail_bg"
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="@dimen/layout_0dp"
+        <LinearLayout
+            style="@style/itemstyle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:text="@string/item_no"
-            android:textColor="@color/white_ff"
-            android:textSize="@dimen/textSize_14sp" />
-        <TextView
-            android:layout_width="@dimen/layout_0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:text="@string/item_name"
-            android:textColor="@color/white_ff"
-            android:textSize="@dimen/textSize_14sp" />
-        <TextView
-            android:layout_width="@dimen/layout_0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:text="@string/model"
-            android:textColor="@color/white_ff"
-            android:textSize="@dimen/textSize_14sp" />
-        <TextView
-            android:layout_width="@dimen/layout_0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/unit"
-            android:textColor="@color/white_ff"
-            android:textSize="@dimen/textSize_14sp" />
-        <TextView
-            android:layout_width="@dimen/layout_0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.5"
-            android:gravity="center"
-            android:text="@string/standard_dosage"
-            android:textColor="@color/white_ff"
-            android:textSize="@dimen/textSize_14sp" />
-        <TextView
-            android:layout_width="@dimen/layout_0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.5"
-            android:gravity="center"
-            android:text="@string/reality_dosage"
-            android:textColor="@color/white_ff"
-            android:textSize="@dimen/textSize_14sp" />
-        <TextView
-            android:layout_width="@dimen/layout_0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/should_num"
-            android:textColor="@color/white_ff"
-            android:textSize="@dimen/textSize_14sp" />
-        <TextView
-            android:layout_width="@dimen/layout_0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/reality_num"
-            android:textColor="@color/white_ff"
-            android:textSize="@dimen/textSize_14sp" />
+            android:background="@drawable/form_head_back"
+            android:orientation="horizontal">
 
+            <TextView
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="@string/item_no"
+                style="@style/ser_text_ingreen" />
+            <TextView
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="@string/item_name"
+                style="@style/ser_text_ingreen" />
+            <TextView
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="@string/model"
+                style="@style/ser_text_ingreen" />
+            <TextView
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/unit"
+                style="@style/ser_text_ingreen" />
+            <TextView
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:gravity="center"
+                android:text="@string/standard_dosage"
+                style="@style/ser_text_ingreen" />
+            <TextView
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:gravity="center"
+                android:text="@string/reality_dosage"
+                style="@style/ser_text_ingreen" />
+            <TextView
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/should_num"
+                style="@style/ser_text_ingreen" />
+            <TextView
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/reality_num"
+                style="@style/ser_text_ingreen" />
+
+        </LinearLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rc_list"
+            android:layout_marginBottom="@dimen/layout_1dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rc_list"
-        android:layout_marginBottom="@dimen/layout_5dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+
 </LinearLayout>

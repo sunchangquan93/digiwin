@@ -129,6 +129,11 @@
         <item name="android:textSize">@dimen/digiwin_textsize</item>
         <item name="android:textColor">@color/white</item>
     </style>
+    <!-- 绿色背景下服务器返回黄色字体样式 -->
+    <style name="ser_text_ingreen_yellow">
+        <item name="android:textSize">@dimen/digiwin_textsize</item>
+        <item name="android:textColor">@color/yellow_text</item>
+    </style>
     <!--白色背景下本地文字样式-->
     <style name="app_text_inwhite">
         <item name="android:textSize">@dimen/digiwin_textsize</item>

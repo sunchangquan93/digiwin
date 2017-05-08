@@ -25,8 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:gravity="center"
-                android:textColor="@color/check_detail_form_text"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_inwhite" />
 
             <TextView
                 android:id="@+id/tv_custom"
@@ -34,8 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textColor="@color/check_detail_form_text"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_inwhite" />
 
             <TextView
                 android:id="@+id/tv_order_no"
@@ -43,8 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:gravity="center"
-                android:textColor="@color/check_detail_form_text"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_inwhite" />
 
             <TextView
                 android:id="@+id/tv_custom_no"
@@ -52,8 +49,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:gravity="center"
-                android:textColor="@color/check_detail_form_text"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_inwhite" />
 
             <TextView
                 android:id="@+id/tv_warehouse"
@@ -61,8 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textColor="@color/check_detail_form_text"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_inwhite" />
 
             <TextView
                 android:id="@+id/tv_num"
@@ -70,8 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textColor="@color/check_detail_form_text"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_inwhite" />
 
         </LinearLayout>
 

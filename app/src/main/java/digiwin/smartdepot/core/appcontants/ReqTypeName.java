@@ -250,4 +250,16 @@ public interface ReqTypeName {
      * 质量追溯明细查询
      */
     static final String  TRACEPRODUCT = "app.get.item.in.detail";
+    /**
+     * 获取测量值
+     */
+    static final String PQCCHECKVALUE = "app.get.test.values";
+    /**
+     * 提交PQC
+     */
+    static final String POSTPQC = "app.upd.pqc.status";
+    /**
+     * 保存PQC
+     */
+    static final String SAVEPQC = "app.check.measure.data";
 }

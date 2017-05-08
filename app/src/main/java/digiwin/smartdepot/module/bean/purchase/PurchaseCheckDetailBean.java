@@ -2,6 +2,8 @@ package digiwin.smartdepot.module.bean.purchase;
 
 import java.io.Serializable;
 
+import digiwin.smartdepot.module.bean.sale.scanout.ScanOutDetailKeyBean;
+
 /**
  * @author 唐孟宇
  * @module 收获检验
@@ -141,5 +143,34 @@ public class PurchaseCheckDetailBean implements Serializable{
      * 项目判定
      */
     private String item_deter = null;
+
+    /**
+     * 重写hashcode和equals方法
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + seq.hashCode();
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof PurchaseCheckDetailBean && this.seq.equals(((PurchaseCheckDetailBean)o).seq);
+    }
+
+    public String getDoc_no() {
+        return doc_no;
+    }
+
+    public void setDoc_no(String doc_no) {
+        this.doc_no = doc_no;
+    }
+
+    /**
+     * pqc单号
+     */
+    private String doc_no;
 
 }

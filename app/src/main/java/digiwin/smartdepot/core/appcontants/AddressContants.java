@@ -249,4 +249,13 @@ public class AddressContants {
      * 理由码
      */
     public static final String REASONCODENO = "reason_code_no";
+
+    /**
+     * 分页数
+     */
+    public static final String PAGESIZE = "pagesize";
+    /**
+     * 项次
+     */
+    public static final String SEQ = "seq";
 }

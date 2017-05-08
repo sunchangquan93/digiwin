@@ -22,7 +22,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:padding="@dimen/layout_5dp"
-            android:textColor="@color/white" />
+            style="@style/ser_text_ingreen"/>
 
         <TextView
             android:id="@+id/tv_text_two"
@@ -31,7 +31,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:padding="@dimen/layout_5dp"
-            android:textColor="@color/white" />
+            style="@style/ser_text_ingreen" />
 
         <TextView
             android:id="@+id/tv_text_three"
@@ -40,7 +40,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:padding="@dimen/layout_5dp"
-            android:textColor="@color/white" />
+            style="@style/ser_text_ingreen" />
 
         <TextView
             android:id="@+id/tv_text_four"
@@ -49,7 +49,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:padding="@dimen/layout_5dp"
-            android:textColor="@color/white" />
+            style="@style/ser_text_ingreen" />
     </LinearLayout>
 
     <LinearLayout

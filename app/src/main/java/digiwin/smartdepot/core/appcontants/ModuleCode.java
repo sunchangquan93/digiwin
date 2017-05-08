@@ -37,6 +37,10 @@ public interface ModuleCode {
      */
     public final String STORERETURNMATERIAL="A008";
     /**
+     * pqc 检验
+     */
+    public final String PQCCHECK="A060";
+    /**
      * 依成品调拨
      */
     public final String ENDPRODUCTALLOT="B001";

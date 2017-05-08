@@ -11,8 +11,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:padding="@dimen/layout_10dp"
-        android:textColor="@color/black_32"
-        android:textSize="@dimen/textSize_14sp" />
+        style="@style/app_text_inwhite" />
     <TextView
         android:id="@+id/tv_item_no"
         android:layout_width="@dimen/layout_0dp"
@@ -20,8 +19,7 @@
         android:layout_weight="1"
         android:padding="@dimen/layout_10dp"
         android:gravity="center"
-        android:textColor="@color/black_32"
-        android:textSize="@dimen/textSize_14sp" />
+        style="@style/app_text_inwhite" />
     <TextView
         android:id="@+id/tv_item_name"
         android:layout_width="@dimen/layout_0dp"
@@ -29,8 +27,7 @@
         android:layout_weight="1"
         android:padding="@dimen/layout_10dp"
         android:gravity="center"
-        android:textColor="@color/black_32"
-        android:textSize="@dimen/textSize_14sp" />
+        style="@style/app_text_inwhite" />
     <TextView
         android:id="@+id/tv_item_spec"
         android:layout_width="@dimen/layout_0dp"
@@ -38,7 +35,6 @@
         android:layout_weight="1"
         android:padding="@dimen/layout_10dp"
         android:gravity="center"
-        android:textColor="@color/check_detail_form_text"
-        android:textSize="@dimen/textSize_14sp" />
+        style="@style/app_text_inwhite" />
 
 </LinearLayout>

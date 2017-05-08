@@ -131,6 +131,8 @@
 
     <string name="toerror">跳转错误</string>
 
+    <string name="input_num_below_zero">输入数量不应小于0</string>
+
     <string name="mataerial_returning">退料过账</string>
     <string name="direct_storage">快速完工</string>
 
@@ -487,6 +489,7 @@
     <string name="chooseunbind_use">按用户解绑</string>
     <string name="chooseunbind_device">按设备解绑</string>
     <string name="scan_finished_barcode">请扫描成品条码</string>
+    <string name="scan_order_barcode_gongxu">请扫描工单号/物料条码/工序</string>
     <string name="feeding_batche">投料批次</string>
     <string name="work_group">工作组</string>
     <string name="check_detail">检验状况</string>
@@ -496,6 +499,7 @@
     <string name="blone_department">所属部门</string>
     <string name="bad_no">不良原因代码</string>
     <string name="bad_string">不良原因说明</string>
+    <string name="string">说明</string>
     <string name="bad_qty">不良原因数量</string>
     <string name="check_employee">检验员</string>
     <string name="print_psw">请输入登入密码</string>
@@ -528,4 +532,16 @@
     <string name="current_max_num">本次发料套数</string>
 
     <string name="scanbarcode_nomatch_item">扫描物料与所选料件不符</string>
+
+    <string name="pqc_check">PQC检验</string>
+    <string name="check_type">检验方式</string>
+    <string name="check_num">检验量</string>
+    <string name="up_value">上值</string>
+    <string name="down_value">下值</string>
+    <string name="check_value">测量值</string>
+    <string name="title_check_value">检验测量值维护</string>
+    <string name="OK">合格</string>
+    <string name="unOK">不合格</string>
+
+
 </resources>

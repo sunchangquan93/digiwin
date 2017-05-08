@@ -103,12 +103,15 @@ public class MainLogic {
 
         ModuleBean quickstorage = new ModuleBean(R.string.title_quickstorage, R.mipmap.quickly_storage, ModuleCode.QUICKSTORAGE, "android.intent.action.digiwin.QuickStorageListActivity");
 
+        ModuleBean pqcCheck = new ModuleBean(R.string.pqc_check, R.mipmap.pqc, ModuleCode.PQCCHECK, "android.intent.action.digiwin.PQCCheckActivity");
+
         purchaseItems.add(materialreceipt);
         purchaseItems.add(quickstorage);
         purchaseItems.add(purchaseCheck);
         purchaseItems.add(purchaseGoodsScan);
         purchaseItems.add(purchaseInStore);
         purchaseItems.add(storeReturnMaterial);
+        purchaseItems.add(pqcCheck);
 
 
 

@@ -193,4 +193,99 @@ public class PurchaseCheckBean implements Serializable{
     public void setOk_qty(String ok_qty) {
         this.ok_qty = ok_qty;
     }
+
+    /**
+     * pqc检验
+     */
+    /**
+     * doc_no                 LIKE rvb_file.rvb01,  #PQC单号
+     * wo_no                  LIKE type_file.chr100,#工单
+     * receipt_no             LIKE type_file.chr100,#Run Card
+     * workstation_no         LIKE sgm_file.sgm06,  #工作组编号
+     * workstation_name       LIKE eca_file.eca02,  #工作组名称
+     * subop_no               LIKE qcm_file.qcm05,  #工序
+     * item_no                LIKE type_file.chr100,#料号
+     * item_name              LIKE ima_file.ima02,  #品名
+     * item_spec              LIKE ima_file.ima021, #规格
+     * drawing_no             LIKE ima_file.ima04,  #图号
+     * qty										LIKE qcm_file.qcm22,  #待检数量
+     * qc_state               LIKE type_file.chr1    #qc单检验否
+     */
+
+    /**
+     * PQC单号
+     */
+    public String doc_no;
+    /**
+     * 工单
+     */
+    public String wo_no;
+    /**
+     * 工作组编号
+     */
+    public String workstation_no;
+    /**
+     * 工作组名称
+     */
+    public String workstation_name;
+    /**
+     * 工序
+     */
+    public String subop_no;
+
+    public String getDoc_no() {
+        return doc_no;
+    }
+
+    public void setDoc_no(String doc_no) {
+        this.doc_no = doc_no;
+    }
+
+    public String getWo_no() {
+        return wo_no;
+    }
+
+    public void setWo_no(String wo_no) {
+        this.wo_no = wo_no;
+    }
+
+    public String getWorkstation_no() {
+        return workstation_no;
+    }
+
+    public void setWorkstation_no(String workstation_no) {
+        this.workstation_no = workstation_no;
+    }
+
+    public String getWorkstation_name() {
+        return workstation_name;
+    }
+
+    public void setWorkstation_name(String workstation_name) {
+        this.workstation_name = workstation_name;
+    }
+
+    public String getSubop_no() {
+        return subop_no;
+    }
+
+    public void setSubop_no(String subop_no) {
+        this.subop_no = subop_no;
+    }
+
+    /**
+     * 重写hashcode和equals方法
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + seq.hashCode();
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof PurchaseCheckBean && this.seq.equals(((PurchaseCheckBean)o).seq);
+    }
 }

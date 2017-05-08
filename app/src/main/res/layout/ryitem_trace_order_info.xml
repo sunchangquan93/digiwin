@@ -25,8 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:gravity="center"
-                android:textColor="@color/check_detail_form_text"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_inwhite" />
 
             <TextView
                 android:id="@+id/tv_item_name"
@@ -34,8 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:gravity="center"
-                android:textColor="@color/check_detail_form_text"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_inwhite" />
 
             <TextView
                 android:id="@+id/tv_item_spec"
@@ -43,8 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:gravity="center"
-                android:textColor="@color/check_detail_form_text"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_inwhite" />
 
             <TextView
                 android:id="@+id/tv_unit"
@@ -52,8 +49,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textColor="@color/check_detail_form_text"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_inwhite" />
 
             <TextView
                 android:id="@+id/tv_biaozhun_use"
@@ -61,8 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.5"
                 android:gravity="center"
-                android:textColor="@color/check_detail_form_text"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_inwhite" />
 
             <TextView
                 android:id="@+id/tv_relatity_use"
@@ -70,8 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.5"
                 android:gravity="center"
-                android:textColor="@color/check_detail_form_text"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_inwhite" />
 
             <TextView
                 android:id="@+id/tv_is_should"
@@ -79,16 +73,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textColor="@color/check_detail_form_text"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_inwhite" />
             <TextView
                 android:id="@+id/tv_relatity"
                 android:layout_width="@dimen/layout_0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textColor="@color/check_detail_form_text"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_inwhite" />
 
         </LinearLayout>
 

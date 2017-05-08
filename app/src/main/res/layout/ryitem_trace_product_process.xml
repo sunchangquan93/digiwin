@@ -25,8 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:gravity="center"
-                android:textColor="@color/check_detail_form_text"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_inwhite" />
 
             <TextView
                 android:id="@+id/tv_card_no"
@@ -34,8 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:gravity="center"
-                android:textColor="@color/check_detail_form_text"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_inwhite" />
 
             <TextView
                 android:id="@+id/tv_time"
@@ -43,8 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:gravity="center"
-                android:textColor="@color/check_detail_form_text"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_inwhite" />
 
             <TextView
                 android:id="@+id/tv_line_no"
@@ -52,8 +49,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textColor="@color/check_detail_form_text"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_inwhite" />
 
             <TextView
                 android:id="@+id/tv_gongxu"
@@ -61,8 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textColor="@color/check_detail_form_text"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_inwhite" />
 
             <TextView
                 android:id="@+id/tv_device"
@@ -70,8 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textColor="@color/check_detail_form_text"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_inwhite" />
 
             <TextView
                 android:id="@+id/tv_is_feeding"
@@ -79,24 +73,21 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textColor="@color/check_detail_form_text"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_inwhite" />
             <TextView
                 android:id="@+id/tv_employee_group"
                 android:layout_width="@dimen/layout_0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textColor="@color/check_detail_form_text"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_inwhite" />
             <TextView
                 android:id="@+id/tv_is_check"
                 android:layout_width="@dimen/layout_0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textColor="@color/check_detail_form_text"
-                android:textSize="@dimen/textSize_14sp" />
+                style="@style/app_text_inwhite" />
 
         </LinearLayout>
 

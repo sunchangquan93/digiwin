@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include layout="@layout/activity_title_toolbar_bar"></include>
+
     <LinearLayout
+        android:layout_below="@id/toolbar_title"
         android:id="@+id/ll_order_head"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,21 +23,28 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 style="@style/app_text_ingreen"
-                android:text="@string/item_no"/>
+                android:text="@string/check_item"/>
             <TextView
                 android:layout_width="@dimen/layout_0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 style="@style/app_text_ingreen"
-                android:text="@string/item_name"/>
+                android:text="@string/string"/>
             <TextView
                 android:layout_width="@dimen/layout_0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 style="@style/app_text_ingreen"
-                android:text="@string/model"/>
+                android:text="@string/check_type"/>
+            <TextView
+                android:layout_width="@dimen/layout_0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                style="@style/app_text_ingreen"
+                android:text="@string/check_num"/>
 
         </LinearLayout>
 
@@ -45,31 +55,42 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:id="@+id/tv_item_no"
+                android:id="@+id/tv_check_item"
                 android:layout_width="@dimen/layout_0dp"
                 android:layout_weight="1"
                 style="@style/ser_text_ingreen_yellow"
                 android:layout_height="wrap_content"
                 android:gravity="center"/>
             <TextView
-                android:id="@+id/tv_item_name"
+                android:id="@+id/tv_string"
                 android:layout_width="@dimen/layout_0dp"
-                android:layout_weight="1"
                 style="@style/ser_text_ingreen_yellow"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:gravity="center"/>
             <TextView
-                android:id="@+id/tv_model"
+                android:id="@+id/tv_check_type"
                 android:layout_width="@dimen/layout_0dp"
-                android:layout_weight="1"
                 style="@style/ser_text_ingreen_yellow"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="center"/>
+            <TextView
+                android:id="@+id/tv_check_num"
+                android:layout_width="@dimen/layout_0dp"
+                style="@style/ser_text_ingreen_yellow"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:gravity="center"/>
         </LinearLayout>
     </LinearLayout>
+
+
     <LinearLayout
+        android:layout_below="@id/ll_order_head"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/layout_60dp"
         android:layout_marginLeft="@dimen/layout_5dp"
         android:layout_marginRight="@dimen/layout_5dp"
         android:background="@drawable/zx_scandetail_bg"
@@ -78,32 +99,15 @@
             style="@style/itemstyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:background="@drawable/form_head_back"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="@dimen/layout_0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/gongDan_no"
-                style="@style/ser_text_ingreen" />
-
-            <TextView
-                android:layout_width="@dimen/layout_0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:gravity="center"
-                android:text="@string/card_number"
-                style="@style/ser_text_ingreen" />
-
-            <TextView
-                android:layout_width="@dimen/layout_0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:gravity="center"
-                android:text="@string/time"
+                android:text="@string/item_seq"
                 style="@style/ser_text_ingreen" />
 
             <TextView
@@ -111,7 +115,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/line"
+                android:text="@string/up_value"
                 style="@style/ser_text_ingreen" />
 
             <TextView
@@ -119,7 +123,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/pallet"
+                android:text="@string/down_value"
                 style="@style/ser_text_ingreen" />
 
             <TextView
@@ -127,38 +131,22 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/device"
+                android:text="@string/check_value"
                 style="@style/ser_text_ingreen" />
-
-            <TextView
-                android:layout_width="@dimen/layout_0dp"
+            <ImageView
+                android:id="@+id/iv_add"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/feeding"
-                style="@style/ser_text_ingreen" />
-            <TextView
-                android:layout_width="@dimen/layout_0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/employee_group"
-                style="@style/ser_text_ingreen" />
-            <TextView
-                android:layout_width="@dimen/layout_0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/check"
-                style="@style/ser_text_ingreen" />
+                android:layout_marginRight="@dimen/layout_5dp"
+                android:src="@drawable/add"/>
 
         </LinearLayout>
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rc_list"
-            android:layout_marginBottom="@dimen/layout_1dp"
+            android:id="@+id/ry_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
     </LinearLayout>
 
+    <include layout="@layout/inclu_save"></include>
 
-</LinearLayout>
+</RelativeLayout>
