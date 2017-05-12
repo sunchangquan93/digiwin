@@ -7,7 +7,7 @@
     android:background="@color/white"
     android:orientation="vertical"
     tools:context="digiwin.smartdepot.module.activity.stock.storequery.StoreQueryActivity">
-
+    <include layout="@layout/activity_title_toolbar_bar" />
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -178,8 +178,6 @@
                 android:textSize="@dimen/textSize_18sp" />
         </LinearLayout>
     </ScrollView>
-
-    <include layout="@layout/activity_title_toolbar_bar" />
 
     <LinearLayout
         android:id="@+id/ll_taylayout"

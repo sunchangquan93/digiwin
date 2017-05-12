@@ -354,7 +354,7 @@ public class LoginActivity extends BaseActivity {
             public void onSuccess(List<String> plants) {
                 try {
                     mPlants = plants;
-                    if (mPlants.size() > 0) {
+                    if (StringUtils.isBlank(tv_login_eye.getText().toString().trim())&&mPlants.size() > 0) {
                         tv_login_eye.setText(mPlants.get(0));
                     }
                 }catch (Exception e){

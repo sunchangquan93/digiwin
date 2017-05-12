@@ -79,6 +79,7 @@ public class JsonResp
     public static String getCode(String resp)
     {
         String code = "-1";
+        LogUtils.i(TAG, "返回报文：" + resp);
         try
         {
             Resp resp2 = getObject(resp, Resp.class);
@@ -90,7 +91,7 @@ public class JsonResp
         }
         catch (Exception e)
         {
-            LogUtils.e(TAG, "获取返回码失败");
+            LogUtils.e(TAG, "获取返回码失败"+e);
         }
         return code;
     }
@@ -116,7 +117,7 @@ public class JsonResp
         }
         catch (Exception e)
         {
-            LogUtils.e(TAG, "获取返回码失败");
+            LogUtils.e(TAG, "获取返回码失败"+e);
         }
         return description;
     }
@@ -143,7 +144,7 @@ public class JsonResp
         }
         catch (Exception e)
         {
-            LogUtils.e(TAG, "getParaDatas失败");
+            LogUtils.e(TAG, "getParaDatas失败"+e);
         }
         return list;
     }
@@ -169,7 +170,7 @@ public class JsonResp
         }
         catch (Exception e)
         {
-            LogUtils.e(TAG, "getParaData失败");
+            LogUtils.e(TAG, "getParaData失败"+e);
         }
         return t;
     }
@@ -186,7 +187,7 @@ public class JsonResp
         }
         catch (Exception e)
         {
-            LogUtils.e(TAG, "getObject发生异常");
+            LogUtils.e(TAG, "getObject发生异常"+e);
         }
         return t;
     }
@@ -203,7 +204,7 @@ public class JsonResp
         }
         catch (Exception e)
         {
-            LogUtils.e(TAG, "getObjects发生异常");
+            LogUtils.e(TAG, "getObjects发生异常"+e);
         }
         return list;
     }
@@ -222,7 +223,7 @@ public class JsonResp
         }
         catch (Exception e)
         {
-            LogUtils.e(TAG, "getlistKeyMaps发生异常");
+            LogUtils.e(TAG, "getlistKeyMaps发生异常"+e);
         }
         return list;
     }

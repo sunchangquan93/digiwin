@@ -580,9 +580,12 @@ public class AlertDialogUtils {
      * 隐藏等待dialog
      */
     public static void dismissDialog() {
+        try{
         if (dialog != null && dialog.isShowing()) {
             dialog.dismiss();
             dialog = null;
+        }}catch (Exception e){
+            LogUtils.e(TAG, "dismissDialog-----Error" + e);
         }
     }
 
