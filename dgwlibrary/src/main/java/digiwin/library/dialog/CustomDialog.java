@@ -93,6 +93,8 @@ public class CustomDialog extends Dialog {
             this.context = context;
         }
 
+
+
         public Builder view(int resView) {
             try {
                 view = LayoutInflater.from(context).inflate(resView, null);

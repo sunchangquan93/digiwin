@@ -83,14 +83,10 @@ public class OkHttpRequestJsonManager implements IRequestManager {
         addCallBack(context, requestCallBack, request);
     }
 
-    /**
-     * 主要xml使用
-     */
     @Override
     public void post(String url, String requestBody, IRequestCallBack requestCallBack) {
         RequestBody formBody = new FormBody.Builder()
-                .add("token", "token")
-                .add("params", requestBody)
+                .add("inParam", requestBody)
                 .build();
         Request request = new Request.Builder()
                 .addHeader("SOAPAction", "\"\"")
@@ -131,7 +127,6 @@ public class OkHttpRequestJsonManager implements IRequestManager {
                 builder.addFormDataPart(key, object.toString());
             } else {
                 File file = (File) object;
-                LogUtils.i(TAG, "updateFile--->"+file);
                 builder.addFormDataPart(key, file.getName(), createProgressRequestBody(MEDIA_OBJECT_STREAM, file, updateCallBack));
             }
         }
@@ -151,6 +146,7 @@ public class OkHttpRequestJsonManager implements IRequestManager {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
+                        LogUtils.i(TAG,"updateFile---onFailure:");
                         updateCallBack.onFailure(context, context.getString(R.string.update_failed));
                     }
                 });
@@ -159,9 +155,22 @@ public class OkHttpRequestJsonManager implements IRequestManager {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 if (response.isSuccessful()) {
-                    String string = response.body().string();
+                  final  String string = response.body().string();
+                    LogUtils.i(TAG,"isSuccessful:"+string);
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (string.equals("") || string == null) {
+                                updateCallBack.onFailure(context ,context.getString(R.string.update_failed));
+                                return;
+                            }
+                            updateCallBack.onResponse(string);
+                        }
+                    });
                     updateCallBack.onResponse(string);
                 } else {
+                    final  String string = response.body().string();
+                    LogUtils.i(TAG,"isSuccessful:else"+string);
                     updateCallBack.onFailure(context, context.getString(R.string.update_failed));
                 }
             }
@@ -247,7 +256,7 @@ public class OkHttpRequestJsonManager implements IRequestManager {
                             @Override
                             public void run() {
                                 if (callBack != null) {
-                                    callBack.onProgressCallBack(remaining, current);
+                                    callBack.onProgressCallBack(current, remaining);
                                 }
                             }
                         });

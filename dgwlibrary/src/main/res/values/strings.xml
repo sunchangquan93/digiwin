@@ -79,4 +79,5 @@
     { "name" : "扫出扫描", "words": [ "扫出扫描","扫出扫描"] },
     ]
     }</string>
+    <string name="sdate_before_edate">开始日期必须在结束日期之前</string>
 </resources>

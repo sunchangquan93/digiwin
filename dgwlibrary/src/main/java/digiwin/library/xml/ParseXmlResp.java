@@ -130,8 +130,9 @@ public class ParseXmlResp {
             xStream.addImplicitCollection(RecordSet.class, "Detail");
             xStream.addImplicitCollection(Detail.class, "Record");
 
-
             xStream.alias("RecordSet", RecordSet.class);
+            xStream.alias("Detail", Detail.class);//如果报文中需要解读到Detail这个节点，则要加上这句
+            xStream.alias("Master", Master.class);//如果报文中需要解读到Master这个节点，则要加上这句
             xStream.alias("Record", Record.class);
             xStream.alias("Field", Field.class);
 

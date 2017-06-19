@@ -82,8 +82,8 @@ public class CreateParaXmlReq {
             }
             // 遍历Map的方法
             init(userName, plant, deviceId, appmodule,reqType, timestamp);
-            RecordSet recordset1 = new RecordSet(String.valueOf(1));
             for (int i = 0; i < maps.size(); i++) {
+                RecordSet recordset1 = new RecordSet(String.valueOf(i+1));
                 Set<Entry<String, String>> sets = maps.get(i).entrySet();
                 Record record = new Record();
                 for (Entry<String, String> entry : sets) {
@@ -95,15 +95,15 @@ public class CreateParaXmlReq {
                     Field field1 = new Field(key.toString(), val.toString());
                     recordset1.A_Master.Record.Field.add(field1);
                 }
+                B_Body.Tip.TipRequest.Request.RequestContent.B_Document.RecordSet.add(recordset1);
             }
-            B_Body.Tip.TipRequest.Request.RequestContent.B_Document.RecordSet.add(recordset1);
         } catch (Exception e) {
-            LogUtils.e("CreateParaXmlReq", "RecordSet中报文--组织报文异常");
+            LogUtils.e("CreateParaXmlReq", "RecordSet中报文--组织报文异常"+e);
         }
     }
     /**
      * @param reqType   节点名
-     * @param userName  用户名
+     * @param userName  用户名e
      * @param masterName  Master节点名称
      * @param plant     营用中心
      * @param maps       RecordSet中报文循环recordset
@@ -119,9 +119,9 @@ public class CreateParaXmlReq {
             }
             // 遍历Map的方法
             init(userName, plant, deviceId, appmodule,reqType, timestamp);
-            RecordSet recordset1 = new RecordSet(String.valueOf(1));
-            recordset1.A_Master.name = masterName;
             for (int i = 0; i < maps.size(); i++) {
+                RecordSet recordset1 = new RecordSet(String.valueOf(i+1));
+                recordset1.A_Master.name = masterName;
                 Set<Entry<String, String>> sets = maps.get(i).entrySet();
                 Record record = new Record();
                 for (Entry<String, String> entry : sets) {
@@ -134,10 +134,10 @@ public class CreateParaXmlReq {
                     record.Field.add(field1);
                 }
                 recordset1.A_Master.Records.add(record);
+                B_Body.Tip.TipRequest.Request.RequestContent.B_Document.RecordSet.add(recordset1);
             }
-            B_Body.Tip.TipRequest.Request.RequestContent.B_Document.RecordSet.add(recordset1);
         } catch (Exception e) {
-            LogUtils.e("CreateParaXmlReq", "RecordSet中报文--组织报文异常");
+            LogUtils.e("CreateParaXmlReq", "RecordSet中报文--组织报文异常"+e);
         }
     }
 

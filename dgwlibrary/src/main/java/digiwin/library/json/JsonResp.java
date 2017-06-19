@@ -174,6 +174,27 @@ public class JsonResp
         }
         return t;
     }
+
+    /**
+     * parameter中只有一个参数时调用
+     * @param resp
+     * @param type
+     * @return
+     */
+    public static String getParaString(String resp, String type) {
+        String t = "";
+        try {
+            Resp resp2 = getObject(resp, Resp.class);
+            Payload payload = getObject(resp2.payload, Payload.class);
+            String std_data = payload.std_data;
+            JSONObject std_dataObj = JSON.parseObject(std_data);
+            JSONObject paraObj = std_dataObj.getJSONObject("parameter").getJSONObject(type);
+            t = paraObj.toJSONString();
+        } catch (Exception e) {
+            LogUtils.e(TAG, "getParaString" + e);
+        }
+        return t;
+    }
     
     /**
      * JSONString--TO--Object
