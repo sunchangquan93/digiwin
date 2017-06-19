@@ -215,7 +215,7 @@ public class EndProductAllotActivity extends BaseFirstModuldeActivity {
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        mName.setText(getResources().getString(R.string.endproduct_allot));
+        mName.setText(getString(R.string.endproduct_allot)+getString(R.string.list));
         search.setVisibility(View.VISIBLE);
         search.setImageResource(R.drawable.search);
         isSearching = true;
@@ -246,7 +246,7 @@ public class EndProductAllotActivity extends BaseFirstModuldeActivity {
         if (requestCode == SCANCODE) {
             if (null!=listSumBeen&&listSumBeen.size()>0) {
                onUpdate();
-            };
+            }
         }
     }
 

@@ -50,7 +50,7 @@ import digiwin.smartdepot.module.bean.purchase.BadReasonBean;
 import digiwin.smartdepot.module.bean.purchase.PQCValueBean;
 import digiwin.smartdepot.module.bean.purchase.PurchaseCheckBean;
 import digiwin.smartdepot.module.bean.purchase.PurchaseCheckDetailBean;
-import digiwin.smartdepot.module.logic.purchase.PQCLogic;
+import digiwin.smartdepot.module.logic.purchase.QCLogic;
 import digiwin.smartdepot.module.logic.purchase.PurcahseCheckLogic;
 
 /**
@@ -186,7 +186,7 @@ public class PQCCheckActivity extends BaseActivity {
     @BindView(R.id.commit)
     Button commit;
 
-    private PQCLogic pqcLogic;
+    private QCLogic pqcLogic;
     @OnClick(R.id.commit)
     public void commit(){
         final List<Map<String,String>> maps = new ArrayList<>();
@@ -220,7 +220,7 @@ public class PQCCheckActivity extends BaseActivity {
             @Override
             public void onCallback1() {
                 showLoadingDialog();
-                pqcLogic.postPQCData(maps, details, new PQCLogic.postPQCListener() {
+                pqcLogic.postPQCData(maps, details, new QCLogic.postPQCListener() {
                     @Override
                     public void onSuccess(String msg) {
                         dismissLoadingDialog();
@@ -252,7 +252,7 @@ public class PQCCheckActivity extends BaseActivity {
         values = new ArrayList<>();
         detailBean = new ArrayList<>();
         logic = PurcahseCheckLogic.getInstance(activity,module,mTimestamp.toString());
-        pqcLogic = PQCLogic.getInstance(activity,module,mTimestamp.toString());
+        pqcLogic = QCLogic.getInstance(activity,module,mTimestamp.toString());
         selectBean = null;
         selectedDetailBean = null;
         prePosition = -1;
@@ -460,7 +460,7 @@ public class PQCCheckActivity extends BaseActivity {
         values = new ArrayList<>();
         detailBean = new ArrayList<>();
         logic = PurcahseCheckLogic.getInstance(activity,module,mTimestamp.toString());
-        pqcLogic = PQCLogic.getInstance(activity,module,mTimestamp.toString());
+        pqcLogic = QCLogic.getInstance(activity,module,mTimestamp.toString());
         selectBean = null;
         selectedDetailBean = null;
         prePosition = -1;

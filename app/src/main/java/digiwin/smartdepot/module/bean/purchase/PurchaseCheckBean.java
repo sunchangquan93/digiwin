@@ -185,6 +185,10 @@ public class PurchaseCheckBean implements Serializable{
      * 判定状态
      */
     public String ok_qty;
+    /**
+     * 图片标签
+     */
+    private String gls_bv08;
 
     public String getOk_qty() {
         return ok_qty;
@@ -233,6 +237,14 @@ public class PurchaseCheckBean implements Serializable{
      */
     public String subop_no;
 
+    public String getGls_bv08() {
+        return gls_bv08;
+    }
+
+    public void setGls_bv08(String gls_bv08) {
+        this.gls_bv08 = gls_bv08;
+    }
+
     public String getDoc_no() {
         return doc_no;
     }
@@ -271,6 +283,32 @@ public class PurchaseCheckBean implements Serializable{
 
     public void setSubop_no(String subop_no) {
         this.subop_no = subop_no;
+    }
+
+
+    /**
+     * 部门名称
+     */
+    private String department_name;
+    /**
+     * 部门编号
+     */
+    private String department_no;
+
+    public String getDepartment_no() {
+        return department_no;
+    }
+
+    public void setDepartment_no(String department_no) {
+        this.department_no = department_no;
+    }
+
+    public String getDepartment_name() {
+        return department_name;
+    }
+
+    public void setDepartment_name(String department_name) {
+        this.department_name = department_name;
     }
 
     /**

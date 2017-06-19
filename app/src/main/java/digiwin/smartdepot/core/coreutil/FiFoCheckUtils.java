@@ -1,5 +1,10 @@
 package digiwin.smartdepot.core.coreutil;
 
+import android.app.Activity;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.support.v4.app.ActivityCompat;
+
 import java.util.List;
 
 import digiwin.library.utils.StringUtils;
@@ -56,4 +61,5 @@ public class FiFoCheckUtils {
 
         return fifocheck;
     }
+
 }

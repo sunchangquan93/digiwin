@@ -110,7 +110,7 @@ public class MoveStoreSumFg extends BaseFragment {
                     commonLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
                         @Override
                         public void onSuccess(ScanLocatorBackBean locatorBackBean) {
-                            tvLocator.setText(locatorBackBean.getStorage_spaces_name());
+                            tvLocator.setText(locatorBackBean.getStorage_spaces_no());
                             tvStorage.setText(locatorBackBean.getWarehouse_name());
                             locatorFlag=true;
                         }
@@ -235,7 +235,7 @@ public class MoveStoreSumFg extends BaseFragment {
      * 提交
      */
     private void sureCommit(){
-        if (!locatorFlag) {
+        if (!locatorFlag||StringUtils.isBlank(tvLocator.getText().toString().trim())) {
             showFailedDialog(R.string.scan_in_movelocator);
             return;
         }

@@ -13,9 +13,9 @@ import digiwin.library.utils.ThreadPoolManager;
 
 
 /**
- * @des      无线打印机管理
- * @author  xiemeng
- * @date    2017/2/21
+ * @author xiemeng
+ * @des 无线打印机管理
+ * @date 2017/2/21
  */
 public class WiFiPrintManager {
     private static final String TAG = "WiFiPrintManager";
@@ -36,15 +36,15 @@ public class WiFiPrintManager {
 
 
     public static WiFiPrintManager getManager() {
-       // if (null == manager) {
-            manager = new WiFiPrintManager();
-            handler=new Handler(Looper.getMainLooper());
-      //  }
+        // if (null == manager) {
+        manager = new WiFiPrintManager();
+        handler = new Handler(Looper.getMainLooper());
+        //  }
         return manager;
     }
 
-    public  interface OpenWiFiPrintListener{
-        public void  isOpen(boolean isOpen);
+    public interface OpenWiFiPrintListener {
+        public void isOpen(boolean isOpen);
     }
 
     /**
@@ -58,21 +58,21 @@ public class WiFiPrintManager {
             public void run() {
                 LogUtils.e(TAG, "openWiFi--");
                 try {
-                    SocketAddress ipe = new InetSocketAddress("172.20.10.10", 9100);
+                    SocketAddress ipe = new InetSocketAddress("192.168.9.161", 9100);
                     socket = new Socket();
                     socket.connect(ipe);
                     socket.setSoTimeout(Net_ReceiveTimeout);
                     printSend = new PrintSend(socket);
-                    isOpen = true;
+                    isOpen = socket.isConnected();
+                    LogUtils.e(TAG, "isOpen成功" + isOpen);
                 } catch (IOException e) {
                     isOpen = false;
                     LogUtils.e(TAG, "IOException--连接不成功");
-                }
-                catch (Exception e) {
+                } catch (Exception e) {
                     isOpen = false;
-                    LogUtils.e(TAG, "Exception--连接不成功"+e);
+                    LogUtils.e(TAG, "Exception--连接不成功" + e);
                 }
-                LogUtils.e(TAG, "isOpen--isOpen："+isOpen);
+                LogUtils.e(TAG, "isOpen--isOpen：" + isOpen);
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
@@ -80,7 +80,7 @@ public class WiFiPrintManager {
                     }
                 });
             }
-        },null);
+        }, null);
     }
 
     /**
@@ -101,13 +101,17 @@ public class WiFiPrintManager {
      */
     public void printText(String msg) {
         try {
-            String encoding2="A"+
-                    "H400V300P2L0101K9B中文ABCD1234"+
-                    "%0H0040V0100BG02120>G" + "123"+ "\n"+
-                    "Q1"+
+//            + "%0H0040V0040L0202P02C9B" + "123" + "\n"
+//                    + "%0H0040V0100BG02120>G" + "123"+ "\n"
+//                    + "%0H0040V0250L0202P02C9B" + "123" + "\n"
+//                    + "%0H0100V0280L0303P02C9B" + "  " + "\n"
+            String encoding3 = "1231";
+            String encoding2 = "A" +
+                    "%0H0040V040BG02120>G" + "123" + "\n" +
+                    "%0H0040V02202D30,M,05,1,0DN" + encoding3.length() + "," + encoding3 +
+                    "H0040V350P2L0101K9B中文ABCD1234" +
                     "Z";
-            String encoding3="1231";
-            printSend.sendMessage(encoding3);
+            printSend.sendMessage(encoding2);
             close();
         } catch (Exception e) {
 

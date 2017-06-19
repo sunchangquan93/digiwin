@@ -198,7 +198,6 @@ public class QuickStorageListActivity extends BaseTitleActivity{
             public void onSuccess(final List<FilterResultOrderBean> list) {
                 dismissLoadingDialog();
                 if(list.size() > 0){
-                    mName.setText(R.string.title_quickstorage_list);
                     ll_search_dialog.setVisibility(View.GONE);
                     scrollview.setVisibility(View.VISIBLE);
                     dataList = new ArrayList<FilterResultOrderBean>();
@@ -293,7 +292,7 @@ public class QuickStorageListActivity extends BaseTitleActivity{
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        mName.setText(R.string.filter_condition);
+        mName.setText(getString(R.string.title_quickstorage)+getString(R.string.list));
         activity = this;
         iv_title_setting.setVisibility(View.VISIBLE);
         iv_title_setting.setImageResource(R.drawable.search);

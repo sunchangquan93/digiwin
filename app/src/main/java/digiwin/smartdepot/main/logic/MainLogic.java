@@ -103,7 +103,7 @@ public class MainLogic {
 
         ModuleBean quickstorage = new ModuleBean(R.string.title_quickstorage, R.mipmap.quickly_storage, ModuleCode.QUICKSTORAGE, "android.intent.action.digiwin.QuickStorageListActivity");
 
-        ModuleBean pqcCheck = new ModuleBean(R.string.pqc_check, R.mipmap.pqc, ModuleCode.PQCCHECK, "android.intent.action.digiwin.PQCCheckActivity");
+
 
         purchaseItems.add(materialreceipt);
         purchaseItems.add(quickstorage);
@@ -111,7 +111,6 @@ public class MainLogic {
         purchaseItems.add(purchaseGoodsScan);
         purchaseItems.add(purchaseInStore);
         purchaseItems.add(storeReturnMaterial);
-        purchaseItems.add(pqcCheck);
 
 
 
@@ -147,7 +146,16 @@ public class MainLogic {
         ModuleBean inbinninglist = new ModuleBean(R.string.title_in_binning,R.mipmap.inbox,ModuleCode.INBINNING,  "android.intent.action.digiwin.InBinningListActivity");
 
         ModuleBean endproductAllot = new ModuleBean(R.string.endproduct_allot,R.mipmap.endproduct_allot,ModuleCode.ENDPRODUCTALLOT,  "android.intent.action.digiwin.EndProductAllotActivity");
+
         ModuleBean linesend= new ModuleBean(R.string.line_send, R.mipmap.pickup_shipment, ModuleCode.LINESEND,"android.intent.action.digiwin.LineSendActivity");
+
+        ModuleBean pqcCheck = new ModuleBean(R.string.pqc_check, R.mipmap.pqc_check, ModuleCode.PQCCHECK, "android.intent.action.digiwin.PQCCheckActivity");
+
+        ModuleBean pqcRunCard = new ModuleBean(R.string.pqc_runcard, R.mipmap.pqc_runcard, ModuleCode.PQCCARD, "android.intent.action.digiwin.PQCRunCardActivity");
+
+        ModuleBean fqcCheck = new ModuleBean(R.string.fqc_check, R.mipmap.fqc_check, ModuleCode.FQCCHECK, "android.intent.action.digiwin.FQCCheckActivity");
+
+        ModuleBean fqcRunCard = new ModuleBean(R.string.fqc_runcard, R.mipmap.fqc_runcard, ModuleCode.FQCCARD, "android.intent.action.digiwin.FQCRunCardActivity");
 
         produceItems.add(finishedStorageActivity);
 
@@ -182,6 +190,14 @@ public class MainLogic {
         produceItems.add(endproductAllot);
 
         produceItems.add(linesend);
+
+        produceItems.add(pqcCheck);
+
+        produceItems.add(pqcRunCard);
+
+        produceItems.add(fqcCheck);
+
+        produceItems.add(fqcRunCard);
 
         //初始化库存管理
         ModuleBean storeallotactivity = new ModuleBean(R.string.nocome_allot, R.mipmap.nocome_alllot, ModuleCode.NOCOMESTOREALLOT, "android.intent.action.digiwin.StoreAllotActivity");
@@ -226,7 +242,6 @@ public class MainLogic {
         //初始化报工管理
         ModuleBean rcttboardactivity = new ModuleBean(R.string.delivery_uncheck_board, R.drawable.receiptout, ModuleCode.RCCTBOARD, "android.intent.action.digiwin.RcttBoardActivity");
         ModuleBean tctsboardactivity = new ModuleBean(R.string.tcts_board, R.drawable.receiptout, ModuleCode.RCCTBOARD, "android.intent.action.digiwin.TctsBoardActivity");
-
 
         ModuleBean palletreport = new ModuleBean(R.string.title_pallet_report, R.mipmap.pallet_report, ModuleCode.PROCESSREPORTING, "android.intent.action.digiwin.ProcessReportingActivity");
         dailyworkItems.add(palletreport);

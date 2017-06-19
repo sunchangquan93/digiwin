@@ -5,7 +5,17 @@ package digiwin.smartdepot.module.bean.purchase;
  */
 
 public class ImageUrl {
-    public String http = "";
+    private String http;
+
+    private String img_url;
+
+    public String getImg_url() {
+        return img_url;
+    }
+
+    public void setImg_url(String img_url) {
+        this.img_url = img_url;
+    }
 
     public String getHttp() {
         return http;

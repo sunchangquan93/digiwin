@@ -432,7 +432,6 @@ public class SettingActivity extends BaseTitleActivity {
                     accoutBean.update(accoutBean.getId());
                 }
             });
-
         }
     }
 

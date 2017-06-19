@@ -28,7 +28,6 @@ import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.base.BaseFirstModuldeActivity;
 import digiwin.smartdepot.core.base.BaseFragment;
 import digiwin.smartdepot.core.modulecommon.ModuleUtils;
-import digiwin.smartdepot.login.bean.AccoutBean;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
 import digiwin.smartdepot.module.activity.purchase.purchaseinstore.PurchaseInStoreSecondActivity;
 import digiwin.smartdepot.module.bean.common.FilterResultOrderBean;
@@ -205,6 +204,7 @@ public class PurchaseInStoreScanFg extends BaseFragment {
             return;
         }
         saveBean.setDoc_no(orderBean.getDoc_no());
+        saveBean.setCustomer_no(orderBean.getSupplier_name());//赋值供应商编码
         saveBean.setQty(et_input_num.getText().toString());
         showLoadingDialog();
         commonLogic.scanSave(saveBean, new CommonLogic.SaveListener() {

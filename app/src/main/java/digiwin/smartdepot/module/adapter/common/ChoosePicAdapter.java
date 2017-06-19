@@ -12,6 +12,7 @@ import java.io.File;
 import java.util.List;
 
 import digiwin.library.utils.LogUtils;
+import digiwin.library.utils.UriToPathUtils;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.BaseRecyclerAdapter;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.RecyclerViewHolder;
 import digiwin.smartdepot.R;
@@ -42,7 +43,7 @@ public class ChoosePicAdapter extends BaseRecyclerAdapter<ChoosePicBean> {
         if (position == 0 || position == mItems.size()-1) {
             Picasso.with(mContext).load(item.getDrawId()).into(imageView);
         } else {
-            Picasso.with(mContext).load(new File(item.getPicPath())).into(imageView);
+            Picasso.with(mContext).load(new File(item.getPicPath())).config(Bitmap.Config.RGB_565).into(imageView);
         }
     }
 }

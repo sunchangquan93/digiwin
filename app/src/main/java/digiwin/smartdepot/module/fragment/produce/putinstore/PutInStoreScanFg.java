@@ -195,7 +195,7 @@ public class PutInStoreScanFg extends BaseFragment {
 
     SaveBean saveBean;
 
-    FilterResultOrderBean orderBean = new FilterResultOrderBean();
+    FilterResultOrderBean orderBean;
     private Handler mHandler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {

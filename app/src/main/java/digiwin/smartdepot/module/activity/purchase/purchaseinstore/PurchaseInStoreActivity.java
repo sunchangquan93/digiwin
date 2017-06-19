@@ -258,8 +258,8 @@ public class PurchaseInStoreActivity extends BaseTitleActivity {
             public void onItemClick(View itemView, int position) {
                 final FilterResultOrderBean orderData = sumShowBeanList.get(position);
                 Bundle bundle = new Bundle();
-                        bundle.putSerializable(AddressContants.ORDERDATA, orderData);
-                        ActivityManagerUtils.startActivityBundleForResult(pactivity, PurchaseInStoreSecondActivity.class, bundle, SUMCODE);
+                bundle.putSerializable(AddressContants.ORDERDATA, orderData);
+                ActivityManagerUtils.startActivityBundleForResult(pactivity, PurchaseInStoreSecondActivity.class, bundle, SUMCODE);
             }
         });
     }
@@ -267,7 +267,7 @@ public class PurchaseInStoreActivity extends BaseTitleActivity {
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        mName.setText(R.string.purchase_in_store);
+        mName.setText(getString(R.string.purchase_in_store)+getString(R.string.list));
         iv_title_setting.setVisibility(View.VISIBLE);
         iv_title_setting.setImageResource(R.drawable.search);
     }
@@ -352,13 +352,11 @@ public class PurchaseInStoreActivity extends BaseTitleActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         try {
-
             if (requestCode == SUMCODE) {
-                adapter = new PurchaseInStorageAdapter(pactivity,new ArrayList<FilterResultOrderBean>());
+                adapter = new PurchaseInStorageAdapter(pactivity, new ArrayList<FilterResultOrderBean>());
                 ryList.setAdapter(adapter);
                 upDateList();
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }

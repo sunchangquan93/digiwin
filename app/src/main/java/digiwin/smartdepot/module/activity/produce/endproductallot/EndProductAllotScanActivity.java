@@ -495,6 +495,7 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
         saveBean.setUnit_no(barcodeBackBean.getUnit_no());
         saveBean.setLot_no(barcodeBackBean.getLot_no());
         saveBean.setCustomer_no(barcodeBackBean.getCol1());
+        saveBean.setFifo_check(barcodeBackBean.getFifo_check());
         etInputNum.requestFocus();
     }
 

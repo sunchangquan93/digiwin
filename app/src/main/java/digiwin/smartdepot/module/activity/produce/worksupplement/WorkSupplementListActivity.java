@@ -310,7 +310,7 @@ public class WorkSupplementListActivity extends BaseTitleActivity{
     protected void initNavigationTitle() {
         super.initNavigationTitle();
         activity = this;
-        mName.setText(R.string.title_worksupplement_list);
+        mName.setText(getString(R.string.title_worksupplement_list)+getString(R.string.list));
         iv_title_setting.setVisibility(View.VISIBLE);
         iv_title_setting.setImageResource(R.drawable.search);
     }

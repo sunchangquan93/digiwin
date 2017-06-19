@@ -3,7 +3,7 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:background="@color/white_ff">
 
-    <include layout="@layout/activity_title_toolbar_bar" ></include>
+    <include layout="@layout/activity_title_toolbar_bar" />
 
     <ScrollView
         android:layout_marginTop="@dimen/layout_6dp"
@@ -134,7 +134,6 @@
                 </LinearLayout>
 
                 <View
-                    android:id="@+id/line_2"
                     style="@style/ry_line_style" />
 
                 <LinearLayout

@@ -6,7 +6,27 @@
     android:orientation="vertical"
     android:paddingLeft="@dimen/layout_10dp"
     android:paddingRight="@dimen/layout_10dp">
+    <LinearLayout
+        style="@style/itemstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
+        <TextView
+            style="@style/app_text_inwhite"
+            android:layout_width="@dimen/layout_50dp"
+            android:layout_height="wrap_content"
+            android:text="@string/item_name" />
+
+        <TextView
+            android:id="@+id/tv_item_name"
+            style="@style/ser_text_inwhite"
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <View style="@style/ry_line_style" />
     <LinearLayout
         style="@style/itemstyle"
         android:layout_width="match_parent"
@@ -42,9 +62,7 @@
             android:layout_weight="1" />
     </LinearLayout>
 
-    <View
-        android:id="@+id/line_1"
-        style="@style/ry_line_style" />
+    <View style="@style/ry_line_style" />
 
 
     <LinearLayout

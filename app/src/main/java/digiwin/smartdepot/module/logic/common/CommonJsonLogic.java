@@ -17,11 +17,13 @@ import digiwin.library.xml.ParseXmlResp;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.appcontants.ReqTypeName;
+import digiwin.smartdepot.core.appcontants.URLPath;
+import digiwin.smartdepot.core.json.JsonParseForJava;
+import digiwin.smartdepot.core.json.JsonReqForJava;
 import digiwin.smartdepot.core.net.IRequestCallbackImp;
 import digiwin.smartdepot.core.net.OkhttpRequest;
 import digiwin.smartdepot.core.net.OkhttpRequestJson;
 import digiwin.smartdepot.core.xml.CreateParaXmlReqIm;
-import digiwin.smartdepot.login.bean.AccoutBean;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
 import digiwin.smartdepot.module.bean.common.ChoosePicBean;
 import digiwin.smartdepot.module.bean.common.ClickItemPutBean;
@@ -42,9 +44,9 @@ import digiwin.smartdepot.module.bean.produce.InBinningBean;
 import digiwin.smartdepot.module.bean.stock.ProductBinningBean;
 
 /**
- * @des  json格式逻辑
- * @date 2017/4/20  
  * @author xiemeng
+ * @des json格式逻辑
+ * @date 2017/4/20
  */
 public class CommonJsonLogic {
 
@@ -148,9 +150,9 @@ public class CommonJsonLogic {
                                 if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
                                     List<ScanLocatorBackBean> locatorBackBeen = xmlResp.getParameterDatas(ScanLocatorBackBean.class);
                                     if (locatorBackBeen.size() > 0) {
-                                        if (!ModuleCode.NOCOMESTOREALLOT.equals(mModule)&&
-                                       ! ModuleCode.TRANSFERS_TO_REVIEW.equals(mModule)&&
-                                       ! ModuleCode.POSTALLOCATE.equals(mModule)
+                                        if (!ModuleCode.NOCOMESTOREALLOT.equals(mModule) &&
+                                                !ModuleCode.TRANSFERS_TO_REVIEW.equals(mModule) &&
+                                                !ModuleCode.POSTALLOCATE.equals(mModule)
                                                 && !locatorBackBeen.get(0).getWarehouse_no().equals(LoginLogic.getWare())) {
                                             error = mContext.getString(R.string.ware_error);
                                         } else {
@@ -558,14 +560,14 @@ public class CommonJsonLogic {
                         if (null != xmlResp) {
                             if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
                                 List<FifoCheckBean> fiFoBeanList = xmlResp.getMasterDatas(FifoCheckBean.class);
-                                if(null != fiFoBeanList && fiFoBeanList.size() > 0){
+                                if (null != fiFoBeanList && fiFoBeanList.size() > 0) {
                                     for (int i = 0; i < fiFoBeanList.size(); i++) {
                                         FifoCheckBean fifoBean = fiFoBeanList.get(i);
                                         fifoBean.setRecommended_qty(StringUtils.deleteZero(fifoBean.getRecommended_qty()));
                                         fifoBean.setScan_sumqty(StringUtils.deleteZero(fifoBean.getScan_sumqty()));
                                     }
                                     listener.onSuccess(fiFoBeanList);
-                                }else{
+                                } else {
                                     List<FifoCheckBean> list = new ArrayList<FifoCheckBean>();
                                     listener.onSuccess(list);
                                 }
@@ -624,6 +626,7 @@ public class CommonJsonLogic {
             }
         }, null);
     }
+
     /**
      * 筛选  获取待办事项
      */
@@ -701,6 +704,7 @@ public class CommonJsonLogic {
             }
         }, null);
     }
+
     /**
      * 从待办事项进入汇总页面
      */
@@ -804,14 +808,14 @@ public class CommonJsonLogic {
                         if (null != xmlResp) {
                             if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
                                 List<FifoCheckBean> fiFoBeanList = xmlResp.getMasterDatas(FifoCheckBean.class);
-                                if(null != fiFoBeanList && fiFoBeanList.size() > 0){
+                                if (null != fiFoBeanList && fiFoBeanList.size() > 0) {
                                     for (int i = 0; i < fiFoBeanList.size(); i++) {
                                         FifoCheckBean fifoBean = fiFoBeanList.get(i);
                                         fifoBean.setRecommended_qty(StringUtils.deleteZero(fifoBean.getRecommended_qty()));
                                         fifoBean.setScan_sumqty(StringUtils.deleteZero(fifoBean.getScan_sumqty()));
                                     }
                                     listener.onSuccess(fiFoBeanList);
-                                }else{
+                                } else {
                                     List<FifoCheckBean> list = new ArrayList<FifoCheckBean>();
                                     listener.onSuccess(list);
                                 }
@@ -853,14 +857,14 @@ public class CommonJsonLogic {
                         if (null != xmlResp) {
                             if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
                                 List<FifoCheckBean> fiFoBeanList = xmlResp.getMasterDatas(FifoCheckBean.class);
-                                if(null != fiFoBeanList && fiFoBeanList.size() >0){
+                                if (null != fiFoBeanList && fiFoBeanList.size() > 0) {
                                     for (int i = 0; i < fiFoBeanList.size(); i++) {
                                         FifoCheckBean fifoBean = fiFoBeanList.get(i);
                                         fifoBean.setRecommended_qty(StringUtils.deleteZero(fifoBean.getRecommended_qty()));
                                         fifoBean.setScan_sumqty(StringUtils.deleteZero(fifoBean.getScan_sumqty()));
                                     }
                                     listener.onSuccess(fiFoBeanList);
-                                }else {
+                                } else {
                                     List<FifoCheckBean> list = new ArrayList<FifoCheckBean>();
                                     listener.onSuccess(fiFoBeanList);
                                 }
@@ -969,6 +973,7 @@ public class CommonJsonLogic {
             }
         }, null);
     }
+
     /**
      * 扫描包装箱号
      */
@@ -1100,45 +1105,64 @@ public class CommonJsonLogic {
     /**
      * 上传图片
      */
-    public interface UpdateImgListener{
+    public interface UpdateImgListener {
         public void onProgressCallBack(long progress, long total);
+
         public void onSuccess(String msg);
-        public void onFailed(long progress, long total);
+
+        public void onFailed(String errmsg);
     }
 
+
+    String error;
     /**
      * 上传图片
+     *
      * @param filepath
      * @param listener
      */
-    public void update(List<ChoosePicBean> filepath, final UpdateImgListener listener){
+    public void update(List<ChoosePicBean> filepath, Object checkBean,final UpdateImgListener listener) {
+         try {
+        error=mContext.getString(R.string.unknow_error);
         HashMap<String, Object> map = new HashMap<>();
-        for (int i=0;i<filepath.size();i++){
+        for (int i = 0; i < filepath.size(); i++) {
             String picPath = filepath.get(i).getPicPath();
             File file = new File(picPath);
-            map.put("file"+i,file);
+            map.put("pic" + (i+1), file);
         }
-        AccoutBean info = LoginLogic.getUserInfo();
-        if (null!=info) {
-            map.put("username", info.getUsername());
-            map.put("plant", info.getPlant());
-        }
-        String url="http://180.167.0.42:9018/barcode/api/res/v1/upload/file";
-        OkhttpRequestJson.getInstance(mContext).update(url, map, new IUpdateCallBack() {
+        String json = JsonReqForJava.toJson(mModule,"resFileService.view", mTimestamp, checkBean);
+        map.put(URLPath.PARAMS,json);
+        OkhttpRequestJson.getInstance(mContext).updateFile(URLPath.FILEURL, map, new IUpdateCallBack() {
             @Override
             public void onProgressCallBack(long progress, long total) {
-                LogUtils.i(TAG, "onProgressCallBack--->" + progress+"--total"+total);
+                listener.onProgressCallBack(progress, total);
             }
 
             @Override
-            public void onResponse(String msg) {
-                LogUtils.i(TAG, "onResponse--->" + msg);
+            public void onResponse(String string) {
+                JsonParseForJava parseForJava = JsonParseForJava.getObject(string, JsonParseForJava.class);
+                if (null!=parseForJava){
+                    if (ReqTypeName.JAVASUCCESSCODE .equals( parseForJava.getAppcode())) {
+                        String msg = parseForJava.getAppmsg();
+                        listener.onSuccess(msg);
+                        return;
+                    } else {
+                        error = parseForJava.getDescription();
+                    }
+                }
+                listener.onFailed(error);
             }
 
             @Override
             public void onFailure(Context context, String throwable) {
+
+                listener.onFailed(throwable);
                 LogUtils.i(TAG, "throwable--->" + throwable);
             }
         });
+          }
+        catch (Exception e) {
+            LogUtils.e(TAG, "Exception--->" + e);
+        }
     }
 }

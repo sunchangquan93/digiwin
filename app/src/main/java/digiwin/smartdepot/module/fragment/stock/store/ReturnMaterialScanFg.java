@@ -118,8 +118,8 @@ public class ReturnMaterialScanFg extends BaseFragment {
                             locatorShow = locatorBackBean.getShow();
                             locatorFlag = true;
                             show();
-                            saveBean.setStorage_spaces_in_no(locatorBackBean.getStorage_spaces_no());
-                            saveBean.setWarehouse_in_no(locatorBackBean.getWarehouse_no());
+                            saveBean.setStorage_spaces_out_no(locatorBackBean.getStorage_spaces_no());
+                            saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
                             etScanBarocde.requestFocus();
                         }
 

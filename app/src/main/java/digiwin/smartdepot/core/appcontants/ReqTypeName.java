@@ -11,6 +11,10 @@ public interface ReqTypeName {
      */
     static final String SUCCCESSCODE = "0";
     /**
+     * 调用java接口时返回
+     */
+    static final String JAVASUCCESSCODE="200";
+    /**
      * 登录验证
      */
     static final String GETAC = "GetAc";
@@ -205,7 +209,7 @@ public interface ReqTypeName {
     /**
      * 更新收货单
      */
-    static final String  UPDRVBCHECKSTATUS = "app.update.rvb.check.status";
+    static final String  UPDRVBCHECKSTATUS = "app.updateFile.rvb.check.status";
     /**
      * 获取图纸
      */
@@ -258,6 +262,10 @@ public interface ReqTypeName {
      * 提交PQC
      */
     static final String POSTPQC = "app.upd.pqc.status";
+    /**
+     * 提交FQC
+     */
+    static final String POSTFQC = "app.upd.fqc.status";
     /**
      * 保存PQC
      */

@@ -150,13 +150,14 @@ public class AccordingMaterialActivity extends BaseFirstModuldeActivity {
             });
         }
     }
-
+    private String itemNo;
     private android.os.Handler mHandler = new android.os.Handler(new android.os.Handler.Callback() {
     @Override
     public boolean handleMessage(Message msg) {
         switch (msg.what) {
             case BARCODEWHAT:
                 updateList(String.valueOf(msg.obj));
+                itemNo=String.valueOf(msg.obj);
                 break;
         }
         return false;
@@ -167,7 +168,7 @@ public class AccordingMaterialActivity extends BaseFirstModuldeActivity {
     protected void initNavigationTitle() {
         super.initNavigationTitle();
         activity = this;
-        mName.setText(getResources().getString(R.string.according_material));
+        mName.setText(getString(R.string.according_material));
     }
 
     @Override
@@ -285,7 +286,10 @@ public class AccordingMaterialActivity extends BaseFirstModuldeActivity {
     public void commitData(){
         showLoadingDialog();
         HashMap<String, String> barcodeMap = new HashMap<String, String>();
-        commonLogic.commit(barcodeMap, new CommonLogic.CommitListener() {
+        barcodeMap.put("item_no",itemNo);
+        List<Map<String, String>> list=new ArrayList<>();
+        list.add(barcodeMap);
+        commonLogic.commitList(list, new CommonLogic.CommitListListener() {
             @Override
             public void onSuccess(String msg) {
                 dismissLoadingDialog();

@@ -54,11 +54,10 @@ public class OkhttpRequestJson {
         RequestManager.downLoadFile(downLoadUrl,filePath,apkName,downLoadCallBack);
     }
 
-    public void update(String urlPath, Map<String,Object> postMap, IUpdateCallBack requestCallBack){
+    public void updateFile(String urlPath, Map<String,Object> postMap, IUpdateCallBack requestCallBack){
         if (null==postMap){
             postMap=new HashMap<>();
         }
-        postMap.put("token","token");
         RequestManager.updateFile(urlPath,postMap,requestCallBack);
     }
 

@@ -31,6 +31,8 @@ import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseActivity;
+import digiwin.smartdepot.core.coreutil.FiFoCheckUtils;
+import digiwin.smartdepot.core.coreutil.PermissionUtils;
 import digiwin.smartdepot.core.jpush.JPushManager;
 import digiwin.smartdepot.core.printer.WiFiPrintManager;
 import digiwin.smartdepot.login.activity.operating_center_pw.OperatingCenterDialog;
@@ -162,13 +164,15 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void doBusiness() {
+           PermissionUtils.verifyStoragePermissions(this);
+
         final    WiFiPrintManager wiFiPrintManager=   WiFiPrintManager.getManager();
-        wiFiPrintManager.openWiFi("", 0, new WiFiPrintManager.OpenWiFiPrintListener() {
-            @Override
-            public void isOpen(boolean isOpen) {
-                wiFiPrintManager.printText("123");
-            }
-        });
+//        wiFiPrintManager.openWiFi("", 0, new WiFiPrintManager.OpenWiFiPrintListener() {
+//            @Override
+//            public void isOpen(boolean isOpen) {
+//                wiFiPrintManager.printText("123");
+//            }
+//        });
         mPlants = new ArrayList<>();
         et_login_user.setOnFocusChangeListener(focusChangeListener);
         isFinished = false;
@@ -184,6 +188,11 @@ public class LoginActivity extends BaseActivity {
      */
     @OnClick(R.id.rl_login_eye)
     void showOperatingCenter() {
+        if (StringUtils.isBlank(et_login_user.getText().toString())
+                || StringUtils.isBlank(et_login_lock.getText().toString()) ){
+            showFailedDialog(R.string.username_pwd_not_null);
+            return;
+        }
         String plant = tv_login_eye.getText().toString();
         OperatingCenterDialog.showOperatingCenterDialog(activity, plant, mPlants);
     }
@@ -206,7 +215,7 @@ public class LoginActivity extends BaseActivity {
     @OnClick(R.id.tv_setup_systemSettings)
     void showSetting() {
         SettingDialog.showSettingDialog(activity);
-       // ActivityManagerUtils.startActivity(activity, ChoosePicActivity.class);
+//        ActivityManagerUtils.startActivity(activity, ChoosePicActivity.class);
     }
 
     @OnClick(R.id.iv_setup_systemSettings)
@@ -414,5 +423,7 @@ public class LoginActivity extends BaseActivity {
         module= ModuleCode.OTHER;
         return module;
     }
+
+
 
 }

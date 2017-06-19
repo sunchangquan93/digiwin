@@ -661,6 +661,55 @@
             android:screenOrientation="landscape"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
         </activity>
+        <!-- FQC检验-->
+        <activity
+            android:name=".module.activity.purchase.fqccheck.FQCCheckActivity"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.digiwin.FQCCheckActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- FQC检验-->
+        <activity
+            android:name=".module.activity.purchase.fqccheck.FQCValueActivity"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+        </activity>
+        <!-- PQCRUNCARD-->
+        <activity
+            android:name=".module.activity.purchase.pqcruncard.PQCRunCardActivity"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.digiwin.PQCRunCardActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- PQCRUNCARD-->
+        <activity
+            android:name=".module.activity.purchase.pqcruncard.PQCRunCardValueActivity"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+        </activity>
+        <!-- FQCRunCard-->
+        <activity
+            android:name=".module.activity.purchase.fqcruncard.FQCRunCardActivity"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.digiwin.FQCRunCardActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- FQCRunCard-->
+        <activity
+            android:name=".module.activity.purchase.fqcruncard.FQCRunCardValueActivity"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+        </activity>
+
         <activity android:name = ".module.activity.common.ChoosePicActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
         <activity

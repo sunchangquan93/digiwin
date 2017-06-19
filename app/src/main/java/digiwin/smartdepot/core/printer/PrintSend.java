@@ -62,6 +62,7 @@ public class PrintSend {
             byte[] send = getBytes(message);
             tmpOut.write(send, 0, send.length);
             tmpOut.flush();
+            LogUtils.i(TAG,"sendMessage执行完毕");
         } catch (IOException e) {
             LogUtils.e(TAG, "Exception during write" + e);
         } catch (Exception e) {

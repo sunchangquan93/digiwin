@@ -131,7 +131,10 @@ public class PostMaterialSecondActivity extends BaseFirstModuldeActivity {
 
             @Override
             public void onPageSelected(int position) {
-                if (position == 1) {
+                if (position==0){
+                    scanFg.getFIFO();
+                }
+                else if (position == 1) {
                     sumFg.upDateList();
                 }
             }

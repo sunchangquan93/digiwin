@@ -291,7 +291,7 @@ public class PurchaseGoodsScanActivity extends BaseTitleActivity {
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        mName.setText(R.string.title_purchase_goods_scan);
+        mName.setText(getString(R.string.title_purchase_goods_scan)+getString(R.string.list));
         iv_title_setting.setVisibility(View.VISIBLE);
         iv_title_setting.setImageResource(R.drawable.search);
     }

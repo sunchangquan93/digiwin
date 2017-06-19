@@ -27,6 +27,7 @@ public class PostmaterialFiFoAdapter extends BaseRecyclerAdapter<FifoCheckBean>{
     @Override
     protected void bindData(RecyclerViewHolder holder, int position, FifoCheckBean item) {
         holder.setText(R.id.tv_locator, item.getStorage_spaces_no());
+        holder.setText(R.id.tv_item_name,item.getItem_name());
         holder.setText(R.id.tv_lot_no,item.getLot_no());
         holder.setText(R.id.tv_rdna_num, item.getRecommended_qty());
         holder.setText(R.id.tv_feeding_amount, item.getScan_sumqty());

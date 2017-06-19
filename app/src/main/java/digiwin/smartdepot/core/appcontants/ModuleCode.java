@@ -41,6 +41,18 @@ public interface ModuleCode {
      */
     public final String PQCCHECK="A060";
     /**
+     * pqc CARD
+     */
+    public final String PQCCARD="A061";
+    /**
+     * fqc 检验
+     */
+    public final String FQCCHECK="A062";
+    /**
+     * fqc CARD
+     */
+    public final String FQCCARD="A063";
+    /**
      * 依成品调拨
      */
     public final String ENDPRODUCTALLOT="B001";

@@ -2,12 +2,10 @@ package digiwin.smartdepot.module.logic.purchase;
 
 import android.content.Context;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import digiwin.library.utils.LogUtils;
-import digiwin.library.utils.StringUtils;
 import digiwin.library.utils.ThreadPoolManager;
 import digiwin.library.xml.ParseXmlResp;
 import digiwin.smartdepot.R;
@@ -15,7 +13,6 @@ import digiwin.smartdepot.core.appcontants.ReqTypeName;
 import digiwin.smartdepot.core.net.IRequestCallbackImp;
 import digiwin.smartdepot.core.net.OkhttpRequest;
 import digiwin.smartdepot.core.xml.CreateParaXmlReqIm;
-import digiwin.smartdepot.module.bean.purchase.MaterialReceiptBean;
 import digiwin.smartdepot.module.bean.purchase.PQCValueBean;
 
 /**
@@ -24,9 +21,9 @@ import digiwin.smartdepot.module.bean.purchase.PQCValueBean;
  * @date 2017/4/30
  */
 
-public class PQCLogic {
+public class QCLogic {
 
-    private static final String TAG = "PQCLogic";
+    private static final String TAG = "QCLogic";
 
     private Context mContext;
     /**
@@ -38,17 +35,17 @@ public class PQCLogic {
      */
     private String mTimestamp = "";
 
-    private static PQCLogic logic;
+    private static QCLogic logic;
 
-    private PQCLogic(Context context, String module, String timestamp) {
+    private QCLogic(Context context, String module, String timestamp) {
         mContext = context;
         mModule = module;
         mTimestamp = timestamp;
     }
 
-    public static PQCLogic getInstance(Context context, String module, String timestamp) {
+    public static QCLogic getInstance(Context context, String module, String timestamp) {
 
-        return logic = new PQCLogic(context, module, timestamp);
+        return logic = new QCLogic(context, module, timestamp);
     }
     /**
      * 获取PQC测量值
@@ -97,7 +94,7 @@ public class PQCLogic {
     }
 
     /**
-     * 提交
+     * PQC提交
      */
     public interface postPQCListener {
 
@@ -115,6 +112,46 @@ public class PQCLogic {
                         @Override
                         public void onResponse(String string) {
                             ParseXmlResp xmlResp = ParseXmlResp.fromXml(ReqTypeName.POSTPQC, string);
+                            String error = mContext.getString(R.string.unknow_error);
+                            if (null != xmlResp) {
+                                if (ReqTypeName.SUCCCESSCODE .equals( xmlResp.getCode())) {
+                                    String msg = xmlResp.getFieldString();
+                                    listener.onSuccess(msg);
+                                    return;
+                                } else {
+                                    error = xmlResp.getDescription();
+                                }
+                            }
+                            listener.onFailed(error);
+                        }
+                    });
+                } catch (Exception e) {
+                    listener.onFailed(mContext.getString(R.string.unknow_error));
+                    LogUtils.e(TAG, "scanLocator--->" + e);
+                }
+            }
+        }, null);
+    }
+
+    /**
+     * FQC提交
+     */
+    public interface postFQCListener {
+
+        public void onSuccess(String msg);
+
+        public void onFailed(String error);
+    }
+    public void postFQCData(final List<Map<String, String>> maps, final List<Map<String, String>> details, final postFQCListener listener) {
+        ThreadPoolManager.getInstance().executeTask(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String xml = CreateParaXmlReqIm.getInstance(mModule, ReqTypeName.POSTFQC,mTimestamp,maps,details).toXml();
+                    OkhttpRequest.getInstance(mContext).post(xml, new IRequestCallbackImp() {
+                        @Override
+                        public void onResponse(String string) {
+                            ParseXmlResp xmlResp = ParseXmlResp.fromXml(ReqTypeName.POSTFQC, string);
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != xmlResp) {
                                 if (ReqTypeName.SUCCCESSCODE .equals( xmlResp.getCode())) {

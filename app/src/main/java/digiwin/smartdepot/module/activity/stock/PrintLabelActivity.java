@@ -5,6 +5,7 @@ import android.os.Message;
 import android.renderscript.ScriptGroup;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -243,7 +244,9 @@ public class PrintLabelActivity extends BaseTitleActivity {
 
                             }
                             et_sum_num.setText(barcodeBackBean.getBarcode_qty());
-                            printBarcodeBean = new PrintBarcodeBean();
+                            if(printBarcodeBean == null){
+                                printBarcodeBean = new PrintBarcodeBean();
+                            }
                             printBarcodeBean.setBarcode(barcode);
                             printBarcodeBean.setItem_name(barcodeBackBean.getItem_name());
                             printBarcodeBean.setItem_no(barcodeBackBean.getItem_no());
@@ -277,7 +280,7 @@ public class PrintLabelActivity extends BaseTitleActivity {
                             }
                         });
                     }else if(single_num == 0){
-                        showFailedDialog(R.string.ac, new OnDialogClickListener() {
+                        showFailedDialog(R.string.single_package_not_zero, new OnDialogClickListener() {
                             @Override
                             public void onCallback() {
                                 et_single_package_num.setText("");
@@ -288,6 +291,9 @@ public class PrintLabelActivity extends BaseTitleActivity {
                     }else{
                         int num = StringUtils.div(sum_num,single_num);
                         tv_num_of_print_pieces.setText(String.valueOf(num));
+                        if(printBarcodeBean == null){
+                            printBarcodeBean = new PrintBarcodeBean();
+                        }
                         printBarcodeBean.setQty(String.valueOf(single_num));
                         printBarcodeBean.setPrint_num(String.valueOf(num));
                     }

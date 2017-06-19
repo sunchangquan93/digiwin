@@ -53,6 +53,7 @@ import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseActivity;
+import digiwin.smartdepot.module.activity.common.ChoosePicActivity;
 import digiwin.smartdepot.module.bean.purchase.BadReasonBean;
 import digiwin.smartdepot.module.bean.purchase.PurchaseCheckBean;
 import digiwin.smartdepot.module.bean.purchase.PurchaseCheckDetailBean;
@@ -70,6 +71,11 @@ public class PurchaseCheckActivity extends BaseActivity {
     @BindView(R.id.iv_back)
     ImageView iv_back;
 
+
+    @OnClick(R.id.tv_title_name)
+    void back(){
+        onBackPressed();
+    }
     @OnClick(R.id.iv_back)
     void backClick(){
         onBackPressed();
@@ -151,7 +157,8 @@ public class PurchaseCheckActivity extends BaseActivity {
             return;
         }
         Bundle bundle = new Bundle();
-        bundle.putString(AddressContants.ITEM_NO,purchaseCheckBean.getItem_no());
+        purchaseCheckBean.setGls_bv08("IQC");
+        bundle.putSerializable(CheckShowImageActivity.DATAKEY,purchaseCheckBean);
         bundle.putString(AddressContants.MODULEID_INTENT,module);
         ActivityManagerUtils.startActivityForBundleData(pactivity,CheckShowImageActivity.class,bundle);
     }
@@ -162,6 +169,10 @@ public class PurchaseCheckActivity extends BaseActivity {
     @OnClick(R.id.ll_take_photo)
     void takePhoto(){
         //TODO 跳转到拍照上传
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(ChoosePicActivity.DATAKEY,purchaseCheckBean);
+        bundle.putString(AddressContants.MODULEID_INTENT,module);
+        ActivityManagerUtils.startActivityForBundleData(pactivity,ChoosePicActivity.class,bundle);
     }
 
     @BindView(R.id.rc_list)

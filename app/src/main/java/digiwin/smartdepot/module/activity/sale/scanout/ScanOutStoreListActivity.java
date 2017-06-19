@@ -277,13 +277,11 @@ public class ScanOutStoreListActivity extends BaseTitleActivity {
             isSearching=false;
             ryList.setVisibility(View.VISIBLE);
             llSearchInput.setVisibility(View.GONE);
-            mName.setText(R.string.scan_out_store_list);
             return;
         } else {
             isSearching=true;
             ryList.setVisibility(View.GONE);
             llSearchInput.setVisibility(View.VISIBLE);
-            mName.setText(R.string.filter_condition);
         }
     }
 
@@ -302,7 +300,7 @@ public class ScanOutStoreListActivity extends BaseTitleActivity {
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        mName.setText(R.string.filter_condition);
+        mName.setText(getString(R.string.scan_out_store_list)+getString(R.string.list));
 //        ivScan.setVisibility(View.GONE);
         search.setVisibility(View.VISIBLE);
         search.setImageResource(R.drawable.search);

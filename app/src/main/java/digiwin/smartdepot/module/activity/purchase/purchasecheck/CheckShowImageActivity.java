@@ -2,12 +2,12 @@ package digiwin.smartdepot.module.activity.purchase.purchasecheck;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -22,9 +22,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 import digiwin.smartdepot.R;
-import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
-import digiwin.smartdepot.core.base.BaseTitleActivity;
 import digiwin.smartdepot.core.base.BaseTitleHActivity;
 import digiwin.smartdepot.module.bean.purchase.ImageUrl;
 import digiwin.smartdepot.module.logic.purchase.PurcahseCheckLogic;
@@ -43,12 +41,15 @@ public class CheckShowImageActivity extends BaseTitleHActivity {
 	/**
 	 * 收货检验界面 带过来的料号
 	 */
-	String item_no = "";
 	@BindView(R.id.checkimg_vp)
 	ViewPager checkimg_vp;
 	
 	@BindView(R.id.toolbar_title)
 	Toolbar toolbar_title;
+
+	public  static String DATAKEY="datakey";
+
+	private Object checkBean;
 
 	@Override
 	protected int bindLayoutId() {
@@ -59,7 +60,8 @@ public class CheckShowImageActivity extends BaseTitleHActivity {
 	protected void doBusiness() {
 		pactivity = (CheckShowImageActivity) activity;
 		logic = PurcahseCheckLogic.getInstance(pactivity,module,mTimestamp.toString());
-		item_no = getIntent().getExtras().getString(AddressContants.ITEM_NO);
+		Bundle bundle = getIntent().getExtras();
+		checkBean=  bundle.getSerializable(DATAKEY);
 		Message msg = new Message();
 		msg.what = 1;
 		handler.sendMessage(msg);
@@ -91,16 +93,20 @@ public class CheckShowImageActivity extends BaseTitleHActivity {
 		}
 		@Override
 		public void run() {
-			showLoadingDialog();
 			List<Bitmap> listBm = new ArrayList<Bitmap>();
 			Bitmap bitmap;
 			for(int i = 0;i < list.size();i++){
 				try {
-					 bitmap = Picasso.with(pactivity).load(list.get(i).getHttp()).placeholder(R.drawable.common_google_signin_btn_icon_dark).error(R.drawable.common_google_signin_btn_icon_dark).get();
+					 bitmap = Picasso.with(pactivity).load(list.get(i).getImg_url()).placeholder(R.drawable.common_google_signin_btn_icon_dark).error(R.drawable.common_google_signin_btn_icon_dark).get();
 					 if(null != bitmap){
 						 listBm.add(bitmap);
 					 }else{
+						 runOnUiThread(new Runnable() {
+							 @Override
+							 public void run() {
 						showFailedDialog(R.string.no_pic);
+							 }
+						 });
 					 }
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -121,9 +127,8 @@ public class CheckShowImageActivity extends BaseTitleHActivity {
 			switch(msg.what){
 				case 1:
 					Map<String,String> map = new HashMap<>();
-					map.put(AddressContants.ITEM_NO,item_no);
 					showLoadingDialog();
-					logic.getDrawing(map, new PurcahseCheckLogic.GetDrawingListener() {
+					logic.getDrawing(checkBean, new PurcahseCheckLogic.GetDrawingListener() {
 						@Override
 						public void onSuccess(List<ImageUrl> list) {
 							dismissLoadingDialog();

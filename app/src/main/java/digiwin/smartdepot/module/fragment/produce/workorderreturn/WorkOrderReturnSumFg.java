@@ -158,10 +158,10 @@ public class WorkOrderReturnSumFg extends BaseFragment {
     private void getDetail(final ListSumBean orderSumData) {
         Map<String, String> map = new HashMap<>();
         showLoadingDialog();
-        map.put(AddressContants.ITEM_NO, orderSumData.getItem_no());
+        map.put(AddressContants.ITEM_NO, orderSumData.getLow_order_item_no());
         final SumShowBean sumShowBean = new SumShowBean();
-        sumShowBean.setItem_no(orderSumData.getItem_no());
-        sumShowBean.setItem_name(orderSumData.getItem_name());
+        sumShowBean.setItem_no(orderSumData.getLow_order_item_no());
+        sumShowBean.setItem_name(orderSumData.getLow_order_item_name());
         sumShowBean.setAvailable_in_qty(StringUtils.getMinQty(orderSumData.getStock_qty(), orderSumData.getReq_qty()));
         commonLogic.getDetail(map, new CommonLogic.GetDetailListener() {
             @Override

@@ -301,7 +301,7 @@ public class PickUpShipmentListActivity extends BaseTitleActivity{
     protected void initNavigationTitle() {
         super.initNavigationTitle();
         activity = this;
-        mName.setText(getResources().getString(R.string.title_pickupshipment_list));
+        mName.setText(getString(R.string.title_pickupshipment_list)+getString(R.string.list));
         iv_title_setting.setVisibility(View.VISIBLE);
         iv_title_setting.setImageResource(R.drawable.search);
     }

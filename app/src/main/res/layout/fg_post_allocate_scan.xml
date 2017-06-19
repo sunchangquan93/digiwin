@@ -184,10 +184,7 @@
 
             </LinearLayout>
 
-            <include
-                android:id="@+id/includedetail"
-                layout="@layout/show_playdetail_layout"
-                android:visibility="gone"></include>
+            <include  layout="@layout/ryitem_fifo_common" />
         </LinearLayout>
     </ScrollView>
 

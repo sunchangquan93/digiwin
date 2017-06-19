@@ -132,10 +132,6 @@ public class PostMaterialScanFg extends BaseFragment {
 
     SaveBean saveBean;
     /**
-     * 从汇总界面带入的单身数据
-     */
-    ListSumBean sumshoubean;
-    /**
      * 从汇总界面带入的单头数据
      */
     FilterResultOrderBean orderData;
@@ -160,7 +156,6 @@ public class PostMaterialScanFg extends BaseFragment {
 
     CommonLogic commonLogic;
 
-    private List<ListSumBean> sumBeanList = new ArrayList<ListSumBean>();
     @OnCheckedChanged(R.id.cb_locatorlock)
     void isLock(boolean checked) {
         if (checked) {
@@ -287,7 +282,7 @@ public class PostMaterialScanFg extends BaseFragment {
         }
     });
 
-    private void getFIFO(ListSumBean sumshoubean ){
+    public void getFIFO( ){
         HashMap<String,String> map = new HashMap<String,String>();
         map.put(AddressContants.ISSUING_NO,orderData.getDoc_no());
         map.put(AddressContants.WAREHOUSE_NO,LoginLogic.getWare());
@@ -365,7 +360,7 @@ public class PostMaterialScanFg extends BaseFragment {
      */
     private void clear() {
         //保存成功，重新获取FIFO
-        getFIFO(sumshoubean);
+        getFIFO();
         et_scan_barocde.setText("");
         et_scan_barocde.requestFocus();
         et_input_num.setText("");
@@ -397,7 +392,7 @@ public class PostMaterialScanFg extends BaseFragment {
         saveBean = new SaveBean();
         orderData = (FilterResultOrderBean) pactivity.getIntent().getExtras().getSerializable(AddressContants.ORDERDATA);
         //获取FIFO
-        getFIFO(sumshoubean);
+        getFIFO();
     }
 
     /**

@@ -13,8 +13,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.greenrobot.eventbus.EventBus;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,7 +20,6 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import digiwin.library.utils.StringUtils;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.BaseRecyclerAdapter;
@@ -32,7 +29,7 @@ import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseActivity;
 import digiwin.smartdepot.module.bean.purchase.PQCValueBean;
-import digiwin.smartdepot.module.logic.purchase.PQCLogic;
+import digiwin.smartdepot.module.logic.purchase.QCLogic;
 
 /**
  * @author 毛衡
@@ -99,7 +96,7 @@ public class PQCValueActivity extends BaseActivity {
             details.add(map2);
         }
         showLoadingDialog();
-        pqcLogic.savePQCData(maps, details, new PQCLogic.SavePQCListener() {
+        pqcLogic.savePQCData(maps, details, new QCLogic.SavePQCListener() {
             @Override
             public void onSuccess(String msg) {
                 dismissLoadingDialog();
@@ -120,7 +117,7 @@ public class PQCValueActivity extends BaseActivity {
 
     }
 
-    private PQCLogic pqcLogic;
+    private QCLogic pqcLogic;
 
     private PQCValueActivity pactivity;
 
@@ -163,7 +160,7 @@ public class PQCValueActivity extends BaseActivity {
             adapter = new PQCValueAdapter(pactivity,values);
             ryList.setAdapter(adapter);
         }
-        pqcLogic = PQCLogic.getInstance(pactivity,module,pactivity.mTimestamp.toString());
+        pqcLogic = QCLogic.getInstance(pactivity,module,pactivity.mTimestamp.toString());
         getValueData();
     }
 
@@ -172,7 +169,7 @@ public class PQCValueActivity extends BaseActivity {
         Map<String,String> map = new HashMap<>();
         map.put(AddressContants.DOC_NO,doc_no);
         map.put(AddressContants.SEQ,seq);
-        pqcLogic.getPQCValueData(map, new PQCLogic.getPQCValueListener() {
+        pqcLogic.getPQCValueData(map, new QCLogic.getPQCValueListener() {
             @Override
             public void onSuccess(PQCValueBean data) {
                 dismissLoadingDialog();

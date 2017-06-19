@@ -89,7 +89,6 @@ public class DeviceLogic {
                     ParseXmlResp xmlResp = ParseXmlResp.fromXml(ReqTypeName.GETAP, string);
                     if (null != xmlResp) {
                         if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
-                            DeviceInfoBean deviceInfoBean = new DeviceInfoBean();
                             List<DeviceInfoBean> deviceInfoBeen = xmlResp.getParameterDatas(DeviceInfoBean.class);
                             listener.onSuccess(deviceInfoBeen);
                             return;

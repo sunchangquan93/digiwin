@@ -257,7 +257,6 @@ public class PurchaseGoodsScanFg extends BaseFragment {
      * 初始化一些变量
      */
     public void initData() {
-        delete();
         tv_scaned_num.setText("");
         et_scan_barocde.setText("");
         barcodeShow = "";
@@ -267,6 +266,7 @@ public class PurchaseGoodsScanFg extends BaseFragment {
         commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
         orderBean = (FilterResultOrderBean) pactivity.getIntent().getExtras().getSerializable(AddressContants.ORDERDATA);
         et_scan_barocde.requestFocus();
+        delete();
         }
 
     /**

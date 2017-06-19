@@ -224,7 +224,7 @@ public class PostMaterialActivity extends BaseTitleActivity {
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        mName.setText(R.string.post_material);
+        mName.setText(getString(R.string.post_material)+getString(R.string.list));
         iv_title_setting.setVisibility(View.VISIBLE);
         iv_title_setting.setImageResource(R.drawable.search);
         iv_un_com.setVisibility(View.VISIBLE);

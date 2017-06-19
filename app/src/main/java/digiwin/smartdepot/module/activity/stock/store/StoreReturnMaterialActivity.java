@@ -116,6 +116,7 @@ public class StoreReturnMaterialActivity extends BaseFirstModuldeActivity {
         //Tablayout和ViewPager关联起来
         tlTab.setupWithViewPager(moduleVp);
         tlTab.setTabsFromPagerAdapter(adapter);
+        moduleVp.setOffscreenPageLimit(2);
         select();
     }
     /**

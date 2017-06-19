@@ -28,6 +28,8 @@ import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseFirstModuldeActivity;
 import digiwin.smartdepot.core.modulecommon.ModuleUtils;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
+import digiwin.smartdepot.main.activity.settingdialog.StorageDialog;
+import digiwin.smartdepot.main.logic.GetStorageLogic;
 import digiwin.smartdepot.module.bean.common.ClickItemPutBean;
 import digiwin.smartdepot.module.bean.common.ListSumBean;
 import digiwin.smartdepot.module.logic.common.CommonLogic;
@@ -71,6 +73,12 @@ public class CompletingStoreActivity extends BaseFirstModuldeActivity{
      */
     @BindView(R.id.tv_label_storage)
     TextView tv_label_storage;
+    @OnClick(R.id.tv_label_storage)
+    void chooseWare(){
+        final List<String> list = GetStorageLogic.getWareString();
+        StorageDialog.showStorageDialog(this,tv_label_storage.getText().toString(),list);
+    }
+
 
     /**
      * 可入库量
@@ -132,10 +140,6 @@ public class CompletingStoreActivity extends BaseFirstModuldeActivity{
                     showFailedDialog(R.string.storage_capacity_large);
                     return;
                 }
-//                wo_no                string        工单号
-//                item_no                string        料件编码
-//                warehouse_no        string        仓库
-//                qty            number(15,3)      数量
                 Map<String,String> map = new HashMap<String, String>();
                 map.put(AddressContants.WO_NO,et_work_order_code.getText().toString().trim());
                 map.put(AddressContants.ITEM_NO,tv_item_no.getText().toString().trim());
@@ -237,6 +241,12 @@ public class CompletingStoreActivity extends BaseFirstModuldeActivity{
     @Override
     protected void doBusiness() {
         commonLogic = CommonLogic.getInstance(activity,activity.module,activity.mTimestamp.toString());
+        StorageDialog.setCallBack(new StorageDialog.StorageCallBack() {
+            @Override
+            public void storageCallBack(String chooseStorage) {
+                tv_label_storage.setText(chooseStorage);
+            }
+        });
     }
 
     @Override

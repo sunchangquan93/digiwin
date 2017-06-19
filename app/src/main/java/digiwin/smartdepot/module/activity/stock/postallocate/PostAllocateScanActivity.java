@@ -126,6 +126,9 @@ public class PostAllocateScanActivity extends BaseFirstModuldeActivity {
 
             @Override
             public void onPageSelected(int position) {
+                if (position==0){
+                    scanFg.getFIFO();
+                }
                 if (position == 1) {
                     sumFg.upDateList();
                 }

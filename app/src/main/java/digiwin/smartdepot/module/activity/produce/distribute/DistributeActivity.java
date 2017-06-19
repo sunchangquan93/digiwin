@@ -54,7 +54,7 @@ import digiwin.smartdepot.module.logic.produce.distribute.DistributeLogic;
 import static digiwin.smartdepot.login.loginlogic.LoginLogic.getUserInfo;
 
 /**
- * 生产配料 汇总界面
+ * 生产配料 列表
  * @author 唐孟宇
  */
 public class DistributeActivity extends BaseFirstModuldeActivity {
@@ -340,7 +340,7 @@ public class DistributeActivity extends BaseFirstModuldeActivity {
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        mName.setText(R.string.distribute);
+        mName.setText(getString(R.string.distribute));
         iv_title_setting.setVisibility(View.VISIBLE);
         iv_title_setting.setImageResource(R.drawable.search);
     }

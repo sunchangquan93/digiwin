@@ -2,16 +2,23 @@ package digiwin.smartdepot.module.logic.purchase;
 
 import android.content.Context;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import digiwin.library.json.JsonResp;
 import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.ThreadPoolManager;
 import digiwin.library.xml.ParseXmlResp;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.ReqTypeName;
+import digiwin.smartdepot.core.appcontants.URLPath;
+import digiwin.smartdepot.core.json.JsonParseForJava;
+import digiwin.smartdepot.core.json.JsonReqForJava;
+import digiwin.smartdepot.core.json.JsonText;
 import digiwin.smartdepot.core.net.IRequestCallbackImp;
 import digiwin.smartdepot.core.net.OkhttpRequest;
+import digiwin.smartdepot.core.net.OkhttpRequestJson;
 import digiwin.smartdepot.core.xml.CreateParaXmlReqIm;
 import digiwin.smartdepot.module.bean.purchase.BadReasonBean;
 import digiwin.smartdepot.module.bean.purchase.ImageUrl;
@@ -326,24 +333,25 @@ public class PurcahseCheckLogic {
     /**
      * 获取图纸获取图纸
      */
-    public void getDrawing(final Map<String, String> maps, final GetDrawingListener listener) {
+    public void getDrawing(final Object checkBean, final GetDrawingListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
                 try {
-                    String xml = CreateParaXmlReqIm.getInstance(maps,mModule, ReqTypeName.GETDRAWING, mTimestamp).toXml();
-                    OkhttpRequest.getInstance(mContext).post(xml, new IRequestCallbackImp() {
+                    String json = JsonReqForJava.toJson(mModule,"resFileService.view",mTimestamp,checkBean);
+                    OkhttpRequestJson.getInstance(mContext).post("",json, new IRequestCallbackImp() {
                         @Override
                         public void onResponse(String string) {
-                            ParseXmlResp xmlResp = ParseXmlResp.fromXml(ReqTypeName.GETDRAWING, string);
+                            JsonParseForJava parseForJava = JsonParseForJava.getObject(string, JsonParseForJava.class);
                             String error = mContext.getString(R.string.unknow_error);
-                            if (null != xmlResp) {
-                                if (ReqTypeName.SUCCCESSCODE .equals( xmlResp.getCode())) {
-                                    List<ImageUrl> list = xmlResp.getMasterDatas(ImageUrl.class);
+                            if (null != parseForJava) {
+                                if (ReqTypeName.JAVASUCCESSCODE .equals( parseForJava.getAppcode())) {
+                                    String data = parseForJava.getData();
+                                    List<ImageUrl> list = JsonParseForJava.getObjects(data,ImageUrl.class);
                                     listener.onSuccess(list);
                                     return;
                                 } else {
-                                    error = xmlResp.getDescription();
+                                    error = parseForJava.getDescription();
                                 }
                             }
                             listener.onFailed(error);

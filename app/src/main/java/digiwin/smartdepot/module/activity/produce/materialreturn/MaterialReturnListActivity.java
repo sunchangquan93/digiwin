@@ -203,7 +203,7 @@ public class MaterialReturnListActivity extends BaseTitleActivity {
     @Override
     protected void initNavigationTitle() {
         super.initNavigationTitle();
-        mName.setText(R.string.mataerial_returning);
+        mName.setText(getString(R.string.mataerial_returning)+getString(R.string.list));
         search.setVisibility(View.VISIBLE);
         search.setImageResource(R.drawable.search);
         isSearching = true;

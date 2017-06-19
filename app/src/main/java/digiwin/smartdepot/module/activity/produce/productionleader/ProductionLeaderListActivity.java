@@ -230,7 +230,6 @@ public class ProductionLeaderListActivity extends BaseTitleActivity {
             public void onSuccess(final List<FilterResultOrderBean> list) {
                 dismissLoadingDialog();
                 if(list.size() > 0){
-                    mName.setText(R.string.title_production_leader);
                     ll_search_dialog.setVisibility(View.GONE);
                     scrollview.setVisibility(View.VISIBLE);
                     dataList = new ArrayList<FilterResultOrderBean>();
@@ -311,7 +310,7 @@ public class ProductionLeaderListActivity extends BaseTitleActivity {
     protected void initNavigationTitle() {
         super.initNavigationTitle();
         activity = this;
-        mName.setText(R.string.filter_condition);
+        mName.setText(getString(R.string.title_production_leader)+getString(R.string.list));
         iv_title_setting.setVisibility(View.VISIBLE);
         iv_title_setting.setImageResource(R.drawable.search);
     }

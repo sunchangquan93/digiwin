@@ -38,6 +38,7 @@
     <string name="user_exit">确定要退出吗</string>
     <string name="app_exit"> 再按一次退出程序</string>
 
+    <string name="username_pwd_not_null">用户名和密码不能为空</string>
     <string name="username_not_null">用户名不能为空</string>
     <string name="password_not_null">密码不能为空</string>
     <string name="plant_not_null">营用中心不能为空</string>
@@ -162,13 +163,11 @@
     <string name="receipt_date">备货日期</string>
     <string name="apply_depart">申请部门</string>
     <string name="apply_person">申请人</string>
-    <string name="transfers_to_reviewlist">配货复核清单</string>
 
     <string name="filter_condition">筛选条件</string>
     <string name="title_in_binning">装箱入库</string>
 
     <string name="check_stock">库存盘点</string>
-    <string name="check_stock_wait">库存盘点待办事项</string>
     <string name="check_person">盘点人员</string>
     <string name="check_order">盘点单号</string>
     <string name="plan_data">计划日期</string>
@@ -371,7 +370,7 @@
     <string name="num_of_print_pieces">打印张数</string>
     <string name="please_scan_barcode_first">请先扫描物料条码</string>
 
-    <string name="title_worksupplement_list">补料清单</string>
+    <string name="title_worksupplement_list">补料</string>
     <string name="title_worksupplement">依退料补料</string>
     <string name="returning_item_no">退料料号</string>
 
@@ -413,12 +412,10 @@
     <string name="super_number">超领单号</string>
     <string name="swept_volume">已扫量</string>
 
-    <string name="store_return_material">仓库退料</string>
-    <string name="store_return_material_list">仓库退料清单</string>
+    <string name="store_return_material">采购退料</string>
     <string name="return_material_order">退货单号</string>
 
     <string name="title_quickstorage">快速入库</string>
-    <string name="title_quickstorage_list">快速入库清单</string>
 
     <string name="scanin_scan">扫入扫描</string>
     <string name="LOT_no">LOT单号</string>
@@ -445,7 +442,7 @@
     <string name="scan_out_store">扫箱码出货</string>
     <string name="warehouse_error">返回仓库与当前仓库不一致</string>
     <string name="scan_out_store_detail">扫码出货明细</string>
-    <string name="scan_out_store_list">扫码出货清单</string>
+    <string name="scan_out_store_list">扫码出货</string>
     <string name="caseNo_barcode">箱码</string>
     <string name="case_no">箱号</string>
     <string name="warehouse_failed">箱码仓库与当前仓库不一致,请重新扫描</string>
@@ -455,6 +452,7 @@
     <string name="ordersale">门店要货</string>
 
     <string name="single_package_lager">单包数量不能超过总数量</string>
+    <string name="single_package_not_zero">单包数量不能为0</string>
 
     <string name="trace_product_quality">成品质量追溯</string>
     <string name="trace_quality">质量追溯</string>
@@ -490,6 +488,7 @@
     <string name="chooseunbind_device">按设备解绑</string>
     <string name="scan_finished_barcode">请扫描成品条码</string>
     <string name="scan_order_barcode_gongxu">请扫描工单号/物料条码/工序</string>
+    <string name="scan_order_barcode">请扫描工单号/物料条码</string>
     <string name="feeding_batche">投料批次</string>
     <string name="work_group">工作组</string>
     <string name="check_detail">检验状况</string>
@@ -542,6 +541,12 @@
     <string name="title_check_value">检验测量值维护</string>
     <string name="OK">合格</string>
     <string name="unOK">不合格</string>
+    <string name="update_pic">上传图片</string>
+    <string name="start_update">开始上传</string>
 
+    <string name="fqc_check">FQC检验</string>
+    <string name="fqc_runcard">FQCRunCard</string>
+    <string name="pqc_runcard">PQCRunCard</string>
 
+    <string name="list">列表</string>
 </resources>

@@ -169,8 +169,6 @@ public class MiscellaneousIssueSumFg extends BaseFragment {
         showLoadingDialog();
         List<Map<String,String>> maps = new ArrayList<>();
         HashMap<String, String> map = new HashMap<>();
-        map.put("employee_no", MiscellaneousIssueScanFg.employee_no);
-        map.put("department_no",MiscellaneousIssueScanFg.department_no);
         maps.add(map);
         commonLogic.commitList(maps, new CommonLogic.CommitListListener() {
             @Override
