@@ -80,4 +80,5 @@
     ]
     }</string>
     <string name="sdate_before_edate">开始日期必须在结束日期之前</string>
+    <string name="barcode_type_null">条码类型为空</string>
 </resources>

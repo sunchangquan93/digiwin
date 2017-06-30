@@ -140,6 +140,40 @@ public class CreateParaXmlReq {
             LogUtils.e("CreateParaXmlReq", "RecordSet中报文--组织报文异常"+e);
         }
     }
+    /**
+     * 无master，一个detail，detail名称可能会变
+     */
+    public CreateParaXmlReq(String userName, String plant, String deviceId, String appmodule, String reqType, String timestamp, List<Map<String, String>> detail2Maps) {
+        try {
+            this.init(userName, plant, deviceId, appmodule, reqType, timestamp);
+            RecordSet recordset1 = new RecordSet(String.valueOf(1));
+            // 遍历Map的方法
+            //detail2
+            if (null != detail2Maps) {
+                Detail detail2 = new Detail();
+                detail2.name = "Detail";
+                for (int i = 0; i < detail2Maps.size(); i++) {
+                    Set<Entry<String, String>> sets = detail2Maps.get(i).entrySet();
+                    Record record = new Record();
+                    for (Entry<String, String> entry : sets) {
+                        Object key = entry.getKey();
+                        Object val = entry.getValue();
+                        if (null == val) {
+                            val = "";
+                        }
+                        Field field1 = new Field(key.toString(), val.toString());
+                        record.Field.add(field1);
+                    }
+                    detail2.Record.add(record);
+                }
+                recordset1.B_Detail.add(detail2);
+            }
+            B_Body.Tip.TipRequest.Request.RequestContent.B_Document.RecordSet.add(recordset1);
+        } catch (Exception e) {
+            LogUtils.e("CreateParaXmlReq", "RecordSet中报文--组织报文异常");
+        }
+    }
+
 
     /**
      * 无master，两个detail，detail名称可能会变
@@ -196,7 +230,7 @@ public class CreateParaXmlReq {
     }
 
     /**
-     * 一个master，一个detail
+     * 一个master，相同detail
      */
     public CreateParaXmlReq(String userName, String plant, String deviceId, String appmodule, String reqType, String timestamp, List<Map<String, String>> maps, List<Map<String, String>> listDetails) {
         try {
@@ -244,6 +278,58 @@ public class CreateParaXmlReq {
             LogUtils.e("CreateParaXmlReq", "RecordSet中报文--组织报文异常");
         }
     }
+
+    /**
+     * 一个master，不同detail
+     */
+    public CreateParaXmlReq(String userName, String plant, String deviceId, String appmodule, String reqType, String timestamp, List<Map<String, String>> maps, List<List<Map<String, String>>> lists, String flag) {
+        try {
+            if (maps == null) {
+                maps = new ArrayList<>();
+            }
+            // 遍历Map的方法
+            init(userName, plant, deviceId, appmodule, reqType, timestamp);
+            for (int i = 0; i < maps.size(); i++) {
+                RecordSet recordset1 = new RecordSet(String.valueOf(i + 1));
+                Set<Entry<String, String>> sets = maps.get(i).entrySet();
+                for (Entry<String, String> entry : sets) {
+                    Object key = entry.getKey();
+                    Object val = entry.getValue();
+                    if (null == val) {
+                        val = "";
+                    }
+                    Field field1 = new Field(key.toString(), val.toString());
+                    recordset1.A_Master.Record.Field.add(field1);
+                }
+
+                Detail detail = new Detail();
+                detail.name = "Detail";
+                List<Map<String, String>> listDetails = lists.get(i);
+                if (null != listDetails) {
+                    for (int j = 0; j < listDetails.size(); j++) {
+                        Set<Entry<String, String>> set = listDetails.get(j).entrySet();
+                        Record record = new Record();
+                        for (Entry<String, String> entry : set) {
+                            Object key = entry.getKey();
+                            Object val = entry.getValue();
+                            if (null == val) {
+                                val = "";
+                            }
+                            Field field1 = new Field(key.toString(), val.toString());
+                            record.Field.add(field1);
+                        }
+                        detail.Record.add(record);
+                        recordset1.B_Detail.add(detail);
+                    }
+                }
+                B_Body.Tip.TipRequest.Request.RequestContent.B_Document.RecordSet.add(recordset1);
+            }
+
+        } catch (Exception e) {
+            LogUtils.e("CreateParaXmlReq", "RecordSet中报文--组织报文异常");
+        }
+    }
+
 
     private void init(String userName, String plant, String deviceId, String appmodule,String reqType, String timestamp) {
         B_Body.Tip.TipRequest.Request.Access.A_Authentication.user = userName;
