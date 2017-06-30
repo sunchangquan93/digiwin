@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
-
+apply plugin: 'com.github.dcendents.android-maven'
 def releaseTime() {
     return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
 }
@@ -16,6 +16,7 @@ android {
         useNewCruncher false
     }
     defaultConfig {
+        multiDexEnabled true
         applicationId "digiwin.smartdepot"
         minSdkVersion 17
         targetSdkVersion 23
@@ -40,8 +41,8 @@ android {
 //    }
     buildTypes {
         release {
-            minifyEnabled false
-            shrinkResources false//去掉不用资源
+            minifyEnabled true
+            shrinkResources true//去掉不用资源
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -76,4 +77,34 @@ dependencies {
     //litepal数据库
     compile 'org.litepal.android:core:1.4.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
+    //65535问题
+    compile 'com.android.support:multidex:1.0.0'
+
+}
+//指定编码
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+//打包源码
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    failOnError  false
+    source = android.sourceSets.main.java.sourceFiles
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    classpath += configurations.compile
+}
+
+// 制作文档(Javadoc)
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+artifacts {
+    archives sourcesJar
+    archives javadocJar
 }

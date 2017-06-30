@@ -88,6 +88,10 @@ public class AccordingMaterialActivity extends BaseFirstModuldeActivity {
      * 跳转扫描页面使用
      */
     public final int SCANCODE = 0123;
+    /**
+     * 页面展示的数据
+     */
+    private List<ListSumBean>  showList;
 
     CommonLogic commonLogic;
 
@@ -104,14 +108,9 @@ public class AccordingMaterialActivity extends BaseFirstModuldeActivity {
 
     @OnClick(R.id.commit)
     void commit(){
-
         showCommitSureDialog(new OnDialogTwoListener() {
             @Override
             public void onCallback1() {
-                if(StringUtils.isBlank(mEt_barcode_scan.getText().toString().trim())){
-                    showFailedDialog(getResources().getString(R.string.please_scan_item_no));
-                    return;
-                }
                 commitData();
             }
             @Override
@@ -210,8 +209,8 @@ public class AccordingMaterialActivity extends BaseFirstModuldeActivity {
         mTv_item_name.setText("");
         mEt_barcode_scan.setText("");
         mEt_barcode_scan.requestFocus();
-        List<ListSumBean> list = new ArrayList<ListSumBean>();
-        adapter = new AccordingMaterialSumAdapter(activity,list);
+        showList= new ArrayList<ListSumBean>();
+        adapter = new AccordingMaterialSumAdapter(activity,showList);
         mRc_list.setAdapter(adapter);
     }
 
@@ -228,7 +227,7 @@ public class AccordingMaterialActivity extends BaseFirstModuldeActivity {
             @Override
             public void onSuccess(final List<ListSumBean> list) {
                 mTv_item_name.setText(list.get(0).getItem_name());
-
+                showList=list;
                 adapter = new AccordingMaterialSumAdapter(activity,list);
                 mRc_list.setAdapter(adapter);
                 dismissLoadingDialog();
@@ -284,9 +283,25 @@ public class AccordingMaterialActivity extends BaseFirstModuldeActivity {
     }
 
     public void commitData(){
+        if(StringUtils.isBlank(mEt_barcode_scan.getText().toString().trim())){
+            showFailedDialog(getResources().getString(R.string.please_scan_item_no));
+            return;
+        }
+        try {
+            for (int i=0;i<showList.size();i++){
+                ListSumBean tempBean = showList.get(i);
+                float sub = StringUtils.sub(tempBean.getStock_qty(), tempBean.getScan_sumqty());
+                if (sub>0){
+                    showFailedDialog(tempBean.getItem_no()+getResources().getString(R.string.scan_big_storenum));
+                    return;
+                }
+            }
+        }catch (Exception e){
+
+        }
         showLoadingDialog();
         HashMap<String, String> barcodeMap = new HashMap<String, String>();
-        barcodeMap.put("item_no",itemNo);
+        barcodeMap.put(AddressContants.ITEM_NO,itemNo);
         List<Map<String, String>> list=new ArrayList<>();
         list.add(barcodeMap);
         commonLogic.commitList(list, new CommonLogic.CommitListListener() {

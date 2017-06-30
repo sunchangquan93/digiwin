@@ -40,9 +40,11 @@ import digiwin.library.voiceutils.VibratorUtil;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
+import digiwin.smartdepot.core.appcontants.SharePreferenceKey;
 import digiwin.smartdepot.core.base.BaseApplication;
 import digiwin.smartdepot.core.base.BaseTitleActivity;
 import digiwin.smartdepot.core.printer.BlueToothManager;
+import digiwin.smartdepot.core.printer.WiFiPrintManager;
 import digiwin.smartdepot.login.activity.LoginActivity;
 import digiwin.smartdepot.login.activity.operating_center_pw.OperatingCenterDialog;
 import digiwin.smartdepot.login.bean.AccoutBean;
@@ -50,6 +52,7 @@ import digiwin.smartdepot.login.bean.AppVersionBean;
 import digiwin.smartdepot.login.loginlogic.AppVersionLogic;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
 import digiwin.smartdepot.main.activity.settingdialog.DeviceDialog;
+import digiwin.smartdepot.main.activity.settingdialog.PrinterIpDialog;
 import digiwin.smartdepot.main.activity.settingdialog.StorageDialog;
 import digiwin.smartdepot.main.activity.versions.VersionsSettingDialog;
 import digiwin.smartdepot.main.bean.DeviceInfoBean;
@@ -182,7 +185,8 @@ public class SettingActivity extends BaseTitleActivity {
     void toUserInfo() {
         ActivityManagerUtils.startActivity(activity, UserInfoActivity.class);
     }
-
+    @BindView(R.id.tv_printer_ip)
+    TextView tvPrinterIp;
     /**
      * 显示营运中心
      */
@@ -296,6 +300,35 @@ public class SettingActivity extends BaseTitleActivity {
             }
         });
     }
+    /**
+     * 无线打印机
+     */
+    @OnClick(R.id.ll_printer_input_ip)
+    void showPrinterDialog() {
+        LogUtils.e(TAG, "-------showPrinterDialog");
+        PrinterIpDialog.showPrinterDailog(this, new PrinterIpDialog.PrinterBindIpListener() {
+            @Override
+            public void bindByDevice(String ip) {
+//                String match = "\\d+.\\d+.\\d:\\d+";
+//                Pattern compile = Pattern.compile(match);
+//                Matcher matcher = compile.matcher(ip);
+//                if (matcher.matches()) {
+                tvPrinterIp.setText(ip);
+                SharedPreferencesUtils.put(SettingActivity.this, SharePreferenceKey.PRINTER_IP, ip);
+                final WiFiPrintManager manager = WiFiPrintManager.getManager();
+                manager.openWiFi(tvPrinterIp.getText().toString(), new WiFiPrintManager.OpenWiFiPrintListener() {
+                    @Override
+                    public void isOpen(boolean isOpen) {
+                        //manager.printText3("ff");
+                    }
+                });
+//                } else {
+//                    showFailedDialog(getString(R.string.ip_matcher_no));
+//                }
+            }
+        });
+
+    }
 
 
 
@@ -348,7 +381,10 @@ public class SettingActivity extends BaseTitleActivity {
         updatePlantStorage();
         getDeviceInfo("0");
         UpdateVer();
-    }
+        //初始化打印机ip
+        tvPrinterIp.setText(SharedPreferencesUtils.get(SettingActivity.this, SharePreferenceKey.PRINTER_IP, "").toString());
+
+}
 
     /**
      * 轮播时间

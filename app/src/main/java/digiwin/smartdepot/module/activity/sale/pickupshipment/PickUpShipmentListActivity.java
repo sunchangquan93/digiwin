@@ -205,40 +205,36 @@ public class PickUpShipmentListActivity extends BaseTitleActivity{
     @OnClick(R.id.btn_search_sure)
     void search(){
         //待办事项展示
-        FilterBean FilterBean = new FilterBean();
+        FilterBean filterBean = new FilterBean();
         try {
             showLoadingDialog();
-            AccoutBean accoutBean = LoginLogic.getUserInfo();
-            if(null == accoutBean){
-                return;
-            }
-            FilterBean.setWarehouse_out_no(accoutBean.getWare());
-
+            filterBean.setDoc_no(et_shipping_order.getText().toString().trim());
+            filterBean.setWarehouse_out_no(LoginLogic.getWare());
             if(!StringUtils.isBlank(et_item_no.getText().toString().trim())){
-                FilterBean.setItem_no(et_item_no.getText().toString().trim());
+                filterBean.setItem_no(et_item_no.getText().toString().trim());
             }
 
             if(!StringUtils.isBlank(et_custom.getText().toString().trim())){
-                FilterBean.setCustomer_no(et_custom.getText().toString().trim());
+                filterBean.setCustomer_no(et_custom.getText().toString().trim());
             }
 
             if(!StringUtils.isBlank(et_salesman.getText().toString().trim())){
-                FilterBean.setEmployee_no(et_salesman.getText().toString().trim());
+                filterBean.setEmployee_no(et_salesman.getText().toString().trim());
             }
 
             if(!StringUtils.isBlank(et_operating_department.getText().toString().trim())){
-                FilterBean.setDepartment_no(et_operating_department.getText().toString().trim());
+                filterBean.setDepartment_no(et_operating_department.getText().toString().trim());
             }
 
             if(!StringUtils.isBlank(et_plan_date.getText().toString())){
-                FilterBean.setDate_begin(startDate);
-                FilterBean.setDate_end(endDate);
+                filterBean.setDate_begin(startDate);
+                filterBean.setDate_end(endDate);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        commonLogic.getOrderData(FilterBean, new CommonLogic.GetOrderListener() {
+        commonLogic.getOrderData(filterBean, new CommonLogic.GetOrderListener() {
             @Override
             public void onSuccess(final List<FilterResultOrderBean> list) {
                 dismissLoadingDialog();

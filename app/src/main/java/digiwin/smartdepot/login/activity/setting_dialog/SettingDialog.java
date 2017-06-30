@@ -3,6 +3,7 @@ package digiwin.smartdepot.login.activity.setting_dialog;
 import android.app.Activity;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,9 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import org.litepal.crud.DataSupport;
+import org.litepal.tablemanager.Connector;
 
 import java.util.List;
 import java.util.Locale;
@@ -22,6 +26,8 @@ import digiwin.library.utils.SharedPreferencesUtils;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.login.activity.LoginActivity;
+import digiwin.smartdepot.login.bean.AccoutBean;
+import digiwin.smartdepot.main.bean.StorageBean;
 
 
 /**
@@ -224,7 +230,8 @@ public class SettingDialog {
                 }else {
                     SharedPreferencesUtils.put(context,SharePreKey.CURRENT_ADDRESS, AddressContants.TEST_FLAG);
                 }
-
+                SQLiteDatabase db = Connector.getDatabase();
+                DataSupport.deleteAll(AccoutBean.class);
                 SharedPreferencesUtils.put(context,SharePreKey.LANGUAGE,preRb.getText().toString().trim());
                 SharedPreferencesUtils.put(context,SharePreKey.FORMAL_ADDRESS,setup_formal_et.getText().toString().trim());
                 SharedPreferencesUtils.put(context,SharePreKey.TEST_ADDRESS,setup_test_et.getText().toString().trim());

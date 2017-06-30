@@ -24,6 +24,7 @@ import digiwin.library.utils.StringUtils;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.base.BaseFragment;
+import digiwin.smartdepot.core.coreutil.CommonUtils;
 import digiwin.smartdepot.core.modulecommon.ModuleUtils;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
 import digiwin.smartdepot.module.activity.produce.productionleader.ProductionLeaderActivity;
@@ -256,6 +257,9 @@ public class ProductionLeaderScanFg extends BaseFragment {
                         et_barcode_no.requestFocus();
                         locatorShow = locatorBackBean.getShow();
                         show();
+                        if (CommonUtils.isAutoSave(saveBean)){
+                            save();
+                        }
                     }
 
                     @Override
@@ -277,7 +281,7 @@ public class ProductionLeaderScanFg extends BaseFragment {
                 barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
                 barcodeMap.put(AddressContants.DOC_NO, localData.getDoc_no());
                 barcodeMap.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
-
+                barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_out_no());
                 commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                     @Override
                     public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
@@ -325,6 +329,10 @@ public class ProductionLeaderScanFg extends BaseFragment {
         saveBean.setFifo_check(barcodeBackBean.getFifo_check());
         show();
         etInputNum.requestFocus();
+        saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
+        if (CommonUtils.isAutoSave(saveBean)){
+            save();
+        }
     }
 
     @Override

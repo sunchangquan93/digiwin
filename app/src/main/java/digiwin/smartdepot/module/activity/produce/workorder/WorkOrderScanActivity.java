@@ -28,6 +28,7 @@ import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseTitleActivity;
+import digiwin.smartdepot.core.coreutil.CommonUtils;
 import digiwin.smartdepot.core.coreutil.FiFoCheckUtils;
 import digiwin.smartdepot.core.modulecommon.ModuleUtils;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
@@ -196,7 +197,7 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
     private  String work_no;
 
     @OnClick(R.id.save)
-    void saveData(){
+    void save(){
         if(!barcodeFlag){
             showFailedDialog(R.string.scan_barcode);
             return;
@@ -316,7 +317,9 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
                         }else{
                             etInputNum.requestFocus();
                         }
-
+                        if (CommonUtils.isAutoSave(saveBean)){
+                            save();
+                        }
                     }
 
                     @Override
@@ -338,6 +341,7 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
                 barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
                 barcodeMap.put(AddressContants.DOC_NO, work_no);
                 barcodeMap.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
+                barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_out_no());
                 commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                     @Override
                     public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
@@ -412,7 +416,7 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
         ListSumBean data = (ListSumBean) getIntent().getSerializableExtra("sumdata");
         localData = data;
         work_no=getIntent().getExtras().getString("work_no");
-        mTv_item_name.setText(data.getItem_name());
+        mTv_item_name.setText(data.getLow_order_item_name());
         et_format.setText(data.getLow_order_item_spec());
         tv_under_feed.setText(StringUtils.deleteZero(data.getShortage_qty()));
         tv_stock_balance.setText(StringUtils.deleteZero(data.getStock_qty()));
@@ -485,6 +489,10 @@ public class WorkOrderScanActivity extends BaseTitleActivity {
         saveBean.setLot_no(barcodeBackBean.getLot_no());
         saveBean.setFifo_check(barcodeBackBean.getFifo_check());
         etInputNum.requestFocus();
+        saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
+        if (CommonUtils.isAutoSave(saveBean)){
+            save();
+        }
     }
 
     /**

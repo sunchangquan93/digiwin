@@ -23,6 +23,7 @@ import digiwin.library.utils.StringUtils;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.base.BaseFragment;
+import digiwin.smartdepot.core.coreutil.CommonUtils;
 import digiwin.smartdepot.core.modulecommon.ModuleUtils;
 import digiwin.smartdepot.module.activity.stock.movestore.MoveStoreActivity;
 import digiwin.smartdepot.module.bean.common.SaveBackBean;
@@ -196,11 +197,13 @@ public class MoveStoreScanFg extends BaseFragment {
                 case BARCODEWHAT:
                     HashMap<String, String> barcodeMap = new HashMap<>();
                     barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
+                    barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_out_no());
+                    barcodeMap.put(AddressContants.WAREHOUSE_NO,saveBean.getWarehouse_out_no());
                     commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                         @Override
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
                             etInputNum.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
-                            tv_scaned_num.setText(barcodeBackBean.getScan_sumqty());
+                            tv_scaned_num.setText(StringUtils.deleteZero(barcodeBackBean.getScan_sumqty()));
                             barcodeFlag = true;
                             saveBean.setAvailable_in_qty(barcodeBackBean.getAvailable_in_qty());
                             saveBean.setBarcode_no(barcodeBackBean.getBarcode_no());
@@ -211,6 +214,10 @@ public class MoveStoreScanFg extends BaseFragment {
                             etInputNum.requestFocus();
                             barcodeShow = barcodeBackBean.getShow();
                             show();
+                            saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
+                            if (CommonUtils.isAutoSave(saveBean)){
+                                save();
+                            }
                         }
 
                         @Override
@@ -237,6 +244,9 @@ public class MoveStoreScanFg extends BaseFragment {
                             etScanBarocde.requestFocus();
                             locatorShow = locatorBackBean.getShow();
                             show();
+                            if (CommonUtils.isAutoSave(saveBean)){
+                                save();
+                            }
                         }
 
                         @Override

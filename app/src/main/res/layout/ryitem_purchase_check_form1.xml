@@ -20,6 +20,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+        <CheckBox
+            android:id="@+id/cb_ischoose"
+            android:layout_width="@dimen/layout_40dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:button="@drawable/all_checkbox" />
 
         <TextView
             android:id="@+id/tv_item_seq"
@@ -74,6 +80,7 @@
             android:gravity="center"
             android:textColor="@color/black_32"
             android:background="@null"
+            android:inputType="numberDecimal"
             android:textCursorDrawable="@color/yellow_text"
             android:textSize="@dimen/textSize_14sp" />
 

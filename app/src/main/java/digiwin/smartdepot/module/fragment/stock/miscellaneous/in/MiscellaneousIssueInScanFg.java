@@ -3,7 +3,6 @@ package digiwin.smartdepot.module.fragment.stock.miscellaneous.in;
 import android.os.Handler;
 import android.os.Message;
 import android.text.method.TextKeyListener;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -14,7 +13,6 @@ import android.widget.TextView;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.BindViews;
@@ -26,8 +24,8 @@ import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.utils.StringUtils;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
-import digiwin.smartdepot.core.base.BaseFirstModuldeActivity;
 import digiwin.smartdepot.core.base.BaseFragment;
+import digiwin.smartdepot.core.coreutil.CommonUtils;
 import digiwin.smartdepot.core.modulecommon.ModuleUtils;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
 import digiwin.smartdepot.module.activity.stock.miscellaneousissues.MiscellaneousissuesInActivity;
@@ -304,7 +302,7 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
     }
 
     @OnClick(R.id.save)
-    void Save() {
+    void save() {
         if (!reasonCodeFlag) {
             showFailedDialog(R.string.scan_reason_code);
             return;
@@ -424,6 +422,7 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
                     HashMap<String, String> barcodeMap = new HashMap<>();
                     barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
                     barcodeMap.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
+                    barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_in_no());
                     commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                         @Override
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
@@ -441,6 +440,10 @@ public class MiscellaneousIssueInScanFg extends BaseFragment {
                             saveBean.setLot_no(barcodeBackBean.getLot_no());
                             saveBean.setScan_sumqty(barcodeBackBean.getScan_sumqty());
                             et_input_num.requestFocus();
+                            saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
+                            if (CommonUtils.isAutoSave(saveBean)){
+                                save();
+                            }
                         }
 
                         @Override

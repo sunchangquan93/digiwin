@@ -25,11 +25,10 @@ import digiwin.pulltorefreshlibrary.recyclerviewAdapter.BaseRecyclerAdapter;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.base.BaseFragment;
-import digiwin.smartdepot.core.coreutil.FiFoCheckUtils;
 import digiwin.smartdepot.login.bean.AccoutBean;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
 import digiwin.smartdepot.module.activity.sale.scanout.ScanOutStoreActivity;
-import digiwin.smartdepot.module.adapter.sale.scanout.ScanOutFifoAdapter;
+import digiwin.smartdepot.module.adapter.common.CommonDocNoFIFoAdapter;
 import digiwin.smartdepot.module.bean.common.ClickItemPutBean;
 import digiwin.smartdepot.module.bean.common.FifoCheckBean;
 import digiwin.smartdepot.module.bean.common.SaveBean;
@@ -137,7 +136,7 @@ public class ScanOutStoreScanFg extends BaseFragment {
             switch (msg.what) {
                 case SALEWHAT:
                     fiFoList.clear();
-                    adapter = new ScanOutFifoAdapter(sActivity,fiFoList);
+                    adapter = new CommonDocNoFIFoAdapter(sActivity,fiFoList);
                     ryList.setAdapter(adapter);
                     HashMap<String, String> map = new HashMap<String, String>();
                     map.put(AddressContants.RECEIPT_NO, String.valueOf(msg.obj));
@@ -151,7 +150,7 @@ public class ScanOutStoreScanFg extends BaseFragment {
                         public void onSuccess(List<FifoCheckBean> fiFoBeanList) {
                             fiFoList.clear();
                             fiFoList = fiFoBeanList;
-                            adapter = new ScanOutFifoAdapter(sActivity, fiFoList);
+                            adapter = new CommonDocNoFIFoAdapter(sActivity, fiFoList);
                             ryList.setAdapter(adapter);
                             etScanBarocde.requestFocus();
                         }
@@ -159,7 +158,7 @@ public class ScanOutStoreScanFg extends BaseFragment {
                         @Override
                         public void onFailed(String error) {
                             fiFoList.clear();
-                            adapter = new ScanOutFifoAdapter(sActivity, fiFoList);
+                            adapter = new CommonDocNoFIFoAdapter(sActivity, fiFoList);
                             ryList.setAdapter(adapter);
                         }
                     });

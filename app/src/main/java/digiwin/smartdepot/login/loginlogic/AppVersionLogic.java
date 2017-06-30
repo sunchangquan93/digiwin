@@ -20,7 +20,7 @@ import digiwin.smartdepot.login.bean.AppVersionBean;
  * @date 2017/1/17
  */
 public class AppVersionLogic {
-    private static final String TAG = "GetStorageLogic";
+    private static final String TAG = "AppVersionLogic";
 
     private Context mContext;
     /**

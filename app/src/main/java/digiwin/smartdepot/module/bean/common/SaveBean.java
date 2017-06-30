@@ -3,6 +3,7 @@ package digiwin.smartdepot.module.bean.common;
 /**
  * @author xiemeng
  * @des 保存通用
+ *        条码类型，3，4的时候自动保存
  * @date 2017/2/23
  */
 public class SaveBean {
@@ -108,6 +109,10 @@ public class SaveBean {
      * 是否允许仓负库存
      */
     private String allow_negative_stock;
+    /**
+     * 条码类型，3，4的时候自动保存
+     */
+    private String item_barcode_type;
 
 
     public String getStorage_spaces_no() {
@@ -308,5 +313,13 @@ public class SaveBean {
 
     public void setAllow_negative_stock(String allow_negative_stock) {
         this.allow_negative_stock = allow_negative_stock;
+    }
+
+    public String getItem_barcode_type() {
+        return item_barcode_type;
+    }
+
+    public void setItem_barcode_type(String item_barcode_type) {
+        this.item_barcode_type = item_barcode_type;
     }
 }

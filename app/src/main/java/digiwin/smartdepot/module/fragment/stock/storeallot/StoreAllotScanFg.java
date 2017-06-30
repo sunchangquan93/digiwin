@@ -24,6 +24,7 @@ import digiwin.library.utils.StringUtils;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.base.BaseFragment;
+import digiwin.smartdepot.core.coreutil.CommonUtils;
 import digiwin.smartdepot.core.modulecommon.ModuleUtils;
 import digiwin.smartdepot.module.activity.stock.storeallot.ChooseAllotDailog;
 import digiwin.smartdepot.module.activity.stock.storeallot.StoreAllotActivity;
@@ -339,6 +340,10 @@ public class StoreAllotScanFg extends BaseFragment {
                             saveBean.setUnit_no(barcodeBackBean.getUnit_no());
                             saveBean.setLot_no(barcodeBackBean.getLot_no());
                             etInputNum.requestFocus();
+                            saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
+                            if (CommonUtils.isAutoSave(saveBean)){
+                                save();
+                            }
                         }
 
                         @Override

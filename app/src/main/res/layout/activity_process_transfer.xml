@@ -1,0 +1,745 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/activity_title_toolbar_bar"></include>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/layout_48dp"
+        android:layout_marginBottom="@dimen/layout_60dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <!-- MoveInScan -->
+            <LinearLayout
+                android:id="@+id/ll_moveIn_scan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginBottom="@dimen/layout_6dp"
+                android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_marginRight="@dimen/layout_10dp"
+                android:layout_marginTop="@dimen/layout_6dp"
+                android:background="@drawable/allscanedit_bg"
+                android:orientation="vertical"
+                android:padding="@dimen/layout_5dp">
+
+                <LinearLayout
+                    android:id="@+id/ll_in_moveOut"
+                    style="@style/itemstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_in_moveOut"
+                        android:layout_width="@dimen/layout_80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/move_out_people"
+                        style="@style/app_text_inwhite"/>
+
+                    <EditText
+                        android:id="@+id/et_in_moveOut"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        android:background="@null"
+                        android:textColor="@color/black_32"
+                        android:textCursorDrawable="@drawable/et_cursor_yellow"
+                        android:textSize="@dimen/textSize_14sp" />
+                    <CheckBox
+                        android:id="@+id/cb_in_moveOut"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/layout_20dp"
+                        android:button="@drawable/lock_checkbox" />
+                </LinearLayout>
+
+                <View style="@style/fg_line_style" />
+
+                <LinearLayout
+                    android:id="@+id/ll_in_moveIn"
+                    style="@style/itemstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_in_moveIn"
+                        android:layout_width="@dimen/layout_80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/move_in_people"
+                        style="@style/app_text_inwhite"/>
+
+                    <EditText
+                        android:id="@+id/et_in_moveIn"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        android:background="@null"
+                        android:textColor="@color/black_32"
+                        android:textCursorDrawable="@drawable/et_cursor_yellow"
+                        android:textSize="@dimen/textSize_14sp" />
+                    <CheckBox
+                        android:id="@+id/cb_in_moveIn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/layout_20dp"
+                        android:button="@drawable/lock_checkbox" />
+                </LinearLayout>
+
+                <View style="@style/fg_line_style" />
+                <LinearLayout
+                    android:id="@+id/ll_in_cardNumber"
+                    style="@style/itemstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_in_cardNumber"
+                        android:layout_width="@dimen/layout_80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/card_number"
+                        style="@style/app_text_inwhite" />
+
+                    <EditText
+                        android:id="@+id/et_in_cardNumber"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        android:background="@null"
+                        android:textColor="@color/black_32"
+                        android:textCursorDrawable="@drawable/et_cursor_yellow"
+                        android:textSize="@dimen/textSize_14sp" />
+                </LinearLayout>
+
+                <View style="@style/fg_line_style" />
+                <LinearLayout
+                    android:id="@+id/ll_in_get_num"
+                    style="@style/itemstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_in_get_num"
+                        android:layout_width="@dimen/layout_80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/actual_get_num"
+                        style="@style/app_text_inwhite" />
+
+                    <EditText
+                        android:id="@+id/et_in_get_num"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        android:background="@null"
+                        android:textColor="@color/black_32"
+                        android:hint="@string/input_num"
+                        android:textCursorDrawable="@drawable/et_cursor_yellow"
+                        android:textSize="@dimen/textSize_14sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+            <!-- MoveOutScan -->
+            <LinearLayout
+                android:id="@+id/ll_moveOut_scan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginBottom="@dimen/layout_6dp"
+                android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_marginRight="@dimen/layout_10dp"
+                android:layout_marginTop="@dimen/layout_6dp"
+                android:background="@drawable/allscanedit_bg"
+                android:orientation="vertical"
+                android:padding="@dimen/layout_5dp">
+
+                <LinearLayout
+                    android:id="@+id/ll_out_change"
+                    style="@style/itemstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_out_change"
+                        android:layout_width="@dimen/layout_80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/change_people"
+                        style="@style/app_text_inwhite"/>
+
+                    <EditText
+                        android:id="@+id/et_out_change"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        android:background="@null"
+                        android:textColor="@color/black_32"
+                        android:textCursorDrawable="@drawable/et_cursor_yellow"
+                        android:textSize="@dimen/textSize_14sp" />
+                    <CheckBox
+                        android:id="@+id/cb_out_change"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/layout_20dp"
+                        android:button="@drawable/lock_checkbox" />
+                </LinearLayout>
+
+                <View style="@style/fg_line_style" />
+                <LinearLayout
+                    android:id="@+id/ll_out_cardNumber"
+                    style="@style/itemstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_out_cardNumber"
+                        android:layout_width="@dimen/layout_80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/card_number"
+                        style="@style/app_text_inwhite" />
+
+                    <EditText
+                        android:id="@+id/et_out_cardNumber"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        android:background="@null"
+                        android:textColor="@color/black_32"
+                        android:textCursorDrawable="@drawable/et_cursor_yellow"
+                        android:textSize="@dimen/textSize_14sp" />
+                </LinearLayout>
+                <View style="@style/fg_line_style" />
+                <LinearLayout
+                    android:id="@+id/ll_out_change_num"
+                    style="@style/itemstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_out_change_num"
+                        android:layout_width="@dimen/layout_80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/change_num"
+                        style="@style/app_text_inwhite" />
+
+                    <EditText
+                        android:id="@+id/et_out_change_num"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        android:background="@null"
+                        android:textColor="@color/black_32"
+                        android:hint="@string/input_num"
+                        android:textCursorDrawable="@drawable/et_cursor_yellow"
+                        android:textSize="@dimen/textSize_14sp" />
+                </LinearLayout>
+            </LinearLayout>
+            <!-- MoveInResult -->
+            <LinearLayout
+                android:id="@+id/ll_moveIn_scanValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_marginRight="@dimen/layout_10dp"
+                android:layout_marginTop="@dimen/layout_6dp"
+                android:padding="@dimen/layout_5dp"
+                android:background="@drawable/zx_scandetail_bg"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    style="@style/itemstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_resin_moveOut"
+                        android:layout_width="@dimen/layout_80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/move_out_people"
+                        style="@style/app_text_inwhite"/>
+
+                    <TextView
+                        android:id="@+id/tv_resin_moveOutValue"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_10dp"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        style="@style/ser_text_inwhite" />
+
+                    <TextView
+                        android:id="@+id/tv_resin_moveIn"
+                        android:layout_width="@dimen/layout_80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/move_in_people"
+                        style="@style/app_text_inwhite"/>
+
+                    <TextView
+                        android:id="@+id/tv_resin_moveInValue"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_10dp"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        style="@style/ser_text_inwhite" />
+                </LinearLayout>
+
+                <View style="@style/fg_line_style" />
+
+                <LinearLayout
+                    style="@style/itemstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv_resin_orderNumber"
+                        android:layout_width="@dimen/layout_80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/order_number"
+                        style="@style/app_text_inwhite"/>
+
+                    <TextView
+                        android:id="@+id/tv_resin_orderumberValue"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_10dp"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        style="@style/ser_text_inwhite" />
+
+                </LinearLayout>
+
+                <View style="@style/fg_line_style" />
+
+                <LinearLayout
+                    style="@style/itemstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv_resin_workNo"
+                        android:layout_width="@dimen/layout_80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/work_no"
+                        style="@style/app_text_inwhite"/>
+
+                    <TextView
+                        android:id="@+id/tv_resin_workNoValue"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_10dp"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        style="@style/ser_text_inwhite" />
+                    <TextView
+                        android:id="@+id/tv_resin_workName"
+                        android:layout_width="@dimen/layout_80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/work_name"
+                        style="@style/app_text_inwhite"/>
+
+                    <TextView
+                        android:id="@+id/tv_resin_workNameValue"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_10dp"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        style="@style/ser_text_inwhite" />
+
+                </LinearLayout>
+
+                <View style="@style/fg_line_style" />
+
+                <LinearLayout
+                    style="@style/itemstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv_resin_canGetNum"
+                        android:layout_width="@dimen/layout_80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/can_get_num"
+                        style="@style/app_text_inwhite"/>
+
+                    <TextView
+                        android:id="@+id/tv_resin_canGetNumValue"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_10dp"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        style="@style/ser_text_inwhite" />
+                    <TextView
+                        android:id="@+id/tv_resin_unit"
+                        android:layout_width="@dimen/layout_80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/unit"
+                        style="@style/app_text_inwhite"/>
+
+                    <TextView
+                        android:id="@+id/tv_resin_unitValue"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_10dp"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        style="@style/ser_text_inwhite" />
+
+                </LinearLayout>
+                <View style="@style/fg_line_style" />
+
+                <LinearLayout
+                    style="@style/itemstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv_resin_itemNo"
+                        android:layout_width="@dimen/layout_80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/item_no"
+                        style="@style/app_text_inwhite"/>
+
+                    <TextView
+                        android:id="@+id/tv_resin_itemNoValue"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_10dp"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        style="@style/ser_text_inwhite" />
+
+                </LinearLayout>
+                <View style="@style/fg_line_style" />
+
+                <LinearLayout
+                    style="@style/itemstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv_resin_itemName"
+                        android:layout_width="@dimen/layout_80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/item_name"
+                        style="@style/app_text_inwhite"/>
+
+                    <TextView
+                        android:id="@+id/tv_resin_itemNameValue"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_10dp"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        style="@style/ser_text_inwhite" />
+
+                </LinearLayout>
+                <View style="@style/fg_line_style" />
+
+                <LinearLayout
+                    style="@style/itemstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv_resin_model"
+                        android:layout_width="@dimen/layout_80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/model"
+                        style="@style/app_text_inwhite"/>
+
+                    <TextView
+                        android:id="@+id/tv_resin_modelValue"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_10dp"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        style="@style/ser_text_inwhite" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+            <!-- MoveOutResult -->
+            <LinearLayout
+                android:id="@+id/ll_moveOut_scanValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginLeft="@dimen/layout_10dp"
+                android:layout_marginRight="@dimen/layout_10dp"
+                android:layout_marginTop="@dimen/layout_6dp"
+                android:padding="@dimen/layout_5dp"
+                android:background="@drawable/zx_scandetail_bg"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    style="@style/itemstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_resout_changePeople"
+                        android:layout_width="@dimen/layout_80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/change_people"
+                        style="@style/app_text_inwhite"/>
+
+                    <TextView
+                        android:id="@+id/tv_resout_changePeopleValue"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_10dp"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        style="@style/ser_text_inwhite" />
+
+                </LinearLayout>
+
+                <View style="@style/fg_line_style" />
+
+                <LinearLayout
+                    style="@style/itemstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv_resout_orderNumber"
+                        android:layout_width="@dimen/layout_80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/order_number"
+                        style="@style/app_text_inwhite"/>
+
+                    <TextView
+                        android:id="@+id/tv_resout_orderumberValue"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_10dp"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        style="@style/ser_text_inwhite" />
+
+                </LinearLayout>
+
+                <View style="@style/fg_line_style" />
+
+                <LinearLayout
+                    style="@style/itemstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv_resout_thisWorkNo"
+                        android:layout_width="@dimen/layout_80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/this_work_no"
+                        style="@style/app_text_inwhite"/>
+
+                    <TextView
+                        android:id="@+id/tv_resout_thisWorkNoValue"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_10dp"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        style="@style/ser_text_inwhite" />
+                    <TextView
+                        android:id="@+id/tv_resout_thisWorkName"
+                        android:layout_width="@dimen/layout_80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/this_work_name"
+                        style="@style/app_text_inwhite"/>
+
+                    <TextView
+                        android:id="@+id/tv_resout_thisWorkNameValue"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_10dp"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        style="@style/ser_text_inwhite" />
+
+                </LinearLayout>
+                <View style="@style/fg_line_style" />
+
+                <LinearLayout
+                    style="@style/itemstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv_resout_nextWorkNo"
+                        android:layout_width="@dimen/layout_80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/next_work_no"
+                        style="@style/app_text_inwhite"/>
+
+                    <TextView
+                        android:id="@+id/tv_resout_nextWorkNoValue"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_10dp"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        style="@style/ser_text_inwhite" />
+                    <TextView
+                        android:id="@+id/tv_resout_nextWorkName"
+                        android:layout_width="@dimen/layout_80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/next_work_name"
+                        style="@style/app_text_inwhite"/>
+
+                    <TextView
+                        android:id="@+id/tv_resout_nextWorkNameValue"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_10dp"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        style="@style/ser_text_inwhite" />
+
+                </LinearLayout>
+
+                <View style="@style/fg_line_style" />
+
+                <LinearLayout
+                    style="@style/itemstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv_resout_canGetNum"
+                        android:layout_width="@dimen/layout_80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/can_get_num"
+                        style="@style/app_text_inwhite"/>
+
+                    <TextView
+                        android:id="@+id/tv_resout_canGetNumValue"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_10dp"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        style="@style/ser_text_inwhite" />
+                    <TextView
+                        android:id="@+id/tv_resout_unit"
+                        android:layout_width="@dimen/layout_80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/unit"
+                        style="@style/app_text_inwhite"/>
+
+                    <TextView
+                        android:id="@+id/tv_resout_unitValue"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_10dp"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        style="@style/ser_text_inwhite" />
+
+                </LinearLayout>
+                <View style="@style/fg_line_style" />
+
+                <LinearLayout
+                    style="@style/itemstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv_resout_itemNo"
+                        android:layout_width="@dimen/layout_80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/item_no"
+                        style="@style/app_text_inwhite"/>
+
+                    <TextView
+                        android:id="@+id/tv_resout_itemNoValue"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_10dp"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        style="@style/ser_text_inwhite" />
+
+                </LinearLayout>
+                <View style="@style/fg_line_style" />
+
+                <LinearLayout
+                    style="@style/itemstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv_resout_itemName"
+                        android:layout_width="@dimen/layout_80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/item_name"
+                        style="@style/app_text_inwhite"/>
+
+                    <TextView
+                        android:id="@+id/tv_resout_itemNameValue"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_10dp"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        style="@style/ser_text_inwhite" />
+
+                </LinearLayout>
+                <View style="@style/fg_line_style" />
+
+                <LinearLayout
+                    style="@style/itemstyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv_resout_model"
+                        android:layout_width="@dimen/layout_80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/model"
+                        style="@style/app_text_inwhite"/>
+
+                    <TextView
+                        android:id="@+id/tv_resout_modelValue"
+                        android:layout_width="@dimen/layout_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/layout_10dp"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        style="@style/ser_text_inwhite" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <include layout="@layout/inclu_commit"></include>
+
+</RelativeLayout>

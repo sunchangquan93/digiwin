@@ -709,6 +709,24 @@
             android:screenOrientation="landscape"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
         </activity>
+        <!-- 工序转移 -->
+        <activity
+            android:name=".module.activity.produce.processtransfer.ProcessTransferActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.digiwin.ProcessTransferActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- 生产报工 -->
+        <activity
+            android:name=".module.activity.produce.producedailywork.ProdurceDailyActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.digiwin.ProdurceDailyActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <activity android:name = ".module.activity.common.ChoosePicActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>

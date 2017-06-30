@@ -185,6 +185,7 @@ public class StockCheckActivity extends BaseFirstModuldeActivity {
                     barcodeMap.put(AddressContants.DOC_NO, data.getDoc_no());
                     barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
                     barcodeMap.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
+                    barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_no());
                     commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                         @Override
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
@@ -196,6 +197,7 @@ public class StockCheckActivity extends BaseFirstModuldeActivity {
                             saveBean.setLot_no(barcodeBackBean.getLot_no());//批号
                             //赋值累积量
                             tv_material_sumnumber.setText(barcodeBackBean.getScan_sumqty());
+                            et_chcek_number.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
                             et_chcek_number.requestFocus();
                         }
 

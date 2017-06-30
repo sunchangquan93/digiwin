@@ -42,6 +42,12 @@ public class CreateParaXmlReqIm extends CreateParaXmlReq {
     private CreateParaXmlReqIm(String userName, String plant, String deviceId, String appmodule, String reqType, String timestamp, List<Map<String, String>> masters, List<Map<String, String>> details){
         super( userName, plant, deviceId, appmodule,reqType,timestamp, masters,details);
     }
+    /**
+     * 一个master，不同detail
+     */
+    private CreateParaXmlReqIm(String userName, String plant, String deviceId, String appmodule, String reqType, String timestamp, List<Map<String, String>> masters, List<List<Map<String, String>>> details,String flag){
+        super( userName, plant, deviceId, appmodule,reqType,timestamp, masters,details,flag);
+    }
 
     /**
      * 获取xml解析实体
@@ -128,7 +134,7 @@ public class CreateParaXmlReqIm extends CreateParaXmlReq {
         return createParaXmlReqIm;
     }
     /**
-     *  一个单头，一个单身
+     *  一个单头，相同单身
      */
     public static CreateParaXmlReqIm getInstance( String appmodule, String reqType, String timestamp,
                                                   List<Map<String, String>> masters, List<Map<String, String>> details ) {
@@ -141,6 +147,22 @@ public class CreateParaXmlReqIm extends CreateParaXmlReq {
         }
         String deviceId= TelephonyUtils.getDeviceId(BaseApplication.getInstance());
         CreateParaXmlReqIm   createParaXmlReqIm = new CreateParaXmlReqIm( userName, plant,deviceId,appmodule,reqType,timestamp, masters,details);
+        return createParaXmlReqIm;
+    }
+    /**
+     *  一个单头，不同单身
+     */
+    public static CreateParaXmlReqIm getInstance( String appmodule, String reqType, String timestamp,
+                                                  List<Map<String, String>> masters, List<List<Map<String, String>>> details ,String flag) {
+        String userName="tiptop";
+        String plant="SYSTEM";
+        AccoutBean accoutBean = LoginLogic.getUserInfo();
+        if (null!=accoutBean){
+            userName = accoutBean.getUsername();
+            plant = accoutBean.getPlant();
+        }
+        String deviceId= TelephonyUtils.getDeviceId(BaseApplication.getInstance());
+        CreateParaXmlReqIm   createParaXmlReqIm = new CreateParaXmlReqIm( userName, plant,deviceId,appmodule,reqType,timestamp, masters,details,flag);
         return createParaXmlReqIm;
     }
 }

@@ -24,6 +24,7 @@ import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.base.BaseFirstModuldeActivity;
 import digiwin.smartdepot.core.base.BaseFragment;
+import digiwin.smartdepot.core.coreutil.CommonUtils;
 import digiwin.smartdepot.core.modulecommon.ModuleUtils;
 import digiwin.smartdepot.login.bean.AccoutBean;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
@@ -135,7 +136,7 @@ public class PurchaseGoodsScanFg extends BaseFragment {
     }
 
     @OnClick(R.id.save)
-    void Save() {
+    void save() {
         if (!barcodeFlag) {
             showFailedDialog(R.string.scan_barcode);
             return;
@@ -199,6 +200,9 @@ public class PurchaseGoodsScanFg extends BaseFragment {
                             saveBean.setScan_sumqty(barcodeBackBean.getScan_sumqty());
                             saveBean.setAvailable_in_qty(barcodeBackBean.getAvailable_in_qty());
                             et_input_num.requestFocus();
+                            if (CommonUtils.isAutoSave(saveBean)){
+                                save();
+                            }
                         }
 
                         @Override

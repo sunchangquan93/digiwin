@@ -102,12 +102,12 @@ public class QCLogic {
 
         public void onFailed(String error);
     }
-    public void postPQCData(final List<Map<String, String>> maps, final List<Map<String, String>> details, final postPQCListener listener) {
+    public void postPQCData(final List<Map<String, String>> maps, final List<List<Map<String, String>>> details, final postPQCListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
                 try {
-                    String xml = CreateParaXmlReqIm.getInstance(mModule, ReqTypeName.POSTPQC,mTimestamp,maps,details).toXml();
+                    String xml = CreateParaXmlReqIm.getInstance(mModule, ReqTypeName.POSTPQC,mTimestamp,maps,details,null).toXml();
                     OkhttpRequest.getInstance(mContext).post(xml, new IRequestCallbackImp() {
                         @Override
                         public void onResponse(String string) {
@@ -142,12 +142,12 @@ public class QCLogic {
 
         public void onFailed(String error);
     }
-    public void postFQCData(final List<Map<String, String>> maps, final List<Map<String, String>> details, final postFQCListener listener) {
+    public void postFQCData(final List<Map<String, String>> maps, final List<List<Map<String, String>>> details, final postFQCListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
                 try {
-                    String xml = CreateParaXmlReqIm.getInstance(mModule, ReqTypeName.POSTFQC,mTimestamp,maps,details).toXml();
+                    String xml = CreateParaXmlReqIm.getInstance(mModule, ReqTypeName.POSTFQC,mTimestamp,maps,details,null).toXml();
                     OkhttpRequest.getInstance(mContext).post(xml, new IRequestCallbackImp() {
                         @Override
                         public void onResponse(String string) {

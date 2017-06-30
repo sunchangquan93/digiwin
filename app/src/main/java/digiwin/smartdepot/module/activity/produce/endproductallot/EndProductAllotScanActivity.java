@@ -25,6 +25,7 @@ import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseTitleActivity;
+import digiwin.smartdepot.core.coreutil.CommonUtils;
 import digiwin.smartdepot.core.coreutil.FiFoCheckUtils;
 import digiwin.smartdepot.core.modulecommon.ModuleUtils;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
@@ -180,7 +181,7 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
     boolean fifo_check;
     ListSumBean localData;
     @OnClick(R.id.save)
-    void saveData(){
+    void save(){
         if(!locatorFlag){
             showFailedDialog(R.string.scan_locator);
             return;
@@ -299,6 +300,9 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
                         }else{
                             etScanBarocde.requestFocus();
                         }
+                        if (CommonUtils.isAutoSave(saveBean)){
+                            save();
+                        }
                     }
 
                     @Override
@@ -319,6 +323,7 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
                 HashMap<String, String> barcodeMap = new HashMap<>();
                 barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
                 barcodeMap.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
+                barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_out_no());
                 commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                     @Override
                     public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
@@ -410,7 +415,7 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
 
         localData = new ListSumBean();
         ListSumBean data = (ListSumBean) getIntent().getSerializableExtra("sumdata");
-        mTv_item_name.setText(data.getItem_name());
+        mTv_item_name.setText(data.getLow_order_item_name());
         et_format.setText(data.getLow_order_item_spec());
         tv_material_return.setText(StringUtils.deleteZero(data.getShortage_qty()));
         tv_material_return_big.setText(StringUtils.deleteZero(data.getStock_qty()));
@@ -497,6 +502,10 @@ public class EndProductAllotScanActivity extends BaseTitleActivity {
         saveBean.setCustomer_no(barcodeBackBean.getCol1());
         saveBean.setFifo_check(barcodeBackBean.getFifo_check());
         etInputNum.requestFocus();
+        saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
+        if (CommonUtils.isAutoSave(saveBean)){
+            save();
+        }
     }
 
     /**

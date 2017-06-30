@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -24,17 +23,18 @@ import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
 import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.utils.StringUtils;
+import digiwin.pulltorefreshlibrary.recyclerview.FullyLinearLayoutManager;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.base.BaseFragment;
+import digiwin.smartdepot.core.coreutil.CommonUtils;
+import digiwin.smartdepot.core.coreutil.FiFoCheckUtils;
 import digiwin.smartdepot.core.modulecommon.ModuleUtils;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
-import digiwin.smartdepot.module.activity.sale.salereturn.SaleReturnSecondActivity;
 import digiwin.smartdepot.module.activity.stock.postallocate.PostAllocateScanActivity;
-import digiwin.smartdepot.module.adapter.produce.PostmaterialFiFoAdapter;
+import digiwin.smartdepot.module.adapter.common.CommonDocNoFIFoAdapter;
 import digiwin.smartdepot.module.bean.common.FifoCheckBean;
 import digiwin.smartdepot.module.bean.common.FilterResultOrderBean;
-import digiwin.smartdepot.module.bean.common.ListSumBean;
 import digiwin.smartdepot.module.bean.common.SaveBackBean;
 import digiwin.smartdepot.module.bean.common.SaveBean;
 import digiwin.smartdepot.module.bean.common.ScanBarcodeBackBean;
@@ -245,7 +245,7 @@ public class PostAllocateScanFg extends BaseFragment {
     }
 
     @OnClick(R.id.save)
-    void Save() {
+    void save() {
         if (!barcodeFlag) {
             showFailedDialog(R.string.scan_barcode);
             return;
@@ -264,6 +264,11 @@ public class PostAllocateScanFg extends BaseFragment {
         }
         saveBean.setDoc_no(orderBean.getDoc_no());
         saveBean.setQty(et_input_num.getText().toString());
+        String fifoCheck = FiFoCheckUtils.fifoCheck(saveBean, fiFoList);
+        if (!StringUtils.isBlank(fifoCheck)){
+            showFailedDialog(fifoCheck);
+            return;
+        }
         showLoadingDialog();
         commonLogic.scanSave(saveBean, new CommonLogic.SaveListener() {
             @Override
@@ -284,7 +289,7 @@ public class PostAllocateScanFg extends BaseFragment {
 
     PostAllocateScanActivity pactivity;
 
-    PostmaterialFiFoAdapter adapter;
+    CommonDocNoFIFoAdapter adapter;
 
     FilterResultOrderBean orderBean;
 
@@ -320,7 +325,12 @@ public class PostAllocateScanFg extends BaseFragment {
                             saveBean.setLot_no(barcodeBackBean.getLot_no());
                             saveBean.setScan_sumqty(barcodeBackBean.getScan_sumqty());
                             saveBean.setAvailable_in_qty(barcodeBackBean.getAvailable_in_qty());
+                            saveBean.setFifo_check(barcodeBackBean.getFifo_check());
                             et_input_num.requestFocus();
+                            saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
+                            if (CommonUtils.isAutoSave(saveBean)){
+                                save();
+                            }
                         }
 
                         @Override
@@ -366,6 +376,15 @@ public class PostAllocateScanFg extends BaseFragment {
                     commonLogic.scanLocator(locatorMap1, new CommonLogic.ScanLocatorListener() {
                         @Override
                         public void onSuccess(ScanLocatorBackBean locatorBackBean) {
+                            if (!LoginLogic.getWare().equals(locatorBackBean.getWarehouse_no())){
+                                showFailedDialog(R.string.ware_error, new OnDialogClickListener() {
+                                    @Override
+                                    public void onCallback() {
+                                        et_scan_locator_out.setText("");
+                                    }
+                                });
+                                return;
+                            }
                             outLocatorShow = locatorBackBean.getShow();
                             outLocatorFlag = true;
                             saveBean.setStorage_spaces_out_no(locatorBackBean.getStorage_spaces_no());
@@ -415,14 +434,14 @@ public class PostAllocateScanFg extends BaseFragment {
             public void onSuccess(List<FifoCheckBean> fiFoBeanList) {
                 fiFoList.clear();
                 fiFoList = fiFoBeanList;
-                adapter = new PostmaterialFiFoAdapter(pactivity, fiFoList);
+                adapter = new CommonDocNoFIFoAdapter(pactivity, fiFoList);
                 ryList.setAdapter(adapter);
             }
 
             @Override
             public void onFailed(String error) {
                 fiFoList = new ArrayList<FifoCheckBean>();
-                adapter = new PostmaterialFiFoAdapter(pactivity, fiFoList);
+                adapter = new CommonDocNoFIFoAdapter(pactivity, fiFoList);
             }
         });
     }
@@ -473,6 +492,8 @@ public class PostAllocateScanFg extends BaseFragment {
         cb_locatorlock_in.setChecked(false);
         cb_locatorlock_out.setChecked(false);
         saveBean = new SaveBean();
+        FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(activity);
+        ryList.setLayoutManager(linearLayoutManager);
         commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
         orderBean = (FilterResultOrderBean) pactivity.getIntent().getExtras().getSerializable(AddressContants.ORDERDATA);
         et_scan_locator_out.requestFocus();

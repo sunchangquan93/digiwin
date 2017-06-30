@@ -27,11 +27,12 @@ import digiwin.library.utils.StringUtils;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.base.BaseFragment;
+import digiwin.smartdepot.core.coreutil.CommonUtils;
 import digiwin.smartdepot.core.coreutil.FiFoCheckUtils;
 import digiwin.smartdepot.core.modulecommon.ModuleUtils;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
 import digiwin.smartdepot.module.activity.produce.worksupplement.WorkSupplementActivity;
-import digiwin.smartdepot.module.adapter.purchase.WorkSupplementFIFoAdapter;
+import digiwin.smartdepot.module.adapter.common.CommonDocNoFIFoAdapter;
 import digiwin.smartdepot.module.bean.common.FifoCheckBean;
 import digiwin.smartdepot.module.bean.common.FilterResultOrderBean;
 import digiwin.smartdepot.module.bean.common.SaveBackBean;
@@ -80,7 +81,7 @@ public class WorkSupplementScanFg extends BaseFragment {
      */
     boolean locatorFlag;
 
-    WorkSupplementFIFoAdapter adapter;
+    CommonDocNoFIFoAdapter adapter;
 
     @BindView(R.id.ry_list)
     RecyclerView mRy_list;
@@ -269,6 +270,9 @@ public class WorkSupplementScanFg extends BaseFragment {
                         saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
                         saveBean.setAllow_negative_stock(locatorBackBean.getAllow_negative_stock());
                         etScanBarocde.requestFocus();
+                        if (CommonUtils.isAutoSave(saveBean)){
+                            save();
+                        }
                     }
 
                     @Override
@@ -289,14 +293,11 @@ public class WorkSupplementScanFg extends BaseFragment {
                 barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
                 barcodeMap.put(AddressContants.DOC_NO, localData.getDoc_no());
                 barcodeMap.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
+                barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_out_no());
                 commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                     @Override
                     public void onSuccess(final ScanBarcodeBackBean barcodeBackBean) {
                         showBarcode(barcodeBackBean);
-
-//                        tv_item_format.setText(barcodeBackBean.getItem_spec());
-//                        tv_item_name.setText(barcodeBackBean.getItem_name());
-//                        tv_available_quantity.setText(barcodeBackBean.getAvailable_in_qty());
                     }
 
                     @Override
@@ -322,7 +323,7 @@ public class WorkSupplementScanFg extends BaseFragment {
                     public void onSuccess(List<FifoCheckBean> fiFoBeanList) {
                         dismissLoadingDialog();
                         fiFoList = fiFoBeanList;
-                        adapter = new WorkSupplementFIFoAdapter(context,fiFoBeanList);
+                        adapter = new CommonDocNoFIFoAdapter(context,fiFoBeanList);
                         mRy_list.setAdapter(adapter);
                     }
 
@@ -353,6 +354,10 @@ public class WorkSupplementScanFg extends BaseFragment {
         saveBean.setDoc_no(localData.getDoc_no());
         saveBean.setFifo_check(barcodeBackBean.getFifo_check());
         etInputNum.requestFocus();
+        saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
+        if (CommonUtils.isAutoSave(saveBean)){
+            save();
+        }
     }
 
     public void upDateList() {

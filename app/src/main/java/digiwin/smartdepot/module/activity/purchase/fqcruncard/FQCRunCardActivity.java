@@ -44,7 +44,9 @@ import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseActivity;
+import digiwin.smartdepot.module.activity.common.ChoosePicActivity;
 import digiwin.smartdepot.module.activity.purchase.purchasecheck.BadReasonActivity;
+import digiwin.smartdepot.module.activity.purchase.purchasecheck.CheckShowImageActivity;
 import digiwin.smartdepot.module.adapter.ExpandAdapter;
 import digiwin.smartdepot.module.bean.purchase.BadReasonBean;
 import digiwin.smartdepot.module.bean.purchase.PQCValueBean;
@@ -106,6 +108,40 @@ public class FQCRunCardActivity extends BaseActivity {
     LinearLayout llEtInput;
     @BindView(R.id.iv_value_check)
     ImageView ivValueCheck;
+
+    /**
+     * 检查图纸
+     */
+    @OnClick(R.id.iv_picture)
+    void checkPic() {
+        //TODO 跳转到检查图纸界面
+        if (selectBean == null) {
+            showToast(R.string.please_select_one_data);
+            return;
+        }
+        Bundle bundle = new Bundle();
+        selectBean.setGls_bv08("FQCRUNCARD");
+        bundle.putSerializable(CheckShowImageActivity.DATAKEY, selectBean);
+        bundle.putString(AddressContants.MODULEID_INTENT, module);
+        ActivityManagerUtils.startActivityForBundleData(activity, CheckShowImageActivity.class, bundle);
+    }
+
+    /**
+     * 拍照上传
+     */
+    @OnClick(R.id.iv_photo)
+    void takePhoto() {
+        //TODO 跳转到拍照上传
+        if (selectBean == null) {
+            showToast(R.string.please_select_one_data);
+            return;
+        }
+        selectBean.setGls_bv08("FQCRUNCARD");
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(ChoosePicActivity.DATAKEY, selectBean);
+        bundle.putString(AddressContants.MODULEID_INTENT, module);
+        ActivityManagerUtils.startActivityForBundleData(activity, ChoosePicActivity.class, bundle);
+    }
 
     private Map<PurchaseCheckDetailBean,List<PQCValueBean>> valueMap;
 
@@ -190,7 +226,7 @@ public class FQCRunCardActivity extends BaseActivity {
     @OnClick(R.id.commit)
     public void commit(){
         final List<Map<String,String>> maps = new ArrayList<>();
-        final List<Map<String,String>> details = new ArrayList<>();
+        final List<List<Map<String,String>>> lists = new ArrayList<>();
         if(null!=detailBean&&detailBean.size()>0){
             for (int i = 0; i < detailBean.size(); i++) {
                 PurchaseCheckDetailBean purchaseCheckDetailBean = detailBean.get(i);
@@ -207,12 +243,14 @@ public class FQCRunCardActivity extends BaseActivity {
                 }
                 maps.add(map1);
                 List<BadReasonBean> list = badReasonMap.get(detailBean.get(i));
+                List<Map<String,String>> details = new ArrayList<>();
                 if(null!=list&&list.size()>0){
                     for (int j = 0; j < list.size(); j++) {
                         Map<String, String> valueMap1 = ObjectAndMapUtils.getValueMap(list.get(j));
                         details.add(valueMap1);
                     }
                 }
+                lists.add(details);
             }
         }else {
             return;
@@ -221,7 +259,7 @@ public class FQCRunCardActivity extends BaseActivity {
             @Override
             public void onCallback1() {
                 showLoadingDialog();
-                pqcLogic.postFQCData(maps, details, new QCLogic.postFQCListener() {
+                pqcLogic.postFQCData(maps, lists, new QCLogic.postFQCListener() {
                     @Override
                     public void onSuccess(String msg) {
                         dismissLoadingDialog();
@@ -292,17 +330,17 @@ public class FQCRunCardActivity extends BaseActivity {
                     showLoadingDialog();
                     logic.getMaterialToCheck(map, new PurcahseCheckLogic.GetMaterialToCheckListener() {
                         @Override
-                        public void onSuccess(List<PurchaseCheckBean> purchaseCheckBean) {
+                        public void onSuccess(List<PurchaseCheckBean> purchaseCheckBeen) {
                             dataMap = new LinkedHashMap<PurchaseCheckBean, List<PurchaseCheckDetailBean>>();
                             etInput.setText("");
-                            if(purchaseCheckBean.size()>0){
-                                for (int i = 0; i < purchaseCheckBean.size(); i++) {
-                                    purchaseCheckBean.get(i).setSeq(StringUtils.objToString(i+1));
+                            if(purchaseCheckBeen.size()>0){
+                                for (int i = 0; i < purchaseCheckBeen.size(); i++) {
+                                    purchaseCheckBeen.get(i).setSeq(StringUtils.objToString(i+1));
                                 }
-                                PurchaseCheckBean checkBean = purchaseCheckBean.get(0);
+                                PurchaseCheckBean checkBean = purchaseCheckBeen.get(0);
                                 tvOrderNumber.setText(checkBean.getWo_no());
                                 tvDepartment.setText(checkBean.getDepartment_name());
-                                getAllDetail(purchaseCheckBean);
+                                getAllDetail(purchaseCheckBeen);
                             }else{
                                 adapter = new FQCExpandAdapter(dataMap,false);
                                 expandLv.setAdapter(adapter);
@@ -416,7 +454,12 @@ public class FQCRunCardActivity extends BaseActivity {
                     values.addAll(valueBeen);
                     valueMap.put(selectedDetailBean,valueBeen);
                     for (int i = 0; i < valueBeen.size(); i++) {
-                        defect_num += StringUtils.string2Float(valueBeen.get(i).getQty());
+                        float qty = StringUtils.string2Float(valueBeen.get(i).getQty());
+                        float upQty = StringUtils.string2Float(valueBeen.get(i).getUpper_qty());
+                        float lowerQty = StringUtils.string2Float(valueBeen.get(i).getLower_qty());
+                        if(qty>upQty||qty<lowerQty){
+                            defect_num++;
+                        }
                     }
                     for (int i = 0; i < dataMap.size(); i++) {
                         selectedDetailBean.setDefect_qty(StringUtils.objToString(defect_num));

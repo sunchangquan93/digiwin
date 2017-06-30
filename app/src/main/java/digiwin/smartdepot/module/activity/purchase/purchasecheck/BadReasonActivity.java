@@ -38,6 +38,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
+import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.StringUtils;
 import digiwin.pulltorefreshlibrary.recyclerview.DividerItemDecoration;
 import digiwin.pulltorefreshlibrary.recyclerview.FullyLinearLayoutManager;
@@ -56,6 +57,7 @@ import digiwin.smartdepot.module.logic.purchase.PurcahseCheckLogic;
 
 /**
  * 收获检验 不良原因维护
+ *
  * @author 唐孟宇
  */
 public class BadReasonActivity extends BaseActivity {
@@ -67,14 +69,21 @@ public class BadReasonActivity extends BaseActivity {
     ImageView iv_back;
 
     @OnClick(R.id.iv_back)
-    void backClick(){
+    void backClick() {
         onBackPressed();
     }
+
     /**
      * 模块名
      */
     @BindView(R.id.tv_title_name)
     TextView tv_title_name;
+
+    @OnClick(R.id.tv_title_name)
+    void backClick2() {
+        onBackPressed();
+    }
+
     /**
      * 扫描框
      */
@@ -142,9 +151,9 @@ public class BadReasonActivity extends BaseActivity {
     final int BARCODEWHAT1 = 1235;
 
     @OnTextChanged(value = R.id.et_input, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
-    void scanBarcode(CharSequence s){
+    void scanBarcode(CharSequence s) {
         //TODO 扫描条码
-        if(!StringUtils.isBlank(s.toString().trim())){
+        if (!StringUtils.isBlank(s.toString().trim())) {
             mHandler.removeMessages(BARCODEWHAT);
             mHandler.sendMessageDelayed(mHandler.obtainMessage(BARCODEWHAT, s.toString()), AddressContants.DELAYTIME);
         }
@@ -161,8 +170,8 @@ public class BadReasonActivity extends BaseActivity {
      * 确定按钮点击事件
      */
     @OnClick(R.id.commit)
-    void commitSure(){
-        if(badReasonList == null){
+    void commitSure() {
+        if (badReasonList == null) {
             showToast(R.string.please_input_bad_num);
             return;
         }
@@ -186,6 +195,7 @@ public class BadReasonActivity extends BaseActivity {
     List<BadReasonBean> badReasonList = new ArrayList<>();
 
     List<BadReasonBean> badReasonList1;
+
     @Override
     protected int bindLayoutId() {
         return R.layout.activity_bad_reason;
@@ -200,82 +210,28 @@ public class BadReasonActivity extends BaseActivity {
     @Override
     protected void doBusiness() {
         pactivity = (BadReasonActivity) activity;
-        logic = PurcahseCheckLogic.getInstance(pactivity,module,mTimestamp.toString());
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(pactivity,2);
+        logic = PurcahseCheckLogic.getInstance(pactivity, module, mTimestamp.toString());
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(pactivity, 2);
         rc_list.setLayoutManager(gridLayoutManager);
         LinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(pactivity);
         rc_list_search_result.setLayoutManager(linearLayoutManager);
         et_input.requestFocus();
-        purchaseCheckDetailBean = (PurchaseCheckDetailBean)getIntent().getExtras().getSerializable("purchaseCheckDetailBean");
-        purchaseCheckBean = (PurchaseCheckBean)getIntent().getExtras().getSerializable("purchaseCheckBean");
+        purchaseCheckDetailBean = (PurchaseCheckDetailBean) getIntent().getExtras().getSerializable("purchaseCheckDetailBean");
+        purchaseCheckBean = (PurchaseCheckBean) getIntent().getExtras().getSerializable("purchaseCheckBean");
         try {
             badReasonList = (List<BadReasonBean>) getIntent().getExtras().getSerializable("badReasonList");
-        if (null != badReasonList) {
-            if (badReasonList.size() > 0) {
-                badReasonAdapter = new BaseSwipeMenuAdapter<BadReasonBean>(pactivity, badReasonList) {
-                    @Override
-                    protected int getItemLayout(int viewType) {
-                        return R.layout.ryitem_bad_reason_detail;
-                    }
-
-                    @Override
-                    protected void bindData(RecyclerViewHolder holder, int position, BadReasonBean item) {
-                        int color = (int) (Math.random() * 5);
-                        if (color == 0) {
-                            holder.setTextColor(R.id.tv_detail_reason, R.color.RED);
-                        } else if (color == 1) {
-                            holder.setTextColor(R.id.tv_detail_reason, R.color.green7d);
-                        } else if (color == 2) {
-                            holder.setTextColor(R.id.tv_detail_reason, R.color.yellow);
-                        } else if (color == 3) {
-                            holder.setTextColor(R.id.tv_detail_reason, R.color.gray);
-                        } else {
-                            holder.setTextColor(R.id.tv_detail_reason, R.color.result_points);
-                        }
-                        final EditText et_bad_num = holder.getEditText(R.id.tv_bad_num);
-                        holder.setText(R.id.tv_detail_reason, item.getDefect_reason_name());
-                        holder.setText(R.id.tv_bad_num, item.getDefect_qty());
-                        holder.setVisibility(R.id.tv_bad_num, View.VISIBLE);
-                        et_bad_num.setTag(position);
-                        et_bad_num.addTextChangedListener(new TextWatcher() {
-                            @Override
-                            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                            }
-
-                            @Override
-                            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                            }
-
-                            @Override
-                            public void afterTextChanged(Editable s) {
-                                if (!StringUtils.isBlank(s.toString().trim())) {
-                                    int tag = (int) et_bad_num.getTag();
-                                    badReasonList.get(tag).setDefect_qty(s.toString());
-                                }
-                            }
-                        });
-                    }
-                };
-                rc_list.setAdapter(badReasonAdapter);
-                rc_list.setHasFixedSize(true);// 如果Item够简单，高度是确定的，打开FixSize将提高性能。
-                rc_list.setItemAnimator(new DefaultItemAnimator());// 设置Item默认动画，加也行，不加也行。
-                // 为SwipeRecyclerView的Item创建菜单就两句话，不错就是这么简单：
-                // 设置菜单Item点击监听。
-                rc_list.setSwipeMenuItemClickListener(menuItemClickListener);
-                // 设置菜单创建器。
-                rc_list.setSwipeMenuCreator(swipeMenuCreator);
-                rc_list.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL_LIST));
+            if (null != badReasonList) {
+                if (badReasonList.size() > 0) {
+                    initAdapter();
+                }
+            } else {
+                Message msg = new Message();
+                msg.what = BARCODEWHAT1;
+                msg.obj = purchaseCheckDetailBean.getItem_no();
+                mHandler.removeMessages(BARCODEWHAT1);
+                mHandler.sendMessageDelayed(msg, AddressContants.DELAYTIME);
             }
-        }else {
-            Message msg = new Message();
-            msg.what = BARCODEWHAT1;
-            msg.obj = purchaseCheckDetailBean.getItem_no();
-            mHandler.removeMessages(BARCODEWHAT1);
-            mHandler.sendMessageDelayed(msg, AddressContants.DELAYTIME);
-        }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -289,6 +245,64 @@ public class BadReasonActivity extends BaseActivity {
         tv_defect_num.setText(purchaseCheckDetailBean.getDefect_qty());
     }
 
+    private void initAdapter() {
+        badReasonAdapter = new BaseSwipeMenuAdapter<BadReasonBean>(pactivity, badReasonList) {
+            @Override
+            protected int getItemLayout(int viewType) {
+                return R.layout.ryitem_bad_reason_detail;
+            }
+
+            @Override
+            protected void bindData(RecyclerViewHolder holder, int position, BadReasonBean item) {
+                int color = (int) (Math.random() * 5);
+                if (color == 0) {
+                    holder.setTextColor(R.id.tv_detail_reason, R.color.RED);
+                } else if (color == 1) {
+                    holder.setTextColor(R.id.tv_detail_reason, R.color.green7d);
+                } else if (color == 2) {
+                    holder.setTextColor(R.id.tv_detail_reason, R.color.yellow);
+                } else if (color == 3) {
+                    holder.setTextColor(R.id.tv_detail_reason, R.color.gray);
+                } else {
+                    holder.setTextColor(R.id.tv_detail_reason, R.color.result_points);
+                }
+                final EditText et_bad_num = holder.getEditText(R.id.tv_bad_num);
+                holder.setText(R.id.tv_detail_reason, item.getDefect_reason_name());
+                holder.setText(R.id.tv_bad_num, item.getDefect_qty());
+                holder.setVisibility(R.id.tv_bad_num, View.VISIBLE);
+                et_bad_num.setTag(position);
+                et_bad_num.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        if (!StringUtils.isBlank(s.toString().trim())) {
+                            int tag = (int) et_bad_num.getTag();
+                            badReasonList.get(tag).setDefect_qty(s.toString());
+                        }
+                    }
+                });
+            }
+        };
+        rc_list.setAdapter(badReasonAdapter);
+        rc_list.setHasFixedSize(true);// 如果Item够简单，高度是确定的，打开FixSize将提高性能。
+        rc_list.setItemAnimator(new DefaultItemAnimator());// 设置Item默认动画，加也行，不加也行。
+        // 为SwipeRecyclerView的Item创建菜单就两句话，不错就是这么简单：
+        // 设置菜单Item点击监听。
+        rc_list.setSwipeMenuItemClickListener(menuItemClickListener);
+        // 设置菜单创建器。
+        rc_list.setSwipeMenuCreator(swipeMenuCreator);
+        rc_list.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL_LIST));
+    }
+
     @Override
     public String moduleCode() {
         module = ModuleCode.PURCHASECHECK;
@@ -299,19 +313,19 @@ public class BadReasonActivity extends BaseActivity {
         tv_title_name.setText(R.string.bad_reason_maintenance);
     }
 
-    private Handler mHandler = new Handler(){
+    private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            switch (msg.what){
+            switch (msg.what) {
                 case BARCODEWHAT:
-                    Map<String,String> map = new HashMap<>();
-                    map.put("defect_reason_zm",msg.obj.toString());
+                    Map<String, String> map = new HashMap<>();
+                    map.put("defect_reason_zm", msg.obj.toString());
                     logic.getQCReasonInfo(map, new PurcahseCheckLogic.GetQCReasonListener() {
                         @Override
                         public void onSuccess(final List<BadReasonBean> badReasonBeenList) {
                             et_input.setText("");
-                            if(badReasonBeenList.size()>0){
+                            if (badReasonBeenList.size() > 0) {
                                 ll_content.setVisibility(View.GONE);
                                 commit.setVisibility(View.GONE);
                                 rc_list_search_result.setVisibility(View.VISIBLE);
@@ -320,22 +334,22 @@ public class BadReasonActivity extends BaseActivity {
                                 for (int i = 0; i < badReasonList1.size(); i++) {
                                     badReasonList1.get(i).setDefect_qty("1");
                                 }
-                                badReasonAdapter1 = new BadReasonAdapter(pactivity,badReasonList1);
+                                badReasonAdapter1 = new BadReasonAdapter(pactivity, badReasonList1);
                                 rc_list_search_result.setAdapter(badReasonAdapter1);
                                 badReasonAdapter1.setOnItemClickListener(new OnItemClickListener() {
                                     @Override
                                     public void onItemClick(View itemView, int position) {
-                                        if(null != badReasonList){
-                                            if(badReasonList.size() > 0){
+                                        if (null != badReasonList) {
+                                            if (badReasonList.size() > 0) {
                                                 for (int i = 0; i < badReasonList.size(); i++) {
-                                                    if(badReasonList.get(i).getDefect_reason_name().equals(badReasonList1.get(position).getDefect_reason_name())){
+                                                    if (badReasonList.get(i).getDefect_reason_name().equals(badReasonList1.get(position).getDefect_reason_name())) {
                                                         showToast(R.string.this_reason_existed);
                                                         return;
                                                     }
                                                 }
                                             }
                                             badReasonList.add(badReasonList1.get(position));
-                                        }else{
+                                        } else {
                                             badReasonList = new ArrayList<BadReasonBean>();
                                             badReasonList.add(badReasonList1.get(position));
                                         }
@@ -354,83 +368,79 @@ public class BadReasonActivity extends BaseActivity {
                             showFailedDialog(error);
                         }
                     });
-                break;
+                    break;
 
                 case BARCODEWHAT1:
                     try {
                         showLoadingDialog();
-                        Map<String,String> hashMap = new HashMap<>();
-                        hashMap.put(AddressContants.ITEM_NO,msg.obj.toString());
+                        Map<String, String> hashMap = new HashMap<>();
+                        hashMap.put(AddressContants.ITEM_NO, msg.obj.toString());
                         logic.getQCReasonTop5Info(hashMap, new PurcahseCheckLogic.GetQCReasonTop5Listener() {
                             @Override
                             public void onSuccess(List<BadReasonBean> badReasonBeenList) {
                                 dismissLoadingDialog();
-                                    badReasonList = new ArrayList<BadReasonBean>();
-                                    badReasonList = badReasonBeenList;
-                                    if(badReasonList.size()>0) {
-                                        for (int i = 0; i < badReasonList.size(); i++) {
-                                            badReasonList.get(i).setDefect_qty("0");
-                                        }
+                                badReasonList = new ArrayList<BadReasonBean>();
+                                badReasonList = badReasonBeenList;
+                                if (badReasonList.size() > 0) {
+                                    for (int i = 0; i < badReasonList.size(); i++) {
+                                        badReasonList.get(i).setDefect_qty("0");
                                     }
-                                    badReasonAdapter = new BaseSwipeMenuAdapter<BadReasonBean>(pactivity,badReasonList){
-                                        @Override
-                                        protected int getItemLayout(int viewType) {
-                                            return R.layout.ryitem_bad_reason_detail;
+                                }
+                                badReasonAdapter = new BaseSwipeMenuAdapter<BadReasonBean>(pactivity, badReasonList) {
+                                    @Override
+                                    protected int getItemLayout(int viewType) {
+                                        return R.layout.ryitem_bad_reason_detail;
+                                    }
+
+                                    @Override
+                                    protected void bindData(RecyclerViewHolder holder, int position, BadReasonBean item) {
+                                        int color = (int) (Math.random() * 5);
+                                        if (color == 0) {
+                                            holder.setTextColor(R.id.tv_detail_reason, R.color.RED);
+                                        } else if (color == 1) {
+                                            holder.setTextColor(R.id.tv_detail_reason, R.color.green7d);
+                                        } else if (color == 2) {
+                                            holder.setTextColor(R.id.tv_detail_reason, R.color.yellow);
+                                        } else if (color == 3) {
+                                            holder.setTextColor(R.id.tv_detail_reason, R.color.gray);
+                                        } else {
+                                            holder.setTextColor(R.id.tv_detail_reason, R.color.result_points);
                                         }
+                                        final EditText et_bad_num = holder.getEditText(R.id.tv_bad_num);
+                                        holder.setText(R.id.tv_detail_reason, item.getDefect_reason_name());
+                                        holder.setText(R.id.tv_bad_num, item.getDefect_qty());
+                                        holder.setVisibility(R.id.tv_bad_num, View.VISIBLE);
+                                        et_bad_num.setTag(position);
+                                        et_bad_num.addTextChangedListener(new TextWatcher() {
+                                            @Override
+                                            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-                                        @Override
-                                        protected void bindData(RecyclerViewHolder holder, int position, BadReasonBean item) {
-                                            int color = (int)(Math.random()*5);
-                                            if(color == 0){
-                                                holder.setTextColor(R.id.tv_detail_reason,R.color.RED);
                                             }
-                                            else if(color == 1){
-                                                holder.setTextColor(R.id.tv_detail_reason,R.color.green7d);
-                                            }
-                                            else if(color == 2){
-                                                holder.setTextColor(R.id.tv_detail_reason,R.color.yellow);
-                                            }
-                                            else if(color == 3){
-                                                holder.setTextColor(R.id.tv_detail_reason,R.color.gray);
-                                            }
-                                            else{
-                                                holder.setTextColor(R.id.tv_detail_reason,R.color.result_points);
-                                            }
-                                            final EditText et_bad_num = holder.getEditText(R.id.tv_bad_num);
-                                            holder.setText(R.id.tv_detail_reason, item.getDefect_reason_name());
-                                            holder.setText(R.id.tv_bad_num, item.getDefect_qty());
-                                            holder.setVisibility(R.id.tv_bad_num, View.VISIBLE);
-                                            et_bad_num.setTag(position);
-                                            et_bad_num.addTextChangedListener(new TextWatcher() {
-                                                @Override
-                                                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+                                            @Override
+                                            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                                            }
+
+                                            @Override
+                                            public void afterTextChanged(Editable s) {
+                                                if (!StringUtils.isBlank(s.toString().trim())) {
+                                                    int tag = (int) et_bad_num.getTag();
+                                                    badReasonList.get(tag).setDefect_qty(s.toString());
                                                 }
-
-                                                @Override
-                                                public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                                                }
-
-                                                @Override
-                                                public void afterTextChanged(Editable s) {
-                                                    if(!StringUtils.isBlank(s.toString().trim())){
-                                                        int tag = (int) et_bad_num.getTag();
-                                                        badReasonList.get(tag).setDefect_qty(s.toString());
-                                                    }
-                                                }
-                                            });
-                                        }
-                                    };
-                                    rc_list.setAdapter(badReasonAdapter);
-                                    rc_list.setHasFixedSize(true);// 如果Item够简单，高度是确定的，打开FixSize将提高性能。
-                                    rc_list.setItemAnimator(new DefaultItemAnimator());// 设置Item默认动画，加也行，不加也行。
-                                    // 为SwipeRecyclerView的Item创建菜单就两句话，不错就是这么简单：
-                                    // 设置菜单Item点击监听。
-                                    rc_list.setSwipeMenuItemClickListener(menuItemClickListener);
-                                    // 设置菜单创建器。
-                                    rc_list.setSwipeMenuCreator(swipeMenuCreator);
-                                    rc_list.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL_LIST));
+                                            }
+                                        });
+                                    }
+                                };
+                                rc_list.setAdapter(badReasonAdapter);
+                                rc_list.setHasFixedSize(true);// 如果Item够简单，高度是确定的，打开FixSize将提高性能。
+                                rc_list.setItemAnimator(new DefaultItemAnimator());// 设置Item默认动画，加也行，不加也行。
+                                // 为SwipeRecyclerView的Item创建菜单就两句话，不错就是这么简单：
+                                // 设置菜单Item点击监听。
+                                rc_list.setSwipeMenuItemClickListener(menuItemClickListener);
+                                // 设置菜单创建器。
+                                rc_list.setSwipeMenuCreator(swipeMenuCreator);
+                                rc_list.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL_LIST));
                             }
 
                             @Override
@@ -442,16 +452,17 @@ public class BadReasonActivity extends BaseActivity {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                break;
+                    break;
             }
         }
     };
 
     /**
-     *  @des 不良原因 adapter
+     * @des 不良原因 adapter
      */
     class BadReasonAdapter extends BaseRecyclerAdapter<BadReasonBean> {
         RecyclerViewHolder viewHolder = null;
+
         public BadReasonAdapter(Context ctx, List<BadReasonBean> list) {
             super(ctx, list);
         }
@@ -465,13 +476,13 @@ public class BadReasonActivity extends BaseActivity {
         protected void bindData(RecyclerViewHolder holder, int position, final BadReasonBean item) {
             viewHolder = holder;
             holder.setVisibility(R.id.tv_bad_num, View.GONE);
-            holder.setText(R.id.tv_detail_reason,item.getDefect_reason_name());
+            holder.setText(R.id.tv_detail_reason, item.getDefect_reason_name());
         }
 
-        public RecyclerViewHolder getHolder(){
-            if(null != viewHolder){
+        public RecyclerViewHolder getHolder() {
+            if (null != viewHolder) {
                 return viewHolder;
-            }else{
+            } else {
                 return null;
             }
         }
@@ -487,8 +498,11 @@ public class BadReasonActivity extends BaseActivity {
             closeable.smoothCloseMenu();// 关闭被点击的菜单。
             // TODO 推荐调用Adapter.notifyItemRemoved(position)，也可以Adapter.notifyDataSetChanged();
             if (menuPosition == 0) {// 删除按钮被点击。
-                badReasonList.remove(menuPosition);
-                badReasonAdapter.notifyDataSetChanged();
+                badReasonList.remove(adapterPosition);
+                for (int i=0;i<badReasonList.size();i++){
+                    LogUtils.i(TAG,i+"badResBeen="+badReasonList.toString());
+                }
+                initAdapter();
             }
         }
     };

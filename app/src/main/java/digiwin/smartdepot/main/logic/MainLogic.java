@@ -157,6 +157,10 @@ public class MainLogic {
 
         ModuleBean fqcRunCard = new ModuleBean(R.string.fqc_runcard, R.mipmap.fqc_runcard, ModuleCode.FQCCARD, "android.intent.action.digiwin.FQCRunCardActivity");
 
+//        ModuleBean processTransfer = new ModuleBean(R.string.work_change, R.mipmap.fqc_runcard, ModuleCode.PROCESSTRANSFER, "android.intent.action.digiwin.ProcessTransferActivity");
+//
+//        ModuleBean produceDailyWork = new ModuleBean(R.string.produce_dailywork, R.mipmap.fqc_runcard, ModuleCode.PRODUCEDAILYWORK, "android.intent.action.digiwin.ProdurceDailyActivity");
+
         produceItems.add(finishedStorageActivity);
 
         produceItems.add(transfersToReviewActivity);
@@ -198,6 +202,10 @@ public class MainLogic {
         produceItems.add(fqcCheck);
 
         produceItems.add(fqcRunCard);
+
+//        produceItems.add(processTransfer);
+//
+//        produceItems.add(produceDailyWork);
 
         //初始化库存管理
         ModuleBean storeallotactivity = new ModuleBean(R.string.nocome_allot, R.mipmap.nocome_alllot, ModuleCode.NOCOMESTOREALLOT, "android.intent.action.digiwin.StoreAllotActivity");
@@ -260,7 +268,7 @@ public class MainLogic {
 
 
         // TODO: 2017/3/14 暂时屏蔽测试用
-
+//        showDetailModule();
         ModuleList.addAll(purchaseItems);
         ModuleList.addAll(produceItems);
         ModuleList.addAll(storageItems);

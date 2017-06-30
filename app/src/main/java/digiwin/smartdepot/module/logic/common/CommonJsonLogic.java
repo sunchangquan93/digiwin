@@ -1147,7 +1147,7 @@ public class CommonJsonLogic {
                         listener.onSuccess(msg);
                         return;
                     } else {
-                        error = parseForJava.getDescription();
+                        error = parseForJava.getAppmsg();
                     }
                 }
                 listener.onFailed(error);

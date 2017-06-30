@@ -62,7 +62,7 @@ public class PurcahseCheckLogic {
      * 获取采购收货待检验事项
      */
     public interface GetMaterialToCheckListener {
-        public void onSuccess(List<PurchaseCheckBean> purchaseCheckBean);
+        public void onSuccess(List<PurchaseCheckBean> purchaseCheckBeen);
 
         public void onFailed(String error);
     }
@@ -248,12 +248,12 @@ public class PurcahseCheckLogic {
     /**
      * 检验单数据提交
      */
-    public void updateQcData(final List<Map<String, String>> maps, final List<Map<String, String>> details, final UpdateQCDataListener listener) {
+    public void updateQcData(final List<Map<String, String>> maps, final List<List<Map<String, String>>> details, final UpdateQCDataListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
             @Override
             public void run() {
                 try {
-                    String xml = CreateParaXmlReqIm.getInstance(mModule, ReqTypeName.UPDATEIQCSTATUS,mTimestamp,maps,details).toXml();
+                    String xml = CreateParaXmlReqIm.getInstance(mModule, ReqTypeName.UPDATEIQCSTATUS,mTimestamp,maps,details,"").toXml();
                     OkhttpRequest.getInstance(mContext).post(xml, new IRequestCallbackImp() {
                         @Override
                         public void onResponse(String string) {

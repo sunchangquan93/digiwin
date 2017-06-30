@@ -122,6 +122,14 @@ public interface ModuleCode {
     public final String WORKSUPPLEMENT="B023";
 
     /**
+     * 工序转移
+     */
+    public final String PROCESSTRANSFER="B025";
+    /**
+     * 生产报工
+     */
+    public final String PRODUCEDAILYWORK="B025";
+    /**
      *装箱打印
      */
     public final String ENCHASEPRINT="B027";

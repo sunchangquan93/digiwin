@@ -69,12 +69,17 @@ public class FQCValueActivity extends BaseActivity {
      * 添加
      */
     void ivAdd(){
+        if(values.size()>=StringUtils.string2Float(bean.getQc_qty())){
+            showFailedDialog(R.string.measuringValueNum_below_inspection);
+            return;
+        }
         PQCValueBean value = new PQCValueBean();
         value.setUpper_qty(bean.getUpper_qty());
         value.setLower_qty(bean.getLower_qty());
         value.setQty(bean.getQty());
         values.add(value);
-        adapter.notifyDataSetChanged();
+        adapter = new PQCValueAdapter(activity,values);
+        ryList.setAdapter(adapter);
     }
     @BindView(R.id.ry_list)
     RecyclerView ryList;

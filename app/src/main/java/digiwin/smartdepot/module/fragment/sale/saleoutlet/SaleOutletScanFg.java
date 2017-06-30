@@ -30,12 +30,13 @@ import digiwin.pulltorefreshlibrary.recyclerviewAdapter.BaseRecyclerAdapter;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.base.BaseFragment;
+import digiwin.smartdepot.core.coreutil.CommonUtils;
 import digiwin.smartdepot.core.coreutil.FiFoCheckUtils;
 import digiwin.smartdepot.core.modulecommon.ModuleUtils;
 import digiwin.smartdepot.login.bean.AccoutBean;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
 import digiwin.smartdepot.module.activity.sale.saleoutlet.SaleOutletActivity;
-import digiwin.smartdepot.module.adapter.sale.SaleOutletFiFoAdapter;
+import digiwin.smartdepot.module.adapter.common.CommonDocNoFIFoAdapter;
 import digiwin.smartdepot.module.bean.common.ClickItemPutBean;
 import digiwin.smartdepot.module.bean.common.FifoCheckBean;
 import digiwin.smartdepot.module.bean.common.FilterResultOrderBean;
@@ -255,7 +256,7 @@ public class SaleOutletScanFg extends BaseFragment {
                             fiFoList.clear();
                             fiFoList = fiFoBeanList;
                             saleFlag = true;
-                            adapter = new SaleOutletFiFoAdapter(pactivity, fiFoList);
+                            adapter = new CommonDocNoFIFoAdapter(pactivity, fiFoList);
                             ryList.setAdapter(adapter);
                             if (!cbLocatorlock.isChecked()) {
                                 etScanLocator.requestFocus();
@@ -268,7 +269,7 @@ public class SaleOutletScanFg extends BaseFragment {
                         public void onFailed(String error) {
                             saleFlag = false;
                             fiFoList.clear();
-                            adapter = new SaleOutletFiFoAdapter(pactivity, fiFoList);
+                            adapter = new CommonDocNoFIFoAdapter(pactivity, fiFoList);
                             ryList.setAdapter(adapter);
                         }
                     });
@@ -278,6 +279,7 @@ public class SaleOutletScanFg extends BaseFragment {
                     barcodeMap.put(AddressContants.DOC_NO, notice_no);
                     barcodeMap.put(AddressContants.WAREHOUSE_NO, ware);
                     barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
+                    barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_out_no());
                     commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                         @Override
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
@@ -291,6 +293,10 @@ public class SaleOutletScanFg extends BaseFragment {
                             saveBean.setDoc_no(notice_no);
                             saveBean.setFifo_check(barcodeBackBean.getFifo_check());
                             etInputNum.requestFocus();
+                            saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
+                            if (CommonUtils.isAutoSave(saveBean)){
+                                save();
+                            }
                         }
 
                         @Override
@@ -316,6 +322,9 @@ public class SaleOutletScanFg extends BaseFragment {
                             saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
                             saveBean.setAllow_negative_stock(locatorBackBean.getAllow_negative_stock());
                             etScanBarocde.requestFocus();
+                            if (CommonUtils.isAutoSave(saveBean)){
+                                save();
+                            }
                         }
 
                         @Override

@@ -118,6 +118,7 @@
     <string name="distribute">生产配货</string>
     <string name="plan_date">计划日</string>
     <string name="class_group">班组</string>
+    <string name="class_group_name">班组名称</string>
     <string name="model">规格</string>
     <string name="locator_num">库存</string>
     <string name="locator_num_">库存量</string>
@@ -370,7 +371,7 @@
     <string name="num_of_print_pieces">打印张数</string>
     <string name="please_scan_barcode_first">请先扫描物料条码</string>
 
-    <string name="title_worksupplement_list">补料</string>
+    <string name="title_worksupplement_list">补料清单</string>
     <string name="title_worksupplement">依退料补料</string>
     <string name="returning_item_no">退料料号</string>
 
@@ -548,5 +549,39 @@
     <string name="fqc_runcard">FQCRunCard</string>
     <string name="pqc_runcard">PQCRunCard</string>
 
+    <string name="measuringValueNum_below_inspection">测量值笔数不能超过检验量</string>
+
     <string name="list">列表</string>
+
+    <string name="work_change">工序转移</string>
+    <string name="move_out_people">转出人员</string>
+    <string name="move_in_people">接收人员</string>
+    <string name="actual_get_num">实接收数量</string>
+    <string name="can_get_num">可接收数量</string>
+    <string name="change_num">转移数量</string>
+    <string name="work_no">工序号</string>
+    <string name="work_name">工序名称</string>
+    <string name="change_people">转移人员</string>
+    <string name="this_work_no">本工序号</string>
+    <string name="next_work_no">下工序号</string>
+    <string name="this_work_name">本工序名称</string>
+    <string name="next_work_name">下工序名称</string>
+    <string name="chooseprocess">请选择接收作业或转出作业</string>
+    <string name="choose_movein">接收作业</string>
+    <string name="choose_moveout">转出作业</string>
+
+    <string name="produce_dailywork">生产报工</string>
+    <string name="check_people">检验人员</string>
+    <string name="good_amount_num">良品数量</string>
+    <string name="need_handle_num">待处理量</string>
+
+    <string name="job_no">作业编号</string>
+    <string name="device_no">设备编号</string>
+    <string name="device_name">设备名称</string>
+    <string name="making_num">在制量</string>
+    <string name="scan_big_storenum">实发量大于库存量</string>
+
+    <string name="please_input_ip">请输入打印机IP地址和端口</string>
+    <string name="print_ip">请输入ip地址和端口号</string>
+    <string name="printer_ip">打印机IP</string>
 </resources>

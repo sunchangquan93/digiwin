@@ -23,7 +23,7 @@ import digiwin.smartdepot.core.screenlistener.ScreenListener;
 public abstract class BaseActivity extends BaseAppActivity {
     private Unbinder unBind;
     private ScreenListener listener;
-    private int finishTime = 5000;
+    private int finishTime = 50000;
     public final int mHandlerWhat = 100;
 
     /**
@@ -95,7 +95,7 @@ public abstract class BaseActivity extends BaseAppActivity {
         super.onDestroy();
         listener.unregisterListener();
 //        EventBus.getDefault().unregister(this);
-        if (unBind != null) unBind.unbind();
+//        if (unBind != null) unBind.unbind();
     }
 
     /**

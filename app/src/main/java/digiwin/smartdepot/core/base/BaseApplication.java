@@ -1,26 +1,26 @@
 package digiwin.smartdepot.core.base;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
+import android.support.multidex.MultiDex;
 
 import com.iflytek.cloud.SpeechConstant;
 import com.iflytek.cloud.SpeechUtility;
 import com.umeng.analytics.MobclickAgent;
 
-import digiwin.library.constant.SharePreKey;
-import digiwin.library.utils.LogUtils;
 import org.litepal.LitePalApplication;
 
 import cn.jpush.im.android.api.JMessageClient;
 import digiwin.library.cockroach.Cockroach;
+import digiwin.library.constant.SharePreKey;
 import digiwin.library.netstate.NetChangeObserver;
 import digiwin.library.netstate.NetStateReceiver;
 import digiwin.library.netstate.NetworkUtils;
 import digiwin.library.utils.AlertDialogUtils;
-import digiwin.library.utils.SharedPreferencesUtils;
+import digiwin.library.utils.LogUtils;
 import digiwin.library.voiceutils.VoiceUtils;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.jpush.NotificationClickEventReceiver;
@@ -45,6 +45,13 @@ public class BaseApplication extends LitePalApplication {
      * 极光IM使用
      */
     public static final String TARGET_ID = "targetId";
+
+    @Override
+    protected void attachBaseContext(Context base){
+        super.attachBaseContext(base);
+        //解决Android遇到的65536问题
+        MultiDex.install(this);
+    }
 
     @Override
     public void onCreate() {

@@ -29,14 +29,14 @@ import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.base.BaseFirstModuldeActivity;
 import digiwin.smartdepot.core.base.BaseFragment;
+import digiwin.smartdepot.core.coreutil.CommonUtils;
 import digiwin.smartdepot.core.coreutil.FiFoCheckUtils;
 import digiwin.smartdepot.core.modulecommon.ModuleUtils;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
 import digiwin.smartdepot.module.activity.produce.postmaterial.PostMaterialSecondActivity;
-import digiwin.smartdepot.module.adapter.produce.PostmaterialFiFoAdapter;
+import digiwin.smartdepot.module.adapter.common.CommonDocNoFIFoAdapter;
 import digiwin.smartdepot.module.bean.common.FifoCheckBean;
 import digiwin.smartdepot.module.bean.common.FilterResultOrderBean;
-import digiwin.smartdepot.module.bean.common.ListSumBean;
 import digiwin.smartdepot.module.bean.common.SaveBackBean;
 import digiwin.smartdepot.module.bean.common.SaveBean;
 import digiwin.smartdepot.module.bean.common.ScanBarcodeBackBean;
@@ -136,7 +136,7 @@ public class PostMaterialScanFg extends BaseFragment {
      */
     FilterResultOrderBean orderData;
 
-    PostmaterialFiFoAdapter adapter;
+    CommonDocNoFIFoAdapter adapter;
 
     List<FifoCheckBean> fiFoList = new ArrayList<FifoCheckBean>();
 
@@ -216,6 +216,7 @@ public class PostMaterialScanFg extends BaseFragment {
                     barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
                     barcodeMap.put(AddressContants.WAREHOUSE_NO,LoginLogic.getWare());
                     barcodeMap.put(AddressContants.DOC_NO,orderData.getDoc_no());
+                    barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_out_no());
                     commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
                         @Override
                         public void onSuccess(ScanBarcodeBackBean barcodeBackBean) {
@@ -227,6 +228,7 @@ public class PostMaterialScanFg extends BaseFragment {
                                tv_product_name.setText(barcodeBackBean.getItem_name());
                             }
                             barcodeFlag = true;
+                            saveBean.setFifo_check(barcodeBackBean.getFifo_check());
                             saveBean.setQty(barcodeBackBean.getBarcode_qty());
                             saveBean.setBarcode_no(barcodeBackBean.getBarcode_no());
                             saveBean.setItem_no(barcodeBackBean.getItem_no());
@@ -235,7 +237,10 @@ public class PostMaterialScanFg extends BaseFragment {
                             saveBean.setScan_sumqty(barcodeBackBean.getScan_sumqty());
                             saveBean.setAvailable_in_qty(barcodeBackBean.getAvailable_in_qty());
                             et_input_num.requestFocus();
-
+                            saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
+                            if (CommonUtils.isAutoSave(saveBean)){
+                                save();
+                            }
                         }
 
                         @Override
@@ -263,6 +268,9 @@ public class PostMaterialScanFg extends BaseFragment {
                             saveBean.setStorage_spaces_out_no(locatorBackBean.getStorage_spaces_no());
                             saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
                             et_scan_barocde.requestFocus();
+                            if (CommonUtils.isAutoSave(saveBean)){
+                                save();
+                            }
                         }
 
                         @Override
@@ -291,14 +299,14 @@ public class PostMaterialScanFg extends BaseFragment {
             public void onSuccess(List<FifoCheckBean> fiFoBeanList) {
                 fiFoList.clear();
                 fiFoList = fiFoBeanList;
-                adapter = new PostmaterialFiFoAdapter(pactivity,fiFoList);
+                adapter = new CommonDocNoFIFoAdapter(pactivity,fiFoList);
                 ryList.setAdapter(adapter);
             }
 
             @Override
             public void onFailed(String error) {
                 fiFoList = new ArrayList<FifoCheckBean>();
-                adapter = new PostmaterialFiFoAdapter(pactivity,fiFoList);
+                adapter = new CommonDocNoFIFoAdapter(pactivity,fiFoList);
             }
         });
     }

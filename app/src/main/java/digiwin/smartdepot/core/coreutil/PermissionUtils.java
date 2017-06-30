@@ -1,9 +1,11 @@
 package digiwin.smartdepot.core.coreutil;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 
 /**
  * @author xiemeng
@@ -18,7 +20,9 @@ public class PermissionUtils {
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {
             "android.permission.READ_EXTERNAL_STORAGE",
-            "android.permission.WRITE_EXTERNAL_STORAGE" };
+            "android.permission.WRITE_EXTERNAL_STORAGE",
+            Manifest.permission.CAMERA,
+            Manifest.permission.RECORD_AUDIO};
 
 
     public static void verifyStoragePermissions(Activity activity) {

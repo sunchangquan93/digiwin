@@ -24,7 +24,7 @@ public class FiFoCheckUtils {
     /**
      * @param saveBean 保存对象
      * @param fifoList fifo列表
-     * @return 返回报错 为空则可以报错
+     * @return 返回报错 不为空则可以报错
      */
     public static String fifoCheck(SaveBean saveBean, List<FifoCheckBean> fifoList) {
         String fifocheck = "";
@@ -40,22 +40,24 @@ public class FiFoCheckUtils {
                         //不允许负库存情况判断了保存数量是否大于建议量，若大于则报错
                         if (AddressContants.N.equals(saveBean.getAllow_negative_stock())
                       &&StringUtils.sub(saveBean.getQty(),fifoList.get(i).getRecommended_qty())>0){
-                            return BaseApplication.getInstance().getString(R.string.input_num_toobig);
+                            fifocheck= BaseApplication.getInstance().getString(R.string.input_num_toobig);
                         }
                            //允许负库存情况无需比较数量直接保存
                         else {
-                            return  "";
+                            fifocheck="";
+                            return fifocheck;
                         }
                     }
                     //保存对象不存在于fifolist集合中
                     else {
-                        return BaseApplication.getInstance().getString(R.string.fifo_scan_error);
+                        fifocheck=BaseApplication.getInstance().getString(R.string.fifo_scan_error);
                     }
                 }
             }
             //fifochek为N直接保存
             else {
-                return "";
+                fifocheck= "";
+                return fifocheck;
             }
         }
 

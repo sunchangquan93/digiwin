@@ -12,8 +12,10 @@ import android.widget.TextView;
 
 import java.io.File;
 
+import digiwin.library.constant.SharePreKey;
 import digiwin.library.utils.DialogUtils;
 import digiwin.library.utils.LogUtils;
+import digiwin.library.utils.SharedPreferencesUtils;
 import digiwin.library.utils.StringUtils;
 import digiwin.library.utils.ViewUtils;
 import digiwin.smartdepot.R;

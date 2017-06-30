@@ -69,6 +69,24 @@ public class PurchaseCheckDetailBean implements Serializable{
      * 缺点数
      */
     private String defect_qty = null;
+    /**
+     * 拒收量
+
+     */
+    private String re_qty = null;
+    /**
+     * 项目判定
+     */
+    private String item_deter = null;
+    /**
+     * 是否需要检验
+     */
+    private String qc_state;
+    /**
+     * pqc单号
+     */
+    private String doc_no;
+
 
     public String getDefect_qty() {
         return defect_qty;
@@ -133,16 +151,21 @@ public class PurchaseCheckDetailBean implements Serializable{
     public void setItem_deter(String item_deter) {
         this.item_deter = item_deter;
     }
+    public String getDoc_no() {
+        return doc_no;
+    }
 
-    /**
-     * 拒收量
+    public void setDoc_no(String doc_no) {
+        this.doc_no = doc_no;
+    }
 
-     */
-    private String re_qty = null;
-    /**
-     * 项目判定
-     */
-    private String item_deter = null;
+    public String getQc_state() {
+        return qc_state;
+    }
+
+    public void setQc_state(String qc_state) {
+        this.qc_state = qc_state;
+    }
 
     /**
      * 重写hashcode和equals方法
@@ -160,17 +183,6 @@ public class PurchaseCheckDetailBean implements Serializable{
         return o instanceof PurchaseCheckDetailBean && this.seq.equals(((PurchaseCheckDetailBean)o).seq);
     }
 
-    public String getDoc_no() {
-        return doc_no;
-    }
 
-    public void setDoc_no(String doc_no) {
-        this.doc_no = doc_no;
-    }
-
-    /**
-     * pqc单号
-     */
-    private String doc_no;
 
 }

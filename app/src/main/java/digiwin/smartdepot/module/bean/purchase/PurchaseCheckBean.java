@@ -46,6 +46,46 @@ public class PurchaseCheckBean implements Serializable{
      * 等待分钟
      */
     public String wait_min;
+    /**
+     * 项次
+
+     */
+    public String seq;
+    /**
+     * 料号
+     */
+    public String item_no;
+    /**
+     * 品名
+     */
+    public String item_name;
+    /**
+     * 规格
+     */
+    public String item_spec;
+    /**
+     * 图号
+     */
+    public String drawing_no;
+    /**
+     * 待检数量
+     */
+    public String qty;
+
+    /**
+     * 判定状态
+     */
+    public String qc_state;
+    /**
+     * 判定状态
+     */
+    public String ok_qty;
+    /**
+     * 图片标签
+     */
+    private String gls_bv08;
+
+    private String cb_ischoose;
 
     public String getReceipt_no() {
         return receipt_no;
@@ -143,31 +183,7 @@ public class PurchaseCheckBean implements Serializable{
         this.qty = qty;
     }
 
-    /**
-     * 项次
 
-     */
-    public String seq;
-    /**
-     * 料号
-     */
-    public String item_no;
-    /**
-     * 品名
-     */
-    public String item_name;
-    /**
-     * 规格
-     */
-    public String item_spec;
-    /**
-     * 图号
-     */
-    public String drawing_no;
-    /**
-     * 待检数量
-     */
-    public String qty;
 
     public String getQc_state() {
         return qc_state;
@@ -177,18 +193,6 @@ public class PurchaseCheckBean implements Serializable{
         this.qc_state = qc_state;
     }
 
-    /**
-     * 判定状态
-     */
-    public String qc_state;
-    /**
-     * 判定状态
-     */
-    public String ok_qty;
-    /**
-     * 图片标签
-     */
-    private String gls_bv08;
 
     public String getOk_qty() {
         return ok_qty;
@@ -196,6 +200,14 @@ public class PurchaseCheckBean implements Serializable{
 
     public void setOk_qty(String ok_qty) {
         this.ok_qty = ok_qty;
+    }
+
+    public String getCb_ischoose() {
+        return cb_ischoose;
+    }
+
+    public void setCb_ischoose(String cb_ischoose) {
+        this.cb_ischoose = cb_ischoose;
     }
 
     /**

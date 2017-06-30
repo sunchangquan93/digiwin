@@ -1,5 +1,9 @@
 package digiwin.smartdepot.core.appcontants;
 
+import digiwin.library.utils.TelephonyUtils;
+import digiwin.smartdepot.R;
+import digiwin.smartdepot.core.base.BaseApplication;
+
 /**
  * Created by Administrator on 2017/1/10 0010.
  */
@@ -15,11 +19,12 @@ public class AddressContants {
     /**
      * 下载好的安装包的名字
      */
-    public static String APK_NAME = "updateDiGiWin.apk";
+    public static String APK_NAME = BaseApplication.getInstance().getString(R.string.app_name)+ TelephonyUtils.getMAppVersion(BaseApplication.getInstance())+".apk";
     /**
      *  默认测试区地址
      */
     public static String TEST_ADDRESS = "http://180.167.0.43:8089/web/ws/r/aws_ttsrv2?wsdl";
+//    public static String TEST_ADDRESS = "http://192.168.0.80/web/ws/r/aws_ttsrv2?WSDL";
     /**
      * 测试区地址标记
      */
@@ -28,6 +33,7 @@ public class AddressContants {
      *  默认正式区地址http://172.16.100.24/web/ws/r/aws_ttsrv2?wsdl
      */
     public static String FORMAL_ADDRESS = "http://180.167.0.43:8089/web/ws/r/aws_ttsrv2?wsdl";
+//    public static String FORMAL_ADDRESS = "http://192.168.0.80/web/ws/r/aws_ttsrv2?WSDL";
     /**
      * 正式区地址标记
      */
@@ -258,4 +264,10 @@ public class AddressContants {
      * 项次
      */
     public static final String SEQ = "seq";
+
+    public static final String STORAGE_SPACES_NO="storage_spaces_no";
+    /**
+     * 流转卡号
+     */
+    public static final String PROCESSCARDNO = "processcard_no";
 }

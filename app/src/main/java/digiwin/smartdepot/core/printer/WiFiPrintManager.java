@@ -84,6 +84,47 @@ public class WiFiPrintManager {
     }
 
     /**
+     * @param IP 打印机IP地址(含端口)
+     * @return 是否开启
+     */
+    public void openWiFi(final String IP, final OpenWiFiPrintListener listener) {
+        ThreadPoolManager.getInstance().executeTask(new Runnable() {
+            @Override
+            public void run() {
+                LogUtils.e(TAG, "openWiFi--");
+                try {
+                    int index = IP.indexOf(":");
+                    //ip地址10.10.0.203:9100
+                    String ip = IP.substring(0,index);
+                    int duankou=Integer.parseInt(IP.substring(index+1, IP.length()));
+                    LogUtils.e(TAG,"ip---"+ip+"duankou---"+duankou);
+                    SocketAddress ipe = new InetSocketAddress(ip,duankou);
+                    socket = new Socket();
+                    socket.connect(ipe);
+                    socket.setSoTimeout(Net_ReceiveTimeout);
+                    printSend = new PrintSend(socket);
+                    isOpen = socket.isConnected();
+                } catch (IOException e) {
+                    isOpen = false;
+                    LogUtils.e(TAG, "IOException--连接不成功");
+                }
+                catch (Exception e) {
+                    isOpen = false;
+                    LogUtils.e(TAG, "Exception--连接不成功"+e);
+                }
+                LogUtils.e(TAG, "isOpen--isOpen："+isOpen);
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        listener.isOpen(isOpen);
+                    }
+                });
+            }
+        },null);
+    }
+
+
+    /**
      * 关闭无线通信
      */
     public void close() {

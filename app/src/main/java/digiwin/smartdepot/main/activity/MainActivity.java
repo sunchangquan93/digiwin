@@ -1,9 +1,13 @@
 package digiwin.smartdepot.main.activity;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -26,6 +30,7 @@ import digiwin.library.constant.SharePreKey;
 import digiwin.library.utils.ActivityManagerUtils;
 import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.SharedPreferencesUtils;
+import digiwin.library.utils.StringUtils;
 import digiwin.library.utils.ToastUtils;
 import digiwin.library.voiceutils.VoiceUtils;
 import digiwin.smartdepot.R;
@@ -170,15 +175,19 @@ public class MainActivity extends BaseTitleActivity {
         exitTime = 0;
         mainLogic=new MainLogic(this);
         initModule();
+        //检测麦克风权限
+        if (ContextCompat.checkSelfPermission(activity, Manifest.permission.RECORD_AUDIO)!= PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.RECORD_AUDIO}, 0);
+        }
     }
 
     //初始化各个模块
     private void initModule() {
         //正式发布版本时在解开
-//        access=getIntent().getExtras().getString("access");
-//        powerItems = StringUtils.split(access);
+        access=getIntent().getExtras().getString("access");
+        powerItems = StringUtils.split(access);
         //模拟测试
-        powerItems = new ArrayList<>();
+//        powerItems = new ArrayList<>();
 
         totalModes = new ArrayList<TotalMode>();
 

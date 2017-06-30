@@ -199,10 +199,10 @@ public class InBinningScanFg extends BaseFragment {
                     barcodeMap.put(AddressContants.PACKAGE_NO, String.valueOf(msg.obj));
                     barcodeMap.put(AddressContants.RECEIPT_NO, listSumBean.getReceipt_no());
                     barcodeMap.put(AddressContants.ITEM_NO, listSumBean.getItem_no());
+                    barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_in_no());
                     //保存箱条码和单号
                     saveBean.setPackage_no(String.valueOf(msg.obj));
                     saveBean.setDoc_no(listSumBean.getWo_no());
-
                     commonLogic.scanPackBoxNumber(barcodeMap, new CommonLogic.ScanPackBoxNumberListener() {
                         @Override
                         public void onSuccess(List<ProductBinningBean> productBinningBeans) {

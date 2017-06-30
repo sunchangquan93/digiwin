@@ -270,4 +270,9 @@ public interface ReqTypeName {
      * 保存PQC
      */
     static final String SAVEPQC = "app.check.measure.data";
+    /**
+     * 获取流转卡号信息
+     */
+    static final String PROCESSCARD = "processcard.get";
+
 }

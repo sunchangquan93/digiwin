@@ -4,7 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
+import android.service.carrier.CarrierService;
 import android.support.annotation.UiThread;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -36,6 +39,7 @@ import digiwin.pulltorefreshlibrary.recyclerviewAdapter.BaseRecyclerAdapter;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemLongClickListener;
 import digiwin.smartdepot.R;
+import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseTitleActivity;
 import digiwin.smartdepot.core.base.BaseTitleHActivity;
@@ -301,13 +305,14 @@ public class ChoosePicActivity extends BaseTitleHActivity {
 
                         @Override
                         public void onFailed(final String errmsg) {
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    dismissLoadingDialog();
-                                    showFailedDialog(errmsg);
-                                }
-                            });
+                            mHandler.sendMessageDelayed(mHandler.obtainMessage(SHOWERRWHAT,errmsg), AddressContants.DELAYTIME);
+//                            runOnUiThread(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    dismissLoadingDialog();
+//                                    showFailedDialog(errmsg);
+//                                }
+//                            });
                         }
                     });
                 }
@@ -318,6 +323,21 @@ public class ChoosePicActivity extends BaseTitleHActivity {
             updateDialog.show();
         }
     }
+final int SHOWERRWHAT=1001;
 
-
+private Handler mHandler=new Handler(new Handler.Callback() {
+    @Override
+    public boolean handleMessage(Message msg) {
+        switch (msg.what){
+            case SHOWERRWHAT:
+                String errmsg= String.valueOf(msg.obj);
+                dismissLoadingDialog();
+                showFailedDialog(errmsg);
+                break;
+                default:
+                    break;
+        }
+        return false;
+    }
+});
 }

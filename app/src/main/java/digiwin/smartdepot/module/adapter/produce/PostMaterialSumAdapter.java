@@ -34,6 +34,7 @@ public class PostMaterialSumAdapter extends BaseRecyclerAdapter<ListSumBean> {
         float numb3 = StringUtils.string2Float(item.getStock_qty());
         float numb2 = StringUtils.string2Float(item.getScan_sumqty());
         holder.setText(R.id.tv_item_no, item.getItem_no());
+        holder.setText(R.id.tv_unit,item.getUnit_no());
         holder.setText(R.id.tv_item_name, item.getItem_name());
         holder.setText(R.id.tv_item_model, item.getItem_spec());
         holder.setText(R.id.tv_material_numb, StringUtils.deleteZero(String.valueOf(numb1)));
@@ -42,6 +43,7 @@ public class PostMaterialSumAdapter extends BaseRecyclerAdapter<ListSumBean> {
         if (numb2 == 0) {
             holder.setBackground(R.id.item_ll, R.drawable.red_scandetail_bg);
             holder.setTextColor(R.id.tv_item_no, mContext.getResources().getColor(R.color.red));
+            holder.setTextColor(R.id.tv_unit, mContext.getResources().getColor(R.color.red));
             holder.setTextColor(R.id.tv_item_name, mContext.getResources().getColor(R.color.red));
             holder.setTextColor(R.id.tv_item_model, mContext.getResources().getColor(R.color.red));
             holder.setTextColor(R.id.tv_material_numb, mContext.getResources().getColor(R.color.red));
@@ -50,6 +52,7 @@ public class PostMaterialSumAdapter extends BaseRecyclerAdapter<ListSumBean> {
         } else if (numb1 > numb2) {
             holder.setBackground(R.id.item_ll, R.drawable.yellow_scandetail_bg);
             holder.setTextColor(R.id.tv_item_no, mContext.getResources().getColor(R.color.outside_yellow));
+            holder.setTextColor(R.id.tv_unit, mContext.getResources().getColor(R.color.outside_yellow));
             holder.setTextColor(R.id.tv_item_name, mContext.getResources().getColor(R.color.outside_yellow));
             holder.setTextColor(R.id.tv_item_model, mContext.getResources().getColor(R.color.outside_yellow));
             holder.setTextColor(R.id.tv_material_numb, mContext.getResources().getColor(R.color.outside_yellow));
@@ -58,6 +61,7 @@ public class PostMaterialSumAdapter extends BaseRecyclerAdapter<ListSumBean> {
         } else if (numb1 == numb2) {
             holder.setBackground(R.id.item_ll, R.drawable.green_scandetail_bg);
             holder.setTextColor(R.id.tv_item_no, mContext.getResources().getColor(R.color.Base_color));
+            holder.setTextColor(R.id.tv_unit, mContext.getResources().getColor(R.color.Base_color));
             holder.setTextColor(R.id.tv_item_name, mContext.getResources().getColor(R.color.Base_color));
             holder.setTextColor(R.id.tv_item_model, mContext.getResources().getColor(R.color.Base_color));
             holder.setTextColor(R.id.tv_material_numb, mContext.getResources().getColor(R.color.Base_color));

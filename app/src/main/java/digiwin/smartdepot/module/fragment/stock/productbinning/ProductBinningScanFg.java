@@ -159,7 +159,6 @@ public class ProductBinningScanFg extends BaseFragment {
                                     ProductBinningBean bean = productBinningBeans.get(productBinningBeans.size() - 1);
                                     number=Integer.parseInt(StringUtils.deleteZero(bean.getQty()));
                                     tvBoxNumber.setText(String.valueOf(number));
-
                                     etProductBarcode.requestFocus();
                                     boxFlag = true;
                                 }

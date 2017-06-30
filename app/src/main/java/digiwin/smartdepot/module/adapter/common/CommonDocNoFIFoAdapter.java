@@ -1,6 +1,7 @@
-package digiwin.smartdepot.module.adapter.sale.pickupshipment;
+package digiwin.smartdepot.module.adapter.common;
 
 import android.content.Context;
+import android.view.View;
 
 import java.util.List;
 
@@ -10,20 +11,20 @@ import digiwin.smartdepot.R;
 import digiwin.smartdepot.module.bean.common.FifoCheckBean;
 
 /**
- * @author 赵浩然
- * @module 检料出货 FIFO适配器
- * @date 2017/3/24
+ * @des  有来源单据统一fifo
+ * @date 2017/6/19
+ * @author xiemeng
  */
 
-public class PickUpShipmentFIFoAdapter extends BaseRecyclerAdapter<FifoCheckBean> {
+public class CommonDocNoFIFoAdapter extends BaseRecyclerAdapter<FifoCheckBean> {
 
-    public PickUpShipmentFIFoAdapter(Context ctx, List<FifoCheckBean> list) {
+    public CommonDocNoFIFoAdapter(Context ctx, List<FifoCheckBean> list) {
         super(ctx, list);
     }
 
     @Override
     protected int getItemLayout(int viewType) {
-        return R.layout.ryitem_pickupshipmentfifo;
+        return R.layout.ryitem_common_doc_no_fifo;
     }
 
     @Override
@@ -33,5 +34,8 @@ public class PickUpShipmentFIFoAdapter extends BaseRecyclerAdapter<FifoCheckBean
         holder.setText(R.id.tv_barcode, item.getBarcode_no());
         holder.setText(R.id.tv_rdna_num, item.getRecommended_qty());
         holder.setText(R.id.tv_feeding_amount, item.getScan_sumqty());
+        if(position == mItems.size() - 1){
+            holder.setVisibility(R.id.fifo_bottom_line, View.GONE);
+        }
     }
 }

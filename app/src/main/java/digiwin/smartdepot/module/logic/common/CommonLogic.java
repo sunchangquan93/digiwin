@@ -1,6 +1,7 @@
 package digiwin.smartdepot.module.logic.common;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ import digiwin.library.utils.StringUtils;
 import digiwin.library.utils.ThreadPoolManager;
 import digiwin.library.xml.ParseXmlResp;
 import digiwin.smartdepot.R;
+import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.appcontants.ReqTypeName;
 import digiwin.smartdepot.core.net.IRequestCallbackImp;
@@ -85,6 +87,9 @@ public class CommonLogic {
             @Override
             public void run() {
                 try {
+                    if (!ModuleCode.MOVESTORE.equals(mModule)) {
+                        map.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
+                    }
                     String xml = CreateParaXmlReqIm.getInstance(map, mModule, ReqTypeName.BARCODE, mTimestamp).toXml();
                     OkhttpRequest.getInstance(mContext).post(xml, new IRequestCallbackImp() {
                         @Override
@@ -142,9 +147,9 @@ public class CommonLogic {
                                 if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
                                     List<ScanLocatorBackBean> locatorBackBeen = xmlResp.getParameterDatas(ScanLocatorBackBean.class);
                                     if (locatorBackBeen.size() > 0) {
-                                        if (!ModuleCode.NOCOMESTOREALLOT.equals(mModule)&&
-                                       ! ModuleCode.TRANSFERS_TO_REVIEW.equals(mModule)&&
-                                       ! ModuleCode.POSTALLOCATE.equals(mModule)
+                                        if (!ModuleCode.NOCOMESTOREALLOT.equals(mModule) &&
+                                                !ModuleCode.TRANSFERS_TO_REVIEW.equals(mModule) &&
+                                                !ModuleCode.POSTALLOCATE.equals(mModule)
                                                 && !locatorBackBeen.get(0).getWarehouse_no().equals(LoginLogic.getWare())) {
                                             error = mContext.getString(R.string.ware_error);
                                         } else {
@@ -302,6 +307,7 @@ public class CommonLogic {
             }
         }, null);
     }
+
     /**
      * 扫描入库单 提交监听
      */
@@ -559,14 +565,14 @@ public class CommonLogic {
                         if (null != xmlResp) {
                             if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
                                 List<FifoCheckBean> fiFoBeanList = xmlResp.getMasterDatas(FifoCheckBean.class);
-                                if(null != fiFoBeanList && fiFoBeanList.size() > 0){
+                                if (null != fiFoBeanList && fiFoBeanList.size() > 0) {
                                     for (int i = 0; i < fiFoBeanList.size(); i++) {
                                         FifoCheckBean fifoBean = fiFoBeanList.get(i);
                                         fifoBean.setRecommended_qty(StringUtils.deleteZero(fifoBean.getRecommended_qty()));
                                         fifoBean.setScan_sumqty(StringUtils.deleteZero(fifoBean.getScan_sumqty()));
                                     }
                                     listener.onSuccess(fiFoBeanList);
-                                }else{
+                                } else {
                                     List<FifoCheckBean> list = new ArrayList<FifoCheckBean>();
                                     listener.onSuccess(list);
                                 }
@@ -625,6 +631,7 @@ public class CommonLogic {
             }
         }, null);
     }
+
     /**
      * 筛选  获取待办事项
      */
@@ -702,6 +709,7 @@ public class CommonLogic {
             }
         }, null);
     }
+
     /**
      * 从待办事项进入汇总页面
      */
@@ -762,14 +770,14 @@ public class CommonLogic {
                         if (null != xmlResp) {
                             if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
                                 List<FifoCheckBean> fiFoBeanList = xmlResp.getMasterDatas(FifoCheckBean.class);
-                                if(null != fiFoBeanList && fiFoBeanList.size() > 0){
+                                if (null != fiFoBeanList && fiFoBeanList.size() > 0) {
                                     for (int i = 0; i < fiFoBeanList.size(); i++) {
                                         FifoCheckBean fifoBean = fiFoBeanList.get(i);
                                         fifoBean.setRecommended_qty(StringUtils.deleteZero(fifoBean.getRecommended_qty()));
                                         fifoBean.setScan_sumqty(StringUtils.deleteZero(fifoBean.getScan_sumqty()));
                                     }
                                     listener.onSuccess(fiFoBeanList);
-                                }else{
+                                } else {
                                     List<FifoCheckBean> list = new ArrayList<FifoCheckBean>();
                                     listener.onSuccess(list);
                                 }
@@ -811,14 +819,14 @@ public class CommonLogic {
                         if (null != xmlResp) {
                             if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
                                 List<FifoCheckBean> fiFoBeanList = xmlResp.getMasterDatas(FifoCheckBean.class);
-                                if(null != fiFoBeanList && fiFoBeanList.size() >0){
+                                if (null != fiFoBeanList && fiFoBeanList.size() > 0) {
                                     for (int i = 0; i < fiFoBeanList.size(); i++) {
                                         FifoCheckBean fifoBean = fiFoBeanList.get(i);
                                         fifoBean.setRecommended_qty(StringUtils.deleteZero(fifoBean.getRecommended_qty()));
                                         fifoBean.setScan_sumqty(StringUtils.deleteZero(fifoBean.getScan_sumqty()));
                                     }
                                     listener.onSuccess(fiFoBeanList);
-                                }else {
+                                } else {
                                     List<FifoCheckBean> list = new ArrayList<FifoCheckBean>();
                                     listener.onSuccess(fiFoBeanList);
                                 }
@@ -927,6 +935,7 @@ public class CommonLogic {
             }
         }, null);
     }
+
     /**
      * 扫描包装箱号
      */
