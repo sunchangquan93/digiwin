@@ -41,7 +41,7 @@ public class MaterialReceiptLogic {
     private static MaterialReceiptLogic logic;
 
     private MaterialReceiptLogic(Context context, String module, String timestamp) {
-        mContext = context;
+        mContext = context.getApplicationContext();
         mModule = module;
         mTimestamp = timestamp;
     }

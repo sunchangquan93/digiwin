@@ -45,7 +45,7 @@ public class AccordingMaterialLogic {
     private static AccordingMaterialLogic logic;
 
     private AccordingMaterialLogic(Context context, String module, String timestamp) {
-        mContext = context;
+        mContext = context.getApplicationContext();
         mModule = module;
         mTimestamp = timestamp;
 

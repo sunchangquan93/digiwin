@@ -22,6 +22,7 @@ import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
 import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.utils.StringUtils;
+import digiwin.library.utils.WeakRefHandler;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
@@ -220,10 +221,9 @@ public class PrintLabelActivity extends BaseTitleActivity {
         et_single_package_num.setInputType(InputType.TYPE_CLASS_NUMBER);
     }
 
-    private Handler mHandler = new Handler(){
+    private Handler.Callback mCallback= new Handler.Callback() {
         @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
+        public boolean handleMessage(Message msg) {
             switch(msg.what){
                 case BARCODEWHAT:
                     Map<String,String> map = new HashMap<>();
@@ -299,8 +299,11 @@ public class PrintLabelActivity extends BaseTitleActivity {
                     }
                     break;
             }
+            return false;
         }
     };
+
+    private Handler mHandler = new WeakRefHandler(mCallback);
 
     /**
      * 打印
@@ -326,4 +329,9 @@ public class PrintLabelActivity extends BaseTitleActivity {
         initData();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
+    }
 }

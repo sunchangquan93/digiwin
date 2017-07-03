@@ -45,7 +45,7 @@
     <string name="network_error">网络已断开,请检查网络设置</string>
     <string name="network_wifi_success">wifi网络连接成功</string>
     <string name="network_mobile_success">移动网络连接成功</string>
-
+    <string name="network_response_error">网络异常：</string>
 
     <string name="download">确认下载</string>
     <string name="download_ok">下载完成</string>

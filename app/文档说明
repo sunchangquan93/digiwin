@@ -17,7 +17,11 @@
 	修改当前Module的AndroidManifest.xml文件中的manifest节点里的package属性值，改为跟你的包名一致。
 
 	修改URL清空用户表，版本更新时重新赋值URL数据
-	
+	引用git上面的库文件： compile 'com.github.xiemeng99.digiwin:dgwlibrary:1.8'
+	                   compile 'com.github.xiemeng99.digiwin:pulltorefreshlibrary:1.8'
+	文档地址： https://jitpack.io/com/github/xiemeng99/digiwin/app/1.8/javadoc/
+	          https://jitpack.io/com/github/xiemeng99/digiwin/dgwlibrary/1.8/javadoc/
+	          https://jitpack.io/com/github/xiemeng99/digiwin/pulltorefreshlibrary/1.8/javadoc/
 1.okhttp网络请求示例:
           HashMap<String, String> loginMap = new HashMap<String, String>();
                 loginMap.put("username", "tiptop");

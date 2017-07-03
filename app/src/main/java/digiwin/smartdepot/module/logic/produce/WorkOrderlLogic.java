@@ -42,7 +42,7 @@ public class WorkOrderlLogic {
     private static WorkOrderlLogic logic;
 
     private WorkOrderlLogic(Context context, String module, String timestamp) {
-        mContext = context;
+        mContext = context.getApplicationContext();
         mModule = module;
         mTimestamp = timestamp;
 

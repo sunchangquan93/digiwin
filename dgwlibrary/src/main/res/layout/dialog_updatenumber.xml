@@ -22,10 +22,12 @@
             android:padding="@dimen/layout_10dp"
             android:background="@drawable/image_click_bg"
             android:src="@mipmap/minus"/>
+
         <View
             android:layout_width="@dimen/layout_0.5dp"
             android:layout_height="match_parent"
-            android:background="@color/MAIN_BELOW"></View>
+            android:background="@color/MAIN_BELOW" />
+
         <EditText
             android:id="@+id/et_text"
             android:layout_width="@dimen/layout_0dp"

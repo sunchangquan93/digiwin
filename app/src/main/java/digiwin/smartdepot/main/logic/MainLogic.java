@@ -249,7 +249,7 @@ public class MainLogic {
 
         //初始化报工管理
         ModuleBean rcttboardactivity = new ModuleBean(R.string.delivery_uncheck_board, R.drawable.receiptout, ModuleCode.RCCTBOARD, "android.intent.action.digiwin.RcttBoardActivity");
-        ModuleBean tctsboardactivity = new ModuleBean(R.string.tcts_board, R.drawable.receiptout, ModuleCode.RCCTBOARD, "android.intent.action.digiwin.TctsBoardActivity");
+        ModuleBean tctsboardactivity = new ModuleBean(R.string.tcts_board, R.drawable.receiptout, ModuleCode.TCTSBOARD, "android.intent.action.digiwin.TctsBoardActivity");
 
         ModuleBean palletreport = new ModuleBean(R.string.title_pallet_report, R.mipmap.pallet_report, ModuleCode.PROCESSREPORTING, "android.intent.action.digiwin.ProcessReportingActivity");
         dailyworkItems.add(palletreport);

@@ -74,7 +74,7 @@ public class StockRemovalActivity extends BaseFirstModuldeActivity{
 
     @Override
     public String moduleCode() {
-        mode = ModuleCode.SCANINSCAN;
+        mode = ModuleCode.SCANOUTSCAN;
         return mode;
     }
 

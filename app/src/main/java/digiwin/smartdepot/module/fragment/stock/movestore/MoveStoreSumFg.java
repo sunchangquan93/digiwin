@@ -27,6 +27,7 @@ import digiwin.library.dialog.OnDialogTwoListener;
 import digiwin.library.utils.ActivityManagerUtils;
 import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.StringUtils;
+import digiwin.library.utils.WeakRefHandler;
 import digiwin.pulltorefreshlibrary.recyclerview.FullyLinearLayoutManager;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.BaseRecyclerAdapter;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
@@ -100,7 +101,7 @@ public class MoveStoreSumFg extends BaseFragment {
     List<SumShowBean> sumShowBeanList;
 
     CommonLogic commonLogic;
-    private Handler mHandler = new Handler(new Handler.Callback() {
+    private Handler.Callback mCallback= new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
@@ -130,7 +131,9 @@ public class MoveStoreSumFg extends BaseFragment {
             }
             return false;
         }
-    });
+    };
+
+    private Handler mHandler = new WeakRefHandler(mCallback);
     /**
      * 库位
      */
@@ -278,5 +281,11 @@ public class MoveStoreSumFg extends BaseFragment {
         etScanMoveinlocator.setText("");
         tvLocator.setText("");
         tvStorage.setText("");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
     }
 }

@@ -38,6 +38,7 @@ import digiwin.library.utils.ObjectAndMapUtils;
 import digiwin.library.utils.SharedPreferencesUtils;
 import digiwin.library.utils.StringUtils;
 import digiwin.library.utils.ViewUtils;
+import digiwin.library.utils.WeakRefHandler;
 import digiwin.library.zxing.MipcaActivityCapture;
 import digiwin.library.zxing.camera.GetBarCodeListener;
 import digiwin.smartdepot.R;
@@ -318,10 +319,9 @@ public class PQCCheckActivity extends BaseActivity {
 
     private PurchaseCheckDetailBean selectedDetailBean;
 
-    private Handler mHandler = new Handler(){
+    private Handler.Callback mCallback= new Handler.Callback() {
         @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
+        public boolean handleMessage(Message msg) {
             switch (msg.what){
                 case BARCODEWHAT:
                     showLoadingDialog();
@@ -361,8 +361,11 @@ public class PQCCheckActivity extends BaseActivity {
                 default:
                     break;
             }
+            return false;
         }
     };
+
+    private Handler mHandler = new WeakRefHandler(mCallback);
 
     /**
      * 获取所有详细信息
@@ -409,6 +412,7 @@ public class PQCCheckActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+        mHandler.removeCallbacksAndMessages(null);
     }
 
     /**
@@ -705,5 +709,6 @@ public class PQCCheckActivity extends BaseActivity {
             return false;
         }
     }
+
 
 }

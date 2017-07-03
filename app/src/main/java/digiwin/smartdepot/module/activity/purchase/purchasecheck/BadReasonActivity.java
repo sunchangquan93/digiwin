@@ -40,6 +40,7 @@ import butterknife.OnClick;
 import butterknife.OnTextChanged;
 import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.StringUtils;
+import digiwin.library.utils.WeakRefHandler;
 import digiwin.pulltorefreshlibrary.recyclerview.DividerItemDecoration;
 import digiwin.pulltorefreshlibrary.recyclerview.FullyLinearLayoutManager;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.BaseRecyclerAdapter;
@@ -313,10 +314,9 @@ public class BadReasonActivity extends BaseActivity {
         tv_title_name.setText(R.string.bad_reason_maintenance);
     }
 
-    private Handler mHandler = new Handler() {
+    private Handler.Callback mCallback= new Handler.Callback() {
         @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
+        public boolean handleMessage(Message msg) {
             switch (msg.what) {
                 case BARCODEWHAT:
                     Map<String, String> map = new HashMap<>();
@@ -454,8 +454,11 @@ public class BadReasonActivity extends BaseActivity {
                     }
                     break;
             }
+            return false;
         }
     };
+
+    private Handler mHandler = new WeakRefHandler(mCallback);
 
     /**
      * @des 不良原因 adapter
@@ -528,4 +531,9 @@ public class BadReasonActivity extends BaseActivity {
         }
     };
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
+    }
 }

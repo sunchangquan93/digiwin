@@ -29,7 +29,12 @@ public class CreateParaXmlReqIm extends CreateParaXmlReq {
     private CreateParaXmlReqIm(String userName, String plant, List<Map<String, String>> maps, String deviceId, String appmodule, String reqType, String timestamp){
         super( userName, plant, maps, deviceId, appmodule,reqType,timestamp);
     }
-
+    /**
+     * 无master，一个detail
+     */
+    private CreateParaXmlReqIm(String userName, String plant, String deviceId, String appmodule, String reqType, String timestamp, List<Map<String, String>> detailMaps) {
+        super(userName, plant, deviceId, appmodule, reqType, timestamp, detailMaps);
+    }
     /**
      * 无master，两个detail
      */
@@ -163,6 +168,22 @@ public class CreateParaXmlReqIm extends CreateParaXmlReq {
         }
         String deviceId= TelephonyUtils.getDeviceId(BaseApplication.getInstance());
         CreateParaXmlReqIm   createParaXmlReqIm = new CreateParaXmlReqIm( userName, plant,deviceId,appmodule,reqType,timestamp, masters,details,flag);
+        return createParaXmlReqIm;
+    }
+
+    /**
+     * 无单头，一个单身
+     */
+    public static CreateParaXmlReqIm getInstance( String appmodule, String reqType, String timestamp,List<Map<String, String>> detailMaps) {
+        String userName = "tiptop";
+        String plant = "SYSTEM";
+        AccoutBean accoutBean = LoginLogic.getUserInfo();
+        if (null != accoutBean) {
+            userName = accoutBean.getUsername();
+            plant = accoutBean.getPlant();
+        }
+        String deviceId = TelephonyUtils.getDeviceId(BaseApplication.getInstance());
+        CreateParaXmlReqIm createParaXmlReqIm = new CreateParaXmlReqIm(userName, plant,deviceId, appmodule, reqType, timestamp,detailMaps);
         return createParaXmlReqIm;
     }
 }

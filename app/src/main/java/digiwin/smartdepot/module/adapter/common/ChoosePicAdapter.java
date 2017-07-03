@@ -2,8 +2,6 @@ package digiwin.smartdepot.module.adapter.common;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Environment;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
@@ -11,13 +9,9 @@ import com.squareup.picasso.Picasso;
 import java.io.File;
 import java.util.List;
 
-import digiwin.library.utils.LogUtils;
-import digiwin.library.utils.UriToPathUtils;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.BaseRecyclerAdapter;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.RecyclerViewHolder;
 import digiwin.smartdepot.R;
-import digiwin.smartdepot.core.appcontants.AddressContants;
-import digiwin.smartdepot.module.bean.board.RcctboardBean;
 import digiwin.smartdepot.module.bean.common.ChoosePicBean;
 
 /**
@@ -26,7 +20,6 @@ import digiwin.smartdepot.module.bean.common.ChoosePicBean;
  * @date 2017/4/19
  */
 public class ChoosePicAdapter extends BaseRecyclerAdapter<ChoosePicBean> {
-
     private static final String TAG = "ChoosePicAdapter";
     public ChoosePicAdapter(Context ctx, List<ChoosePicBean> list) {
         super(ctx, list);

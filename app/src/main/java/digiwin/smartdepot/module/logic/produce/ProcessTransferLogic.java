@@ -13,9 +13,7 @@ import digiwin.smartdepot.core.appcontants.ReqTypeName;
 import digiwin.smartdepot.core.net.IRequestCallbackImp;
 import digiwin.smartdepot.core.net.OkhttpRequest;
 import digiwin.smartdepot.core.xml.CreateParaXmlReqIm;
-import digiwin.smartdepot.module.bean.common.ScanEmployeeBackBean;
 import digiwin.smartdepot.module.bean.produce.ProcessTransferBean;
-import digiwin.smartdepot.module.logic.common.CommonLogic;
 
 /**
  * @des     工序转移
@@ -39,7 +37,7 @@ public class ProcessTransferLogic {
     private static ProcessTransferLogic logic;
 
     private ProcessTransferLogic(Context context, String module, String timestamp) {
-        mContext = context;
+        mContext = context.getApplicationContext();
         mModule=module;
         mTimestamp=timestamp;
 

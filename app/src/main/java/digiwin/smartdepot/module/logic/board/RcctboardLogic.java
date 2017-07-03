@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import digiwin.library.utils.LogUtils;
-import digiwin.library.utils.ThreadPoolManager;
 import digiwin.library.xml.ParseXmlResp;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.ReqTypeName;
@@ -14,7 +13,6 @@ import digiwin.smartdepot.core.net.IRequestCallbackImp;
 import digiwin.smartdepot.core.net.OkhttpRequest;
 import digiwin.smartdepot.core.xml.CreateParaXmlReqIm;
 import digiwin.smartdepot.module.bean.board.RcctboardBean;
-import digiwin.smartdepot.module.bean.common.ScanBarcodeBackBean;
 
 /**
  * @author xiemeng
@@ -37,7 +35,7 @@ public class RcctboardLogic {
     private static RcctboardLogic logic;
 
     private RcctboardLogic(Context context, String module, String timestamp) {
-        mContext = context;
+        mContext = context.getApplicationContext();
         mModule = module;
         mTimestamp = timestamp;
 

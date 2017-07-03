@@ -87,7 +87,7 @@ public class TctsBoardActivity extends BaseTitleHActivity {
 
     @Override
     public String moduleCode() {
-        module= ModuleCode.RCCTBOARD;
+        module= ModuleCode.TCTSBOARD;
         return module;
     }
 

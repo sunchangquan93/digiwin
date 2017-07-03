@@ -25,6 +25,7 @@ import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
 import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.utils.StringUtils;
+import digiwin.library.utils.WeakRefHandler;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.base.BaseFirstModuldeActivity;
@@ -207,7 +208,7 @@ public class PostMaterialScanFg extends BaseFragment {
      */
     boolean fifo_check = false;
 
-    private Handler mHandler = new Handler(new Handler.Callback() {
+    private Handler.Callback mCallback= new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
@@ -225,7 +226,7 @@ public class PostMaterialScanFg extends BaseFragment {
                                 et_input_num.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
                             }
                             if(!StringUtils.isBlank(barcodeBackBean.getItem_name())){
-                               tv_product_name.setText(barcodeBackBean.getItem_name());
+                                tv_product_name.setText(barcodeBackBean.getItem_name());
                             }
                             barcodeFlag = true;
                             saveBean.setFifo_check(barcodeBackBean.getFifo_check());
@@ -288,7 +289,9 @@ public class PostMaterialScanFg extends BaseFragment {
             }
             return false;
         }
-    });
+    };
+
+    private Handler mHandler = new WeakRefHandler(mCallback);
 
     public void getFIFO( ){
         HashMap<String,String> map = new HashMap<String,String>();
@@ -420,5 +423,11 @@ public class PostMaterialScanFg extends BaseFragment {
 
             }
         });
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
     }
 }

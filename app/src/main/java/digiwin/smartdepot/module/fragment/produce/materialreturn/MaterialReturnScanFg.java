@@ -25,6 +25,7 @@ import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
 import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.utils.StringUtils;
+import digiwin.library.utils.WeakRefHandler;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.base.BaseFragment;
@@ -203,8 +204,7 @@ public class MaterialReturnScanFg extends BaseFragment {
         });
 
     }
-
-    private Handler mHandler = new Handler(new Handler.Callback() {
+    private Handler.Callback mCallback= new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
@@ -278,8 +278,9 @@ public class MaterialReturnScanFg extends BaseFragment {
             }
             return false;
         }
-    });
+    };
 
+    private Handler mHandler = new WeakRefHandler(mCallback);
     /**
      * 公共区域展示
      */
@@ -330,4 +331,9 @@ public class MaterialReturnScanFg extends BaseFragment {
         commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
+    }
 }

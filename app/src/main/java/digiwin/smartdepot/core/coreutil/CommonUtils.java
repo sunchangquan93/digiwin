@@ -27,4 +27,13 @@ public class CommonUtils {
         }
         return  isAutoSave;
     }
+
+    /**
+     * 检查库位是否与所选仓库一致
+     * @return
+     */
+    public static boolean checkStore(String moulde,String stock){
+        boolean isCheck=true;
+        return  isCheck;
+    }
 }

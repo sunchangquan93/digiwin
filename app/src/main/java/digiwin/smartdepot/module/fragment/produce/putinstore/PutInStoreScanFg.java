@@ -22,6 +22,7 @@ import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
 import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.utils.StringUtils;
+import digiwin.library.utils.WeakRefHandler;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.base.BaseFirstModuldeActivity;
@@ -197,7 +198,7 @@ public class PutInStoreScanFg extends BaseFragment {
     SaveBean saveBean;
 
     FilterResultOrderBean orderBean;
-    private Handler mHandler = new Handler(new Handler.Callback() {
+    private Handler.Callback mCallback= new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
@@ -229,17 +230,17 @@ public class PutInStoreScanFg extends BaseFragment {
                         }
 
                         @Override
-                public void onFailed(String error) {
-                    barcodeFlag = false;
-                    showFailedDialog(error, new OnDialogClickListener() {
-                        @Override
-                        public void onCallback() {
-                            etScanBarocde.setText("");
+                        public void onFailed(String error) {
+                            barcodeFlag = false;
+                            showFailedDialog(error, new OnDialogClickListener() {
+                                @Override
+                                public void onCallback() {
+                                    etScanBarocde.setText("");
+                                }
+                            });
                         }
                     });
-                }
-            });
-            break;
+                    break;
                 case LOCATORWHAT:
                     HashMap<String, String> locatorMap = new HashMap<>();
                     locatorMap.put(AddressContants.STORAGE_SPACES_BARCODE, String.valueOf(msg.obj));
@@ -273,7 +274,9 @@ public class PutInStoreScanFg extends BaseFragment {
             }
             return false;
         }
-    });
+    };
+
+    private Handler mHandler = new WeakRefHandler(mCallback);
 
     @Override
     protected int bindLayoutId() {
@@ -359,5 +362,11 @@ public class PutInStoreScanFg extends BaseFragment {
 
             }
         });
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
     }
 }

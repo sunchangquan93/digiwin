@@ -2,9 +2,6 @@ package digiwin.smartdepot.module.logic.produce;
 
 import android.content.Context;
 
-import digiwin.smartdepot.main.logic.GetStorageLogic;
-import digiwin.smartdepot.module.bean.common.ScanBarcodeBackBean;
-
 /**
  * @des      生产完工入库
  * @author  xiemeng
@@ -26,7 +23,7 @@ public class FinishedStorageLogic {
     private static FinishedStorageLogic logic;
 
     private FinishedStorageLogic(Context context, String module, String timestamp) {
-        mContext = context;
+        mContext = context.getApplicationContext();
         mModule=module;
         mTimestamp=timestamp;
 

@@ -49,6 +49,7 @@ import digiwin.library.utils.ObjectAndMapUtils;
 import digiwin.library.utils.SharedPreferencesUtils;
 import digiwin.library.utils.StringUtils;
 import digiwin.library.utils.ViewUtils;
+import digiwin.library.utils.WeakRefHandler;
 import digiwin.library.zxing.MipcaActivityCapture;
 import digiwin.library.zxing.camera.GetBarCodeListener;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.BaseRecyclerAdapter;
@@ -192,32 +193,6 @@ public class PurchaseCheckActivity extends BaseActivity {
 
     @BindView(R.id.rc_list)
     RecyclerView rc_list;
-
-//    /**
-//     * 送货单号
-//     */
-//    @BindView(R.id.tv_send_goods_order)
-//    TextView tv_send_goods_order;
-//    /**
-//     * 收货单号
-//     */
-//    @BindView(R.id.tv_receipt_goods_order)
-//    TextView tv_receipt_goods_order;
-//    /**
-//     * 供应商
-//     */
-//    @BindView(R.id.tv_supplier)
-//    TextView tv_supplier;
-//    /**
-//     * 收料时间
-//     */
-//    @BindView(R.id.tv_get_material_time)
-//    TextView tv_get_material_time;
-//    /**
-//     * 距收料（分钟）
-//     */
-//    @BindView(R.id.tv_to_get_material_time)
-//    TextView tv_to_get_material_time;
 
     @BindView(R.id.rc_main_list)
     RecyclerView rcMainList;
@@ -397,6 +372,7 @@ public class PurchaseCheckActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+        mHandler.removeCallbacksAndMessages(null);
     }
 
     /**
@@ -445,10 +421,9 @@ public class PurchaseCheckActivity extends BaseActivity {
         tv_title_name.setText(R.string.purchase_check);
     }
 
-    private Handler mHandler = new Handler() {
+    private Handler.Callback mCallback= new Handler.Callback() {
         @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
+        public boolean handleMessage(Message msg) {
             switch (msg.what) {
                 case BARCODEWHAT:
                     Map<String, String> map = new HashMap<>();
@@ -490,8 +465,11 @@ public class PurchaseCheckActivity extends BaseActivity {
                     });
                     break;
             }
+            return false;
         }
     };
+
+    private Handler mHandler = new WeakRefHandler(mCallback);
 
     /**
      * 先将数据按送货单分类
@@ -547,7 +525,7 @@ public class PurchaseCheckActivity extends BaseActivity {
         for (PurchaseCheckBean tempBean : purchaseCheckAllBeen) {
             if (null != tempBean.getDelivery_bill_no()
                     && tempBean.getDelivery_bill_no().equals(mainItemBean.getDelivery_bill_no())) {
-                if (null == tempBean.getCb_ischoose()) {
+                if (!StringUtils.isBlank(tempBean.getOk_qty())&&null == tempBean.getCb_ischoose()) {
                     tempBean.setCb_ischoose("Y");
                 }
                 purchaseCheckBeanList.add(tempBean);
@@ -611,6 +589,8 @@ public class PurchaseCheckActivity extends BaseActivity {
                             purchaseCheckDetailList.addAll(detailList);
                             for (int i = 0; i < purchaseCheckDetailList.size(); i++) {
                                 purchaseCheckDetailList.get(i).setHead_seq(map.get("seq"));
+                                purchaseCheckDetailList.get(i).setTurn_order(purchaseCheckBean.getTurn_order());
+                                purchaseCheckDetailList.get(i).setReceipt_no(purchaseCheckBean.getReceipt_no());
                                 purchaseCheckDetailList.get(i).setItem_no(purchaseCheckBean.getItem_no());
                             }
                             detailAdapter = new PurchaseCheckDetailAdapter(pactivity, purchaseCheckDetailList);

@@ -35,6 +35,7 @@ import digiwin.library.utils.StringUtils;
 import digiwin.library.utils.TelephonyUtils;
 import digiwin.library.utils.UriToPathUtils;
 import digiwin.library.utils.ViewUtils;
+import digiwin.library.utils.WeakRefHandler;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.BaseRecyclerAdapter;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemLongClickListener;
@@ -323,21 +324,28 @@ public class ChoosePicActivity extends BaseTitleHActivity {
             updateDialog.show();
         }
     }
-final int SHOWERRWHAT=1001;
-
-private Handler mHandler=new Handler(new Handler.Callback() {
-    @Override
-    public boolean handleMessage(Message msg) {
-        switch (msg.what){
-            case SHOWERRWHAT:
-                String errmsg= String.valueOf(msg.obj);
-                dismissLoadingDialog();
-                showFailedDialog(errmsg);
-                break;
+    final int SHOWERRWHAT=1001;
+    private Handler.Callback mCallback= new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message msg) {
+            switch (msg.what){
+                case SHOWERRWHAT:
+                    String errmsg= String.valueOf(msg.obj);
+                    dismissLoadingDialog();
+                    showFailedDialog(errmsg);
+                    break;
                 default:
                     break;
+            }
+            return false;
         }
-        return false;
+    };
+
+    private Handler mHandler = new WeakRefHandler(mCallback);
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
     }
-});
 }

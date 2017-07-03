@@ -43,7 +43,7 @@ public class LoginLogic {
     private static LoginLogic logic;
 
     private LoginLogic(Context context,String module,String timestamp) {
-        mContext = context;
+        mContext = context.getApplicationContext();
         mModule=module;
         mTimestamp=timestamp;
     }

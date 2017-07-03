@@ -22,6 +22,7 @@ import butterknife.OnTextChanged;
 import digiwin.library.dialog.OnDialogTwoListener;
 import digiwin.library.utils.ObjectAndMapUtils;
 import digiwin.library.utils.StringUtils;
+import digiwin.library.utils.WeakRefHandler;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
@@ -208,7 +209,7 @@ public class CompletingStoreActivity extends BaseFirstModuldeActivity{
         }
     }
 
-    Handler mHandler = new Handler(new Handler.Callback() {
+    private Handler.Callback mCallback= new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             if(msg.what == BARCODEWHAT){
@@ -236,7 +237,9 @@ public class CompletingStoreActivity extends BaseFirstModuldeActivity{
             }
             return false;
         }
-    });
+    };
+
+    private Handler mHandler = new WeakRefHandler(mCallback);
 
     @Override
     protected void doBusiness() {
@@ -285,5 +288,11 @@ public class CompletingStoreActivity extends BaseFirstModuldeActivity{
     @Override
     public ExitMode exitOrDel() {
         return ExitMode.EXITD;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
     }
 }

@@ -174,7 +174,7 @@ public class QuickStorageListActivity extends BaseTitleActivity{
             FilterBean.setWarehouse_in_no(LoginLogic.getWare());
 
             if(!StringUtils.isBlank(et_provider_code.getText().toString().trim())){
-                FilterBean.setDoc_no(et_provider_code.getText().toString().trim());
+                FilterBean.setSupplier_no(et_provider_code.getText().toString().trim());
             }
 
             if(!StringUtils.isBlank(et_barcode_no.getText().toString().trim())){

@@ -38,7 +38,7 @@ public class StoreTransLogic {
 
     private StoreTransLogic(Context context, String module, String timestamp) {
         mTimestamp = timestamp;
-        mContext = context;
+        mContext = context.getApplicationContext();
         mModule = module;
 
     }

@@ -24,6 +24,7 @@ import butterknife.OnFocusChange;
 import butterknife.OnTextChanged;
 import digiwin.library.dialog.OnDialogClickListener;
 import digiwin.library.utils.StringUtils;
+import digiwin.library.utils.WeakRefHandler;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.base.BaseFragment;
@@ -254,90 +255,91 @@ public class WorkSupplementScanFg extends BaseFragment {
         }
     }
 
-    private Handler mHandler = new Handler(new Handler.Callback() {
+    private Handler.Callback mCallback= new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
-        switch (msg.what){
-
-            case LOCATORWHAT:
-                HashMap<String, String> locatorMap = new HashMap<>();
-                locatorMap.put(AddressContants.STORAGE_SPACES_BARCODE, String.valueOf(msg.obj));
-                commonLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
-                    @Override
-                    public void onSuccess(ScanLocatorBackBean locatorBackBean) {
-                        locatorFlag = true;
-                        saveBean.setStorage_spaces_out_no(locatorBackBean.getStorage_spaces_no());
-                        saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
-                        saveBean.setAllow_negative_stock(locatorBackBean.getAllow_negative_stock());
-                        etScanBarocde.requestFocus();
-                        if (CommonUtils.isAutoSave(saveBean)){
-                            save();
+            switch (msg.what){
+                case LOCATORWHAT:
+                    HashMap<String, String> locatorMap = new HashMap<>();
+                    locatorMap.put(AddressContants.STORAGE_SPACES_BARCODE, String.valueOf(msg.obj));
+                    commonLogic.scanLocator(locatorMap, new CommonLogic.ScanLocatorListener() {
+                        @Override
+                        public void onSuccess(ScanLocatorBackBean locatorBackBean) {
+                            locatorFlag = true;
+                            saveBean.setStorage_spaces_out_no(locatorBackBean.getStorage_spaces_no());
+                            saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
+                            saveBean.setAllow_negative_stock(locatorBackBean.getAllow_negative_stock());
+                            etScanBarocde.requestFocus();
+                            if (CommonUtils.isAutoSave(saveBean)){
+                                save();
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onFailed(String error) {
-                        showFailedDialog(error, new OnDialogClickListener() {
-                            @Override
-                            public void onCallback() {
-                                etScanLocator.setText("");
-                            }
-                        });
-                        locatorFlag = false;
-                    }
-                });
-                break;
+                        @Override
+                        public void onFailed(String error) {
+                            showFailedDialog(error, new OnDialogClickListener() {
+                                @Override
+                                public void onCallback() {
+                                    etScanLocator.setText("");
+                                }
+                            });
+                            locatorFlag = false;
+                        }
+                    });
+                    break;
 
-            case BARCODEWHAT:
-                HashMap<String, String> barcodeMap = new HashMap<>();
-                barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
-                barcodeMap.put(AddressContants.DOC_NO, localData.getDoc_no());
-                barcodeMap.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
-                barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_out_no());
-                commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
-                    @Override
-                    public void onSuccess(final ScanBarcodeBackBean barcodeBackBean) {
-                        showBarcode(barcodeBackBean);
-                    }
+                case BARCODEWHAT:
+                    HashMap<String, String> barcodeMap = new HashMap<>();
+                    barcodeMap.put(AddressContants.BARCODE_NO, String.valueOf(msg.obj));
+                    barcodeMap.put(AddressContants.DOC_NO, localData.getDoc_no());
+                    barcodeMap.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
+                    barcodeMap.put(AddressContants.STORAGE_SPACES_NO,saveBean.getStorage_spaces_out_no());
+                    commonLogic.scanBarcode(barcodeMap, new CommonLogic.ScanBarcodeListener() {
+                        @Override
+                        public void onSuccess(final ScanBarcodeBackBean barcodeBackBean) {
+                            showBarcode(barcodeBackBean);
+                        }
 
-                    @Override
-                    public void onFailed(String error) {
-                        barcodeFlag = false;
-                        showFailedDialog(error, new OnDialogClickListener() {
-                            @Override
-                            public void onCallback() {
-                                etScanBarocde.setText("");
-                                etScanBarocde.requestFocus();
-                            }
-                        });
-                    }
-                });
-                break;
+                        @Override
+                        public void onFailed(String error) {
+                            barcodeFlag = false;
+                            showFailedDialog(error, new OnDialogClickListener() {
+                                @Override
+                                public void onCallback() {
+                                    etScanBarocde.setText("");
+                                    etScanBarocde.requestFocus();
+                                }
+                            });
+                        }
+                    });
+                    break;
 
-            case FIFOWHAT:
-                Map<String,String> map = new HashMap<String,String>();
-                map.put(AddressContants.ISSUING_NO,String.valueOf(msg.obj));
-                map.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
-                commonLogic.postMaterialFIFO(map, new CommonLogic.PostMaterialFIFOListener() {
-                    @Override
-                    public void onSuccess(List<FifoCheckBean> fiFoBeanList) {
-                        dismissLoadingDialog();
-                        fiFoList = fiFoBeanList;
-                        adapter = new CommonDocNoFIFoAdapter(context,fiFoBeanList);
-                        mRy_list.setAdapter(adapter);
-                    }
+                case FIFOWHAT:
+                    Map<String,String> map = new HashMap<String,String>();
+                    map.put(AddressContants.ISSUING_NO,String.valueOf(msg.obj));
+                    map.put(AddressContants.WAREHOUSE_NO, LoginLogic.getWare());
+                    commonLogic.postMaterialFIFO(map, new CommonLogic.PostMaterialFIFOListener() {
+                        @Override
+                        public void onSuccess(List<FifoCheckBean> fiFoBeanList) {
+                            dismissLoadingDialog();
+                            fiFoList = fiFoBeanList;
+                            adapter = new CommonDocNoFIFoAdapter(context,fiFoBeanList);
+                            mRy_list.setAdapter(adapter);
+                        }
 
-                    @Override
-                    public void onFailed(String error) {
-                        dismissLoadingDialog();
+                        @Override
+                        public void onFailed(String error) {
+                            dismissLoadingDialog();
 //                        showFailedDialog(error);
-                    }
-                });
-                break;
+                        }
+                    });
+                    break;
+            }
+            return false;
         }
-        return false;
-        }
-    });
+    };
+
+    private Handler mHandler = new WeakRefHandler(mCallback);
 
     /**
      * 对比物料条码
@@ -406,5 +408,10 @@ public class WorkSupplementScanFg extends BaseFragment {
         mHandler.sendMessageDelayed(mHandler.obtainMessage(FIFOWHAT, localData.getDoc_no()), AddressContants.DELAYTIME);
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
+    }
 }
 

@@ -15,6 +15,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
+import digiwin.library.utils.WeakRefHandler;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
@@ -101,7 +102,7 @@ public class LineSendActivity extends BaseTitleActivity {
 
     String minQty;
     boolean itemFlag;
-    private Handler mHandler = new Handler(new Handler.Callback() {
+    private Handler.Callback mCallback= new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
@@ -111,7 +112,9 @@ public class LineSendActivity extends BaseTitleActivity {
             }
             return false;
         }
-    });
+    };
+
+    private Handler mHandler = new WeakRefHandler(mCallback);
 
     @Override
     protected int bindLayoutId() {
@@ -246,4 +249,10 @@ public class LineSendActivity extends BaseTitleActivity {
        commonLogic = CommonLogic.getInstance(activity, module, mTimestamp.toString());
        sumBeanList = new ArrayList<>();
    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
+    }
 }

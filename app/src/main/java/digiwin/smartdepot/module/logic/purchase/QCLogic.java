@@ -38,7 +38,7 @@ public class QCLogic {
     private static QCLogic logic;
 
     private QCLogic(Context context, String module, String timestamp) {
-        mContext = context;
+        mContext = context.getApplicationContext();
         mModule = module;
         mTimestamp = timestamp;
     }
@@ -155,7 +155,7 @@ public class QCLogic {
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != xmlResp) {
                                 if (ReqTypeName.SUCCCESSCODE .equals( xmlResp.getCode())) {
-                                    String msg = xmlResp.getFieldString();
+                                    String msg = xmlResp.getDescription();
                                     listener.onSuccess(msg);
                                     return;
                                 } else {

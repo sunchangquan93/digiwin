@@ -12,7 +12,7 @@ public interface ModuleCode {
     public final String OTHER="OTHER";
 
     /**
-     * 扫码收获
+     * 扫码收货
      */
     public final String PURCHASEGOODSSCAN = "A003";
     /**

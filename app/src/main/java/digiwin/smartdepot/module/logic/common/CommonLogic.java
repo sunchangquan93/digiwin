@@ -1,6 +1,7 @@
 package digiwin.smartdepot.module.logic.common;
 
 import android.content.Context;
+import android.support.v4.content.res.TypedArrayUtils;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -18,7 +19,6 @@ import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.appcontants.ReqTypeName;
 import digiwin.smartdepot.core.net.IRequestCallbackImp;
 import digiwin.smartdepot.core.net.OkhttpRequest;
-import digiwin.smartdepot.core.net.OkhttpRequestJson;
 import digiwin.smartdepot.core.xml.CreateParaXmlReqIm;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
 import digiwin.smartdepot.module.bean.common.ClickItemPutBean;
@@ -39,7 +39,7 @@ import digiwin.smartdepot.module.bean.produce.InBinningBean;
 import digiwin.smartdepot.module.bean.stock.ProductBinningBean;
 
 /**
- * Created by xiemeng on 2017/2/23.
+ * Created by xiemeng on 2017/2/23
  */
 
 public class CommonLogic {
@@ -60,7 +60,7 @@ public class CommonLogic {
 
     private CommonLogic(Context context, String module, String timestamp) {
         mTimestamp = timestamp;
-        mContext = context;
+        mContext = context.getApplicationContext();
         mModule = module;
 
     }
@@ -78,6 +78,17 @@ public class CommonLogic {
 
         public void onFailed(String error);
     }
+
+    /**
+     * 该数组中模组无需判断库位是否存在于设置中的仓库
+     */
+    private String[] inStores={ModuleCode.PURCHASEGOODSSCAN,ModuleCode.PURCHASEINSTORE,
+            ModuleCode.PURCHASEINSTORE,ModuleCode.MATERIALRECEIPTCODE,ModuleCode.QUICKSTORAGE,
+            ModuleCode.STORERETURNMATERIAL,
+            ModuleCode.TRANSFERS_TO_REVIEW,
+            ModuleCode.POSTALLOCATE,ModuleCode.NOCOMESTOREALLOT,
+            };
+
 
     /**
      * 扫描物料条码
@@ -146,11 +157,12 @@ public class CommonLogic {
                             if (null != xmlResp) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
                                     List<ScanLocatorBackBean> locatorBackBeen = xmlResp.getParameterDatas(ScanLocatorBackBean.class);
+                                    boolean store=false;
                                     if (locatorBackBeen.size() > 0) {
-                                        if (!ModuleCode.NOCOMESTOREALLOT.equals(mModule) &&
-                                                !ModuleCode.TRANSFERS_TO_REVIEW.equals(mModule) &&
-                                                !ModuleCode.POSTALLOCATE.equals(mModule)
-                                                && !locatorBackBeen.get(0).getWarehouse_no().equals(LoginLogic.getWare())) {
+                                        for(String s:inStores ){
+                                            if(s.equals(mModule))store=true;
+                                        }
+                                        if (!store&&!locatorBackBeen.get(0).getWarehouse_no().equals(LoginLogic.getWare())) {
                                             error = mContext.getString(R.string.ware_error);
                                         } else {
                                             listener.onSuccess(locatorBackBeen.get(0));

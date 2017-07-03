@@ -43,7 +43,7 @@ public class TraceProductLogic {
 
     private TraceProductLogic(Context context, String module, String timestamp) {
         mTimestamp = timestamp;
-        mContext = context;
+        mContext = context.getApplicationContext();
         mModule = module;
 
     }

@@ -20,35 +20,19 @@ public class PurchaseCheckDetailBean implements Serializable{
 //    item_deter             string					项目判定
 //    item_no             string					料号
 
-    public String getHead_seq() {
-        return head_seq;
-    }
-
-    public void setHead_seq(String head_seq) {
-        this.head_seq = head_seq;
-    }
-
-    public String getItem_no() {
-        return item_no;
-    }
-
-    public void setItem_no(String item_no) {
-        this.item_no = item_no;
-    }
-
     /**
      * 料号
      */
 
-    private String item_no = null;
+    private String item_no;
     /**
      * 单头项次
      */
-    private String head_seq = null;
+    private String head_seq;
     /**
      * 项次
      */
-    private String seq = null;
+    private String seq;
     /**
      * 检验项目
      */
@@ -86,6 +70,30 @@ public class PurchaseCheckDetailBean implements Serializable{
      * pqc单号
      */
     private String doc_no;
+    /**
+     * 收货单号
+     */
+    private String receipt_no;
+    /**
+     * 行序
+     */
+    private String turn_order;
+
+    public String getHead_seq() {
+        return head_seq;
+    }
+
+    public void setHead_seq(String head_seq) {
+        this.head_seq = head_seq;
+    }
+
+    public String getItem_no() {
+        return item_no;
+    }
+
+    public void setItem_no(String item_no) {
+        this.item_no = item_no;
+    }
 
 
     public String getDefect_qty() {
@@ -165,6 +173,22 @@ public class PurchaseCheckDetailBean implements Serializable{
 
     public void setQc_state(String qc_state) {
         this.qc_state = qc_state;
+    }
+
+    public String getReceipt_no() {
+        return receipt_no;
+    }
+
+    public void setReceipt_no(String receipt_no) {
+        this.receipt_no = receipt_no;
+    }
+
+    public String getTurn_order() {
+        return turn_order;
+    }
+
+    public void setTurn_order(String turn_order) {
+        this.turn_order = turn_order;
     }
 
     /**

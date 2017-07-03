@@ -2,20 +2,16 @@ package digiwin.smartdepot.module.logic.purchase;
 
 import android.content.Context;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import digiwin.library.json.JsonResp;
 import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.ThreadPoolManager;
 import digiwin.library.xml.ParseXmlResp;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.ReqTypeName;
-import digiwin.smartdepot.core.appcontants.URLPath;
 import digiwin.smartdepot.core.json.JsonParseForJava;
 import digiwin.smartdepot.core.json.JsonReqForJava;
-import digiwin.smartdepot.core.json.JsonText;
 import digiwin.smartdepot.core.net.IRequestCallbackImp;
 import digiwin.smartdepot.core.net.OkhttpRequest;
 import digiwin.smartdepot.core.net.OkhttpRequestJson;
@@ -46,7 +42,7 @@ public class PurcahseCheckLogic {
     private static PurcahseCheckLogic logic;
 
     private PurcahseCheckLogic(Context context, String module, String timestamp) {
-        mContext = context;
+        mContext = context.getApplicationContext();
         mModule = module;
         mTimestamp = timestamp;
 
