@@ -1,6 +1,7 @@
 package digiwin.smartdepot.module.adapter.produce;
 
 import android.content.Context;
+import android.view.View;
 
 import java.util.List;
 
@@ -16,9 +17,11 @@ import digiwin.smartdepot.module.bean.common.FifoCheckBean;
  */
 
 public class AccordingMaterialFiFo_Adapter extends BaseRecyclerAdapter<FifoCheckBean>{
+    private List<FifoCheckBean> fifoList;
 
     public AccordingMaterialFiFo_Adapter(Context ctx, List<FifoCheckBean> list) {
         super(ctx, list);
+        fifoList=list;
     }
 
     @Override
@@ -33,5 +36,10 @@ public class AccordingMaterialFiFo_Adapter extends BaseRecyclerAdapter<FifoCheck
         holder.setText(R.id.tv_item_no,item.getItem_no());
         holder.setText(R.id.tv_rdna_num, item.getRecommended_qty());
         holder.setText(R.id.tv_feeding_amount, item.getScan_sumqty());
+        if(position == fifoList.size() - 1){
+            holder.setVisibility(R.id.fifo_bottom_line, View.GONE);
+        }else{
+            holder.setVisibility(R.id.fifo_bottom_line, View.VISIBLE);
+        }
     }
 }

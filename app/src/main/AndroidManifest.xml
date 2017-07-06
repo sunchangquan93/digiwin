@@ -96,6 +96,10 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".module.activity.produce.distribute.DistributeScanActivity"
+            android:configChanges="keyboardHidden|screenSize"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+        <activity
             android:name=".module.activity.common.NoComeUnComActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
@@ -323,6 +327,15 @@
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
             <intent-filter>
                 <action android:name="android.intent.action.digiwin.PurchaseGoodsScanActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- 采购收货-->
+        <activity
+            android:name=".module.activity.purchase.purchasereceive.PurchaseReceiveActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
+            <intent-filter>
+                <action android:name="android.intent.action.digiwin.PurchaseReceiveActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

@@ -230,7 +230,7 @@ public class PurchaseInStoreActivity extends BaseTitleActivity {
 
     @Override
     public String moduleCode() {
-        module = ModuleCode.PURCHASEINSTORE;
+        module = ModuleCode.PURCHASERECEIVE;
         return module;
     }
 

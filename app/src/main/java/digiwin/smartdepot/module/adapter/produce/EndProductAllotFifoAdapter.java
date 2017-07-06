@@ -1,6 +1,7 @@
 package digiwin.smartdepot.module.adapter.produce;
 
 import android.content.Context;
+import android.view.View;
 
 import java.util.List;
 
@@ -15,9 +16,11 @@ import digiwin.pulltorefreshlibrary.recyclerviewAdapter.RecyclerViewHolder;
  * @date 2017/4/13
  */
 public class EndProductAllotFifoAdapter extends BaseRecyclerAdapter<FifoCheckBean> {
+    private List<FifoCheckBean> fifoList;
 
     public EndProductAllotFifoAdapter(Context ctx, List<FifoCheckBean> list) {
         super(ctx, list);
+        fifoList=list;
     }
 
     @Override
@@ -31,5 +34,10 @@ public class EndProductAllotFifoAdapter extends BaseRecyclerAdapter<FifoCheckBea
         holder.setText(R.id.tv_barcode_no,item.getBarcode_no());
         holder.setText(R.id.tv_rdna_num, item.getRecommended_qty());
         holder.setText(R.id.tv_actual_yield, item.getScan_sumqty());
+        if(position == fifoList.size() - 1){
+            holder.setVisibility(R.id.fifo_bottom_line, View.GONE);
+        }else{
+            holder.setVisibility(R.id.fifo_bottom_line, View.VISIBLE);
+        }
     }
 }

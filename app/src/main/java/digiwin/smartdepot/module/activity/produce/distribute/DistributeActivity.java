@@ -502,7 +502,8 @@ public class DistributeActivity extends BaseFirstModuldeActivity {
         commonLogic.getDetail(map, new CommonLogic.GetDetailListener() {
             @Override
             public void onSuccess(List<DetailShowBean> detailShowBeen) {
-                if(null != detailShowBeen && detailShowBeen.size()>0){
+                dismissLoadingDialog();
+//                if(null != detailShowBeen && detailShowBeen.size()>0){
                     Bundle bundle = new Bundle();
                     SumShowBean bean = new SumShowBean();
                     bean.setItem_no(sumShowBean.getItem_no());
@@ -511,9 +512,8 @@ public class DistributeActivity extends BaseFirstModuldeActivity {
                     bundle.putString(CommonDetailActivity.MODULECODE, module);
                     bundle.putSerializable(CommonDetailActivity.ONESUM, bean);
                     bundle.putSerializable(CommonDetailActivity.DETAIL, (Serializable) detailShowBeen);
-                    dismissLoadingDialog();
                     ActivityManagerUtils.startActivityBundleForResult(distributeActivity, CommonDetailActivity.class, bundle, pactivity.DETAILCODE);
-                }
+//                }
             }
 
             @Override

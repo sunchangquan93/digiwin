@@ -36,6 +36,8 @@ public class CommonDocNoFIFoAdapter extends BaseRecyclerAdapter<FifoCheckBean> {
         holder.setText(R.id.tv_feeding_amount, item.getScan_sumqty());
         if(position == mItems.size() - 1){
             holder.setVisibility(R.id.fifo_bottom_line, View.GONE);
+        }else{
+            holder.setVisibility(R.id.fifo_bottom_line, View.VISIBLE);
         }
     }
 }

@@ -1,8 +1,7 @@
-package digiwin.smartdepot.module.fragment.produce.materialreturn;
+package digiwin.smartdepot.module.fragment.purchase.purchasereceive;
 
 
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
@@ -20,15 +19,20 @@ import digiwin.library.dialog.OnDialogTwoListener;
 import digiwin.library.utils.ActivityManagerUtils;
 import digiwin.library.utils.LogUtils;
 import digiwin.library.utils.StringUtils;
-import digiwin.pulltorefreshlibrary.recyclerviewAdapter.BaseRecyclerAdapter;
+import digiwin.pulltorefreshlibrary.recyclerview.FullyLinearLayoutManager;
 import digiwin.pulltorefreshlibrary.recyclerviewAdapter.OnItemClickListener;
 import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.base.BaseFragment;
+import digiwin.smartdepot.login.bean.AccoutBean;
 import digiwin.smartdepot.login.loginlogic.LoginLogic;
 import digiwin.smartdepot.module.activity.common.CommonDetailActivity;
-import digiwin.smartdepot.module.activity.produce.materialreturn.MaterialReturnActivity;
-import digiwin.smartdepot.module.adapter.produce.MaterialReturnSumAdapter;
+import digiwin.smartdepot.module.activity.produce.finishstorage.FinishedStorageActivity;
+import digiwin.smartdepot.module.activity.purchase.purchaseinstore.PurchaseInStoreSecondActivity;
+import digiwin.smartdepot.module.activity.purchase.purchasereceive.PurchaseReceiveActivity;
+import digiwin.smartdepot.module.adapter.produce.FinishedStorageSumAdapter;
+import digiwin.smartdepot.module.adapter.purchase.PruchaseReceiveSumAdapter;
+import digiwin.smartdepot.module.adapter.purchase.PurchaseInStorageSumAdapter;
 import digiwin.smartdepot.module.bean.common.ClickItemPutBean;
 import digiwin.smartdepot.module.bean.common.DetailShowBean;
 import digiwin.smartdepot.module.bean.common.FilterResultOrderBean;
@@ -38,21 +42,12 @@ import digiwin.smartdepot.module.logic.common.CommonLogic;
 
 
 /**
- * @author xiemeng
- * @des 退料过账汇总页面
- * @date 2017/3/30
+ * @author 唐孟宇
+ * @des 采购入库 数据汇总界面
  */
-public class MaterialReturnSumFg extends BaseFragment {
-    @BindView(R.id.tv_material_return_number)
-    TextView tvMaterialReturnNumber;
-    @BindView(R.id.tv_item_date)
-    TextView tvItemDate;
+public class PurchaseReceiveSumFg extends BaseFragment {
     @BindView(R.id.ry_list)
     RecyclerView ryList;
-    @BindView(R.id.tv_depart)
-    TextView tvDepart;
-    @BindView(R.id.tv_applicant)
-    TextView tvApplicant;
 
     @OnClick(R.id.commit)
     void commit() {
@@ -61,7 +56,6 @@ public class MaterialReturnSumFg extends BaseFragment {
             public void onCallback1() {
                 sureCommit();
             }
-
             @Override
             public void onCallback2() {
 
@@ -69,74 +63,63 @@ public class MaterialReturnSumFg extends BaseFragment {
         });
     }
 
+    PurchaseReceiveActivity pactivity;
 
-    MaterialReturnActivity pactivity;
     CommonLogic commonLogic;
 
-    boolean upDateFlag;
+    private boolean upDateFlag;
 
-    List<ListSumBean> sumBeanList;
-    private BaseRecyclerAdapter adapter;
+    PruchaseReceiveSumAdapter adapter;
+
+    List<ListSumBean> sumShowBeanList;
 
     @Override
     protected int bindLayoutId() {
-        return R.layout.fg_material_return_sum;
+        return R.layout.fg_finishedstorage_sum;
     }
 
     @Override
     protected void doBusiness() {
-        upDateFlag = false;
-        sumBeanList = new ArrayList<>();
-        pactivity = (MaterialReturnActivity) this.activity;
-        commonLogic = CommonLogic.getInstance(context, pactivity.module, pactivity.mTimestamp.toString());
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(pactivity);
+        sumShowBeanList=new ArrayList<>();
+        pactivity = (PurchaseReceiveActivity) activity;
+        FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(activity);
         ryList.setLayoutManager(linearLayoutManager);
+        initData();
     }
 
+
+    /**
+     * 汇总展示
+     */
     public void upDateList() {
         try {
-            sumBeanList.clear();
-            adapter = new MaterialReturnSumAdapter(context, sumBeanList);
+            Map<String, String> map = new HashMap<>();
+            sumShowBeanList.clear();
+            adapter = new PruchaseReceiveSumAdapter(activity, sumShowBeanList);
             ryList.setAdapter(adapter);
-            Bundle bundle = activity.getIntent().getExtras();
-            FilterResultOrderBean filterBean = (FilterResultOrderBean) bundle.getSerializable(MaterialReturnActivity.filterBean);
-            ClickItemPutBean itemPutBean = new ClickItemPutBean();
-            itemPutBean.setDoc_no(filterBean.getDoc_no());
-            itemPutBean.setWarehouse_in_no(LoginLogic.getWare());
             showLoadingDialog();
-            commonLogic.getOrderSumData(itemPutBean, new CommonLogic.GetOrderSumListener() {
+            ClickItemPutBean mPutBean = new ClickItemPutBean();
+            commonLogic.getOrderSumData(mPutBean, new CommonLogic.GetOrderSumListener() {
                 @Override
                 public void onSuccess(List<ListSumBean> list) {
-                    dismissLoadingDialog();
-                    sumBeanList = list;
-                    adapter = new MaterialReturnSumAdapter(context, sumBeanList);
+                    sumShowBeanList = list;
+                    adapter = new PruchaseReceiveSumAdapter(activity, sumShowBeanList);
                     ryList.setAdapter(adapter);
-                    if (null != list && list.size() > 0) {
-                        upDateFlag = true;
-                        toDetail();
-                        tvMaterialReturnNumber.setText(list.get(0).getDoc_no());
-                        tvItemDate.setText(list.get(0).getCreate_date());
-                        tvDepart.setText(list.get(0).getDepartment_name());
-                        tvApplicant.setText(list.get(0).getEmployee_name());
-
-                    }
+                    upDateFlag = true;
+                    toDetail();
+                    dismissLoadingDialog();
                 }
 
                 @Override
                 public void onFailed(String error) {
-                    dismissLoadingDialog();
                     upDateFlag = false;
-                    sumBeanList.clear();
-                    adapter = new MaterialReturnSumAdapter(context, sumBeanList);
-                    ryList.setAdapter(adapter);
+                    dismissLoadingDialog();
                     showFailedDialog(error);
                 }
             });
-        }catch (Exception e){
-            LogUtils.e(TAG,"updatelist"+e);
+        } catch (Exception e) {
+            LogUtils.e(TAG, "updateList--getSum--Exception" + e);
         }
-
-
     }
 
     /**
@@ -147,7 +130,7 @@ public class MaterialReturnSumFg extends BaseFragment {
             adapter.setOnItemClickListener(new OnItemClickListener() {
                 @Override
                 public void onItemClick(View itemView, int pos) {
-                    getDetail(sumBeanList.get(pos));
+                    getDetail(sumShowBeanList.get(pos));
                 }
             });
         } catch (Exception e) {
@@ -159,23 +142,32 @@ public class MaterialReturnSumFg extends BaseFragment {
     /**
      * 查看明细
      */
-    private void getDetail(final ListSumBean orderSumData) {
+    public void getDetail(final ListSumBean orderSumData) {
         Map<String, String> map = new HashMap<>();
         showLoadingDialog();
         map.put(AddressContants.ITEM_NO, orderSumData.getItem_no());
         final SumShowBean sumShowBean = new SumShowBean();
         sumShowBean.setItem_no(orderSumData.getItem_no());
         sumShowBean.setItem_name(orderSumData.getItem_name());
-        sumShowBean.setAvailable_in_qty(orderSumData.getReceipt_qty());
+        float numb1 = StringUtils.string2Float(orderSumData.getReq_qty());
+        float numb2 = StringUtils.string2Float(orderSumData.getStock_qty());
+        if(numb1 > numb2){
+            sumShowBean.setAvailable_in_qty(orderSumData.getStock_qty());
+        }else if(numb1 < numb2){
+            sumShowBean.setAvailable_in_qty(orderSumData.getReq_qty());
+        }else if(numb1 == numb2){
+            sumShowBean.setAvailable_in_qty(orderSumData.getReq_qty());
+        }
+
         commonLogic.getDetail(map, new CommonLogic.GetDetailListener() {
             @Override
             public void onSuccess(List<DetailShowBean> detailShowBeen) {
-                dismissLoadingDialog();
                 Bundle bundle = new Bundle();
                 bundle.putString(AddressContants.MODULEID_INTENT, pactivity.mTimestamp.toString());
                 bundle.putString(CommonDetailActivity.MODULECODE, pactivity.module);
                 bundle.putSerializable(CommonDetailActivity.ONESUM, sumShowBean);
                 bundle.putSerializable(CommonDetailActivity.DETAIL, (Serializable) detailShowBeen);
+                dismissLoadingDialog();
                 ActivityManagerUtils.startActivityBundleForResult(activity, CommonDetailActivity.class, bundle, pactivity.DETAILCODE);
             }
 
@@ -187,7 +179,7 @@ public class MaterialReturnSumFg extends BaseFragment {
         });
     }
 
-    private void sureCommit() {
+    private void sureCommit(){
         if (!upDateFlag) {
             showFailedDialog(R.string.nodate);
             return;
@@ -201,8 +193,10 @@ public class MaterialReturnSumFg extends BaseFragment {
                 showCommitSuccessDialog(msg, new OnDialogClickListener() {
                     @Override
                     public void onCallback() {
+                        pactivity.mZXVp.setCurrentItem(0);
+                        pactivity.createNewModuleId(pactivity.module);
                         pactivity.scanFg.initData();
-                        pactivity.finish();
+                        initData();
                     }
                 });
             }
@@ -215,6 +209,8 @@ public class MaterialReturnSumFg extends BaseFragment {
         });
 
     }
-
-
+    public void initData() {
+        commonLogic = CommonLogic.getInstance(activity, pactivity.module, pactivity.mTimestamp.toString());
+        upDateFlag = false;
+    }
 }

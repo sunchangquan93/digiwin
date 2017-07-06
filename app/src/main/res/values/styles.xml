@@ -164,4 +164,11 @@
         <item name="android:textSize">@dimen/digiwin_textsize</item>
         <item name="android:textColor">@color/black_32</item>
     </style>
+
+    <!--本地fifo字体-->
+    <style name="app_text_infifoitem">
+        <item name="android:textSize">@dimen/digiwin_textsize</item>
+        <item name="android:textColor">@color/bottom_menu_text</item>
+    </style>
+
 </resources>

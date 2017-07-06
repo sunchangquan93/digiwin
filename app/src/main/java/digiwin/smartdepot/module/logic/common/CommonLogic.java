@@ -1,8 +1,6 @@
 package digiwin.smartdepot.module.logic.common;
 
 import android.content.Context;
-import android.support.v4.content.res.TypedArrayUtils;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +64,6 @@ public class CommonLogic {
     }
 
     public static CommonLogic getInstance(Context context, String module, String timestamp) {
-
         return logic = new CommonLogic(context, module, timestamp);
     }
 
@@ -85,8 +82,9 @@ public class CommonLogic {
     private String[] inStores={ModuleCode.PURCHASEGOODSSCAN,ModuleCode.PURCHASEINSTORE,
             ModuleCode.PURCHASEINSTORE,ModuleCode.MATERIALRECEIPTCODE,ModuleCode.QUICKSTORAGE,
             ModuleCode.STORERETURNMATERIAL,
-            ModuleCode.TRANSFERS_TO_REVIEW,
-            ModuleCode.POSTALLOCATE,ModuleCode.NOCOMESTOREALLOT,
+            ModuleCode.DIRECTSTORAGE,ModuleCode.COMPLETINGSTORE,ModuleCode.PUTINSTORE,
+            ModuleCode.MATERIALRETURNING,ModuleCode.FINISHEDSTORAGE,ModuleCode.TRANSFERS_TO_REVIEW,
+            ModuleCode.POSTALLOCATE,ModuleCode.MISCELLANEOUSISSUESIN,ModuleCode.NOCOMESTOREALLOT,
             };
 
 

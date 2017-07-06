@@ -9,7 +9,7 @@ import digiwin.library.utils.SharedPreferencesUtils;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 
 /**
- * Created by ChangquanSun
+ * Created by qGod
  * 2017/1/5
  * 网络请求工具类(二次封装，请求直接使用该类)
  */

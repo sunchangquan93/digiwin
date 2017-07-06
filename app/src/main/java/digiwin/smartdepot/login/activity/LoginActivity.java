@@ -31,7 +31,6 @@ import digiwin.smartdepot.R;
 import digiwin.smartdepot.core.appcontants.AddressContants;
 import digiwin.smartdepot.core.appcontants.ModuleCode;
 import digiwin.smartdepot.core.base.BaseActivity;
-import digiwin.smartdepot.core.coreutil.FiFoCheckUtils;
 import digiwin.smartdepot.core.coreutil.PermissionUtils;
 import digiwin.smartdepot.core.jpush.JPushManager;
 import digiwin.smartdepot.core.printer.WiFiPrintManager;
@@ -43,7 +42,6 @@ import digiwin.smartdepot.login.loginlogic.LoginLogic;
 import digiwin.smartdepot.main.activity.MainActivity;
 import digiwin.smartdepot.main.activity.versions.VersionsSettingDialog;
 import digiwin.smartdepot.main.bean.StorageBean;
-import digiwin.smartdepot.module.activity.common.ChoosePicActivity;
 
 /**
  * 登录界面
@@ -151,7 +149,6 @@ public class LoginActivity extends BaseActivity {
 //    };
 
 
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -164,9 +161,9 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void doBusiness() {
-           PermissionUtils.verifyStoragePermissions(this);
+        PermissionUtils.verifyStoragePermissions(this);
 
-        final    WiFiPrintManager wiFiPrintManager=   WiFiPrintManager.getManager();
+        final WiFiPrintManager wiFiPrintManager = WiFiPrintManager.getManager();
 //        wiFiPrintManager.openWiFi("", 0, new WiFiPrintManager.OpenWiFiPrintListener() {
 //            @Override
 //            public void isOpen(boolean isOpen) {
@@ -189,7 +186,7 @@ public class LoginActivity extends BaseActivity {
     @OnClick(R.id.rl_login_eye)
     void showOperatingCenter() {
         if (StringUtils.isBlank(et_login_user.getText().toString())
-                || StringUtils.isBlank(et_login_lock.getText().toString()) ){
+                || StringUtils.isBlank(et_login_lock.getText().toString())) {
             showFailedDialog(R.string.username_pwd_not_null);
             return;
         }
@@ -229,15 +226,15 @@ public class LoginActivity extends BaseActivity {
     @OnClick(R.id.tv_login_rightNow)
     void login() {
         if (StringUtils.isBlank(et_login_user.getText().toString())) {
-            AlertDialogUtils.showFailedDialog(context,R.string.username_not_null);
+            AlertDialogUtils.showFailedDialog(context, R.string.username_not_null);
             return;
         }
         if (StringUtils.isBlank(et_login_lock.getText().toString())) {
-            AlertDialogUtils.showFailedDialog(context,R.string.password_not_null);
+            AlertDialogUtils.showFailedDialog(context, R.string.password_not_null);
             return;
         }
         if (StringUtils.isBlank(tv_login_eye.getText().toString())) {
-            AlertDialogUtils.showFailedDialog(context,R.string.plant_not_null);
+            AlertDialogUtils.showFailedDialog(context, R.string.plant_not_null);
             return;
         }
         Map<String, String> map = new HashMap<>();
@@ -250,32 +247,31 @@ public class LoginActivity extends BaseActivity {
             public void onSuccess(AccoutBean accoutBean) {
                 String vernum = accoutBean.getVernum();
                 //TODO:由于开启自启动原因，所以该处会再次判断是否为最新版
-                if (!StringUtils.isBlank(vernum) && StringUtils.string2Float(vernum)>TelephonyUtils.getMAppVersion(context)) {
+                if (!StringUtils.isBlank(vernum) && StringUtils.string2Float(vernum) > TelephonyUtils.getMAppVersion(context)) {
                     AppVersionBean versionBean = new AppVersionBean();
                     versionBean.setVernum(accoutBean.getVernum());
                     versionBean.setVerurl(accoutBean.getVerurl());
                     versionBean.setVerwhat(accoutBean.getVerwhat());
                     dismissLoadingDialog();
                     matchVersion(versionBean);
-                }
-        else
-                {
+                } else {
                     //传入权限
-                    Bundle bundle=new Bundle();
-                    bundle.putString("access",accoutBean.getAccess());
+                    Bundle bundle = new Bundle();
+                    bundle.putString("access", accoutBean.getAccess());
                     accoutBean.setPassword(et_login_lock.getText().toString());
                     if (cb_remeber_password.isChecked()) {
                         accoutBean.setIsRemeberPassWord("Y");
                     } else {
-                        accoutBean.setIsRemeberPassWord("N");}
+                        accoutBean.setIsRemeberPassWord("N");
+                    }
                     List<String> split = StringUtils.split(accoutBean.getWare());
                     ArrayList<StorageBean> storageList = new ArrayList<>();
-                    for (int i=0;i<split.size();i++){
+                    for (int i = 0; i < split.size(); i++) {
                         StorageBean storageBean = new StorageBean();
                         storageBean.setWare(split.get(i));
                         storageList.add(storageBean);
                     }
-                    if (storageList.size()>0){
+                    if (storageList.size() > 0) {
                         accoutBean.setWare(storageList.get(0).getWare());
                     }
                     SQLiteDatabase db = Connector.getDatabase();
@@ -287,8 +283,8 @@ public class LoginActivity extends BaseActivity {
                     accoutBean.save();
 //                    db.endTransaction();
                     //上传用户词表
-                    ActivityManagerUtils.startActivityForBundleDataFinish(activity,MainActivity.class,bundle);
-                    JPushManager.login(TelephonyUtils.getDeviceId(activity),TelephonyUtils.getDeviceId(activity));
+                    ActivityManagerUtils.startActivityForBundleDataFinish(activity, MainActivity.class, bundle);
+                    JPushManager.login(TelephonyUtils.getDeviceId(activity), TelephonyUtils.getDeviceId(activity));
 //                    dismissLoadingDialog();
                 }
             }
@@ -296,7 +292,7 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onFailed(String msg) {
                 dismissLoadingDialog();
-                AlertDialogUtils.showFailedDialog(context,msg);
+                AlertDialogUtils.showFailedDialog(context, msg);
             }
         });
     }
@@ -306,12 +302,13 @@ public class LoginActivity extends BaseActivity {
         super.onDestroy();
         dismissLoadingDialog();
         isFinished = true;
+        animationDrawable.stop();
+        animationDrawable=null;
 //        if(handler!=null){
 //            handler.removeMessages(HANDLERWHAT);
 //            handler = null;
 //        }
     }
-
 
 
     /**
@@ -363,11 +360,11 @@ public class LoginActivity extends BaseActivity {
             public void onSuccess(List<String> plants) {
                 try {
                     mPlants = plants;
-                    if (StringUtils.isBlank(tv_login_eye.getText().toString().trim())&&mPlants.size() > 0) {
+                    if (StringUtils.isBlank(tv_login_eye.getText().toString().trim()) && mPlants.size() > 0) {
                         tv_login_eye.setText(mPlants.get(0));
                     }
-                }catch (Exception e){
-                    LogUtils.e(TAG,"getPlant异常");
+                } catch (Exception e) {
+                    LogUtils.e(TAG, "getPlant异常");
                 }
             }
 
@@ -376,7 +373,7 @@ public class LoginActivity extends BaseActivity {
                 if (mPlants.size() > 0) {
                     tv_login_eye.setText(mPlants.get(0));
                 }
-                AlertDialogUtils.showFailedDialog(context,msg);
+                AlertDialogUtils.showFailedDialog(context, msg);
             }
         });
     }
@@ -390,7 +387,7 @@ public class LoginActivity extends BaseActivity {
         float mAppVersion = TelephonyUtils.getMAppVersion(activity);
         float newVersion = StringUtils.string2Float(version.getVernum());
         if (newVersion > mAppVersion) {
-              VersionsSettingDialog.showVersionDialog(activity, version);
+            VersionsSettingDialog.showVersionDialog(activity, version);
         } else {
             return;
         }
@@ -420,10 +417,9 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public String moduleCode() {
-        module= ModuleCode.OTHER;
+        module = ModuleCode.OTHER;
         return module;
     }
-
 
 
 }

@@ -12,7 +12,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/layout_0.5dp"
-        android:background="@color/gray_f0"></View>
+        android:background="@color/gray_f0" />
 
     <ScrollView
         android:layout_width="match_parent"

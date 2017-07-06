@@ -15,7 +15,7 @@
 
         <TextView
             android:id="@+id/tv_item_name_string"
-            style="@style/app_text_inwhite"
+            style="@style/app_text_infifoitem"
             android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
             android:text="@string/item_name" />
@@ -40,7 +40,7 @@
 
         <TextView
             android:id="@+id/tv_model_string"
-            style="@style/app_text_inwhite"
+            style="@style/app_text_infifoitem"
             android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
             android:text="@string/barcode" />
@@ -48,8 +48,9 @@
         <TextView
             android:id="@+id/tv_barcode"
             style="@style/ry_ser_text_inwhite"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"/>
     </LinearLayout>
 
     <View style="@style/ry_line_style" />
@@ -62,7 +63,7 @@
 
         <TextView
             android:id="@+id/tv_locator_string"
-            style="@style/app_text_inwhite"
+            style="@style/app_text_infifoitem"
             android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
             android:text="@string/locator" />
@@ -70,8 +71,9 @@
         <TextView
             android:id="@+id/tv_locator"
             style="@style/ry_ser_text_inwhite"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_width="@dimen/layout_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"/>
     </LinearLayout>
 
 
@@ -88,7 +90,7 @@
 
         <TextView
             android:id="@+id/tv_rdna_num_string"
-            style="@style/app_text_inwhite"
+            style="@style/app_text_infifoitem"
             android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
             android:text="@string/rdna_num" />
@@ -102,7 +104,7 @@
 
         <TextView
             android:id="@+id/tv_actual_yield_string"
-            style="@style/app_text_inwhite"
+            style="@style/app_text_infifoitem"
             android:layout_width="@dimen/layout_60dp"
             android:layout_height="wrap_content"
             android:text="@string/actual_yield" />

@@ -238,6 +238,19 @@ public class ListSumBean implements Serializable {
      */
     private String remark;
 
+    /**
+     * 采购项次
+     */
+    private String purchase_seq;
+
+    public String getPurchase_seq() {
+        return purchase_seq;
+    }
+
+    public void setPurchase_seq(String purchase_seq) {
+        this.purchase_seq = purchase_seq;
+    }
+
     public String getEmployee_no() {
         return employee_no;
     }

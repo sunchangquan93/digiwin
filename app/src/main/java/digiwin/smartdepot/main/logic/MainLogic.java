@@ -64,10 +64,11 @@ public class MainLogic {
     private List<String> powerItems;
 
     public MainLogic(Context context) {
-        activity= (MainActivity) context;
+        activity = (MainActivity) context;
     }
 
-    public static  List<ModuleBean> ModuleList = new ArrayList<>();
+    public static List<ModuleBean> ModuleList = new ArrayList<>();
+
     /**
      * 初始化各个模块
      *
@@ -78,24 +79,26 @@ public class MainLogic {
      * @param salesItems     销售管理数据源
      * @param dailyworkItems 报工管理数据源
      */
-    public void initModule(Context context,List<String> powerItems, List<ModuleBean> purchaseItems,
-                                  List<ModuleBean> produceItems, List<ModuleBean> storageItems
-            , List<ModuleBean> salesItems, List<ModuleBean> dailyworkItems,List<ModuleBean> boardItems) {
-        this.powerItems=powerItems;
-        this.purchaseItems=purchaseItems;
-        this.produceItems=produceItems;
-        this.storageItems= storageItems;
-        this.salesItems=salesItems;
-        this.dailyworkItems=dailyworkItems;
-        this.boardItems=boardItems;
+    public void initModule(Context context, List<String> powerItems, List<ModuleBean> purchaseItems,
+                           List<ModuleBean> produceItems, List<ModuleBean> storageItems
+            , List<ModuleBean> salesItems, List<ModuleBean> dailyworkItems, List<ModuleBean> boardItems) {
+        this.powerItems = powerItems;
+        this.purchaseItems = purchaseItems;
+        this.produceItems = produceItems;
+        this.storageItems = storageItems;
+        this.salesItems = salesItems;
+        this.dailyworkItems = dailyworkItems;
+        this.boardItems = boardItems;
 
         //初始化采购管理
 
-        ModuleBean purchaseInStore= new ModuleBean(R.string.purchase_in_store, R.mipmap.lingliaoguozahng, ModuleCode.PURCHASEINSTORE,"android.intent.action.digiwin.PurchaseInStoreActivity");
+        ModuleBean purchaseInStore = new ModuleBean(R.string.purchase_in_store, R.mipmap.lingliaoguozahng, ModuleCode.PURCHASEINSTORE, "android.intent.action.digiwin.PurchaseInStoreActivity");
 
         ModuleBean materialreceipt = new ModuleBean(R.string.title_material_receipt, R.mipmap.material_receipt, ModuleCode.MATERIALRECEIPTCODE, "android.intent.action.digiwin.MaterialReceiptActivity");
 
         ModuleBean purchaseGoodsScan = new ModuleBean(R.string.title_purchase_goods_scan, R.mipmap.scan_inapection, ModuleCode.PURCHASEGOODSSCAN, "android.intent.action.digiwin.PurchaseGoodsScanActivity");
+
+        ModuleBean purchaseReceive = new ModuleBean(R.string.title_purchase_receive, R.mipmap.purchasereceive, ModuleCode.PURCHASERECEIVE, "android.intent.action.digiwin.PurchaseReceiveActivity");
 
         ModuleBean purchaseCheck = new ModuleBean(R.string.purchase_check, R.mipmap.inspection_tests, ModuleCode.PURCHASECHECK, "android.intent.action.digiwin.PurchaseCheckActivity");
 
@@ -104,50 +107,49 @@ public class MainLogic {
         ModuleBean quickstorage = new ModuleBean(R.string.title_quickstorage, R.mipmap.quickly_storage, ModuleCode.QUICKSTORAGE, "android.intent.action.digiwin.QuickStorageListActivity");
 
 
-
         purchaseItems.add(materialreceipt);
         purchaseItems.add(quickstorage);
         purchaseItems.add(purchaseCheck);
         purchaseItems.add(purchaseGoodsScan);
+        purchaseItems.add(purchaseReceive);
         purchaseItems.add(purchaseInStore);
         purchaseItems.add(storeReturnMaterial);
 
 
-
         //初始化生产管理
-        ModuleBean finishedStorageActivity= new ModuleBean(R.string.finishedstorage, R.mipmap.finishedstorage, ModuleCode.FINISHEDSTORAGE,"android.intent.action.digiwin.FinishedStorageActivity");
+        ModuleBean finishedStorageActivity = new ModuleBean(R.string.finishedstorage, R.mipmap.finishedstorage, ModuleCode.FINISHEDSTORAGE, "android.intent.action.digiwin.FinishedStorageActivity");
 
-        ModuleBean transfersToReviewActivity= new ModuleBean(R.string.transfers_to_review, R.mipmap.diaobofuhe, ModuleCode.TRANSFERS_TO_REVIEW,"android.intent.action.digiwin.TransfersToReviewActivity");
+        ModuleBean transfersToReviewActivity = new ModuleBean(R.string.transfers_to_review, R.mipmap.diaobofuhe, ModuleCode.TRANSFERS_TO_REVIEW, "android.intent.action.digiwin.TransfersToReviewActivity");
 
-        ModuleBean accordingMaterialActivity = new ModuleBean(R.string.according_material,R.mipmap.accordingmaterial,ModuleCode.ACCORDINGMATERIALCODE,"android.intent.action.digiwin.AccordingMaterialActivity");
+        ModuleBean accordingMaterialActivity = new ModuleBean(R.string.according_material, R.mipmap.accordingmaterial, ModuleCode.ACCORDINGMATERIALCODE, "android.intent.action.digiwin.AccordingMaterialActivity");
 
-        ModuleBean distribute= new ModuleBean(R.string.distribute, R.mipmap.shengchanpeihuo, ModuleCode.DISTRIBUTE,"android.intent.action.digiwin.DistributeActivity");
+        ModuleBean distribute = new ModuleBean(R.string.distribute, R.mipmap.shengchanpeihuo, ModuleCode.DISTRIBUTE, "android.intent.action.digiwin.DistributeActivity");
 
-        ModuleBean postMaterial= new ModuleBean(R.string.post_material, R.mipmap.lingliaoguozahng, ModuleCode.POSTMATERIAL,"android.intent.action.digiwin.PostMaterialActivity");
+        ModuleBean postMaterial = new ModuleBean(R.string.post_material, R.mipmap.lingliaoguozahng, ModuleCode.POSTMATERIAL, "android.intent.action.digiwin.PostMaterialActivity");
 
-        ModuleBean putInStore = new ModuleBean(R.string.put_in_store, R.mipmap.putaway, ModuleCode.PUTINSTORE,"android.intent.action.digiwin.PutInStoreActivity");
+        ModuleBean putInStore = new ModuleBean(R.string.put_in_store, R.mipmap.putaway, ModuleCode.PUTINSTORE, "android.intent.action.digiwin.PutInStoreActivity");
 
-        ModuleBean materialReturning= new ModuleBean(R.string.mataerial_returning, R.mipmap.return_of_material, ModuleCode.MATERIALRETURNING,"android.intent.action.digiwin.MaterialReturnListActivity");
+        ModuleBean materialReturning = new ModuleBean(R.string.mataerial_returning, R.mipmap.return_of_material, ModuleCode.MATERIALRETURNING, "android.intent.action.digiwin.MaterialReturnListActivity");
 
-        ModuleBean driectStorage= new ModuleBean(R.string.direct_storage, R.mipmap.direct_storage, ModuleCode.DIRECTSTORAGE,"android.intent.action.digiwin.DirectStorageActivity");
+        ModuleBean driectStorage = new ModuleBean(R.string.direct_storage, R.mipmap.direct_storage, ModuleCode.DIRECTSTORAGE, "android.intent.action.digiwin.DirectStorageActivity");
 
-        ModuleBean workorder = new ModuleBean(R.string.title_work_order,R.mipmap.work_order,ModuleCode.WORKORDERCODE,"android.intent.action.digiwin.WorkOrderActivity");
+        ModuleBean workorder = new ModuleBean(R.string.title_work_order, R.mipmap.work_order, ModuleCode.WORKORDERCODE, "android.intent.action.digiwin.WorkOrderActivity");
 
-        ModuleBean completingstore = new ModuleBean(R.string.title_completing_store,R.mipmap.complete_storage,ModuleCode.COMPLETINGSTORE,"android.intent.action.digiwin.CompletingStoreActivity");
+        ModuleBean completingstore = new ModuleBean(R.string.title_completing_store, R.mipmap.complete_storage, ModuleCode.COMPLETINGSTORE, "android.intent.action.digiwin.CompletingStoreActivity");
 
-        ModuleBean enchaseprint = new ModuleBean(R.string.enchaseprint,R.mipmap.enchaseprint,ModuleCode.ENCHASEPRINT, "android.intent.action.digiwin.EnchasePrintActivity");
+        ModuleBean enchaseprint = new ModuleBean(R.string.enchaseprint, R.mipmap.enchaseprint, ModuleCode.ENCHASEPRINT, "android.intent.action.digiwin.EnchasePrintActivity");
 
-        ModuleBean workorderreturnlistactivity = new ModuleBean(R.string.work_order_return,R.mipmap.work_order_return,ModuleCode.WORKORDERRETURN,  "android.intent.action.digiwin.WorkOrderReturnListActivity");
+        ModuleBean workorderreturnlistactivity = new ModuleBean(R.string.work_order_return, R.mipmap.work_order_return, ModuleCode.WORKORDERRETURN, "android.intent.action.digiwin.WorkOrderReturnListActivity");
 
-        ModuleBean worksupplementlist = new ModuleBean(R.string.title_worksupplement,R.mipmap.ordermaterial,ModuleCode.WORKSUPPLEMENT,  "android.intent.action.digiwin.WorkSupplementListActivity");
+        ModuleBean worksupplementlist = new ModuleBean(R.string.title_worksupplement, R.mipmap.ordermaterial, ModuleCode.WORKSUPPLEMENT, "android.intent.action.digiwin.WorkSupplementListActivity");
 
-        ModuleBean productionleaderlist = new ModuleBean(R.string.title_production_leader,R.mipmap.production_receive,ModuleCode.PRODUCTIONLEADER,  "android.intent.action.digiwin.ProductionLeaderListActivity");
+        ModuleBean productionleaderlist = new ModuleBean(R.string.title_production_leader, R.mipmap.production_receive, ModuleCode.PRODUCTIONLEADER, "android.intent.action.digiwin.ProductionLeaderListActivity");
 
-        ModuleBean inbinninglist = new ModuleBean(R.string.title_in_binning,R.mipmap.inbox,ModuleCode.INBINNING,  "android.intent.action.digiwin.InBinningListActivity");
+        ModuleBean inbinninglist = new ModuleBean(R.string.title_in_binning, R.mipmap.inbox, ModuleCode.INBINNING, "android.intent.action.digiwin.InBinningListActivity");
 
-        ModuleBean endproductAllot = new ModuleBean(R.string.endproduct_allot,R.mipmap.endproduct_allot,ModuleCode.ENDPRODUCTALLOT,  "android.intent.action.digiwin.EndProductAllotActivity");
+        ModuleBean endproductAllot = new ModuleBean(R.string.endproduct_allot, R.mipmap.endproduct_allot, ModuleCode.ENDPRODUCTALLOT, "android.intent.action.digiwin.EndProductAllotActivity");
 
-        ModuleBean linesend= new ModuleBean(R.string.line_send, R.mipmap.pickup_shipment, ModuleCode.LINESEND,"android.intent.action.digiwin.LineSendActivity");
+        ModuleBean linesend = new ModuleBean(R.string.line_send, R.mipmap.pickup_shipment, ModuleCode.LINESEND, "android.intent.action.digiwin.LineSendActivity");
 
         ModuleBean pqcCheck = new ModuleBean(R.string.pqc_check, R.mipmap.pqc_check, ModuleCode.PQCCHECK, "android.intent.action.digiwin.PQCCheckActivity");
 
@@ -160,40 +162,39 @@ public class MainLogic {
 //        ModuleBean processTransfer = new ModuleBean(R.string.work_change, R.mipmap.fqc_runcard, ModuleCode.PROCESSTRANSFER, "android.intent.action.digiwin.ProcessTransferActivity");
 //
 //        ModuleBean produceDailyWork = new ModuleBean(R.string.produce_dailywork, R.mipmap.fqc_runcard, ModuleCode.PRODUCEDAILYWORK, "android.intent.action.digiwin.ProdurceDailyActivity");
-
-        produceItems.add(finishedStorageActivity);
+        produceItems.add(distribute);
 
         produceItems.add(transfersToReviewActivity);
 
+        produceItems.add(workorder);
+
+        produceItems.add(linesend);
+
         produceItems.add(accordingMaterialActivity);
 
-        produceItems.add(distribute);
+        produceItems.add(productionleaderlist);
 
         produceItems.add(postMaterial);
 
-        produceItems.add(putInStore);
-
         produceItems.add(worksupplementlist);
 
-        produceItems.add(materialReturning);
+        produceItems.add(workorderreturnlistactivity);
 
-        produceItems.add(workorder);
+        produceItems.add(materialReturning);
 
         produceItems.add(driectStorage);
 
         produceItems.add(completingstore);
 
-        produceItems.add(enchaseprint);
+        produceItems.add(putInStore);
 
-        produceItems.add(workorderreturnlistactivity);
-
-        produceItems.add(productionleaderlist);
+        produceItems.add(finishedStorageActivity);
 
         produceItems.add(inbinninglist);
 
-        produceItems.add(endproductAllot);
+        produceItems.add(enchaseprint);
 
-        produceItems.add(linesend);
+        produceItems.add(endproductAllot);
 
         produceItems.add(pqcCheck);
 
@@ -203,9 +204,6 @@ public class MainLogic {
 
         produceItems.add(fqcRunCard);
 
-//        produceItems.add(processTransfer);
-//
-//        produceItems.add(produceDailyWork);
 
         //初始化库存管理
         ModuleBean storeallotactivity = new ModuleBean(R.string.nocome_allot, R.mipmap.nocome_alllot, ModuleCode.NOCOMESTOREALLOT, "android.intent.action.digiwin.StoreAllotActivity");
@@ -220,10 +218,10 @@ public class MainLogic {
         storageItems.add(printLabelActivity);
         ModuleBean movestoreactivity = new ModuleBean(R.string.movestore, R.mipmap.movestore, ModuleCode.MOVESTORE, "android.intent.action.digiwin.MoveStoreActivity");
         storageItems.add(movestoreactivity);
-        ModuleBean storetranslockactivity = new ModuleBean(R.string.store_trans_lock, R.mipmap.inventory_lock, ModuleCode.STORETRANSLOCK, "android.intent.action.digiwin.StoreTransLockActivity");
-        storageItems.add(storetranslockactivity);
-        ModuleBean storetransunlockactivity = new ModuleBean(R.string.store_trans_unlock, R.mipmap.inventory_deblocking, ModuleCode.STORETRANSUNLOCK, "android.intent.action.digiwin.StoreTransUnlockActivity");
-        storageItems.add(storetransunlockactivity);
+//        ModuleBean storetranslockactivity = new ModuleBean(R.string.store_trans_lock, R.mipmap.inventory_lock, ModuleCode.STORETRANSLOCK, "android.intent.action.digiwin.StoreTransLockActivity");
+//        storageItems.add(storetranslockactivity);
+//        ModuleBean storetransunlockactivity = new ModuleBean(R.string.store_trans_unlock, R.mipmap.inventory_deblocking, ModuleCode.STORETRANSUNLOCK, "android.intent.action.digiwin.StoreTransUnlockActivity");
+//        storageItems.add(storetransunlockactivity);
         ModuleBean productbinning = new ModuleBean(R.string.product_binning, R.drawable.encasement, ModuleCode.PRODUCTBINNING, "android.intent.action.digiwin.ProductBinningActivity");
         storageItems.add(productbinning);
         ModuleBean productoutbox = new ModuleBean(R.string.product_outbox, R.mipmap.outbox, ModuleCode.PRODUCTOUTBOX, "android.intent.action.digiwin.ProductOutBoxActivity");
@@ -276,6 +274,7 @@ public class MainLogic {
         ModuleList.addAll(dailyworkItems);
         ModuleList.addAll(boardItems);
     }
+
     /**
      * 判断权限小模块
      */
@@ -344,36 +343,36 @@ public class MainLogic {
     /**
      * 显示标题栏
      */
-    public void showTitle(List<TotalMode> totalModes,List<String> titles) {
+    public void showTitle(List<TotalMode> totalModes, List<String> titles) {
         try {
             //添加采购管理
-            if(purchaseItems.size()>0 && purchaseItems!=null){
+            if (purchaseItems.size() > 0 && purchaseItems != null) {
                 TotalMode totalMode = new TotalMode(activity.getString(R.string.purchasemanger), purchaseItems);
                 totalModes.add(totalMode);
             }
             //添加生产管理
-            if(produceItems.size()>0 && produceItems!=null){
+            if (produceItems.size() > 0 && produceItems != null) {
                 TotalMode totalMode = new TotalMode(activity.getString(R.string.producemanager), produceItems);
                 totalModes.add(totalMode);
             }
             //添加库存管理
-            if(storageItems.size()>0 && storageItems!=null){
+            if (storageItems.size() > 0 && storageItems != null) {
                 TotalMode totalMode = new TotalMode(activity.getString(R.string.storagemanager), storageItems);
                 totalModes.add(totalMode);
             }
 
             //销售管理
-            if(salesItems.size()>0 && salesItems!=null){
+            if (salesItems.size() > 0 && salesItems != null) {
                 TotalMode totalMode = new TotalMode(activity.getString(R.string.salesmanager), salesItems);
                 totalModes.add(totalMode);
             }
             //报工管理
-            if(dailyworkItems.size()>0 && dailyworkItems!=null){
+            if (dailyworkItems.size() > 0 && dailyworkItems != null) {
                 TotalMode totalMode = new TotalMode(activity.getString(R.string.dailyworkmanager), dailyworkItems);
                 totalModes.add(totalMode);
             }
             //看板管理
-            if(boardItems.size()>0 && boardItems!=null){
+            if (boardItems.size() > 0 && boardItems != null) {
                 TotalMode totalMode = new TotalMode(activity.getString(R.string.boardmanager), boardItems);
                 totalModes.add(totalMode);
             }
@@ -417,11 +416,11 @@ public class MainLogic {
         tv.setText(titles.get(i));
         if (i == tablayout.getSelectedTabPosition()) {
             tv.setTextColor(context.getResources().getColor(R.color.Assist_color));
-            tv.setTextSize(TypedValue.COMPLEX_UNIT_SP,16);
+            tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             iv.setVisibility(View.VISIBLE);
         } else {
             tv.setTextColor(context.getResources().getColor(R.color.tab_item_text));
-            tv.setTextSize(TypedValue.COMPLEX_UNIT_SP,15);
+            tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
             iv.setVisibility(View.INVISIBLE);
         }
         return view;
@@ -445,7 +444,7 @@ public class MainLogic {
         }
     }
 
-    public void initListener(final Context context,final List<View> points,final ViewPager viewPager,TabLayout tablayout){
+    public void initListener(final Context context, final List<View> points, final ViewPager viewPager, TabLayout tablayout) {
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -468,7 +467,7 @@ public class MainLogic {
                 ((TextView) tab.getCustomView().findViewById(R.id.tablayout_tv)).
                         setTextColor(context.getResources().getColor(R.color.Assist_color));
                 ((TextView) tab.getCustomView().findViewById(R.id.tablayout_tv)).
-                        setTextSize(TypedValue.COMPLEX_UNIT_SP,16);
+                        setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
                 ((View) tab.getCustomView().findViewById(R.id.tablayout_im)).setVisibility(View.VISIBLE);
 //                ((ImageView) tab.getCustomView().findViewById(R.id.tablayout_im)).setVisibility(View.VISIBLE);
                 viewPager.setCurrentItem(tab.getPosition());
@@ -479,7 +478,7 @@ public class MainLogic {
                 ((TextView) tab.getCustomView().findViewById(R.id.tablayout_tv))
                         .setTextColor(context.getResources().getColor(R.color.tab_item_text));
                 ((TextView) tab.getCustomView().findViewById(R.id.tablayout_tv)).
-                        setTextSize(TypedValue.COMPLEX_UNIT_SP,15);
+                        setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
                 ((View) tab.getCustomView().findViewById(R.id.tablayout_im)).setVisibility(View.INVISIBLE);
 //                ((ImageView) tab.getCustomView().findViewById(R.id.tablayout_im)).setVisibility(View.INVISIBLE);
             }

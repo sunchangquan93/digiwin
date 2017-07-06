@@ -16,6 +16,10 @@ public interface ModuleCode {
      */
     public final String PURCHASEGOODSSCAN = "A003";
     /**
+     * 采购收货
+     */
+    public final String PURCHASERECEIVE = "A001";
+    /**
      * 收货检验
      */
     public final String PURCHASECHECK = "A004";

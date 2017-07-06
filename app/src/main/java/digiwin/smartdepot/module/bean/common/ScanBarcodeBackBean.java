@@ -82,9 +82,34 @@ public class ScanBarcodeBackBean {
 
     private String scan_sumqty;
     /**
-     * 目前依成品调拨使用--客户编号
+     * 目前依成品调拨使用--客户编号(采购收货--采购单号)
      */
     private String col1;
+
+    /**
+     * 采购收货--采购单项次
+     */
+    private String col2;
+    /**
+     * 供应商
+     */
+    private String col3;
+
+    public String getCol2() {
+        return col2;
+    }
+
+    public void setCol2(String col2) {
+        this.col2 = col2;
+    }
+
+    public String getCol3() {
+        return col3;
+    }
+
+    public void setCol3(String col3) {
+        this.col3 = col3;
+    }
 
     public String getFifo_check() {
         return fifo_check;

@@ -268,9 +268,11 @@ public class AccordingMaterialActivity extends BaseFirstModuldeActivity {
     public void ToDetailAct(final SumShowBean bean){
         HashMap<String,String> map = new HashMap<String,String>();
         map.put(AddressContants.ITEM_NO,bean.getItem_no());
+        showLoadingDialog();
         commonLogic.getDetail(map, new CommonLogic.GetDetailListener() {
             @Override
             public void onSuccess(final List<DetailShowBean> detailShowBeen) {
+                dismissLoadingDialog();
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(CommonDetailActivity.ONESUM,bean);
                 bundle.putSerializable(CommonDetailActivity.DETAIL, (Serializable) detailShowBeen);
@@ -281,7 +283,8 @@ public class AccordingMaterialActivity extends BaseFirstModuldeActivity {
 
             @Override
             public void onFailed(String error) {
-                showToast(error);
+                dismissLoadingDialog();
+                showFailedDialog(error);
             }
         });
     }

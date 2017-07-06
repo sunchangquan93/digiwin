@@ -256,6 +256,7 @@
     <string name="title_completing_store">完工入库</string>
     <string name="work_order_code">工单条码</string>
     <string name="storage_capacity">可入库量</string>
+    <string name="canreceipt_num">可收货量</string>
     <string name="storage_capacity_large">输入数量不可大于可入库量</string>
     <string name="scan_sumqty_larger_than_need_qty">已扫描量大于需求量，请检查</string>
     <string name="can_instorage_number">可入数量</string>
@@ -294,6 +295,8 @@
     <string name="receipt_address">收货地址</string>
     <string name="purchase_goods_scan">采购收货扫描</string>
     <string name="title_purchase_goods_scan">扫码收货</string>
+    <string name="title_purchase_receive">采购收货</string>
+    <string name="purchase_receive_order">采购单号</string>
     <string name="send_goods_num">发货量</string>
 
     <string name="purchase_check">收货检验</string>

@@ -114,6 +114,18 @@ public class SaveBean {
      */
     private String item_barcode_type;
 
+    /**
+     * 项次
+     */
+    private String seq;
+
+    public String getSeq() {
+        return seq;
+    }
+
+    public void setSeq(String seq) {
+        this.seq = seq;
+    }
 
     public String getStorage_spaces_no() {
         return storage_spaces_no;

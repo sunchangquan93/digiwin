@@ -262,7 +262,10 @@ public class DistributeScanActivity extends BaseTitleActivity {
                                 }
                             }
                             barcodeShow = barcodeBackBean.getShow();
-                            if(!StringUtils.isBlank(barcodeBackBean.getBarcode_qty())){
+                             if(StringUtils.isBlank(et_scan_locator.getText().toString().trim())){
+                                et_scan_locator.requestFocus();
+                            }
+                             else if(!StringUtils.isBlank(barcodeBackBean.getBarcode_qty())){
                                 et_input_num.setText(StringUtils.deleteZero(barcodeBackBean.getBarcode_qty()));
                             }
                             barcodeFlag = true;
@@ -272,7 +275,6 @@ public class DistributeScanActivity extends BaseTitleActivity {
                             saveBean.setItem_no(barcodeBackBean.getItem_no());
                             saveBean.setUnit_no(barcodeBackBean.getUnit_no());
                             saveBean.setLot_no(barcodeBackBean.getLot_no());
-                            et_input_num.requestFocus();
                             saveBean.setItem_barcode_type(barcodeBackBean.getItem_barcode_type());
                             if (CommonUtils.isAutoSave(saveBean)){
                                 save();
@@ -315,7 +317,11 @@ public class DistributeScanActivity extends BaseTitleActivity {
 //                            show();
                             saveBean.setStorage_spaces_out_no(locatorBackBean.getStorage_spaces_no());
                             saveBean.setWarehouse_out_no(locatorBackBean.getWarehouse_no());
-                            et_scan_barocde.requestFocus();
+                            if (StringUtils.isBlank(et_scan_barocde.getText().toString())){
+                                et_scan_barocde.requestFocus();
+                            }else {
+                                et_input_num.requestFocus();
+                            }
                             if (CommonUtils.isAutoSave(saveBean)){
                                 save();
                             }
