@@ -14,7 +14,7 @@ import digiwin.library.dialog.OnDialogTwoListener;
 
 
 /**
- * Created by ChangquanSun
+ * Created by qGod
  * 2017/1/24
  */
 

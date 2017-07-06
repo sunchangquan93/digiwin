@@ -52,7 +52,7 @@ public class OkHttpRequestT100Manager implements IRequestManager {
     }
 
     public static OkHttpRequestT100Manager getInstance(Context context) {
-        OkHttpRequestT100Manager.context = context;
+        OkHttpRequestT100Manager.context = context.getApplicationContext();
         return SingletonHolder.INSTANCE;
     }
 

@@ -3,7 +3,6 @@ package digiwin.library.net;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.v4.util.TimeUtils;
 
 import com.franmontiel.persistentcookiejar.ClearableCookieJar;
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
@@ -14,7 +13,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.Serializable;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -65,7 +63,7 @@ public class OkHttpRequestJsonManager implements IRequestManager {
     }
 
     public static OkHttpRequestJsonManager getInstance(Context context) {
-        OkHttpRequestJsonManager.context = context;
+        OkHttpRequestJsonManager.context = context.getApplicationContext();
         return SingletonHolder.INSTANCE;
     }
 
