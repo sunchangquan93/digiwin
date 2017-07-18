@@ -118,11 +118,17 @@ public class ParseXmlResp {
         ParseXmlResp resp = null;
         try
         {
+            int startIndex=payload.indexOf("fjs1:");
+            int endIndex=payload.indexOf("Response");
+            String interfaceName=payload.substring(startIndex+5,endIndex);
+            LogUtils.i(TAG, "截取成功："+interfaceName);
+
             XStream xStream = new XStream(new XppDriver(new XmlFriendlyNameCoder("_-", "_")));
             xStream.alias("SOAP-ENV:Envelope", ParseXmlResp.class);
 
             xStream.aliasField("SOAP-ENV:Body", ParseXmlResp.class, "Body");
-            xStream.aliasField("fjs1:" + respType+"Response", Body.class, "Fjs");
+//            xStream.aliasField("fjs1:" + respType+"Response", Body.class, "Fjs");
+            xStream.aliasField("fjs1:" + interfaceName+"Response", Body.class, "Fjs");
             xStream.aliasField("fjs1:response", Fjs.class, "FjsResponse");
             xStream.addImplicitCollection(Document.class, "RecordSet");
             xStream.addImplicitCollection(Parameter.class, "Record");

@@ -2,9 +2,11 @@ package digiwin.library.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.NumberPicker;
+import android.widget.TextView;
 
 import digiwin.library.R;
 import digiwin.library.dialog.CustomDialog;
@@ -73,6 +75,7 @@ public class AlertDialogUtils {
                                 dialog.dismiss();
                             }
                         }).cancelTouchout(false);
+                ((TextView) builder.getView(R.id.tv_commit_success_content)).setMovementMethod(ScrollingMovementMethod.getInstance());
                 if (content instanceof String) {
                     dialog = builder.setViewText(R.id.tv_commit_success_content, (String) content)
                             .build();
@@ -111,7 +114,7 @@ public class AlertDialogUtils {
                                 dialog.dismiss();
                             }
                         }).cancelTouchout(false);
-
+                ((TextView) builder.getView(R.id.tv_commit_success_content)).setMovementMethod(ScrollingMovementMethod.getInstance());
                 if (content instanceof String) {
                     dialog = builder.setViewText(R.id.tv_commit_success_content, (String) content)
                             .build();
@@ -149,7 +152,7 @@ public class AlertDialogUtils {
                                 dialog.dismiss();
                             }
                         }).cancelTouchout(false);
-
+                ((TextView) builder.getView(R.id.tv_commit_success_content)).setMovementMethod(ScrollingMovementMethod.getInstance());
                 if (content instanceof String) {
                     dialog = builder.setViewText(R.id.tv_commit_success_content, (String) content)
                             .build();
@@ -188,6 +191,7 @@ public class AlertDialogUtils {
                                 dialog.dismiss();
                             }
                         }).cancelTouchout(false);
+                ((TextView) builder.getView(R.id.tv_commit_success_content)).setMovementMethod(ScrollingMovementMethod.getInstance());
                 if (content instanceof String) {
                     dialog = builder.setViewText(R.id.tv_commit_success_content, (String) content)
                             .build();
@@ -436,7 +440,7 @@ public class AlertDialogUtils {
                                 dialog.dismiss();
                             }
                         }).cancelTouchout(false);
-
+                ((TextView) builder.getView(R.id.tv_commit_success_content)).setMovementMethod(ScrollingMovementMethod.getInstance());
                 if (content instanceof String) {
                     dialog = builder.setViewText(R.id.tv_commit_success_content, (String) content)
                             .build();
@@ -480,7 +484,7 @@ public class AlertDialogUtils {
                                 dialog.dismiss();
                             }
                         }).cancelTouchout(false);
-
+                ((TextView) builder.getView(R.id.tv_commit_success_content)).setMovementMethod(ScrollingMovementMethod.getInstance());
                 if (content instanceof String) {
                     dialog = builder.setViewText(R.id.tv_commit_success_content, (String) content)
                             .build();

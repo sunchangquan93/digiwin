@@ -102,6 +102,19 @@ public class OkHttpRequestManager implements IRequestManager {
 
     }
 
+    private String stringMsg = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\"><SOAP-ENV:Body><fjs1:app.network.errorResponse xmlns:fjs1=\"http://www.dsc.com.tw/tiptop/TIPTOPServiceGateWay\"><fjs1:response><Response>\n" +
+            "                                                   <Execution>\n" +
+            "                                                     <Status code=\"-1\" sqlcode=\"0\" description=\"Network connection is failed\"/>\n" +
+            "                                                   </Execution>\n" +
+            "                                                   <ResponseContent>\n" +
+            "                                                     <Parameter>\n" +
+            "                                                       <Record>\n" +
+            "                                                         <Field name=\"doc_no\" value=\"\"/>\n" +
+            "                                                       </Record>\n" +
+            "                                                     </Parameter>\n" +
+            "                                                     <Document/>\n" +
+            "                                                   </ResponseContent>\n" +
+            "                                                 </Response></fjs1:response></fjs1:app.network.errorResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>";
 
     private void addCallBack(final Context context, final IRequestCallBack requestCallback, final Request request) {
         try {
@@ -111,7 +124,8 @@ public class OkHttpRequestManager implements IRequestManager {
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            requestCallback.onFailure(context, new Exception("NewWork connection fail"));
+//                            requestCallback.onFailure(context, new Exception("NewWork connection is failed"));
+                            requestCallback.onResponse(stringMsg);
                         }
                     });
                 }
@@ -122,10 +136,6 @@ public class OkHttpRequestManager implements IRequestManager {
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            if (string.equals("") || string == null) {
-                                requestCallback.onFailure(context, new NullPointerException("Response data is null"));
-                                return;
-                            }
                             requestCallback.onResponse(string);
                         }
                     });
@@ -145,7 +155,7 @@ public class OkHttpRequestManager implements IRequestManager {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        callBack.onFailure(context, new Exception("NewWork connection fail"));
+                        callBack.onFailure(context, new Exception("Network connection is failed"));
                     }
                 });
             }
