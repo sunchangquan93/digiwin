@@ -13,14 +13,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingBottom="@dimen/layout_20dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/layout_20dp">
 
             <LinearLayout
                 android:id="@+id/ll_zx_input"
-                android:layout_below="@+id/ll_distribute_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_distribute_input"
                 android:layout_marginBottom="@dimen/layout_1dp"
                 android:layout_marginLeft="@dimen/layout_10dp"
                 android:layout_marginRight="@dimen/layout_10dp"
@@ -28,6 +28,7 @@
                 android:background="@drawable/allscanedit_bg"
                 android:orientation="vertical"
                 android:padding="@dimen/layout_5dp">
+
                 <LinearLayout
                     android:id="@+id/ll_scan_locator"
                     style="@style/itemstyle"
@@ -36,11 +37,11 @@
 
                     <TextView
                         android:id="@+id/tv_locator_string"
+                        style="@style/app_text_inwhite"
                         android:layout_width="@dimen/layout_50dp"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:text="@string/locator"
-                        style="@style/app_text_inwhite"/>
+                        android:text="@string/locator" />
 
                     <EditText
                         android:id="@+id/et_scan_locator"
@@ -53,15 +54,16 @@
                         android:textColor="@color/black_32"
                         android:textCursorDrawable="@drawable/et_cursor_yellow"
                         android:textSize="@dimen/textSize_14sp" />
+
                     <CheckBox
                         android:id="@+id/cb_locatorlock"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/layout_20dp"
-                        android:button="@drawable/lock_checkbox"
-                        />
+                        android:button="@drawable/lock_checkbox" />
                 </LinearLayout>
 
                 <View style="@style/fg_line_style" />
+
                 <LinearLayout
                     android:id="@+id/ll_scan_barcode"
                     style="@style/itemstyle"
@@ -70,11 +72,11 @@
 
                     <TextView
                         android:id="@+id/tv_barcode"
+                        style="@style/app_text_inwhite"
                         android:layout_width="@dimen/layout_50dp"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:text="@string/barcode_no"
-                        style="@style/app_text_inwhite"/>
+                        android:text="@string/barcode_no" />
 
                     <EditText
                         android:id="@+id/et_scan_barocde"
@@ -100,11 +102,11 @@
 
                     <TextView
                         android:id="@+id/tv_number"
+                        style="@style/app_text_inwhite"
                         android:layout_width="@dimen/layout_50dp"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:text="@string/num"
-                        style="@style/app_text_inwhite"/>
+                        android:text="@string/num" />
 
                     <EditText
                         android:id="@+id/et_input_num"
@@ -127,28 +129,29 @@
                     style="@style/itemstyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <TextView
+                        style="@style/app_text_inwhite"
                         android:layout_width="@dimen/layout_50dp"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
-                        style="@style/app_text_inwhite"
-                        android:text="@string/item_name"
-                        />
+                        android:text="@string/item_name" />
 
                     <TextView
                         android:id="@+id/tv_product_name"
+                        style="@style/ser_text_inwhite"
                         android:layout_width="@dimen/layout_0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/layout_10dp"
-                        android:layout_weight="2"
-                        style="@style/ser_text_inwhite" />
+                        android:layout_weight="2" />
                 </LinearLayout>
 
             </LinearLayout>
 
-            <include  layout="@layout/ryitem_fifo_common" />
+            <include layout="@layout/ryitem_fifo_common" />
         </LinearLayout>
     </ScrollView>
-    <include layout="@layout/inclu_save"/>
+
+    <include layout="@layout/inclu_save" />
 
 </RelativeLayout>

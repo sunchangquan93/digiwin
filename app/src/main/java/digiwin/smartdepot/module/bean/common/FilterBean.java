@@ -6,26 +6,13 @@ package digiwin.smartdepot.module.bean.common;
  */
 public class FilterBean {
     /**
+     * 每页笔数
+     */
+    private String pagesize;
+    /**
      *  工单号  16接口
      */
     private String wo_no ;
-
-    public String getWo_no() {
-        return wo_no;
-    }
-
-    public void setWo_no(String wo_no) {
-        this.wo_no = wo_no;
-    }
-
-    public String getWarehouse_no() {
-        return warehouse_no;
-    }
-
-    public void setWarehouse_no(String warehouse_no) {
-        this.warehouse_no = warehouse_no;
-    }
-
     /**
      *  发出仓   16接口
      */
@@ -40,6 +27,78 @@ public class FilterBean {
      *  拨出仓
      */
     private String warehouse_out_no ;
+
+    /**
+     *  品名
+     */
+    private String item_name;
+    /**
+     * 客户编号
+     */
+    /**
+     * 客户
+     */
+    private String customer_no;
+    /**
+     * 下阶料号
+     */
+    private String low_order_item_no;
+    /**
+     * 批号
+     */
+    private String lot_no;
+    /**
+     * 库位
+     */
+    private String warehouse_storage;
+
+
+    /**
+     *  接收仓
+     *  拨入仓
+     */
+    private String warehouse_in_no;
+    /**
+     *  物料条码
+     */
+    private String barcode_no ;
+    /**
+     *  料号
+     */
+
+    private String item_no ;
+    /**
+     * 部门编码
+     */
+    private String department_no ;
+    /**
+     * 班组编码
+     */
+    private String workgroup_no ;
+    /**
+     *  人员
+     */
+    private String employee_no ;
+    /**
+     *  计划日起
+     */
+    private String date_begin ;
+    /**
+     *  计划日止
+     */
+    private String date_end;
+    /**
+     *  供应商编号
+     */
+    private String supplier_no ;
+
+    public String getPagesize() {
+        return pagesize;
+    }
+
+    public void setPagesize(String pagesize) {
+        this.pagesize = pagesize;
+    }
 
     public String getDoc_no() {
         return doc_no;
@@ -121,16 +180,6 @@ public class FilterBean {
         this.supplier_no = supplier_no;
     }
 
-    /**
-     *  接收仓
-     *  拨入仓
-     */
-    private String warehouse_in_no;
-    /**
-     *  物料条码
-     */
-    private String barcode_no ;
-
     public String getItem_no() {
         return item_no;
     }
@@ -138,37 +187,6 @@ public class FilterBean {
     public void setItem_no(String item_no) {
         this.item_no = item_no;
     }
-
-    /**
-     *  料号
-     */
-
-    private String item_no ;
-    /**
-     * 部门编码
-     */
-    private String department_no ;
-    /**
-     * 班组编码
-     */
-    private String workgroup_no ;
-    /**
-     *  人员
-     */
-    private String employee_no ;
-    /**
-     *  计划日起
-     */
-    private String date_begin ;
-    /**
-     *  计划日止
-     */
-    private String date_end;
-    /**
-     *  供应商编号
-     */
-    private String supplier_no ;
-
     public String getItem_name() {
         return item_name;
     }
@@ -176,22 +194,6 @@ public class FilterBean {
     public void setItem_name(String item_name) {
         this.item_name = item_name;
     }
-
-    /**
-     *  品名
-     */
-    private String item_name;
-    /**
-     * 客户编号
-     */
-    /**
-     * 客户
-     */
-    private String customer_no;
-    /**
-     * 下阶料号
-     */
-    private String low_order_item_no;
 
     public String getCustomer_no() {
         return customer_no;
@@ -208,10 +210,6 @@ public class FilterBean {
     public void setLow_order_item_no(String low_order_item_no) {
         this.low_order_item_no = low_order_item_no;
     }
-    /**
-     * 批号
-     */
-    private String lot_no;
 
     public String getLot_no() {
         return lot_no;
@@ -220,10 +218,6 @@ public class FilterBean {
     public void setLot_no(String lot_no) {
         this.lot_no = lot_no;
     }
-    /**
-     * 库位
-     */
-    private String warehouse_storage;
 
     public String getWarehouse_storage() {
         return warehouse_storage;
@@ -231,5 +225,20 @@ public class FilterBean {
 
     public void setWarehouse_storage(String warehouse_storage) {
         this.warehouse_storage = warehouse_storage;
+    }
+    public String getWo_no() {
+        return wo_no;
+    }
+
+    public void setWo_no(String wo_no) {
+        this.wo_no = wo_no;
+    }
+
+    public String getWarehouse_no() {
+        return warehouse_no;
+    }
+
+    public void setWarehouse_no(String warehouse_no) {
+        this.warehouse_no = warehouse_no;
     }
 }

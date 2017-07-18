@@ -167,6 +167,7 @@ public class EndProductAllotActivity extends BaseFirstModuldeActivity {
     void search_sure(){
         Map<String, String> map = new HashMap<>();
         map.put(AddressContants.FLAG, ExitMode.EXITD.getName());
+        showLoadingDialog();
         commonLogic.exit(map, new CommonLogic.ExitListener() {
             @Override
             public void onSuccess(String msg) {
@@ -175,6 +176,7 @@ public class EndProductAllotActivity extends BaseFirstModuldeActivity {
 
             @Override
             public void onFailed(String error) {
+                dismissLoadingDialog();
                 showFailedDialog(error);
             }
         });
@@ -254,7 +256,6 @@ public class EndProductAllotActivity extends BaseFirstModuldeActivity {
      * 更新
      */
     private void onUpdate() {
-        showLoadingDialog();
         //先清空数据
         listSumBeen.clear();
         adapter = new EndProductAllotSumAdapter(this, listSumBeen);

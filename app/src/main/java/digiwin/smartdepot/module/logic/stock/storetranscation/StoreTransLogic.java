@@ -43,7 +43,6 @@ public class StoreTransLogic {
 
     }
 
-
     public static StoreTransLogic getInstance(Context context, String module, String timestamp) {
 
         return logic = new StoreTransLogic(context, module, timestamp);

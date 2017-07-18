@@ -2,18 +2,17 @@ package digiwin.smartdepot.main;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import digiwin.smartdepot.R;
+import digiwin.smartdepot.core.weight.CenterTextView;
 import digiwin.smartdepot.main.bean.ModuleBean;
 
 
@@ -78,7 +77,7 @@ public class CustomRecyclerAdapter extends RecyclerView.Adapter<CustomRecyclerAd
      */
     class OCViewHolder extends RecyclerView.ViewHolder{
         @BindView(R.id.tv_gridview_item)
-        public TextView tvTitle;
+        public CenterTextView tvTitle;
         @BindView(R.id.iv_gridview_item)
         public ImageView ivImage;
 

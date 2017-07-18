@@ -47,7 +47,7 @@ public class BaseApplication extends LitePalApplication {
     public static final String TARGET_ID = "targetId";
 
     @Override
-    protected void attachBaseContext(Context base){
+    protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         //解决Android遇到的65536问题
         MultiDex.install(this);
@@ -56,7 +56,15 @@ public class BaseApplication extends LitePalApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-
+        //多进程条件下，会执行多次application
+//        ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+//        List<ActivityManager.RunningAppProcessInfo> runningApps = am.getRunningAppProcesses();
+//        if (runningApps != null && !runningApps.isEmpty()) {
+//            for (ActivityManager.RunningAppProcessInfo procInfo : runningApps) {
+//                if (procInfo.processName.equals("digiwin.smartdepot")) {
+//                }
+//            }
+//        }
         //暂时不用（封装好的okhttp）
 //        initOkHttp();
         instance = this;
@@ -74,7 +82,7 @@ public class BaseApplication extends LitePalApplication {
         // 设置极光IM的Notification的模式
         JMessageClient.setNotificationMode(JMessageClient.NOTI_MODE_DEFAULT);
         // 注册极光IM的Notification点击的接收器
-         new NotificationClickEventReceiver(getApplicationContext());
+        new NotificationClickEventReceiver(getApplicationContext());
 
         //安装讯飞语音组件
         SpeechUtility.createUtility(instance, SpeechConstant.APPID + "=5868adcb");
@@ -82,6 +90,7 @@ public class BaseApplication extends LitePalApplication {
         //全局异常捕捉
 //        initUnExceptionCatch();
     }
+
     private void getActivityContext() {
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
             @Override
@@ -96,7 +105,7 @@ public class BaseApplication extends LitePalApplication {
 
             @Override
             public void onActivityResumed(Activity activity) {
-                context=activity;
+                context = activity;
             }
 
             @Override
@@ -129,7 +138,7 @@ public class BaseApplication extends LitePalApplication {
                     @Override
                     public void run() {
                         try {
-                            LogUtils.e("AndroidRuntime", "--->CockroachException:" + thread + "---"+ throwable);
+                            LogUtils.e("AndroidRuntime", "--->CockroachException:" + thread + "---" + throwable);
                         } catch (Throwable e) {
 
                         }
@@ -138,6 +147,7 @@ public class BaseApplication extends LitePalApplication {
             }
         });
     }
+
     public static BaseApplication getInstance() {
         return instance;
     }

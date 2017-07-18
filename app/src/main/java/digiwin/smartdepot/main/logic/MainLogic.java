@@ -92,13 +92,15 @@ public class MainLogic {
 
         //初始化采购管理
 
-        ModuleBean purchaseInStore = new ModuleBean(R.string.purchase_in_store, R.mipmap.lingliaoguozahng, ModuleCode.PURCHASEINSTORE, "android.intent.action.digiwin.PurchaseInStoreActivity");
+        ModuleBean purchaseInStore = new ModuleBean(R.string.purchase_in_store, R.mipmap.purchaseinstore, ModuleCode.PURCHASEINSTORE, "android.intent.action.digiwin.PurchaseInStoreActivity");
 
         ModuleBean materialreceipt = new ModuleBean(R.string.title_material_receipt, R.mipmap.material_receipt, ModuleCode.MATERIALRECEIPTCODE, "android.intent.action.digiwin.MaterialReceiptActivity");
 
         ModuleBean purchaseGoodsScan = new ModuleBean(R.string.title_purchase_goods_scan, R.mipmap.scan_inapection, ModuleCode.PURCHASEGOODSSCAN, "android.intent.action.digiwin.PurchaseGoodsScanActivity");
 
-        ModuleBean purchaseReceive = new ModuleBean(R.string.title_purchase_receive, R.mipmap.purchasereceive, ModuleCode.PURCHASERECEIVE, "android.intent.action.digiwin.PurchaseReceiveActivity");
+        ModuleBean purchaseReceive = new ModuleBean(R.string.title_purchase_receive, R.drawable.yiyuanliaoshouhuo, ModuleCode.PURCHASERECEIVE, "android.intent.action.digiwin.PurchaseReceiveActivity");
+
+        ModuleBean materialReceiving = new ModuleBean(R.string.title_material_receiving, R.mipmap.purchasereceive, ModuleCode.MATERIALRECEIVING, "android.intent.action.digiwin.MaterialReceivingActivity");
 
         ModuleBean purchaseCheck = new ModuleBean(R.string.purchase_check, R.mipmap.inspection_tests, ModuleCode.PURCHASECHECK, "android.intent.action.digiwin.PurchaseCheckActivity");
 
@@ -106,15 +108,14 @@ public class MainLogic {
 
         ModuleBean quickstorage = new ModuleBean(R.string.title_quickstorage, R.mipmap.quickly_storage, ModuleCode.QUICKSTORAGE, "android.intent.action.digiwin.QuickStorageListActivity");
 
-
         purchaseItems.add(materialreceipt);
         purchaseItems.add(quickstorage);
         purchaseItems.add(purchaseCheck);
         purchaseItems.add(purchaseGoodsScan);
-        purchaseItems.add(purchaseReceive);
         purchaseItems.add(purchaseInStore);
+        purchaseItems.add(purchaseReceive);
+        purchaseItems.add(materialReceiving);
         purchaseItems.add(storeReturnMaterial);
-
 
         //初始化生产管理
         ModuleBean finishedStorageActivity = new ModuleBean(R.string.finishedstorage, R.mipmap.finishedstorage, ModuleCode.FINISHEDSTORAGE, "android.intent.action.digiwin.FinishedStorageActivity");
@@ -212,6 +213,12 @@ public class MainLogic {
         storageItems.add(miscellaneousoutactivity);
         ModuleBean miscellaneousainctivity = new ModuleBean(R.string.miscellaneous_issues_in, R.mipmap.shouliao, ModuleCode.MISCELLANEOUSISSUESIN, "android.intent.action.digiwin.MiscellaneousissuesInActivity");
         storageItems.add(miscellaneousainctivity);
+
+        ModuleBean miscellaneousinactivity = new ModuleBean(R.string.miscellaneous_active_in, R.mipmap.youyuanshouliao, ModuleCode.MISCELLANEOUSISSUESIN, "android.intent.action.digiwin.MiscellaneousActiveInListActivity");
+        storageItems.add(miscellaneousinactivity);
+
+        ModuleBean miscellaneousaactiveoutactivity = new ModuleBean(R.string.miscellaneous_active_out, R.mipmap.youyuanfaliao, ModuleCode.MISCELLANEOUSACTIVE_IN, "android.intent.action.digiwin.MiscellaneousActiveOutListActivity");
+        storageItems.add(miscellaneousaactiveoutactivity);
         ModuleBean storeQueryActivity = new ModuleBean(R.string.store_query, R.mipmap.store_query, ModuleCode.STOREQUERY, "android.intent.action.digiwin.StoreQueryActivity");
         storageItems.add(storeQueryActivity);
         ModuleBean printLabelActivity = new ModuleBean(R.string.print_label, R.mipmap.bar_code, ModuleCode.PRINTLABEL, "android.intent.action.digiwin.PrintLabelActivity");

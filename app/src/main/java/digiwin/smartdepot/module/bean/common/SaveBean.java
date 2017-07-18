@@ -8,6 +8,10 @@ package digiwin.smartdepot.module.bean.common;
  */
 public class SaveBean {
     /**
+     * 供应商编号
+     */
+    private String supplier_no;
+    /**
      * 物料条码
      */
     private String barcode_no;
@@ -118,6 +122,14 @@ public class SaveBean {
      * 项次
      */
     private String seq;
+
+    public String getSupplier_no() {
+        return supplier_no;
+    }
+
+    public void setSupplier_no(String supplier_no) {
+        this.supplier_no = supplier_no;
+    }
 
     public String getSeq() {
         return seq;

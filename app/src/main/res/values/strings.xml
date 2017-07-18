@@ -210,6 +210,7 @@
     <string name="in_storage_number">入库量</string>
     <string name="match_number">匹配量</string>
     <string name="material_follow_order">原料跟踪单号</string>
+    <string name="material_order">原料条码</string>
 
     <string name="title_material_receipt">快速收货</string>
     <string name="delivery_note">送货单</string>
@@ -222,6 +223,8 @@
 
     <string name="title_work_order">工单发料</string>
     <string name="please_scan_job_number">请扫描工单号</string>
+    <string name="please_scan_material_number">请扫描原始条码</string>
+    <string name="please_scan_supplier">请扫描供应商</string>
     <string name="work_order_scan">依工单发料扫描</string>
     <string name="purchasemanger">采购管理</string>
     <string name="producemanager">生产管理</string>
@@ -242,6 +245,8 @@
 
     <string name="general_number">出通单号</string>
     <string name="saleoutlet">通知出货</string>
+    <string name="miscellaneous_in_no">杂收单号</string>
+    <string name="miscellaneous_out_no">杂发单号</string>
 
 
     <string name="in_store_order">入库单号</string>
@@ -254,15 +259,19 @@
     <string name="item_lot_no_date">批次日期</string>
 
     <string name="title_completing_store">完工入库</string>
+    <string name="title_material_receiving">依原料收货</string>
     <string name="work_order_code">工单条码</string>
     <string name="storage_capacity">可入库量</string>
     <string name="canreceipt_num">可收货量</string>
     <string name="storage_capacity_large">输入数量不可大于可入库量</string>
+    <string name="storage_biger_zero">输入数量不可小于等于0</string>
     <string name="scan_sumqty_larger_than_need_qty">已扫描量大于需求量，请检查</string>
     <string name="can_instorage_number">可入数量</string>
 
     <string name="miscellaneous_issues_out">杂项发料</string>
     <string name="miscellaneous_issues_in">杂项收料</string>
+    <string name="miscellaneous_active_out">有源杂项发料</string>
+    <string name="miscellaneous_active_in">有源杂项收料</string>
     <string name="scan_reason_code">请扫描理由码</string>
     <string name="scan_apply_branch">请扫描申请部门</string>
     <string name="send_material_num">发料量</string>

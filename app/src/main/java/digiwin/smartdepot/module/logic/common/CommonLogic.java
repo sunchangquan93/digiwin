@@ -34,6 +34,7 @@ import digiwin.smartdepot.module.bean.common.ScanReasonCodeBackBean;
 import digiwin.smartdepot.module.bean.common.SumShowBean;
 import digiwin.smartdepot.module.bean.common.UnCompleteBean;
 import digiwin.smartdepot.module.bean.produce.InBinningBean;
+import digiwin.smartdepot.module.bean.purchase.ScanSupplierBean;
 import digiwin.smartdepot.module.bean.stock.ProductBinningBean;
 
 /**
@@ -85,6 +86,7 @@ public class CommonLogic {
             ModuleCode.DIRECTSTORAGE,ModuleCode.COMPLETINGSTORE,ModuleCode.PUTINSTORE,
             ModuleCode.MATERIALRETURNING,ModuleCode.FINISHEDSTORAGE,ModuleCode.TRANSFERS_TO_REVIEW,
             ModuleCode.POSTALLOCATE,ModuleCode.MISCELLANEOUSISSUESIN,ModuleCode.NOCOMESTOREALLOT,
+            ModuleCode.MISCELLANEOUSACTIVE_IN
             };
 
 
@@ -103,6 +105,7 @@ public class CommonLogic {
                     OkhttpRequest.getInstance(mContext).post(xml, new IRequestCallbackImp() {
                         @Override
                         public void onResponse(String string) {
+                            LogUtils.e("sunchangquan","-----"+string);
                             ParseXmlResp xmlResp = ParseXmlResp.fromXml(ReqTypeName.BARCODE, string);
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != xmlResp) {
@@ -158,7 +161,10 @@ public class CommonLogic {
                                     boolean store=false;
                                     if (locatorBackBeen.size() > 0) {
                                         for(String s:inStores ){
-                                            if(s.equals(mModule))store=true;
+                                            if(s.equals(mModule)){
+                                                store=true;
+                                                break;
+                                            }
                                         }
                                         if (!store&&!locatorBackBeen.get(0).getWarehouse_no().equals(LoginLogic.getWare())) {
                                             error = mContext.getString(R.string.ware_error);
@@ -166,6 +172,51 @@ public class CommonLogic {
                                             listener.onSuccess(locatorBackBeen.get(0));
                                             return;
                                         }
+                                    } else {
+                                        error = mContext.getString(R.string.data_null);
+                                    }
+                                } else {
+                                    error = xmlResp.getDescription();
+                                }
+                            }
+                            listener.onFailed(error);
+                        }
+                    });
+                } catch (Exception e) {
+                    listener.onFailed(mContext.getString(R.string.unknow_error));
+                    LogUtils.e(TAG, "scanLocator--->" + e);
+                }
+            }
+        }, null);
+    }
+    /**
+     * 扫描供应商
+     */
+    public interface ScanSupplierListener {
+        public void onSuccess(ScanSupplierBean supplierBean);
+
+        public void onFailed(String error);
+    }
+    /**
+     * 扫描供应商
+     */
+    public void scanSupplier(final Map<String, String> map, final ScanSupplierListener listener) {
+        ThreadPoolManager.getInstance().executeTask(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String xml = CreateParaXmlReqIm.getInstance(map, mModule, ReqTypeName.SUPPLIERNAME, mTimestamp).toXml();
+                    OkhttpRequest.getInstance(mContext).post(xml, new IRequestCallbackImp() {
+                        @Override
+                        public void onResponse(String string) {
+                            ParseXmlResp xmlResp = ParseXmlResp.fromXml(ReqTypeName.SUPPLIERNAME, string);
+                            String error = mContext.getString(R.string.unknow_error);
+                            if (null != xmlResp) {
+                                if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
+                                    List<ScanSupplierBean> supplierBeans = xmlResp.getMasterDatas(ScanSupplierBean.class);
+                                    if (supplierBeans.size() > 0) {
+                                            listener.onSuccess(supplierBeans.get(0));
+                                            return;
                                     } else {
                                         error = mContext.getString(R.string.data_null);
                                     }
@@ -298,6 +349,38 @@ public class CommonLogic {
                         @Override
                         public void onResponse(String string) {
                             ParseXmlResp xmlResp = ParseXmlResp.fromXml(ReqTypeName.COMMIT, string);
+                            String error = mContext.getString(R.string.unknow_error);
+                            if (null != xmlResp) {
+                                if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
+                                    listener.onSuccess(xmlResp.getFieldString());
+                                    return;
+                                } else {
+                                    error = xmlResp.getDescription();
+                                }
+                            }
+                            listener.onFailed(error);
+                        }
+                    });
+                } catch (Exception e) {
+                    listener.onFailed(mContext.getString(R.string.unknow_error));
+                    LogUtils.e(TAG, "getSum--->" + e);
+                }
+            }
+        }, null);
+    }
+    /**
+     * 依原料收货提交
+     */
+    public void materialReceivingCommit(final Map<String, String> map, final CommitListener listener) {
+        ThreadPoolManager.getInstance().executeTask(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    final String xml = CreateParaXmlReqIm.getInstance(map, mModule, ReqTypeName.MATERIALRECEIVINGCOMMIT, mTimestamp).toXml();
+                    OkhttpRequest.getInstance(mContext).post(xml, new IRequestCallbackImp() {
+                        @Override
+                        public void onResponse(String string) {
+                            ParseXmlResp xmlResp = ParseXmlResp.fromXml(ReqTypeName.MATERIALRECEIVINGCOMMIT, string);
                             String error = mContext.getString(R.string.unknow_error);
                             if (null != xmlResp) {
                                 if (ReqTypeName.SUCCCESSCODE.equals(xmlResp.getCode())) {
@@ -765,7 +848,7 @@ public class CommonLogic {
     }
 
     /**
-     * 领料过账 获取FIFO
+     * 领料过账 获取FIFO(根据单号)
      */
     public void postMaterialFIFO(final Map<String, String> map, final PostMaterialFIFOListener listener) {
         ThreadPoolManager.getInstance().executeTask(new Runnable() {

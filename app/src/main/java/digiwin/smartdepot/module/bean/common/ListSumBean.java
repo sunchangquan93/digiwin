@@ -242,6 +242,18 @@ public class ListSumBean implements Serializable {
      * 采购项次
      */
     private String purchase_seq;
+    /**
+     * 需求量
+     */
+    private String apply_qty;
+
+    public String getApply_qty() {
+        return apply_qty;
+    }
+
+    public void setApply_qty(String apply_qty) {
+        this.apply_qty = apply_qty;
+    }
 
     public String getPurchase_seq() {
         return purchase_seq;

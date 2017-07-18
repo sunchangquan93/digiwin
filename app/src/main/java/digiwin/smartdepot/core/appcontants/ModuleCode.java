@@ -41,6 +41,10 @@ public interface ModuleCode {
      */
     public final String STORERETURNMATERIAL="A008";
     /**
+     * 依原料收货
+     */
+    public final String MATERIALRECEIVING="A009";
+    /**
      * pqc 检验
      */
     public final String PQCCHECK="A060";
@@ -190,6 +194,14 @@ public interface ModuleCode {
      * 产品出箱
      */
     public final String PRODUCTOUTBOX="C017";
+    /**
+     * 有源杂收
+     */
+    public final String MISCELLANEOUSACTIVE_IN="C019";
+    /**
+     * 有源杂发
+     */
+    public final String MISCELLANEOUSACTIVE_OUT="C020";
     /**
      * 通知出货
      */

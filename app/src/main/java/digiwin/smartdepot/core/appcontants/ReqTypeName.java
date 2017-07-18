@@ -44,6 +44,10 @@ public interface ReqTypeName {
      */
     static final String STORAGE = "app.storage.spaces.get";
     /**
+     * 解析供应商编号
+     */
+    static final String SUPPLIERNAME = "app.get.supplier.name";
+    /**
      * 保存
      */
     static final String SCANINFOSAVE = "app.scaninfo.keep";
@@ -59,6 +63,10 @@ public interface ReqTypeName {
      * 提交
      */
     static final String COMMIT = "app.receipt.submit";
+    /**
+     * 依原料收货提交
+     */
+    static final String MATERIALRECEIVINGCOMMIT = "app.row.material.submit";
     /**
      * 获取明细
      */

@@ -57,16 +57,22 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".main.activity.MainActivity"></activity>
+        <activity android:name=".main.activity.MainActivity" />
         <activity
             android:name=".login.activity.WelcomeGuideActivity"
-            android:theme="@style/SplashTheme">
+            android:theme="@style/SplashTheme"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".login.activity.LoginActivity"
+            android:process=":login"
+            android:theme="@style/AppThemeTWO"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity android:name=".main.activity.UserInfoActivity" />
         <activity android:name=".main.activity.SettingActivity" />
         <activity
@@ -75,7 +81,7 @@
         <activity
             android:name=".module.activity.produce.finishstorage.FinishedStorageActivity"
             android:configChanges="keyboardHidden|screenSize"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.digiwin.FinishedStorageActivity" />
 
@@ -88,7 +94,7 @@
         <activity
             android:name=".module.activity.produce.distribute.DistributeActivity"
             android:configChanges="keyboardHidden|screenSize"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.digiwin.DistributeActivity" />
 
@@ -98,18 +104,17 @@
         <activity
             android:name=".module.activity.produce.distribute.DistributeScanActivity"
             android:configChanges="keyboardHidden|screenSize"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
             android:name=".module.activity.common.NoComeUnComActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
+            />
         <activity
             android:name=".module.activity.common.CommonTwoCommitActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
+           />
         <activity
-            android:name=".login.activity.LoginActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
-
-        <activity android:name=".module.activity.produce.transtersreview.TransfersToReviewActivity"
+            android:name=".module.activity.produce.transtersreview.TransfersToReviewActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.digiwin.TransfersToReviewActivity" />
@@ -117,12 +122,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".module.activity.produce.transtersreview.TransfersToReviewComActivity"
-            />
+        <activity android:name=".module.activity.produce.transtersreview.TransfersToReviewComActivity" />
 
         <!-- 退料过账 -->
-        <activity android:name=".module.activity.produce.materialreturn.MaterialReturnListActivity"
+        <activity
+            android:name=".module.activity.produce.materialreturn.MaterialReturnListActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.digiwin.MaterialReturnListActivity" />
@@ -130,10 +134,12 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".module.activity.produce.materialreturn.MaterialReturnActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+        <activity
+            android:name=".module.activity.produce.materialreturn.MaterialReturnActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <!-- 退料过账 -->
-        <activity android:name=".module.activity.stock.storecheck.StockCheckListActivity"
+        <activity
+            android:name=".module.activity.stock.storecheck.StockCheckListActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.digiwin.StockCheckListActivity" />
@@ -141,10 +147,12 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".module.activity.stock.storecheck.StockCheckActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+        <activity
+            android:name=".module.activity.stock.storecheck.StockCheckActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <!--直接入库-->
-        <activity android:name=".module.activity.produce.directstorage.DirectStorageActivity"
+        <activity
+            android:name=".module.activity.produce.directstorage.DirectStorageActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.digiwin.DirectStorageActivity" />
@@ -154,7 +162,8 @@
         </activity>
 
         <!-- 依成品发料汇总 -->
-        <activity android:name=".module.activity.produce.accordingmaterial.AccordingMaterialActivity"
+        <activity
+            android:name=".module.activity.produce.accordingmaterial.AccordingMaterialActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.digiwin.AccordingMaterialActivity" />
@@ -164,29 +173,30 @@
         </activity>
 
         <!-- 依成品发料扫描 -->
-        <activity android:name = ".module.activity.produce.accordingmaterial.AccordingMaterialScanActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+        <activity
+            android:name=".module.activity.produce.accordingmaterial.AccordingMaterialScanActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
 
         <!-- 采购收获 快速 -->
         <activity
             android:name=".module.activity.purchase.materialreceipt.MaterialReceiptActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
-            >
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.digiwin.MaterialReceiptActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".module.activity.board.RcttBoardActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            >
+        <activity
+            android:name=".module.activity.board.RcttBoardActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.digiwin.RcttBoardActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".module.activity.board.TctsBoardActivity"
+        <activity
+            android:name=".module.activity.board.TctsBoardActivity"
             android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.digiwin.TctsBoardActivity" />
@@ -194,8 +204,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".module.activity.stock.storeallot.StoreAllotActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
+        <activity
+            android:name=".module.activity.stock.storeallot.StoreAllotActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.digiwin.StoreAllotActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -206,7 +217,7 @@
         <activity
             android:name=".module.activity.produce.workorder.WorkOrderActivity"
             android:configChanges="keyboardHidden|screenSize"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.digiwin.WorkOrderActivity" />
 
@@ -215,13 +226,12 @@
         </activity>
         <activity
             android:name=".module.activity.produce.workorder.WorkOrderScanActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
-        </activity>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
 
         <!-- 完工入库 -->
         <activity
             android:name=".module.activity.produce.completingstore.CompletingStoreActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.digiwin.CompletingStoreActivity" />
 
@@ -229,7 +239,8 @@
             </intent-filter>
         </activity>
         <!-- 领料过账-->
-        <activity android:name=".module.activity.produce.postmaterial.PostMaterialActivity"
+        <activity
+            android:name=".module.activity.produce.postmaterial.PostMaterialActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.digiwin.PostMaterialActivity" />
@@ -237,11 +248,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".module.activity.produce.postmaterial.PostMaterialSecondActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+        <activity
+            android:name=".module.activity.produce.postmaterial.PostMaterialSecondActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
 
         <!-- 采购入库-->
-        <activity android:name=".module.activity.purchase.purchaseinstore.PurchaseInStoreActivity"
+        <activity
+            android:name=".module.activity.purchase.purchaseinstore.PurchaseInStoreActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.digiwin.PurchaseInStoreActivity" />
@@ -249,14 +262,15 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".module.activity.purchase.purchaseinstore.PurchaseInStoreSecondActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+        <activity
+            android:name=".module.activity.purchase.purchaseinstore.PurchaseInStoreSecondActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
 
         <!-- 入库上架 待办事项 -->
         <activity
             android:name=".module.activity.produce.putinstore.PutInStoreActivity"
             android:configChanges="keyboardHidden|screenSize"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.digiwin.PutInStoreActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -267,7 +281,7 @@
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
             android:name=".module.activity.sale.saleoutlet.SaleOutletListActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.digiwin.SaleOutletListActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -275,11 +289,11 @@
         </activity>
         <activity
             android:name=".module.activity.sale.saleoutlet.SaleOutletActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <!--销售退货-->
         <activity
             android:name=".module.activity.sale.salereturn.SaleReturnActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.digiwin.SaleReturnActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -287,11 +301,11 @@
         </activity>
         <activity
             android:name=".module.activity.sale.salereturn.SaleReturnSecondActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
 
         <activity
             android:name=".module.activity.stock.miscellaneousissues.MiscellaneousissuesOutActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.digiwin.MiscellaneousissuesOutActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -299,15 +313,42 @@
         </activity>
         <activity
             android:name=".module.activity.stock.miscellaneousissues.MiscellaneousissuesInActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.digiwin.MiscellaneousissuesInActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <!--有源杂项收料-->
+        <activity
+            android:name="digiwin.smartdepot.module.activity.stock.activemiscellaneous.MiscellaneousActiveInListActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.digiwin.MiscellaneousActiveInListActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="digiwin.smartdepot.module.activity.stock.activemiscellaneous.MiscellaneousActiveInActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+        </activity>
+        <!--有源杂项发料-->
+        <activity
+            android:name="digiwin.smartdepot.module.activity.stock.activemiscellaneous.MiscellaneousActiveOutListActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.digiwin.MiscellaneousActiveOutListActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="digiwin.smartdepot.module.activity.stock.activemiscellaneous.MiscellaneousActiveOutActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+        </activity>
 
         <!-- 工序报工-->
-        <activity android:name=".module.activity.dailywork.processreporting.ProcessReportingActivity"
+        <activity
+            android:name=".module.activity.dailywork.processreporting.ProcessReportingActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.digiwin.ProcessReportingActivity" />
@@ -324,7 +365,7 @@
         <!-- 采购收货扫描-->
         <activity
             android:name=".module.activity.purchase.purchasegoodsscan.PurchaseGoodsScanActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.digiwin.PurchaseGoodsScanActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -333,7 +374,7 @@
         <!-- 采购收货-->
         <activity
             android:name=".module.activity.purchase.purchasereceive.PurchaseReceiveActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.digiwin.PurchaseReceiveActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -341,7 +382,15 @@
         </activity>
         <activity
             android:name=".module.activity.purchase.purchasegoodsscan.PurchaseGoodsScanSecondActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <!-- 依原料收货-->
+        <activity
+            android:name="digiwin.smartdepot.module.activity.purchase.materialreceiving.MaterialReceivingActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.digiwin.MaterialReceivingActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
         <!-- 收货检验-->
         <activity
@@ -367,17 +416,16 @@
         <!-- 捡料出货-->
         <activity
             android:name=".module.activity.sale.pickupshipment.PickUpShipmentActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <!-- 二次提交-->
         <activity
             android:name=".module.activity.sale.pickupshipment.PickUpShipmentCommitActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
-
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
 
 
         <activity
-        android:name=".module.activity.produce.enchaseprint.EnchasePrintActivity"
-        android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            android:name=".module.activity.produce.enchaseprint.EnchasePrintActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.digiwin.EnchasePrintActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -412,7 +460,7 @@
 
         <activity
             android:name=".module.activity.produce.workorderreturn.WorkOrderReturnListActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.digiwin.WorkOrderReturnListActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -420,7 +468,7 @@
         </activity>
         <activity
             android:name=".module.activity.produce.workorderreturn.WorkOrderReturnActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
 
         <activity
             android:name=".module.activity.stock.PrintLabelActivity"
@@ -432,10 +480,10 @@
         </activity>
         <activity
             android:name=".module.activity.common.HaveSourceUnComActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
             android:name=".module.activity.produce.workorderreturn.WorkOrderReturnCommitActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
 
         <!-- 依工单补料-补料清单-->
         <activity
@@ -468,7 +516,7 @@
         <!-- 依工单补料-->
         <activity
             android:name=".module.activity.produce.worksupplement.WorkSupplementActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
 
         <!-- 库存交易锁定 -->
         <activity
@@ -491,8 +539,7 @@
         <!-- 库存交易解锁明细 -->
         <activity
             android:name=".module.activity.stock.storetranscation.StoreTransUnLockDetailActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
-        </activity>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
         <!-- 仓库退料清单 -->
         <activity
             android:name=".module.activity.stock.store.StoreReturnMaterialListActivity"
@@ -505,8 +552,7 @@
         <!-- 仓库退料 -->
         <activity
             android:name=".module.activity.stock.store.StoreReturnMaterialActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
-        </activity>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
 
         <!-- 生产超领-超领清单-->
         <activity
@@ -531,13 +577,13 @@
         <!--装箱入库-->
         <activity
             android:name=".module.activity.produce.inbinning.InBinningActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
 
 
         <!-- 生产超领-->
         <activity
             android:name=".module.activity.produce.productionleader.ProductionLeaderActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
 
         <!-- 快速入库-清单-->
         <activity
@@ -552,7 +598,7 @@
         <!-- 快速入库-->
         <activity
             android:name=".module.activity.purchase.quickstorage.QuickStorageActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
 
         <!-- 扫入扫描 -->
         <activity
@@ -603,18 +649,15 @@
         <!-- 扫码出货 -->
         <activity
             android:name=".module.activity.sale.scanout.ScanOutStoreActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
-        </activity>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
         <!-- 扫码出货二次提交 -->
         <activity
             android:name=".module.activity.sale.scanout.ScanOutCommitActiivty"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
-        </activity>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
         <!-- 扫码出货明细 -->
         <activity
             android:name=".module.activity.sale.scanout.ScanOutDetailActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
-        </activity>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
         <!-- 产品质量追溯-->
         <activity
             android:name=".module.activity.sale.tranceproduct.TraceProductActivity"
@@ -629,8 +672,7 @@
         <activity
             android:name=".module.activity.sale.tranceproduct.TraceProductDetailActivity"
             android:screenOrientation="landscape"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
-        </activity>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
 
         <!-- 调拨过账-->
         <activity
@@ -644,10 +686,10 @@
         <!-- 调拨过账扫描-->
         <activity
             android:name=".module.activity.stock.postallocate.PostAllocateScanActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
-        </activity>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
         <!-- 依成品调拨汇总 -->
-        <activity android:name=".module.activity.produce.endproductallot.EndProductAllotActivity"
+        <activity
+            android:name=".module.activity.produce.endproductallot.EndProductAllotActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.digiwin.EndProductAllotActivity" />
@@ -656,8 +698,9 @@
             </intent-filter>
         </activity>
         <!-- 依成品调拨扫描 -->
-        <activity android:name = ".module.activity.produce.endproductallot.EndProductAllotScanActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+        <activity
+            android:name=".module.activity.produce.endproductallot.EndProductAllotScanActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <!-- PQC检验-->
         <activity
             android:name=".module.activity.purchase.pqccheck.PQCCheckActivity"
@@ -672,8 +715,7 @@
         <activity
             android:name=".module.activity.purchase.pqccheck.PQCValueActivity"
             android:screenOrientation="landscape"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
-        </activity>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
         <!-- FQC检验-->
         <activity
             android:name=".module.activity.purchase.fqccheck.FQCCheckActivity"
@@ -688,8 +730,7 @@
         <activity
             android:name=".module.activity.purchase.fqccheck.FQCValueActivity"
             android:screenOrientation="landscape"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
-        </activity>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
         <!-- PQCRUNCARD-->
         <activity
             android:name=".module.activity.purchase.pqcruncard.PQCRunCardActivity"
@@ -704,8 +745,7 @@
         <activity
             android:name=".module.activity.purchase.pqcruncard.PQCRunCardValueActivity"
             android:screenOrientation="landscape"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
-        </activity>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
         <!-- FQCRunCard-->
         <activity
             android:name=".module.activity.purchase.fqcruncard.FQCRunCardActivity"
@@ -720,8 +760,7 @@
         <activity
             android:name=".module.activity.purchase.fqcruncard.FQCRunCardValueActivity"
             android:screenOrientation="landscape"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
-        </activity>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
         <!-- 工序转移 -->
         <activity
             android:name=".module.activity.produce.processtransfer.ProcessTransferActivity"
@@ -741,8 +780,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name = ".module.activity.common.ChoosePicActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+        <activity
+            android:name=".module.activity.common.ChoosePicActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
             android:name=".module.activity.produce.linesend.LineSendActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
